@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="14400">
+<title>Impacto del Terremoto — local</title>
+<style>
+  :root {
+    --bg: #eef0ee; --surface: #ffffff; --surface-2: #f7f7f5; --border: #dadcd8;
+    --ink: #14171a; --muted: #5c635f; --accent: #1f5fae; --accent-soft: #e4edf8;
+    --ok: #2f7a4f; --warn: #b3391f;
+    --shadow: 0 1px 2px rgba(20,23,26,0.04), 0 8px 24px -12px rgba(20,23,26,0.12);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, "Segoe UI", BlinkMacSystemFont, sans-serif; line-height: 1.5; }
+  .mono { font-family: ui-monospace, "Cascadia Mono", SFMono-Regular, Menlo, Consolas, monospace; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 22px 80px; }
+  .statusbar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; margin-bottom: 28px; box-shadow: var(--shadow); }
+  .pill { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; padding: 4px 10px 4px 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); color: var(--muted); }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); flex: none; }
+  .pill.stale .dot { background: var(--warn); }
+  .statusbar .sep { width: 1px; height: 16px; background: var(--border); }
+  .statusbar .meta-text { font-size: 12.5px; color: var(--muted); }
+  .statusbar .meta-text b { color: var(--ink); font-weight: 600; }
+  .statusbar .spacer { flex: 1; }
+  header.hero { padding-bottom: 22px; margin-bottom: 6px; }
+  .kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  h1 { font-size: clamp(26px, 3.4vw, 34px); margin: 0 0 10px; letter-spacing: -0.015em; }
+  .subtitle { color: var(--muted); font-size: 15.5px; max-width: 680px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 26px 0 34px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 17px; box-shadow: var(--shadow); }
+  .tile.critical { border-color: #d9a89c; }
+  .tile-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+  .tile-value { font-size: 23px; font-weight: 600; letter-spacing: -0.01em; }
+  .tile-value.warn { color: var(--warn); }
+  .tile-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+  section { margin-top: 40px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 4px; flex-wrap: wrap; }
+  .section-head h2 { font-size: 18px; margin: 0; }
+  .legend-track { display: flex; width: 130px; height: 8px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+  .legend-stop { flex: 1; }
+  .legend-labels { display: flex; justify-content: space-between; width: 130px; font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+  p.note { color: var(--muted); font-size: 14px; max-width: 760px; margin: 8px 0 16px; }
+  .table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .table-scroll { overflow-x: auto; }
+  table.heat { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 760px; }
+  table.heat th, table.heat td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  table.heat thead th { position: sticky; top: 0; background: var(--surface-2); z-index: 2; text-align: center; color: var(--muted); font-weight: 600; font-size: 10.8px; text-transform: uppercase; white-space: nowrap; }
+  table.heat thead th.left { text-align: left; }
+  table.heat td.dep-cell { position: sticky; left: 0; background: var(--surface); z-index: 1; font-weight: 600; white-space: nowrap; border-right: 1px solid var(--border); }
+  table.heat thead th:first-child { position: sticky; left: 0; z-index: 3; text-align: left; }
+  table.heat td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.heat td.num.muted { color: var(--muted); }
+  table.heat td.compuesto { font-weight: 700; min-width: 148px; }
+  table.heat td.cell { text-align: center; font-variant-numeric: tabular-nums; font-weight: 500; }
+  table.heat tbody tr:last-child td { border-bottom: none; }
+  .compbar { display: inline-block; width: 60px; height: 6px; border-radius: 3px; background: var(--surface-2); margin-left: 8px; vertical-align: middle; overflow: hidden; }
+  .compbar-fill { height: 100%; }
+  details.method { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px 18px; box-shadow: var(--shadow); }
+  details.method summary { cursor: pointer; padding: 14px 0; font-weight: 600; font-size: 14.5px; }
+  details.method .method-body { padding: 0 0 18px; color: var(--muted); font-size: 13.8px; max-width: 780px; }
+  details.method .method-body p { margin: 0 0 10px; }
+  details.method .method-body code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; font-size: 0.92em; color: var(--ink); }
+  footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12.5px; display: flex; flex-direction: column; gap: 4px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="statusbar">
+    <span class="pill" id="freshness-pill"><span class="dot"></span><span id="freshness-text">verificando…</span></span>
+    <span class="sep"></span>
+    <span class="meta-text">Snapshot fuente: <b>1 de septiembre de 2026, 00:46 UTC</b></span>
+    <span class="sep"></span>
+    <span class="meta-text">Tablero generado: <b>2 de septiembre de 2026, 19:29 UTC</b></span>
+    <span class="spacer"></span>
+    <span class="meta-text mono">25 departamentos · 3,857 puntos</span>
+  </div>
+  <header class="hero">
+    <div class="kicker">Índice de impacto · Terremoto de Colombia, 2026 · generado localmente</div>
+    <h1>Impacto por departamento</h1>
+    <p class="subtitle">Salud, vivienda, instituciones, educación y productividad económica combinadas en un índice per cápita de 0 a 100, recalculado desde <span class="mono">registro.json</span> de mapadelterremoto.com cada vez que corres este script.</p>
+  </header>
+  <div class="tiles">
+    <div class="tile critical">
+      <div class="tile-label">Departamento más crítico</div>
+      <div class="tile-value warn">Quindío</div>
+      <div class="tile-sub">índice 91.5 / 100</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Menos crítico (con dato)</div>
+      <div class="tile-value">Boyacá</div>
+      <div class="tile-sub">índice 0.3 / 100</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Población cubierta</div>
+      <div class="tile-value">38,195,000</div>
+      <div class="tile-sub">en 25 departamentos con puntos registrados</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Puntos en el registro</div>
+      <div class="tile-value">3,857</div>
+      <div class="tile-sub">agregados de 25 departamentos</div>
+    </div>
+  </div>
+  <section>
+    <div class="section-head">
+      <h2>Las 5 dimensiones, por departamento</h2>
+      <div>
+        <div class="legend-track"><div class="legend-stop" style="background:rgb(242,241,234)"></div><div class="legend-stop" style="background:rgb(243,236,218)"></div><div class="legend-stop" style="background:rgb(243,232,203)"></div><div class="legend-stop" style="background:rgb(244,227,187)"></div><div class="legend-stop" style="background:rgb(245,222,171)"></div><div class="legend-stop" style="background:rgb(245,218,156)"></div><div class="legend-stop" style="background:rgb(246,213,140)"></div><div class="legend-stop" style="background:rgb(245,205,129)"></div><div class="legend-stop" style="background:rgb(244,197,119)"></div><div class="legend-stop" style="background:rgb(243,188,110)"></div><div class="legend-stop" style="background:rgb(242,179,100)"></div><div class="legend-stop" style="background:rgb(241,170,90)"></div><div class="legend-stop" style="background:rgb(240,161,81)"></div><div class="legend-stop" style="background:rgb(237,152,74)"></div><div class="legend-stop" style="background:rgb(233,142,69)"></div><div class="legend-stop" style="background:rgb(230,131,64)"></div><div class="legend-stop" style="background:rgb(226,121,59)"></div><div class="legend-stop" style="background:rgb(222,111,54)"></div><div class="legend-stop" style="background:rgb(219,101,50)"></div><div class="legend-stop" style="background:rgb(212,91,45)"></div><div class="legend-stop" style="background:rgb(197,81,43)"></div><div class="legend-stop" style="background:rgb(182,71,41)"></div><div class="legend-stop" style="background:rgb(167,61,38)"></div><div class="legend-stop" style="background:rgb(152,51,36)"></div><div class="legend-stop" style="background:rgb(137,41,33)"></div><div class="legend-stop" style="background:rgb(122,31,31)"></div></div>
+        <div class="legend-labels"><span>0</span><span>100</span></div>
+      </div>
+    </div>
+    <p class="note">Cada celda es el puntaje 0-100 de esa dimensión, per cápita — más oscuro y rojizo es peor. Ordenado por índice compuesto descendente.</p>
+    <div class="table-card">
+      <div class="table-scroll">
+        <table class="heat">
+          <thead><tr><th class="left">Departamento</th><th>Población*</th><th>Índice</th><th>Salud</th><th>Vivienda</th><th>Instituciones</th><th>Educación</th><th>Productividad (proxy)</th></tr></thead>
+          <tbody>
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Quindío</span></td>
+          <td class="num muted">556,000</td>
+          <td class="num compuesto">91.5<div class="compbar" role="img" aria-label="índice 91.5 de 100"><div class="compbar-fill" style="width:91%;background:rgb(154,52,36)"></div></div></td>
+          <td class="cell" style="background:rgb(134,39,33);color:#fbf7ef">97</td><td class="cell" style="background:rgb(191,76,42);color:#fbf7ef">82</td><td class="cell" style="background:rgb(122,31,31);color:#fbf7ef">100</td><td class="cell" style="background:rgb(181,70,40);color:#fbf7ef">84</td><td class="cell" style="background:rgb(142,44,34);color:#fbf7ef">95</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Caldas</span></td>
+          <td class="num muted">1,055,000</td>
+          <td class="num compuesto">87.4<div class="compbar" role="img" aria-label="índice 87.4 de 100"><div class="compbar-fill" style="width:87%;background:rgb(170,62,39)"></div></div></td>
+          <td class="cell" style="background:rgb(122,31,31);color:#fbf7ef">100</td><td class="cell" style="background:rgb(240,161,80);color:#1c1a16">48</td><td class="cell" style="background:rgb(165,59,38);color:#fbf7ef">89</td><td class="cell" style="background:rgb(122,31,31);color:#fbf7ef">100</td><td class="cell" style="background:rgb(122,31,31);color:#fbf7ef">100</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Chocó</span></td>
+          <td class="num muted">524,000</td>
+          <td class="num compuesto">74.7<div class="compbar" role="img" aria-label="índice 74.7 de 100"><div class="compbar-fill" style="width:75%;background:rgb(216,94,46)"></div></div></td>
+          <td class="cell" style="background:rgb(157,54,37);color:#fbf7ef">91</td><td class="cell" style="background:rgb(122,31,31);color:#fbf7ef">100</td><td class="cell" style="background:rgb(185,73,41);color:#fbf7ef">83</td><td class="cell" style="background:rgb(246,214,142);color:#1c1a16">23</td><td class="cell" style="background:rgb(212,90,45);color:#fbf7ef">76</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Risaralda</span></td>
+          <td class="num muted">1,007,000</td>
+          <td class="num compuesto">57.8<div class="compbar" role="img" aria-label="índice 57.8 de 100"><div class="compbar-fill" style="width:58%;background:rgb(232,137,67)"></div></div></td>
+          <td class="cell" style="background:rgb(158,55,37);color:#fbf7ef">90</td><td class="cell" style="background:rgb(244,197,119);color:#1c1a16">32</td><td class="cell" style="background:rgb(234,143,69);color:#1c1a16">56</td><td class="cell" style="background:rgb(245,207,130);color:#1c1a16">27</td><td class="cell" style="background:rgb(184,72,41);color:#fbf7ef">83</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Valle del Cauca</span></td>
+          <td class="num muted">4,711,000</td>
+          <td class="num compuesto">32.9<div class="compbar" role="img" aria-label="índice 32.9 de 100"><div class="compbar-fill" style="width:33%;background:rgb(244,195,117)"></div></div></td>
+          <td class="cell" style="background:rgb(230,131,64);color:#1c1a16">60</td><td class="cell" style="background:rgb(246,215,147);color:#1c1a16">22</td><td class="cell" style="background:rgb(244,200,123);color:#1c1a16">30</td><td class="cell" style="background:rgb(244,230,196);color:#1c1a16">10</td><td class="cell" style="background:rgb(241,175,95);color:#1c1a16">42</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Tolima</span></td>
+          <td class="num muted">1,313,000</td>
+          <td class="num compuesto">14.3<div class="compbar" role="img" aria-label="índice 14.3 de 100"><div class="compbar-fill" style="width:14%;background:rgb(244,224,178)"></div></div></td>
+          <td class="cell" style="background:rgb(245,205,128);color:#1c1a16">28</td><td class="cell" style="background:rgb(244,230,196);color:#1c1a16">10</td><td class="cell" style="background:rgb(244,230,196);color:#1c1a16">10</td><td class="cell" style="background:rgb(243,234,211);color:#1c1a16">6</td><td class="cell" style="background:rgb(245,220,164);color:#1c1a16">18</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Cauca</span></td>
+          <td class="num muted">1,526,000</td>
+          <td class="num compuesto">7.4<div class="compbar" role="img" aria-label="índice 7.4 de 100"><div class="compbar-fill" style="width:7%;background:rgb(243,232,205)"></div></div></td>
+          <td class="cell" style="background:rgb(245,219,160);color:#1c1a16">19</td><td class="cell" style="background:rgb(242,238,224);color:#1c1a16">3</td><td class="cell" style="background:rgb(243,235,214);color:#1c1a16">5</td><td class="cell" style="background:rgb(243,237,222);color:#1c1a16">3</td><td class="cell" style="background:rgb(243,233,206);color:#1c1a16">7</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Huila</span></td>
+          <td class="num muted">991,000</td>
+          <td class="num compuesto">6.8<div class="compbar" role="img" aria-label="índice 6.8 de 100"><div class="compbar-fill" style="width:7%;background:rgb(243,233,207)"></div></div></td>
+          <td class="cell" style="background:rgb(243,231,201);color:#1c1a16">8</td><td class="cell" style="background:rgb(243,233,206);color:#1c1a16">7</td><td class="cell" style="background:rgb(242,238,223);color:#1c1a16">3</td><td class="cell" style="background:rgb(244,223,174);color:#1c1a16">15</td><td class="cell" style="background:rgb(242,240,231);color:#1c1a16">1</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Cundinamarca</span></td>
+          <td class="num muted">2,768,000</td>
+          <td class="num compuesto">4.8<div class="compbar" role="img" aria-label="índice 4.8 de 100"><div class="compbar-fill" style="width:5%;background:rgb(243,235,215)"></div></div></td>
+          <td class="cell" style="background:rgb(243,234,211);color:#1c1a16">6</td><td class="cell" style="background:rgb(242,238,222);color:#1c1a16">3</td><td class="cell" style="background:rgb(243,236,218);color:#1c1a16">4</td><td class="cell" style="background:rgb(242,237,222);color:#1c1a16">3</td><td class="cell" style="background:rgb(243,232,203);color:#1c1a16">8</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Nariño</span></td>
+          <td class="num muted">1,077,000</td>
+          <td class="num compuesto">4.4<div class="compbar" role="img" aria-label="índice 4.4 de 100"><div class="compbar-fill" style="width:4%;background:rgb(243,236,217)"></div></div></td>
+          <td class="cell" style="background:rgb(243,237,219);color:#1c1a16">4</td><td class="cell" style="background:rgb(243,236,218);color:#1c1a16">4</td><td class="cell" style="background:rgb(243,233,207);color:#1c1a16">7</td><td class="cell" style="background:rgb(242,239,227);color:#1c1a16">2</td><td class="cell" style="background:rgb(243,234,212);color:#1c1a16">6</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Antioquia</span></td>
+          <td class="num muted">6,384,000</td>
+          <td class="num compuesto">4.2<div class="compbar" role="img" aria-label="índice 4.2 de 100"><div class="compbar-fill" style="width:4%;background:rgb(243,236,218)"></div></div></td>
+          <td class="cell" style="background:rgb(243,234,211);color:#1c1a16">6</td><td class="cell" style="background:rgb(242,238,225);color:#1c1a16">2</td><td class="cell" style="background:rgb(243,235,213);color:#1c1a16">5</td><td class="cell" style="background:rgb(242,238,224);color:#1c1a16">3</td><td class="cell" style="background:rgb(243,235,215);color:#1c1a16">5</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Santander</span></td>
+          <td class="num muted">1,175,000</td>
+          <td class="num compuesto">3.9<div class="compbar" role="img" aria-label="índice 3.9 de 100"><div class="compbar-fill" style="width:4%;background:rgb(243,236,219)"></div></div></td>
+          <td class="cell" style="background:rgb(243,235,213);color:#1c1a16">5</td><td class="cell" style="background:rgb(242,239,228);color:#1c1a16">2</td><td class="cell" style="background:rgb(242,239,228);color:#1c1a16">2</td><td class="cell" style="background:rgb(243,237,219);color:#1c1a16">4</td><td class="cell" style="background:rgb(243,233,206);color:#1c1a16">7</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Putumayo</span></td>
+          <td class="num muted">68,000</td>
+          <td class="num compuesto">3.4<div class="compbar" role="img" aria-label="índice 3.4 de 100"><div class="compbar-fill" style="width:3%;background:rgb(243,237,221)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(245,221,168);color:#1c1a16">17</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Atlántico</span></td>
+          <td class="num muted">1,300,000</td>
+          <td class="num compuesto">1.6<div class="compbar" role="img" aria-label="índice 1.6 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,239,228)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,238,225);color:#1c1a16">2</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(243,234,211);color:#1c1a16">6</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Bolívar</span></td>
+          <td class="num muted">1,159,000</td>
+          <td class="num compuesto">1.6<div class="compbar" role="img" aria-label="índice 1.6 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,239,228)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,239,227);color:#1c1a16">2</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(243,234,210);color:#1c1a16">6</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Bogotá D.C.</span></td>
+          <td class="num muted">7,900,000</td>
+          <td class="num compuesto">1.5<div class="compbar" role="img" aria-label="índice 1.5 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,239,228)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,239,228);color:#1c1a16">1</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(243,234,210);color:#1c1a16">6</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Sucre</span></td>
+          <td class="num muted">353,000</td>
+          <td class="num compuesto">1.5<div class="compbar" role="img" aria-label="índice 1.5 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,239,228)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,238,225);color:#1c1a16">2</td><td class="cell" style="background:rgb(242,240,230);color:#1c1a16">1</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(243,236,218);color:#1c1a16">4</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">La Guajira</span></td>
+          <td class="num muted">212,000</td>
+          <td class="num compuesto">1.3<div class="compbar" role="img" aria-label="índice 1.3 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,240,229)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,239,227);color:#1c1a16">2</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(243,236,216);color:#1c1a16">5</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Caquetá</span></td>
+          <td class="num muted">189,000</td>
+          <td class="num compuesto">1.1<div class="compbar" role="img" aria-label="índice 1.1 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,240,230)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(243,235,213);color:#1c1a16">5</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Cesar</span></td>
+          <td class="num muted">723,000</td>
+          <td class="num compuesto">1.1<div class="compbar" role="img" aria-label="índice 1.1 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,240,230)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,240,232);color:#1c1a16">1</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(243,236,215);color:#1c1a16">5</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Meta</span></td>
+          <td class="num muted">770,000</td>
+          <td class="num compuesto">0.8<div class="compbar" role="img" aria-label="índice 0.8 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,240,231)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,240,232);color:#1c1a16">1</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(243,237,220);color:#1c1a16">4</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Norte de Santander</span></td>
+          <td class="num muted">1,011,000</td>
+          <td class="num compuesto">0.5<div class="compbar" role="img" aria-label="índice 0.5 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,240,232)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,240,229);color:#1c1a16">1</td><td class="cell" style="background:rgb(242,241,233);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,240,230);color:#1c1a16">1</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Córdoba</span></td>
+          <td class="num muted">585,000</td>
+          <td class="num compuesto">0.5<div class="compbar" role="img" aria-label="índice 0.5 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,240,232)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,240,231);color:#1c1a16">1</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,239,226);color:#1c1a16">2</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Magdalena</span></td>
+          <td class="num muted">589,000</td>
+          <td class="num compuesto">0.4<div class="compbar" role="img" aria-label="índice 0.4 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,241,233)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,239,227);color:#1c1a16">2</td>
+        </tr>
+
+        <tr>
+          <td class="dep-cell"><span class="dep-name">Boyacá</span></td>
+          <td class="num muted">249,000</td>
+          <td class="num compuesto">0.3<div class="compbar" role="img" aria-label="índice 0.3 de 100"><div class="compbar-fill" style="width:2%;background:rgb(242,241,233)"></div></div></td>
+          <td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,241,234);color:#1c1a16">0</td><td class="cell" style="background:rgb(242,240,229);color:#1c1a16">1</td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="note" style="font-size:12px;margin-top:8px;">*Población de los municipios que el sitio marca como afectados dentro de ese departamento, no el censo departamental completo.</p>
+  </section>
+  <section>
+    <details class="method">
+      <summary>Metodología y limitaciones</summary>
+      <div class="method-body">
+        <p>Unidad geográfica: departamento (25). <b>Salud</b> = puntos tipo <code>HOSPITAL</code>; <b>Vivienda</b> = <code>VIVIENDA</code>; <b>Educación</b> = <code>ESCUELA</code>; <b>Instituciones</b> = puntos cuyo texto menciona una sede de gobierno o gestión pública; <b>Productividad (proxy)</b> = <code>SERVICIO</code> + <code>PUNTO_AYUDA</code> + <code>RESTRICCION</code>.</p>
+        <p>Cada punto pesa según severidad (COLAPSO=4, GRAVE=3, MODERADO=2, LEVE=1, SIN_EVALUAR=1). Cada dimensión se divide por la población afectada del departamento y se normaliza 0-100 (mínimo-máximo entre los 25). El índice compuesto es el promedio simple de las 5 dimensiones.</p>
+      </div>
+    </details>
+  </section>
+  <footer>
+    <span>Fuente: <span class="mono">registro.json</span> de <a href="https://mapadelterremoto.com" target="_blank" rel="noopener">mapadelterremoto.com</a>, un agregador de prensa — no un censo oficial de campo.</span>
+    <span>Generado localmente con <span class="mono">actualizar_indice_terremoto.py</span>. Esta página se autorrecarga cada 4 horas si la dejas abierta — recarga el mismo archivo en disco, así que si el Programador de tareas la actualizó, verás el dato nuevo solo.</span>
+  </footer>
+</div>
+<script>
+(function() {
+  var SNAPSHOT_ISO = "2026-09-01T00:46:00.117Z";
+  var BUILD_ISO = "2026-09-02T19:29:59.584569+00:00";
+  function fmtAgo(iso) {
+    if (!iso) return null;
+    var then = new Date(iso).getTime();
+    if (isNaN(then)) return null;
+    var h = (Date.now() - then) / 3600000;
+    if (h < 1) return Math.max(1, Math.round(h * 60)) + " min";
+    if (h < 48) return Math.round(h) + " h";
+    return Math.round(h / 24) + " días";
+  }
+  var pill = document.getElementById("freshness-pill");
+  var text = document.getElementById("freshness-text");
+  var ago = fmtAgo(SNAPSHOT_ISO || BUILD_ISO);
+  var hours = (Date.now() - new Date(SNAPSHOT_ISO || BUILD_ISO).getTime()) / 3600000;
+  if (ago === null) { text.textContent = "fecha desconocida"; }
+  else if (hours > 30) { pill.classList.add("stale"); text.textContent = "desactualizado · hace " + ago; }
+  else { text.textContent = "en vivo · hace " + ago; }
+})();
+</script>
+</body>
+</html>

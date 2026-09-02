@@ -62,6 +62,26 @@
   details.method .method-body { padding: 0 0 18px; color: var(--muted); font-size: 13.8px; max-width: 780px; }
   details.method .method-body p { margin: 0 0 10px; }
   details.method .method-body code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; font-size: 0.92em; color: var(--ink); }
+  .tab-nav { display: flex; gap: 6px; margin: 22px 0 0; border-bottom: 1px solid var(--border); }
+  .tab-btn { font: inherit; font-size: 13.5px; font-weight: 600; color: var(--muted); background: none; border: none; border-bottom: 2px solid transparent; padding: 10px 4px; margin-bottom: -1px; cursor: pointer; }
+  .tab-btn + .tab-btn { margin-left: 14px; }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel[hidden] { display: none; }
+  .accordion-list { display: flex; flex-direction: column; gap: 8px; }
+  details.dep-accordion { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+  details.dep-accordion summary { cursor: pointer; list-style: none; padding: 13px 16px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-weight: 600; font-size: 14px; }
+  details.dep-accordion summary::-webkit-details-marker { display: none; }
+  details.dep-accordion summary::before { content: "▸ "; color: var(--muted); }
+  details.dep-accordion[open] summary::before { content: "▾ "; }
+  .dep-accordion-count { font-weight: 500; font-size: 12px; color: var(--muted); white-space: nowrap; }
+  table.muni { width: 100%; border-collapse: collapse; font-size: 12.8px; min-width: 640px; }
+  table.muni th, table.muni td { padding: 7px 12px; border-top: 1px solid var(--border); }
+  table.muni thead th { text-align: center; color: var(--muted); font-weight: 600; font-size: 10.5px; text-transform: uppercase; white-space: nowrap; background: var(--surface-2); }
+  table.muni thead th.left { text-align: left; }
+  table.muni td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.muni td.num.muted { color: var(--muted); }
+  table.muni td.nota { color: var(--muted); font-size: 12px; max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sev-badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
   footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12.5px; display: flex; flex-direction: column; gap: 4px; }
   a { color: var(--accent); }
 </style>
@@ -73,7 +93,7 @@
     <span class="sep"></span>
     <span class="meta-text">Snapshot fuente: <b>1 de septiembre de 2026, 00:46 UTC</b></span>
     <span class="sep"></span>
-    <span class="meta-text">Tablero generado: <b>2 de septiembre de 2026, 19:29 UTC</b></span>
+    <span class="meta-text">Tablero generado: <b>2 de septiembre de 2026, 20:34 UTC</b></span>
     <span class="spacer"></span>
     <span class="meta-text mono">25 departamentos · 3,857 puntos</span>
   </div>
@@ -82,6 +102,12 @@
     <h1>Impacto por departamento</h1>
     <p class="subtitle">Salud, vivienda, instituciones, educación y productividad económica combinadas en un índice per cápita de 0 a 100, recalculado desde <span class="mono">registro.json</span> de mapadelterremoto.com cada vez que corres este script.</p>
   </header>
+  
+  <div class="tab-nav" role="tablist">
+    <button class="tab-btn active" data-tab="departamental" role="tab" aria-selected="true">Vista departamental</button>
+    <button class="tab-btn" data-tab="municipal" role="tab" aria-selected="false">Vista municipal (432 municipios)</button>
+  </div>
+  <div id="tab-departamental" class="tab-panel">
   <div class="tiles">
     <div class="tile critical">
       <div class="tile-label">Departamento más crítico</div>
@@ -306,6 +332,3726 @@
       </div>
     </details>
   </section>
+  </div>
+  
+  <div id="tab-municipal" class="tab-panel" hidden>
+    <header class="hero">
+      <div class="kicker">Listado nominal · por municipio</div>
+      <h1>Municipios afectados</h1>
+      <p class="subtitle">Gravedad oficial (cuando existe), puntos de daño registrados y población DANE aproximada, agrupados por departamento — expande cada uno para ver el detalle.</p>
+    </header>
+    
+    <div class="tiles">
+      <div class="tile critical">
+        <div class="tile-label">Fallecidos (oficial UNGRD)</div>
+        <div class="tile-value warn">314</div>
+        <div class="tile-sub">262 desaparecidos</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Heridos</div>
+        <div class="tile-value">4,437</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Personas afectadas</div>
+        <div class="tile-value">262,154</div>
+        <div class="tile-sub">147,464 familias</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Municipios afectados (oficial UNGRD)</div>
+        <div class="tile-value">471</div>
+        <div class="tile-sub">en 15 departamentos · corte 2026-08-19</div>
+      </div>
+    </div>
+    <p class="note">El listado nominal de data/municipios_afectados_terremoto_colombia_ago2026.csv (432 municipios) es una aproximación agregada por Naboo Intelligence de 257 fuentes públicas, normalizada con DIVIPOLA -- no es el desglose oficial exacto de los 471 de UNGRD, que no se publica nominal.</p>
+    <section>
+      <div class="section-head">
+        <h2>Departamentos, ordenados por número de municipios afectados</h2>
+      </div>
+      <div class="accordion-list">
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Antioquia</span><span class="dep-accordion-count">99 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Medellín</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">60</td>
+              <td class="num muted">2,500,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Rionegro</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">19</td>
+              <td class="num muted">156,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Andes</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">12</td>
+              <td class="num muted">45,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Támesis</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">11</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Ceja</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">10</td>
+              <td class="num muted">74,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Jardín</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">9</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Sonsón</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">8</td>
+              <td class="num muted">36,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Pintada</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">7</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Sabaneta</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">7</td>
+              <td class="num muted">109,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Jericó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">6</td>
+              <td class="num muted">14,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Argelia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bello</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">609,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Hispania</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Urrao</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">32,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Abejorral</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">21,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Betulia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Caramanta</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Fredonia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">27,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Unión</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">24,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Titiribí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Venecia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Caucasia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">94,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cisneros</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ciudad Bolívar</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">28,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Concordia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">22,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Copacabana</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">92,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Retiro</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">28,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Itagüí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">306,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ituango</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">30,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Marinilla</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">76,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pueblorrico</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Remedios</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">34,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Santa Fe de Antioquia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Vigía del Fuerte</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Yalí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Amagá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">33,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Anzá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Apartadó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">126,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Caldas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">90,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Carepa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">51,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cañasgordas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Dabeiba</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Donmatías</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">20,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Peñol</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">24,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Santuario</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">41,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Envigado</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">268,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Granada</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Guarne</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">66,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Montebello</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Salgar</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Carlos</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Jerónimo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Pedro de Urabá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">33,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Rafael</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Santa Rosa de Osos</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">41,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Sopetrán</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Tarso</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Turbo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">130,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Yolombó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Yondó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">22,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Zaragoza</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">27,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Alejandría</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Amalfi</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Angelópolis</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Angostura</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Armenia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD (capa 3iS/iMMAP para OCHA, 12-08-2026), y entre los 90 municipios afectados que enumeró la Gobernación de Antioquia (El Colombiano, 12-08-2026).">Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD (capa 3iS/iMMAP para OCHA, 12-08-2026), y entre los 90 municipios afectados que enumeró la Gobernación de Antioquia (El Colombiano, 12-08-2026).</td>
+            </tr>
+
+            <tr>
+              <td>Barbosa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">64,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Betania</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Caicedo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Campamento</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Caracolí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Carolina del Príncipe</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cocorná</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Concepción</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ebéjico</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Bagre</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">57,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Entrerríos</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Frontino</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">22,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Giraldo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Girardota</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">62,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Gómez Plata</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Heliconia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Estrella</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">84,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Liborina</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Nariño</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Peque</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Puerto Nare</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Puerto Triunfo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">20,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Francisco</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD.">Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD.</td>
+            </tr>
+
+            <tr>
+              <td>San Luis</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD.">Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD.</td>
+            </tr>
+
+            <tr>
+              <td>San Vicente Ferrer</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Santa Bárbara</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">30,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Santo Domingo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">14,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Toledo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Uramita</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Valdivia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Valparaíso</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Vegachí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Yarumal</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">42,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Cundinamarca</span><span class="dep-accordion-count">58 municipios · 21 con gravedad oficial</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Tena</td>
+              <td><span class="sev-badge" style="background:rgb(197,81,43);color:#fbf7ef">Afectación muy alta</span></td>
+              <td class="num">1</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="Alcaldía e iglesia con afectaciones de consideración y riesgo de colapso ante nuevas réplicas.">Alcaldía e iglesia con afectaciones de consideración y riesgo de colapso ante nuevas réplicas.</td>
+            </tr>
+
+            <tr>
+              <td>Apulo</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">3</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="Daños importantes en dos sedes educativas y viviendas.">Daños importantes en dos sedes educativas y viviendas.</td>
+            </tr>
+
+            <tr>
+              <td>Cáqueza</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">2</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="Viviendas agrietadas y una vivienda evacuada preventivamente.">Viviendas agrietadas y una vivienda evacuada preventivamente.</td>
+            </tr>
+
+            <tr>
+              <td>Cabrera</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">1</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="Daños en cuatro sedes educativas.">Daños en cuatro sedes educativas.</td>
+            </tr>
+
+            <tr>
+              <td>Ubaque</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">1</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="Daños en Alcaldía, institución educativa y plaza de mercado.">Daños en Alcaldía, institución educativa y plaza de mercado.</td>
+            </tr>
+
+            <tr>
+              <td>Sasaima</td>
+              <td><span class="sev-badge" style="background:rgb(242,179,100);color:#1c1a16">Afectación media-alta</span></td>
+              <td class="num">3</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="Daños en hospital y colegio.">Daños en hospital y colegio.</td>
+            </tr>
+
+            <tr>
+              <td>Tenjo</td>
+              <td><span class="sev-badge" style="background:rgb(242,179,100);color:#1c1a16">Afectación media-alta</span></td>
+              <td class="num">2</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="Daños en hospital y parque empresarial.">Daños en hospital y parque empresarial.</td>
+            </tr>
+
+            <tr>
+              <td>Anapoima</td>
+              <td><span class="sev-badge" style="background:rgb(242,179,100);color:#1c1a16">Afectación media-alta</span></td>
+              <td class="num">1</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="Daños en dos instituciones educativas.">Daños en dos instituciones educativas.</td>
+            </tr>
+
+            <tr>
+              <td>Soacha</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">14</td>
+              <td class="num muted">896,000</td>
+              <td class="nota" title="Agrietamientos en edificaciones y establecimientos.">Agrietamientos en edificaciones y establecimientos.</td>
+            </tr>
+
+            <tr>
+              <td>Funza</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">6</td>
+              <td class="num muted">126,000</td>
+              <td class="nota" title="Incidentes en bodegas con sustancias químicas y fuga de gas controlada.">Incidentes en bodegas con sustancias químicas y fuga de gas controlada.</td>
+            </tr>
+
+            <tr>
+              <td>Chía</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">5</td>
+              <td class="num muted">178,000</td>
+              <td class="nota" title="Agrietamientos en institución educativa.">Agrietamientos en institución educativa.</td>
+            </tr>
+
+            <tr>
+              <td>Madrid</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">3</td>
+              <td class="num muted">147,000</td>
+              <td class="nota" title="Daños/incidente en bodega y derrame controlado.">Daños/incidente en bodega y derrame controlado.</td>
+            </tr>
+
+            <tr>
+              <td>Nilo</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">3</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="Agrietamientos en edificaciones y colegio.">Agrietamientos en edificaciones y colegio.</td>
+            </tr>
+
+            <tr>
+              <td>Mosquera</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">2</td>
+              <td class="num muted">186,000</td>
+              <td class="nota" title="Daños en bodega, cierre preventivo y fisuras.">Daños en bodega, cierre preventivo y fisuras.</td>
+            </tr>
+
+            <tr>
+              <td>Puerto Salgar</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">2</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="Daños en institución educativa.">Daños en institución educativa.</td>
+            </tr>
+
+            <tr>
+              <td>Ricaurte</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">2</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="Agrietamientos en oficinas de servicios públicos.">Agrietamientos en oficinas de servicios públicos.</td>
+            </tr>
+
+            <tr>
+              <td>San Juan de Rioseco</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">2</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="Agrietamientos en estación de Policía y colegio.">Agrietamientos en estación de Policía y colegio.</td>
+            </tr>
+
+            <tr>
+              <td>Suesca</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">2</td>
+              <td class="num muted">20,000</td>
+              <td class="nota" title="Daños leves en institución educativa.">Daños leves en institución educativa.</td>
+            </tr>
+
+            <tr>
+              <td>Sopó</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">1</td>
+              <td class="num muted">34,000</td>
+              <td class="nota" title="Fisuras en varias urbanizaciones.">Fisuras en varias urbanizaciones.</td>
+            </tr>
+
+            <tr>
+              <td>Tabio</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">1</td>
+              <td class="num muted">23,000</td>
+              <td class="nota" title="Afectaciones en institución educativa; inspección estructural.">Afectaciones en institución educativa; inspección estructural.</td>
+            </tr>
+
+            <tr>
+              <td>Tocaima</td>
+              <td><span class="sev-badge" style="background:rgb(245,218,156);color:#1c1a16">Afectación media</span></td>
+              <td class="num">1</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="Vivienda agrietada y verificaciones adicionales.">Vivienda agrietada y verificaciones adicionales.</td>
+            </tr>
+
+            <tr>
+              <td>Ubalá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Zipaquirá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">170,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Francisco</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cajicá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">126,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Fusagasugá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">163,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Albán</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Girardot</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">104,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Anolaima</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cogua</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">26,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Fúquene</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Guachetá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Guataquí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">3,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Mesa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">38,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Palma</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Medina</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pacho</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Paratebueno</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Antonio del Tequendama</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Subachoque</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Tibacuy</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Yacopí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bituima</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">2,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bojacá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Choachí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cota</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">49,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cucunubá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Granada</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD.">Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD.</td>
+            </tr>
+
+            <tr>
+              <td>Guaduas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">31,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Guatavita</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Peña</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Nimaima</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Nocaima</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pasca</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pulí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Vergara</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Villeta</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">30,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Zipacón</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Tolima</span><span class="dep-accordion-count">42 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Ibagué</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">43</td>
+              <td class="num muted">557,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Roncesvalles</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">13</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cajamarca</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">7</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Herveo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Luis</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">14,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Chaparral</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">53,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Fresno</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">32,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Honda</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Palocabildo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Dolores</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Espinal</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">72,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Planadas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">27,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Purificación</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">24,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Coello</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Melgar</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">40,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ortega</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">37,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Antonio</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Alvarado</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Armero Guayabal</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ataco</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">21,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Casabianca</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cunday</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Falan</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Flandes</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Icononzo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Lérida</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Líbano</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">38,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Mariquita</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">41,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Murillo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Natagaima</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Piedras</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Prado</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Rioblanco</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">24,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Rovira</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">22,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Santa Isabel</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Suárez</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="Nombrado entre los municipios que quedaron sin servicio de energía.">Nombrado entre los municipios que quedaron sin servicio de energía.</td>
+            </tr>
+
+            <tr>
+              <td>Venadillo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Villahermosa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Villarrica</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Alpujarra</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Anzoátegui</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Saldaña</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Valle del Cauca</span><span class="dep-accordion-count">41 municipios · 14 con gravedad oficial</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Cali</td>
+              <td><span class="sev-badge" style="background:rgb(122,31,31);color:#fbf7ef">Afectación crítica</span></td>
+              <td class="num">420</td>
+              <td class="num muted">2,300,000</td>
+              <td class="nota" title="Múltiples estructuras colapsadas; hospital Universitario con colapso parcial; personas atrapadas; fallecidos y cientos de heridos.">Múltiples estructuras colapsadas; hospital Universitario con colapso parcial; personas atrapadas; fallecidos y cientos de heridos.</td>
+            </tr>
+
+            <tr>
+              <td>Calima-El Darién</td>
+              <td><span class="sev-badge" style="background:rgb(122,31,31);color:#fbf7ef">Afectación crítica</span></td>
+              <td class="num">14</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="Colapso de pared con tres menores fallecidos; daños importantes en infraestructura.">Colapso de pared con tres menores fallecidos; daños importantes en infraestructura.</td>
+            </tr>
+
+            <tr>
+              <td>Buenaventura</td>
+              <td><span class="sev-badge" style="background:rgb(197,81,43);color:#fbf7ef">Afectación muy alta</span></td>
+              <td class="num">124</td>
+              <td class="num muted">335,000</td>
+              <td class="nota" title="Fallecidos; daños importantes; afectación del muelle de Juanchaco y puentes.">Fallecidos; daños importantes; afectación del muelle de Juanchaco y puentes.</td>
+            </tr>
+
+            <tr>
+              <td>El Cairo</td>
+              <td><span class="sev-badge" style="background:rgb(197,81,43);color:#fbf7ef">Afectación muy alta</span></td>
+              <td class="num">23</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="Afectación masiva del municipio; daños graves y hospital colapsado.">Afectación masiva del municipio; daños graves y hospital colapsado.</td>
+            </tr>
+
+            <tr>
+              <td>Sevilla</td>
+              <td><span class="sev-badge" style="background:rgb(197,81,43);color:#fbf7ef">Afectación muy alta</span></td>
+              <td class="num">17</td>
+              <td class="num muted">44,000</td>
+              <td class="nota" title="Cinco fallecidos reportados y daños materiales importantes.">Cinco fallecidos reportados y daños materiales importantes.</td>
+            </tr>
+
+            <tr>
+              <td>Zarzal</td>
+              <td><span class="sev-badge" style="background:rgb(197,81,43);color:#fbf7ef">Afectación muy alta</span></td>
+              <td class="num">11</td>
+              <td class="num muted">44,000</td>
+              <td class="nota" title="Fallecidos, numerosos heridos y hospital municipal colapsado/saturado.">Fallecidos, numerosos heridos y hospital municipal colapsado/saturado.</td>
+            </tr>
+
+            <tr>
+              <td>Buga</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">40</td>
+              <td class="num muted">132,000</td>
+              <td class="nota" title="Tres fallecidos y afectaciones estructurales.">Tres fallecidos y afectaciones estructurales.</td>
+            </tr>
+
+            <tr>
+              <td>Roldanillo</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">34</td>
+              <td class="num muted">39,000</td>
+              <td class="nota" title="Tres fallecidos y daños estructurales.">Tres fallecidos y daños estructurales.</td>
+            </tr>
+
+            <tr>
+              <td>Cartago</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">29</td>
+              <td class="num muted">144,000</td>
+              <td class="nota" title="Hospital evacuado y aeropuerto afectado; daños de infraestructura.">Hospital evacuado y aeropuerto afectado; daños de infraestructura.</td>
+            </tr>
+
+            <tr>
+              <td>Yumbo</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">18</td>
+              <td class="num muted">116,000</td>
+              <td class="nota" title="Tres fallecidos, incluido un menor, además de daños.">Tres fallecidos, incluido un menor, además de daños.</td>
+            </tr>
+
+            <tr>
+              <td>El Águila</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">15</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="Hospital afectado y necesidad de evacuación/atención de infraestructura.">Hospital afectado y necesidad de evacuación/atención de infraestructura.</td>
+            </tr>
+
+            <tr>
+              <td>La Unión</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">14</td>
+              <td class="num muted">35,000</td>
+              <td class="nota" title="Un fallecido y afectaciones.">Un fallecido y afectaciones.</td>
+            </tr>
+
+            <tr>
+              <td>Florida</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">4</td>
+              <td class="num muted">57,000</td>
+              <td class="nota" title="Un fallecido y daños reportados.">Un fallecido y daños reportados.</td>
+            </tr>
+
+            <tr>
+              <td>Riofrío</td>
+              <td><span class="sev-badge" style="background:rgb(242,179,100);color:#1c1a16">Afectación media-alta</span></td>
+              <td class="num">5</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="Afectaciones de infraestructura reportadas.">Afectaciones de infraestructura reportadas.</td>
+            </tr>
+
+            <tr>
+              <td>Versalles</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">45</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Tuluá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">31</td>
+              <td class="num muted">226,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Palmira</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">26</td>
+              <td class="num muted">383,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Dagua</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">12</td>
+              <td class="num muted">60,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Victoria</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">12</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bolívar</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">9</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Argelia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">7</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bugalagrande</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">7</td>
+              <td class="num muted">26,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ansermanuevo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">6</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Caicedonia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">6</td>
+              <td class="num muted">30,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Cerrito</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">6</td>
+              <td class="num muted">56,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Cumbre</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">6</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Alcalá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">14,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Andalucía</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Jamundí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">197,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Vijes</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">14,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Yotoco</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Dovio</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pradera</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">50,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Restrepo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ulloa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Candelaria</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">116,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ginebra</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Toro</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Trujillo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">20,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Obando</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Pedro</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Cauca</span><span class="dep-accordion-count">39 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Popayán</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">23</td>
+              <td class="num muted">355,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Santander de Quilichao</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">13</td>
+              <td class="num muted">131,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Guapi</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">6</td>
+              <td class="num muted">30,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Puerto Tejada</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">44,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Puracé</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Balboa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">23,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Buenos Aires</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">33,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cajibío</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">47,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Corinto</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">28,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Tambo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">59,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Guachené</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">20,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Morales</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">46,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Piendamó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">43,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Rosas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Silvia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">41,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Suárez</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">39,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Totoró</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">28,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Almaguer</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Argelia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">28,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bolívar</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">38,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Caldono</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">45,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Caloto</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">31,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Florencia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Inzá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Jambaló</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Sierra</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Vega</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">24,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>López de Micay</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">20,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Mercaderes</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">27,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Miranda</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">33,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Padilla</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Patía</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">39,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Sebastián</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Santa Rosa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Sucre</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Timbiquí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">30,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Timbío</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">40,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Toribío</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">40,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Sotará</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Caldas</span><span class="dep-accordion-count">27 municipios · 8 con gravedad oficial</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Manizales</td>
+              <td><span class="sev-badge" style="background:rgb(122,31,31);color:#fbf7ef">Afectación crítica</span></td>
+              <td class="num">386</td>
+              <td class="num muted">476,000</td>
+              <td class="nota" title="Colapsos y daños graves en edificaciones e infraestructura; afectación de la Catedral y hospitales.">Colapsos y daños graves en edificaciones e infraestructura; afectación de la Catedral y hospitales.</td>
+            </tr>
+
+            <tr>
+              <td>Chinchiná</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">33</td>
+              <td class="num muted">50,000</td>
+              <td class="nota" title="Daños estructurales e infraestructura afectada.">Daños estructurales e infraestructura afectada.</td>
+            </tr>
+
+            <tr>
+              <td>Villamaría</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">29</td>
+              <td class="num muted">74,000</td>
+              <td class="nota" title="Daños en viviendas e infraestructura y víctimas.">Daños en viviendas e infraestructura y víctimas.</td>
+            </tr>
+
+            <tr>
+              <td>Palestina</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">23</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="Daños en infraestructura y viviendas.">Daños en infraestructura y viviendas.</td>
+            </tr>
+
+            <tr>
+              <td>Riosucio</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">16</td>
+              <td class="num muted">52,000</td>
+              <td class="nota" title="Daños y afectaciones en infraestructura.">Daños y afectaciones en infraestructura.</td>
+            </tr>
+
+            <tr>
+              <td>Anserma</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">13</td>
+              <td class="num muted">37,000</td>
+              <td class="nota" title="Afectaciones estructurales y daños en infraestructura.">Afectaciones estructurales y daños en infraestructura.</td>
+            </tr>
+
+            <tr>
+              <td>Neira</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">11</td>
+              <td class="num muted">21,000</td>
+              <td class="nota" title="Afectaciones en infraestructura y servicios.">Afectaciones en infraestructura y servicios.</td>
+            </tr>
+
+            <tr>
+              <td>Marmato</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">1</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="Daños y afectaciones estructurales.">Daños y afectaciones estructurales.</td>
+            </tr>
+
+            <tr>
+              <td>Pensilvania</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">22</td>
+              <td class="num muted">20,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Aguadas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">16</td>
+              <td class="num muted">22,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pácora</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">15</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Salamina</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">15</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Aranzazu</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">14</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Belalcázar</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">13</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Viterbo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">12</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Manzanares</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">10</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San José</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">7</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Risaralda</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">6</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Supía</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">6</td>
+              <td class="num muted">32,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Samaná</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">21,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Dorada</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">71,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Victoria</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Filadelfia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Marquetalia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">14,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Marulanda</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">3,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Norcasia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Merced</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Chocó</span><span class="dep-accordion-count">27 municipios · 5 con gravedad oficial</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Quibdó</td>
+              <td><span class="sev-badge" style="background:rgb(122,31,31);color:#fbf7ef">Afectación crítica</span></td>
+              <td class="num">80</td>
+              <td class="num muted">143,000</td>
+              <td class="nota" title="Daños estructurales, personas heridas y afectación de edificaciones y servicios.">Daños estructurales, personas heridas y afectación de edificaciones y servicios.</td>
+            </tr>
+
+            <tr>
+              <td>San José del Palmar</td>
+              <td><span class="sev-badge" style="background:rgb(122,31,31);color:#fbf7ef">Afectación crítica</span></td>
+              <td class="num">26</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="Epicentro; viviendas y estructuras dañadas; vías bloqueadas por derrumbes; operación de rescate.">Epicentro; viviendas y estructuras dañadas; vías bloqueadas por derrumbes; operación de rescate.</td>
+            </tr>
+
+            <tr>
+              <td>Nóvita</td>
+              <td><span class="sev-badge" style="background:rgb(197,81,43);color:#fbf7ef">Afectación muy alta</span></td>
+              <td class="num">5</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="Cercanía al epicentro; afectaciones y priorización para atención de emergencia.">Cercanía al epicentro; afectaciones y priorización para atención de emergencia.</td>
+            </tr>
+
+            <tr>
+              <td>Río Iró</td>
+              <td><span class="sev-badge" style="background:rgb(197,81,43);color:#fbf7ef">Afectación muy alta</span></td>
+              <td class="num">3</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="Zona próxima al epicentro; afectaciones graves y priorización humanitaria.">Zona próxima al epicentro; afectaciones graves y priorización humanitaria.</td>
+            </tr>
+
+            <tr>
+              <td>Sipí</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">8</td>
+              <td class="num muted">3,000</td>
+              <td class="nota" title="Afectaciones y zona próxima al entorno del evento.">Afectaciones y zona próxima al entorno del evento.</td>
+            </tr>
+
+            <tr>
+              <td>Medio San Juan</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">16</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Istmina</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">14</td>
+              <td class="num muted">37,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Tadó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">12</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Litoral del San Juan</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">8</td>
+              <td class="num muted">28,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Unión Panamericana</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">8</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bajo Baudó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">35,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Condoto</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cértegui</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Carmen de Atrato</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Alto Baudó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Atrato</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Cantón del San Pablo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Medio Baudó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Nuquí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bagadó</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bahía Solano</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Lloró</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Medio Atrato</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Riosucio</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">30,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Río Quito</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Acandí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bojayá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Huila</span><span class="dep-accordion-count">23 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Neiva</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">12</td>
+              <td class="num muted">408,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Tello</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">8</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Baraya</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Garzón</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">77,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Plata</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">5</td>
+              <td class="num muted">70,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Elías</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Villavieja</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Aipe</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">18,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Campoalegre</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">32,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Palermo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">27,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Acevedo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">26,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Pital</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">15,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Rivera</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">30,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Santa María</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">11,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Timaná</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">24,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Íquira</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Agrado</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">9,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Colombia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Gigante</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">23,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Hobo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Paicol</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pitalito</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">146,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Teruel</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Nariño</span><span class="dep-accordion-count">17 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Pasto</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">18</td>
+              <td class="num muted">405,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ipiales</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">9</td>
+              <td class="num muted">123,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Chachagüí</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Tumaco</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">277,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Cruz</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">20,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Barbacoas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">65,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Consacá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Cuaspud</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Córdoba</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="Nombrado entre los doce «municipios afectados» del Boletín Sismo N.º 04 de la Gobernación de Nariño.">Nombrado entre los doce «municipios afectados» del Boletín Sismo N.º 04 de la Gobernación de Nariño.</td>
+            </tr>
+
+            <tr>
+              <td>El Peñol</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Francisco Pizarro</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">16,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Funes</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Los Andes</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Mosquera</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Ricaurte</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">24,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Samaniego</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Sandoná</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">21,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Risaralda</span><span class="dep-accordion-count">14 municipios · 5 con gravedad oficial</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Pereira</td>
+              <td><span class="sev-badge" style="background:rgb(122,31,31);color:#fbf7ef">Afectación crítica</span></td>
+              <td class="num">245</td>
+              <td class="num muted">488,000</td>
+              <td class="nota" title="Numerosos colapsos estructurales; fallecidos; daños en viviendas, hospitales y aeropuerto Matecaña.">Numerosos colapsos estructurales; fallecidos; daños en viviendas, hospitales y aeropuerto Matecaña.</td>
+            </tr>
+
+            <tr>
+              <td>Dosquebradas</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">66</td>
+              <td class="num muted">246,000</td>
+              <td class="nota" title="Afectaciones en infraestructura y red hospitalaria.">Afectaciones en infraestructura y red hospitalaria.</td>
+            </tr>
+
+            <tr>
+              <td>Belén de Umbría</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">8</td>
+              <td class="num muted">25,000</td>
+              <td class="nota" title="487 viviendas afectadas; 116 con recomendación preliminar de desalojo total; daños en infraestructura crítica.">487 viviendas afectadas; 116 con recomendación preliminar de desalojo total; daños en infraestructura crítica.</td>
+            </tr>
+
+            <tr>
+              <td>La Celia</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">1</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="Víctimas mortales y daños importantes.">Víctimas mortales y daños importantes.</td>
+            </tr>
+
+            <tr>
+              <td>Santuario</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">1</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="Víctimas mortales y afectaciones estructurales.">Víctimas mortales y afectaciones estructurales.</td>
+            </tr>
+
+            <tr>
+              <td>Santa Rosa de Cabal</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">18</td>
+              <td class="num muted">84,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Virginia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">13</td>
+              <td class="num muted">28,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Balboa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">11</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD.">Declarado afectado en el reparto municipal del EDAN de viviendas de la UNGRD.</td>
+            </tr>
+
+            <tr>
+              <td>Marsella</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">17,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Guática</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pueblo Rico</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Quinchía</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">28,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Apía</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">13,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Mistrató</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">19,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Quindío</span><span class="dep-accordion-count">12 municipios · 1 con gravedad oficial</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Armenia</td>
+              <td><span class="sev-badge" style="background:rgb(230,131,64);color:#1c1a16">Afectación alta</span></td>
+              <td class="num">120</td>
+              <td class="num muted">307,000</td>
+              <td class="nota" title="Daños y afectaciones de infraestructura; aeropuerto cerrado para inspección.">Daños y afectaciones de infraestructura; aeropuerto cerrado para inspección.</td>
+            </tr>
+
+            <tr>
+              <td>Montenegro</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">44</td>
+              <td class="num muted">37,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Quimbaya</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">36</td>
+              <td class="num muted">31,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Calarcá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">26</td>
+              <td class="num muted">74,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Circasia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">22</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>La Tebaida</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">11</td>
+              <td class="num muted">34,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Salento</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">10</td>
+              <td class="num muted">10,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Filandia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">8</td>
+              <td class="num muted">12,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Génova</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">7</td>
+              <td class="num muted">8,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Buenavista</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">3,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Córdoba</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pijao</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Norte de Santander</span><span class="dep-accordion-count">7 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Cúcuta</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">7</td>
+              <td class="num muted">792,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Silos</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">7,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Chinácota</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">21,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Lourdes</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">5,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>El Tarra</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Los Patios</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">105,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pamplona</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">52,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Santander</span><span class="dep-accordion-count">5 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Barrancabermeja</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">15</td>
+              <td class="num muted">231,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bucaramanga</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">14</td>
+              <td class="num muted">619,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Floridablanca</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">315,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Confines</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">4,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Coromoro</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">6,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Cesar</span><span class="dep-accordion-count">4 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Valledupar</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">629,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Bosconia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">49,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Pailitas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">21,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Diego</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">24,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Bolívar</span><span class="dep-accordion-count">3 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Cartagena</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">13</td>
+              <td class="num muted">1,000,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Turbaco</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">130,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>San Pablo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">0</td>
+              <td class="num muted">29,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Meta</span><span class="dep-accordion-count">3 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Villavicencio</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">589,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Acacías</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">106,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Granada</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">75,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Boyacá</span><span class="dep-accordion-count">2 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Chiquinquirá</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">58,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Tunja</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">191,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Sucre</span><span class="dep-accordion-count">2 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Sincelejo</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">4</td>
+              <td class="num muted">331,000</td>
+              <td class="nota" title="">—</td>
+            </tr>
+
+            <tr>
+              <td>Coveñas</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">22,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Atlántico</span><span class="dep-accordion-count">1 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Barranquilla</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">19</td>
+              <td class="num muted">1,300,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Bogotá D.C.</span><span class="dep-accordion-count">1 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Bogotá D.C.</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">109</td>
+              <td class="num muted">7,900,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Caquetá</span><span class="dep-accordion-count">1 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Florencia</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">189,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Córdoba</span><span class="dep-accordion-count">1 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Montería</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">585,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">La Guajira</span><span class="dep-accordion-count">1 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Riohacha</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">2</td>
+              <td class="num muted">212,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Magdalena</span><span class="dep-accordion-count">1 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Santa Marta</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">3</td>
+              <td class="num muted">589,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">Putumayo</span><span class="dep-accordion-count">1 municipios · ninguno con gravedad oficial todavía</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>
+            <tr>
+              <td>Mocoa</td>
+              <td><span class="sev-badge" style="background:rgb(242,241,234);color:#1c1a16">Sin clasificación oficial</span></td>
+              <td class="num">1</td>
+              <td class="num muted">68,000</td>
+              <td class="nota" title="">—</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+      <p class="note" style="font-size:12px;margin-top:8px;">*Población aproximada del municipio (DANE). Fuente: data/municipios_afectados_terremoto_colombia_ago2026.csv — ver data/README.md.</p>
+    </section>
+  </div>
   <footer>
     <span>Fuente: <span class="mono">registro.json</span> de <a href="https://mapadelterremoto.com" target="_blank" rel="noopener">mapadelterremoto.com</a>, un agregador de prensa — no un censo oficial de campo.</span>
     <span>Generado localmente con <span class="mono">actualizar_indice_terremoto.py</span>. Esta página se autorrecarga cada 4 horas si la dejas abierta — recarga el mismo archivo en disco, así que si el Programador de tareas la actualizó, verás el dato nuevo solo.</span>
@@ -314,7 +4060,7 @@
 <script>
 (function() {
   var SNAPSHOT_ISO = "2026-09-01T00:46:00.117Z";
-  var BUILD_ISO = "2026-09-02T19:29:59.584569+00:00";
+  var BUILD_ISO = "2026-09-02T20:34:25.315097+00:00";
   function fmtAgo(iso) {
     if (!iso) return null;
     var then = new Date(iso).getTime();
@@ -331,6 +4077,26 @@
   if (ago === null) { text.textContent = "fecha desconocida"; }
   else if (hours > 30) { pill.classList.add("stale"); text.textContent = "desactualizado · hace " + ago; }
   else { text.textContent = "en vivo · hace " + ago; }
+})();
+(function() {
+  var btns = document.querySelectorAll(".tab-btn");
+  if (!btns.length) return;
+  var panels = {
+    departamental: document.getElementById("tab-departamental"),
+    municipal: document.getElementById("tab-municipal"),
+  };
+  btns.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      btns.forEach(function(b) { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      var target = btn.getAttribute("data-tab");
+      Object.keys(panels).forEach(function(key) {
+        if (!panels[key]) return;
+        panels[key].hidden = key !== target;
+      });
+    });
+  });
 })();
 </script>
 </body>

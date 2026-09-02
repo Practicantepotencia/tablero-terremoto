@@ -1,0 +1,13 @@
+{
+  "evento": "Terremoto Colombia, 10 de agosto de 2026 (M7,4, epicentro San José del Palmar, Chocó)",
+  "corte": "2026-08-19",
+  "municipios_afectados_oficial": 471,
+  "departamentos_oficial": 15,
+  "fallecidos": 314,
+  "desaparecidos": 262,
+  "heridos": 4437,
+  "familias_afectadas": 147464,
+  "personas_afectadas": 262154,
+  "fuente": "UNGRD, vía mapadelterremoto.com/municipios (corte 19 ago 2026)",
+  "nota_listado": "El listado nominal de data/municipios_afectados_terremoto_colombia_ago2026.csv (432 municipios) es una aproximación agregada por Naboo Intelligence de 257 fuentes públicas, normalizada con DIVIPOLA -- no es el desglose oficial exacto de los 471 de UNGRD, que no se publica nominal."
+}

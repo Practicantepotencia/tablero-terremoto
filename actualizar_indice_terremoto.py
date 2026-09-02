@@ -39,6 +39,19 @@ URL_POR_DEFECTO = "https://www.mapadelterremoto.com/datos/registro.json"
 # CSV en vez de editar este script). Se puede forzar otra ruta con
 # --poblacion, o forzar la tabla fija con --poblacion "" (string vacío).
 MUNICIPIOS_POBLACION_CSV = "data/municipios_afectados_terremoto_colombia_ago2026.csv"
+RESUMEN_UNGRD_JSON = "data/resumen_ungrd_ago2026.json"
+
+# Nivel de gravedad oficial (municipal) -> punto en la misma rampa 0-100 que
+# ya usan las celdas del heatmap departamental (ver RAMP/cell_color), para
+# que ambas pestañas compartan el mismo lenguaje visual de color.
+SEV_OFICIAL_VALUE = {
+    "Afectación crítica": 100,
+    "Afectación muy alta": 80,
+    "Afectación alta": 60,
+    "Afectación media-alta": 40,
+    "Afectación media": 20,
+    "Sin clasificación oficial": 0,
+}
 
 # ---------------------------------------------------------------------------
 # Población departamental (agregada de los municipios que mapadelterremoto.com
@@ -154,6 +167,39 @@ def load_dep_population(pop_csv_path):
     return dep_pop
 
 
+def load_municipios(csv_path):
+    """Lee el listado municipal completo (data/municipios_...csv) para la
+    pestaña de vista municipal. Devuelve [] si el archivo no existe -- la
+    pestaña simplemente no se genera (ver build_html)."""
+    if not csv_path or not os.path.exists(csv_path):
+        return []
+    municipios = []
+    with open(csv_path, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            try:
+                municipios.append({
+                    "departamento": row["departamento"],
+                    "municipio": row["municipio"],
+                    "gravedad_oficial": row.get("gravedad_oficial") or "Sin clasificación oficial",
+                    "puntos_dano": int(float(row.get("puntos_dano") or 0)),
+                    "poblacion": int(float(row["poblacion"])) if row.get("poblacion") else 0,
+                    "nota": row.get("nota") or "",
+                })
+            except (KeyError, ValueError):
+                continue
+    return municipios
+
+
+def load_resumen_meta(json_path):
+    if not json_path or not os.path.exists(json_path):
+        return None
+    try:
+        with open(json_path, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
 def compute_indice(data, dep_pop):
     puntos = data["puntos"]
     weighted = {d: defaultdict(float) for d in DIMS}
@@ -227,7 +273,7 @@ def fmt_fecha_es(dt):
     return f"{dt.day} de {MESES_ES[dt.month]} de {dt.year}, {dt.strftime('%H:%M')} UTC"
 
 
-def build_html(rows, meta, autorefresh_seconds=14400):
+def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_meta=None):
     snapshot_iso = meta.get("actualizado_snapshot", "")
     try:
         snap_dt = datetime.fromisoformat(snapshot_iso.replace("Z", "+00:00"))
@@ -266,6 +312,97 @@ def build_html(rows, meta, autorefresh_seconds=14400):
     header_dim_cells = "".join(f'<th>{DIM_LABELS[d]}</th>' for d in DIMS)
     legend_stops = "".join(f'<div class="legend-stop" style="background:{cell_color(v)}"></div>' for v in range(0, 101, 4))
     refresh_tag = f'<meta http-equiv="refresh" content="{autorefresh_seconds}">' if autorefresh_seconds else ""
+
+    # --- Pestaña municipal (opcional: solo si hay data/municipios_...csv) ---
+    tab_nav_html = ""
+    tab_municipal_html = ""
+    if municipios:
+        por_dep = defaultdict(list)
+        for m in municipios:
+            por_dep[m["departamento"]].append(m)
+        deps_ordenados = sorted(por_dep, key=lambda d: (-len(por_dep[d]), d))
+
+        def sev_badge(grav):
+            v = SEV_OFICIAL_VALUE.get(grav, 0)
+            return f'<span class="sev-badge" style="background:{cell_color(v)};color:{text_on(v)}">{grav}</span>'
+
+        accordion_items = []
+        for dep in deps_ordenados:
+            munis = sorted(
+                por_dep[dep],
+                key=lambda m: (-SEV_OFICIAL_VALUE.get(m["gravedad_oficial"], 0), -m["puntos_dano"], m["municipio"]),
+            )
+            n_oficial = sum(1 for m in munis if m["gravedad_oficial"] != "Sin clasificación oficial")
+            muni_rows = "\n".join(f"""
+            <tr>
+              <td>{m['municipio']}</td>
+              <td>{sev_badge(m['gravedad_oficial'])}</td>
+              <td class="num">{m['puntos_dano']}</td>
+              <td class="num muted">{m['poblacion']:,}</td>
+              <td class="nota" title="{(m['nota'] or '').replace('"', '&quot;')}">{m['nota'] or '—'}</td>
+            </tr>""" for m in munis)
+            resumen_dep = f"{n_oficial} con gravedad oficial" if n_oficial else "ninguno con gravedad oficial todavía"
+            accordion_items.append(f"""
+        <details class="dep-accordion">
+          <summary><span class="dep-accordion-name">{dep}</span><span class="dep-accordion-count">{len(munis)} municipios · {resumen_dep}</span></summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
+              <tbody>{muni_rows}</tbody>
+            </table>
+          </div>
+        </details>""")
+        accordion_html = "\n".join(accordion_items)
+
+        resumen_tiles_html = ""
+        if resumen_meta:
+            resumen_tiles_html = f"""
+    <div class="tiles">
+      <div class="tile critical">
+        <div class="tile-label">Fallecidos (oficial UNGRD)</div>
+        <div class="tile-value warn">{resumen_meta.get('fallecidos', 0):,}</div>
+        <div class="tile-sub">{resumen_meta.get('desaparecidos', 0):,} desaparecidos</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Heridos</div>
+        <div class="tile-value">{resumen_meta.get('heridos', 0):,}</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Personas afectadas</div>
+        <div class="tile-value">{resumen_meta.get('personas_afectadas', 0):,}</div>
+        <div class="tile-sub">{resumen_meta.get('familias_afectadas', 0):,} familias</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Municipios afectados (oficial UNGRD)</div>
+        <div class="tile-value">{resumen_meta.get('municipios_afectados_oficial', 0):,}</div>
+        <div class="tile-sub">en {resumen_meta.get('departamentos_oficial', 0)} departamentos · corte {resumen_meta.get('corte', '')}</div>
+      </div>
+    </div>
+    <p class="note">{resumen_meta.get('nota_listado', '')}</p>"""
+
+        tab_nav_html = """
+  <div class="tab-nav" role="tablist">
+    <button class="tab-btn active" data-tab="departamental" role="tab" aria-selected="true">Vista departamental</button>
+    <button class="tab-btn" data-tab="municipal" role="tab" aria-selected="false">Vista municipal ({n} municipios)</button>
+  </div>""".replace("{n}", str(len(municipios)))
+
+        tab_municipal_html = f"""
+  <div id="tab-municipal" class="tab-panel" hidden>
+    <header class="hero">
+      <div class="kicker">Listado nominal · por municipio</div>
+      <h1>Municipios afectados</h1>
+      <p class="subtitle">Gravedad oficial (cuando existe), puntos de daño registrados y población DANE aproximada, agrupados por departamento — expande cada uno para ver el detalle.</p>
+    </header>
+    {resumen_tiles_html}
+    <section>
+      <div class="section-head">
+        <h2>Departamentos, ordenados por número de municipios afectados</h2>
+      </div>
+      <div class="accordion-list">{accordion_html}
+      </div>
+      <p class="note" style="font-size:12px;margin-top:8px;">*Población aproximada del municipio (DANE). Fuente: data/municipios_afectados_terremoto_colombia_ago2026.csv — ver data/README.md.</p>
+    </section>
+  </div>"""
 
     html = f"""<!doctype html>
 <html lang="es">
@@ -331,6 +468,26 @@ def build_html(rows, meta, autorefresh_seconds=14400):
   details.method .method-body {{ padding: 0 0 18px; color: var(--muted); font-size: 13.8px; max-width: 780px; }}
   details.method .method-body p {{ margin: 0 0 10px; }}
   details.method .method-body code {{ background: var(--surface-2); padding: 1px 5px; border-radius: 4px; font-size: 0.92em; color: var(--ink); }}
+  .tab-nav {{ display: flex; gap: 6px; margin: 22px 0 0; border-bottom: 1px solid var(--border); }}
+  .tab-btn {{ font: inherit; font-size: 13.5px; font-weight: 600; color: var(--muted); background: none; border: none; border-bottom: 2px solid transparent; padding: 10px 4px; margin-bottom: -1px; cursor: pointer; }}
+  .tab-btn + .tab-btn {{ margin-left: 14px; }}
+  .tab-btn.active {{ color: var(--accent); border-bottom-color: var(--accent); }}
+  .tab-panel[hidden] {{ display: none; }}
+  .accordion-list {{ display: flex; flex-direction: column; gap: 8px; }}
+  details.dep-accordion {{ background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }}
+  details.dep-accordion summary {{ cursor: pointer; list-style: none; padding: 13px 16px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-weight: 600; font-size: 14px; }}
+  details.dep-accordion summary::-webkit-details-marker {{ display: none; }}
+  details.dep-accordion summary::before {{ content: "▸ "; color: var(--muted); }}
+  details.dep-accordion[open] summary::before {{ content: "▾ "; }}
+  .dep-accordion-count {{ font-weight: 500; font-size: 12px; color: var(--muted); white-space: nowrap; }}
+  table.muni {{ width: 100%; border-collapse: collapse; font-size: 12.8px; min-width: 640px; }}
+  table.muni th, table.muni td {{ padding: 7px 12px; border-top: 1px solid var(--border); }}
+  table.muni thead th {{ text-align: center; color: var(--muted); font-weight: 600; font-size: 10.5px; text-transform: uppercase; white-space: nowrap; background: var(--surface-2); }}
+  table.muni thead th.left {{ text-align: left; }}
+  table.muni td.num {{ text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }}
+  table.muni td.num.muted {{ color: var(--muted); }}
+  table.muni td.nota {{ color: var(--muted); font-size: 12px; max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+  .sev-badge {{ display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }}
   footer {{ margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12.5px; display: flex; flex-direction: column; gap: 4px; }}
   a {{ color: var(--accent); }}
 </style>
@@ -351,6 +508,8 @@ def build_html(rows, meta, autorefresh_seconds=14400):
     <h1>Impacto por departamento</h1>
     <p class="subtitle">Salud, vivienda, instituciones, educación y productividad económica combinadas en un índice per cápita de 0 a 100, recalculado desde <span class="mono">registro.json</span> de mapadelterremoto.com cada vez que corres este script.</p>
   </header>
+  {tab_nav_html}
+  <div id="tab-departamental" class="tab-panel">
   <div class="tiles">
     <div class="tile critical">
       <div class="tile-label">Departamento más crítico</div>
@@ -401,6 +560,8 @@ def build_html(rows, meta, autorefresh_seconds=14400):
       </div>
     </details>
   </section>
+  </div>
+  {tab_municipal_html}
   <footer>
     <span>Fuente: <span class="mono">registro.json</span> de <a href="https://mapadelterremoto.com" target="_blank" rel="noopener">mapadelterremoto.com</a>, un agregador de prensa — no un censo oficial de campo.</span>
     <span>Generado localmente con <span class="mono">actualizar_indice_terremoto.py</span>. Esta página se autorrecarga cada {autorefresh_seconds // 3600 if autorefresh_seconds else 0} horas si la dejas abierta — recarga el mismo archivo en disco, así que si el Programador de tareas la actualizó, verás el dato nuevo solo.</span>
@@ -426,6 +587,26 @@ def build_html(rows, meta, autorefresh_seconds=14400):
   if (ago === null) {{ text.textContent = "fecha desconocida"; }}
   else if (hours > 30) {{ pill.classList.add("stale"); text.textContent = "desactualizado · hace " + ago; }}
   else {{ text.textContent = "en vivo · hace " + ago; }}
+}})();
+(function() {{
+  var btns = document.querySelectorAll(".tab-btn");
+  if (!btns.length) return;
+  var panels = {{
+    departamental: document.getElementById("tab-departamental"),
+    municipal: document.getElementById("tab-municipal"),
+  }};
+  btns.forEach(function(btn) {{
+    btn.addEventListener("click", function() {{
+      btns.forEach(function(b) {{ b.classList.remove("active"); b.setAttribute("aria-selected", "false"); }});
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      var target = btn.getAttribute("data-tab");
+      Object.keys(panels).forEach(function(key) {{
+        if (!panels[key]) return;
+        panels[key].hidden = key !== target;
+      }});
+    }});
+  }});
 }})();
 </script>
 </body>
@@ -463,8 +644,16 @@ def main():
         "n_departamentos": len(rows),
     }
 
+    municipios = load_municipios(MUNICIPIOS_POBLACION_CSV)
+    resumen_meta = load_resumen_meta(RESUMEN_UNGRD_JSON)
+    if municipios:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Vista municipal: {len(municipios)} municipios cargados de {MUNICIPIOS_POBLACION_CSV}")
+
     write_indice_csv(rows, args.csv)
-    html = build_html(rows, meta, autorefresh_seconds=0 if args.sin_autorefresh else 14400)
+    html = build_html(
+        rows, meta, autorefresh_seconds=0 if args.sin_autorefresh else 14400,
+        municipios=municipios, resumen_meta=resumen_meta,
+    )
     with open(args.out, "w", encoding="utf-8") as f:
         f.write(html)
 

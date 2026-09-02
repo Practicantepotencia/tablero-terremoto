@@ -27,7 +27,7 @@ así que no hay riesgo de que un commit automático pise tus archivos aquí.
 
 ## Cómo se conecta al índice
 
-Cuando agregues el primer archivo aquí, `actualizar_indice_terremoto.py` se
+Cuando agregues un archivo aquí, `actualizar_indice_terremoto.py` se
 actualiza para leerlo (una función `load_*()` por archivo/fuente) y
 combinarlo con los puntos de `registro.json` antes de calcular el índice —
 mismo patrón que ya usa la fuente actual, sin librerías nuevas.
@@ -36,3 +36,26 @@ Archivo → función loader → normalizado a la forma común (`departamento`,
 `tipo`, `severidad`, texto) → entra al mismo cálculo de las 5 dimensiones, o
 se agrega como una dimensión nueva si mide algo distinto (ver discusión en el
 historial del proyecto).
+
+## Archivos actuales
+
+- **`municipios_afectados_terremoto_colombia_ago2026.xlsx`** — original tal
+  cual se descargó (fuente: mapadelterremoto.com/municipios, corte 19-20 ago
+  2026, agregado de 257 fuentes públicas normalizado con DIVIPOLA). Se
+  conserva como referencia, el script no lo lee directamente.
+- **`municipios_afectados_terremoto_colombia_ago2026.csv`** — versión
+  normalizada del Excel de arriba (departamento, municipio, gravedad oficial,
+  puntos de daño, población, nota/fuente), generada una vez con
+  `openpyxl` y guardada como CSV plano para que el script la lea con la
+  librería estándar (`csv`), sin agregar dependencias nuevas. Es la fuente de
+  población por departamento por defecto (reemplaza a `POBLACION_CSV`
+  embebida, que sigue como respaldo) y alimenta la pestaña "Vista municipal"
+  del tablero.
+- **`resumen_ungrd_ago2026.json`** — cifras oficiales UNGRD de la hoja
+  "Resumen" del Excel (fallecidos, desaparecidos, heridos, personas/familias
+  afectadas), para los tiles de la pestaña municipal.
+
+Si reemplazas el Excel por una versión más nueva, regenera el CSV con el
+mismo procedimiento (parsear "Listado completo", ojo con el orden
+`millones|mil` en el regex — `mil` es prefijo de `millones`) y actualiza el
+JSON de resumen a mano con la hoja "Resumen" nueva.

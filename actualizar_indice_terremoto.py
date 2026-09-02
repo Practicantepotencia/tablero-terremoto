@@ -320,7 +320,24 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
         por_dep = defaultdict(list)
         for m in municipios:
             por_dep[m["departamento"]].append(m)
-        deps_ordenados = sorted(por_dep, key=lambda d: (-len(por_dep[d]), d))
+
+        def dep_score(dep):
+            """Gravedad oficial (0-100, misma escala que el heatmap) ponderada
+            por población, sobre el total de población de los municipios
+            afectados del departamento. Captura a la vez cantidad (más
+            municipios graves suman más al numerador), población (pesa más
+            un municipio grande que uno chico con la misma gravedad) y
+            gravedad -- en una sola cifra 0-100 comparable entre
+            departamentos, coloreable con la misma rampa que ya usa el resto
+            del tablero."""
+            pob_total = sum(m["poblacion"] for m in por_dep[dep])
+            if pob_total <= 0:
+                return 0.0
+            ponderado = sum(SEV_OFICIAL_VALUE.get(m["gravedad_oficial"], 0) * m["poblacion"] for m in por_dep[dep])
+            return ponderado / pob_total
+
+        scores = {dep: dep_score(dep) for dep in por_dep}
+        deps_ordenados = sorted(por_dep, key=lambda d: (-scores[d], -len(por_dep[d]), d))
 
         def sev_badge(grav):
             v = SEV_OFICIAL_VALUE.get(grav, 0)
@@ -342,9 +359,15 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
               <td class="nota" title="{(m['nota'] or '').replace('"', '&quot;')}">{m['nota'] or '—'}</td>
             </tr>""" for m in munis)
             resumen_dep = f"{n_oficial} con gravedad oficial" if n_oficial else "ninguno con gravedad oficial todavía"
+            score = scores[dep]
+            score_badge = f'<span class="score-badge" style="background:{cell_color(score)};color:{text_on(score)}">{score:.0f}</span>'
             accordion_items.append(f"""
         <details class="dep-accordion">
-          <summary><span class="dep-accordion-name">{dep}</span><span class="dep-accordion-count">{len(munis)} municipios · {resumen_dep}</span></summary>
+          <summary>
+            <span class="dep-accordion-name">{dep}</span>
+            <span class="dep-accordion-score">{score_badge}{bar(score)}</span>
+            <span class="dep-accordion-count">{len(munis)} municipios · {resumen_dep}</span>
+          </summary>
           <div class="table-scroll">
             <table class="muni">
               <thead><tr><th class="left">Municipio</th><th class="left">Gravedad oficial</th><th>Puntos de daño</th><th>Población*</th><th class="left">Nota / fuente</th></tr></thead>
@@ -396,8 +419,9 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     {resumen_tiles_html}
     <section>
       <div class="section-head">
-        <h2>Departamentos, ordenados por número de municipios afectados</h2>
+        <h2>Departamentos, ordenados por gravedad</h2>
       </div>
+      <p class="note">Cada departamento muestra un índice 0-100 (mismo color que el heatmap): la gravedad oficial de cada municipio (crítica=100 … sin clasificación=0), ponderada por su población dentro del total de municipios afectados del departamento. Un departamento con muchos municipios pero ninguno clasificado todavía queda en 0 — cantidad sola no implica gravedad confirmada.</p>
       <div class="accordion-list">{accordion_html}
       </div>
       <p class="note" style="font-size:12px;margin-top:8px;">*Población aproximada del municipio (DANE). Fuente: data/municipios_afectados_terremoto_colombia_ago2026.csv — ver data/README.md.</p>
@@ -475,11 +499,15 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
   .tab-panel[hidden] {{ display: none; }}
   .accordion-list {{ display: flex; flex-direction: column; gap: 8px; }}
   details.dep-accordion {{ background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }}
-  details.dep-accordion summary {{ cursor: pointer; list-style: none; padding: 13px 16px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-weight: 600; font-size: 14px; }}
+  details.dep-accordion summary {{ cursor: pointer; list-style: none; padding: 13px 16px; display: flex; align-items: center; gap: 16px; font-weight: 600; font-size: 14px; }}
   details.dep-accordion summary::-webkit-details-marker {{ display: none; }}
   details.dep-accordion summary::before {{ content: "▸ "; color: var(--muted); }}
   details.dep-accordion[open] summary::before {{ content: "▾ "; }}
-  .dep-accordion-count {{ font-weight: 500; font-size: 12px; color: var(--muted); white-space: nowrap; }}
+  .dep-accordion-name {{ flex: 1 1 auto; }}
+  .dep-accordion-score {{ flex: none; display: flex; align-items: center; gap: 8px; }}
+  .score-badge {{ display: inline-flex; align-items: center; justify-content: center; min-width: 26px; padding: 2px 6px; border-radius: 999px; font-size: 12px; font-weight: 700; }}
+  .dep-accordion-count {{ flex: none; font-weight: 500; font-size: 12px; color: var(--muted); white-space: nowrap; }}
+  @media (max-width: 640px) {{ .dep-accordion-score {{ display: none; }} }}
   table.muni {{ width: 100%; border-collapse: collapse; font-size: 12.8px; min-width: 640px; }}
   table.muni th, table.muni td {{ padding: 7px 12px; border-top: 1px solid var(--border); }}
   table.muni thead th {{ text-align: center; color: var(--muted); font-weight: 600; font-size: 10.5px; text-transform: uppercase; white-space: nowrap; background: var(--surface-2); }}

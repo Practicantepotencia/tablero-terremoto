@@ -24,6 +24,7 @@ import argparse
 import csv
 import io
 import json
+import os
 import sys
 import urllib.request
 from collections import defaultdict
@@ -31,10 +32,18 @@ from datetime import datetime, timezone
 
 URL_POR_DEFECTO = "https://www.mapadelterremoto.com/datos/registro.json"
 
+# Listado nominal de municipios afectados (departamento, municipio, gravedad
+# oficial, población DANE aprox., etc.) -- ver data/README.md. Si este
+# archivo existe, se usa para sumar la población por departamento en vez de
+# la tabla fija de abajo (misma fuente, pero se actualiza reemplazando el
+# CSV en vez de editar este script). Se puede forzar otra ruta con
+# --poblacion, o forzar la tabla fija con --poblacion "" (string vacío).
+MUNICIPIOS_POBLACION_CSV = "data/municipios_afectados_terremoto_colombia_ago2026.csv"
+
 # ---------------------------------------------------------------------------
 # Población departamental (agregada de los municipios que mapadelterremoto.com
-# marca como afectados). No cambia salvo que el sitio agregue departamentos
-# nuevos a su cobertura -- por eso va embebida, no hace falta un CSV aparte.
+# marca como afectados). Respaldo si MUNICIPIOS_POBLACION_CSV no está
+# disponible (ej. corriendo el script fuera del repo, sin la carpeta data/).
 # ---------------------------------------------------------------------------
 POBLACION_CSV = """departamento,poblacion
 Antioquia,6384000
@@ -430,7 +439,7 @@ def main():
     ap.add_argument("--url", default=URL_POR_DEFECTO, help="URL o ruta local de registro.json (por defecto: el endpoint público del sitio)")
     ap.add_argument("--out", default="dashboard_impacto_terremoto.html", help="Ruta del HTML de salida")
     ap.add_argument("--csv", default="indice_impacto_departamento.csv", help="Ruta del CSV del índice (para Excel/Power BI/lo que sea)")
-    ap.add_argument("--poblacion", default=None, help="CSV externo de población por departamento (opcional; si no, usa la tabla embebida)")
+    ap.add_argument("--poblacion", default=None, help=f"CSV externo de población por departamento o por municipio (opcional; por defecto usa {MUNICIPIOS_POBLACION_CSV} si existe, si no la tabla embebida). Pasa '' vacío para forzar la tabla embebida.")
     ap.add_argument("--sin-autorefresh", action="store_true", help="No agregar la etiqueta de autorrecarga cada 4h al HTML")
     args = ap.parse_args()
 
@@ -441,7 +450,12 @@ def main():
         print(f"[{datetime.now().isoformat(timespec='seconds')}] ERROR al obtener registro.json: {e}", file=sys.stderr)
         sys.exit(1)
 
-    dep_pop = load_dep_population(args.poblacion)
+    poblacion_path = args.poblacion
+    if poblacion_path is None:
+        poblacion_path = MUNICIPIOS_POBLACION_CSV if os.path.exists(MUNICIPIOS_POBLACION_CSV) else None
+    fuente_pob = poblacion_path if poblacion_path else "tabla embebida (POBLACION_CSV)"
+    print(f"[{datetime.now().isoformat(timespec='seconds')}] Población por departamento desde: {fuente_pob}")
+    dep_pop = load_dep_population(poblacion_path or None)
     rows = compute_indice(data, dep_pop)
     meta = {
         "actualizado_snapshot": data.get("actualizado"),

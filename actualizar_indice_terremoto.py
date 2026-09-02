@@ -207,25 +207,28 @@ def write_indice_csv(rows, csv_path):
         w.writerows(rows)
 
 
+MESES_ES = {1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio",
+            7: "julio", 8: "agosto", 9: "septiembre", 10: "octubre", 11: "noviembre", 12: "diciembre"}
+
+
+def fmt_fecha_es(dt):
+    # Evita "%-d"/"%#d": esos modificadores de strftime son extensiones de
+    # plataforma (funcionan en Linux/Mac, truenan en Windows con "Invalid
+    # format string") -- se arma el texto a mano para que sea igual en todos.
+    return f"{dt.day} de {MESES_ES[dt.month]} de {dt.year}, {dt.strftime('%H:%M')} UTC"
+
+
 def build_html(rows, meta, autorefresh_seconds=14400):
     snapshot_iso = meta.get("actualizado_snapshot", "")
     try:
         snap_dt = datetime.fromisoformat(snapshot_iso.replace("Z", "+00:00"))
-        snap_label = snap_dt.strftime("%-d de %B de %Y, %H:%M UTC")
+        snap_label = fmt_fecha_es(snap_dt)
     except Exception:
         snap_label = snapshot_iso or "desconocido"
 
     build_dt = datetime.now(timezone.utc)
     build_iso = build_dt.isoformat()
-    build_label = build_dt.strftime("%-d de %B de %Y, %H:%M UTC")
-
-    MES_ES = {"January": "enero", "February": "febrero", "March": "marzo", "April": "abril",
-              "May": "mayo", "June": "junio", "July": "julio", "August": "agosto",
-              "September": "septiembre", "October": "octubre", "November": "noviembre",
-              "December": "diciembre"}
-    for en, es in MES_ES.items():
-        snap_label = snap_label.replace(en, es)
-        build_label = build_label.replace(en, es)
+    build_label = fmt_fecha_es(build_dt)
 
     n_dep = len(rows)
     poblacion_total = sum(r["poblacion"] for r in rows)

@@ -1,0 +1,9 @@
+# Resultado de correr el script en TU computador para probar — no se sube,
+# porque el que cuenta para la página pública es el que genera el workflow
+# de GitHub Actions (index.html + indice_impacto_departamento.csv, esos SÍ
+# se suben, no están en esta lista).
+dashboard_impacto_terremoto.html
+actualizar_log.txt
+
+__pycache__/
+*.pyc

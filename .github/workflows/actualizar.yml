@@ -1,0 +1,37 @@
+name: Actualizar tablero de impacto
+
+# Corre solo cada 4 horas en los servidores de GitHub (no depende de que tu
+# computador esté encendido), y también se puede disparar a mano desde la
+# pestaña "Actions" del repo con el botón "Run workflow".
+on:
+  schedule:
+    - cron: "0 */4 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write  # necesario para que el workflow pueda hacer commit del HTML/CSV actualizados
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          # sin "cache: pip" ni requirements.txt a propósito: el script no
+          # usa ninguna librería externa, solo la estándar de Python.
+
+      - name: Generar tablero e índice
+        run: python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
+
+      - name: Publicar cambios si hay datos nuevos
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Actualización automática del índice de impacto"
+          file_pattern: "index.html indice_impacto_departamento.csv"
+          commit_user_name: "tablero-terremoto-bot"
+          commit_user_email: "actions@github.com"

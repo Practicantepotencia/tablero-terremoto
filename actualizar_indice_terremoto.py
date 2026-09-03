@@ -604,15 +604,17 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
 
     # --- Pestaña "Perfil por departamento" (Fase 3: siempre disponible,
     # solo depende de `rows` -- una ficha por departamento con sus 5
-    # dimensiones desglosadas, comparadas contra el mejor departamento en
-    # cada una, igual que la ficha de ciudad del ICC 2025) ---
-    # "Mejor" = menos afectado = valor MÁS BAJO (en este índice, más alto es
-    # peor -- ver cell_color/cómo se ordena el heatmap). Orden ascendente,
-    # el primero es el mínimo.
-    mejor_en_dim = {}
+    # dimensiones desglosadas, comparadas contra el PEOR departamento en
+    # cada una -- referencia de qué tan lejos está del caso más crítico,
+    # no del mejor (con tantos departamentos empatados en 0, comparar
+    # contra el mejor casi siempre da una referencia sin información)) ---
+    # "Peor" = más afectado = valor MÁS ALTO (en este índice, más alto es
+    # peor -- ver cell_color/cómo se ordena el heatmap). Orden descendente,
+    # el primero es el máximo.
+    peor_en_dim = {}
     for d in DIMS:
-        ranked_d = sorted(rows, key=lambda r: (r[f"{d}_idx"], r["departamento"]))
-        mejor_en_dim[d] = ranked_d[0]
+        ranked_d = sorted(rows, key=lambda r: (-r[f"{d}_idx"], r["departamento"]))
+        peor_en_dim[d] = ranked_d[0]
 
     ranked_compuesto = sorted(rows, key=lambda r: (-r["indice_compuesto"], r["departamento"]))
     rank_compuesto = {r["departamento"]: i + 1 for i, r in enumerate(ranked_compuesto)}
@@ -622,9 +624,9 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
         dep = r["departamento"]
         dim_rows_html = []
         for d in DIMS:
-            best = mejor_en_dim[d]
-            es_el_mejor = best["departamento"] == dep
-            referencia = "es el mejor" if es_el_mejor else f"{best['departamento']} ({best[f'{d}_idx']:.0f})"
+            peor = peor_en_dim[d]
+            es_el_peor = peor["departamento"] == dep
+            referencia = "es el peor" if es_el_peor else f"{peor['departamento']} ({peor[f'{d}_idx']:.0f})"
             dim_rows_html.append(f"""
             <tr>
               <td class="left">{DIM_LABELS[d]}</td>
@@ -643,7 +645,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
           </summary>
           <div class="table-scroll">
             <table class="muni">
-              <thead><tr><th class="left">Dimensión</th><th>Incidencia</th><th>Severidad</th><th>Dimensión</th><th class="left">Mejor departamento en esa dimensión</th></tr></thead>
+              <thead><tr><th class="left">Dimensión</th><th>Incidencia</th><th>Severidad</th><th>Dimensión</th><th class="left">Peor departamento en esa dimensión</th></tr></thead>
               <tbody>{''.join(dim_rows_html)}</tbody>
             </table>
           </div>
@@ -654,7 +656,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     <header class="hero">
       <div class="kicker">Perfil por departamento · Fase 3</div>
       <h1>Cada departamento, sus 5 dimensiones</h1>
-      <p class="subtitle">Incidencia y severidad promedio desglosadas por dimensión, comparadas contra el mejor departamento en cada una — expande cada uno para ver el detalle. Ordenados por índice compuesto, igual que la vista departamental.</p>
+      <p class="subtitle">Incidencia y severidad promedio desglosadas por dimensión, comparadas contra el peor departamento en cada una — expande cada uno para ver el detalle. Ordenados por índice compuesto, igual que la vista departamental.</p>
     </header>
     <section>
       <div class="accordion-list">{''.join(perfil_items)}

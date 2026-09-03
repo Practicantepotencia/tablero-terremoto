@@ -602,9 +602,71 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     </section>
   </div>"""
 
+    # --- Pestaña "Perfil por departamento" (Fase 3: siempre disponible,
+    # solo depende de `rows` -- una ficha por departamento con sus 5
+    # dimensiones desglosadas, comparadas contra el mejor departamento en
+    # cada una, igual que la ficha de ciudad del ICC 2025) ---
+    mejor_en_dim = {}
+    for d in DIMS:
+        ranked_d = sorted(rows, key=lambda r: (-r[f"{d}_idx"], r["departamento"]))
+        mejor_en_dim[d] = ranked_d[0]
+
+    ranked_compuesto = sorted(rows, key=lambda r: (-r["indice_compuesto"], r["departamento"]))
+    rank_compuesto = {r["departamento"]: i + 1 for i, r in enumerate(ranked_compuesto)}
+
+    perfil_items = []
+    for r in ranked_compuesto:
+        dep = r["departamento"]
+        dim_rows_html = []
+        for d in DIMS:
+            best = mejor_en_dim[d]
+            es_el_mejor = best["departamento"] == dep
+            referencia = "es el mejor" if es_el_mejor else f"{best['departamento']} ({best[f'{d}_idx']:.0f})"
+            dim_rows_html.append(f"""
+            <tr>
+              <td class="left">{DIM_LABELS[d]}</td>
+              <td class="num muted">{r[f'{d}_incidencia_idx']:.0f}</td>
+              <td class="num muted">{r[f'{d}_severidad_idx']:.0f}</td>
+              <td class="num" style="background:{cell_color(r[f'{d}_idx'])};color:{text_on(r[f'{d}_idx'])}">{r[f'{d}_idx']:.0f}</td>
+              <td class="left muted">{referencia}</td>
+            </tr>""")
+        score_badge = f'<span class="score-badge" style="background:{cell_color(r["indice_compuesto"])};color:{text_on(r["indice_compuesto"])}">{r["indice_compuesto"]:.0f}</span>'
+        perfil_items.append(f"""
+        <details class="dep-accordion">
+          <summary>
+            <span class="dep-accordion-name">{dep}</span>
+            <span class="dep-accordion-score">{score_badge}{bar(r['indice_compuesto'])}</span>
+            <span class="dep-accordion-count">índice compuesto · puesto {rank_compuesto[dep]}/25</span>
+          </summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Dimensión</th><th>Incidencia</th><th>Severidad</th><th>Dimensión</th><th class="left">Mejor departamento en esa dimensión</th></tr></thead>
+              <tbody>{''.join(dim_rows_html)}</tbody>
+            </table>
+          </div>
+        </details>""")
+
+    tab_perfil_html = f"""
+  <div id="tab-perfil" class="tab-panel" hidden>
+    <header class="hero">
+      <div class="kicker">Perfil por departamento · Fase 3</div>
+      <h1>Cada departamento, sus 5 dimensiones</h1>
+      <p class="subtitle">Incidencia y severidad promedio desglosadas por dimensión, comparadas contra el mejor departamento en cada una — expande cada uno para ver el detalle. Ordenados por índice compuesto, igual que la vista departamental.</p>
+    </header>
+    <section>
+      <div class="accordion-list">{''.join(perfil_items)}
+      </div>
+    </section>
+  </div>"""
+
     # --- Nav de pestañas: se arma según qué paneles existan realmente.
-    # "departamental" y "dimensión" siempre están; "municipal" es opcional. ---
-    tab_defs = [("departamental", "Vista departamental"), ("dimension", "Por dimensión")]
+    # "departamental", "dimensión" y "perfil" siempre están; "municipal" es
+    # opcional. ---
+    tab_defs = [
+        ("departamental", "Vista departamental"),
+        ("dimension", "Por dimensión"),
+        ("perfil", "Perfil por departamento"),
+    ]
     if municipios:
         tab_defs.append(("municipal", f"Vista municipal ({len(municipios)} municipios)"))
     tab_nav_html = '\n  <div class="tab-nav" role="tablist">\n' + "\n".join(
@@ -790,6 +852,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
   </section>
   </div>
   {tab_dim_html}
+  {tab_perfil_html}
   {tab_municipal_html}
   <footer>
     <span>Fuente: <span class="mono">registro.json</span> de <a href="https://mapadelterremoto.com" target="_blank" rel="noopener">mapadelterremoto.com</a>, un agregador de prensa — no un censo oficial de campo.</span>
@@ -823,6 +886,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
   var panels = {{
     departamental: document.getElementById("tab-departamental"),
     dimension: document.getElementById("tab-dimension"),
+    perfil: document.getElementById("tab-perfil"),
     municipal: document.getElementById("tab-municipal"),
   }};
   btns.forEach(function(btn) {{

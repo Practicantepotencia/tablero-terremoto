@@ -606,9 +606,12 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     # solo depende de `rows` -- una ficha por departamento con sus 5
     # dimensiones desglosadas, comparadas contra el mejor departamento en
     # cada una, igual que la ficha de ciudad del ICC 2025) ---
+    # "Mejor" = menos afectado = valor MÁS BAJO (en este índice, más alto es
+    # peor -- ver cell_color/cómo se ordena el heatmap). Orden ascendente,
+    # el primero es el mínimo.
     mejor_en_dim = {}
     for d in DIMS:
-        ranked_d = sorted(rows, key=lambda r: (-r[f"{d}_idx"], r["departamento"]))
+        ranked_d = sorted(rows, key=lambda r: (r[f"{d}_idx"], r["departamento"]))
         mejor_en_dim[d] = ranked_d[0]
 
     ranked_compuesto = sorted(rows, key=lambda r: (-r["indice_compuesto"], r["departamento"]))

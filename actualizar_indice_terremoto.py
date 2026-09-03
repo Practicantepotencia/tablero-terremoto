@@ -200,6 +200,21 @@ def load_resumen_meta(json_path):
         return None
 
 
+def _normalizar_0_100(valores_por_dep, departamentos, dep_pop):
+    """Min-máx 0-100 entre los departamentos con población > 0. Factorizado
+    para poder aplicarla por separado a cada sub-indicador de la Fase 1
+    (incidencia y severidad promedio) en vez de a una sola tasa combinada
+    -- misma lógica de normalización de siempre, reutilizada un nivel más
+    abajo en la jerarquía."""
+    vals = [valores_por_dep[dep] for dep in departamentos if dep_pop.get(dep, 0) > 0]
+    vmin, vmax = min(vals), max(vals)
+    rng = (vmax - vmin) if vmax > vmin else 1.0
+    return {
+        dep: (valores_por_dep[dep] - vmin) / rng * 100 if dep_pop.get(dep, 0) > 0 else 0.0
+        for dep in departamentos
+    }
+
+
 def compute_indice(data, dep_pop):
     puntos = data["puntos"]
     weighted = {d: defaultdict(float) for d in DIMS}
@@ -223,19 +238,32 @@ def compute_indice(data, dep_pop):
             weighted["instituciones"][dep] += w; raw_n["instituciones"][dep] += 1
 
     departamentos = sorted(dep_pop.keys())
-    tasa = {d: {} for d in DIMS}
+
+    # Fase 1 (evolución hacia el formato ICC 2025, ver brief): cada
+    # dimensión se parte en dos sub-indicadores en vez de una sola tasa
+    # que mezclaba cantidad y gravedad de una:
+    #   incidencia          = cuántos puntos hay, por población (n / pob * 100k)
+    #   severidad_promedio  = qué tan graves son en promedio esos puntos
+    #                         (peso de severidad promedio; la población ya
+    #                         la captura la incidencia, no se vuelve a dividir)
+    # Cada sub-indicador se normaliza 0-100 por separado y la dimensión
+    # final es su promedio -- mismo principio que "compuesto = promedio de
+    # las 5 dimensiones", un nivel más abajo en la jerarquía.
+    incidencia_tasa = {d: {} for d in DIMS}
+    severidad_promedio = {d: {} for d in DIMS}
     for d in DIMS:
         for dep in departamentos:
             pob = dep_pop.get(dep, 0)
-            tasa[d][dep] = (weighted[d].get(dep, 0) / pob * 100000) if pob > 0 else 0.0
+            n = raw_n[d].get(dep, 0)
+            incidencia_tasa[d][dep] = (n / pob * 100000) if pob > 0 else 0.0
+            severidad_promedio[d][dep] = (weighted[d].get(dep, 0) / n) if n > 0 else 0.0
 
-    idx = {d: {} for d in DIMS}
-    for d in DIMS:
-        vals = [tasa[d][dep] for dep in departamentos if dep_pop.get(dep, 0) > 0]
-        vmin, vmax = min(vals), max(vals)
-        rng = (vmax - vmin) if vmax > vmin else 1.0
-        for dep in departamentos:
-            idx[d][dep] = (tasa[d][dep] - vmin) / rng * 100 if dep_pop.get(dep, 0) > 0 else 0.0
+    incidencia_idx = {d: _normalizar_0_100(incidencia_tasa[d], departamentos, dep_pop) for d in DIMS}
+    severidad_idx = {d: _normalizar_0_100(severidad_promedio[d], departamentos, dep_pop) for d in DIMS}
+    idx = {
+        d: {dep: (incidencia_idx[d][dep] + severidad_idx[d][dep]) / 2 for dep in departamentos}
+        for d in DIMS
+    }
 
     rows = []
     for dep in departamentos:
@@ -245,7 +273,10 @@ def compute_indice(data, dep_pop):
         row = {"departamento": dep, "poblacion": int(dep_pop[dep]), "indice_compuesto": compuesto}
         for d in DIMS:
             row[f"{d}_n"] = raw_n[d].get(dep, 0)
-            row[f"{d}_tasa_100k"] = tasa[d][dep]
+            row[f"{d}_incidencia_tasa_100k"] = incidencia_tasa[d][dep]
+            row[f"{d}_incidencia_idx"] = incidencia_idx[d][dep]
+            row[f"{d}_severidad_promedio"] = severidad_promedio[d][dep]
+            row[f"{d}_severidad_idx"] = severidad_idx[d][dep]
             row[f"{d}_idx"] = idx[d][dep]
         rows.append(row)
     rows.sort(key=lambda r: -r["indice_compuesto"])
@@ -255,7 +286,10 @@ def compute_indice(data, dep_pop):
 def write_indice_csv(rows, csv_path):
     fieldnames = ["departamento", "poblacion", "indice_compuesto"]
     for d in DIMS:
-        fieldnames += [f"{d}_n", f"{d}_tasa_100k", f"{d}_idx"]
+        fieldnames += [
+            f"{d}_n", f"{d}_incidencia_tasa_100k", f"{d}_incidencia_idx",
+            f"{d}_severidad_promedio", f"{d}_severidad_idx", f"{d}_idx",
+        ]
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
@@ -584,7 +618,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
       <summary>Metodología y limitaciones</summary>
       <div class="method-body">
         <p>Unidad geográfica: departamento (25). <b>Salud</b> = puntos tipo <code>HOSPITAL</code>; <b>Vivienda</b> = <code>VIVIENDA</code>; <b>Educación</b> = <code>ESCUELA</code>; <b>Instituciones</b> = puntos cuyo texto menciona una sede de gobierno o gestión pública; <b>Productividad (proxy)</b> = <code>SERVICIO</code> + <code>PUNTO_AYUDA</code> + <code>RESTRICCION</code>.</p>
-        <p>Cada punto pesa según severidad (COLAPSO=4, GRAVE=3, MODERADO=2, LEVE=1, SIN_EVALUAR=1). Cada dimensión se divide por la población afectada del departamento y se normaliza 0-100 (mínimo-máximo entre los 25). El índice compuesto es el promedio simple de las 5 dimensiones.</p>
+        <p>Cada punto pesa según severidad (COLAPSO=4, GRAVE=3, MODERADO=2, LEVE=1, SIN_EVALUAR=1). Cada dimensión se calcula en dos sub-indicadores separados -- <b>incidencia</b> (cuántos puntos hay, por cada 100k habitantes) y <b>severidad promedio</b> (qué tan graves son en promedio esos puntos) -- normalizados 0-100 cada uno (mínimo-máximo entre los 25 departamentos) y promediados entre sí. El índice compuesto es el promedio simple de las 5 dimensiones.</p>
       </div>
     </details>
   </section>

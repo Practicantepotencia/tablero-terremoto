@@ -81,32 +81,78 @@ sustituir `registro.json`.
 | Granularidad | Punto individual, con tipo/severidad/texto libre | Punto individual (`lon,lat,grade`), agrupado por AOI (zona), no por municipio/departamento directamente | Desconocida por hoja — falta leer el contenido de cada una |
 | Cobertura geográfica | Nacional, todos los departamentos reportados | Solo AOIs con imagen satelital contratada — visto hasta ahora: Cali, Pereira (no Chocó todavía, falta ver el CSV completo) | Desconocida |
 
+## Qué trae cada hoja de Google Sheets (leídas completas por primera vez)
+
+Se bajaron las 4 vía el mismo truco de diagnóstico temporal. Esquema real:
+
+### `Datos_Territoriales` (408 KB) -- la más valiosa con diferencia
+
+Columnas: `Reporte, Nivel, Departamento, Municipio, Lat, Lon, Fallecidos,
+Heridos, Desaparecidos, Rescatados, Familias, VivAveriadas,
+VivDestruidas, Colapsos, Salud, Educativos, Comunitarios, Vias,
+Aeropuertos, Acueductos, MunicipiosAfectados, DeptsAfectados,
+PersonasAfectadas`.
+
+Una fila por corte de tiempo (`Reporte`, ej. "3 Sep 06:30") x nivel
+(`Nacional` / `Departamento`, con lat/lon del centroide) -- **es una
+serie de tiempo de cifras oficiales consolidadas**, algo que hoy no
+tenemos en absoluto (nuestra fuente actual son puntos individuales de
+reportes de prensa, sin totales oficiales de fallecidos/heridos/viviendas
+por departamento). Ejemplo real (corte "1 Sep 18:30"): Chocó -- 12
+fallecidos, 357 heridos, 36.412 familias, 26.278 viv. averiadas, 5.184
+colapsos, 90 puntos de salud afectados, 314 educativos, 175 vías; Valle
+del Cauca -- 199 fallecidos, 2.904 heridos, 120.598 familias, 53.496 viv.
+averiadas, 13.051 colapsos.
+
+### `Tendencias` (263 KB)
+
+Subconjunto de columnas de arriba (`Fallecidos, Desaparecidos, Heridos,
+Rescatados, VivAveriadas, VivDestruidas`), pero con un nivel adicional:
+`Municipio` (ej. filas `Chocó/Acandí`, `Chocó/Alto Baudó`...) -- **esta sí
+llega a nivel municipal con cifras oficiales**, cruzable directo con
+`data/municipios_afectados_terremoto_colombia_ago2026.csv`.
+
+### `Bitácora_Noticias` (136 KB)
+
+`Reporte, Fecha, Categoria (OFICIAL/PRENSA), Titulo, Detalle, Color,
+Enlace` -- log editorial de eventos/noticias con enlace a fuente
+original. No es dato estructurado numérico -- sirve como bitácora/
+contexto, no como indicador para el índice.
+
+### `Necesidades` (198 KB)
+
+Formato inusual: parece venir de una hoja pivoteada/transpuesta (la
+primera fila trae decenas de IDs tipo `NEC-191`, `N-059`... como
+encabezados de columna en vez de una fila por necesidad). Trae
+`Sector_Humanitario` (WASH, Salud, Protección, Alojamientos y
+Asentamientos, Educación en Emergencias, Recuperación Temprana...) --
+estilo clásico de tracking humanitario ONU/OCHA (sistema de clusters).
+Hace falta re-leerla con más cuidado (probablemente hay que transponerla)
+para saber si es aprovechable como está.
+
 ## Lo que hay que resolver antes de decidir
 
-1. **¿El CSV de Copernicus cubre Chocó/San José del Palmar?** Solo vimos
+1. **`Datos_Territoriales` cambia el panorama** -- no es un dato menor
+   para "complementar", son cifras oficiales de impacto humano (fallecidos,
+   heridos) y de infraestructura (viviendas, salud, educación, vías) por
+   departamento Y por corte de tiempo, algo que el índice actual no tiene
+   en absoluto (hoy solo contamos *puntos* reportados, no víctimas ni
+   viviendas). Vale la pena priorizar esta hoja sobre el CSV de Copernicus.
+2. **¿El CSV de Copernicus cubre Chocó/San José del Palmar?** Solo vimos
    los primeros ~2000 caracteres (AOI01 Cali, AOI02 Pereira) de 54 KB
    totales. Falta bajar el archivo completo y listar todos los `aoi_name`
    distintos.
-2. **¿Cómo se cruza `aoi`/`lon,lat` con departamento/municipio?** No trae
-   columna de departamento — como con `registro.json`, tocaría hacer
-   cruce geográfico (lat/lon → división administrativa) o mapear
-   `aoi_name` a mano si son pocas zonas.
-3. **¿Qué trae cada hoja de Google Sheets?** `Datos_Territoriales` y
-   `Necesidades` suenan más relevantes para el índice que
-   `Bitacora_Noticias` (que probablemente es un log editorial, no datos
-   estructurados).
-4. **Esto no reemplaza `registro.json`** — se suma como indicador(es)
-   nuevo(s) en `indicadores_largo.csv` (`fuente=Copernicus`,
-   `fuente=3iS-Sheets`), con su propia fila por dimensión, siguiendo el
-   mismo patrón que ya usamos con Cámaras de Comercio en la rama
-   `formato-largo`.
+3. **Esto no reemplaza `registro.json`** -- se suma como indicador(es)
+   nuevo(s) en `indicadores_largo.csv` (`fuente=3iS-Sheets`), con su
+   propia fila por dimensión/corte, siguiendo el mismo patrón que ya
+   usamos con Cámaras de Comercio en la rama `formato-largo`.
 
 ## Próximo paso
 
-Bajar el CSV completo de Copernicus y el contenido de las 4 hojas de
-Google Sheets (mismo truco: paso de diagnóstico temporal en el workflow,
-correr, leer el log, revertir) para decidir si vale la pena escribir un
-`load_copernicus()`/`load_3is_sheets()` que alimente `indicadores_largo.csv`
-como fuente cruda adicional — no se ha hecho todavía, queda pendiente de
-que Daniel confirme si quiere seguir por esta vía antes de invertir más
-tiempo en ella.
+Escribir `load_3is_datos_territoriales()`: tomar el corte más reciente
+(`Reporte`) de nivel `Departamento` y volcar cada columna (Fallecidos,
+Heridos, VivAveriadas, VivDestruidas, Colapsos, Salud, Educativos,
+Vias...) como una fila en `indicadores_largo.csv` (`fuente=3iS-Sheets`)
+por departamento -- materia prima cruda, no se usa todavía para
+recalcular el índice. Queda pendiente de que Daniel confirme si quiere
+que se implemente ahora.

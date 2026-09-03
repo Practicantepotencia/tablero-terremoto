@@ -38,7 +38,11 @@ jobs:
           puntos = [p for p in data.get("puntos", []) if p.get("departamento") == "Atlántico"]
           print(f"=== {len(puntos)} puntos en Atlántico ===")
           for p in puntos:
-              print(json.dumps(p, ensure_ascii=False, indent=2))
+              print("|".join([
+                  p.get("codigo", ""), p.get("tipo", ""), p.get("severidad", ""),
+                  (p.get("direccion") or "")[:70],
+                  (p.get("descripcion") or "")[:90],
+              ]))
           EOF
 
       - name: Generar tablero e índice

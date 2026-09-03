@@ -50,6 +50,29 @@ RESUMEN_UNGRD_JSON = "data/resumen_ungrd_ago2026.json"
 # propio script en cada corrida.
 HISTORIAL_CSV_POR_DEFECTO = "historial_indice.csv"
 
+# Fase A (formato largo, ver docs/formato_largo.md): salida en paralelo al
+# CSV ancho existente -- una fila por indicador x unidad geográfica, con
+# metadatos (dimensión, fuente, unidad) en vez de columnas fijas. No
+# reemplaza nada todavía, es la base para poder agregar fuentes nuevas
+# (3iS, IPM...) sin reescribir compute_indice() cada vez.
+INDICADORES_LARGO_CSV_POR_DEFECTO = "indicadores_largo.csv"
+
+# Códigos DIVIPOLA departamentales (DANE) -- llave geográfica canónica,
+# reemplaza el cruce por nombre que ya falló varias veces esta sesión
+# (mayúsculas, acentos, abreviaturas). ADVERTENCIA: armados de memoria del
+# modelo, sin verificar contra la fuente oficial del DANE en vivo (este
+# entorno no tiene salida a internet) -- confirmar antes de depender de
+# ellos para un cruce real. DIVIPOLA municipal (5 dígitos) queda pendiente.
+DIVIPOLA_DEPARTAMENTO = {
+    "Antioquia": "05", "Atlántico": "08", "Bogotá D.C.": "11", "Bolívar": "13",
+    "Boyacá": "15", "Caldas": "17", "Caquetá": "18", "Cauca": "19", "Cesar": "20",
+    "Córdoba": "23", "Cundinamarca": "25", "Chocó": "27", "Huila": "41",
+    "La Guajira": "44", "Magdalena": "47", "Meta": "50", "Nariño": "52",
+    "Norte de Santander": "54", "Quindío": "63", "Risaralda": "66",
+    "Santander": "68", "Sucre": "70", "Tolima": "73", "Valle del Cauca": "76",
+    "Putumayo": "86",
+}
+
 # Nivel de gravedad oficial (municipal) -> punto en la misma rampa 0-100 que
 # ya usan las celdas del heatmap departamental (ver RAMP/cell_color), para
 # que ambas pestañas compartan el mismo lenguaje visual de color.
@@ -352,6 +375,62 @@ def write_indice_csv(rows, csv_path):
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
         w.writerows(rows)
+
+
+def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None):
+    """Fase A (ver docs/formato_largo.md): exporta los mismos indicadores
+    que ya calcula el script a una tabla larga (un indicador x unidad
+    geográfica por fila, con dimensión/unidad/fuente como metadatos) en
+    vez de columnas fijas. Salida EN PARALELO a write_indice_csv() -- no
+    reemplaza nada, es la base para poder agregar fuentes nuevas (3iS,
+    IPM...) sin reescribir compute_indice() cada vez."""
+    fieldnames = [
+        "divipola", "nivel", "departamento", "municipio", "dimension",
+        "indicador_id", "indicador", "unidad", "fuente", "valor", "fecha_corte",
+    ]
+    hoy = datetime.now(timezone.utc).date().isoformat()
+    filas = []
+
+    def fila(dep, mun, nivel, dimension, ind_id, ind_nombre, unidad, fuente, valor):
+        filas.append({
+            "divipola": DIVIPOLA_DEPARTAMENTO.get(dep, ""), "nivel": nivel,
+            "departamento": dep, "municipio": mun or "",
+            "dimension": dimension, "indicador_id": ind_id, "indicador": ind_nombre,
+            "unidad": unidad, "fuente": fuente, "valor": valor, "fecha_corte": hoy,
+        })
+
+    for r in rows:
+        dep = r["departamento"]
+        for d in DIMS:
+            label = DIM_LABELS[d]
+            fila(dep, None, "departamental", label, f"{d}_n", f"Puntos registrados ({label})", "Número", "Naboo", r[f"{d}_n"])
+            fila(dep, None, "departamental", label, f"{d}_incidencia_idx", f"Incidencia ({label})", "Índice 0-100", "Calculo", r[f"{d}_incidencia_idx"])
+            fila(dep, None, "departamental", label, f"{d}_severidad_idx", f"Severidad promedio ({label})", "Índice 0-100", "Calculo", r[f"{d}_severidad_idx"])
+            fila(dep, None, "departamental", label, f"{d}_idx", label, "Índice 0-100", "Calculo", r[f"{d}_idx"])
+        fila(dep, None, "departamental", "Compuesto", "indice_compuesto", "Índice compuesto", "Índice 0-100", "Calculo", r["indice_compuesto"])
+        if empresarios_por_dep and dep in empresarios_por_dep:
+            fila(dep, None, "departamental", "Productividad", "empresarios_afectados",
+                 "Empresarios afectados (grave/crítico)", "Número", "Camaras", empresarios_por_dep[dep])
+
+    if municipios:
+        por_dep = defaultdict(list)
+        for m in municipios:
+            por_dep[m["departamento"]].append(m)
+        for dep, munis in por_dep.items():
+            pob_total = sum(m["poblacion"] for m in munis)
+            score = (sum(SEV_OFICIAL_VALUE.get(m["gravedad_oficial"], 0) * m["poblacion"] for m in munis) / pob_total) if pob_total > 0 else 0.0
+            fila(dep, None, "departamental", "Gravedad municipal", "score_municipal",
+                 "Score de gravedad municipal ponderado por población", "Índice 0-100", "Calculo", round(score, 2))
+        for m in municipios:
+            fila(m["departamento"], m["municipio"], "municipal", "Gravedad municipal", "gravedad_oficial",
+                 "Gravedad oficial (municipal)", "Categoría (0-100)", "Naboo/UNGRD",
+                 SEV_OFICIAL_VALUE.get(m["gravedad_oficial"], 0))
+
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames)
+        w.writeheader()
+        w.writerows(filas)
+    return len(filas)
 
 
 MESES_ES = {1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio",
@@ -922,6 +1001,7 @@ def main():
     ap.add_argument("--poblacion", default=None, help=f"CSV externo de población por departamento o por municipio (opcional; por defecto usa {MUNICIPIOS_POBLACION_CSV} si existe, si no la tabla embebida). Pasa '' vacío para forzar la tabla embebida.")
     ap.add_argument("--sin-autorefresh", action="store_true", help="No agregar la etiqueta de autorrecarga cada 4h al HTML")
     ap.add_argument("--historial", default=HISTORIAL_CSV_POR_DEFECTO, help="CSV donde se acumula el historial para la pestaña 'Por dimensión' (una fila por departamento por corrida, nunca se sobrescribe). Pasa '' vacío para desactivar el historial.")
+    ap.add_argument("--formato-largo", default=INDICADORES_LARGO_CSV_POR_DEFECTO, help="CSV en formato largo (Fase A, ver docs/formato_largo.md) -- salida en paralelo al CSV ancho, no lo reemplaza. Pasa '' vacío para desactivarlo.")
     args = ap.parse_args()
 
     print(f"[{datetime.now().isoformat(timespec='seconds')}] Descargando/leyendo: {args.url}")
@@ -957,6 +1037,10 @@ def main():
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Historial: sin corridas previas todavía, arranca en {historial_path}")
 
     write_indice_csv(rows, args.csv)
+    if args.formato_largo:
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=None)
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
+
     html = build_html(
         rows, meta, autorefresh_seconds=0 if args.sin_autorefresh else 14400,
         municipios=municipios, resumen_meta=resumen_meta,

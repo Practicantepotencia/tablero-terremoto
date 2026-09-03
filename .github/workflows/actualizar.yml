@@ -25,52 +25,6 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
-      - name: DIAGNÓSTICO TEMPORAL 2 -- CSV de Copernicus y hoja de Google Sheets de 3is.org
-        run: |
-          python3 - <<'EOF'
-          import re, urllib.request
-
-          def get(url):
-              req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-              with urllib.request.urlopen(req, timeout=30) as resp:
-                  return resp.status, resp.geturl(), resp.read().decode("utf-8", errors="replace")
-
-          base = "https://3is.org/emergenciaslatam/terremoto_choco/"
-
-          print("=== 1) CSV Copernicus (puntos/dl_copernicus_buildings.csv) ===")
-          for candidata in [base + "puntos/dl_copernicus_buildings.csv"]:
-              try:
-                  status, final_url, body = get(candidata)
-                  print(f"status={status} url={final_url} largo={len(body)} caracteres")
-                  print("--- primeras 2000 caracteres ---")
-                  print(body[:2000])
-              except Exception as e:
-                  print(f"ERROR al descargar {candidata}:", e)
-
-          print()
-          print("=== 2) Buscar docs.google.com / sheets en el HTML principal ===")
-          try:
-              status, final_url, html = get(base)
-          except Exception as e:
-              print("ERROR al descargar la página principal:", e)
-              raise SystemExit(0)
-
-          for m in re.findall(r'[\'"]([^\'"]*docs\.google\.com[^\'"]*)[\'"]', html, re.IGNORECASE):
-              print(m)
-          for m in re.findall(r'[\'"]([^\'"]*spreadsheets[^\'"]*)[\'"]', html, re.IGNORECASE):
-              print(m)
-          for m in re.findall(r'const\s+SHEET[A-Z_]*\s*=\s*[\'"]([^\'"]+)[\'"]', html):
-              print("SHEET const:", m)
-
-          print()
-          print("=== 3) Otras rutas relativas bajo puntos/ o data/ referenciadas en el HTML ===")
-          vistos = set()
-          for m in re.findall(r'[\'"]((?:puntos|data)/[^\'"]+)[\'"]', html):
-              if m not in vistos:
-                  vistos.add(m)
-                  print(m)
-          EOF
-
       - name: Generar tablero e índice
         run: python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
 

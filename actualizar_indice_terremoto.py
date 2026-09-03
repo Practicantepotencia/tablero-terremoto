@@ -64,6 +64,15 @@ HISTORIAL_CSV_POR_DEFECTO = "historial_indice.csv"
 # (3iS, IPM...) sin reescribir compute_indice() cada vez.
 INDICADORES_LARGO_CSV_POR_DEFECTO = "indicadores_largo.csv"
 
+# Vista derivada de indicadores_largo.csv, filtrada a fuente != "Calculo":
+# solo materia prima de fuentes externas (Naboo, Naboo/UNGRD, Camaras...),
+# nada que hayamos calculado nosotros. Se regenera sola en cada corrida a
+# partir de las mismas filas que ya arma export_formato_largo() -- antes
+# era un snapshot manual que Daniel subía a mano (data/indicadores_largo_
+# solo_fuentes_crudas_snapshot.csv), ahora queda automático y siempre
+# fresco, al mismo nivel que indicadores_largo.csv.
+NO_CALCULO_CSV_POR_DEFECTO = "indicadores_largo_no_calculo.csv"
+
 # Códigos DIVIPOLA departamentales (DANE) -- llave geográfica canónica,
 # reemplaza el cruce por nombre que ya falló varias veces esta sesión
 # (mayúsculas, acentos, abreviaturas). ADVERTENCIA: armados de memoria del
@@ -404,13 +413,18 @@ def write_indice_csv(rows, csv_path):
         w.writerows(rows)
 
 
-def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None):
+def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None):
     """Fase A (ver docs/formato_largo.md): exporta los mismos indicadores
     que ya calcula el script a una tabla larga (un indicador x unidad
     geográfica por fila, con dimensión/unidad/fuente como metadatos) en
     vez de columnas fijas. Salida EN PARALELO a write_indice_csv() -- no
     reemplaza nada, es la base para poder agregar fuentes nuevas (3iS,
-    IPM...) sin reescribir compute_indice() cada vez."""
+    IPM...) sin reescribir compute_indice() cada vez.
+
+    Si se pasa no_calculo_csv_path, además escribe ahí el subconjunto de
+    filas con fuente != "Calculo" -- el inventario de materia prima cruda,
+    regenerado a partir de las mismas filas que se acaban de armar (no
+    releído del CSV recién escrito, para no depender del orden de escritura)."""
     fieldnames = [
         "divipola", "nivel", "departamento", "municipio", "dimension",
         "indicador_id", "indicador", "unidad", "fuente", "valor", "fecha_corte",
@@ -459,6 +473,15 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None):
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
         w.writerows(filas)
+
+    if no_calculo_csv_path:
+        fieldnames_nc = ["nivel", "departamento", "municipio", "dimension", "indicador_id", "indicador", "unidad", "fuente", "valor"]
+        filas_nc = [{k: f[k] for k in fieldnames_nc} for f in filas if f["fuente"] != "Calculo"]
+        with open(no_calculo_csv_path, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=fieldnames_nc)
+            w.writeheader()
+            w.writerows(filas_nc)
+
     return len(filas)
 
 
@@ -1112,6 +1135,7 @@ def main():
     ap.add_argument("--sin-autorefresh", action="store_true", help="No agregar la etiqueta de autorrecarga cada 4h al HTML")
     ap.add_argument("--historial", default=HISTORIAL_CSV_POR_DEFECTO, help="CSV donde se acumula el historial para la pestaña 'Por dimensión' (una fila por departamento por corrida, nunca se sobrescribe). Pasa '' vacío para desactivar el historial.")
     ap.add_argument("--formato-largo", default=INDICADORES_LARGO_CSV_POR_DEFECTO, help="CSV en formato largo (Fase A, ver docs/formato_largo.md) -- salida en paralelo al CSV ancho, no lo reemplaza. Pasa '' vacío para desactivarlo.")
+    ap.add_argument("--no-calculo", default=NO_CALCULO_CSV_POR_DEFECTO, help="CSV derivado de --formato-largo filtrado a fuente != Calculo (solo materia prima cruda de fuentes externas). Se regenera solo en cada corrida. Pasa '' vacío para desactivarlo.")
     args = ap.parse_args()
 
     print(f"[{datetime.now().isoformat(timespec='seconds')}] Descargando/leyendo: {args.url}")
@@ -1151,8 +1175,10 @@ def main():
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: empresarios afectados (Cámaras de Comercio) de {CAMARAS_COMERCIO_CSV} -- {len(empresarios_por_dep)} departamentos con dato (materia prima, no se usa para recalcular el índice)")
 
     if args.formato_largo:
-        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None)
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
+        if args.no_calculo:
+            print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo (fuente != Calculo): -> {args.no_calculo}")
 
         # Cutover real, no solo espejo: se relee lo que se acaba de
         # escribir y se reconstruye la forma ancha. Si coincide exacto con

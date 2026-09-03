@@ -72,9 +72,20 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
   juntar toda la materia prima posible antes de tocar el cálculo del
   índice de nuevo (ver `docs/formato_largo.md`).
 - **`indicadores_largo_solo_fuentes_crudas_snapshot.csv`** — snapshot que
-  compartió Daniel: el propio `indicadores_largo.csv` filtrado a
+  compartió Daniel a mano: el propio `indicadores_largo.csv` filtrado a
   `fuente != Calculo` (solo lo que viene de fuentes externas, nada que
   hayamos calculado nosotros), sin las columnas `divipola`/`fecha_corte`.
-  No es una fuente nueva -- es una vista de referencia de nuestro propio
-  output, útil para revisar el inventario crudo sin que se mezcle con lo
-  derivado.
+  **Superado por `indicadores_largo_no_calculo.csv`** (ver abajo) -- se
+  deja aquí solo como referencia histórica de ese momento puntual, ya no
+  hace falta actualizarlo a mano.
+
+## Salidas automáticas (no van en esta carpeta)
+
+- **`indicadores_largo_no_calculo.csv`** (raíz del repo, junto a
+  `indicadores_largo.csv`) — la misma vista de arriba (`fuente != Calculo`,
+  mismas columnas), pero generada sola en cada corrida por
+  `export_formato_largo()` a partir de las filas que ya arma, sin releer
+  nada del disco. El workflow automático la commitea junto con los demás
+  CSV de salida (ver `file_pattern` en `.github/workflows/actualizar.yml`)
+  -- siempre queda al día con lo último que trajo `registro.json` y los
+  archivos de `data/`, sin que nadie tenga que regenerarla a mano.

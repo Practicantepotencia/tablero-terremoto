@@ -32,6 +32,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Actualización automática del índice de impacto"
-          file_pattern: "index.html indice_impacto_departamento.csv historial_indice.csv indicadores_largo.csv"
+          file_pattern: "index.html indice_impacto_departamento.csv historial_indice.csv indicadores_largo.csv indicadores_largo_no_calculo.csv"
           commit_user_name: "tablero-terremoto-bot"
           commit_user_email: "actions@github.com"

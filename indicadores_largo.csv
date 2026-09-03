@@ -30,6 +30,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,64.26470588235293,2026-09-03
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,72.58208268139794,2026-09-03
 63,departamental,Quindío,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,81.14500196659912,2026-09-03
+63,departamental,Quindío,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,934,2026-09-03
 27,departamental,Chocó,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,14,2026-09-03
 27,departamental,Chocó,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,2.6717557251908395,2026-09-03
 27,departamental,Chocó,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,72.27441769426501,2026-09-03
@@ -61,6 +62,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,100.0,2026-09-03
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,78.84639444234351,2026-09-03
 27,departamental,Chocó,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,76.52748151860462,2026-09-03
+27,departamental,Chocó,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,464,2026-09-03
 17,departamental,Caldas,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,39,2026-09-03
 17,departamental,Caldas,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,3.6966824644549763,2026-09-03
 17,departamental,Caldas,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,100.0,2026-09-03
@@ -92,6 +94,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,21.698113207547166,2026-09-03
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,60.84905660377358,2026-09-03
 17,departamental,Caldas,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,76.06300831558674,2026-09-03
+17,departamental,Caldas,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,1164,2026-09-03
 66,departamental,Risaralda,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,25,2026-09-03
 66,departamental,Risaralda,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,2.4826216484607744,2026-09-03
 66,departamental,Risaralda,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,67.15809843913121,2026-09-03
@@ -123,6 +126,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,63.30275229357797,2026-09-03
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,67.37455346205937,2026-09-03
 66,departamental,Risaralda,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,64.66666355939053,2026-09-03
+66,departamental,Risaralda,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,7035,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,93,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,1.9741031628104435,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,53.402021455513285,2026-09-03
@@ -154,6 +158,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,59.46768060836503,2026-09-03
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,47.83630300467783,2026-09-03
 76,departamental,Valle del Cauca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,50.55102114132603,2026-09-03
+76,departamental,Valle del Cauca,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,4801,2026-09-03
 73,departamental,Tolima,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11,2026-09-03
 73,departamental,Tolima,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.8377760853008377,2026-09-03
 73,departamental,Tolima,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,22.66291717929189,2026-09-03

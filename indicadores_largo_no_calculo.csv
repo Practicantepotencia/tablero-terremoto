@@ -5,75 +5,271 @@ departamental,Quindío,,Instituciones,instituciones_n,Puntos registrados (Instit
 departamental,Quindío,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,62
 departamental,Quindío,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,68
 departamental,Quindío,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,934
+departamental,Quindío,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,3.0
+departamental,Quindío,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,315.0
+departamental,Quindío,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Quindío,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Quindío,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,36057.0
+departamental,Quindío,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,32604.0
+departamental,Quindío,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,4294.0
+departamental,Quindío,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,115.0
+departamental,Quindío,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,29.0
+departamental,Quindío,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,205.0
+departamental,Quindío,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,1317.0
+departamental,Quindío,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,45.0
+departamental,Quindío,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Quindío,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,8.0
 departamental,Chocó,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,14
 departamental,Chocó,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,49
 departamental,Chocó,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,71
 departamental,Chocó,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,18
 departamental,Chocó,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,46
 departamental,Chocó,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,464
+departamental,Chocó,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,12.0
+departamental,Chocó,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,357.0
+departamental,Chocó,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Chocó,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Chocó,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,36412.0
+departamental,Chocó,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,26278.0
+departamental,Chocó,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,5184.0
+departamental,Chocó,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Chocó,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,90.0
+departamental,Chocó,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,314.0
+departamental,Chocó,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,175.0
+departamental,Chocó,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,16.0
+departamental,Chocó,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Chocó,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,29.0
 departamental,Caldas,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,39
 departamental,Caldas,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,59
 departamental,Caldas,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,165
 departamental,Caldas,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,181
 departamental,Caldas,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,159
 departamental,Caldas,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,1164
+departamental,Caldas,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,5.0
+departamental,Caldas,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,329.0
+departamental,Caldas,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caldas,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caldas,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,11760.0
+departamental,Caldas,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,17177.0
+departamental,Caldas,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,2348.0
+departamental,Caldas,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caldas,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,25.0
+departamental,Caldas,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,477.0
+departamental,Caldas,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,62.0
+departamental,Caldas,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,16.0
+departamental,Caldas,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Caldas,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,25.0
 departamental,Risaralda,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,25
 departamental,Risaralda,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,35
 departamental,Risaralda,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,103
 departamental,Risaralda,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,35
 departamental,Risaralda,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,109
 departamental,Risaralda,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,7035
+departamental,Risaralda,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,110.0
+departamental,Risaralda,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,588.0
+departamental,Risaralda,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,99.0
+departamental,Risaralda,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,274.0
+departamental,Risaralda,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,61821.0
+departamental,Risaralda,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,56079.0
+departamental,Risaralda,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,11986.0
+departamental,Risaralda,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,109.0
+departamental,Risaralda,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,44.0
+departamental,Risaralda,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,389.0
+departamental,Risaralda,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,39.0
+departamental,Risaralda,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,130.0
+departamental,Risaralda,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Risaralda,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,29.0
 departamental,Valle del Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,93
 departamental,Valle del Cauca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,121
 departamental,Valle del Cauca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,244
 departamental,Valle del Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,80
 departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,263
 departamental,Valle del Cauca,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,4801
+departamental,Valle del Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,199.0
+departamental,Valle del Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,2890.0
+departamental,Valle del Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,33.0
+departamental,Valle del Cauca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,88.0
+departamental,Valle del Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,66405.0
+departamental,Valle del Cauca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,53169.0
+departamental,Valle del Cauca,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,13051.0
+departamental,Valle del Cauca,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,422.0
+departamental,Valle del Cauca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,102.0
+departamental,Valle del Cauca,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,1390.0
+departamental,Valle del Cauca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,3440.0
+departamental,Valle del Cauca,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,142.0
+departamental,Valle del Cauca,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,2.0
+departamental,Valle del Cauca,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Tolima,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11
 departamental,Tolima,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,12
 departamental,Tolima,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,22
 departamental,Tolima,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,11
 departamental,Tolima,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,34
+departamental,Tolima,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Tolima,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Tolima,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Tolima,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Tolima,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Tolima,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,1072.0
+departamental,Tolima,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,30.0
+departamental,Tolima,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Tolima,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,12.0
+departamental,Tolima,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,196.0
+departamental,Tolima,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,71.0
+departamental,Tolima,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,19.0
+departamental,Tolima,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Tolima,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,4.0
 departamental,Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11
 departamental,Cauca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,5
 departamental,Cauca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,18
 departamental,Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9
 departamental,Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,18
+departamental,Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Cauca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,7066.0
+departamental,Cauca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,6817.0
+departamental,Cauca,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,317.0
+departamental,Cauca,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cauca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,20.0
+departamental,Cauca,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,327.0
+departamental,Cauca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,93.0
+departamental,Cauca,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,7.0
+departamental,Cauca,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cauca,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,14.0
 departamental,Cundinamarca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,8
 departamental,Cundinamarca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,12
 departamental,Cundinamarca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,26
 departamental,Cundinamarca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,15
 departamental,Cundinamarca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,37
+departamental,Cundinamarca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cundinamarca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cundinamarca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cundinamarca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cundinamarca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,296.0
+departamental,Cundinamarca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,66.0
+departamental,Cundinamarca,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cundinamarca,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cundinamarca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,12.0
+departamental,Cundinamarca,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,141.0
+departamental,Cundinamarca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,39.0
+departamental,Cundinamarca,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cundinamarca,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Cundinamarca,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,3.0
 departamental,Antioquia,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,17
 departamental,Antioquia,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,20
 departamental,Antioquia,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,74
 departamental,Antioquia,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,28
 departamental,Antioquia,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,60
+departamental,Antioquia,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Antioquia,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,24.0
+departamental,Antioquia,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Antioquia,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Antioquia,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,4359.0
+departamental,Antioquia,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,4320.0
+departamental,Antioquia,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,39.0
+departamental,Antioquia,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Antioquia,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,31.0
+departamental,Antioquia,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,526.0
+departamental,Antioquia,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,247.0
+departamental,Antioquia,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,7.0
+departamental,Antioquia,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Antioquia,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,9.0
 departamental,Santander,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,1
 departamental,Santander,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,5
 departamental,Santander,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,5
 departamental,Santander,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9
 departamental,Santander,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,16
+departamental,Santander,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,4.0
+departamental,Santander,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Santander,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,19.0
+departamental,Santander,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,2.0
+departamental,Santander,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Santander,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Huila,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,2
 departamental,Huila,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,15
 departamental,Huila,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,7
 departamental,Huila,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,33
 departamental,Huila,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3
+departamental,Huila,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Huila,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Huila,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Huila,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Huila,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,558.0
+departamental,Huila,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,558.0
+departamental,Huila,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Huila,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Huila,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,17.0
+departamental,Huila,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,156.0
+departamental,Huila,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,25.0
+departamental,Huila,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,71.0
+departamental,Huila,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Huila,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Nariño,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,2
 departamental,Nariño,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,9
 departamental,Nariño,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,19
 departamental,Nariño,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,5
 departamental,Nariño,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,12
+departamental,Nariño,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Nariño,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Nariño,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Nariño,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Nariño,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,163.0
+departamental,Nariño,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,440.0
+departamental,Nariño,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,6.0
+departamental,Nariño,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Nariño,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,2.0
+departamental,Nariño,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,40.0
+departamental,Nariño,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,3.0
+departamental,Nariño,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,5.0
+departamental,Nariño,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Nariño,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Norte de Santander,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Norte de Santander,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,3
 departamental,Norte de Santander,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1
 departamental,Norte de Santander,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,3
 departamental,Norte de Santander,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2
+departamental,Norte de Santander,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Norte de Santander,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Norte de Santander,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Norte de Santander,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Norte de Santander,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,82.0
+departamental,Norte de Santander,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,81.0
+departamental,Norte de Santander,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Norte de Santander,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Norte de Santander,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Norte de Santander,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,18.0
+departamental,Norte de Santander,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,3.0
+departamental,Norte de Santander,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Norte de Santander,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Norte de Santander,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Sucre,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Sucre,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,2
 departamental,Sucre,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1
 departamental,Sucre,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Sucre,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3
+departamental,Sucre,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Sucre,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Sucre,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Sucre,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Sucre,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,16.0
+departamental,Sucre,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,22.0
+departamental,Sucre,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Sucre,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Sucre,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Sucre,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,23.0
+departamental,Sucre,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,6.0
+departamental,Sucre,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,3.0
+departamental,Sucre,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Sucre,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Atlántico,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Atlántico,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Atlántico,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,8
@@ -84,6 +280,20 @@ departamental,Bolívar,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Númer
 departamental,Bolívar,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,5
 departamental,Bolívar,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Bolívar,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,14
+departamental,Bolívar,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Bolívar,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Bolívar,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Bolívar,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Bolívar,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,11.0
+departamental,Bolívar,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,15.0
+departamental,Bolívar,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Bolívar,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Bolívar,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,2.0
+departamental,Bolívar,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,8.0
+departamental,Bolívar,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,2.0
+departamental,Bolívar,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,1.0
+departamental,Bolívar,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Bolívar,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0
 departamental,Bogotá D.C.,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Bogotá D.C.,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Bogotá D.C.,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,30
@@ -119,6 +329,20 @@ departamental,Caquetá,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Númer
 departamental,Caquetá,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0
 departamental,Caquetá,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Caquetá,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2
+departamental,Caquetá,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,18.0
+departamental,Caquetá,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,18.0
+departamental,Caquetá,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,19.0
+departamental,Caquetá,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,39.0
+departamental,Caquetá,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
+departamental,Caquetá,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Magdalena,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Magdalena,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Magdalena,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0

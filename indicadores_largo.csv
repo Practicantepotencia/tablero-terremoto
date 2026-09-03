@@ -31,6 +31,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,72.58208268139794,2026-09-03
 63,departamental,Quindío,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,81.14500196659912,2026-09-03
 63,departamental,Quindío,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,934,2026-09-03
+63,departamental,Quindío,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-03
+63,departamental,Quindío,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,315.0,2026-09-03
+63,departamental,Quindío,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+63,departamental,Quindío,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+63,departamental,Quindío,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,36057.0,2026-09-03
+63,departamental,Quindío,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,32604.0,2026-09-03
+63,departamental,Quindío,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,4294.0,2026-09-03
+63,departamental,Quindío,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,115.0,2026-09-03
+63,departamental,Quindío,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,29.0,2026-09-03
+63,departamental,Quindío,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,205.0,2026-09-03
+63,departamental,Quindío,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,1317.0,2026-09-03
+63,departamental,Quindío,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,45.0,2026-09-03
+63,departamental,Quindío,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+63,departamental,Quindío,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,8.0,2026-09-03
 27,departamental,Chocó,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,14,2026-09-03
 27,departamental,Chocó,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,2.6717557251908395,2026-09-03
 27,departamental,Chocó,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,72.27441769426501,2026-09-03
@@ -63,6 +77,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,78.84639444234351,2026-09-03
 27,departamental,Chocó,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,76.52748151860462,2026-09-03
 27,departamental,Chocó,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,464,2026-09-03
+27,departamental,Chocó,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,12.0,2026-09-03
+27,departamental,Chocó,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,357.0,2026-09-03
+27,departamental,Chocó,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+27,departamental,Chocó,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+27,departamental,Chocó,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,36412.0,2026-09-03
+27,departamental,Chocó,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,26278.0,2026-09-03
+27,departamental,Chocó,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,5184.0,2026-09-03
+27,departamental,Chocó,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+27,departamental,Chocó,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,90.0,2026-09-03
+27,departamental,Chocó,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,314.0,2026-09-03
+27,departamental,Chocó,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,175.0,2026-09-03
+27,departamental,Chocó,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,16.0,2026-09-03
+27,departamental,Chocó,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+27,departamental,Chocó,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,29.0,2026-09-03
 17,departamental,Caldas,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,39,2026-09-03
 17,departamental,Caldas,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,3.6966824644549763,2026-09-03
 17,departamental,Caldas,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,100.0,2026-09-03
@@ -95,6 +123,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,60.84905660377358,2026-09-03
 17,departamental,Caldas,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,76.06300831558674,2026-09-03
 17,departamental,Caldas,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,1164,2026-09-03
+17,departamental,Caldas,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-03
+17,departamental,Caldas,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,329.0,2026-09-03
+17,departamental,Caldas,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+17,departamental,Caldas,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+17,departamental,Caldas,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,11760.0,2026-09-03
+17,departamental,Caldas,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,17177.0,2026-09-03
+17,departamental,Caldas,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,2348.0,2026-09-03
+17,departamental,Caldas,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+17,departamental,Caldas,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,25.0,2026-09-03
+17,departamental,Caldas,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,477.0,2026-09-03
+17,departamental,Caldas,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,62.0,2026-09-03
+17,departamental,Caldas,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,16.0,2026-09-03
+17,departamental,Caldas,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+17,departamental,Caldas,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,25.0,2026-09-03
 66,departamental,Risaralda,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,25,2026-09-03
 66,departamental,Risaralda,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,2.4826216484607744,2026-09-03
 66,departamental,Risaralda,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,67.15809843913121,2026-09-03
@@ -127,6 +169,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,67.37455346205937,2026-09-03
 66,departamental,Risaralda,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,64.66666355939053,2026-09-03
 66,departamental,Risaralda,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,7035,2026-09-03
+66,departamental,Risaralda,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,110.0,2026-09-03
+66,departamental,Risaralda,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,588.0,2026-09-03
+66,departamental,Risaralda,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,99.0,2026-09-03
+66,departamental,Risaralda,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,274.0,2026-09-03
+66,departamental,Risaralda,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,61821.0,2026-09-03
+66,departamental,Risaralda,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,56079.0,2026-09-03
+66,departamental,Risaralda,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,11986.0,2026-09-03
+66,departamental,Risaralda,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,109.0,2026-09-03
+66,departamental,Risaralda,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,44.0,2026-09-03
+66,departamental,Risaralda,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,389.0,2026-09-03
+66,departamental,Risaralda,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,39.0,2026-09-03
+66,departamental,Risaralda,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,130.0,2026-09-03
+66,departamental,Risaralda,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+66,departamental,Risaralda,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,29.0,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,93,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,1.9741031628104435,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,53.402021455513285,2026-09-03
@@ -159,6 +215,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,47.83630300467783,2026-09-03
 76,departamental,Valle del Cauca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,50.55102114132603,2026-09-03
 76,departamental,Valle del Cauca,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,4801,2026-09-03
+76,departamental,Valle del Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,199.0,2026-09-03
+76,departamental,Valle del Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,2890.0,2026-09-03
+76,departamental,Valle del Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,33.0,2026-09-03
+76,departamental,Valle del Cauca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,88.0,2026-09-03
+76,departamental,Valle del Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,66405.0,2026-09-03
+76,departamental,Valle del Cauca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,53169.0,2026-09-03
+76,departamental,Valle del Cauca,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,13051.0,2026-09-03
+76,departamental,Valle del Cauca,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,422.0,2026-09-03
+76,departamental,Valle del Cauca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,102.0,2026-09-03
+76,departamental,Valle del Cauca,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,1390.0,2026-09-03
+76,departamental,Valle del Cauca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,3440.0,2026-09-03
+76,departamental,Valle del Cauca,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,142.0,2026-09-03
+76,departamental,Valle del Cauca,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-03
+76,departamental,Valle del Cauca,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
 73,departamental,Tolima,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11,2026-09-03
 73,departamental,Tolima,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.8377760853008377,2026-09-03
 73,departamental,Tolima,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,22.66291717929189,2026-09-03
@@ -190,6 +260,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 73,departamental,Tolima,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,47.35294117647058,2026-09-03
 73,departamental,Tolima,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,31.71662049110745,2026-09-03
 73,departamental,Tolima,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,43.809072628948236,2026-09-03
+73,departamental,Tolima,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+73,departamental,Tolima,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+73,departamental,Tolima,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+73,departamental,Tolima,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+73,departamental,Tolima,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+73,departamental,Tolima,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,1072.0,2026-09-03
+73,departamental,Tolima,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,30.0,2026-09-03
+73,departamental,Tolima,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+73,departamental,Tolima,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,12.0,2026-09-03
+73,departamental,Tolima,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,196.0,2026-09-03
+73,departamental,Tolima,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,71.0,2026-09-03
+73,departamental,Tolima,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,19.0,2026-09-03
+73,departamental,Tolima,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+73,departamental,Tolima,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,4.0,2026-09-03
 19,departamental,Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11,2026-09-03
 19,departamental,Cauca,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.7208387942332897,2026-09-03
 19,departamental,Cauca,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,19.499613536310783,2026-09-03
@@ -221,6 +305,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,38.33333333333336,2026-09-03
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,22.466985663719896,2026-09-03
 19,departamental,Cauca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,32.301676325010035,2026-09-03
+19,departamental,Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+19,departamental,Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+19,departamental,Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+19,departamental,Cauca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+19,departamental,Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,7066.0,2026-09-03
+19,departamental,Cauca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,6817.0,2026-09-03
+19,departamental,Cauca,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,317.0,2026-09-03
+19,departamental,Cauca,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+19,departamental,Cauca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,20.0,2026-09-03
+19,departamental,Cauca,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,327.0,2026-09-03
+19,departamental,Cauca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,93.0,2026-09-03
+19,departamental,Cauca,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,7.0,2026-09-03
+19,departamental,Cauca,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+19,departamental,Cauca,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,14.0,2026-09-03
 25,departamental,Cundinamarca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,8,2026-09-03
 25,departamental,Cundinamarca,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.28901734104046245,2026-09-03
 25,departamental,Cundinamarca,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,7.818289610197125,2026-09-03
@@ -252,6 +350,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,24.86486486486487,2026-09-03
 25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,16.26105103287791,2026-09-03
 25,departamental,Cundinamarca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,28.702673626985877,2026-09-03
+25,departamental,Cundinamarca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+25,departamental,Cundinamarca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+25,departamental,Cundinamarca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+25,departamental,Cundinamarca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+25,departamental,Cundinamarca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,296.0,2026-09-03
+25,departamental,Cundinamarca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,66.0,2026-09-03
+25,departamental,Cundinamarca,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+25,departamental,Cundinamarca,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+25,departamental,Cundinamarca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,12.0,2026-09-03
+25,departamental,Cundinamarca,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,141.0,2026-09-03
+25,departamental,Cundinamarca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,39.0,2026-09-03
+25,departamental,Cundinamarca,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+25,departamental,Cundinamarca,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+25,departamental,Cundinamarca,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-03
 05,departamental,Antioquia,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,17,2026-09-03
 05,departamental,Antioquia,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.2662907268170426,2026-09-03
 05,departamental,Antioquia,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,7.2035055587687165,2026-09-03
@@ -283,6 +395,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,11.500000000000012,2026-09-03
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,8.244494759392957,2026-09-03
 05,departamental,Antioquia,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.727362139739817,2026-09-03
+05,departamental,Antioquia,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+05,departamental,Antioquia,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,24.0,2026-09-03
+05,departamental,Antioquia,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+05,departamental,Antioquia,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+05,departamental,Antioquia,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,4359.0,2026-09-03
+05,departamental,Antioquia,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,4320.0,2026-09-03
+05,departamental,Antioquia,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,39.0,2026-09-03
+05,departamental,Antioquia,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+05,departamental,Antioquia,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,31.0,2026-09-03
+05,departamental,Antioquia,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,526.0,2026-09-03
+05,departamental,Antioquia,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,247.0,2026-09-03
+05,departamental,Antioquia,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,7.0,2026-09-03
+05,departamental,Antioquia,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+05,departamental,Antioquia,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,9.0,2026-09-03
 68,departamental,Santander,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,1,2026-09-03
 68,departamental,Santander,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0851063829787234,2026-09-03
 68,departamental,Santander,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,2.3022367703218767,2026-09-03
@@ -314,6 +440,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 68,departamental,Santander,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 68,departamental,Santander,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.912651674154339,2026-09-03
 68,departamental,Santander,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.691375273361444,2026-09-03
+68,departamental,Santander,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,4.0,2026-09-03
+68,departamental,Santander,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+68,departamental,Santander,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,19.0,2026-09-03
+68,departamental,Santander,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-03
+68,departamental,Santander,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+68,departamental,Santander,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
 41,departamental,Huila,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,2,2026-09-03
 41,departamental,Huila,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.20181634712411703,2026-09-03
 41,departamental,Huila,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,5.459390928613935,2026-09-03
@@ -345,6 +485,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 41,departamental,Huila,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 41,departamental,Huila,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,0.3526481110775987,2026-09-03
 41,departamental,Huila,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.070278113713954,2026-09-03
+41,departamental,Huila,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+41,departamental,Huila,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+41,departamental,Huila,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+41,departamental,Huila,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+41,departamental,Huila,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,558.0,2026-09-03
+41,departamental,Huila,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,558.0,2026-09-03
+41,departamental,Huila,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+41,departamental,Huila,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+41,departamental,Huila,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,17.0,2026-09-03
+41,departamental,Huila,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,156.0,2026-09-03
+41,departamental,Huila,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,25.0,2026-09-03
+41,departamental,Huila,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,71.0,2026-09-03
+41,departamental,Huila,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+41,departamental,Huila,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
 52,departamental,Nariño,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,2,2026-09-03
 52,departamental,Nariño,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.18570102135561747,2026-09-03
 52,departamental,Nariño,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,5.0234507059019595,2026-09-03
@@ -376,6 +530,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 52,departamental,Nariño,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 52,departamental,Nariño,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.0806353648789084,2026-09-03
 52,departamental,Nariño,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,21.451212660656346,2026-09-03
+52,departamental,Nariño,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+52,departamental,Nariño,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+52,departamental,Nariño,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+52,departamental,Nariño,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+52,departamental,Nariño,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,163.0,2026-09-03
+52,departamental,Nariño,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,440.0,2026-09-03
+52,departamental,Nariño,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,6.0,2026-09-03
+52,departamental,Nariño,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+52,departamental,Nariño,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-03
+52,departamental,Nariño,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,40.0,2026-09-03
+52,departamental,Nariño,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-03
+52,departamental,Nariño,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-03
+52,departamental,Nariño,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+52,departamental,Nariño,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
 54,departamental,Norte de Santander,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
 54,departamental,Norte de Santander,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
@@ -407,6 +575,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,14.48197646076523,2026-09-03
+54,departamental,Norte de Santander,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+54,departamental,Norte de Santander,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+54,departamental,Norte de Santander,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+54,departamental,Norte de Santander,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+54,departamental,Norte de Santander,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,82.0,2026-09-03
+54,departamental,Norte de Santander,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,81.0,2026-09-03
+54,departamental,Norte de Santander,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+54,departamental,Norte de Santander,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+54,departamental,Norte de Santander,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+54,departamental,Norte de Santander,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,18.0,2026-09-03
+54,departamental,Norte de Santander,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-03
+54,departamental,Norte de Santander,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+54,departamental,Norte de Santander,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+54,departamental,Norte de Santander,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
 70,departamental,Sucre,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
 70,departamental,Sucre,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
@@ -438,6 +620,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 70,departamental,Sucre,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.1919678414656314,2026-09-03
 70,departamental,Sucre,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,10.424128358256974,2026-09-03
+70,departamental,Sucre,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+70,departamental,Sucre,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+70,departamental,Sucre,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+70,departamental,Sucre,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+70,departamental,Sucre,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,16.0,2026-09-03
+70,departamental,Sucre,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,22.0,2026-09-03
+70,departamental,Sucre,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+70,departamental,Sucre,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+70,departamental,Sucre,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+70,departamental,Sucre,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,23.0,2026-09-03
+70,departamental,Sucre,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,6.0,2026-09-03
+70,departamental,Sucre,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-03
+70,departamental,Sucre,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+70,departamental,Sucre,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
 08,departamental,Atlántico,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
 08,departamental,Atlántico,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
@@ -500,6 +696,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 13,departamental,Bolívar,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.395736798045189,2026-09-03
 13,departamental,Bolívar,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.64943043191972,2026-09-03
+13,departamental,Bolívar,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+13,departamental,Bolívar,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+13,departamental,Bolívar,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+13,departamental,Bolívar,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+13,departamental,Bolívar,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,11.0,2026-09-03
+13,departamental,Bolívar,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,15.0,2026-09-03
+13,departamental,Bolívar,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+13,departamental,Bolívar,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+13,departamental,Bolívar,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-03
+13,departamental,Bolívar,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,8.0,2026-09-03
+13,departamental,Bolívar,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-03
+13,departamental,Bolívar,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
+13,departamental,Bolívar,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+13,departamental,Bolívar,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-03
 11,departamental,Bogotá D.C.,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
 11,departamental,Bogotá D.C.,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
@@ -717,6 +927,20 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 18,departamental,Caquetá,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.8923610829699498,2026-09-03
 18,departamental,Caquetá,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,0.57847221659399,2026-09-03
+18,departamental,Caquetá,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,18.0,2026-09-03
+18,departamental,Caquetá,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,18.0,2026-09-03
+18,departamental,Caquetá,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Vivienda,3is_colapsos,"Colapsos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,19.0,2026-09-03
+18,departamental,Caquetá,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,39.0,2026-09-03
+18,departamental,Caquetá,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
+18,departamental,Caquetá,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-03
 47,departamental,Magdalena,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
 47,departamental,Magdalena,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03

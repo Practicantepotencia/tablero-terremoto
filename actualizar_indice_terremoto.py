@@ -41,6 +41,13 @@ URL_POR_DEFECTO = "https://www.mapadelterremoto.com/datos/registro.json"
 MUNICIPIOS_POBLACION_CSV = "data/municipios_afectados_terremoto_colombia_ago2026.csv"
 RESUMEN_UNGRD_JSON = "data/resumen_ungrd_ago2026.json"
 
+# Rama "economica": empresarios afectados por Cámara de Comercio, reemplaza
+# el proxy de puntos para la dimensión de productividad. Cobertura parcial
+# (5 de 25 departamentos) -- ver data/README.md y el comentario en
+# compute_indice(). Si el archivo no existe, econ_proxy sigue calculándose
+# con el proxy de puntos de siempre (degradación elegante).
+CAMARAS_COMERCIO_CSV = "data/camaras_comercio_empresarios_afectados_ago2026.csv"
+
 # Fase 2: historial acumulado (una fila por departamento por corrida, nunca
 # se sobrescribe) para poder calcular "subió/bajó X posiciones desde la
 # última corrida" en la pestaña "Por dimensión". Vive junto a los demás
@@ -113,7 +120,7 @@ INSTITUCION_KEYWORDS = [
 DIMS = ["salud", "vivienda", "instituciones", "educacion", "econ_proxy"]
 DIM_LABELS = {
     "salud": "Salud", "vivienda": "Vivienda", "instituciones": "Instituciones",
-    "educacion": "Educación", "econ_proxy": "Productividad (proxy)",
+    "educacion": "Educación", "econ_proxy": "Productividad (Cámaras de Comercio)",
 }
 
 RAMP = [
@@ -209,6 +216,25 @@ def load_resumen_meta(json_path):
         return None
 
 
+def load_empresarios_afectados(csv_path):
+    """Suma empresarios_afectados por departamento desde el CSV de Cámaras
+    de Comercio. Devuelve {} si el archivo no existe (rama "economica" no
+    aplicable / degradación elegante a la metodología anterior)."""
+    if not csv_path or not os.path.exists(csv_path):
+        return {}
+    por_dep = defaultdict(int)
+    with open(csv_path, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            dep = row.get("departamento")
+            if not dep:
+                continue
+            try:
+                por_dep[dep] += int(float(row.get("empresarios_afectados") or 0))
+            except ValueError:
+                continue
+    return dict(por_dep)
+
+
 def load_historial_previo(path):
     """Fase 2: lee historial_indice.csv (una fila por departamento por
     corrida, ver append_historial) y devuelve (fecha, snapshot) de la
@@ -273,7 +299,7 @@ def _normalizar_0_100(valores_por_dep, departamentos, dep_pop):
     }
 
 
-def compute_indice(data, dep_pop):
+def compute_indice(data, dep_pop, empresarios_por_dep=None):
     puntos = data["puntos"]
     weighted = {d: defaultdict(float) for d in DIMS}
     raw_n = {d: defaultdict(int) for d in DIMS}
@@ -315,6 +341,24 @@ def compute_indice(data, dep_pop):
             n = raw_n[d].get(dep, 0)
             incidencia_tasa[d][dep] = (n / pob * 100000) if pob > 0 else 0.0
             severidad_promedio[d][dep] = (weighted[d].get(dep, 0) / n) if n > 0 else 0.0
+
+    # Rama "economica": productividad ya no se estima con el proxy de
+    # puntos (SERVICIO/PUNTO_AYUDA/RESTRICCION) sino con empresarios
+    # afectados reportados por las Cámaras de Comercio -- un dato real,
+    # aunque con cobertura parcial (5 de 25 departamentos, los que ya
+    # reportaron; el resto queda en 0 -- ver data/README.md).
+    # Cámaras no clasifica por severidad, así que no hay un segundo
+    # sub-indicador independiente que ofrecer: se refleja la misma tasa
+    # en severidad_promedio para que el promedio incidencia+severidad no
+    # diluya la señal a la mitad -- el resultado final es simplemente la
+    # tasa de empresarios afectados, normalizada.
+    if empresarios_por_dep is not None:
+        for dep in departamentos:
+            pob = dep_pop.get(dep, 0)
+            n_emp = empresarios_por_dep.get(dep, 0)
+            tasa = (n_emp / pob * 100000) if pob > 0 else 0.0
+            incidencia_tasa["econ_proxy"][dep] = tasa
+            severidad_promedio["econ_proxy"][dep] = tasa
 
     incidencia_idx = {d: _normalizar_0_100(incidencia_tasa[d], departamentos, dep_pop) for d in DIMS}
     severidad_idx = {d: _normalizar_0_100(severidad_promedio[d], departamentos, dep_pop) for d in DIMS}
@@ -366,7 +410,7 @@ def fmt_fecha_es(dt):
 
 
 def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_meta=None,
-                historial_previo=None, fecha_historial_previo=None):
+                historial_previo=None, fecha_historial_previo=None, empresarios_por_dep=None):
     snapshot_iso = meta.get("actualizado_snapshot", "")
     try:
         snap_dt = datetime.fromisoformat(snapshot_iso.replace("Z", "+00:00"))
@@ -405,6 +449,19 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     header_dim_cells = "".join(f'<th>{DIM_LABELS[d]}</th>' for d in DIMS)
     legend_stops = "".join(f'<div class="legend-stop" style="background:{cell_color(v)}"></div>' for v in range(0, 101, 4))
     refresh_tag = f'<meta http-equiv="refresh" content="{autorefresh_seconds}">' if autorefresh_seconds else ""
+
+    if empresarios_por_dep:
+        prod_label = DIM_LABELS["econ_proxy"]
+        n_dep_camaras = sum(1 for r in rows if empresarios_por_dep.get(r["departamento"]))
+        prod_metodo = (
+            f"empresarios afectados (estado grave/crítico) reportados por Cámaras de Comercio, "
+            f"por cada 100k habitantes -- dato real, pero con cobertura parcial "
+            f"({n_dep_camaras} de {len(rows)} departamentos; el resto queda en 0 por falta de dato, "
+            f"no porque se haya confirmado que no hay afectación económica)"
+        )
+    else:
+        prod_label = "Productividad (proxy)"
+        prod_metodo = "<code>SERVICIO</code> + <code>PUNTO_AYUDA</code> + <code>RESTRICCION</code>"
 
     # --- Pestaña "Por dimensión" (Fase 2: resultados por pilar, siempre
     # disponible -- solo depende de `rows`, no de fuentes externas) ---
@@ -850,7 +907,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     <details class="method">
       <summary>Metodología y limitaciones</summary>
       <div class="method-body">
-        <p>Unidad geográfica: departamento (25). <b>Salud</b> = puntos tipo <code>HOSPITAL</code>; <b>Vivienda</b> = <code>VIVIENDA</code>; <b>Educación</b> = <code>ESCUELA</code>; <b>Instituciones</b> = puntos cuyo texto menciona una sede de gobierno o gestión pública; <b>Productividad (proxy)</b> = <code>SERVICIO</code> + <code>PUNTO_AYUDA</code> + <code>RESTRICCION</code>.</p>
+        <p>Unidad geográfica: departamento (25). <b>Salud</b> = puntos tipo <code>HOSPITAL</code>; <b>Vivienda</b> = <code>VIVIENDA</code>; <b>Educación</b> = <code>ESCUELA</code>; <b>Instituciones</b> = puntos cuyo texto menciona una sede de gobierno o gestión pública; <b>{prod_label}</b> = {prod_metodo}</p>
         <p>Cada punto pesa según severidad (COLAPSO=4, GRAVE=3, MODERADO=2, LEVE=1, SIN_EVALUAR=1). Cada dimensión se calcula en dos sub-indicadores separados -- <b>incidencia</b> (cuántos puntos hay, por cada 100k habitantes) y <b>severidad promedio</b> (qué tan graves son en promedio esos puntos) -- normalizados 0-100 cada uno (mínimo-máximo entre los 25 departamentos) y promediados entre sí. El índice compuesto es el promedio simple de las 5 dimensiones.</p>
       </div>
     </details>
@@ -937,7 +994,12 @@ def main():
     fuente_pob = poblacion_path if poblacion_path else "tabla embebida (POBLACION_CSV)"
     print(f"[{datetime.now().isoformat(timespec='seconds')}] Población por departamento desde: {fuente_pob}")
     dep_pop = load_dep_population(poblacion_path or None)
-    rows = compute_indice(data, dep_pop)
+
+    empresarios_por_dep = load_empresarios_afectados(CAMARAS_COMERCIO_CSV)
+    if empresarios_por_dep:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Productividad: usando empresarios afectados (Cámaras de Comercio) de {CAMARAS_COMERCIO_CSV} -- {len(empresarios_por_dep)} departamentos con dato, {sum(empresarios_por_dep.values()):,} empresarios")
+
+    rows = compute_indice(data, dep_pop, empresarios_por_dep=empresarios_por_dep or None)
     meta = {
         "actualizado_snapshot": data.get("actualizado"),
         "n_puntos": len(data.get("puntos", [])),
@@ -961,6 +1023,7 @@ def main():
         rows, meta, autorefresh_seconds=0 if args.sin_autorefresh else 14400,
         municipios=municipios, resumen_meta=resumen_meta,
         historial_previo=historial_previo, fecha_historial_previo=fecha_historial_previo,
+        empresarios_por_dep=empresarios_por_dep or None,
     )
     with open(args.out, "w", encoding="utf-8") as f:
         f.write(html)

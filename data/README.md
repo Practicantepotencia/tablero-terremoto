@@ -59,3 +59,20 @@ Si reemplazas el Excel por una versión más nueva, regenera el CSV con el
 mismo procedimiento (parsear "Listado completo", ojo con el orden
 `millones|mil` en el regex — `mil` es prefijo de `millones`) y actualiza el
 JSON de resumen a mano con la hoja "Resumen" nueva.
+
+### Rama `economica`
+
+- **`camaras_comercio_empresarios_afectados_ago2026.xlsx`** — original tal
+  cual (fuente: Cámaras de Comercio, "Trabajo colaborativo para la atención
+  de la emergencia"). Empresarios afectados en estado grave/crítico, por
+  municipio, con apoyo recibido/aliados/recursos propios en texto libre.
+  **Cobertura parcial: solo 5 de 25 departamentos** (Risaralda, Valle del
+  Cauca, Caldas, Quindío, Chocó) — los que ya reportaron.
+- **`camaras_comercio_empresarios_afectados_ago2026.csv`** — normalizado
+  (departamento, municipio, camara_comercio, empresarios_afectados,
+  apoyo_recibido, aliados, recursos_propios), nombres de departamento
+  mapeados a la forma canónica con acentos (`QUINDIO` → `Quindío`, etc.).
+  Si existe, `actualizar_indice_terremoto.py` lo usa para reemplazar el
+  proxy de puntos (`SERVICIO`+`PUNTO_AYUDA`+`RESTRICCION`) de la dimensión
+  de productividad — ver `compute_indice()`. Si no existe, esa dimensión
+  sigue calculándose como antes (degradación elegante).

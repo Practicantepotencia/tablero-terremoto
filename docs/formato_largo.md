@@ -1,8 +1,17 @@
 # Formato largo de indicadores — diseño (Fase A)
 
-**Estado:** en construcción, rama `formato-largo`. No reemplaza nada en
-`main` todavía — se agrega como salida en paralelo (`indicadores_largo.csv`)
-mientras se valida, antes de migrar las vistas del tablero a leer de aquí.
+**Estado:** cutover real implementado y verificado en cada corrida, rama
+`formato-largo`. No fusionado a `main` todavía.
+
+`compute_indice()` sigue siendo quien calcula todo (la lógica no cambió),
+pero desde este punto **el CSV ancho y el HTML ya no leen directamente su
+resultado** -- leen la reconstrucción hecha a partir de
+`indicadores_largo.csv`, que se relee justo después de escribirlo. Si la
+reconstrucción no coincide exacto con el cálculo original (`verificar_pivote()`),
+la corrida se cae de vuelta al cálculo original y lo deja bien loggeado
+-- nunca se publica un tablero con datos corrompidos silenciosamente.
+Probado a propósito con un caso de corrupción simulada (un departamento
+incompleto): se detecta y bloquea el cutover, como debe ser.
 
 ## Por qué
 
@@ -96,10 +105,37 @@ De `compute_indice()` actual, por departamento:
 Pendiente de agregar cuando existan: indicadores de 3iS (rama `3is`,
 todavía sin acceso a los datos crudos) e IPM (Fase B, línea base).
 
-## Próximo paso técnico
+## Cómo funciona el cutover (implementado)
 
-Función `export_formato_largo(rows, municipios, meta, empresarios_por_dep)`
-en `actualizar_indice_terremoto.py` que recorre las estructuras que el
-script ya calcula y escribe `indicadores_largo.csv` -- sin tocar
-`compute_indice()`, `build_html()` ni el CSV ancho existentes. Salida en
-paralelo, no reemplazo, mientras se valida.
+En cada corrida, en este orden:
+
+1. `compute_indice()` calcula `rows` igual que siempre (ninguna lógica de
+   negocio cambió).
+2. `export_formato_largo(rows, ...)` escribe `indicadores_largo.csv`.
+3. `load_indicadores_largo()` lo relee, y `pivotar_a_rows()` reconstruye
+   la forma ancha (mismas claves que `compute_indice()` produce) a partir
+   de las filas largas.
+4. `verificar_pivote(rows, rows_reconstruidas)` compara ambas, campo por
+   campo, con tolerancia de punto flotante (`1e-6`). Si algún
+   departamento falta o algún valor no coincide, `ok=False` y se
+   registra el detalle.
+5. Si `ok=True`: `rows = rows_reconstruidas` -- el CSV ancho
+   (`write_indice_csv`) y el HTML (`build_html`) usan la reconstrucción,
+   no el cálculo directo. Si `ok=False`: se sigue con el `rows` original,
+   sin interrumpir la corrida, dejando el motivo en el log
+   (`stderr`).
+
+Esto prueba, corrida tras corrida con datos reales, que el formato largo
+es una representación completa y fiel -- no solo un espejo de exportación
+que podría desincronizarse en silencio.
+
+## Qué falta para terminar la Fase A
+
+- **Migrar `build_html()` a leer directamente del formato largo**, en vez
+  de depender de que `compute_indice()` primero produzca la forma ancha
+  para reconstruirla después. Hoy el pivote es una prueba de fidelidad,
+  no todavía el camino de lectura real de las vistas.
+- **DIVIPOLA municipal** (5 dígitos), pendiente.
+- **Población como indicador propio** en la tabla larga (hoy sigue
+  entrando por fuera, vía `dep_pop`), para que hasta ese dato tenga
+  fuente y fecha de corte trazables como cualquier otro indicador.

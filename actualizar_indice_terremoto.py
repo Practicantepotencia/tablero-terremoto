@@ -404,7 +404,9 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None):
         for d in DIMS:
             label = DIM_LABELS[d]
             fila(dep, None, "departamental", label, f"{d}_n", f"Puntos registrados ({label})", "Número", "Naboo", r[f"{d}_n"])
+            fila(dep, None, "departamental", label, f"{d}_incidencia_tasa_100k", f"Tasa de incidencia ({label})", "Tasa x100k hab.", "Calculo", r[f"{d}_incidencia_tasa_100k"])
             fila(dep, None, "departamental", label, f"{d}_incidencia_idx", f"Incidencia ({label})", "Índice 0-100", "Calculo", r[f"{d}_incidencia_idx"])
+            fila(dep, None, "departamental", label, f"{d}_severidad_promedio", f"Severidad promedio cruda ({label})", "Peso promedio", "Calculo", r[f"{d}_severidad_promedio"])
             fila(dep, None, "departamental", label, f"{d}_severidad_idx", f"Severidad promedio ({label})", "Índice 0-100", "Calculo", r[f"{d}_severidad_idx"])
             fila(dep, None, "departamental", label, f"{d}_idx", label, "Índice 0-100", "Calculo", r[f"{d}_idx"])
         fila(dep, None, "departamental", "Compuesto", "indice_compuesto", "Índice compuesto", "Índice 0-100", "Calculo", r["indice_compuesto"])
@@ -431,6 +433,87 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None):
         w.writeheader()
         w.writerows(filas)
     return len(filas)
+
+
+def load_indicadores_largo(csv_path):
+    """Lee indicadores_largo.csv de vuelta a una lista de dicts (uno por
+    fila). Devuelve [] si el archivo no existe."""
+    if not csv_path or not os.path.exists(csv_path):
+        return []
+    with open(csv_path, encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def pivotar_a_rows(indicadores, dep_pop):
+    """Reconstruye la forma ancha que build_html()/write_indice_csv()
+    esperan (una fila por departamento, mismas claves que compute_indice())
+    a partir del formato largo. Es la prueba de que el formato largo
+    alcanza para ser la fuente real del tablero, no solo un espejo: si
+    algún departamento queda incompleto (falta una columna esperada), se
+    omite -- se prefiere no reconstruirlo a reconstruirlo mal."""
+    columnas_esperadas = {"indice_compuesto"}
+    for d in DIMS:
+        columnas_esperadas |= {
+            f"{d}_n", f"{d}_incidencia_tasa_100k", f"{d}_incidencia_idx",
+            f"{d}_severidad_promedio", f"{d}_severidad_idx", f"{d}_idx",
+        }
+
+    por_dep = defaultdict(dict)
+    for row in indicadores:
+        if row.get("nivel") != "departamental":
+            continue
+        ind_id = row.get("indicador_id")
+        if ind_id not in columnas_esperadas:
+            continue
+        try:
+            valor = float(row["valor"])
+        except (TypeError, ValueError):
+            continue
+        if ind_id.endswith("_n"):
+            valor = int(valor)
+        por_dep[row["departamento"]][ind_id] = valor
+
+    rows = []
+    for dep, campos in por_dep.items():
+        if len(campos) != len(columnas_esperadas):
+            continue
+        row = {"departamento": dep, "poblacion": int(dep_pop.get(dep, 0))}
+        row.update(campos)
+        rows.append(row)
+    rows.sort(key=lambda r: (-r["indice_compuesto"], r["departamento"]))
+    return rows
+
+
+def verificar_pivote(rows_original, rows_reconstruidas):
+    """Compara la forma ancha original contra la reconstruida desde el
+    formato largo. Devuelve (ok, detalle) -- ok=False ante cualquier
+    diferencia real (más allá de redondeo de punto flotante) o
+    departamento faltante, para que main() pueda decidir NO usar la
+    reconstrucción si algo no cuadra, en vez de publicar un tablero con
+    datos corrompidos silenciosamente."""
+    orig_por_dep = {r["departamento"]: r for r in rows_original}
+    recon_por_dep = {r["departamento"]: r for r in rows_reconstruidas}
+
+    faltantes = set(orig_por_dep) - set(recon_por_dep)
+    if faltantes:
+        return False, f"{len(faltantes)} departamento(s) no se pudieron reconstruir: {sorted(faltantes)}"
+
+    diffs = []
+    for dep, orig in orig_por_dep.items():
+        recon = recon_por_dep[dep]
+        for k, v in orig.items():
+            if k not in recon:
+                diffs.append(f"{dep}.{k}: falta en la reconstrucción")
+                continue
+            if isinstance(v, (int, float)) and isinstance(recon[k], (int, float)):
+                if abs(v - recon[k]) > 1e-6:
+                    diffs.append(f"{dep}.{k}: {v} (original) != {recon[k]} (reconstruido)")
+            elif v != recon[k]:
+                diffs.append(f"{dep}.{k}: {v!r} (original) != {recon[k]!r} (reconstruido)")
+
+    if diffs:
+        return False, f"{len(diffs)} diferencia(s), ej.: " + "; ".join(diffs[:5])
+    return True, f"{len(rows_original)} departamentos verificados, coincidencia exacta"
 
 
 MESES_ES = {1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio",
@@ -1036,10 +1119,26 @@ def main():
     elif historial_path:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Historial: sin corridas previas todavía, arranca en {historial_path}")
 
-    write_indice_csv(rows, args.csv)
     if args.formato_largo:
         n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
+
+        # Cutover real, no solo espejo: se relee lo que se acaba de
+        # escribir y se reconstruye la forma ancha. Si coincide exacto con
+        # el cálculo original, el resto de la corrida (CSV + HTML) usa la
+        # reconstrucción -- prueba en cada corrida que el formato largo
+        # alcanza para ser la fuente real. Si algo no cuadra, se seguía
+        # con el cálculo original (nunca se publica con datos corrompidos).
+        indicadores_largo = load_indicadores_largo(args.formato_largo)
+        rows_reconstruidas = pivotar_a_rows(indicadores_largo, dep_pop)
+        pivote_ok, pivote_detalle = verificar_pivote(rows, rows_reconstruidas)
+        if pivote_ok:
+            print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): verificación OK ({pivote_detalle}) -- CSV y HTML usan la reconstrucción")
+            rows = rows_reconstruidas
+        else:
+            print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): VERIFICACIÓN FALLÓ ({pivote_detalle}) -- se sigue usando el cálculo original", file=sys.stderr)
+
+    write_indice_csv(rows, args.csv)
 
     html = build_html(
         rows, meta, autorefresh_seconds=0 if args.sin_autorefresh else 14400,

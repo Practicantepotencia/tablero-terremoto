@@ -25,26 +25,6 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
-      - name: DIAGNÓSTICO TEMPORAL -- puntos de Atlántico
-        run: |
-          python3 - <<'EOF'
-          import json, urllib.request
-          req = urllib.request.Request(
-              "https://www.mapadelterremoto.com/datos/registro.json",
-              headers={"User-Agent": "Mozilla/5.0"},
-          )
-          with urllib.request.urlopen(req, timeout=60) as resp:
-              data = json.loads(resp.read().decode("utf-8"))
-          puntos = [p for p in data.get("puntos", []) if p.get("departamento") == "Atlántico"]
-          print(f"=== {len(puntos)} puntos en Atlántico ===")
-          for p in puntos:
-              print("|".join([
-                  p.get("codigo", ""), p.get("tipo", ""), p.get("severidad", ""),
-                  (p.get("direccion") or "")[:70],
-                  (p.get("descripcion") or "")[:90],
-              ]))
-          EOF
-
       - name: Generar tablero e índice
         run: python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
 

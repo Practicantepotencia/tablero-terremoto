@@ -41,6 +41,13 @@ URL_POR_DEFECTO = "https://www.mapadelterremoto.com/datos/registro.json"
 MUNICIPIOS_POBLACION_CSV = "data/municipios_afectados_terremoto_colombia_ago2026.csv"
 RESUMEN_UNGRD_JSON = "data/resumen_ungrd_ago2026.json"
 
+# Empresarios afectados por Cámara de Comercio (traído de la rama
+# "economica", solo el dato crudo -- aquí NO se usa para recalcular
+# ninguna dimensión, solo entra al inventario de indicadores en
+# formato largo con fuente=Camaras. Cobertura parcial: 5 de 25
+# departamentos, ver data/README.md.
+CAMARAS_COMERCIO_CSV = "data/camaras_comercio_empresarios_afectados_ago2026.csv"
+
 # Fase 2: historial acumulado (una fila por departamento por corrida, nunca
 # se sobrescribe) para poder calcular "subió/bajó X posiciones desde la
 # última corrida" en la pestaña "Por dimensión". Vive junto a los demás
@@ -230,6 +237,26 @@ def load_resumen_meta(json_path):
             return json.load(f)
     except (OSError, ValueError):
         return None
+
+
+def load_empresarios_afectados(csv_path):
+    """Suma empresarios_afectados por departamento desde el CSV de Cámaras
+    de Comercio (rama 'economica'). Solo materia prima para el inventario
+    de formato largo (fuente=Camaras) -- NO se usa para recalcular ninguna
+    dimensión del índice todavía. Devuelve {} si el archivo no existe."""
+    if not csv_path or not os.path.exists(csv_path):
+        return {}
+    por_dep = defaultdict(int)
+    with open(csv_path, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            dep = row.get("departamento")
+            if not dep:
+                continue
+            try:
+                por_dep[dep] += int(float(row.get("empresarios_afectados") or 0))
+            except ValueError:
+                continue
+    return dict(por_dep)
 
 
 def load_historial_previo(path):
@@ -1119,8 +1146,12 @@ def main():
     elif historial_path:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Historial: sin corridas previas todavía, arranca en {historial_path}")
 
+    empresarios_por_dep = load_empresarios_afectados(CAMARAS_COMERCIO_CSV)
+    if empresarios_por_dep:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: empresarios afectados (Cámaras de Comercio) de {CAMARAS_COMERCIO_CSV} -- {len(empresarios_por_dep)} departamentos con dato (materia prima, no se usa para recalcular el índice)")
+
     if args.formato_largo:
-        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=None)
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
 
         # Cutover real, no solo espejo: se relee lo que se acaba de

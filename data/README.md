@@ -59,3 +59,22 @@ Si reemplazas el Excel por una versión más nueva, regenera el CSV con el
 mismo procedimiento (parsear "Listado completo", ojo con el orden
 `millones|mil` en el regex — `mil` es prefijo de `millones`) y actualiza el
 JSON de resumen a mano con la hoja "Resumen" nueva.
+
+### Rama `formato-largo`
+
+- **`camaras_comercio_empresarios_afectados_ago2026.{xlsx,csv}`** —
+  traídos de la rama `economica` (empresarios afectados en estado
+  grave/crítico, por Cámara de Comercio; cobertura parcial, 5 de 25
+  departamentos). Aquí **solo entran al inventario crudo** de
+  `indicadores_largo.csv` (`fuente=Camaras`) vía `load_empresarios_afectados()`
+  -- a diferencia de la rama `economica`, donde sí se usan para
+  recalcular la dimensión de productividad. En `formato-largo` la idea es
+  juntar toda la materia prima posible antes de tocar el cálculo del
+  índice de nuevo (ver `docs/formato_largo.md`).
+- **`indicadores_largo_solo_fuentes_crudas_snapshot.csv`** — snapshot que
+  compartió Daniel: el propio `indicadores_largo.csv` filtrado a
+  `fuente != Calculo` (solo lo que viene de fuentes externas, nada que
+  hayamos calculado nosotros), sin las columnas `divipola`/`fecha_corte`.
+  No es una fuente nueva -- es una vista de referencia de nuestro propio
+  output, útil para revisar el inventario crudo sin que se mezcle con lo
+  derivado.

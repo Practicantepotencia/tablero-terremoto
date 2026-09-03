@@ -801,7 +801,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
   <header class="hero">
     <div class="kicker">Índice de impacto · Terremoto de Colombia, 2026 · generado localmente</div>
     <h1>Impacto por departamento</h1>
-    <p class="subtitle">Salud, vivienda, instituciones, educación y productividad económica combinadas en un índice per cápita de 0 a 100, recalculado desde <span class="mono">registro.json</span> de mapadelterremoto.com cada vez que corres este script.</p>
+    <p class="subtitle">Salud, vivienda, instituciones, educación y productividad económica combinadas en un índice per cápita de 0 a 100.</p>
   </header>
   {tab_nav_html}
   <div id="tab-departamental" class="tab-panel">

@@ -48,6 +48,47 @@ RESUMEN_UNGRD_JSON = "data/resumen_ungrd_ago2026.json"
 # departamentos, ver data/README.md.
 CAMARAS_COMERCIO_CSV = "data/camaras_comercio_empresarios_afectados_ago2026.csv"
 
+# Hoja "Datos_Territoriales" del Google Sheets público que alimenta el
+# dashboard 3iS (ver docs/investigacion_3is.md) -- cifras OFICIALES
+# consolidadas por departamento y por corte de tiempo (fallecidos, heridos,
+# viviendas averiadas/destruidas, colapsos, salud, educativos, vías...).
+# Se descarga fresca en cada corrida (como registro.json), no es un
+# snapshot manual -- Google la sirve como CSV público sin autenticación.
+# Solo entra al inventario crudo (fuente=3iS-Sheets), NO se usa todavía
+# para recalcular ninguna dimensión del índice.
+SHEETS_3IS_DATOS_TERRITORIALES_URL = (
+    "https://docs.google.com/spreadsheets/d/1fQ-LTlIEljzOKvW23epwevJeWLWORi88xL7XxkpTMzY"
+    "/gviz/tq?tqx=out:csv&sheet=Datos_Territoriales"
+)
+CAMPOS_3IS_DATOS_TERRITORIALES = [
+    "Fallecidos", "Heridos", "Desaparecidos", "Rescatados", "Familias",
+    "VivAveriadas", "VivDestruidas", "Colapsos", "Salud", "Educativos",
+    "Comunitarios", "Vias", "Aeropuertos", "Acueductos",
+]
+# Dimensión bajo la que cae cada campo al exportarlo a indicadores_largo.csv
+# -- descriptiva, no necesariamente una de las 5 que usa compute_indice().
+DIMENSION_3IS_POR_CAMPO = {
+    "Fallecidos": "Impacto humano", "Heridos": "Impacto humano",
+    "Desaparecidos": "Impacto humano", "Rescatados": "Impacto humano",
+    "Familias": "Impacto humano",
+    "VivAveriadas": "Vivienda", "VivDestruidas": "Vivienda", "Colapsos": "Vivienda",
+    "Salud": "Salud", "Educativos": "Educación", "Comunitarios": "Instituciones",
+    "Vias": "Infraestructura", "Aeropuertos": "Infraestructura", "Acueductos": "Infraestructura",
+}
+# Nombre legible por campo (el nombre crudo de la columna del Sheets, ej.
+# "VivDestruidas", no es apto para mostrar tal cual).
+LABEL_3IS_POR_CAMPO = {
+    "Fallecidos": "Fallecidos", "Heridos": "Heridos", "Desaparecidos": "Desaparecidos",
+    "Rescatados": "Rescatados", "Familias": "Familias afectadas",
+    "VivAveriadas": "Viviendas averiadas", "VivDestruidas": "Viviendas destruidas",
+    "Colapsos": "Colapsos", "Salud": "Puntos de salud afectados",
+    "Educativos": "Puntos educativos afectados", "Comunitarios": "Puntos comunitarios afectados",
+    "Vias": "Vías afectadas", "Aeropuertos": "Aeropuertos afectados", "Acueductos": "Acueductos afectados",
+}
+# Meses en español abreviados como los usa la hoja ("3 Sep 06:30") -- para
+# poder comparar cortes y quedarnos con el más reciente.
+MESES_ES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6, "Jul": 7, "Ago": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}
+
 # Fase 2: historial acumulado (una fila por departamento por corrida, nunca
 # se sobrescribe) para poder calcular "subió/bajó X posiciones desde la
 # última corrida" en la pestaña "Por dimensión". Vive junto a los demás
@@ -248,6 +289,61 @@ def load_resumen_meta(json_path):
         return None
 
 
+def _clave_orden_corte(reporte):
+    """'3 Sep 06:30' -> (mes, día, hora, minuto) para poder comparar cortes
+    y encontrar el más reciente sin asumir el orden del CSV fuente."""
+    try:
+        partes = reporte.split(" ")
+        dia, mes_abrev, hhmm = partes[0], partes[1], partes[2]
+        h, m = hhmm.split(":")
+        return (MESES_ES.get(mes_abrev, 0), int(dia), int(h), int(m))
+    except (ValueError, IndexError):
+        return (0, 0, 0, 0)
+
+
+def load_3is_datos_territoriales(url=SHEETS_3IS_DATOS_TERRITORIALES_URL):
+    """Descarga la hoja 'Datos_Territoriales' del Sheets público de 3iS
+    (ver docs/investigacion_3is.md) y devuelve (corte, {departamento:
+    {campo: valor}}) con el corte de tiempo MÁS RECIENTE, nivel
+    'Departamento' únicamente. Solo materia prima para el inventario de
+    formato largo (fuente=3iS-Sheets) -- NO se usa para recalcular ninguna
+    dimensión del índice todavía. Devuelve (None, {}) si falla la descarga
+    o el parseo -- nunca interrumpe la corrida (misma filosofía que el
+    resto de fuentes opcionales de data/)."""
+    if not url:
+        return None, {}
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            raw = resp.read().decode("utf-8-sig")
+    except Exception:
+        return None, {}
+
+    try:
+        filas = list(csv.DictReader(io.StringIO(raw)))
+    except csv.Error:
+        return None, {}
+
+    deps = [r for r in filas if r.get("Nivel") == "Departamento" and r.get("Departamento")]
+    if not deps:
+        return None, {}
+
+    corte_mas_reciente = max({r["Reporte"] for r in deps}, key=_clave_orden_corte)
+    resultado = {}
+    for r in deps:
+        if r["Reporte"] != corte_mas_reciente:
+            continue
+        dep = r["Departamento"]
+        valores = {}
+        for campo in CAMPOS_3IS_DATOS_TERRITORIALES:
+            try:
+                valores[campo] = float(r.get(campo) or 0)
+            except ValueError:
+                valores[campo] = 0.0
+        resultado[dep] = valores
+    return corte_mas_reciente, resultado
+
+
 def load_empresarios_afectados(csv_path):
     """Suma empresarios_afectados por departamento desde el CSV de Cámaras
     de Comercio (rama 'economica'). Solo materia prima para el inventario
@@ -413,7 +509,7 @@ def write_indice_csv(rows, csv_path):
         w.writerows(rows)
 
 
-def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None):
+def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None):
     """Fase A (ver docs/formato_largo.md): exporta los mismos indicadores
     que ya calcula el script a una tabla larga (un indicador x unidad
     geográfica por fila, con dimensión/unidad/fuente como metadatos) en
@@ -454,6 +550,10 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
         if empresarios_por_dep and dep in empresarios_por_dep:
             fila(dep, None, "departamental", "Productividad", "empresarios_afectados",
                  "Empresarios afectados (grave/crítico)", "Número", "Camaras", empresarios_por_dep[dep])
+        if datos_3is_por_dep and dep in datos_3is_por_dep:
+            for campo, valor in datos_3is_por_dep[dep].items():
+                fila(dep, None, "departamental", DIMENSION_3IS_POR_CAMPO[campo],
+                     f"3is_{campo.lower()}", f"{LABEL_3IS_POR_CAMPO[campo]} (3iS, oficial)", "Número", "3iS-Sheets", valor)
 
     if municipios:
         por_dep = defaultdict(list)
@@ -1136,6 +1236,7 @@ def main():
     ap.add_argument("--historial", default=HISTORIAL_CSV_POR_DEFECTO, help="CSV donde se acumula el historial para la pestaña 'Por dimensión' (una fila por departamento por corrida, nunca se sobrescribe). Pasa '' vacío para desactivar el historial.")
     ap.add_argument("--formato-largo", default=INDICADORES_LARGO_CSV_POR_DEFECTO, help="CSV en formato largo (Fase A, ver docs/formato_largo.md) -- salida en paralelo al CSV ancho, no lo reemplaza. Pasa '' vacío para desactivarlo.")
     ap.add_argument("--no-calculo", default=NO_CALCULO_CSV_POR_DEFECTO, help="CSV derivado de --formato-largo filtrado a fuente != Calculo (solo materia prima cruda de fuentes externas). Se regenera solo en cada corrida. Pasa '' vacío para desactivarlo.")
+    ap.add_argument("--sheets-3is", default=SHEETS_3IS_DATOS_TERRITORIALES_URL, help="URL del CSV público (hoja 'Datos_Territoriales' del Sheets de 3iS, ver docs/investigacion_3is.md) con cifras oficiales por departamento -- solo alimenta el inventario crudo (fuente=3iS-Sheets), no recalcula el índice. Si falla la descarga, la corrida sigue sin ese dato. Pasa '' vacío para desactivarlo.")
     args = ap.parse_args()
 
     print(f"[{datetime.now().isoformat(timespec='seconds')}] Descargando/leyendo: {args.url}")
@@ -1174,8 +1275,14 @@ def main():
     if empresarios_por_dep:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: empresarios afectados (Cámaras de Comercio) de {CAMARAS_COMERCIO_CSV} -- {len(empresarios_por_dep)} departamentos con dato (materia prima, no se usa para recalcular el índice)")
 
+    corte_3is, datos_3is_por_dep = load_3is_datos_territoriales(args.sheets_3is or None)
+    if datos_3is_por_dep:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: cifras oficiales 3iS-Sheets (corte {corte_3is}) -- {len(datos_3is_por_dep)} departamentos con dato (materia prima, no se usa para recalcular el índice)")
+    elif args.sheets_3is:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: no se pudo leer 3iS-Sheets esta corrida (red o formato) -- se sigue sin ese dato, no interrumpe la corrida")
+
     if args.formato_largo:
-        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None)
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
         if args.no_calculo:
             print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo (fuente != Calculo): -> {args.no_calculo}")

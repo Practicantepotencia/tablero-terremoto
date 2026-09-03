@@ -1,526 +1,776 @@
 divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fuente,valor,fecha_corte
 63,departamental,Quindío,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,16,2026-09-03
+63,departamental,Quindío,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,2.8776978417266186,2026-09-03
 63,departamental,Quindío,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,77.84541597491238,2026-09-03
+63,departamental,Quindío,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.625,2026-09-03
 63,departamental,Quindío,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,54.166666666666664,2026-09-03
 63,departamental,Quindío,,Salud,salud_idx,Salud,Índice 0-100,Calculo,66.00604132078952,2026-09-03
 63,departamental,Quindío,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,41,2026-09-03
+63,departamental,Quindío,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,7.37410071942446,2026-09-03
 63,departamental,Quindío,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,78.85773014241667,2026-09-03
+63,departamental,Quindío,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,2.8536585365853657,2026-09-03
 63,departamental,Quindío,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,100.0,2026-09-03
 63,departamental,Quindío,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,89.42886507120834,2026-09-03
 63,departamental,Quindío,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,82,2026-09-03
+63,departamental,Quindío,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,14.74820143884892,2026-09-03
 63,departamental,Quindío,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,94.29910616960976,2026-09-03
+63,departamental,Quindío,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.7560975609756098,2026-09-03
 63,departamental,Quindío,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,100.0,2026-09-03
 63,departamental,Quindío,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,97.14955308480488,2026-09-03
 63,departamental,Quindío,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,62,2026-09-03
+63,departamental,Quindío,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,11.151079136690647,2026-09-03
 63,departamental,Quindío,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,64.9966214873405,2026-09-03
+63,departamental,Quindío,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,2.032258064516129,2026-09-03
 63,departamental,Quindío,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,96.12031386224935,2026-09-03
 63,departamental,Quindío,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,80.55846767479493,2026-09-03
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,68,2026-09-03
+63,departamental,Quindío,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,12.23021582733813,2026-09-03
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,80.89945948044294,2026-09-03
+63,departamental,Quindío,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.2794117647058822,2026-09-03
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,64.26470588235293,2026-09-03
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,72.58208268139794,2026-09-03
 63,departamental,Quindío,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,81.14500196659912,2026-09-03
 27,departamental,Chocó,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,14,2026-09-03
+27,departamental,Chocó,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,2.6717557251908395,2026-09-03
 27,departamental,Chocó,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,72.27441769426501,2026-09-03
+27,departamental,Chocó,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.6428571428571428,2026-09-03
 27,departamental,Chocó,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,54.76190476190476,2026-09-03
 27,departamental,Chocó,,Salud,salud_idx,Salud,Índice 0-100,Calculo,63.518161228084885,2026-09-03
 27,departamental,Chocó,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,49,2026-09-03
+27,departamental,Chocó,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,9.351145038167939,2026-09-03
 27,departamental,Chocó,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,100.0,2026-09-03
+27,departamental,Chocó,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,2.7551020408163267,2026-09-03
 27,departamental,Chocó,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,96.54631083202513,2026-09-03
 27,departamental,Chocó,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,98.27315541601257,2026-09-03
 27,departamental,Chocó,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,71,2026-09-03
+27,departamental,Chocó,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,13.549618320610687,2026-09-03
 27,departamental,Chocó,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,86.6354383529956,2026-09-03
+27,departamental,Chocó,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.591549295774648,2026-09-03
 27,departamental,Chocó,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,90.62989045383412,2026-09-03
 27,departamental,Chocó,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,88.63266440341486,2026-09-03
 27,departamental,Chocó,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,18,2026-09-03
+27,departamental,Chocó,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,3.435114503816794,2026-09-03
 27,departamental,Chocó,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,20.02235249462275,2026-09-03
+27,departamental,Chocó,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.8333333333333333,2026-09-03
 27,departamental,Chocó,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,86.7117117117117,2026-09-03
 27,departamental,Chocó,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,53.367032103167226,2026-09-03
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,46,2026-09-03
+27,departamental,Chocó,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,8.778625954198473,2026-09-03
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,57.69278888468702,2026-09-03
+27,departamental,Chocó,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.434782608695652,2026-09-03
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,100.0,2026-09-03
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,78.84639444234351,2026-09-03
 27,departamental,Chocó,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,76.52748151860462,2026-09-03
 17,departamental,Caldas,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,39,2026-09-03
+17,departamental,Caldas,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,3.6966824644549763,2026-09-03
 17,departamental,Caldas,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,100.0,2026-09-03
+17,departamental,Caldas,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.3076923076923077,2026-09-03
 17,departamental,Caldas,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,43.58974358974359,2026-09-03
 17,departamental,Caldas,,Salud,salud_idx,Salud,Índice 0-100,Calculo,71.7948717948718,2026-09-03
 17,departamental,Caldas,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,59,2026-09-03
+17,departamental,Caldas,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,5.592417061611374,2026-09-03
 17,departamental,Caldas,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,59.80462327110939,2026-09-03
+17,departamental,Caldas,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,2.2203389830508473,2026-09-03
 17,departamental,Caldas,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,77.80675068810662,2026-09-03
 17,departamental,Caldas,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,68.805686979608,2026-09-03
 17,departamental,Caldas,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,165,2026-09-03
+17,departamental,Caldas,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,15.639810426540285,2026-09-03
 17,departamental,Caldas,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,100.0,2026-09-03
+17,departamental,Caldas,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.4666666666666666,2026-09-03
 17,departamental,Caldas,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,83.51851851851852,2026-09-03
 17,departamental,Caldas,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,91.75925925925927,2026-09-03
 17,departamental,Caldas,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,181,2026-09-03
+17,departamental,Caldas,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,17.156398104265403,2026-09-03
 17,departamental,Caldas,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,100.0,2026-09-03
+17,departamental,Caldas,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.569060773480663,2026-09-03
 17,departamental,Caldas,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,74.21233388084217,2026-09-03
 17,departamental,Caldas,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,87.10616694042108,2026-09-03
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,159,2026-09-03
+17,departamental,Caldas,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,15.071090047393364,2026-09-03
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,100.0,2026-09-03
+17,departamental,Caldas,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0943396226415094,2026-09-03
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,21.698113207547166,2026-09-03
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,60.84905660377358,2026-09-03
 17,departamental,Caldas,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,76.06300831558674,2026-09-03
 66,departamental,Risaralda,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,25,2026-09-03
+66,departamental,Risaralda,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,2.4826216484607744,2026-09-03
 66,departamental,Risaralda,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,67.15809843913121,2026-09-03
+66,departamental,Risaralda,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.76,2026-09-03
 66,departamental,Risaralda,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,58.666666666666664,2026-09-03
 66,departamental,Risaralda,,Salud,salud_idx,Salud,Índice 0-100,Calculo,62.91238255289893,2026-09-03
 66,departamental,Risaralda,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,35,2026-09-03
+66,departamental,Risaralda,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,3.475670307845084,2026-09-03
 66,departamental,Risaralda,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,37.16839267981273,2026-09-03
+66,departamental,Risaralda,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,2.3714285714285714,2026-09-03
 66,departamental,Risaralda,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,83.1013431013431,2026-09-03
 66,departamental,Risaralda,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,60.13486789057792,2026-09-03
 66,departamental,Risaralda,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,103,2026-09-03
+66,departamental,Risaralda,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,10.228401191658392,2026-09-03
 66,departamental,Risaralda,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,65.39977731636122,2026-09-03
+66,departamental,Risaralda,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.4077669902912622,2026-09-03
 66,departamental,Risaralda,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,80.16450916936354,2026-09-03
 66,departamental,Risaralda,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,72.78214324286239,2026-09-03
 66,departamental,Risaralda,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,35,2026-09-03
+66,departamental,Risaralda,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,3.475670307845084,2026-09-03
 66,departamental,Risaralda,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,20.258741297108088,2026-09-03
+66,departamental,Risaralda,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,2.1142857142857143,2026-09-03
 66,departamental,Risaralda,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,100.0,2026-09-03
 66,departamental,Risaralda,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,60.129370648554044,2026-09-03
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,109,2026-09-03
+66,departamental,Risaralda,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,10.824230387288976,2026-09-03
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,71.44635463054078,2026-09-03
+66,departamental,Risaralda,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.275229357798165,2026-09-03
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,63.30275229357797,2026-09-03
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,67.37455346205937,2026-09-03
 66,departamental,Risaralda,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,64.66666355939053,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,93,2026-09-03
+76,departamental,Valle del Cauca,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,1.9741031628104435,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,53.402021455513285,2026-09-03
+76,departamental,Valle del Cauca,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.4731182795698925,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,49.10394265232975,2026-09-03
 76,departamental,Valle del Cauca,,Salud,salud_idx,Salud,Índice 0-100,Calculo,51.252982053921514,2026-09-03
 76,departamental,Valle del Cauca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,121,2026-09-03
+76,departamental,Valle del Cauca,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,2.5684568032264914,2026-09-03
 76,departamental,Valle del Cauca,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,27.46676254878942,2026-09-03
+76,departamental,Valle del Cauca,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,2.2231404958677685,2026-09-03
 76,departamental,Valle del Cauca,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,77.90492335946881,2026-09-03
 76,departamental,Valle del Cauca,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,52.685842954129114,2026-09-03
 76,departamental,Valle del Cauca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,244,2026-09-03
+76,departamental,Valle del Cauca,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,5.179367437911272,2026-09-03
 76,departamental,Valle del Cauca,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,33.116561496947824,2026-09-03
+76,departamental,Valle del Cauca,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.5245901639344261,2026-09-03
 76,departamental,Valle del Cauca,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,86.81693989071037,2026-09-03
 76,departamental,Valle del Cauca,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,59.9667506938291,2026-09-03
 76,departamental,Valle del Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,80,2026-09-03
+76,departamental,Valle del Cauca,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,1.6981532583315644,2026-09-03
 76,departamental,Valle del Cauca,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,9.898075621766854,2026-09-03
+76,departamental,Valle del Cauca,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.525,2026-09-03
 76,departamental,Valle del Cauca,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,72.12837837837837,2026-09-03
 76,departamental,Valle del Cauca,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,41.01322700007261,2026-09-03
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,263,2026-09-03
+76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,5.582678836765018,2026-09-03
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,36.204925400990625,2026-09-03
+76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.258555133079848,2026-09-03
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,59.46768060836503,2026-09-03
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,47.83630300467783,2026-09-03
 76,departamental,Valle del Cauca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,50.55102114132603,2026-09-03
 73,departamental,Tolima,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11,2026-09-03
+73,departamental,Tolima,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.8377760853008377,2026-09-03
 73,departamental,Tolima,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,22.66291717929189,2026-09-03
+73,departamental,Tolima,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.6363636363636365,2026-09-03
 73,departamental,Tolima,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,54.545454545454554,2026-09-03
 73,departamental,Tolima,,Salud,salud_idx,Salud,Índice 0-100,Calculo,38.60418586237322,2026-09-03
 73,departamental,Tolima,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,12,2026-09-03
+73,departamental,Tolima,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.913937547600914,2026-09-03
 73,departamental,Tolima,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,9.77353622332406,2026-09-03
+73,departamental,Tolima,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,2.75,2026-09-03
 73,departamental,Tolima,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,96.36752136752136,2026-09-03
 73,departamental,Tolima,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,53.07052879542271,2026-09-03
 73,departamental,Tolima,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,22,2026-09-03
+73,departamental,Tolima,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,1.6755521706016754,2026-09-03
 73,departamental,Tolima,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,10.713379030210712,2026-09-03
+73,departamental,Tolima,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.5,2026-09-03
 73,departamental,Tolima,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,85.41666666666666,2026-09-03
 73,departamental,Tolima,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,48.06502284843869,2026-09-03
 73,departamental,Tolima,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,11,2026-09-03
+73,departamental,Tolima,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.8377760853008377,2026-09-03
 73,departamental,Tolima,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,4.8831699999579214,2026-09-03
+73,departamental,Tolima,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.9090909090909092,2026-09-03
 73,departamental,Tolima,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,90.2948402948403,2026-09-03
 73,departamental,Tolima,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,47.58900514739911,2026-09-03
 73,departamental,Tolima,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,34,2026-09-03
+73,departamental,Tolima,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,2.5894897182025898,2026-09-03
 73,departamental,Tolima,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,16.08029980574432,2026-09-03
+73,departamental,Tolima,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.2058823529411764,2026-09-03
 73,departamental,Tolima,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,47.35294117647058,2026-09-03
 73,departamental,Tolima,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,31.71662049110745,2026-09-03
 73,departamental,Tolima,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,43.809072628948236,2026-09-03
 19,departamental,Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11,2026-09-03
+19,departamental,Cauca,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.7208387942332897,2026-09-03
 19,departamental,Cauca,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,19.499613536310783,2026-09-03
+19,departamental,Cauca,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.2727272727272727,2026-09-03
 19,departamental,Cauca,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,42.42424242424242,2026-09-03
 19,departamental,Cauca,,Salud,salud_idx,Salud,Índice 0-100,Calculo,30.961927980276602,2026-09-03
 19,departamental,Cauca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,5,2026-09-03
+19,departamental,Cauca,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.327653997378768,2026-09-03
 19,departamental,Cauca,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,3.503891727070907,2026-09-03
+19,departamental,Cauca,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,2.0,2026-09-03
 19,departamental,Cauca,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,70.08547008547009,2026-09-03
 19,departamental,Cauca,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,36.7946809062705,2026-09-03
 19,departamental,Cauca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,18,2026-09-03
+19,departamental,Cauca,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,1.1795543905635648,2026-09-03
 19,departamental,Cauca,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,7.54199928511855,2026-09-03
+19,departamental,Cauca,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.1111111111111112,2026-09-03
 19,departamental,Cauca,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,63.27160493827161,2026-09-03
 19,departamental,Cauca,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,35.40680211169508,2026-09-03
 19,departamental,Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9,2026-09-03
+19,departamental,Cauca,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.5897771952817824,2026-09-03
 19,departamental,Cauca,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,3.437651607857903,2026-09-03
+19,departamental,Cauca,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.4444444444444444,2026-09-03
 19,departamental,Cauca,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,68.31831831831832,2026-09-03
 19,departamental,Cauca,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,35.87798496308811,2026-09-03
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,18,2026-09-03
+19,departamental,Cauca,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,1.1795543905635648,2026-09-03
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,6.600637994106437,2026-09-03
+19,departamental,Cauca,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.1666666666666667,2026-09-03
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,38.33333333333336,2026-09-03
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,22.466985663719896,2026-09-03
 19,departamental,Cauca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,32.301676325010035,2026-09-03
 25,departamental,Cundinamarca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,8,2026-09-03
+25,departamental,Cundinamarca,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.28901734104046245,2026-09-03
 25,departamental,Cundinamarca,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,7.818289610197125,2026-09-03
+25,departamental,Cundinamarca,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.0,2026-09-03
 25,departamental,Cundinamarca,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,33.33333333333333,2026-09-03
 25,departamental,Cundinamarca,,Salud,salud_idx,Salud,Índice 0-100,Calculo,20.575811471765228,2026-09-03
 25,departamental,Cundinamarca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,12,2026-09-03
+25,departamental,Cundinamarca,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.43352601156069365,2026-09-03
 25,departamental,Cundinamarca,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,4.636074082812316,2026-09-03
+25,departamental,Cundinamarca,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,1.75,2026-09-03
 25,departamental,Cundinamarca,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,61.32478632478633,2026-09-03
 25,departamental,Cundinamarca,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,32.98043020379932,2026-09-03
 25,departamental,Cundinamarca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,26,2026-09-03
+25,departamental,Cundinamarca,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.9393063583815028,2026-09-03
 25,departamental,Cundinamarca,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,6.005867927833245,2026-09-03
+25,departamental,Cundinamarca,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.1538461538461537,2026-09-03
 25,departamental,Cundinamarca,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,65.70512820512819,2026-09-03
 25,departamental,Cundinamarca,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,35.85549806648072,2026-09-03
 25,departamental,Cundinamarca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,15,2026-09-03
+25,departamental,Cundinamarca,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.541907514450867,2026-09-03
 25,departamental,Cundinamarca,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,3.158632197489861,2026-09-03
+25,departamental,Cundinamarca,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.5333333333333334,2026-09-03
 25,departamental,Cundinamarca,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,72.52252252252252,2026-09-03
 25,departamental,Cundinamarca,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,37.84057736000619,2026-09-03
 25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,37,2026-09-03
+25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,1.3367052023121386,2026-09-03
 25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,7.657237200890944,2026-09-03
+25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.1081081081081081,2026-09-03
 25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,24.86486486486487,2026-09-03
 25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,16.26105103287791,2026-09-03
 25,departamental,Cundinamarca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,28.702673626985877,2026-09-03
 05,departamental,Antioquia,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,17,2026-09-03
+05,departamental,Antioquia,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.2662907268170426,2026-09-03
 05,departamental,Antioquia,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,7.2035055587687165,2026-09-03
+05,departamental,Antioquia,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.0588235294117647,2026-09-03
 05,departamental,Antioquia,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,35.294117647058826,2026-09-03
 05,departamental,Antioquia,,Salud,salud_idx,Salud,Índice 0-100,Calculo,21.248811602913772,2026-09-03
 05,departamental,Antioquia,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,20,2026-09-03
+05,departamental,Antioquia,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.31328320802005016,2026-09-03
 05,departamental,Antioquia,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,3.3502122653572712,2026-09-03
+05,departamental,Antioquia,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,1.8,2026-09-03
 05,departamental,Antioquia,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,63.07692307692309,2026-09-03
 05,departamental,Antioquia,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,33.21356767114018,2026-09-03
 05,departamental,Antioquia,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,74,2026-09-03
+05,departamental,Antioquia,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,1.1591478696741855,2026-09-03
 05,departamental,Antioquia,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,7.4115212273107005,2026-09-03
+05,departamental,Antioquia,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.2162162162162162,2026-09-03
 05,departamental,Antioquia,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,69.25675675675676,2026-09-03
 05,departamental,Antioquia,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,38.33413899203373,2026-09-03
 05,departamental,Antioquia,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,28,2026-09-03
+05,departamental,Antioquia,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.43859649122807015,2026-09-03
 05,departamental,Antioquia,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,2.5564602113017347,2026-09-03
+05,departamental,Antioquia,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.5357142857142858,2026-09-03
 05,departamental,Antioquia,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,72.63513513513514,2026-09-03
 05,departamental,Antioquia,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,37.59579767321844,2026-09-03
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,60,2026-09-03
+05,departamental,Antioquia,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.9398496240601504,2026-09-03
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,4.988989518785902,2026-09-03
+05,departamental,Antioquia,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.05,2026-09-03
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,11.500000000000012,2026-09-03
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,8.244494759392957,2026-09-03
 05,departamental,Antioquia,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.727362139739817,2026-09-03
 68,departamental,Santander,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,1,2026-09-03
+68,departamental,Santander,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0851063829787234,2026-09-03
 68,departamental,Santander,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,2.3022367703218767,2026-09-03
+68,departamental,Santander,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,3.0,2026-09-03
 68,departamental,Santander,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,100.0,2026-09-03
 68,departamental,Santander,,Salud,salud_idx,Salud,Índice 0-100,Calculo,51.15111838516094,2026-09-03
 68,departamental,Santander,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,5,2026-09-03
+68,departamental,Santander,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.4255319148936171,2026-09-03
 68,departamental,Santander,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,4.550586191923578,2026-09-03
+68,departamental,Santander,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,1.0,2026-09-03
 68,departamental,Santander,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,35.042735042735046,2026-09-03
 68,departamental,Santander,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,19.796660617329312,2026-09-03
 68,departamental,Santander,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,5,2026-09-03
+68,departamental,Santander,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.4255319148936171,2026-09-03
 68,departamental,Santander,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,2.7208252740167636,2026-09-03
+68,departamental,Santander,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 68,departamental,Santander,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 68,departamental,Santander,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,29.832634859230602,2026-09-03
 68,departamental,Santander,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9,2026-09-03
+68,departamental,Santander,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.7659574468085107,2026-09-03
 68,departamental,Santander,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,4.464558598800989,2026-09-03
+68,departamental,Santander,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.3333333333333333,2026-09-03
 68,departamental,Santander,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,63.06306306306306,2026-09-03
 68,departamental,Santander,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,33.76381083093202,2026-09-03
 68,departamental,Santander,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,16,2026-09-03
+68,departamental,Santander,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,1.3617021276595744,2026-09-03
 68,departamental,Santander,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,7.825303348308678,2026-09-03
+68,departamental,Santander,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 68,departamental,Santander,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 68,departamental,Santander,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.912651674154339,2026-09-03
 68,departamental,Santander,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.691375273361444,2026-09-03
 41,departamental,Huila,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,2,2026-09-03
+41,departamental,Huila,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.20181634712411703,2026-09-03
 41,departamental,Huila,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,5.459390928613935,2026-09-03
+41,departamental,Huila,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,2.0,2026-09-03
 41,departamental,Huila,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,66.66666666666666,2026-09-03
 41,departamental,Huila,,Salud,salud_idx,Salud,Índice 0-100,Calculo,36.0630287976403,2026-09-03
 41,departamental,Huila,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,15,2026-09-03
+41,departamental,Huila,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,1.513622603430878,2026-09-03
 41,departamental,Huila,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,16.186494779546532,2026-09-03
+41,departamental,Huila,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,1.2,2026-09-03
 41,departamental,Huila,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,42.05128205128205,2026-09-03
 41,departamental,Huila,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,29.11888841541429,2026-09-03
 41,departamental,Huila,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,7,2026-09-03
+41,departamental,Huila,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.7063572149344097,2026-09-03
 41,departamental,Huila,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,4.5164052227624385,2026-09-03
+41,departamental,Huila,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 41,departamental,Huila,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 41,departamental,Huila,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,30.73042483360344,2026-09-03
 41,departamental,Huila,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,33,2026-09-03
+41,departamental,Huila,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,3.3299697275479314,2026-09-03
 41,departamental,Huila,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,19.40949205835949,2026-09-03
+41,departamental,Huila,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.2424242424242424,2026-09-03
 41,departamental,Huila,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,58.763308763308764,2026-09-03
 41,departamental,Huila,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,39.08640041083413,2026-09-03
 41,departamental,Huila,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3,2026-09-03
+41,departamental,Huila,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.3027245206861756,2026-09-03
 41,departamental,Huila,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,0.7052962221551974,2026-09-03
+41,departamental,Huila,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 41,departamental,Huila,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 41,departamental,Huila,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,0.3526481110775987,2026-09-03
 41,departamental,Huila,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.070278113713954,2026-09-03
 52,departamental,Nariño,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,2,2026-09-03
+52,departamental,Nariño,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.18570102135561747,2026-09-03
 52,departamental,Nariño,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,5.0234507059019595,2026-09-03
+52,departamental,Nariño,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,1.0,2026-09-03
 52,departamental,Nariño,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,33.33333333333333,2026-09-03
 52,departamental,Nariño,,Salud,salud_idx,Salud,Índice 0-100,Calculo,19.178392019617643,2026-09-03
 52,departamental,Nariño,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,9,2026-09-03
+52,departamental,Nariño,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.8356545961002786,2026-09-03
 52,departamental,Nariño,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,8.936387925643796,2026-09-03
+52,departamental,Nariño,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,1.2222222222222223,2026-09-03
 52,departamental,Nariño,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,42.83000949667617,2026-09-03
 52,departamental,Nariño,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,25.883198711159984,2026-09-03
 52,departamental,Nariño,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,19,2026-09-03
+52,departamental,Nariño,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,1.764159702878366,2026-09-03
 52,departamental,Nariño,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,11.2799302214344,2026-09-03
+52,departamental,Nariño,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 52,departamental,Nariño,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 52,departamental,Nariño,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,34.11218733293942,2026-09-03
 52,departamental,Nariño,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,5,2026-09-03
+52,departamental,Nariño,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.4642525533890437,2026-09-03
 52,departamental,Nariño,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,2.7060024520742605,2026-09-03
+52,departamental,Nariño,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.0,2026-09-03
 52,departamental,Nariño,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,47.2972972972973,2026-09-03
 52,departamental,Nariño,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,25.00164987468578,2026-09-03
 52,departamental,Nariño,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,12,2026-09-03
+52,departamental,Nariño,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,1.1142061281337048,2026-09-03
 52,departamental,Nariño,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,6.161270729757817,2026-09-03
+52,departamental,Nariño,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 52,departamental,Nariño,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 52,departamental,Nariño,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.0806353648789084,2026-09-03
 52,departamental,Nariño,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,21.451212660656346,2026-09-03
 54,departamental,Norte de Santander,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+54,departamental,Norte de Santander,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+54,departamental,Norte de Santander,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,3,2026-09-03
+54,departamental,Norte de Santander,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.2967359050445104,2026-09-03
 54,departamental,Norte de Santander,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,3.1732574335372132,2026-09-03
+54,departamental,Norte de Santander,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,1.0,2026-09-03
 54,departamental,Norte de Santander,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,35.042735042735046,2026-09-03
 54,departamental,Norte de Santander,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,19.10799623813613,2026-09-03
 54,departamental,Norte de Santander,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1,2026-09-03
+54,departamental,Norte de Santander,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.09891196834817012,2026-09-03
 54,departamental,Norte de Santander,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,0.6324371309534514,2026-09-03
+54,departamental,Norte de Santander,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 54,departamental,Norte de Santander,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 54,departamental,Norte de Santander,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,28.788440787698946,2026-09-03
 54,departamental,Norte de Santander,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,3,2026-09-03
+54,departamental,Norte de Santander,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.2967359050445104,2026-09-03
 54,departamental,Norte de Santander,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,1.7295932586848535,2026-09-03
+54,departamental,Norte de Santander,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,1.0,2026-09-03
 54,departamental,Norte de Santander,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,47.2972972972973,2026-09-03
 54,departamental,Norte de Santander,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,24.513445277991075,2026-09-03
 54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2,2026-09-03
+54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.19782393669634024,2026-09-03
 54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
+54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,0.0,2026-09-03
 54,departamental,Norte de Santander,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,14.48197646076523,2026-09-03
 70,departamental,Sucre,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+70,departamental,Sucre,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+70,departamental,Sucre,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,2,2026-09-03
+70,departamental,Sucre,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.56657223796034,2026-09-03
 70,departamental,Sucre,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,6.058854136555472,2026-09-03
+70,departamental,Sucre,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,1.0,2026-09-03
 70,departamental,Sucre,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,35.042735042735046,2026-09-03
 70,departamental,Sucre,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,20.55079458964526,2026-09-03
 70,departamental,Sucre,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1,2026-09-03
+70,departamental,Sucre,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.28328611898017,2026-09-03
 70,departamental,Sucre,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,1.811314275903511,2026-09-03
+70,departamental,Sucre,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 70,departamental,Sucre,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 70,departamental,Sucre,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,29.377879360173978,2026-09-03
 70,departamental,Sucre,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+70,departamental,Sucre,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+70,departamental,Sucre,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3,2026-09-03
+70,departamental,Sucre,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.8498583569405099,2026-09-03
 70,departamental,Sucre,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,4.383935682931263,2026-09-03
+70,departamental,Sucre,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 70,departamental,Sucre,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 70,departamental,Sucre,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.1919678414656314,2026-09-03
 70,departamental,Sucre,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,10.424128358256974,2026-09-03
 08,departamental,Atlántico,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+08,departamental,Atlántico,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+08,departamental,Atlántico,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+08,departamental,Atlántico,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+08,departamental,Atlántico,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,8,2026-09-03
+08,departamental,Atlántico,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.6153846153846154,2026-09-03
 08,departamental,Atlántico,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,3.9347319347319347,2026-09-03
+08,departamental,Atlántico,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 08,departamental,Atlántico,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 08,departamental,Atlántico,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,30.43958818958819,2026-09-03
 08,departamental,Atlántico,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+08,departamental,Atlántico,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+08,departamental,Atlántico,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,15,2026-09-03
+08,departamental,Atlántico,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,1.1538461538461537,2026-09-03
 08,departamental,Atlántico,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,6.427789364047157,2026-09-03
+08,departamental,Atlántico,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 08,departamental,Atlántico,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 08,departamental,Atlántico,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.2138946820235783,2026-09-03
 08,departamental,Atlántico,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.730696574322353,2026-09-03
 13,departamental,Bolívar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+13,departamental,Bolívar,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+13,departamental,Bolívar,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+13,departamental,Bolívar,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+13,departamental,Bolívar,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,5,2026-09-03
+13,departamental,Bolívar,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.4314063848144953,2026-09-03
 13,departamental,Bolívar,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,2.7583862786623787,2026-09-03
+13,departamental,Bolívar,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 13,departamental,Bolívar,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 13,departamental,Bolívar,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,29.85141536155341,2026-09-03
 13,departamental,Bolívar,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+13,departamental,Bolívar,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+13,departamental,Bolívar,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,14,2026-09-03
+13,departamental,Bolívar,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,1.2079378774805867,2026-09-03
 13,departamental,Bolívar,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,6.791473596090378,2026-09-03
+13,departamental,Bolívar,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 13,departamental,Bolívar,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 13,departamental,Bolívar,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.395736798045189,2026-09-03
 13,departamental,Bolívar,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.64943043191972,2026-09-03
 11,departamental,Bogotá D.C.,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+11,departamental,Bogotá D.C.,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+11,departamental,Bogotá D.C.,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+11,departamental,Bogotá D.C.,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+11,departamental,Bogotá D.C.,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,30,2026-09-03
+11,departamental,Bogotá D.C.,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.379746835443038,2026-09-03
 11,departamental,Bogotá D.C.,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,2.428078250863061,2026-09-03
+11,departamental,Bogotá D.C.,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 11,departamental,Bogotá D.C.,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 11,departamental,Bogotá D.C.,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,29.68626134765375,2026-09-03
 11,departamental,Bogotá D.C.,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+11,departamental,Bogotá D.C.,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+11,departamental,Bogotá D.C.,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,96,2026-09-03
+11,departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,1.2151898734177216,2026-09-03
 11,departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,6.840232193449965,2026-09-03
+11,departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 11,departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 11,departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.4201160967249824,2026-09-03
 11,departamental,Bogotá D.C.,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.621275488875748,2026-09-03
 44,departamental,La Guajira,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+44,departamental,La Guajira,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+44,departamental,La Guajira,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+44,departamental,La Guajira,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+44,departamental,La Guajira,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1,2026-09-03
+44,departamental,La Guajira,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.4716981132075472,2026-09-03
 44,departamental,La Guajira,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,3.0160091480846196,2026-09-03
+44,departamental,La Guajira,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 44,departamental,La Guajira,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 44,departamental,La Guajira,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,29.98022679626453,2026-09-03
 44,departamental,La Guajira,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+44,departamental,La Guajira,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+44,departamental,La Guajira,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2,2026-09-03
+44,departamental,La Guajira,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.9433962264150944,2026-09-03
 44,departamental,La Guajira,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,5.01283500321782,2026-09-03
+44,departamental,La Guajira,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 44,departamental,La Guajira,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 44,departamental,La Guajira,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.50641750160891,2026-09-03
 44,departamental,La Guajira,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.497328859574688,2026-09-03
 20,departamental,Cesar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+20,departamental,Cesar,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+20,departamental,Cesar,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+20,departamental,Cesar,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+20,departamental,Cesar,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1,2026-09-03
+20,departamental,Cesar,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.13831258644536654,2026-09-03
 20,departamental,Cesar,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,0.884362295150677,2026-09-03
+20,departamental,Cesar,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 20,departamental,Cesar,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 20,departamental,Cesar,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,28.91440336979756,2026-09-03
 20,departamental,Cesar,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+20,departamental,Cesar,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+20,departamental,Cesar,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,7,2026-09-03
+20,departamental,Cesar,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.9681881051175656,2026-09-03
 20,departamental,Cesar,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,5.179522525097367,2026-09-03
+20,departamental,Cesar,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 20,departamental,Cesar,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 20,departamental,Cesar,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.5897612625486834,2026-09-03
 20,departamental,Cesar,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.3008329264692495,2026-09-03
 50,departamental,Meta,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+50,departamental,Meta,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+50,departamental,Meta,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+50,departamental,Meta,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+50,departamental,Meta,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1,2026-09-03
+50,departamental,Meta,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.12987012987012986,2026-09-03
 50,departamental,Meta,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,0.8303817394726484,2026-09-03
+50,departamental,Meta,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 50,departamental,Meta,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 50,departamental,Meta,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,28.887413091958546,2026-09-03
 50,departamental,Meta,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+50,departamental,Meta,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+50,departamental,Meta,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,6,2026-09-03
+50,departamental,Meta,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.7792207792207791,2026-09-03
 50,departamental,Meta,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,3.909005851151225,2026-09-03
+50,departamental,Meta,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 50,departamental,Meta,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 50,departamental,Meta,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,1.9545029255756126,2026-09-03
 50,departamental,Meta,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.168383203506832,2026-09-03
 23,departamental,Córdoba,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+23,departamental,Córdoba,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+23,departamental,Córdoba,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+23,departamental,Córdoba,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+23,departamental,Córdoba,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1,2026-09-03
+23,departamental,Córdoba,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.17094017094017094,2026-09-03
 23,departamental,Córdoba,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,1.092981092981093,2026-09-03
+23,departamental,Córdoba,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,1.0,2026-09-03
 23,departamental,Córdoba,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,56.94444444444444,2026-09-03
 23,departamental,Córdoba,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,29.018712768712767,2026-09-03
 23,departamental,Córdoba,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+23,departamental,Córdoba,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+23,departamental,Córdoba,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3,2026-09-03
+23,departamental,Córdoba,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.5128205128205128,2026-09-03
 23,departamental,Córdoba,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,2.1178709086474514,2026-09-03
+23,departamental,Córdoba,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 23,departamental,Córdoba,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 23,departamental,Córdoba,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,1.0589354543237257,2026-09-03
 23,departamental,Córdoba,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.015529644607299,2026-09-03
 86,departamental,Putumayo,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+86,departamental,Putumayo,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+86,departamental,Putumayo,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+86,departamental,Putumayo,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+86,departamental,Putumayo,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0,2026-09-03
+86,departamental,Putumayo,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,0.0,2026-09-03
+86,departamental,Putumayo,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+86,departamental,Putumayo,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+86,departamental,Putumayo,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2,2026-09-03
+86,departamental,Putumayo,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,2.9411764705882355,2026-09-03
 86,departamental,Putumayo,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,18.44485611616163,2026-09-03
+86,departamental,Putumayo,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 86,departamental,Putumayo,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 86,departamental,Putumayo,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,9.222428058080816,2026-09-03
 86,departamental,Putumayo,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,1.8444856116161632,2026-09-03
 18,departamental,Caquetá,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+18,departamental,Caquetá,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+18,departamental,Caquetá,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+18,departamental,Caquetá,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+18,departamental,Caquetá,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0,2026-09-03
+18,departamental,Caquetá,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,0.0,2026-09-03
+18,departamental,Caquetá,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+18,departamental,Caquetá,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+18,departamental,Caquetá,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2,2026-09-03
+18,departamental,Caquetá,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,1.0582010582010581,2026-09-03
 18,departamental,Caquetá,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,5.7847221659398995,2026-09-03
+18,departamental,Caquetá,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 18,departamental,Caquetá,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 18,departamental,Caquetá,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.8923610829699498,2026-09-03
 18,departamental,Caquetá,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,0.57847221659399,2026-09-03
 47,departamental,Magdalena,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+47,departamental,Magdalena,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+47,departamental,Magdalena,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+47,departamental,Magdalena,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+47,departamental,Magdalena,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0,2026-09-03
+47,departamental,Magdalena,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,0.0,2026-09-03
+47,departamental,Magdalena,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+47,departamental,Magdalena,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+47,departamental,Magdalena,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3,2026-09-03
+47,departamental,Magdalena,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.5093378607809848,2026-09-03
 47,departamental,Magdalena,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,2.094455392421172,2026-09-03
+47,departamental,Magdalena,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 47,departamental,Magdalena,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 47,departamental,Magdalena,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,1.047227696210586,2026-09-03
 47,departamental,Magdalena,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,0.2094455392421172,2026-09-03
 15,departamental,Boyacá,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-03
+15,departamental,Boyacá,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-03
+15,departamental,Boyacá,,Salud,salud_severidad_promedio,Severidad promedio cruda (Salud),Peso promedio,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Salud,salud_severidad_idx,Severidad promedio (Salud),Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Salud,salud_idx,Salud,Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-03
+15,departamental,Boyacá,,Vivienda,vivienda_incidencia_tasa_100k,Tasa de incidencia (Vivienda),Tasa x100k hab.,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Vivienda,vivienda_incidencia_idx,Incidencia (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
+15,departamental,Boyacá,,Vivienda,vivienda_severidad_promedio,Severidad promedio cruda (Vivienda),Peso promedio,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Vivienda,vivienda_severidad_idx,Severidad promedio (Vivienda),Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Vivienda,vivienda_idx,Vivienda,Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0,2026-09-03
+15,departamental,Boyacá,,Instituciones,instituciones_incidencia_tasa_100k,Tasa de incidencia (Instituciones),Tasa x100k hab.,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Instituciones,instituciones_incidencia_idx,Incidencia (Instituciones),Índice 0-100,Calculo,0.0,2026-09-03
+15,departamental,Boyacá,,Instituciones,instituciones_severidad_promedio,Severidad promedio cruda (Instituciones),Peso promedio,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Instituciones,instituciones_severidad_idx,Severidad promedio (Instituciones),Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Instituciones,instituciones_idx,Instituciones,Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0,2026-09-03
+15,departamental,Boyacá,,Educación,educacion_incidencia_tasa_100k,Tasa de incidencia (Educación),Tasa x100k hab.,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Educación,educacion_incidencia_idx,Incidencia (Educación),Índice 0-100,Calculo,0.0,2026-09-03
+15,departamental,Boyacá,,Educación,educacion_severidad_promedio,Severidad promedio cruda (Educación),Peso promedio,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Educación,educacion_severidad_idx,Severidad promedio (Educación),Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Educación,educacion_idx,Educación,Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,1,2026-09-03
+15,departamental,Boyacá,,Productividad (proxy),econ_proxy_incidencia_tasa_100k,Tasa de incidencia (Productividad (proxy)),Tasa x100k hab.,Calculo,0.4016064257028113,2026-09-03
 15,departamental,Boyacá,,Productividad (proxy),econ_proxy_incidencia_idx,Incidencia (Productividad (proxy)),Índice 0-100,Calculo,1.3701260199997924,2026-09-03
+15,departamental,Boyacá,,Productividad (proxy),econ_proxy_severidad_promedio,Severidad promedio cruda (Productividad (proxy)),Peso promedio,Calculo,1.0,2026-09-03
 15,departamental,Boyacá,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-03
 15,departamental,Boyacá,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,0.6850630099998962,2026-09-03
 15,departamental,Boyacá,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,0.13701260199997925,2026-09-03

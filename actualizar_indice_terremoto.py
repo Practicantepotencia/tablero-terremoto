@@ -41,6 +41,15 @@ URL_POR_DEFECTO = "https://www.mapadelterremoto.com/datos/registro.json"
 MUNICIPIOS_POBLACION_CSV = "data/municipios_afectados_terremoto_colombia_ago2026.csv"
 RESUMEN_UNGRD_JSON = "data/resumen_ungrd_ago2026.json"
 
+# Fase 2: historial acumulado (una fila por departamento por corrida, nunca
+# se sobrescribe) para poder calcular "subió/bajó X posiciones desde la
+# última corrida" en la pestaña "Por dimensión". Vive junto a los demás
+# archivos que el workflow genera y comitea (index.html,
+# indice_impacto_departamento.csv), no en data/ -- ese es solo para fuentes
+# externas que subes tú a mano (ver data/README.md), esto lo escribe el
+# propio script en cada corrida.
+HISTORIAL_CSV_POR_DEFECTO = "historial_indice.csv"
+
 # Nivel de gravedad oficial (municipal) -> punto en la misma rampa 0-100 que
 # ya usan las celdas del heatmap departamental (ver RAMP/cell_color), para
 # que ambas pestañas compartan el mismo lenguaje visual de color.
@@ -200,6 +209,55 @@ def load_resumen_meta(json_path):
         return None
 
 
+def load_historial_previo(path):
+    """Fase 2: lee historial_indice.csv (una fila por departamento por
+    corrida, ver append_historial) y devuelve (fecha, snapshot) de la
+    corrida MÁS RECIENTE ya guardada -- es decir, la que compararemos
+    contra la corrida actual para calcular cambios de posición. Devuelve
+    (None, {}) si no hay historial todavía (primera corrida)."""
+    if not path or not os.path.exists(path):
+        return None, {}
+    filas_por_fecha = defaultdict(dict)
+    with open(path, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            fecha = row.get("fecha")
+            dep = row.get("departamento")
+            if not fecha or not dep:
+                continue
+            try:
+                entry = {"indice_compuesto": float(row["indice_compuesto"])}
+                for d in DIMS:
+                    entry[d] = float(row[f"{d}_idx"])
+            except (KeyError, ValueError):
+                continue
+            filas_por_fecha[fecha][dep] = entry
+    if not filas_por_fecha:
+        return None, {}
+    fecha_mas_reciente = max(filas_por_fecha)
+    return fecha_mas_reciente, filas_por_fecha[fecha_mas_reciente]
+
+
+def append_historial(rows, fecha, path):
+    """Agrega una fila por departamento de la corrida actual -- nunca
+    sobrescribe, así el próximo load_historial_previo() puede comparar
+    contra esta. fecha identifica la corrida (no el snapshot de la fuente:
+    dos corridas con la misma fuente sin cambios also cuentan como 'sin
+    cambio desde la última vez', que es una señal válida, no ruido)."""
+    if not path:
+        return
+    fieldnames = ["fecha", "departamento", "indice_compuesto"] + [f"{d}_idx" for d in DIMS]
+    ya_existe = os.path.exists(path)
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames)
+        if not ya_existe:
+            w.writeheader()
+        for r in rows:
+            out = {"fecha": fecha, "departamento": r["departamento"], "indice_compuesto": r["indice_compuesto"]}
+            for d in DIMS:
+                out[f"{d}_idx"] = r[f"{d}_idx"]
+            w.writerow(out)
+
+
 def _normalizar_0_100(valores_por_dep, departamentos, dep_pop):
     """Min-máx 0-100 entre los departamentos con población > 0. Factorizado
     para poder aplicarla por separado a cada sub-indicador de la Fase 1
@@ -307,7 +365,8 @@ def fmt_fecha_es(dt):
     return f"{dt.day} de {MESES_ES[dt.month]} de {dt.year}, {dt.strftime('%H:%M')} UTC"
 
 
-def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_meta=None):
+def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_meta=None,
+                historial_previo=None, fecha_historial_previo=None):
     snapshot_iso = meta.get("actualizado_snapshot", "")
     try:
         snap_dt = datetime.fromisoformat(snapshot_iso.replace("Z", "+00:00"))
@@ -347,8 +406,95 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     legend_stops = "".join(f'<div class="legend-stop" style="background:{cell_color(v)}"></div>' for v in range(0, 101, 4))
     refresh_tag = f'<meta http-equiv="refresh" content="{autorefresh_seconds}">' if autorefresh_seconds else ""
 
+    # --- Pestaña "Por dimensión" (Fase 2: resultados por pilar, siempre
+    # disponible -- solo depende de `rows`, no de fuentes externas) ---
+    # Desempate alfabético explícito: sin esto, empates (comunes en 0.0,
+    # cuando muchos departamentos no tienen puntos en una dimensión) se
+    # ordenan por la posición en `rows`, que cambia de corrida en corrida
+    # -- generaría flechas de cambio de posición falsas entre empates
+    # idénticos.
+    def rank_dim(d):
+        return sorted(rows, key=lambda r: (-r[f"{d}_idx"], r["departamento"]))
+
+    dim_blocks = []
+    for d in DIMS:
+        ranked = rank_dim(d)
+        rank_actual = {r["departamento"]: i + 1 for i, r in enumerate(ranked)}
+        rank_previo = {}
+        if historial_previo:
+            prev_vals = {dep: entry[d] for dep, entry in historial_previo.items() if d in entry}
+            prev_ranked = sorted(prev_vals, key=lambda dep: (-prev_vals[dep], dep))
+            rank_previo = {dep: i + 1 for i, dep in enumerate(prev_ranked)}
+
+        bar_rows = []
+        deltas = []
+        for r in ranked:
+            dep = r["departamento"]
+            v = r[f"{d}_idx"]
+            ra = rank_actual[dep]
+            rp = rank_previo.get(dep)
+            if rp is None:
+                delta_html = '<span class="rank-delta new" title="Sin dato previo para comparar">nuevo</span>'
+            else:
+                delta = rp - ra
+                if delta != 0:
+                    deltas.append((dep, delta))
+                if delta > 0:
+                    delta_html = f'<span class="rank-delta up" title="Subió {delta} posición(es) desde {fecha_historial_previo}">▲ {delta}</span>'
+                elif delta < 0:
+                    delta_html = f'<span class="rank-delta down" title="Bajó {abs(delta)} posición(es) desde {fecha_historial_previo}">▼ {abs(delta)}</span>'
+                else:
+                    delta_html = '<span class="rank-delta same" title="Sin cambio de posición">—</span>'
+            w = max(2, round(v))
+            bar_rows.append(f"""
+              <div class="rank-row">
+                <span class="rank-pos">{ra}</span>
+                <span class="rank-dep">{dep}</span>
+                <div class="rank-track"><div class="rank-fill" style="width:{w}%;background:{cell_color(v)}"></div></div>
+                <span class="rank-val">{v:.1f}</span>
+                {delta_html}
+              </div>""")
+
+        lider, colero = ranked[0], ranked[-1]
+        if deltas:
+            dep_mov, delta_mov = max(deltas, key=lambda x: abs(x[1]))
+            fila_mov = next(r for r in rows if r["departamento"] == dep_mov)
+            atribucion = "incidencia" if fila_mov[f"{d}_incidencia_idx"] >= fila_mov[f"{d}_severidad_idx"] else "severidad promedio"
+            texto_mov = (f"El que más se movió fue <b>{dep_mov}</b>: "
+                         f"{'subió' if delta_mov > 0 else 'bajó'} {abs(delta_mov)} posición(es) desde la corrida anterior "
+                         f"(hoy pesa más su {atribucion}).")
+        elif historial_previo:
+            texto_mov = "Ningún departamento cambió de posición desde la corrida anterior."
+        else:
+            texto_mov = "Todavía no hay una corrida previa con la que comparar -- este historial arranca aquí."
+
+        narrativa = (f"Lidera <b>{lider['departamento']}</b> ({lider[f'{d}_idx']:.1f}/100); "
+                     f"menos crítico, <b>{colero['departamento']}</b> ({colero[f'{d}_idx']:.1f}/100). {texto_mov}")
+
+        dim_blocks.append(f"""
+        <div class="dim-block">
+          <h3>{DIM_LABELS[d]}</h3>
+          <p class="note">{narrativa}</p>
+          <div class="rank-list">{''.join(bar_rows)}
+          </div>
+        </div>""")
+
+    fecha_prev_label = (
+        f" comparado contra la corrida del {fecha_historial_previo}." if fecha_historial_previo
+        else " esta es la primera corrida con historial -- sin comparación todavía."
+    )
+    tab_dim_html = f"""
+  <div id="tab-dimension" class="tab-panel" hidden>
+    <header class="hero">
+      <div class="kicker">Resultados por dimensión · Fase 2</div>
+      <h1>Cada dimensión, departamento por departamento</h1>
+      <p class="subtitle">Los 25 departamentos ordenados de peor a mejor en cada una de las 5 dimensiones, con el cambio de posición desde la corrida anterior --{fecha_prev_label}</p>
+    </header>
+    <section>{''.join(dim_blocks)}
+    </section>
+  </div>"""
+
     # --- Pestaña municipal (opcional: solo si hay data/municipios_...csv) ---
-    tab_nav_html = ""
     tab_municipal_html = ""
     if municipios:
         por_dep = defaultdict(list)
@@ -437,12 +583,6 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     </div>
     <p class="note">{resumen_meta.get('nota_listado', '')}</p>"""
 
-        tab_nav_html = """
-  <div class="tab-nav" role="tablist">
-    <button class="tab-btn active" data-tab="departamental" role="tab" aria-selected="true">Vista departamental</button>
-    <button class="tab-btn" data-tab="municipal" role="tab" aria-selected="false">Vista municipal ({n} municipios)</button>
-  </div>""".replace("{n}", str(len(municipios)))
-
         tab_municipal_html = f"""
   <div id="tab-municipal" class="tab-panel" hidden>
     <header class="hero">
@@ -461,6 +601,16 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
       <p class="note" style="font-size:12px;margin-top:8px;">*Población aproximada del municipio (DANE). Fuente: data/municipios_afectados_terremoto_colombia_ago2026.csv — ver data/README.md.</p>
     </section>
   </div>"""
+
+    # --- Nav de pestañas: se arma según qué paneles existan realmente.
+    # "departamental" y "dimensión" siempre están; "municipal" es opcional. ---
+    tab_defs = [("departamental", "Vista departamental"), ("dimension", "Por dimensión")]
+    if municipios:
+        tab_defs.append(("municipal", f"Vista municipal ({len(municipios)} municipios)"))
+    tab_nav_html = '\n  <div class="tab-nav" role="tablist">\n' + "\n".join(
+        f'    <button class="tab-btn{" active" if i == 0 else ""}" data-tab="{key}" role="tab" aria-selected="{"true" if i == 0 else "false"}">{label}</button>'
+        for i, (key, label) in enumerate(tab_defs)
+    ) + "\n  </div>"
 
     html = f"""<!doctype html>
 <html lang="es">
@@ -550,6 +700,22 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
   table.muni td.num.muted {{ color: var(--muted); }}
   table.muni td.nota {{ color: var(--muted); font-size: 12px; max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
   .sev-badge {{ display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }}
+  .dim-block {{ background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 18px 20px 8px; margin-bottom: 16px; }}
+  .dim-block h3 {{ margin: 0 0 6px; font-size: 16px; }}
+  .rank-list {{ display: flex; flex-direction: column; }}
+  .rank-row {{ display: flex; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px solid var(--border); font-size: 12.8px; }}
+  .rank-row:first-child {{ border-top: none; }}
+  .rank-pos {{ flex: none; width: 20px; text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 11.5px; }}
+  .rank-dep {{ flex: none; width: 148px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
+  .rank-track {{ flex: 1 1 auto; height: 10px; border-radius: 5px; background: var(--surface-2); overflow: hidden; }}
+  .rank-fill {{ height: 100%; }}
+  .rank-val {{ flex: none; width: 38px; text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }}
+  .rank-delta {{ flex: none; width: 46px; text-align: right; font-weight: 600; font-size: 11.5px; white-space: nowrap; }}
+  .rank-delta.up {{ color: var(--warn); }}
+  .rank-delta.down {{ color: var(--ok); }}
+  .rank-delta.same {{ color: var(--muted); font-weight: 400; }}
+  .rank-delta.new {{ color: var(--muted); font-weight: 400; font-size: 10.5px; }}
+  @media (max-width: 640px) {{ .rank-dep {{ width: 92px; }} }}
   footer {{ margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12.5px; display: flex; flex-direction: column; gap: 4px; }}
   a {{ color: var(--accent); }}
 </style>
@@ -623,6 +789,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     </details>
   </section>
   </div>
+  {tab_dim_html}
   {tab_municipal_html}
   <footer>
     <span>Fuente: <span class="mono">registro.json</span> de <a href="https://mapadelterremoto.com" target="_blank" rel="noopener">mapadelterremoto.com</a>, un agregador de prensa — no un censo oficial de campo.</span>
@@ -655,6 +822,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
   if (!btns.length) return;
   var panels = {{
     departamental: document.getElementById("tab-departamental"),
+    dimension: document.getElementById("tab-dimension"),
     municipal: document.getElementById("tab-municipal"),
   }};
   btns.forEach(function(btn) {{
@@ -684,6 +852,7 @@ def main():
     ap.add_argument("--csv", default="indice_impacto_departamento.csv", help="Ruta del CSV del índice (para Excel/Power BI/lo que sea)")
     ap.add_argument("--poblacion", default=None, help=f"CSV externo de población por departamento o por municipio (opcional; por defecto usa {MUNICIPIOS_POBLACION_CSV} si existe, si no la tabla embebida). Pasa '' vacío para forzar la tabla embebida.")
     ap.add_argument("--sin-autorefresh", action="store_true", help="No agregar la etiqueta de autorrecarga cada 4h al HTML")
+    ap.add_argument("--historial", default=HISTORIAL_CSV_POR_DEFECTO, help="CSV donde se acumula el historial para la pestaña 'Por dimensión' (una fila por departamento por corrida, nunca se sobrescribe). Pasa '' vacío para desactivar el historial.")
     args = ap.parse_args()
 
     print(f"[{datetime.now().isoformat(timespec='seconds')}] Descargando/leyendo: {args.url}")
@@ -711,13 +880,25 @@ def main():
     if municipios:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Vista municipal: {len(municipios)} municipios cargados de {MUNICIPIOS_POBLACION_CSV}")
 
+    historial_path = args.historial or None
+    fecha_historial_previo, historial_previo = load_historial_previo(historial_path)
+    if historial_previo:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Historial: comparando contra la corrida del {fecha_historial_previo} ({len(historial_previo)} departamentos)")
+    elif historial_path:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Historial: sin corridas previas todavía, arranca en {historial_path}")
+
     write_indice_csv(rows, args.csv)
     html = build_html(
         rows, meta, autorefresh_seconds=0 if args.sin_autorefresh else 14400,
         municipios=municipios, resumen_meta=resumen_meta,
+        historial_previo=historial_previo, fecha_historial_previo=fecha_historial_previo,
     )
     with open(args.out, "w", encoding="utf-8") as f:
         f.write(html)
+
+    if historial_path:
+        run_fecha = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        append_historial(rows, run_fecha, historial_path)
 
     print(f"[{datetime.now().isoformat(timespec='seconds')}] OK -> {args.out} ({len(html)/1024:.1f} KB) y {args.csv} — {json.dumps(meta, ensure_ascii=False)}")
 

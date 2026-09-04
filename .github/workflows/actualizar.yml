@@ -25,48 +25,6 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
-      - name: DIAGNÓSTICO TEMPORAL 4 -- ¿hay filas municipales en Datos_Territoriales?
-        run: |
-          python3 - <<'EOF'
-          import csv, io, urllib.request
-          from collections import Counter
-
-          def get_csv(hoja):
-              sheet_id = "1fQ-LTlIEljzOKvW23epwevJeWLWORi88xL7XxkpTMzY"
-              url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={hoja}"
-              req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-              with urllib.request.urlopen(req, timeout=30) as resp:
-                  raw = resp.read().decode("utf-8-sig")
-              return list(csv.DictReader(io.StringIO(raw)))
-
-          print("=== Datos_Territoriales: valores únicos de Nivel ===")
-          filas = get_csv("Datos_Territoriales")
-          c = Counter(r.get("Nivel") for r in filas)
-          for nivel, n in c.most_common():
-              print(f"  {nivel!r}: {n} filas")
-          munic = [r for r in filas if r.get("Nivel") == "Municipio"]
-          print(f"\n  filas con Nivel=Municipio: {len(munic)}")
-          if munic:
-              print("  ejemplo:", munic[0])
-              deps_con_municipios = sorted(set(r["Departamento"] for r in munic))
-              print("  departamentos con desglose municipal:", deps_con_municipios)
-
-          print()
-          print("=== Tendencias: valores únicos de Nivel (referencia) ===")
-          filas_t = get_csv("Tendencias")
-          c2 = Counter(r.get("Nivel") for r in filas_t)
-          for nivel, n in c2.most_common():
-              print(f"  {nivel!r}: {n} filas")
-          munic_t = [r for r in filas_t if r.get("Nivel") == "Municipio"]
-          if munic_t:
-              cortes = sorted(set(r["Reporte"] for r in munic_t))
-              deps_t = sorted(set(r["Departamento"] for r in munic_t))
-              print(f"  cortes distintos con datos municipales: {cortes}")
-              print(f"  departamentos con municipios en Tendencias: {deps_t}")
-              print(f"  municipios totales (todas las filas): {len(munic_t)}")
-              print("  ejemplo:", munic_t[0])
-          EOF
-
       - name: Generar tablero e índice
         run: python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
 

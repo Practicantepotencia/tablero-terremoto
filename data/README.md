@@ -78,6 +78,18 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
   **Superado por `indicadores_largo_no_calculo.csv`** (ver abajo) -- se
   deja aquí solo como referencia histórica de ese momento puntual, ya no
   hace falta actualizarlo a mano.
+- **`sedes_educativas_afectadas_choco_ago2026.csv`** — detalle por sede
+  educativa (código DANE, severidad 1/2/3, matrícula, docentes,
+  organizaciones aliadas) que Daniel encontró y descargó de
+  `fundacionexe.org.co/unmillonderazones` -- ese sitio bloquea cualquier
+  intento de scraping automático con un reto de Cloudflare (ver
+  `docs/investigacion_fundacion_exito.md`), así que este **es** un
+  snapshot manual, sin forma de automatizar su actualización. Separado
+  por `;` con BOM (export de Excel en español), a diferencia del resto
+  de `data/` que usa `,` -- `load_sedes_educativas_afectadas()` lo lee
+  con `delimiter=";"` y lo agrega por municipio (`fuente=FundacionExito`)
+  para `indicadores_largo.csv`; el detalle por sede solo vive en este CSV.
+  303 sedes, 300 en Chocó (30 municipios), 63.863 estudiantes matriculados.
 
 ## Salidas automáticas (no van en esta carpeta)
 

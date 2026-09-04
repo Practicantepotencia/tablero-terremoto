@@ -48,6 +48,16 @@ RESUMEN_UNGRD_JSON = "data/resumen_ungrd_ago2026.json"
 # departamentos, ver data/README.md.
 CAMARAS_COMERCIO_CSV = "data/camaras_comercio_empresarios_afectados_ago2026.csv"
 
+# Sedes educativas afectadas (encontrado por Daniel al intentar acceder a
+# fundacionexe.org.co/unmillonderazones -- ese sitio bloquea cualquier
+# scraping automático con un reto de Cloudflare, ver docs/investigacion_
+# fundacion_exito.md, así que este SÍ es un snapshot manual, no se puede
+# automatizar la descarga). Detalle por sede (código DANE, severidad
+# 1/2/3, matrícula, docentes, organizaciones aliadas) -- solo entra al
+# inventario crudo AGREGADO por municipio (fuente=FundacionExito), el
+# detalle por sede se conserva tal cual en el CSV para consulta manual.
+SEDES_EDUCATIVAS_CSV = "data/sedes_educativas_afectadas_choco_ago2026.csv"
+
 # Hoja "Datos_Territoriales" del Google Sheets público que alimenta el
 # dashboard 3iS (ver docs/investigacion_3is.md) -- cifras OFICIALES
 # consolidadas por departamento y por corte de tiempo (fallecidos, heridos,
@@ -354,6 +364,39 @@ def load_3is_datos_territoriales(url=SHEETS_3IS_DATOS_TERRITORIALES_URL):
     return corte_dep, resultado_dep, corte_mun, resultado_mun
 
 
+def load_sedes_educativas_afectadas(csv_path):
+    """Lee el detalle por sede educativa (código DANE, severidad 1/2/3,
+    matrícula, docentes...) y lo agrega por (departamento, municipio) --
+    solo materia prima para el inventario de formato largo
+    (fuente=FundacionExito), NO se usa para recalcular ninguna dimensión
+    del índice todavía. Archivo separado por ';' con BOM (export de Excel
+    en español), a diferencia del resto de data/ que usa ','. Devuelve {}
+    si el archivo no existe."""
+    if not csv_path or not os.path.exists(csv_path):
+        return {}
+    por_mun = defaultdict(lambda: {"n_sedes": 0, "n_sedes_criticas": 0, "matricula_afectada": 0, "docentes_afectados": 0})
+    with open(csv_path, encoding="utf-8-sig") as f:
+        for row in csv.DictReader(f, delimiter=";"):
+            dep = (row.get("Departamento") or "").strip()
+            mun = (row.get("Municipio") or "").strip()
+            if not dep or not mun:
+                continue
+            clave = (dep, mun)
+            agg = por_mun[clave]
+            agg["n_sedes"] += 1
+            if (row.get("Severidad") or "").strip() == "3":
+                agg["n_sedes_criticas"] += 1
+            try:
+                agg["matricula_afectada"] += int(float(row.get("Matrícula total") or 0))
+            except ValueError:
+                pass
+            try:
+                agg["docentes_afectados"] += int(float(row.get("Docentes") or 0))
+            except ValueError:
+                pass
+    return dict(por_mun)
+
+
 def load_empresarios_afectados(csv_path):
     """Suma empresarios_afectados por departamento desde el CSV de Cámaras
     de Comercio (rama 'economica'). Solo materia prima para el inventario
@@ -519,7 +562,13 @@ def write_indice_csv(rows, csv_path):
         w.writerows(rows)
 
 
-def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None):
+LABEL_SEDES_EDUCATIVAS_POR_CAMPO = {
+    "n_sedes": "Sedes educativas afectadas", "n_sedes_criticas": "Sedes educativas en estado crítico",
+    "matricula_afectada": "Matrícula afectada", "docentes_afectados": "Docentes afectados",
+}
+
+
+def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None, sedes_educativas_por_municipio=None):
     """Fase A (ver docs/formato_largo.md): exporta los mismos indicadores
     que ya calcula el script a una tabla larga (un indicador x unidad
     geográfica por fila, con dimensión/unidad/fuente como metadatos) en
@@ -584,6 +633,12 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
             for campo, valor in valores.items():
                 fila(dep, mun, "municipal", DIMENSION_3IS_POR_CAMPO[campo],
                      f"3is_{campo.lower()}", f"{LABEL_3IS_POR_CAMPO[campo]} (3iS, oficial)", "Número", "3iS-Sheets", valor)
+
+    if sedes_educativas_por_municipio:
+        for (dep, mun), valores in sedes_educativas_por_municipio.items():
+            for campo, valor in valores.items():
+                fila(dep, mun, "municipal", "Educación",
+                     f"sedes_edu_{campo}", LABEL_SEDES_EDUCATIVAS_POR_CAMPO[campo], "Número", "FundacionExito", valor)
 
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
@@ -1299,8 +1354,13 @@ def main():
     if datos_3is_por_municipio:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: cifras oficiales 3iS-Sheets a nivel municipal (corte {corte_3is_mun}) -- {len(datos_3is_por_municipio)} municipios con dato")
 
+    sedes_educativas_por_municipio = load_sedes_educativas_afectadas(SEDES_EDUCATIVAS_CSV)
+    if sedes_educativas_por_municipio:
+        n_sedes_total = sum(v["n_sedes"] for v in sedes_educativas_por_municipio.values())
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: sedes educativas afectadas de {SEDES_EDUCATIVAS_CSV} -- {n_sedes_total} sedes en {len(sedes_educativas_por_municipio)} municipios (materia prima, no se usa para recalcular el índice)")
+
     if args.formato_largo:
-        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None)
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None, sedes_educativas_por_municipio=sedes_educativas_por_municipio or None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
         if args.no_calculo:
             print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo (fuente != Calculo): -> {args.no_calculo}")

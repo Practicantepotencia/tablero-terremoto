@@ -25,51 +25,88 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
-      - name: DIAGNÓSTICO TEMPORAL -- explorar StoryMap de UNDP geosmart (ArcGIS)
+      - name: DIAGNÓSTICO TEMPORAL -- explorar Dashboards de UNDP geosmart (ArcGIS)
         run: |
           python3 - <<'EOF'
           import json, re, urllib.request
 
           HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
-          ITEM_ID = "9d0ef01099a64edda2caecbd34135d7e"
           PORTAL = "https://geosmart.undp.org/arcgis"
+
+          DASHBOARD_IDS = [
+              "41d019779c5441348a7c3a974bc089c5",
+              "5e26cb37fcbe465186c3584cceda03eb",
+              "6ab2dc869b7546fca3b932dceaded56b",
+              "937e319ee0be45ebb80c11bc5e9b4693",
+              "af31f897aeab4af48cee47d10e228033",
+              "c1e07ed3548543a2ab9944c66cc8396b",
+              "d1a3fd84191c40b7b5295c7c86946162",
+              "d7b3e3bc849c4dd1b79df85127574d9e",
+              "dac5b57bf91e48b3b5f92e5a0f4c5532",
+              "dddb2ced56614af790e778380e43a96a",
+              "eb084876238f47a9864f84c23356976e",
+              "ed32f179b27c453b8816241ee836361e",
+              "fdafdd095d504f4fb12a73ffdd637b73",
+          ]
+          WEBMAP_IDS = ["a91d938f010c4b87aed6a47de4e53adf", "c05c2d7af49c437dbf47f9f963c1468d"]
 
           def get(url):
               req = urllib.request.Request(url, headers=HEADERS)
               with urllib.request.urlopen(req, timeout=30) as resp:
                   return resp.status, resp.read().decode("utf-8", errors="replace")
 
-          print("=== 1) Item info (metadata del StoryMap) ===")
-          try:
-              status, body = get(f"{PORTAL}/sharing/rest/content/items/{ITEM_ID}?f=json")
-              print(f"status={status}")
-              print(body[:3000])
-          except Exception as e:
-              print("ERROR:", e)
+          all_service_urls = set()
 
-          print()
-          print("=== 2) Item data (contenido/estructura del StoryMap) ===")
-          try:
-              status, body = get(f"{PORTAL}/sharing/rest/content/items/{ITEM_ID}/data?f=json")
-              print(f"status={status} largo={len(body)} caracteres")
-              print(body[:5000])
-              # buscar referencias a otros item IDs (capas/feature services usados en el story)
+          def explorar_item(item_id, etiqueta):
+              print(f"--- {etiqueta} ({item_id}) ---")
+              try:
+                  status, info = get(f"{PORTAL}/sharing/rest/content/items/{item_id}?f=json")
+                  d = json.loads(info)
+                  print(f"  info: status={status} title={d.get('title')!r} type={d.get('type')} access={d.get('access')}")
+              except Exception as e:
+                  print("  info ERROR:", e)
+              try:
+                  status, data = get(f"{PORTAL}/sharing/rest/content/items/{item_id}/data?f=json")
+                  print(f"  data: status={status} largo={len(data)} caracteres")
+                  urls = re.findall(r'"url"\s*:\s*"([^"]*(?:FeatureServer|MapServer)[^"]*)"', data)
+                  for u in sorted(set(urls)):
+                      print("   servicio:", u)
+                      all_service_urls.add(u)
+                  if not urls:
+                      print("   (sin FeatureServer/MapServer en el JSON de este item)")
+                      print("   fragmento:", data[:800])
+              except Exception as e:
+                  print("  data ERROR:", e)
               print()
-              print("--- otros item IDs / URLs de servicios referenciados ---")
-              refs = re.findall(r'"(?:itemId|url)"\s*:\s*"([^"]+)"', body)
-              for r in sorted(set(refs))[:40]:
-                  print(r)
-          except Exception as e:
-              print("ERROR:", e)
+
+          print("=== Webmaps referenciados por el StoryMap ===")
+          for wid in WEBMAP_IDS:
+              explorar_item(wid, "webmap")
+
+          print("=== Dashboards referenciados por el StoryMap ===")
+          for did in DASHBOARD_IDS:
+              explorar_item(did, "dashboard")
+
+          print("=== Resumen: servicios Feature/MapServer encontrados ===")
+          for u in sorted(all_service_urls):
+              print(u)
 
           print()
-          print("=== 3) HTML de la página pública del StoryMap ===")
-          try:
-              status, html = get(f"https://geosmart.undp.org/arcgis/apps/storymaps/stories/{ITEM_ID}")
-              print(f"status={status} largo={len(html)} caracteres")
-              print(html[:2000])
-          except Exception as e:
-              print("ERROR:", e)
+          print("=== Probar query de ejemplo sobre el primer servicio encontrado ===")
+          if all_service_urls:
+              base = sorted(all_service_urls)[0].rstrip("/")
+              try:
+                  status, layers = get(f"{base}?f=json")
+                  print(f"servicio info: status={status}")
+                  print(layers[:2000])
+              except Exception as e:
+                  print("ERROR servicio info:", e)
+              try:
+                  status, rows = get(f"{base}/0/query?where=1=1&outFields=*&f=json&resultRecordCount=3")
+                  print(f"query capa 0: status={status}")
+                  print(rows[:3000])
+              except Exception as e:
+                  print("ERROR query:", e)
           EOF
 
       - name: Generar tablero e índice

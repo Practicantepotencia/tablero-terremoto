@@ -129,8 +129,26 @@ económico, vulnerabilidad}, en `indice_ajustado_departamento.csv` e
 | `{d}_ajust_idx` | El valor crudo, normalizado 0-100 |
 
 Más **`compuesto_ajustado`** (promedio de los `{d}_ajust_idx` disponibles)
-y **`n_dimensiones`** (cuántas de las 6 tienen dato). Jerarquía completa de
-qué fuente gana cada dimensión, en `docs/indice_ajustado.md`.
+y **`n_dimensiones`** (cuántas de las 6 tienen dato).
+
+**Qué dato exacto se usa para cada dimensión** -- jerarquía fija, se usa la
+PRIMERA fuente de la lista que tenga dato para esa unidad, nunca se
+combinan dos:
+
+| Dimensión | Campo departamental (fuente, en orden) | Campo municipal (fuente, en orden) |
+|---|---|---|
+| **Vivienda** | `vd`+`va` (PNUD) → `VivDestruidas`+`VivAveriadas` (3iS) → `vivienda_n` (Naboo) | `bdg_homes_dest`+`bdg_homes_dmg` (UNDP-RAPIDA) → `vd`+`va` (PNUD) → `VivDestruidas`+`VivAveriadas` (3iS) |
+| **Salud** | `csalud` (PNUD) → `Salud` (3iS) → `salud_n` (Naboo) | `bdg_health_aff` (UNDP-RAPIDA) → `csalud` (PNUD) → `Salud` (3iS) |
+| **Educación** | `cedu` (PNUD) → `Educativos` (3iS) → `n_sedes` agregado por depto (FundacionExe, solo sedes "En Decreto 1171=SI") → `educacion_n` (Naboo) | `bdg_edu_aff` (UNDP-RAPIDA) → `cedu` (PNUD) → `Educativos` (3iS) → `n_sedes` (FundacionExe, mismo filtro) |
+| **Instituciones** | `Comunitarios` (3iS) → `instituciones_n` (Naboo) | `bdg_comm_aff`+`bdg_public_imp` (UNDP-RAPIDA) → `Comunitarios` (3iS) |
+| **Pérdidas económicas** | `econ_dmg_total_cop` (UNDP-RAPIDA) -- única fuente, nunca también PNUD (mismo dato, ver auditoría) | `econ_dmg_total_cop` (UNDP-RAPIDA) |
+| **Vulnerabilidad previa (IPM)** | `mpi` municipal (UNDP-RAPIDA), ponderado por población dentro del depto | `mpi` (UNDP-RAPIDA) directo |
+
+Por qué UNDP-RAPIDA no encabeza la columna departamental salvo en las 2
+últimas filas: su servicio departamental (`COL_adm1`) solo trae escombros
+y daño económico -- personas y edificaciones viven solo en su servicio
+municipal, y sumarlas hacia arriba daría un total parcial disfrazado de
+total departamental (detalle en `docs/indice_ajustado.md`).
 
 ---
 

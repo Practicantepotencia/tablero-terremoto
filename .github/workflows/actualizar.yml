@@ -25,6 +25,51 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
+      - name: DIAGNÓSTICO TEMPORAL -- explorar Fundación Éxito "Un millón de razones"
+        run: |
+          python3 - <<'EOF'
+          import re, urllib.request
+
+          def get(url):
+              req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  return resp.status, resp.geturl(), resp.read().decode("utf-8", errors="replace")
+
+          try:
+              status, final_url, html = get("https://fundacionexe.org.co/unmillonderazones/")
+          except Exception as e:
+              print("ERROR al descargar la página:", e)
+              raise SystemExit(0)
+
+          print(f"status={status} final_url={final_url} largo={len(html)} caracteres")
+          print()
+          print("--- primeros 3000 caracteres del HTML ---")
+          print(html[:3000])
+          print()
+          print("--- pistas de endpoints de datos (api/json/arcgis/geojson/csv/download/embed/sheet) ---")
+          patrones = re.findall(
+              r'[\'"]([^\'"]*(?:api|\.json|arcgis|geojson|\.csv|\.xlsx|download|embed|sheet|spreadsheet)[^\'"]*)[\'"]',
+              html, re.IGNORECASE,
+          )
+          vistos = set()
+          for p in patrones:
+              if p not in vistos:
+                  vistos.add(p)
+                  print(p)
+          print(f"({len(vistos)} pistas únicas)")
+
+          print()
+          print("--- iframes / scripts src ---")
+          for m in re.findall(r'<(?:iframe|script)[^>]+src=["\']([^"\']+)["\']', html, re.IGNORECASE):
+              print(m)
+
+          print()
+          print("--- enlaces <a href> que parecen archivos o secciones internas ---")
+          for m in re.findall(r'<a[^>]+href=["\']([^"\']+)["\']', html, re.IGNORECASE):
+              if any(k in m.lower() for k in ("dato", "descarg", "map", "tablero", "dashboard", ".csv", ".xlsx", ".json", ".pdf")):
+                  print(m)
+          EOF
+
       - name: Generar tablero e índice
         run: python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
 

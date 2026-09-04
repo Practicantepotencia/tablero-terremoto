@@ -30,6 +30,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,64.26470588235293,2026-09-04
 63,departamental,Quindío,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,72.58208268139794,2026-09-04
 63,departamental,Quindío,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,81.14500196659912,2026-09-04
+63,departamental,Quindío,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 63,departamental,Quindío,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,934,2026-09-04
 63,departamental,Quindío,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-04
 63,departamental,Quindío,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,315.0,2026-09-04
@@ -76,6 +77,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,100.0,2026-09-04
 27,departamental,Chocó,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,78.84639444234351,2026-09-04
 27,departamental,Chocó,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,76.52748151860462,2026-09-04
+27,departamental,Chocó,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 27,departamental,Chocó,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,464,2026-09-04
 27,departamental,Chocó,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,12.0,2026-09-04
 27,departamental,Chocó,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,357.0,2026-09-04
@@ -122,6 +124,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,21.698113207547166,2026-09-04
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,60.84905660377358,2026-09-04
 17,departamental,Caldas,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,76.06300831558674,2026-09-04
+17,departamental,Caldas,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 17,departamental,Caldas,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,1164,2026-09-04
 17,departamental,Caldas,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-04
 17,departamental,Caldas,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,329.0,2026-09-04
@@ -168,6 +171,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,63.30275229357797,2026-09-04
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,67.37455346205937,2026-09-04
 66,departamental,Risaralda,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,64.66666355939053,2026-09-04
+66,departamental,Risaralda,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 66,departamental,Risaralda,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,7035,2026-09-04
 66,departamental,Risaralda,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,110.0,2026-09-04
 66,departamental,Risaralda,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,588.0,2026-09-04
@@ -214,6 +218,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,59.46768060836503,2026-09-04
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,47.83630300467783,2026-09-04
 76,departamental,Valle del Cauca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,50.55102114132603,2026-09-04
+76,departamental,Valle del Cauca,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 76,departamental,Valle del Cauca,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,4801,2026-09-04
 76,departamental,Valle del Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,199.0,2026-09-04
 76,departamental,Valle del Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,2890.0,2026-09-04
@@ -260,6 +265,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 73,departamental,Tolima,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,47.35294117647058,2026-09-04
 73,departamental,Tolima,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,31.71662049110745,2026-09-04
 73,departamental,Tolima,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,43.809072628948236,2026-09-04
+73,departamental,Tolima,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 73,departamental,Tolima,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 73,departamental,Tolima,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 73,departamental,Tolima,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -305,6 +311,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,38.33333333333336,2026-09-04
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,22.466985663719896,2026-09-04
 19,departamental,Cauca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,32.301676325010035,2026-09-04
+19,departamental,Cauca,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 19,departamental,Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-04
 19,departamental,Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-04
 19,departamental,Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-04
@@ -350,6 +357,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,24.86486486486487,2026-09-04
 25,departamental,Cundinamarca,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,16.26105103287791,2026-09-04
 25,departamental,Cundinamarca,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,28.702673626985877,2026-09-04
+25,departamental,Cundinamarca,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 25,departamental,Cundinamarca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 25,departamental,Cundinamarca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 25,departamental,Cundinamarca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -395,6 +403,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,11.500000000000012,2026-09-04
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,8.244494759392957,2026-09-04
 05,departamental,Antioquia,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.727362139739817,2026-09-04
+05,departamental,Antioquia,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 05,departamental,Antioquia,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-04
 05,departamental,Antioquia,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,24.0,2026-09-04
 05,departamental,Antioquia,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-04
@@ -440,6 +449,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 68,departamental,Santander,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 68,departamental,Santander,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.912651674154339,2026-09-04
 68,departamental,Santander,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.691375273361444,2026-09-04
+68,departamental,Santander,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 68,departamental,Santander,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 68,departamental,Santander,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 68,departamental,Santander,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -485,6 +495,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 41,departamental,Huila,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 41,departamental,Huila,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,0.3526481110775987,2026-09-04
 41,departamental,Huila,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,27.070278113713954,2026-09-04
+41,departamental,Huila,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 41,departamental,Huila,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 41,departamental,Huila,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 41,departamental,Huila,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -530,6 +541,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 52,departamental,Nariño,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 52,departamental,Nariño,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.0806353648789084,2026-09-04
 52,departamental,Nariño,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,21.451212660656346,2026-09-04
+52,departamental,Nariño,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 52,departamental,Nariño,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 52,departamental,Nariño,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 52,departamental,Nariño,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -575,6 +587,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 54,departamental,Norte de Santander,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,0.0,2026-09-04
 54,departamental,Norte de Santander,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,14.48197646076523,2026-09-04
+54,departamental,Norte de Santander,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 54,departamental,Norte de Santander,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 54,departamental,Norte de Santander,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-04
 54,departamental,Norte de Santander,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -620,6 +633,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 70,departamental,Sucre,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 70,departamental,Sucre,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.1919678414656314,2026-09-04
 70,departamental,Sucre,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,10.424128358256974,2026-09-04
+70,departamental,Sucre,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 70,departamental,Sucre,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 70,departamental,Sucre,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 70,departamental,Sucre,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -665,6 +679,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 08,departamental,Atlántico,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 08,departamental,Atlántico,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.2138946820235783,2026-09-04
 08,departamental,Atlántico,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.730696574322353,2026-09-04
+08,departamental,Atlántico,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 13,departamental,Bolívar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-04
 13,departamental,Bolívar,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-04
 13,departamental,Bolívar,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-04
@@ -696,6 +711,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 13,departamental,Bolívar,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 13,departamental,Bolívar,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.395736798045189,2026-09-04
 13,departamental,Bolívar,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.64943043191972,2026-09-04
+13,departamental,Bolívar,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 13,departamental,Bolívar,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 13,departamental,Bolívar,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 13,departamental,Bolívar,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -741,6 +757,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 11,departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 11,departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,3.4201160967249824,2026-09-04
 11,departamental,Bogotá D.C.,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.621275488875748,2026-09-04
+11,departamental,Bogotá D.C.,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 44,departamental,La Guajira,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-04
 44,departamental,La Guajira,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-04
 44,departamental,La Guajira,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-04
@@ -772,6 +789,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 44,departamental,La Guajira,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 44,departamental,La Guajira,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.50641750160891,2026-09-04
 44,departamental,La Guajira,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.497328859574688,2026-09-04
+44,departamental,La Guajira,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 20,departamental,Cesar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-04
 20,departamental,Cesar,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-04
 20,departamental,Cesar,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-04
@@ -803,6 +821,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 20,departamental,Cesar,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 20,departamental,Cesar,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.5897612625486834,2026-09-04
 20,departamental,Cesar,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.3008329264692495,2026-09-04
+20,departamental,Cesar,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 50,departamental,Meta,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-04
 50,departamental,Meta,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-04
 50,departamental,Meta,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-04
@@ -834,6 +853,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 50,departamental,Meta,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 50,departamental,Meta,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,1.9545029255756126,2026-09-04
 50,departamental,Meta,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.168383203506832,2026-09-04
+50,departamental,Meta,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 23,departamental,Córdoba,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-04
 23,departamental,Córdoba,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-04
 23,departamental,Córdoba,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-04
@@ -865,6 +885,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 23,departamental,Córdoba,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 23,departamental,Córdoba,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,1.0589354543237257,2026-09-04
 23,departamental,Córdoba,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,6.015529644607299,2026-09-04
+23,departamental,Córdoba,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 86,departamental,Putumayo,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-04
 86,departamental,Putumayo,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-04
 86,departamental,Putumayo,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-04
@@ -896,6 +917,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 86,departamental,Putumayo,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 86,departamental,Putumayo,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,9.222428058080816,2026-09-04
 86,departamental,Putumayo,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,1.8444856116161632,2026-09-04
+86,departamental,Putumayo,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-04
 18,departamental,Caquetá,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-04
 18,departamental,Caquetá,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-04
 18,departamental,Caquetá,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-04
@@ -927,6 +949,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 18,departamental,Caquetá,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 18,departamental,Caquetá,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,2.8923610829699498,2026-09-04
 18,departamental,Caquetá,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,0.57847221659399,2026-09-04
+18,departamental,Caquetá,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 18,departamental,Caquetá,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 18,departamental,Caquetá,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 18,departamental,Caquetá,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
@@ -972,6 +995,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 47,departamental,Magdalena,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 47,departamental,Magdalena,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,1.047227696210586,2026-09-04
 47,departamental,Magdalena,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,0.2094455392421172,2026-09-04
+47,departamental,Magdalena,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 15,departamental,Boyacá,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-04
 15,departamental,Boyacá,,Salud,salud_incidencia_tasa_100k,Tasa de incidencia (Salud),Tasa x100k hab.,Calculo,0.0,2026-09-04
 15,departamental,Boyacá,,Salud,salud_incidencia_idx,Incidencia (Salud),Índice 0-100,Calculo,0.0,2026-09-04
@@ -1003,6 +1027,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 15,departamental,Boyacá,,Productividad (proxy),econ_proxy_severidad_idx,Severidad promedio (Productividad (proxy)),Índice 0-100,Calculo,0.0,2026-09-04
 15,departamental,Boyacá,,Productividad (proxy),econ_proxy_idx,Productividad (proxy),Índice 0-100,Calculo,0.6850630099998962,2026-09-04
 15,departamental,Boyacá,,Compuesto,indice_compuesto,Índice compuesto,Índice 0-100,Calculo,0.13701260199997925,2026-09-04
+15,departamental,Boyacá,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0,2026-09-04
 05,departamental,Antioquia,,Gravedad municipal,score_municipal,Score de gravedad municipal ponderado por población,Índice 0-100,Calculo,0.0,2026-09-04
 08,departamental,Atlántico,,Gravedad municipal,score_municipal,Score de gravedad municipal ponderado por población,Índice 0-100,Calculo,0.0,2026-09-04
 11,departamental,Bogotá D.C.,,Gravedad municipal,score_municipal,Score de gravedad municipal ponderado por población,Índice 0-100,Calculo,0.0,2026-09-04

@@ -4,6 +4,7 @@ departamental,Quindío,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Númer
 departamental,Quindío,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,82
 departamental,Quindío,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,62
 departamental,Quindío,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,68
+departamental,Quindío,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Quindío,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,934
 departamental,Quindío,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,3.0
 departamental,Quindío,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,315.0
@@ -24,6 +25,7 @@ departamental,Chocó,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,
 departamental,Chocó,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,71
 departamental,Chocó,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,18
 departamental,Chocó,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,46
+departamental,Chocó,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Chocó,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,464
 departamental,Chocó,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,12.0
 departamental,Chocó,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,357.0
@@ -44,6 +46,7 @@ departamental,Caldas,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,
 departamental,Caldas,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,165
 departamental,Caldas,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,181
 departamental,Caldas,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,159
+departamental,Caldas,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Caldas,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,1164
 departamental,Caldas,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,5.0
 departamental,Caldas,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,329.0
@@ -64,6 +67,7 @@ departamental,Risaralda,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Núme
 departamental,Risaralda,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,103
 departamental,Risaralda,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,35
 departamental,Risaralda,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,109
+departamental,Risaralda,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Risaralda,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,7035
 departamental,Risaralda,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,110.0
 departamental,Risaralda,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,588.0
@@ -84,6 +88,7 @@ departamental,Valle del Cauca,,Vivienda,vivienda_n,Puntos registrados (Vivienda)
 departamental,Valle del Cauca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,244
 departamental,Valle del Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,80
 departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,263
+departamental,Valle del Cauca,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Valle del Cauca,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,4801
 departamental,Valle del Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,199.0
 departamental,Valle del Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,2890.0
@@ -104,6 +109,7 @@ departamental,Tolima,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,
 departamental,Tolima,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,22
 departamental,Tolima,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,11
 departamental,Tolima,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,34
+departamental,Tolima,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Tolima,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Tolima,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Tolima,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -123,6 +129,7 @@ departamental,Cauca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,N
 departamental,Cauca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,18
 departamental,Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9
 departamental,Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,18
+departamental,Cauca,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0
 departamental,Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0
 departamental,Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0
@@ -142,6 +149,7 @@ departamental,Cundinamarca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),N�
 departamental,Cundinamarca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,26
 departamental,Cundinamarca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,15
 departamental,Cundinamarca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,37
+departamental,Cundinamarca,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Cundinamarca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Cundinamarca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Cundinamarca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -161,6 +169,7 @@ departamental,Antioquia,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Núme
 departamental,Antioquia,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,74
 departamental,Antioquia,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,28
 departamental,Antioquia,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,60
+departamental,Antioquia,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Antioquia,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0
 departamental,Antioquia,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,24.0
 departamental,Antioquia,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0
@@ -180,6 +189,7 @@ departamental,Santander,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Núme
 departamental,Santander,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,5
 departamental,Santander,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9
 departamental,Santander,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,16
+departamental,Santander,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Santander,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Santander,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Santander,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -199,6 +209,7 @@ departamental,Huila,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,N
 departamental,Huila,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,7
 departamental,Huila,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,33
 departamental,Huila,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3
+departamental,Huila,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Huila,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Huila,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Huila,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -218,6 +229,7 @@ departamental,Nariño,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número
 departamental,Nariño,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,19
 departamental,Nariño,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,5
 departamental,Nariño,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,12
+departamental,Nariño,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Nariño,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Nariño,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Nariño,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -237,6 +249,7 @@ departamental,Norte de Santander,,Vivienda,vivienda_n,Puntos registrados (Vivien
 departamental,Norte de Santander,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1
 departamental,Norte de Santander,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,3
 departamental,Norte de Santander,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2
+departamental,Norte de Santander,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Norte de Santander,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Norte de Santander,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0
 departamental,Norte de Santander,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -256,6 +269,7 @@ departamental,Sucre,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,N
 departamental,Sucre,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1
 departamental,Sucre,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Sucre,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3
+departamental,Sucre,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Sucre,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Sucre,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Sucre,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -275,11 +289,13 @@ departamental,Atlántico,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Núm
 departamental,Atlántico,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,8
 departamental,Atlántico,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Atlántico,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,15
+departamental,Atlántico,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Bolívar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Bolívar,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Bolívar,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,5
 departamental,Bolívar,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Bolívar,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,14
+departamental,Bolívar,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Bolívar,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Bolívar,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Bolívar,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -299,36 +315,43 @@ departamental,Bogotá D.C.,,Vivienda,vivienda_n,Puntos registrados (Vivienda),N�
 departamental,Bogotá D.C.,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,30
 departamental,Bogotá D.C.,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,96
+departamental,Bogotá D.C.,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,La Guajira,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,La Guajira,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,La Guajira,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1
 departamental,La Guajira,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,La Guajira,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2
+departamental,La Guajira,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Cesar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Cesar,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Cesar,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1
 departamental,Cesar,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Cesar,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,7
+departamental,Cesar,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Meta,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Meta,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Meta,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1
 departamental,Meta,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Meta,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,6
+departamental,Meta,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Córdoba,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Córdoba,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Córdoba,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1
 departamental,Córdoba,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Córdoba,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3
+departamental,Córdoba,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Putumayo,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Putumayo,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Putumayo,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0
 departamental,Putumayo,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Putumayo,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2
+departamental,Putumayo,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1
 departamental,Caquetá,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Caquetá,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Caquetá,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0
 departamental,Caquetá,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Caquetá,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2
+departamental,Caquetá,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Caquetá,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Caquetá,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,0.0
 departamental,Caquetá,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,0.0
@@ -348,11 +371,13 @@ departamental,Magdalena,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Núme
 departamental,Magdalena,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0
 departamental,Magdalena,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Magdalena,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3
+departamental,Magdalena,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 departamental,Boyacá,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0
 departamental,Boyacá,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0
 departamental,Boyacá,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0
 departamental,Boyacá,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0
 departamental,Boyacá,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,1
+departamental,Boyacá,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,0
 municipal,Antioquia,Abejorral,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0
 municipal,Antioquia,Alejandría,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0
 municipal,Antioquia,Amagá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0

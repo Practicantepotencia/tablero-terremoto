@@ -25,6 +25,53 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
+      - name: DIAGNÓSTICO TEMPORAL -- explorar StoryMap de UNDP geosmart (ArcGIS)
+        run: |
+          python3 - <<'EOF'
+          import json, re, urllib.request
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
+          ITEM_ID = "9d0ef01099a64edda2caecbd34135d7e"
+          PORTAL = "https://geosmart.undp.org/arcgis"
+
+          def get(url):
+              req = urllib.request.Request(url, headers=HEADERS)
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  return resp.status, resp.read().decode("utf-8", errors="replace")
+
+          print("=== 1) Item info (metadata del StoryMap) ===")
+          try:
+              status, body = get(f"{PORTAL}/sharing/rest/content/items/{ITEM_ID}?f=json")
+              print(f"status={status}")
+              print(body[:3000])
+          except Exception as e:
+              print("ERROR:", e)
+
+          print()
+          print("=== 2) Item data (contenido/estructura del StoryMap) ===")
+          try:
+              status, body = get(f"{PORTAL}/sharing/rest/content/items/{ITEM_ID}/data?f=json")
+              print(f"status={status} largo={len(body)} caracteres")
+              print(body[:5000])
+              # buscar referencias a otros item IDs (capas/feature services usados en el story)
+              print()
+              print("--- otros item IDs / URLs de servicios referenciados ---")
+              refs = re.findall(r'"(?:itemId|url)"\s*:\s*"([^"]+)"', body)
+              for r in sorted(set(refs))[:40]:
+                  print(r)
+          except Exception as e:
+              print("ERROR:", e)
+
+          print()
+          print("=== 3) HTML de la página pública del StoryMap ===")
+          try:
+              status, html = get(f"https://geosmart.undp.org/arcgis/apps/storymaps/stories/{ITEM_ID}")
+              print(f"status={status} largo={len(html)} caracteres")
+              print(html[:2000])
+          except Exception as e:
+              print("ERROR:", e)
+          EOF
+
       - name: Generar tablero e índice
         run: python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
 

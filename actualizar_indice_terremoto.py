@@ -142,6 +142,18 @@ DIVIPOLA_DEPARTAMENTO = {
     "Putumayo": "86", "Casanare": "85",
 }
 
+# Departamentos declarados en el Artículo 1 del Decreto 1171 del 11 de
+# agosto de 2026 ("Por el cual se declara una Situación de Desastre de
+# Carácter Nacional") -- ver docs/investigacion_fundacion_exito.md. Son
+# los únicos con acceso formal a la Subcuenta SISMO 2026 y al régimen
+# especial de la Ley 1523 de 2012. El decreto dice "y demás afectados"
+# sin nombrarlos, así que esta lista es exactamente el texto del
+# Artículo 1, ni más ni menos.
+DEPARTAMENTOS_DECRETO_1171 = {
+    "Antioquia", "Caldas", "Cauca", "Chocó", "Quindío", "Cundinamarca",
+    "Risaralda", "Huila", "Valle del Cauca", "Tolima", "Putumayo", "Norte de Santander",
+}
+
 # Corrige variantes sin tilde de fuentes externas (ej. la hoja de sedes
 # educativas trae "Quindio" sin tilde) contra las claves canónicas de
 # DIVIPOLA_DEPARTAMENTO -- sin esto, esas filas quedan con divipola vacío
@@ -629,6 +641,9 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
             fila(dep, None, "departamental", label, f"{d}_severidad_idx", f"Severidad promedio ({label})", "Índice 0-100", "Calculo", r[f"{d}_severidad_idx"])
             fila(dep, None, "departamental", label, f"{d}_idx", label, "Índice 0-100", "Calculo", r[f"{d}_idx"])
         fila(dep, None, "departamental", "Compuesto", "indice_compuesto", "Índice compuesto", "Índice 0-100", "Calculo", r["indice_compuesto"])
+        fila(dep, None, "departamental", "Marco normativo", "en_decreto_1171",
+             "En Decreto 1171 de 2026 (desastre nacional)", "Sí/No (1-0)", "Decreto1171",
+             1 if dep in DEPARTAMENTOS_DECRETO_1171 else 0)
         if empresarios_por_dep and dep in empresarios_por_dep:
             fila(dep, None, "departamental", "Productividad", "empresarios_afectados",
                  "Empresarios afectados (grave/crítico)", "Número", "Camaras", empresarios_por_dep[dep])

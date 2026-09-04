@@ -96,6 +96,15 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
   solo a Chocó (303 sedes) -- este lo reemplazó por completo.
   Normaliza departamentos sin tilde (ej. "Quindio") con
   `normalizar_nombre_departamento()` contra `DIVIPOLA_DEPARTAMENTO`.
+- **`decreto_1171_11ago2026.pdf`** — "Por el cual se declara una Situación
+  de Desastre de Carácter Nacional", firmado por el Presidente el 11 de
+  agosto de 2026. Su Artículo 1 nombra los 12 departamentos con acceso
+  formal a la Subcuenta SISMO 2026 y al régimen especial de la Ley 1523
+  de 2012 (`DEPARTAMENTOS_DECRETO_1171` en `actualizar_indice_
+  terremoto.py`, copiado literal del texto del decreto). Se usa para
+  generar la fila `en_decreto_1171` (`fuente=Decreto1171`) en
+  `indicadores_largo.csv` -- 1 si el departamento está en la lista, 0 si
+  no. Solo referencia/trazabilidad, el script no lee el PDF directamente.
 
 ## Salidas automáticas (no van en esta carpeta)
 

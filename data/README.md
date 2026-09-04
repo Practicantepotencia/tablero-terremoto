@@ -132,3 +132,20 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
   sin tocar el índice. No hace falta subir nada a mano; si la descarga
   falla (red, formato cambiado), la corrida sigue sin ese dato en vez de
   fallar.
+- **PNUD Colombia -- estimación de pérdidas económicas** (ver
+  `docs/investigacion_pnud.md`). Microsite en GitHub Pages
+  ("Impacto Económico del Sismo — Chocó") con una estimación propia de
+  PNUD del costo en pesos de reponer vivienda e infraestructura
+  institucional (salud/educación/comunitario) destruida o averiada, por
+  departamento y por municipio (534 municipios, 17 departamentos en el
+  snapshot de sep/2026) -- metodología completa documentada en la propia
+  página (precios CONSTRUDATA, índice ICOCED, factor territorial,
+  multiplicador de tipología). Los datos no vienen en un CSV/API aparte:
+  viven embebidos como JSON dentro de un `<script id="results-data">`
+  en el HTML de 2,4 MB, así que `load_pnud_perdidas_economicas()`
+  descarga la página fresca en cada corrida y extrae ese bloque -- igual
+  de "en vivo" que `registro.json`. Entra al inventario crudo
+  (`fuente=PNUD`) sin tocar el índice: conteos (viviendas destruidas/
+  averiadas, centros de salud/educativos/comunitarios afectados) y costo
+  estimado en COP por categoría y total. Total nacional estimado en el
+  snapshot: **$42,1 billones de pesos**.

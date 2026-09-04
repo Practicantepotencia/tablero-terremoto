@@ -101,6 +101,83 @@ LABEL_3IS_POR_CAMPO = {
 # poder comparar cortes y quedarnos con el más reciente.
 MESES_ES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6, "Jul": 7, "Ago": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}
 
+# Microsite de PNUD Colombia "Impacto Económico del Sismo -- Chocó"
+# (GitHub Pages, ver docs/investigacion_pnud.md) -- estimación propia de
+# PNUD de pérdidas económicas en pesos colombianos (vivienda + infraestructura
+# institucional: salud/educación/comunitario), por departamento y por
+# municipio, con metodología documentada en la propia página (CONSTRUDATA,
+# índice ICOCED, factor territorial, multiplicador de tipología). Los datos
+# viven embebidos como JSON en un <script id="results-data"> dentro del
+# HTML -- no hay CSV/API separado, hay que extraerlo del HTML en cada
+# corrida (se descarga fresco, como registro.json). Es la propia
+# estimación de PNUD, no un cálculo nuestro -- solo entra al inventario
+# crudo (fuente=PNUD), NO se usa todavía para recalcular el índice.
+PNUD_PERDIDAS_URL = "https://pnudco.github.io/Respuesta-a-crisis-y-recuperaci-n-temprana/"
+
+CAMPOS_PNUD_CONTEO = ["vd", "va", "csalud", "cedu", "ccom"]
+CAMPOS_PNUD_COSTO = ["vivt_cop", "salud_cop", "edu_cop", "com_cop", "infra_cop", "tot_cop"]
+LABEL_PNUD_POR_CAMPO = {
+    "vd": "Viviendas destruidas", "va": "Viviendas averiadas",
+    "csalud": "Centros de salud afectados", "cedu": "Centros educativos afectados",
+    "ccom": "Centros comunitarios afectados",
+    "vivt_cop": "Costo estimado vivienda (COP)", "salud_cop": "Costo estimado salud (COP)",
+    "edu_cop": "Costo estimado educación (COP)", "com_cop": "Costo estimado comunitario (COP)",
+    "infra_cop": "Costo estimado infraestructura institucional (COP)",
+    "tot_cop": "Costo total estimado (COP)",
+}
+DIMENSION_PNUD_POR_CAMPO = {
+    "vd": "Vivienda", "va": "Vivienda", "vivt_cop": "Vivienda",
+    "csalud": "Salud", "salud_cop": "Salud",
+    "cedu": "Educación", "edu_cop": "Educación",
+    "ccom": "Instituciones", "com_cop": "Instituciones",
+    "infra_cop": "Infraestructura",
+    "tot_cop": "Pérdidas económicas",
+}
+UNIDAD_PNUD_POR_CAMPO = {c: "COP" for c in CAMPOS_PNUD_COSTO}
+UNIDAD_PNUD_POR_CAMPO.update({c: "Número" for c in CAMPOS_PNUD_CONTEO})
+
+
+def load_pnud_perdidas_economicas(url=PNUD_PERDIDAS_URL):
+    """Descarga el microsite de PNUD Colombia y extrae el bloque JSON
+    embebido (<script id="results-data">) con la estimación de pérdidas
+    económicas por vivienda e infraestructura institucional, por
+    departamento y por municipio (534 municipios, 17 departamentos en el
+    snapshot de sep/2026). Devuelve (datos_dep, datos_mun) -- cada uno
+    {nombre: {campo: valor}} -- o ({}, {}) si falla la descarga o el
+    parseo, nunca interrumpe la corrida."""
+    if not url:
+        return {}, {}
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            html = resp.read().decode("utf-8", errors="replace")
+    except Exception:
+        return {}, {}
+
+    marca = '<script type="application/json" id="results-data">'
+    inicio = html.find(marca)
+    if inicio == -1:
+        return {}, {}
+    inicio = html.find(">", inicio) + 1
+    fin = html.find("</script>", inicio)
+    if fin == -1:
+        return {}, {}
+    try:
+        datos = json.loads(html[inicio:fin])
+    except json.JSONDecodeError:
+        return {}, {}
+
+    campos = CAMPOS_PNUD_CONTEO + CAMPOS_PNUD_COSTO
+    datos_dep = {
+        r["dep"]: {c: r.get(c, 0) for c in campos}
+        for r in datos.get("departamentos", {}).values()
+    }
+    datos_mun = {
+        (r["dep"], r["mun"]): {c: r.get(c, 0) for c in campos}
+        for r in datos.get("municipios", {}).values()
+    }
+    return datos_dep, datos_mun
+
 # Fase 2: historial acumulado (una fila por departamento por corrida, nunca
 # se sobrescribe) para poder calcular "subió/bajó X posiciones desde la
 # última corrida" en la pestaña "Por dimensión". Vive junto a los demás
@@ -603,7 +680,7 @@ LABEL_SEDES_EDUCATIVAS_POR_CAMPO = {
 }
 
 
-def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None, sedes_educativas_por_municipio=None):
+def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None, sedes_educativas_por_municipio=None, datos_pnud_por_dep=None, datos_pnud_por_municipio=None):
     """Fase A (ver docs/formato_largo.md): exporta los mismos indicadores
     que ya calcula el script a una tabla larga (un indicador x unidad
     geográfica por fila, con dimensión/unidad/fuente como metadatos) en
@@ -651,6 +728,10 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
             for campo, valor in datos_3is_por_dep[dep].items():
                 fila(dep, None, "departamental", DIMENSION_3IS_POR_CAMPO[campo],
                      f"3is_{campo.lower()}", f"{LABEL_3IS_POR_CAMPO[campo]} (3iS, oficial)", "Número", "3iS-Sheets", valor)
+        if datos_pnud_por_dep and dep in datos_pnud_por_dep:
+            for campo, valor in datos_pnud_por_dep[dep].items():
+                fila(dep, None, "departamental", DIMENSION_PNUD_POR_CAMPO[campo],
+                     f"pnud_{campo}", LABEL_PNUD_POR_CAMPO[campo], UNIDAD_PNUD_POR_CAMPO[campo], "PNUD", valor)
 
     if municipios:
         por_dep = defaultdict(list)
@@ -677,6 +758,12 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
             for campo, valor in valores.items():
                 fila(dep, mun, "municipal", "Educación",
                      f"sedes_edu_{campo}", LABEL_SEDES_EDUCATIVAS_POR_CAMPO[campo], "Número", "FundacionExe", valor)
+
+    if datos_pnud_por_municipio:
+        for (dep, mun), valores in datos_pnud_por_municipio.items():
+            for campo, valor in valores.items():
+                fila(dep, mun, "municipal", DIMENSION_PNUD_POR_CAMPO[campo],
+                     f"pnud_{campo}", LABEL_PNUD_POR_CAMPO[campo], UNIDAD_PNUD_POR_CAMPO[campo], "PNUD", valor)
 
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
@@ -1397,8 +1484,15 @@ def main():
         n_sedes_total = sum(v["n_sedes"] for v in sedes_educativas_por_municipio.values())
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: sedes educativas afectadas de {SEDES_EDUCATIVAS_CSV} -- {n_sedes_total} sedes en {len(sedes_educativas_por_municipio)} municipios (materia prima, no se usa para recalcular el índice)")
 
+    datos_pnud_por_dep, datos_pnud_por_municipio = load_pnud_perdidas_economicas(PNUD_PERDIDAS_URL)
+    if datos_pnud_por_dep:
+        tot_nacional = sum(v["tot_cop"] for v in datos_pnud_por_dep.values())
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: pérdidas económicas PNUD -- {len(datos_pnud_por_dep)} departamentos, {len(datos_pnud_por_municipio)} municipios, ${tot_nacional:,.0f} COP estimados en total (materia prima, no se usa para recalcular el índice)")
+    else:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: no se pudo leer PNUD esta corrida (red o formato) -- se sigue sin ese dato, no interrumpe la corrida")
+
     if args.formato_largo:
-        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None, sedes_educativas_por_municipio=sedes_educativas_por_municipio or None)
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None, sedes_educativas_por_municipio=sedes_educativas_por_municipio or None, datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
         if args.no_calculo:
             print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo (fuente != Calculo): -> {args.no_calculo}")

@@ -25,7 +25,7 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
-      - name: DIAGNÓSTICO TEMPORAL -- explorar Dashboards de UNDP geosmart (ArcGIS)
+      - name: DIAGNÓSTICO TEMPORAL -- resolver itemIds de Dashboards y consultar COL_adm1
         run: |
           python3 - <<'EOF'
           import json, re, urllib.request
@@ -33,80 +33,74 @@ jobs:
           HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
           PORTAL = "https://geosmart.undp.org/arcgis"
 
-          DASHBOARD_IDS = [
-              "41d019779c5441348a7c3a974bc089c5",
-              "5e26cb37fcbe465186c3584cceda03eb",
-              "6ab2dc869b7546fca3b932dceaded56b",
-              "937e319ee0be45ebb80c11bc5e9b4693",
-              "af31f897aeab4af48cee47d10e228033",
-              "c1e07ed3548543a2ab9944c66cc8396b",
-              "d1a3fd84191c40b7b5295c7c86946162",
-              "d7b3e3bc849c4dd1b79df85127574d9e",
-              "dac5b57bf91e48b3b5f92e5a0f4c5532",
-              "dddb2ced56614af790e778380e43a96a",
-              "eb084876238f47a9864f84c23356976e",
-              "ed32f179b27c453b8816241ee836361e",
-              "fdafdd095d504f4fb12a73ffdd637b73",
-          ]
-          WEBMAP_IDS = ["a91d938f010c4b87aed6a47de4e53adf", "c05c2d7af49c437dbf47f9f963c1468d"]
+          DASHBOARD_IDS = {
+              "41d019779c5441348a7c3a974bc089c5": "summary_stats",
+              "5e26cb37fcbe465186c3584cceda03eb": "buildingImpact_publicBldg",
+              "6ab2dc869b7546fca3b932dceaded56b": "powerOutages",
+              "937e319ee0be45ebb80c11bc5e9b4693": "buildingExposure",
+              "af31f897aeab4af48cee47d10e228033": "econDamage_adm1",
+              "c1e07ed3548543a2ab9944c66cc8396b": "roadsExposure",
+              "d1a3fd84191c40b7b5295c7c86946162": "populationImpact",
+              "d7b3e3bc849c4dd1b79df85127574d9e": "buildingImpact_households",
+              "dac5b57bf91e48b3b5f92e5a0f4c5532": "debris_adm1",
+              "dddb2ced56614af790e778380e43a96a": "econDamage_adm2",
+              "eb084876238f47a9864f84c23356976e": "earlyRecovery",
+              "ed32f179b27c453b8816241ee836361e": "roadsImpact",
+              "fdafdd095d504f4fb12a73ffdd637b73": "populationExposure",
+          }
 
           def get(url):
               req = urllib.request.Request(url, headers=HEADERS)
               with urllib.request.urlopen(req, timeout=30) as resp:
                   return resp.status, resp.read().decode("utf-8", errors="replace")
 
-          all_service_urls = set()
-
-          def explorar_item(item_id, etiqueta):
-              print(f"--- {etiqueta} ({item_id}) ---")
+          def resolver_item_a_url(item_id):
+              """Devuelve la URL de FeatureServer/MapServer de un item, si la tiene."""
               try:
-                  status, info = get(f"{PORTAL}/sharing/rest/content/items/{item_id}?f=json")
+                  _, info = get(f"{PORTAL}/sharing/rest/content/items/{item_id}?f=json")
                   d = json.loads(info)
-                  print(f"  info: status={status} title={d.get('title')!r} type={d.get('type')} access={d.get('access')}")
+                  return d.get("url"), d.get("title"), d.get("type")
               except Exception as e:
-                  print("  info ERROR:", e)
+                  return None, None, f"ERROR: {e}"
+
+          print("=== 1) itemIds referenciados dentro de cada dashboard -> resolver a FeatureServer ===")
+          servicios_por_dashboard = {}
+          for did, etiqueta in DASHBOARD_IDS.items():
+              print(f"--- dashboard {etiqueta} ({did}) ---")
               try:
-                  status, data = get(f"{PORTAL}/sharing/rest/content/items/{item_id}/data?f=json")
-                  print(f"  data: status={status} largo={len(data)} caracteres")
-                  urls = re.findall(r'"url"\s*:\s*"([^"]*(?:FeatureServer|MapServer)[^"]*)"', data)
-                  for u in sorted(set(urls)):
-                      print("   servicio:", u)
-                      all_service_urls.add(u)
-                  if not urls:
-                      print("   (sin FeatureServer/MapServer en el JSON de este item)")
-                      print("   fragmento:", data[:800])
+                  _, data = get(f"{PORTAL}/sharing/rest/content/items/{did}/data?f=json")
+                  item_ids = set(re.findall(r'"itemId"\s*:\s*"([0-9a-f]{32})"', data))
+                  item_ids.discard(did)
+                  urls = []
+                  for iid in item_ids:
+                      url, title, typ = resolver_item_a_url(iid)
+                      print(f"   itemId={iid} title={title!r} type={typ} url={url}")
+                      if url:
+                          urls.append(url)
+                  servicios_por_dashboard[etiqueta] = urls
               except Exception as e:
-                  print("  data ERROR:", e)
+                  print("   ERROR:", e)
               print()
 
-          print("=== Webmaps referenciados por el StoryMap ===")
-          for wid in WEBMAP_IDS:
-              explorar_item(wid, "webmap")
-
-          print("=== Dashboards referenciados por el StoryMap ===")
-          for did in DASHBOARD_IDS:
-              explorar_item(did, "dashboard")
-
-          print("=== Resumen: servicios Feature/MapServer encontrados ===")
-          for u in sorted(all_service_urls):
-              print(u)
+          print("=== 2) Consultar capa COL_adm1 (departamentos) -- campos y primera fila ===")
+          base = "https://geosmarthosting.undp.org/arcgis/rest/services/Hosted/COL_adm1/FeatureServer/0"
+          try:
+              status, info = get(f"{base}?f=json")
+              d = json.loads(info)
+              print("campos:", [f["name"] for f in d.get("fields", [])])
+          except Exception as e:
+              print("ERROR info:", e)
+          try:
+              status, rows = get(f"{base}/query?where=1=1&outFields=*&f=json&resultRecordCount=2")
+              print(f"query: status={status}")
+              print(rows[:4000])
+          except Exception as e:
+              print("ERROR query:", e)
 
           print()
-          print("=== Probar query de ejemplo sobre el primer servicio encontrado ===")
-          if all_service_urls:
-              base = sorted(all_service_urls)[0].rstrip("/")
-              try:
-                  status, layers = get(f"{base}?f=json")
-                  print(f"servicio info: status={status}")
-                  print(layers[:2000])
-              except Exception as e:
-                  print("ERROR servicio info:", e)
-              try:
-                  status, rows = get(f"{base}/0/query?where=1=1&outFields=*&f=json&resultRecordCount=3")
-                  print(f"query capa 0: status={status}")
-                  print(rows[:3000])
-              except Exception as e:
-                  print("ERROR query:", e)
+          print("=== 3) Resumen final: servicios por dashboard ===")
+          for etiqueta, urls in servicios_por_dashboard.items():
+              print(f"{etiqueta}: {urls}")
           EOF
 
       - name: Generar tablero e índice

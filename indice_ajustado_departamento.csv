@@ -1,26 +1,26 @@
-departamento,vivienda_ajust_idx,vivienda_ajust_fuente,salud_ajust_idx,salud_ajust_fuente,educacion_ajust_idx,educacion_ajust_fuente,instituciones_ajust_idx,instituciones_ajust_fuente,economico_ajust_idx,economico_ajust_fuente,vulnerabilidad_ajust_idx,vulnerabilidad_ajust_fuente,compuesto_ajustado,n_dimensiones
-Valle del Cauca,80.6,PNUD,100.0,PNUD,100.0,PNUD,100.0,3iS-Sheets,68.2,UNDP-RAPIDA,13.1,UNDP-RAPIDA,77.0,6
-Chocó,46.2,PNUD,97.8,PNUD,29.5,PNUD,5.1,3iS-Sheets,37.7,UNDP-RAPIDA,100.0,UNDP-RAPIDA,52.7,6
-Risaralda,100.0,PNUD,47.8,PNUD,36.6,PNUD,1.1,3iS-Sheets,100.0,UNDP-RAPIDA,6.8,UNDP-RAPIDA,48.7,6
-Quindío,49.7,PNUD,19.6,PNUD,18.7,PNUD,38.3,3iS-Sheets,42.2,UNDP-RAPIDA,13.6,UNDP-RAPIDA,30.3,6
-Caldas,28.7,PNUD,27.2,PNUD,44.9,PNUD,1.8,3iS-Sheets,27.4,UNDP-RAPIDA,17.3,UNDP-RAPIDA,24.5,6
-Antioquia,6.4,PNUD,33.7,PNUD,49.5,PNUD,7.2,3iS-Sheets,4.3,UNDP-RAPIDA,10.4,UNDP-RAPIDA,18.6,6
-Cauca,10.5,PNUD,21.7,PNUD,30.8,PNUD,2.7,3iS-Sheets,8.7,UNDP-RAPIDA,36.7,UNDP-RAPIDA,18.5,6
-Tolima,1.6,PNUD,13.0,PNUD,18.4,PNUD,2.1,3iS-Sheets,2.1,UNDP-RAPIDA,32.4,UNDP-RAPIDA,11.6,6
-Santander,0.0,PNUD,1.1,PNUD,1.8,PNUD,0.1,3iS-Sheets,0.0,UNDP-RAPIDA,44.3,UNDP-RAPIDA,7.9,6
-Huila,0.8,PNUD,17.4,PNUD,11.6,PNUD,0.7,3iS-Sheets,1.0,UNDP-RAPIDA,5.1,UNDP-RAPIDA,6.1,6
-Boyacá,0.0,Naboo,0.0,Naboo,2.7,FundacionExe,0.0,Naboo,,,17.0,UNDP-RAPIDA,4.0,5
-Caquetá,0.0,PNUD,14.1,PNUD,3.7,PNUD,0.0,3iS-Sheets,0.1,UNDP-RAPIDA,,,3.6,5
-Córdoba,0.0,Naboo,0.0,Naboo,10.5,FundacionExe,0.0,Naboo,,,,,2.6,4
-Cundinamarca,0.1,PNUD,5.4,PNUD,7.5,PNUD,1.1,3iS-Sheets,0.6,UNDP-RAPIDA,0.0,UNDP-RAPIDA,2.5,6
-Nariño,0.2,PNUD,2.2,PNUD,3.0,PNUD,0.1,3iS-Sheets,0.3,UNDP-RAPIDA,,,1.1,5
-Bolívar,0.0,PNUD,2.2,PNUD,0.8,PNUD,0.1,3iS-Sheets,0.0,UNDP-RAPIDA,,,0.6,5
-Sucre,0.0,PNUD,0.0,PNUD,2.2,PNUD,0.2,3iS-Sheets,0.1,UNDP-RAPIDA,,,0.5,5
-Meta,0.0,Naboo,0.0,Naboo,1.6,FundacionExe,0.0,Naboo,,,,,0.4,4
-Norte de Santander,0.1,PNUD,0.0,PNUD,1.7,PNUD,0.1,3iS-Sheets,0.2,UNDP-RAPIDA,,,0.4,5
-Bogotá D.C.,0.0,Naboo,0.0,Naboo,0.0,Naboo,0.9,Naboo,,,,,0.2,4
-Atlántico,0.0,Naboo,0.0,Naboo,0.3,FundacionExe,0.2,Naboo,,,,,0.1,4
-Cesar,0.0,Naboo,0.0,Naboo,0.0,Naboo,0.0,Naboo,,,,,0.0,4
-La Guajira,0.0,Naboo,0.0,Naboo,0.0,Naboo,0.0,Naboo,,,,,0.0,4
-Magdalena,0.0,Naboo,0.0,Naboo,0.0,Naboo,0.0,Naboo,,,,,0.0,4
-Putumayo,0.0,PNUD,0.0,PNUD,0.0,PNUD,0.0,Naboo,,,,,0.0,4
+departamento,vivienda_ajust_idx,vivienda_ajust_raw,vivienda_ajust_fuente,salud_ajust_idx,salud_ajust_raw,salud_ajust_fuente,educacion_ajust_idx,educacion_ajust_raw,educacion_ajust_fuente,instituciones_ajust_idx,instituciones_ajust_raw,instituciones_ajust_fuente,economico_ajust_idx,economico_ajust_raw,economico_ajust_fuente,vulnerabilidad_ajust_idx,vulnerabilidad_ajust_raw,vulnerabilidad_ajust_fuente,compuesto_ajustado,n_dimensiones
+Valle del Cauca,80.6,54853,PNUD,100.0,92,PNUD,100.0,1063,PNUD,100.0,3440.0,3iS-Sheets,68.2,9784676699995,UNDP-RAPIDA,13.1,6.417781020066891,UNDP-RAPIDA,77.0,6
+Chocó,46.2,31462,PNUD,97.8,90,PNUD,29.5,314,PNUD,5.1,175.0,3iS-Sheets,37.7,5413642413514,UNDP-RAPIDA,100.0,29.151242247191007,UNDP-RAPIDA,52.7,6
+Risaralda,100.0,68065,PNUD,47.8,44,PNUD,36.6,389,PNUD,1.1,39.0,3iS-Sheets,100.0,14350369454460,UNDP-RAPIDA,6.8,4.7733055679287295,UNDP-RAPIDA,48.7,6
+Quindío,49.7,33849,PNUD,19.6,18,PNUD,18.7,199,PNUD,38.3,1317.0,3iS-Sheets,42.2,6057749367773,UNDP-RAPIDA,13.6,6.55475,UNDP-RAPIDA,30.3,6
+Caldas,28.7,19525,PNUD,27.2,25,PNUD,44.9,477,PNUD,1.8,62.0,3iS-Sheets,27.4,3943839089783,UNDP-RAPIDA,17.3,7.51261822971549,UNDP-RAPIDA,24.5,6
+Antioquia,6.4,4359,PNUD,33.7,31,PNUD,49.5,526,PNUD,7.2,247.0,3iS-Sheets,4.3,628848612394,UNDP-RAPIDA,10.4,5.707004210718192,UNDP-RAPIDA,18.6,6
+Cauca,10.5,7134,PNUD,21.7,20,PNUD,30.8,327,PNUD,2.7,93.0,3iS-Sheets,8.7,1251910871096,UNDP-RAPIDA,36.7,12.602005963302751,UNDP-RAPIDA,18.5,6
+Tolima,1.6,1102,PNUD,13.0,12,PNUD,18.4,196,PNUD,2.1,71.0,3iS-Sheets,2.1,315186783397,UNDP-RAPIDA,32.4,11.481428071539659,UNDP-RAPIDA,11.6,6
+Santander,0.0,4,PNUD,1.1,1,PNUD,1.8,19,PNUD,0.1,2.0,3iS-Sheets,0.0,9693241268,UNDP-RAPIDA,44.3,14.58935,UNDP-RAPIDA,7.9,6
+Huila,0.8,532,PNUD,17.4,16,PNUD,11.6,123,PNUD,0.7,25.0,3iS-Sheets,1.0,154394182879,UNDP-RAPIDA,5.1,4.341138738738739,UNDP-RAPIDA,6.1,6
+Caquetá,0.0,18,PNUD,14.1,13,PNUD,3.7,39,PNUD,0.0,0.0,3iS-Sheets,0.1,25943811494,UNDP-RAPIDA,,,,3.6,5
+Boyacá,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,,,,17.0,7.4577,UNDP-RAPIDA,3.4,5
+Cundinamarca,0.1,89,PNUD,5.4,5,PNUD,7.5,80,PNUD,1.1,39.0,3iS-Sheets,0.6,92262360625,UNDP-RAPIDA,0.0,2.9986984615384613,UNDP-RAPIDA,2.5,6
+Nariño,0.2,124,PNUD,2.2,2,PNUD,3.0,32,PNUD,0.1,3.0,3iS-Sheets,0.3,42764506145,UNDP-RAPIDA,,,,1.1,5
+Bolívar,0.0,15,PNUD,2.2,2,PNUD,0.8,8,PNUD,0.1,2.0,3iS-Sheets,0.0,6863553030,UNDP-RAPIDA,,,,0.6,5
+Sucre,0.0,22,PNUD,0.0,0,PNUD,2.2,23,PNUD,0.2,6.0,3iS-Sheets,0.1,19943796864,UNDP-RAPIDA,,,,0.5,5
+Norte de Santander,0.1,81,PNUD,0.0,0,PNUD,1.7,18,PNUD,0.1,3.0,3iS-Sheets,0.2,35023995692,UNDP-RAPIDA,,,,0.4,5
+Bogotá D.C.,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,0.9,30,Naboo,,,,,,,0.2,4
+Atlántico,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,0.2,8,Naboo,,,,,,,0.1,4
+Cesar,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,0.0,1,Naboo,,,,,,,0.0,4
+Córdoba,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,0.0,1,Naboo,,,,,,,0.0,4
+La Guajira,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,0.0,1,Naboo,,,,,,,0.0,4
+Magdalena,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,,,,,,,0.0,4
+Meta,0.0,0,Naboo,0.0,0,Naboo,0.0,0,Naboo,0.0,1,Naboo,,,,,,,0.0,4
+Putumayo,0.0,0,PNUD,0.0,0,PNUD,0.0,0,PNUD,0.0,0,Naboo,,,,,,,0.0,4

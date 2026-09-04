@@ -25,53 +25,6 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
-      - name: DIAGNÓSTICO TEMPORAL -- probar Wayback Machine para fundacionexe.org.co
-        run: |
-          python3 - <<'EOF'
-          import json, re, urllib.request
-
-          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
-
-          def get(url):
-              req = urllib.request.Request(url, headers=HEADERS)
-              with urllib.request.urlopen(req, timeout=30) as resp:
-                  return resp.status, resp.read().decode("utf-8", errors="replace")
-
-          objetivo = "https://fundacionexe.org.co/unmillonderazones/"
-
-          print("=== 1) ¿hay snapshot en Wayback Machine? ===")
-          try:
-              status, body = get(f"http://archive.org/wayback/available?url={objetivo}")
-              print(f"status={status}")
-              print(body[:1500])
-              data = json.loads(body)
-              snap_url = data.get("archived_snapshots", {}).get("closest", {}).get("url")
-          except Exception as e:
-              print("ERROR consultando wayback availability API:", e)
-              snap_url = None
-
-          print()
-          if snap_url:
-              print(f"=== 2) Bajando snapshot: {snap_url} ===")
-              try:
-                  status, html = get(snap_url)
-                  print(f"status={status} largo={len(html)} caracteres")
-                  print("--- primeros 2500 caracteres ---")
-                  print(html[:2500])
-                  print()
-                  print("--- pistas de endpoints (api/json/csv/xlsx/embed/sheet/arcgis) ---")
-                  patrones = re.findall(
-                      r'[\'"]([^\'"]*(?:api|\.json|arcgis|geojson|\.csv|\.xlsx|download|embed|sheet|spreadsheet)[^\'"]*)[\'"]',
-                      html, re.IGNORECASE,
-                  )
-                  for p in sorted(set(patrones))[:60]:
-                      print(p)
-              except Exception as e:
-                  print("ERROR bajando el snapshot:", e)
-          else:
-              print("No hay snapshot disponible en Wayback Machine para esa URL.")
-          EOF
-
       - name: Generar tablero e índice
         run: python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
 

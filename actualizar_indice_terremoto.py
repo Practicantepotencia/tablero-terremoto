@@ -301,47 +301,57 @@ def _clave_orden_corte(reporte):
         return (0, 0, 0, 0)
 
 
+def _valores_3is(r):
+    valores = {}
+    for campo in CAMPOS_3IS_DATOS_TERRITORIALES:
+        try:
+            valores[campo] = float(r.get(campo) or 0)
+        except ValueError:
+            valores[campo] = 0.0
+    return valores
+
+
 def load_3is_datos_territoriales(url=SHEETS_3IS_DATOS_TERRITORIALES_URL):
     """Descarga la hoja 'Datos_Territoriales' del Sheets público de 3iS
-    (ver docs/investigacion_3is.md) y devuelve (corte, {departamento:
-    {campo: valor}}) con el corte de tiempo MÁS RECIENTE, nivel
-    'Departamento' únicamente. Solo materia prima para el inventario de
-    formato largo (fuente=3iS-Sheets) -- NO se usa para recalcular ninguna
-    dimensión del índice todavía. Devuelve (None, {}) si falla la descarga
-    o el parseo -- nunca interrumpe la corrida (misma filosofía que el
-    resto de fuentes opcionales de data/)."""
+    (ver docs/investigacion_3is.md) y devuelve (corte_dep, {departamento:
+    {campo: valor}}, corte_mun, {(departamento, municipio): {campo: valor}})
+    -- cada nivel con SU PROPIO corte más reciente (departamental y
+    municipal no siempre comparten el mismo corte en la hoja fuente, así
+    que se calculan por separado en vez de asumir que van juntos). Solo
+    materia prima para el inventario de formato largo (fuente=3iS-Sheets)
+    -- NO se usa para recalcular ninguna dimensión del índice todavía.
+    Devuelve (None, {}, None, {}) si falla la descarga o el parseo -- nunca
+    interrumpe la corrida (misma filosofía que el resto de fuentes
+    opcionales de data/)."""
+    vacio = (None, {}, None, {})
     if not url:
-        return None, {}
+        return vacio
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=30) as resp:
             raw = resp.read().decode("utf-8-sig")
     except Exception:
-        return None, {}
+        return vacio
 
     try:
         filas = list(csv.DictReader(io.StringIO(raw)))
     except csv.Error:
-        return None, {}
+        return vacio
 
     deps = [r for r in filas if r.get("Nivel") == "Departamento" and r.get("Departamento")]
-    if not deps:
-        return None, {}
+    munis = [r for r in filas if r.get("Nivel") == "Municipio" and r.get("Departamento") and r.get("Municipio")]
 
-    corte_mas_reciente = max({r["Reporte"] for r in deps}, key=_clave_orden_corte)
-    resultado = {}
-    for r in deps:
-        if r["Reporte"] != corte_mas_reciente:
-            continue
-        dep = r["Departamento"]
-        valores = {}
-        for campo in CAMPOS_3IS_DATOS_TERRITORIALES:
-            try:
-                valores[campo] = float(r.get(campo) or 0)
-            except ValueError:
-                valores[campo] = 0.0
-        resultado[dep] = valores
-    return corte_mas_reciente, resultado
+    corte_dep = max({r["Reporte"] for r in deps}, key=_clave_orden_corte) if deps else None
+    resultado_dep = {
+        r["Departamento"]: _valores_3is(r) for r in deps if r["Reporte"] == corte_dep
+    } if corte_dep else {}
+
+    corte_mun = max({r["Reporte"] for r in munis}, key=_clave_orden_corte) if munis else None
+    resultado_mun = {
+        (r["Departamento"], r["Municipio"]): _valores_3is(r) for r in munis if r["Reporte"] == corte_mun
+    } if corte_mun else {}
+
+    return corte_dep, resultado_dep, corte_mun, resultado_mun
 
 
 def load_empresarios_afectados(csv_path):
@@ -509,7 +519,7 @@ def write_indice_csv(rows, csv_path):
         w.writerows(rows)
 
 
-def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None):
+def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None):
     """Fase A (ver docs/formato_largo.md): exporta los mismos indicadores
     que ya calcula el script a una tabla larga (un indicador x unidad
     geográfica por fila, con dimensión/unidad/fuente como metadatos) en
@@ -568,6 +578,12 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
             fila(m["departamento"], m["municipio"], "municipal", "Gravedad municipal", "gravedad_oficial",
                  "Gravedad oficial (municipal)", "Categoría (0-100)", "Naboo/UNGRD",
                  SEV_OFICIAL_VALUE.get(m["gravedad_oficial"], 0))
+
+    if datos_3is_por_municipio:
+        for (dep, mun), valores in datos_3is_por_municipio.items():
+            for campo, valor in valores.items():
+                fila(dep, mun, "municipal", DIMENSION_3IS_POR_CAMPO[campo],
+                     f"3is_{campo.lower()}", f"{LABEL_3IS_POR_CAMPO[campo]} (3iS, oficial)", "Número", "3iS-Sheets", valor)
 
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
@@ -1275,14 +1291,16 @@ def main():
     if empresarios_por_dep:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: empresarios afectados (Cámaras de Comercio) de {CAMARAS_COMERCIO_CSV} -- {len(empresarios_por_dep)} departamentos con dato (materia prima, no se usa para recalcular el índice)")
 
-    corte_3is, datos_3is_por_dep = load_3is_datos_territoriales(args.sheets_3is or None)
+    corte_3is_dep, datos_3is_por_dep, corte_3is_mun, datos_3is_por_municipio = load_3is_datos_territoriales(args.sheets_3is or None)
     if datos_3is_por_dep:
-        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: cifras oficiales 3iS-Sheets (corte {corte_3is}) -- {len(datos_3is_por_dep)} departamentos con dato (materia prima, no se usa para recalcular el índice)")
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: cifras oficiales 3iS-Sheets (corte {corte_3is_dep}) -- {len(datos_3is_por_dep)} departamentos con dato (materia prima, no se usa para recalcular el índice)")
     elif args.sheets_3is:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: no se pudo leer 3iS-Sheets esta corrida (red o formato) -- se sigue sin ese dato, no interrumpe la corrida")
+    if datos_3is_por_municipio:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: cifras oficiales 3iS-Sheets a nivel municipal (corte {corte_3is_mun}) -- {len(datos_3is_por_municipio)} municipios con dato")
 
     if args.formato_largo:
-        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None)
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
         if args.no_calculo:
             print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo (fuente != Calculo): -> {args.no_calculo}")

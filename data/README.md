@@ -93,12 +93,15 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
 ## Fuentes remotas que NO viven en `data/` (se bajan solas cada corrida)
 
 - **3iS-Sheets (`Datos_Territoriales`)** — cifras oficiales por
-  departamento (fallecidos, heridos, viviendas averiadas/destruidas,
-  colapsos, salud, educativos, vías, acueductos...) del dashboard 3iS
-  (ver `docs/investigacion_3is.md`). Es un CSV público de Google Sheets
-  (`gviz/tq?tqx=out:csv`), igual de "en vivo" que `registro.json` -- se
-  descarga fresco en cada corrida vía `load_3is_datos_territoriales()`,
-  se queda con el corte de tiempo más reciente que trae la hoja, y entra
-  al inventario crudo (`fuente=3iS-Sheets`) sin tocar el índice. No hace
-  falta subir nada a mano; si la descarga falla (red, formato cambiado),
-  la corrida sigue sin ese dato en vez de fallar.
+  departamento **y por municipio** (fallecidos, heridos, viviendas
+  averiadas/destruidas, colapsos, salud, educativos, vías, acueductos...)
+  del dashboard 3iS (ver `docs/investigacion_3is.md`). Es un CSV público
+  de Google Sheets (`gviz/tq?tqx=out:csv`), igual de "en vivo" que
+  `registro.json` -- se descarga fresco en cada corrida vía
+  `load_3is_datos_territoriales()`, que calcula el corte más reciente
+  **por separado para cada nivel** (departamental y municipal no siempre
+  comparten el mismo corte en la hoja fuente), y entra al inventario
+  crudo (`fuente=3iS-Sheets`, `nivel=departamental` o `nivel=municipal`)
+  sin tocar el índice. No hace falta subir nada a mano; si la descarga
+  falla (red, formato cambiado), la corrida sigue sin ese dato en vez de
+  fallar.

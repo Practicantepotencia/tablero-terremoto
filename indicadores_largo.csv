@@ -3210,3 +3210,123 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 17,municipal,Caldas,Viterbo,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 17,municipal,Caldas,Viterbo,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,0.0,2026-09-04
 17,municipal,Caldas,Viterbo,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-04
+27,municipal,Chocó,Quibdó,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,97,2026-09-04
+27,municipal,Chocó,Quibdó,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,27,2026-09-04
+27,municipal,Chocó,Quibdó,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,31992,2026-09-04
+27,municipal,Chocó,Quibdó,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,1501,2026-09-04
+27,municipal,Chocó,Nuevo Belén de Bajirá,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,9,2026-09-04
+27,municipal,Chocó,Nuevo Belén de Bajirá,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,4,2026-09-04
+27,municipal,Chocó,Nuevo Belén de Bajirá,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,2797,2026-09-04
+27,municipal,Chocó,Nuevo Belén de Bajirá,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,127,2026-09-04
+27,municipal,Chocó,Istmina,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,8,2026-09-04
+27,municipal,Chocó,Istmina,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,1,2026-09-04
+27,municipal,Chocó,Istmina,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,3775,2026-09-04
+27,municipal,Chocó,Istmina,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,215,2026-09-04
+27,municipal,Chocó,Bagadó,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,4,2026-09-04
+27,municipal,Chocó,Bagadó,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,2,2026-09-04
+27,municipal,Chocó,Bagadó,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1851,2026-09-04
+27,municipal,Chocó,Bagadó,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,76,2026-09-04
+27,municipal,Chocó,Medio Baudó,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,20,2026-09-04
+27,municipal,Chocó,Medio Baudó,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,8,2026-09-04
+27,municipal,Chocó,Medio Baudó,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1631,2026-09-04
+27,municipal,Chocó,Medio Baudó,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,91,2026-09-04
+27,municipal,Chocó,Unión Panamericana,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,5,2026-09-04
+27,municipal,Chocó,Unión Panamericana,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,2,2026-09-04
+27,municipal,Chocó,Unión Panamericana,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1386,2026-09-04
+27,municipal,Chocó,Unión Panamericana,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,82,2026-09-04
+27,municipal,Chocó,Carmen del Darién,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,9,2026-09-04
+27,municipal,Chocó,Carmen del Darién,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Carmen del Darién,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1670,2026-09-04
+27,municipal,Chocó,Carmen del Darién,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,74,2026-09-04
+27,municipal,Chocó,Riosucio,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,23,2026-09-04
+27,municipal,Chocó,Riosucio,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,1,2026-09-04
+27,municipal,Chocó,Riosucio,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,3537,2026-09-04
+27,municipal,Chocó,Riosucio,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,166,2026-09-04
+27,municipal,Chocó,Condoto,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,2,2026-09-04
+27,municipal,Chocó,Condoto,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Condoto,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,781,2026-09-04
+27,municipal,Chocó,Condoto,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,62,2026-09-04
+27,municipal,Chocó,Tadó,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,11,2026-09-04
+27,municipal,Chocó,Tadó,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,1,2026-09-04
+27,municipal,Chocó,Tadó,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1790,2026-09-04
+27,municipal,Chocó,Tadó,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,109,2026-09-04
+27,municipal,Chocó,Lloró,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,5,2026-09-04
+27,municipal,Chocó,Lloró,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Lloró,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1241,2026-09-04
+27,municipal,Chocó,Lloró,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,59,2026-09-04
+27,municipal,Chocó,El Carmen de Atrato,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,5,2026-09-04
+27,municipal,Chocó,El Carmen de Atrato,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,El Carmen de Atrato,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,932,2026-09-04
+27,municipal,Chocó,El Carmen de Atrato,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,56,2026-09-04
+27,municipal,Chocó,Acandí,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,3,2026-09-04
+27,municipal,Chocó,Acandí,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Acandí,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,899,2026-09-04
+27,municipal,Chocó,Acandí,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,30,2026-09-04
+27,municipal,Chocó,Río Quito,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,2,2026-09-04
+27,municipal,Chocó,Río Quito,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Río Quito,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,977,2026-09-04
+27,municipal,Chocó,Río Quito,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,72,2026-09-04
+27,municipal,Chocó,Unguía,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,3,2026-09-04
+27,municipal,Chocó,Unguía,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Unguía,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,805,2026-09-04
+27,municipal,Chocó,Unguía,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,49,2026-09-04
+27,municipal,Chocó,Bajo Baudó,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,23,2026-09-04
+27,municipal,Chocó,Bajo Baudó,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,7,2026-09-04
+27,municipal,Chocó,Bajo Baudó,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1566,2026-09-04
+27,municipal,Chocó,Bajo Baudó,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,112,2026-09-04
+27,municipal,Chocó,Nóvita,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,16,2026-09-04
+27,municipal,Chocó,Nóvita,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,8,2026-09-04
+27,municipal,Chocó,Nóvita,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,769,2026-09-04
+27,municipal,Chocó,Nóvita,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,53,2026-09-04
+27,municipal,Chocó,El Cantón del San Pablo,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,6,2026-09-04
+27,municipal,Chocó,El Cantón del San Pablo,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,El Cantón del San Pablo,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1141,2026-09-04
+27,municipal,Chocó,El Cantón del San Pablo,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,79,2026-09-04
+27,municipal,Chocó,Atrato,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,10,2026-09-04
+27,municipal,Chocó,Atrato,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,2,2026-09-04
+27,municipal,Chocó,Atrato,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,885,2026-09-04
+27,municipal,Chocó,Atrato,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,94,2026-09-04
+27,municipal,Chocó,Bahía Solano,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,4,2026-09-04
+27,municipal,Chocó,Bahía Solano,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Bahía Solano,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,1058,2026-09-04
+27,municipal,Chocó,Bahía Solano,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,71,2026-09-04
+27,municipal,Chocó,Medio San Juan,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,6,2026-09-04
+27,municipal,Chocó,Medio San Juan,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,1,2026-09-04
+27,municipal,Chocó,Medio San Juan,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,484,2026-09-04
+27,municipal,Chocó,Medio San Juan,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,38,2026-09-04
+27,municipal,Chocó,Río Iró,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,3,2026-09-04
+27,municipal,Chocó,Río Iró,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Río Iró,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,705,2026-09-04
+27,municipal,Chocó,Río Iró,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,45,2026-09-04
+27,municipal,Chocó,Sipí,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,3,2026-09-04
+27,municipal,Chocó,Sipí,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,1,2026-09-04
+27,municipal,Chocó,Sipí,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,280,2026-09-04
+27,municipal,Chocó,Sipí,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,17,2026-09-04
+27,municipal,Chocó,Medio Atrato,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,4,2026-09-04
+27,municipal,Chocó,Medio Atrato,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Medio Atrato,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,229,2026-09-04
+27,municipal,Chocó,Medio Atrato,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,14,2026-09-04
+27,municipal,Chocó,Alto Baudó,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,12,2026-09-04
+27,municipal,Chocó,Alto Baudó,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Alto Baudó,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,395,2026-09-04
+27,municipal,Chocó,Alto Baudó,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,33,2026-09-04
+27,municipal,Chocó,Bojayá,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,4,2026-09-04
+27,municipal,Chocó,Bojayá,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+27,municipal,Chocó,Bojayá,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,175,2026-09-04
+27,municipal,Chocó,Bojayá,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,13,2026-09-04
+27,municipal,Chocó,El Litoral del San Juan,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,3,2026-09-04
+27,municipal,Chocó,El Litoral del San Juan,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,1,2026-09-04
+27,municipal,Chocó,El Litoral del San Juan,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,74,2026-09-04
+27,municipal,Chocó,El Litoral del San Juan,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,9,2026-09-04
+05,municipal,Antioquia,Cocorná,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,1,2026-09-04
+05,municipal,Antioquia,Cocorná,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+05,municipal,Antioquia,Cocorná,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,20,2026-09-04
+05,municipal,Antioquia,Cocorná,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,1,2026-09-04
+17,municipal,Caldas,Marquetalia,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,1,2026-09-04
+17,municipal,Caldas,Marquetalia,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+17,municipal,Caldas,Marquetalia,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,10,2026-09-04
+17,municipal,Caldas,Marquetalia,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,1,2026-09-04
+05,municipal,Antioquia,San Carlos,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExito,1,2026-09-04
+05,municipal,Antioquia,San Carlos,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExito,0,2026-09-04
+05,municipal,Antioquia,San Carlos,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExito,8,2026-09-04
+05,municipal,Antioquia,San Carlos,Educación,sedes_edu_docentes_afectados,Docentes afectados,Número,FundacionExito,1,2026-09-04

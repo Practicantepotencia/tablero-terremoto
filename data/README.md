@@ -87,7 +87,7 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
   snapshot manual, sin forma de automatizar su actualización. Separado
   por `;` con BOM (export de Excel en español), a diferencia del resto
   de `data/` que usa `,` -- `load_sedes_educativas_afectadas()` lo lee
-  con `delimiter=";"` y lo agrega por municipio (`fuente=FundacionExito`)
+  con `delimiter=";"` y lo agrega por municipio (`fuente=FundacionExe`)
   para `indicadores_largo.csv`; el detalle por sede solo vive en este CSV.
   **Cobertura nacional, no solo Chocó**: 6.028 sedes en 451 municipios,
   21 departamentos (Valle del Cauca, Antioquia, Cauca, Caldas y Tolima

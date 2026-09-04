@@ -52,7 +52,7 @@ con el detalle de **sedes educativas afectadas** -- lo bajó y lo compartió
 directamente, sin necesidad de scraping. Ver `data/README.md` para el
 detalle del archivo (`sedes_educativas_afectadas_ago2026.csv`) y
 `load_sedes_educativas_afectadas()` en `actualizar_indice_terremoto.py`
-para cómo se agrega a `indicadores_largo.csv` (`fuente=FundacionExito`,
+para cómo se agrega a `indicadores_largo.csv` (`fuente=FundacionExe`,
 nivel municipal: sedes afectadas, sedes en estado crítico, matrícula
 afectada, docentes afectados).
 

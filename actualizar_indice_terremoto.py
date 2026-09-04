@@ -56,7 +56,7 @@ CAMARAS_COMERCIO_CSV = "data/camaras_comercio_empresarios_afectados_ago2026.csv"
 # snapshot manual, no se puede automatizar la descarga). Detalle por sede
 # (código DANE, severidad 1/2/3, matrícula, docentes, organizaciones
 # aliadas) -- solo entra al inventario crudo AGREGADO por municipio
-# (fuente=FundacionExito), el detalle por sede se conserva tal cual en
+# (fuente=FundacionExe), el detalle por sede se conserva tal cual en
 # el CSV para consulta manual.
 SEDES_EDUCATIVAS_CSV = "data/sedes_educativas_afectadas_ago2026.csv"
 
@@ -389,7 +389,7 @@ def load_sedes_educativas_afectadas(csv_path):
     matrícula, docentes...) -- cobertura nacional, no solo Chocó (21
     departamentos, 439 municipios en el snapshot de sep/2026) -- y lo
     agrega por (departamento, municipio). Solo materia prima para el
-    inventario de formato largo (fuente=FundacionExito), NO se usa para
+    inventario de formato largo (fuente=FundacionExe), NO se usa para
     recalcular ninguna dimensión del índice todavía. Archivo separado
     por ';' con BOM (export de Excel en español), a diferencia del resto
     de data/ que usa ','. Normaliza nombres de departamento sin tilde
@@ -661,7 +661,7 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
         for (dep, mun), valores in sedes_educativas_por_municipio.items():
             for campo, valor in valores.items():
                 fila(dep, mun, "municipal", "Educación",
-                     f"sedes_edu_{campo}", LABEL_SEDES_EDUCATIVAS_POR_CAMPO[campo], "Número", "FundacionExito", valor)
+                     f"sedes_edu_{campo}", LABEL_SEDES_EDUCATIVAS_POR_CAMPO[campo], "Número", "FundacionExe", valor)
 
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)

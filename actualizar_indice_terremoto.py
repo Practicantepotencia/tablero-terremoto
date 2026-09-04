@@ -465,6 +465,18 @@ DIM_AJUSTADO_LABELS = {
     "vulnerabilidad": "Vulnerabilidad previa (IPM)",
 }
 
+# Con pocas dimensiones, el compuesto_ajustado de una unidad es ESA(S)
+# dimensión(es) sola(s) -- no hay otras que la diluyan, así que tiene más
+# varianza que el de una unidad con cobertura completa (misma matemática
+# de "muestra chica": más probable en los extremos, no porque esté más o
+# menos afectada). Un municipio con 1/6 dimensiones (ej. Lorica, Córdoba,
+# con solo "Educación" vía FundacionExe antes del fix del filtro por
+# decreto) puede terminar arriba del ranking sin que eso signifique nada
+# comparable a un municipio con las 6. Por debajo de este umbral, un
+# municipio se muestra igual (con su ficha completa) pero no compite en
+# el ranking principal -- ver build_html(), sección "Por municipio".
+MIN_DIM_RANKING_MUN = 3
+
 RAMP = [
     (0,   (242, 241, 234)),
     (25,  (246, 212, 136)),
@@ -623,22 +635,34 @@ def load_3is_datos_territoriales(url=SHEETS_3IS_DATOS_TERRITORIALES_URL):
     return corte_dep, resultado_dep, corte_mun, resultado_mun
 
 
-def load_sedes_educativas_afectadas(csv_path):
+def load_sedes_educativas_afectadas(csv_path, solo_en_decreto=False):
     """Lee el detalle por sede educativa (código DANE, severidad 1/2/3,
     matrícula, docentes...) -- cobertura nacional, no solo Chocó (21
     departamentos, 439 municipios en el snapshot de sep/2026) -- y lo
-    agrega por (departamento, municipio). Solo materia prima para el
-    inventario de formato largo (fuente=FundacionExe), NO se usa para
-    recalcular ninguna dimensión del índice todavía. Archivo separado
-    por ';' con BOM (export de Excel en español), a diferencia del resto
-    de data/ que usa ','. Normaliza nombres de departamento sin tilde
-    (ej. 'Quindio') contra DIVIPOLA_DEPARTAMENTO. Devuelve {} si el
-    archivo no existe."""
+    agrega por (departamento, municipio). Archivo separado por ';' con
+    BOM (export de Excel en español), a diferencia del resto de data/ que
+    usa ','. Normaliza nombres de departamento sin tilde (ej. 'Quindio')
+    contra DIVIPOLA_DEPARTAMENTO. Devuelve {} si el archivo no existe.
+
+    Si solo_en_decreto=True, descarta toda sede cuya columna "En Decreto
+    1171 de 2026" no diga "SI" -- el propio CSV ya trae esa bandera (2.310
+    de 6.028 sedes marcadas, el resto vacía o "NO"), pero el agregado por
+    defecto la ignora a propósito para el inventario crudo
+    (fuente=FundacionExe): ahí se listan las 6.028 tal como las reporta la
+    fuente, sin editorializar (ver docs/investigacion_fundacion_exito.md).
+    El índice ajustado (Fase B, ver docs/indice_ajustado.md) SÍ necesita
+    este filtro -- sin él, sedes de departamentos que el sismo apenas
+    sintió (ej. Córdoba) terminaban compitiendo con Chocó/Valle del Cauca
+    en el ranking municipal, porque "Educación" era la única dimensión
+    disponible ahí y su normalización no tenía forma de saber que esas
+    sedes no tenían relación con este sismo."""
     if not csv_path or not os.path.exists(csv_path):
         return {}
     por_mun = defaultdict(lambda: {"n_sedes": 0, "n_sedes_criticas": 0, "matricula_afectada": 0, "docentes_afectados": 0})
     with open(csv_path, encoding="utf-8-sig") as f:
         for row in csv.DictReader(f, delimiter=";"):
+            if solo_en_decreto and (row.get("En Decreto 1171 de 2026") or "").strip().upper() != "SI":
+                continue
             dep = normalizar_nombre_departamento((row.get("Departamento") or "").strip())
             mun = (row.get("Municipio") or "").strip()
             if not dep or not mun:
@@ -963,6 +987,7 @@ def compute_indice_ajustado(dep_pop, rows_naboo, municipios,
             v = idx_dim[d].get(dep)
             fila[f"{d}_ajust_idx"] = round(v, 1) if v is not None else None
             fila[f"{d}_ajust_fuente"] = fuente_dim[d].get(dep)
+            fila[f"{d}_ajust_raw"] = valores_dim[d].get(dep)
             if v is not None:
                 disponibles.append(v)
         fila["compuesto_ajustado"] = round(sum(disponibles) / len(disponibles), 1) if disponibles else None
@@ -1027,6 +1052,7 @@ def compute_indice_ajustado(dep_pop, rows_naboo, municipios,
             v = idx_dim_mun[d].get((dep, mun))
             fila[f"{d}_ajust_idx"] = round(v, 1) if v is not None else None
             fila[f"{d}_ajust_fuente"] = fuente_dim_mun[d].get((dep, mun))
+            fila[f"{d}_ajust_raw"] = valores_dim_mun[d].get((dep, mun))
             if v is not None:
                 disponibles.append(v)
         if not disponibles:
@@ -1055,11 +1081,13 @@ def write_indice_csv(rows, csv_path):
 def write_indice_ajustado_csv(filas_dep, filas_mun, csv_path_dep, csv_path_mun):
     """Escribe el índice ajustado (Fase B) en dos CSV en paralelo al
     índice original -- uno departamental, uno municipal. Cada dimensión
-    trae su propia columna "_fuente" al lado del índice, para que quede
-    a la vista cuál de las fuentes en cascada alimentó esa celda."""
+    trae su propia columna "_fuente" (cuál de las fuentes en cascada
+    alimentó esa celda) y "_raw" (el valor tal cual antes de normalizar
+    0-100) al lado del índice -- para poder rastrear cualquier puntaje
+    hasta su número crudo sin tener que cruzar archivos a mano."""
     campos_dim = []
     for d in DIMS_AJUSTADO:
-        campos_dim += [f"{d}_ajust_idx", f"{d}_ajust_fuente"]
+        campos_dim += [f"{d}_ajust_idx", f"{d}_ajust_raw", f"{d}_ajust_fuente"]
 
     if csv_path_dep:
         fieldnames = ["departamento"] + campos_dim + ["compuesto_ajustado", "n_dimensiones"]
@@ -1592,18 +1620,52 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     # decide si migrar. ---
     tab_ajustado_html = ""
     if filas_ajustado_dep:
-        def cell_ajust(v, fuente):
+        def fmt_raw_ajust(d, v):
+            """Formato legible del valor crudo -- antes de normalizar 0-100
+            -- según la unidad de cada dimensión (COP, índice, conteo)."""
+            if v is None:
+                return "—"
+            if d == "economico":
+                return f"${v:,.0f} COP"
+            if d == "vulnerabilidad":
+                return f"{v:,.1f}"
+            return f"{v:,.0f}"
+
+        def cell_ajust(d, v, raw, fuente):
             if v is None:
                 return '<td class="cell muted" title="Sin dato en ninguna fuente para esta dimensión">—</td>'
-            titulo = f"Fuente: {fuente}" if fuente else ""
+            titulo = f"{fuente} · crudo: {fmt_raw_ajust(d, raw)}" if fuente else ""
             return f'<td class="cell" style="background:{cell_color(v)};color:{text_on(v)}" title="{titulo}">{v:.0f}</td>'
+
+        def ficha_dimensiones_html(fila):
+            """Tabla de 4 columnas -- dimensión, valor crudo, fuente, índice
+            0-100 -- para que cualquier puntaje se pueda rastrear hasta el
+            número que lo originó, sin adivinar ni cruzar CSV a mano."""
+            filas_html = []
+            for d in DIMS_AJUSTADO:
+                idx = fila[f"{d}_ajust_idx"]
+                raw = fila[f"{d}_ajust_raw"]
+                fuente = fila[f"{d}_ajust_fuente"]
+                idx_cell = (f'<td class="num" style="background:{cell_color(idx)};color:{text_on(idx)}">{idx:.0f}</td>'
+                            if idx is not None else '<td class="num muted">—</td>')
+                filas_html.append(f"""
+            <tr>
+              <td class="left">{DIM_AJUSTADO_LABELS[d]}</td>
+              <td class="num muted">{fmt_raw_ajust(d, raw)}</td>
+              <td class="left muted">{fuente or '—'}</td>
+              {idx_cell}
+            </tr>""")
+            return f"""<table class="muni">
+              <thead><tr><th class="left">Dimensión</th><th>Valor crudo</th><th class="left">Fuente</th><th>Índice 0-100</th></tr></thead>
+              <tbody>{''.join(filas_html)}</tbody>
+            </table>"""
 
         header_dim_ajust = "".join(f'<th>{DIM_AJUSTADO_LABELS[d]}</th>' for d in DIMS_AJUSTADO)
         filas_dep_html = []
         for f in filas_ajustado_dep:
             comp = f["compuesto_ajustado"]
             comp_html = f'{comp:.1f}{bar(comp)}' if comp is not None else '<span class="muted">sin dato</span>'
-            cells = "".join(cell_ajust(f[f"{d}_ajust_idx"], f[f"{d}_ajust_fuente"]) for d in DIMS_AJUSTADO)
+            cells = "".join(cell_ajust(d, f[f"{d}_ajust_idx"], f[f"{d}_ajust_raw"], f[f"{d}_ajust_fuente"]) for d in DIMS_AJUSTADO)
             filas_dep_html.append(f"""
         <tr>
           <td class="dep-cell"><span class="dep-name">{f['departamento']}</span></td>
@@ -1616,24 +1678,65 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
         n_dep_con_dato = sum(1 for f in filas_ajustado_dep if f["n_dimensiones"] > 0)
         n_dep_completo = sum(1 for f in filas_ajustado_dep if f["n_dimensiones"] == len(DIMS_AJUSTADO))
 
+        # Ficha por departamento (mismo patrón que la pestaña "Perfil por
+        # departamento" del índice original): un acordeón por departamento
+        # con la tabla completa de dimensión -> valor crudo -> fuente ->
+        # índice, para no depender del tooltip de la tabla de arriba.
+        ficha_dep_items = []
+        for f in sorted(filas_ajustado_dep, key=lambda r: (-(r["compuesto_ajustado"] if r["compuesto_ajustado"] is not None else -1), r["departamento"])):
+            comp = f["compuesto_ajustado"]
+            badge = (f'<span class="score-badge" style="background:{cell_color(comp)};color:{text_on(comp)}">{comp:.0f}</span>{bar(comp)}'
+                     if comp is not None else '<span class="muted">sin dato</span>')
+            ficha_dep_items.append(f"""
+        <details class="dep-accordion">
+          <summary>
+            <span class="dep-accordion-name">{f['departamento']}</span>
+            <span class="dep-accordion-score">{badge}</span>
+            <span class="dep-accordion-count">{f['n_dimensiones']}/{len(DIMS_AJUSTADO)} dimensiones con dato</span>
+          </summary>
+          <div class="table-scroll">{ficha_dimensiones_html(f)}</div>
+        </details>""")
+        ficha_dep_html = f"""
+    <section>
+      <div class="section-head"><h2>Ficha por departamento</h2></div>
+      <p class="note">Expande un departamento para ver, dimensión por dimensión, el valor crudo que trajo la fuente, cuál fuente fue, y en qué índice 0-100 quedó.</p>
+      <div class="accordion-list">{''.join(ficha_dep_items)}
+      </div>
+    </section>"""
+
         # Municipal: agrupado por departamento, mismo patrón que la pestaña
         # "Vista municipal" -- pero solo entran los municipios con dato en
-        # al menos una dimensión (no los ~1.122 del país).
+        # al menos una dimensión (no los ~1.122 del país). Separado en dos
+        # grupos por MIN_DIM_RANKING_MUN: un municipio con 1-2 dimensiones
+        # no compite en el ranking principal (ver la constante, más varianza
+        # por muestra chica -- así apareció Lorica, Córdoba en el puesto 2
+        # antes de este fix), pero se sigue mostrando con su ficha completa.
         muni_accordion = ""
+        n_mun_parcial = 0
         if filas_ajustado_mun:
-            por_dep_mun = defaultdict(list)
-            for f in filas_ajustado_mun:
-                por_dep_mun[f["departamento"]].append(f)
-            deps_mun_ordenados = sorted(por_dep_mun, key=lambda d: (-max(m["compuesto_ajustado"] for m in por_dep_mun[d]), d))
+            def muni_item_html(m):
+                return f"""
+            <details class="dep-accordion">
+              <summary>
+                <span class="dep-accordion-name">{m['municipio']}</span>
+                <span class="dep-accordion-score"><span class="score-badge" style="background:{cell_color(m['compuesto_ajustado'])};color:{text_on(m['compuesto_ajustado'])}">{m['compuesto_ajustado']:.0f}</span></span>
+                <span class="dep-accordion-count">{m['n_dimensiones']}/{len(DIMS_AJUSTADO)} dimensiones con dato</span>
+              </summary>
+              <div class="table-scroll">{ficha_dimensiones_html(m)}</div>
+            </details>"""
+
+            elegibles = [f for f in filas_ajustado_mun if f["n_dimensiones"] >= MIN_DIM_RANKING_MUN]
+            parciales = [f for f in filas_ajustado_mun if f["n_dimensiones"] < MIN_DIM_RANKING_MUN]
+            n_mun_parcial = len(parciales)
+
+            por_dep_elegibles = defaultdict(list)
+            for f in elegibles:
+                por_dep_elegibles[f["departamento"]].append(f)
+            deps_ordenados = sorted(por_dep_elegibles, key=lambda d: (-max(m["compuesto_ajustado"] for m in por_dep_elegibles[d]), d))
             items = []
-            for dep in deps_mun_ordenados:
-                munis = sorted(por_dep_mun[dep], key=lambda m: -m["compuesto_ajustado"])
-                muni_rows = "\n".join(f"""
-            <tr>
-              <td>{m['municipio']}</td>
-              <td class="num muted">{m['n_dimensiones']}/{len(DIMS_AJUSTADO)}</td>
-              <td class="num" style="background:{cell_color(m['compuesto_ajustado'])};color:{text_on(m['compuesto_ajustado'])}">{m['compuesto_ajustado']:.0f}</td>
-            </tr>""" for m in munis)
+            for dep in deps_ordenados:
+                munis = sorted(por_dep_elegibles[dep], key=lambda m: -m["compuesto_ajustado"])
+                muni_items = "\n".join(muni_item_html(m) for m in munis)
                 peor_mun = munis[0]
                 score_badge = f'<span class="score-badge" style="background:{cell_color(peor_mun["compuesto_ajustado"])};color:{text_on(peor_mun["compuesto_ajustado"])}">{peor_mun["compuesto_ajustado"]:.0f}</span>'
                 items.append(f"""
@@ -1643,19 +1746,35 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
             <span class="dep-accordion-score">{score_badge}{bar(peor_mun['compuesto_ajustado'])}</span>
             <span class="dep-accordion-count">{len(munis)} municipios con dato · peor: {peor_mun['municipio']}</span>
           </summary>
-          <div class="table-scroll">
-            <table class="muni">
-              <thead><tr><th class="left">Municipio</th><th>Dimensiones</th><th>Índice ajustado</th></tr></thead>
-              <tbody>{muni_rows}</tbody>
-            </table>
+          <div class="accordion-list nested">{muni_items}
           </div>
         </details>""")
+
+            parciales_html = ""
+            if parciales:
+                parciales_ordenados = sorted(parciales, key=lambda m: (-m["compuesto_ajustado"], m["departamento"], m["municipio"]))
+                parciales_items = "\n".join(f"""
+            <details class="dep-accordion">
+              <summary>
+                <span class="dep-accordion-name">{m['municipio']}, {m['departamento']}</span>
+                <span class="dep-accordion-score"><span class="score-badge" style="background:{cell_color(m['compuesto_ajustado'])};color:{text_on(m['compuesto_ajustado'])}">{m['compuesto_ajustado']:.0f}</span></span>
+                <span class="dep-accordion-count">{m['n_dimensiones']}/{len(DIMS_AJUSTADO)} dimensiones -- no comparable con el ranking principal</span>
+              </summary>
+              <div class="table-scroll">{ficha_dimensiones_html(m)}</div>
+            </details>""" for m in parciales_ordenados)
+                parciales_html = f"""
+      <div class="section-head" style="margin-top:26px;"><h2>Cobertura mínima -- no comparable</h2></div>
+      <p class="note">{len(parciales)} municipios con menos de {MIN_DIM_RANKING_MUN}/{len(DIMS_AJUSTADO)} dimensiones -- su compuesto_ajustado es esa única dimensión (o el promedio de 2), no un promedio real, así que no compiten en el ranking de arriba. Se muestran igual, con su ficha completa, para que el dato no desaparezca.</p>
+      <div class="accordion-list">{parciales_items}
+      </div>"""
+
             muni_accordion = f"""
     <section>
       <div class="section-head"><h2>Por municipio</h2></div>
-      <p class="note">Solo los municipios con dato en al menos una dimensión ({len(filas_ajustado_mun)} de ~1.122 del país) -- la cobertura real depende de qué fuentes alcanzaron cada zona (UNDP-RAPIDA solo evalúa la zona con intensidad sísmica MMI≥5). Agrupados por departamento, ordenados por índice ajustado.</p>
+      <p class="note">Solo los municipios con dato en al menos una dimensión ({len(filas_ajustado_mun)} de ~1.122 del país) -- la cobertura real depende de qué fuentes alcanzaron cada zona (UNDP-RAPIDA solo evalúa la zona con intensidad sísmica MMI≥5). Ranking principal: municipios con {MIN_DIM_RANKING_MUN}+ de {len(DIMS_AJUSTADO)} dimensiones ({len(elegibles)}). Agrupados por departamento; expande un departamento y luego un municipio para ver su ficha completa (valor crudo, fuente, índice por dimensión).</p>
       <div class="accordion-list">{''.join(items)}
       </div>
+      {parciales_html}
     </section>"""
 
         tab_ajustado_html = f"""
@@ -1679,6 +1798,11 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
         <div class="tile-value">{len(filas_ajustado_mun)}</div>
         <div class="tile-sub">de ~1.122 del país -- ver nota abajo</div>
       </div>
+      <div class="tile">
+        <div class="tile-label">Cobertura mínima (&lt;{MIN_DIM_RANKING_MUN}/{len(DIMS_AJUSTADO)} dim.)</div>
+        <div class="tile-value">{n_mun_parcial}</div>
+        <div class="tile-sub">no compiten en el ranking -- ver "Cobertura mínima" abajo</div>
+      </div>
     </div>
     <section>
       <div class="section-head">
@@ -1688,7 +1812,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
           <div class="legend-labels"><span>0</span><span>100</span></div>
         </div>
       </div>
-      <p class="note">"—" = ninguna fuente tiene dato para esa dimensión en ese departamento (no es un cero). El índice ajustado del departamento es el promedio de las dimensiones que sí tienen dato, no de las {len(DIMS_AJUSTADO)} completas.</p>
+      <p class="note">"—" = ninguna fuente tiene dato para esa dimensión en ese departamento (no es un cero). El índice ajustado del departamento es el promedio de las dimensiones que sí tienen dato, no de las {len(DIMS_AJUSTADO)} completas. Pasa el mouse sobre un número para ver la fuente y el valor crudo, o expande la ficha de abajo.</p>
       <div class="table-card">
         <div class="table-scroll">
           <table class="heat">
@@ -1698,13 +1822,15 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
         </div>
       </div>
     </section>
+    {ficha_dep_html}
     {muni_accordion}
     <section>
       <details class="method">
         <summary>Metodología y limitaciones</summary>
         <div class="method-body">
           <p>Cada dimensión toma la PRIMERA fuente disponible de una jerarquía fija (nunca combina dos en la misma celda): <b>Vivienda</b> = PNUD &gt; 3iS &gt; Naboo (depto) / UNDP-RAPIDA &gt; PNUD &gt; 3iS (municipio); <b>Salud</b> = PNUD &gt; 3iS &gt; Naboo (depto) / UNDP-RAPIDA &gt; PNUD &gt; 3iS (municipio); <b>Educación</b> = PNUD &gt; 3iS &gt; FundacionExe &gt; Naboo (depto) / UNDP-RAPIDA &gt; PNUD &gt; 3iS &gt; FundacionExe (municipio); <b>Instituciones</b> = 3iS &gt; Naboo (depto) / UNDP-RAPIDA &gt; 3iS (municipio); <b>Pérdidas económicas</b> (nueva) = solo UNDP-RAPIDA, nunca también PNUD -- son el mismo dato, ver la auditoría de fuentes; <b>Vulnerabilidad previa / IPM</b> (nueva) = solo UNDP-RAPIDA, ponderada por población municipal a nivel departamental.</p>
-          <p>Cada dimensión se normaliza 0-100 (mínimo-máximo) solo entre las unidades que sí tienen dato para ESA dimensión -- una dimensión con poca cobertura no queda aplastada contra 0 por las unidades sin medir. El índice ajustado de cada unidad es el promedio simple de sus dimensiones disponibles, no de todas. Detalle completo en <span class="mono">docs/indice_ajustado.md</span>.</p>
+          <p>Cada dimensión se normaliza 0-100 (mínimo-máximo) solo entre las unidades que sí tienen dato para ESA dimensión -- una dimensión con poca cobertura no queda aplastada contra 0 por las unidades sin medir. El índice ajustado de cada unidad es el promedio simple de sus dimensiones disponibles, no de todas.</p>
+          <p><b>Dos correcciones sobre la primera versión de este índice:</b> (1) FundacionExe reporta sedes educativas en 21 departamentos, muchos sin relación con este sismo -- ahora solo se usan las marcadas "En Decreto 1171 de 2026 = SI" en el propio archivo fuente. (2) Con pocas dimensiones el compuesto es esa(s) dimensión(es) sola(s), sin nada que la(s) dilute -- más varianza que con cobertura completa, así que un municipio con menos de {MIN_DIM_RANKING_MUN}/{len(DIMS_AJUSTADO)} dimensiones no compite en el ranking principal (se muestra aparte, en "Cobertura mínima"). Detalle completo, con el caso que motivó ambos fixes, en <span class="mono">docs/indice_ajustado.md</span>.</p>
         </div>
       </details>
     </section>
@@ -1797,6 +1923,8 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
   .tab-btn.active {{ color: var(--accent); border-bottom-color: var(--accent); }}
   .tab-panel[hidden] {{ display: none; }}
   .accordion-list {{ display: flex; flex-direction: column; gap: 8px; }}
+  .accordion-list.nested {{ padding: 4px 12px 12px; gap: 6px; }}
+  .accordion-list.nested details.dep-accordion {{ box-shadow: none; border-color: var(--border); }}
   details.dep-accordion {{ background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }}
   details.dep-accordion summary {{ cursor: pointer; list-style: none; padding: 13px 16px; display: flex; align-items: center; gap: 16px; font-weight: 600; font-size: 14px; }}
   details.dep-accordion summary::-webkit-details-marker {{ display: none; }}
@@ -2028,6 +2156,17 @@ def main():
         n_sedes_total = sum(v["n_sedes"] for v in sedes_educativas_por_municipio.values())
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: sedes educativas afectadas de {SEDES_EDUCATIVAS_CSV} -- {n_sedes_total} sedes en {len(sedes_educativas_por_municipio)} municipios (materia prima, no se usa para recalcular el índice)")
 
+    # Variante filtrada, solo para el índice ajustado (ver docs/indice_
+    # ajustado.md) -- el inventario crudo de arriba se queda con las 6.028
+    # sedes tal como las reporta FundacionExe, sin editorializar; para
+    # recalcular algo hace falta la bandera que trae el propio CSV ("En
+    # Decreto 1171 de 2026"), que descarta las sedes de zonas que el sismo
+    # no afectó (ver load_sedes_educativas_afectadas()).
+    sedes_educativas_en_decreto_por_municipio = load_sedes_educativas_afectadas(SEDES_EDUCATIVAS_CSV, solo_en_decreto=True)
+    if sedes_educativas_en_decreto_por_municipio:
+        n_sedes_decreto = sum(v["n_sedes"] for v in sedes_educativas_en_decreto_por_municipio.values())
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Índice ajustado: sedes educativas filtradas a zona oficial (En Decreto 1171=SI) -- {n_sedes_decreto} de {n_sedes_total if sedes_educativas_por_municipio else 0} sedes, {len(sedes_educativas_en_decreto_por_municipio)} municipios")
+
     datos_pnud_por_dep, datos_pnud_por_municipio = load_pnud_perdidas_economicas(PNUD_PERDIDAS_URL)
     if datos_pnud_por_dep:
         tot_nacional = sum(v["tot_cop"] for v in datos_pnud_por_dep.values())
@@ -2052,7 +2191,7 @@ def main():
         datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None,
         datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None,
         datos_undp_por_dep=datos_undp_por_dep or None, datos_undp_por_municipio=datos_undp_por_municipio or None,
-        sedes_educativas_por_municipio=sedes_educativas_por_municipio or None,
+        sedes_educativas_por_municipio=sedes_educativas_en_decreto_por_municipio or None,
     )
     n_dep_con_dato = sum(1 for f in filas_ajustado_dep if f["n_dimensiones"] > 0)
     print(f"[{datetime.now().isoformat(timespec='seconds')}] Índice ajustado (Fase B): {n_dep_con_dato}/{len(filas_ajustado_dep)} departamentos con al menos 1 dimensión, {len(filas_ajustado_mun)} municipios con dato -> {args.indice_ajustado_dep or '(desactivado)'}")

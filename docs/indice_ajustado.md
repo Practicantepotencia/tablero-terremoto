@@ -46,13 +46,70 @@ no arriesgar lo que ya está en producción ni romper la comparabilidad de
    quede claro que no todos los compuestos se calcularon con la misma
    base.
 
+## Dos fallas reales encontradas después de publicar la beta, y su arreglo
+
+La primera versión de este índice tenía dos problemas de fondo -- no
+cosméticos, cambiaban el ranking. Los detectó Daniel al revisarlo, con un
+caso concreto: **Lorica (Córdoba) apareció en el puesto 2 del ranking
+municipal**, por encima de casi todo Chocó, Valle del Cauca y Risaralda --
+pese a que la región Caribe apenas sintió el sismo.
+
+### Falla 1: FundacionExe no estaba filtrada a la zona del sismo
+
+`data/sedes_educativas_afectadas_ago2026.csv` trae sedes de 21
+departamentos -- muchos sin relación con este sismo (Boyacá, Atlántico,
+Casanare, Meta...). El propio archivo ya trae una columna, **"En Decreto
+1171 de 2026"**, que marca "SI" para las sedes dentro de la zona
+oficialmente declarada en desastre (2.310 de 6.028 sedes) -- el loader la
+estaba ignorando. Las 100 sedes que el archivo reporta para Lorica tienen
+esa columna vacía en las 100: no están marcadas como parte de la zona del
+sismo.
+
+`load_sedes_educativas_afectadas()` ahora acepta `solo_en_decreto=True` --
+`main()` carga la fuente dos veces: sin filtrar para el inventario crudo
+(`indicadores_largo.csv`, `fuente=FundacionExe`, se queda con las 6.028
+sedes tal como las reporta la fuente, sin editorializar) y filtrada para
+el índice ajustado (2.310 sedes, 174 municipios). Con el filtro, Lorica
+deja de tener dato en absoluto -- desaparece del índice ajustado, que es
+lo correcto: no hay ninguna fuente que diga que el sismo la afectó.
+
+### Falla 2: pocas dimensiones = más varianza, no más certeza
+
+Aun sin el bug de Falla 1, el diseño tenía un problema más general: el
+compuesto de una unidad es el promedio de sus dimensiones *disponibles*.
+Con 1 sola dimensión, esa dimensión **es** el compuesto entero -- nada la
+diluye. Eso le da más varianza a las unidades con poca cobertura (más
+probable que aparezcan en los extremos del ranking, no porque estén más o
+menos afectadas, sino por tamaño de muestra), exactamente el patrón que
+produjo el caso de Lorica.
+
+Fix: `MIN_DIM_RANKING_MUN = 3` -- un municipio con menos de 3 de las 6
+dimensiones no compite en el ranking principal ("Por municipio"). Se
+sigue mostrando, con su ficha completa, en una sección aparte ("Cobertura
+mínima -- no comparable") para que el dato no desaparezca, solo deja de
+competir contra unidades con base de comparación real. (A nivel
+departamental no hace falta un umbral: Naboo cubre los 25 departamentos
+en 4 de las 6 dimensiones, así que ningún departamento cae por debajo de
+4/6.)
+
+### Transparencia: valor crudo visible, no solo el índice 0-100
+
+De paso, se resolvió una queja relacionada: no había forma de saber, sin
+cruzar CSV a mano, qué número crudo había detrás de cada celda. Ahora
+`compute_indice_ajustado()` guarda también `{dimensión}_ajust_raw` (el
+valor antes de normalizar), y el tablero lo muestra en dos lugares: el
+tooltip de cada celda de la tabla ("Fuente · crudo: X"), y una ficha
+expandible por departamento y por municipio (`ficha_dimensiones_html()`)
+con una tabla de 4 columnas -- Dimensión, Valor crudo, Fuente, Índice
+0-100 -- igual para todas las unidades, tengan 1 o 6 dimensiones con dato.
+
 ## Jerarquía de fuentes por dimensión
 
 | Dimensión | Departamental | Municipal |
 |---|---|---|
 | Vivienda | PNUD (`vd`+`va`) → 3iS (`VivDestruidas`+`VivAveriadas`) → Naboo (`vivienda_n`) | UNDP-RAPIDA (`bdg_homes_dest`+`bdg_homes_dmg`) → PNUD → 3iS |
 | Salud | PNUD (`csalud`) → 3iS (`Salud`) → Naboo (`salud_n`) | UNDP-RAPIDA (`bdg_health_aff`) → PNUD → 3iS |
-| Educación | PNUD (`cedu`) → 3iS (`Educativos`) → FundacionExe (`n_sedes`, agregado por depto) → Naboo (`educacion_n`) | UNDP-RAPIDA (`bdg_edu_aff`) → PNUD → 3iS → FundacionExe |
+| Educación | PNUD (`cedu`) → 3iS (`Educativos`) → FundacionExe (`n_sedes`, agregado por depto, solo sedes "En Decreto 1171=SI") → Naboo (`educacion_n`) | UNDP-RAPIDA (`bdg_edu_aff`) → PNUD → 3iS → FundacionExe (solo sedes "En Decreto 1171=SI") |
 | Instituciones | 3iS (`Comunitarios`) → Naboo (`instituciones_n`) | UNDP-RAPIDA (`bdg_comm_aff`+`bdg_public_imp`) → 3iS (`Comunitarios`) |
 | Pérdidas económicas *(nueva)* | UNDP-RAPIDA (`econ_dmg_total_cop`) -- única fuente, nunca PNUD también | UNDP-RAPIDA (`econ_dmg_total_cop`) |
 | Vulnerabilidad previa / IPM *(nueva)* | UNDP-RAPIDA (`mpi`), ponderado por población municipal | UNDP-RAPIDA (`mpi`) directo |

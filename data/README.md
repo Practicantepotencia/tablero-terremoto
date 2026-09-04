@@ -149,3 +149,22 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
   averiadas, centros de salud/educativos/comunitarios afectados) y costo
   estimado en COP por categoría y total. Total nacional estimado en el
   snapshot: **$42,1 billones de pesos**.
+- **UNDP geosmart -- Evaluación RAPIDA (StoryMap + dashboards ArcGIS)**
+  (ver `docs/investigacion_undp_geosmart.md`). StoryMap de UNGRD + PNUD
+  ("Evaluación Rápida del Terremoto de Magnitud 7.4 en Colombia") en el
+  portal ArcGIS Enterprise propio de UNDP -- el texto del StoryMap y sus
+  13 dashboards son solo visualización; el dato real vive en 2 Feature
+  Services de ArcGIS REST, públicos y sin token, que
+  `load_undp_geosmart_rapida()` consulta frescos en cada corrida
+  (paginado). `COL_adm1` (departamental): escombros en m³ y daño
+  económico en COP. `COL_RAPIDA_earthquake_adm2_20260810` (municipal, con
+  código DIVIPOLA municipal de 5 dígitos limpio disponible pero no usado
+  todavía): fallecidos/desaparecidos/heridos, población expuesta e
+  impactada (urbana/rural), edificaciones afectadas por categoría, vías
+  expuestas/impactadas (km), IPM, susceptibilidad a licuación y
+  deslizamientos, necesidades de recuperación temprana, y daño económico
+  -- 24 campos, la fuente más rica de toda la sesión. Entra al inventario
+  crudo (`fuente=UNDP-RAPIDA`) sin tocar el índice. Su cifra de daño
+  económico total en Chocó coincide casi exacto con la de PNUD -- ver nota
+  de validación cruzada en el doc, probablemente comparten linaje, no son
+  mediciones independientes.

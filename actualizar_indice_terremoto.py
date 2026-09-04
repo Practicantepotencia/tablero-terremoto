@@ -27,6 +27,7 @@ import json
 import os
 import sys
 import unicodedata
+import urllib.parse
 import urllib.request
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -176,6 +177,139 @@ def load_pnud_perdidas_economicas(url=PNUD_PERDIDAS_URL):
         (r["dep"], r["mun"]): {c: r.get(c, 0) for c in campos}
         for r in datos.get("municipios", {}).values()
     }
+    return datos_dep, datos_mun
+
+# StoryMap de UNDP geosmart ("Evaluación Rápida del Terremoto de Magnitud
+# 7.4 en Colombia", UNGRD + PNUD -- ver docs/investigacion_undp_geosmart.md).
+# El StoryMap en sí es solo texto narrativo; los números reales viven en dos
+# Feature Services de ArcGIS Enterprise, públicos y sin token, que alimentan
+# los 13 dashboards que enlaza: COL_adm1 (departamento) y
+# COL_RAPIDA_earthquake_adm2_20260810 (municipio, con el código DIVIPOLA
+# municipal de 5 dígitos limpio en "mpcodigo" -- no se usa todavía, ver nota
+# en el doc). Es la evaluación RAPIDA "oficial" de UNGRD/PNUD: la más rica
+# de las fuentes de esta sesión (heridos/fallecidos, exposición e impacto
+# poblacional urbano/rural, edificaciones por categoría, vías, escombros,
+# IPM, susceptibilidad a licuación/deslizamiento, necesidades de
+# recuperación temprana, y daño económico). Solo inventario crudo
+# (fuente=UNDP-RAPIDA), no se usa para recalcular el índice todavía.
+ARCGIS_ADM1_URL = "https://geosmarthosting.undp.org/arcgis/rest/services/Hosted/COL_adm1/FeatureServer/0"
+ARCGIS_ADM2_URL = "https://geosmarthosting.undp.org/arcgis/rest/services/Hosted/COL_RAPIDA_earthquake_adm2_20260810/FeatureServer/0"
+
+CAMPOS_UNDP_ADM1 = [
+    "debris_households_m3", "debris_buildings_m3", "debris_infra_m3", "debris_total_m3",
+    "econ_dmg_households_cop", "econ_dmg_infra_cop", "econ_dmg_total_cop",
+]
+CAMPOS_UNDP_ADM2 = [
+    "pop_dead", "pop_missing", "pop_inj", "pop_exp", "pop_exp_urb", "pop_exp_rur", "pop_imp",
+    "bdg_exp", "bdg_comm_aff", "bdg_health_aff", "bdg_edu_aff", "bdg_homes_dmg", "bdg_homes_dest",
+    "bdg_public_imp", "bdg_other_imp", "roads_exp_km", "roads_imp_km", "mpi",
+    "liquefaction", "landslides", "recovery_needs",
+    "econ_dmg_households_cop", "econ_dmg_infra_cop", "econ_dmg_total_cop",
+]
+LABEL_UNDP_POR_CAMPO = {
+    "debris_households_m3": "Escombros de vivienda (m³)",
+    "debris_buildings_m3": "Escombros de edificaciones (m³)",
+    "debris_infra_m3": "Escombros de infraestructura (m³)",
+    "debris_total_m3": "Escombros totales (m³)",
+    "econ_dmg_households_cop": "Daño económico en vivienda (COP)",
+    "econ_dmg_infra_cop": "Daño económico en infraestructura (COP)",
+    "econ_dmg_total_cop": "Daño económico total (COP)",
+    "pop_dead": "Personas fallecidas", "pop_missing": "Personas desaparecidas",
+    "pop_inj": "Personas heridas", "pop_exp": "Población expuesta",
+    "pop_exp_urb": "Población expuesta (urbana)", "pop_exp_rur": "Población expuesta (rural)",
+    "pop_imp": "Población impactada", "bdg_exp": "Edificaciones expuestas",
+    "bdg_comm_aff": "Edificaciones comunitarias afectadas",
+    "bdg_health_aff": "Edificaciones de salud afectadas",
+    "bdg_edu_aff": "Edificaciones educativas afectadas",
+    "bdg_homes_dmg": "Viviendas averiadas", "bdg_homes_dest": "Viviendas destruidas",
+    "bdg_public_imp": "Edificaciones públicas impactadas",
+    "bdg_other_imp": "Otras edificaciones impactadas",
+    "roads_exp_km": "Vías expuestas (km)", "roads_imp_km": "Vías impactadas (km)",
+    "mpi": "Índice de pobreza multidimensional (IPM)",
+    "liquefaction": "Susceptibilidad a licuación", "landslides": "Susceptibilidad a deslizamientos",
+    "recovery_needs": "Necesidades de recuperación temprana",
+}
+DIMENSION_UNDP_POR_CAMPO = {
+    "debris_households_m3": "Escombros", "debris_buildings_m3": "Escombros",
+    "debris_infra_m3": "Escombros", "debris_total_m3": "Escombros",
+    "econ_dmg_households_cop": "Pérdidas económicas", "econ_dmg_infra_cop": "Pérdidas económicas",
+    "econ_dmg_total_cop": "Pérdidas económicas",
+    "pop_dead": "Personas", "pop_missing": "Personas", "pop_inj": "Personas",
+    "pop_exp": "Personas", "pop_exp_urb": "Personas", "pop_exp_rur": "Personas", "pop_imp": "Personas",
+    "bdg_exp": "Infraestructura", "bdg_comm_aff": "Infraestructura", "bdg_health_aff": "Infraestructura",
+    "bdg_edu_aff": "Infraestructura", "bdg_homes_dmg": "Infraestructura", "bdg_homes_dest": "Infraestructura",
+    "bdg_public_imp": "Infraestructura", "bdg_other_imp": "Infraestructura",
+    "roads_exp_km": "Infraestructura", "roads_imp_km": "Infraestructura",
+    "mpi": "Vulnerabilidad", "liquefaction": "Amenaza", "landslides": "Amenaza",
+    "recovery_needs": "Recuperación",
+}
+UNIDAD_UNDP_POR_CAMPO = {c: "COP" for c in ("econ_dmg_households_cop", "econ_dmg_infra_cop", "econ_dmg_total_cop")}
+UNIDAD_UNDP_POR_CAMPO.update({c: "m³" for c in ("debris_households_m3", "debris_buildings_m3", "debris_infra_m3", "debris_total_m3")})
+UNIDAD_UNDP_POR_CAMPO.update({c: "km" for c in ("roads_exp_km", "roads_imp_km")})
+UNIDAD_UNDP_POR_CAMPO.update({c: "Índice" for c in ("mpi", "liquefaction", "landslides", "recovery_needs")})
+for _c in CAMPOS_UNDP_ADM2:
+    UNIDAD_UNDP_POR_CAMPO.setdefault(_c, "Número")
+
+
+def _arcgis_query_all(url, out_fields, where="1=1", page_size=1000, timeout=60):
+    """Pagina resultados de un FeatureServer/MapServer de ArcGIS REST público
+    (sin token) hasta agotar el total, sin traer geometría (no hace falta
+    para el inventario, y las capas fuente son polígonos pesados). Devuelve
+    una lista de dicts (attributes) de cada feature, o [] si falla la
+    descarga o el servicio no responde -- nunca interrumpe la corrida."""
+    features = []
+    offset = 0
+    while True:
+        params = {
+            "where": where, "outFields": out_fields, "f": "json",
+            "returnGeometry": "false", "resultOffset": str(offset),
+            "resultRecordCount": str(page_size), "orderByFields": "objectid",
+        }
+        try:
+            req = urllib.request.Request(f"{url}/query?{urllib.parse.urlencode(params)}", headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                data = json.loads(resp.read().decode("utf-8", errors="replace"))
+        except Exception:
+            return features
+        feats = data.get("features", [])
+        if not feats:
+            break
+        features.extend(f["attributes"] for f in feats)
+        if len(feats) < page_size:
+            break
+        offset += page_size
+    return features
+
+
+def load_undp_geosmart_rapida(adm1_url=ARCGIS_ADM1_URL, adm2_url=ARCGIS_ADM2_URL):
+    """Descarga (en vivo, cada corrida) los dos Feature Services de ArcGIS
+    que alimentan el StoryMap/dashboards de UNDP geosmart y devuelve
+    (datos_dep, datos_mun) -- mismo formato que load_pnud_perdidas_economicas
+    ({nombre: {campo: valor}} y {(dep, mun): {campo: valor}}). Descarta
+    filas sin departamento reconocible (ej. "Área en Litigio Cauca -
+    Huila", un polígono administrativo sin datos de terremoto) y campos
+    nulos (null = no evaluado, distinto de 0 = evaluado en cero)."""
+    datos_dep = {}
+    campos_adm1 = "decodigo,denombre," + ",".join(CAMPOS_UNDP_ADM1)
+    for attrs in _arcgis_query_all(adm1_url, campos_adm1):
+        dep = normalizar_nombre_departamento((attrs.get("denombre") or "").strip())
+        if not dep or dep not in DIVIPOLA_DEPARTAMENTO:
+            continue
+        valores = {c: attrs[c] for c in CAMPOS_UNDP_ADM1 if attrs.get(c) is not None}
+        if valores:
+            datos_dep[dep] = valores
+
+    datos_mun = {}
+    campos_adm2 = "mpcodigo,mpnombre,depto," + ",".join(CAMPOS_UNDP_ADM2)
+    for attrs in _arcgis_query_all(adm2_url, campos_adm2):
+        dep = normalizar_nombre_departamento((attrs.get("depto") or "").strip())
+        mun = (attrs.get("mpnombre") or "").strip()
+        if not dep or dep not in DIVIPOLA_DEPARTAMENTO or not mun:
+            continue
+        valores = {c: attrs[c] for c in CAMPOS_UNDP_ADM2 if attrs.get(c) is not None}
+        if valores:
+            datos_mun[(dep, mun)] = valores
+
     return datos_dep, datos_mun
 
 # Fase 2: historial acumulado (una fila por departamento por corrida, nunca
@@ -680,7 +814,7 @@ LABEL_SEDES_EDUCATIVAS_POR_CAMPO = {
 }
 
 
-def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None, sedes_educativas_por_municipio=None, datos_pnud_por_dep=None, datos_pnud_por_municipio=None):
+def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None, sedes_educativas_por_municipio=None, datos_pnud_por_dep=None, datos_pnud_por_municipio=None, datos_undp_por_dep=None, datos_undp_por_municipio=None):
     """Fase A (ver docs/formato_largo.md): exporta los mismos indicadores
     que ya calcula el script a una tabla larga (un indicador x unidad
     geográfica por fila, con dimensión/unidad/fuente como metadatos) en
@@ -732,6 +866,10 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
             for campo, valor in datos_pnud_por_dep[dep].items():
                 fila(dep, None, "departamental", DIMENSION_PNUD_POR_CAMPO[campo],
                      f"pnud_{campo}", LABEL_PNUD_POR_CAMPO[campo], UNIDAD_PNUD_POR_CAMPO[campo], "PNUD", valor)
+        if datos_undp_por_dep and dep in datos_undp_por_dep:
+            for campo, valor in datos_undp_por_dep[dep].items():
+                fila(dep, None, "departamental", DIMENSION_UNDP_POR_CAMPO[campo],
+                     f"undp_rapida_{campo}", LABEL_UNDP_POR_CAMPO[campo], UNIDAD_UNDP_POR_CAMPO[campo], "UNDP-RAPIDA", valor)
 
     if municipios:
         por_dep = defaultdict(list)
@@ -764,6 +902,12 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
             for campo, valor in valores.items():
                 fila(dep, mun, "municipal", DIMENSION_PNUD_POR_CAMPO[campo],
                      f"pnud_{campo}", LABEL_PNUD_POR_CAMPO[campo], UNIDAD_PNUD_POR_CAMPO[campo], "PNUD", valor)
+
+    if datos_undp_por_municipio:
+        for (dep, mun), valores in datos_undp_por_municipio.items():
+            for campo, valor in valores.items():
+                fila(dep, mun, "municipal", DIMENSION_UNDP_POR_CAMPO[campo],
+                     f"undp_rapida_{campo}", LABEL_UNDP_POR_CAMPO[campo], UNIDAD_UNDP_POR_CAMPO[campo], "UNDP-RAPIDA", valor)
 
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
@@ -1491,8 +1635,15 @@ def main():
     else:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: no se pudo leer PNUD esta corrida (red o formato) -- se sigue sin ese dato, no interrumpe la corrida")
 
+    datos_undp_por_dep, datos_undp_por_municipio = load_undp_geosmart_rapida()
+    if datos_undp_por_dep or datos_undp_por_municipio:
+        n_dep_econ = sum(1 for v in datos_undp_por_dep.values() if "econ_dmg_total_cop" in v)
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: evaluación RAPIDA UNDP/UNGRD (StoryMap geosmart) -- {len(datos_undp_por_dep)} departamentos ({n_dep_econ} con daño económico), {len(datos_undp_por_municipio)} municipios (materia prima, no se usa para recalcular el índice)")
+    else:
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: no se pudo leer UNDP geosmart esta corrida (red o formato) -- se sigue sin ese dato, no interrumpe la corrida")
+
     if args.formato_largo:
-        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None, sedes_educativas_por_municipio=sedes_educativas_por_municipio or None, datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None)
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None, sedes_educativas_por_municipio=sedes_educativas_por_municipio or None, datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None, datos_undp_por_dep=datos_undp_por_dep or None, datos_undp_por_municipio=datos_undp_por_municipio or None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
         if args.no_calculo:
             print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo (fuente != Calculo): -> {args.no_calculo}")

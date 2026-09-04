@@ -25,6 +25,39 @@ jobs:
           # sin "cache: pip" ni requirements.txt a propósito: el script no
           # usa ninguna librería externa, solo la estándar de Python.
 
+      - name: DIAGNÓSTICO TEMPORAL -- probar lectores externos (r.jina.ai, Google cache) para fundacionexe.org.co
+        run: |
+          python3 - <<'EOF'
+          import urllib.request
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
+          objetivo = "https://fundacionexe.org.co/unmillonderazones/"
+
+          candidatas = [
+              f"https://r.jina.ai/{objetivo}",
+              f"http://r.jina.ai/{objetivo}",
+              f"https://www.google.com/search?q=site:fundacionexe.org.co+unmillonderazones",
+          ]
+
+          for url in candidatas:
+              print(f"=== {url} ===")
+              try:
+                  req = urllib.request.Request(url, headers=HEADERS)
+                  with urllib.request.urlopen(req, timeout=25) as resp:
+                      body = resp.read().decode("utf-8", errors="replace")
+                      print(f"status={resp.status} largo={len(body)} caracteres")
+                      print(body[:3000])
+              except urllib.error.HTTPError as e:
+                  print(f"HTTP {e.code}: {e.reason}")
+                  try:
+                      print(e.read().decode('utf-8', errors='replace')[:1000])
+                  except Exception:
+                      pass
+              except Exception as e:
+                  print(f"ERROR {type(e).__name__}: {e}")
+              print()
+          EOF
+
       - name: Generar tablero e índice
         run: python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
 

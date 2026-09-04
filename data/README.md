@@ -6,6 +6,8 @@ vivo de `mapadelterremoto.com` para calcular el índice de impacto.
 > Para el detalle técnico de cómo se extrae cada fuente (endpoint, formato,
 > frecuencia, transformaciones), ver `docs/metodologia_fuentes.md` -- este
 > README se enfoca en qué archivos van en esta carpeta y cómo actualizarlos.
+> Para el SEGUNDO índice compuesto que ya usa estas fuentes (en vez de solo
+> Naboo), ver `docs/indice_ajustado.md`.
 
 ## Qué va aquí
 

@@ -449,6 +449,22 @@ DIM_LABELS = {
     "educacion": "Educación", "econ_proxy": "Productividad (proxy)",
 }
 
+# Índice ajustado (Fase B, ver docs/indice_ajustado.md) -- SEGUNDO índice
+# compuesto, en paralelo al de arriba (que nunca se toca). En vez de
+# depender solo de Naboo, usa las fuentes institucionales que se agregaron
+# esta sesión (3iS, PNUD, UNDP-RAPIDA, FundacionExe) con una jerarquía
+# explícita de fuente por dimensión -- nunca mezcla dos fuentes en la
+# misma celda (evita el doble conteo PNUD/UNDP-RAPIDA que detectó la
+# auditoría) y solo llega hasta donde el dato realmente alcanza (no
+# rellena con cero lo que no se midió). Dos dimensiones nuevas que el
+# índice original no tiene: pérdidas económicas y vulnerabilidad previa.
+DIMS_AJUSTADO = ["vivienda", "salud", "educacion", "instituciones", "economico", "vulnerabilidad"]
+DIM_AJUSTADO_LABELS = {
+    "vivienda": "Vivienda", "salud": "Salud", "educacion": "Educación",
+    "instituciones": "Instituciones", "economico": "Pérdidas económicas",
+    "vulnerabilidad": "Vulnerabilidad previa (IPM)",
+}
+
 RAMP = [
     (0,   (242, 241, 234)),
     (25,  (246, 212, 136)),
@@ -795,6 +811,234 @@ def compute_indice(data, dep_pop):
     return rows
 
 
+def _normalizar_min_max(valores_por_unidad):
+    """Min-máx 0-100 sobre las unidades que sí tienen valor -- a diferencia
+    de _normalizar_0_100(), no exige una lista fija de departamentos ni
+    población: la usa compute_indice_ajustado(), donde cada dimensión
+    puede terminar con una cobertura distinta según qué fuente alcanzó el
+    dato para cada unidad (departamento o municipio)."""
+    vals = list(valores_por_unidad.values())
+    if not vals:
+        return {}
+    vmin, vmax = min(vals), max(vals)
+    rng = (vmax - vmin) if vmax > vmin else 1.0
+    return {u: (v - vmin) / rng * 100 for u, v in valores_por_unidad.items()}
+
+
+def _cascada_valor_y_fuente(unidad, cascada):
+    """cascada: lista de (nombre_fuente, {unidad: {campo: valor}}, [campos])
+    en orden de prioridad. Devuelve (suma_de_campos, nombre_fuente) de la
+    PRIMERA fuente que tenga dato para esa unidad -- nunca mezcla dos
+    fuentes en la misma celda. (None, None) si ninguna la tiene."""
+    for nombre, fuente_dict, campos in cascada:
+        d = fuente_dict.get(unidad)
+        if d and any(c in d for c in campos):
+            return sum(d.get(c, 0) for c in campos), nombre
+    return None, None
+
+
+def compute_indice_ajustado(dep_pop, rows_naboo, municipios,
+                             datos_3is_por_dep=None, datos_3is_por_municipio=None,
+                             datos_pnud_por_dep=None, datos_pnud_por_municipio=None,
+                             datos_undp_por_dep=None, datos_undp_por_municipio=None,
+                             sedes_educativas_por_municipio=None):
+    """Fase B (ver docs/indice_ajustado.md): un SEGUNDO índice compuesto,
+    en paralelo a compute_indice() (que esta función nunca toca ni lee) --
+    en vez de depender solo de Naboo, usa las fuentes institucionales
+    agregadas en formato-largo (3iS, PNUD, UNDP-RAPIDA, FundacionExe) con
+    una jerarquía explícita de fuente por dimensión. Reglas, todas por
+    diseño, no por accidente:
+      - nunca mezcla dos fuentes en la misma celda (evita el doble conteo
+        PNUD/UNDP-RAPIDA que detectó la auditoría de fuentes -- son el
+        mismo dato, solo se usa uno de los dos);
+      - un campo que ninguna fuente reportó queda en None, nunca en 0 (0
+        significaría "medido y en cero", que es otra cosa);
+      - la normalización 0-100 de cada dimensión se hace sobre las
+        unidades que sí tienen dato para ESA dimensión, no sobre el total
+        del país -- así una dimensión con poca cobertura no queda
+        aplastada contra 0 por unidades sin medir.
+    Devuelve (filas_dep, filas_mun) -- listas de dicts, una fila por
+    departamento / por municipio con dato en al menos una dimensión."""
+    departamentos = sorted(dep_pop.keys())
+
+    # Adaptar Naboo (lista de rows de compute_indice) y FundacionExe
+    # (agregado por municipio) a la forma común {unidad: {campo: valor}}
+    # que espera _cascada_valor_y_fuente -- el resto de fuentes ya vienen
+    # así.
+    naboo_por_dep = {r["departamento"]: r for r in rows_naboo}
+    naboo_dep = {
+        "vivienda": {dep: {"n": r["vivienda_n"]} for dep, r in naboo_por_dep.items()},
+        "salud": {dep: {"n": r["salud_n"]} for dep, r in naboo_por_dep.items()},
+        "educacion": {dep: {"n": r["educacion_n"]} for dep, r in naboo_por_dep.items()},
+        "instituciones": {dep: {"n": r["instituciones_n"]} for dep, r in naboo_por_dep.items()},
+    }
+    fexe_por_dep = defaultdict(lambda: {"n_sedes": 0})
+    for (dep, mun), v in (sedes_educativas_por_municipio or {}).items():
+        fexe_por_dep[dep]["n_sedes"] += v.get("n_sedes", 0)
+    fexe_por_dep = dict(fexe_por_dep)
+
+    datos_3is_por_dep = datos_3is_por_dep or {}
+    datos_3is_por_municipio = datos_3is_por_municipio or {}
+    datos_pnud_por_dep = datos_pnud_por_dep or {}
+    datos_pnud_por_municipio = datos_pnud_por_municipio or {}
+    datos_undp_por_dep = datos_undp_por_dep or {}
+    datos_undp_por_municipio = datos_undp_por_municipio or {}
+    sedes_educativas_por_municipio = sedes_educativas_por_municipio or {}
+
+    # ---- Nivel departamental ----
+    # UNDP-RAPIDA no aparece aquí salvo en "económico": su servicio
+    # departamental (COL_adm1) solo trae escombros y daño económico, no
+    # personas/edificaciones -- esos campos viven solo en su servicio
+    # municipal. Sumar el municipal hacia arriba daría un total parcial
+    # (solo los municipios que evaluó, ver docs/investigacion_undp_
+    # geosmart.md) disfrazado de total departamental, así que no se hace.
+    cascada_dep = {
+        "vivienda": [
+            ("PNUD", datos_pnud_por_dep, ["vd", "va"]),
+            ("3iS-Sheets", datos_3is_por_dep, ["VivDestruidas", "VivAveriadas"]),
+            ("Naboo", naboo_dep["vivienda"], ["n"]),
+        ],
+        "salud": [
+            ("PNUD", datos_pnud_por_dep, ["csalud"]),
+            ("3iS-Sheets", datos_3is_por_dep, ["Salud"]),
+            ("Naboo", naboo_dep["salud"], ["n"]),
+        ],
+        "educacion": [
+            ("PNUD", datos_pnud_por_dep, ["cedu"]),
+            ("3iS-Sheets", datos_3is_por_dep, ["Educativos"]),
+            ("FundacionExe", fexe_por_dep, ["n_sedes"]),
+            ("Naboo", naboo_dep["educacion"], ["n"]),
+        ],
+        "instituciones": [
+            ("3iS-Sheets", datos_3is_por_dep, ["Comunitarios"]),
+            ("Naboo", naboo_dep["instituciones"], ["n"]),
+        ],
+        "economico": [
+            ("UNDP-RAPIDA", datos_undp_por_dep, ["econ_dmg_total_cop"]),
+        ],
+        # "vulnerabilidad" (IPM) se arma aparte abajo: no es una suma de
+        # campos, es un promedio ponderado por población de los
+        # municipios del departamento.
+    }
+
+    valores_dim = {d: {} for d in DIMS_AJUSTADO}
+    fuente_dim = {d: {} for d in DIMS_AJUSTADO}
+    for d, cascada in cascada_dep.items():
+        for dep in departamentos:
+            v, fuente = _cascada_valor_y_fuente(dep, cascada)
+            if v is not None:
+                valores_dim[d][dep] = v
+                fuente_dim[d][dep] = fuente
+
+    # Vulnerabilidad previa (IPM): promedio ponderado por población de los
+    # municipios del departamento con dato en UNDP-RAPIDA -- mismo patrón
+    # que score_municipal en export_formato_largo() (gravedad oficial
+    # ponderada por población), un nivel más abajo. Si el municipio no
+    # cruza por nombre contra el CSV de población, se cae a promedio
+    # simple para ese departamento en vez de perder el dato.
+    pob_por_mun = {(m["departamento"], m["municipio"]): m["poblacion"] for m in (municipios or [])}
+    ipm_valores = defaultdict(list)
+    ipm_pesado = defaultdict(lambda: [0.0, 0.0])
+    for (dep, mun), v in datos_undp_por_municipio.items():
+        mpi = v.get("mpi")
+        if mpi is None:
+            continue
+        ipm_valores[dep].append(mpi)
+        pob = pob_por_mun.get((dep, mun), 0)
+        if pob > 0:
+            ipm_pesado[dep][0] += mpi * pob
+            ipm_pesado[dep][1] += pob
+    for dep, vals in ipm_valores.items():
+        suma_pesada, pob_total = ipm_pesado[dep]
+        valores_dim["vulnerabilidad"][dep] = (suma_pesada / pob_total) if pob_total > 0 else (sum(vals) / len(vals))
+        fuente_dim["vulnerabilidad"][dep] = "UNDP-RAPIDA"
+
+    idx_dim = {d: _normalizar_min_max(valores_dim[d]) for d in DIMS_AJUSTADO}
+
+    filas_dep = []
+    for dep in departamentos:
+        fila = {"departamento": dep}
+        disponibles = []
+        for d in DIMS_AJUSTADO:
+            v = idx_dim[d].get(dep)
+            fila[f"{d}_ajust_idx"] = round(v, 1) if v is not None else None
+            fila[f"{d}_ajust_fuente"] = fuente_dim[d].get(dep)
+            if v is not None:
+                disponibles.append(v)
+        fila["compuesto_ajustado"] = round(sum(disponibles) / len(disponibles), 1) if disponibles else None
+        fila["n_dimensiones"] = len(disponibles)
+        filas_dep.append(fila)
+    filas_dep.sort(key=lambda f: (-(f["compuesto_ajustado"] if f["compuesto_ajustado"] is not None else -1), f["departamento"]))
+
+    # ---- Nivel municipal ----
+    # Aquí sí manda UNDP-RAPIDA primero en casi todo: a diferencia del
+    # nivel departamental, su servicio municipal SÍ trae personas y
+    # edificaciones directamente (no hay que agregar nada).
+    cascada_mun = {
+        "vivienda": [
+            ("UNDP-RAPIDA", datos_undp_por_municipio, ["bdg_homes_dest", "bdg_homes_dmg"]),
+            ("PNUD", datos_pnud_por_municipio, ["vd", "va"]),
+            ("3iS-Sheets", datos_3is_por_municipio, ["VivDestruidas", "VivAveriadas"]),
+        ],
+        "salud": [
+            ("UNDP-RAPIDA", datos_undp_por_municipio, ["bdg_health_aff"]),
+            ("PNUD", datos_pnud_por_municipio, ["csalud"]),
+            ("3iS-Sheets", datos_3is_por_municipio, ["Salud"]),
+        ],
+        "educacion": [
+            ("UNDP-RAPIDA", datos_undp_por_municipio, ["bdg_edu_aff"]),
+            ("PNUD", datos_pnud_por_municipio, ["cedu"]),
+            ("3iS-Sheets", datos_3is_por_municipio, ["Educativos"]),
+            ("FundacionExe", sedes_educativas_por_municipio, ["n_sedes"]),
+        ],
+        "instituciones": [
+            ("UNDP-RAPIDA", datos_undp_por_municipio, ["bdg_comm_aff", "bdg_public_imp"]),
+            ("3iS-Sheets", datos_3is_por_municipio, ["Comunitarios"]),
+        ],
+        "economico": [
+            ("UNDP-RAPIDA", datos_undp_por_municipio, ["econ_dmg_total_cop"]),
+        ],
+        "vulnerabilidad": [
+            ("UNDP-RAPIDA", datos_undp_por_municipio, ["mpi"]),
+        ],
+    }
+
+    unidades_mun = set()
+    for cascada in cascada_mun.values():
+        for _, fuente_dict, _ in cascada:
+            unidades_mun.update(fuente_dict.keys())
+
+    valores_dim_mun = {d: {} for d in DIMS_AJUSTADO}
+    fuente_dim_mun = {d: {} for d in DIMS_AJUSTADO}
+    for d, cascada in cascada_mun.items():
+        for unidad in unidades_mun:
+            v, fuente = _cascada_valor_y_fuente(unidad, cascada)
+            if v is not None:
+                valores_dim_mun[d][unidad] = v
+                fuente_dim_mun[d][unidad] = fuente
+
+    idx_dim_mun = {d: _normalizar_min_max(valores_dim_mun[d]) for d in DIMS_AJUSTADO}
+
+    filas_mun = []
+    for (dep, mun) in unidades_mun:
+        fila = {"departamento": dep, "municipio": mun}
+        disponibles = []
+        for d in DIMS_AJUSTADO:
+            v = idx_dim_mun[d].get((dep, mun))
+            fila[f"{d}_ajust_idx"] = round(v, 1) if v is not None else None
+            fila[f"{d}_ajust_fuente"] = fuente_dim_mun[d].get((dep, mun))
+            if v is not None:
+                disponibles.append(v)
+        if not disponibles:
+            continue
+        fila["compuesto_ajustado"] = round(sum(disponibles) / len(disponibles), 1)
+        fila["n_dimensiones"] = len(disponibles)
+        filas_mun.append(fila)
+    filas_mun.sort(key=lambda f: (-f["compuesto_ajustado"], f["departamento"], f["municipio"]))
+
+    return filas_dep, filas_mun
+
+
 def write_indice_csv(rows, csv_path):
     fieldnames = ["departamento", "poblacion", "indice_compuesto"]
     for d in DIMS:
@@ -806,6 +1050,30 @@ def write_indice_csv(rows, csv_path):
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
         w.writerows(rows)
+
+
+def write_indice_ajustado_csv(filas_dep, filas_mun, csv_path_dep, csv_path_mun):
+    """Escribe el índice ajustado (Fase B) en dos CSV en paralelo al
+    índice original -- uno departamental, uno municipal. Cada dimensión
+    trae su propia columna "_fuente" al lado del índice, para que quede
+    a la vista cuál de las fuentes en cascada alimentó esa celda."""
+    campos_dim = []
+    for d in DIMS_AJUSTADO:
+        campos_dim += [f"{d}_ajust_idx", f"{d}_ajust_fuente"]
+
+    if csv_path_dep:
+        fieldnames = ["departamento"] + campos_dim + ["compuesto_ajustado", "n_dimensiones"]
+        with open(csv_path_dep, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=fieldnames)
+            w.writeheader()
+            w.writerows(filas_dep)
+
+    if csv_path_mun:
+        fieldnames = ["departamento", "municipio"] + campos_dim + ["compuesto_ajustado", "n_dimensiones"]
+        with open(csv_path_mun, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=fieldnames)
+            w.writeheader()
+            w.writerows(filas_mun)
 
 
 LABEL_SEDES_EDUCATIVAS_POR_CAMPO = {
@@ -1018,7 +1286,8 @@ def fmt_fecha_es(dt):
 
 
 def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_meta=None,
-                historial_previo=None, fecha_historial_previo=None):
+                historial_previo=None, fecha_historial_previo=None,
+                filas_ajustado_dep=None, filas_ajustado_mun=None):
     snapshot_iso = meta.get("actualizado_snapshot", "")
     try:
         snap_dt = datetime.fromisoformat(snapshot_iso.replace("Z", "+00:00"))
@@ -1316,9 +1585,134 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     </section>
   </div>"""
 
+    # --- Pestaña "Índice ajustado" (Fase B, ver docs/indice_ajustado.md;
+    # opcional: solo si compute_indice_ajustado() encontró algo). SEGUNDO
+    # índice compuesto, en paralelo al de la pestaña "Vista departamental"
+    # -- no la toca, no la reemplaza, solo convive al lado mientras se
+    # decide si migrar. ---
+    tab_ajustado_html = ""
+    if filas_ajustado_dep:
+        def cell_ajust(v, fuente):
+            if v is None:
+                return '<td class="cell muted" title="Sin dato en ninguna fuente para esta dimensión">—</td>'
+            titulo = f"Fuente: {fuente}" if fuente else ""
+            return f'<td class="cell" style="background:{cell_color(v)};color:{text_on(v)}" title="{titulo}">{v:.0f}</td>'
+
+        header_dim_ajust = "".join(f'<th>{DIM_AJUSTADO_LABELS[d]}</th>' for d in DIMS_AJUSTADO)
+        filas_dep_html = []
+        for f in filas_ajustado_dep:
+            comp = f["compuesto_ajustado"]
+            comp_html = f'{comp:.1f}{bar(comp)}' if comp is not None else '<span class="muted">sin dato</span>'
+            cells = "".join(cell_ajust(f[f"{d}_ajust_idx"], f[f"{d}_ajust_fuente"]) for d in DIMS_AJUSTADO)
+            filas_dep_html.append(f"""
+        <tr>
+          <td class="dep-cell"><span class="dep-name">{f['departamento']}</span></td>
+          <td class="num muted">{f['n_dimensiones']}/{len(DIMS_AJUSTADO)}</td>
+          <td class="num compuesto">{comp_html}</td>
+          {cells}
+        </tr>""")
+        rows_ajust_html = "\n".join(filas_dep_html)
+
+        n_dep_con_dato = sum(1 for f in filas_ajustado_dep if f["n_dimensiones"] > 0)
+        n_dep_completo = sum(1 for f in filas_ajustado_dep if f["n_dimensiones"] == len(DIMS_AJUSTADO))
+
+        # Municipal: agrupado por departamento, mismo patrón que la pestaña
+        # "Vista municipal" -- pero solo entran los municipios con dato en
+        # al menos una dimensión (no los ~1.122 del país).
+        muni_accordion = ""
+        if filas_ajustado_mun:
+            por_dep_mun = defaultdict(list)
+            for f in filas_ajustado_mun:
+                por_dep_mun[f["departamento"]].append(f)
+            deps_mun_ordenados = sorted(por_dep_mun, key=lambda d: (-max(m["compuesto_ajustado"] for m in por_dep_mun[d]), d))
+            items = []
+            for dep in deps_mun_ordenados:
+                munis = sorted(por_dep_mun[dep], key=lambda m: -m["compuesto_ajustado"])
+                muni_rows = "\n".join(f"""
+            <tr>
+              <td>{m['municipio']}</td>
+              <td class="num muted">{m['n_dimensiones']}/{len(DIMS_AJUSTADO)}</td>
+              <td class="num" style="background:{cell_color(m['compuesto_ajustado'])};color:{text_on(m['compuesto_ajustado'])}">{m['compuesto_ajustado']:.0f}</td>
+            </tr>""" for m in munis)
+                peor_mun = munis[0]
+                score_badge = f'<span class="score-badge" style="background:{cell_color(peor_mun["compuesto_ajustado"])};color:{text_on(peor_mun["compuesto_ajustado"])}">{peor_mun["compuesto_ajustado"]:.0f}</span>'
+                items.append(f"""
+        <details class="dep-accordion">
+          <summary>
+            <span class="dep-accordion-name">{dep}</span>
+            <span class="dep-accordion-score">{score_badge}{bar(peor_mun['compuesto_ajustado'])}</span>
+            <span class="dep-accordion-count">{len(munis)} municipios con dato · peor: {peor_mun['municipio']}</span>
+          </summary>
+          <div class="table-scroll">
+            <table class="muni">
+              <thead><tr><th class="left">Municipio</th><th>Dimensiones</th><th>Índice ajustado</th></tr></thead>
+              <tbody>{muni_rows}</tbody>
+            </table>
+          </div>
+        </details>""")
+            muni_accordion = f"""
+    <section>
+      <div class="section-head"><h2>Por municipio</h2></div>
+      <p class="note">Solo los municipios con dato en al menos una dimensión ({len(filas_ajustado_mun)} de ~1.122 del país) -- la cobertura real depende de qué fuentes alcanzaron cada zona (UNDP-RAPIDA solo evalúa la zona con intensidad sísmica MMI≥5). Agrupados por departamento, ordenados por índice ajustado.</p>
+      <div class="accordion-list">{''.join(items)}
+      </div>
+    </section>"""
+
+        tab_ajustado_html = f"""
+  <div id="tab-ajustado" class="tab-panel" hidden>
+    <header class="hero">
+      <div class="kicker">Fase B · beta, en paralelo al índice original</div>
+      <h1>Índice ajustado</h1>
+      <p class="subtitle">Las mismas dimensiones repensadas con las fuentes institucionales que se agregaron después de Naboo -- 3iS, PNUD, UNDP-RAPIDA, FundacionExe -- en vez de solo puntos reportados. Cada celda usa UNA sola fuente (nunca mezcla dos): pasa el mouse sobre un número para ver cuál alimentó esa celda. No reemplaza al índice de "Vista departamental" todavía, conviven mientras se decide si migrar.</p>
+    </header>
+    <div class="tiles">
+      <div class="tile">
+        <div class="tile-label">Departamentos con algún dato</div>
+        <div class="tile-value">{n_dep_con_dato}/{len(filas_ajustado_dep)}</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Departamentos con las {len(DIMS_AJUSTADO)} dimensiones</div>
+        <div class="tile-value">{n_dep_completo}</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Municipios con dato</div>
+        <div class="tile-value">{len(filas_ajustado_mun)}</div>
+        <div class="tile-sub">de ~1.122 del país -- ver nota abajo</div>
+      </div>
+    </div>
+    <section>
+      <div class="section-head">
+        <h2>Por departamento</h2>
+        <div>
+          <div class="legend-track">{legend_stops}</div>
+          <div class="legend-labels"><span>0</span><span>100</span></div>
+        </div>
+      </div>
+      <p class="note">"—" = ninguna fuente tiene dato para esa dimensión en ese departamento (no es un cero). El índice ajustado del departamento es el promedio de las dimensiones que sí tienen dato, no de las {len(DIMS_AJUSTADO)} completas.</p>
+      <div class="table-card">
+        <div class="table-scroll">
+          <table class="heat">
+            <thead><tr><th class="left">Departamento</th><th>Dimensiones</th><th>Índice ajustado</th>{header_dim_ajust}</tr></thead>
+            <tbody>{rows_ajust_html}</tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    {muni_accordion}
+    <section>
+      <details class="method">
+        <summary>Metodología y limitaciones</summary>
+        <div class="method-body">
+          <p>Cada dimensión toma la PRIMERA fuente disponible de una jerarquía fija (nunca combina dos en la misma celda): <b>Vivienda</b> = PNUD &gt; 3iS &gt; Naboo (depto) / UNDP-RAPIDA &gt; PNUD &gt; 3iS (municipio); <b>Salud</b> = PNUD &gt; 3iS &gt; Naboo (depto) / UNDP-RAPIDA &gt; PNUD &gt; 3iS (municipio); <b>Educación</b> = PNUD &gt; 3iS &gt; FundacionExe &gt; Naboo (depto) / UNDP-RAPIDA &gt; PNUD &gt; 3iS &gt; FundacionExe (municipio); <b>Instituciones</b> = 3iS &gt; Naboo (depto) / UNDP-RAPIDA &gt; 3iS (municipio); <b>Pérdidas económicas</b> (nueva) = solo UNDP-RAPIDA, nunca también PNUD -- son el mismo dato, ver la auditoría de fuentes; <b>Vulnerabilidad previa / IPM</b> (nueva) = solo UNDP-RAPIDA, ponderada por población municipal a nivel departamental.</p>
+          <p>Cada dimensión se normaliza 0-100 (mínimo-máximo) solo entre las unidades que sí tienen dato para ESA dimensión -- una dimensión con poca cobertura no queda aplastada contra 0 por las unidades sin medir. El índice ajustado de cada unidad es el promedio simple de sus dimensiones disponibles, no de todas. Detalle completo en <span class="mono">docs/indice_ajustado.md</span>.</p>
+        </div>
+      </details>
+    </section>
+  </div>"""
+
     # --- Nav de pestañas: se arma según qué paneles existan realmente.
-    # "departamental", "dimensión" y "perfil" siempre están; "municipal" es
-    # opcional. ---
+    # "departamental", "dimensión" y "perfil" siempre están; "municipal" y
+    # "ajustado" son opcionales. ---
     tab_defs = [
         ("departamental", "Vista departamental"),
         ("dimension", "Por dimensión"),
@@ -1326,6 +1720,8 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     ]
     if municipios:
         tab_defs.append(("municipal", f"Vista municipal ({len(municipios)} municipios)"))
+    if filas_ajustado_dep:
+        tab_defs.append(("ajustado", "Índice ajustado (beta)"))
     tab_nav_html = '\n  <div class="tab-nav" role="tablist">\n' + "\n".join(
         f'    <button class="tab-btn{" active" if i == 0 else ""}" data-tab="{key}" role="tab" aria-selected="{"true" if i == 0 else "false"}">{label}</button>'
         for i, (key, label) in enumerate(tab_defs)
@@ -1511,6 +1907,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
   {tab_dim_html}
   {tab_perfil_html}
   {tab_municipal_html}
+  {tab_ajustado_html}
   <footer>
     <span>Fuente: <span class="mono">registro.json</span> de <a href="https://mapadelterremoto.com" target="_blank" rel="noopener">mapadelterremoto.com</a>, un agregador de prensa — no un censo oficial de campo.</span>
     <span>Generado localmente con <span class="mono">actualizar_indice_terremoto.py</span>. Esta página se autorrecarga cada {autorefresh_seconds // 3600 if autorefresh_seconds else 0} horas si la dejas abierta — recarga el mismo archivo en disco, así que si el Programador de tareas la actualizó, verás el dato nuevo solo.</span>
@@ -1545,6 +1942,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     dimension: document.getElementById("tab-dimension"),
     perfil: document.getElementById("tab-perfil"),
     municipal: document.getElementById("tab-municipal"),
+    ajustado: document.getElementById("tab-ajustado"),
   }};
   btns.forEach(function(btn) {{
     btn.addEventListener("click", function() {{
@@ -1577,6 +1975,8 @@ def main():
     ap.add_argument("--formato-largo", default=INDICADORES_LARGO_CSV_POR_DEFECTO, help="CSV en formato largo (Fase A, ver docs/formato_largo.md) -- salida en paralelo al CSV ancho, no lo reemplaza. Pasa '' vacío para desactivarlo.")
     ap.add_argument("--no-calculo", default=NO_CALCULO_CSV_POR_DEFECTO, help="CSV derivado de --formato-largo filtrado a fuente != Calculo (solo materia prima cruda de fuentes externas). Se regenera solo en cada corrida. Pasa '' vacío para desactivarlo.")
     ap.add_argument("--sheets-3is", default=SHEETS_3IS_DATOS_TERRITORIALES_URL, help="URL del CSV público (hoja 'Datos_Territoriales' del Sheets de 3iS, ver docs/investigacion_3is.md) con cifras oficiales por departamento -- solo alimenta el inventario crudo (fuente=3iS-Sheets), no recalcula el índice. Si falla la descarga, la corrida sigue sin ese dato. Pasa '' vacío para desactivarlo.")
+    ap.add_argument("--indice-ajustado-dep", default="indice_ajustado_departamento.csv", help="CSV del índice ajustado (Fase B, ver docs/indice_ajustado.md) por departamento -- SEGUNDO índice compuesto en paralelo al original, usando 3iS/PNUD/UNDP-RAPIDA/FundacionExe donde alcanzan. Pasa '' vacío para desactivarlo.")
+    ap.add_argument("--indice-ajustado-mun", default="indice_ajustado_municipio.csv", help="CSV del índice ajustado (Fase B) por municipio -- solo municipios con dato en al menos una dimensión. Pasa '' vacío para desactivarlo.")
     args = ap.parse_args()
 
     print(f"[{datetime.now().isoformat(timespec='seconds')}] Descargando/leyendo: {args.url}")
@@ -1642,6 +2042,21 @@ def main():
     else:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: no se pudo leer UNDP geosmart esta corrida (red o formato) -- se sigue sin ese dato, no interrumpe la corrida")
 
+    # Índice ajustado (Fase B, ver docs/indice_ajustado.md) -- se calcula
+    # SIEMPRE a partir de las variables ya cargadas arriba, en paralelo al
+    # índice original (que nunca se toca): un segundo índice compuesto que
+    # usa 3iS/PNUD/UNDP-RAPIDA/FundacionExe donde alcanzan, con Naboo solo
+    # como último respaldo departamental.
+    filas_ajustado_dep, filas_ajustado_mun = compute_indice_ajustado(
+        dep_pop, rows, municipios,
+        datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None,
+        datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None,
+        datos_undp_por_dep=datos_undp_por_dep or None, datos_undp_por_municipio=datos_undp_por_municipio or None,
+        sedes_educativas_por_municipio=sedes_educativas_por_municipio or None,
+    )
+    n_dep_con_dato = sum(1 for f in filas_ajustado_dep if f["n_dimensiones"] > 0)
+    print(f"[{datetime.now().isoformat(timespec='seconds')}] Índice ajustado (Fase B): {n_dep_con_dato}/{len(filas_ajustado_dep)} departamentos con al menos 1 dimensión, {len(filas_ajustado_mun)} municipios con dato -> {args.indice_ajustado_dep or '(desactivado)'}")
+
     if args.formato_largo:
         n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None, sedes_educativas_por_municipio=sedes_educativas_por_municipio or None, datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None, datos_undp_por_dep=datos_undp_por_dep or None, datos_undp_por_municipio=datos_undp_por_municipio or None)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
@@ -1664,11 +2079,13 @@ def main():
             print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): VERIFICACIÓN FALLÓ ({pivote_detalle}) -- se sigue usando el cálculo original", file=sys.stderr)
 
     write_indice_csv(rows, args.csv)
+    write_indice_ajustado_csv(filas_ajustado_dep, filas_ajustado_mun, args.indice_ajustado_dep or None, args.indice_ajustado_mun or None)
 
     html = build_html(
         rows, meta, autorefresh_seconds=0 if args.sin_autorefresh else 14400,
         municipios=municipios, resumen_meta=resumen_meta,
         historial_previo=historial_previo, fecha_historial_previo=fecha_historial_previo,
+        filas_ajustado_dep=filas_ajustado_dep, filas_ajustado_mun=filas_ajustado_mun,
     )
     with open(args.out, "w", encoding="utf-8") as f:
         f.write(html)

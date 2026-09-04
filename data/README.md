@@ -78,7 +78,7 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
   **Superado por `indicadores_largo_no_calculo.csv`** (ver abajo) -- se
   deja aquí solo como referencia histórica de ese momento puntual, ya no
   hace falta actualizarlo a mano.
-- **`sedes_educativas_afectadas_choco_ago2026.csv`** — detalle por sede
+- **`sedes_educativas_afectadas_ago2026.csv`** — detalle por sede
   educativa (código DANE, severidad 1/2/3, matrícula, docentes,
   organizaciones aliadas) que Daniel encontró y descargó de
   `fundacionexe.org.co/unmillonderazones` -- ese sitio bloquea cualquier
@@ -89,7 +89,13 @@ JSON de resumen a mano con la hoja "Resumen" nueva.
   de `data/` que usa `,` -- `load_sedes_educativas_afectadas()` lo lee
   con `delimiter=";"` y lo agrega por municipio (`fuente=FundacionExito`)
   para `indicadores_largo.csv`; el detalle por sede solo vive en este CSV.
-  303 sedes, 300 en Chocó (30 municipios), 63.863 estudiantes matriculados.
+  **Cobertura nacional, no solo Chocó**: 6.028 sedes en 451 municipios,
+  21 departamentos (Valle del Cauca, Antioquia, Cauca, Caldas y Tolima
+  son los que más sedes traen -- Chocó, pese a ser el epicentro, es solo
+  el 6º con 300). El primer snapshot que subió Daniel venía filtrado
+  solo a Chocó (303 sedes) -- este lo reemplazó por completo.
+  Normaliza departamentos sin tilde (ej. "Quindio") con
+  `normalizar_nombre_departamento()` contra `DIVIPOLA_DEPARTAMENTO`.
 
 ## Salidas automáticas (no van en esta carpeta)
 

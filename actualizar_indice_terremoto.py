@@ -26,6 +26,7 @@ import io
 import json
 import os
 import sys
+import unicodedata
 import urllib.request
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -48,15 +49,16 @@ RESUMEN_UNGRD_JSON = "data/resumen_ungrd_ago2026.json"
 # departamentos, ver data/README.md.
 CAMARAS_COMERCIO_CSV = "data/camaras_comercio_empresarios_afectados_ago2026.csv"
 
-# Sedes educativas afectadas (encontrado por Daniel al intentar acceder a
-# fundacionexe.org.co/unmillonderazones -- ese sitio bloquea cualquier
-# scraping automático con un reto de Cloudflare, ver docs/investigacion_
-# fundacion_exito.md, así que este SÍ es un snapshot manual, no se puede
-# automatizar la descarga). Detalle por sede (código DANE, severidad
-# 1/2/3, matrícula, docentes, organizaciones aliadas) -- solo entra al
-# inventario crudo AGREGADO por municipio (fuente=FundacionExito), el
-# detalle por sede se conserva tal cual en el CSV para consulta manual.
-SEDES_EDUCATIVAS_CSV = "data/sedes_educativas_afectadas_choco_ago2026.csv"
+# Sedes educativas afectadas -- COBERTURA NACIONAL (encontrado por Daniel
+# al intentar acceder a fundacionexe.org.co/unmillonderazones -- ese
+# sitio bloquea cualquier scraping automático con un reto de Cloudflare,
+# ver docs/investigacion_fundacion_exito.md, así que este SÍ es un
+# snapshot manual, no se puede automatizar la descarga). Detalle por sede
+# (código DANE, severidad 1/2/3, matrícula, docentes, organizaciones
+# aliadas) -- solo entra al inventario crudo AGREGADO por municipio
+# (fuente=FundacionExito), el detalle por sede se conserva tal cual en
+# el CSV para consulta manual.
+SEDES_EDUCATIVAS_CSV = "data/sedes_educativas_afectadas_ago2026.csv"
 
 # Hoja "Datos_Territoriales" del Google Sheets público que alimenta el
 # dashboard 3iS (ver docs/investigacion_3is.md) -- cifras OFICIALES
@@ -137,8 +139,26 @@ DIVIPOLA_DEPARTAMENTO = {
     "La Guajira": "44", "Magdalena": "47", "Meta": "50", "Nariño": "52",
     "Norte de Santander": "54", "Quindío": "63", "Risaralda": "66",
     "Santander": "68", "Sucre": "70", "Tolima": "73", "Valle del Cauca": "76",
-    "Putumayo": "86",
+    "Putumayo": "86", "Casanare": "85",
 }
+
+# Corrige variantes sin tilde de fuentes externas (ej. la hoja de sedes
+# educativas trae "Quindio" sin tilde) contra las claves canónicas de
+# DIVIPOLA_DEPARTAMENTO -- sin esto, esas filas quedan con divipola vacío
+# y el nombre de departamento no calza con el resto del inventario.
+def _sin_acentos(s):
+    return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn").upper()
+
+
+_DEPARTAMENTOS_SIN_ACENTOS = {_sin_acentos(dep): dep for dep in DIVIPOLA_DEPARTAMENTO}
+
+
+def normalizar_nombre_departamento(nombre):
+    """Devuelve el nombre canónico (con tilde, tal como aparece en
+    DIVIPOLA_DEPARTAMENTO) si encuentra una coincidencia ignorando
+    acentos; si no, devuelve el nombre tal cual llegó -- nunca inventa
+    un departamento que no exista."""
+    return _DEPARTAMENTOS_SIN_ACENTOS.get(_sin_acentos(nombre), nombre)
 
 # Nivel de gravedad oficial (municipal) -> punto en la misma rampa 0-100 que
 # ya usan las celdas del heatmap departamental (ver RAMP/cell_color), para
@@ -366,18 +386,21 @@ def load_3is_datos_territoriales(url=SHEETS_3IS_DATOS_TERRITORIALES_URL):
 
 def load_sedes_educativas_afectadas(csv_path):
     """Lee el detalle por sede educativa (código DANE, severidad 1/2/3,
-    matrícula, docentes...) y lo agrega por (departamento, municipio) --
-    solo materia prima para el inventario de formato largo
-    (fuente=FundacionExito), NO se usa para recalcular ninguna dimensión
-    del índice todavía. Archivo separado por ';' con BOM (export de Excel
-    en español), a diferencia del resto de data/ que usa ','. Devuelve {}
-    si el archivo no existe."""
+    matrícula, docentes...) -- cobertura nacional, no solo Chocó (21
+    departamentos, 439 municipios en el snapshot de sep/2026) -- y lo
+    agrega por (departamento, municipio). Solo materia prima para el
+    inventario de formato largo (fuente=FundacionExito), NO se usa para
+    recalcular ninguna dimensión del índice todavía. Archivo separado
+    por ';' con BOM (export de Excel en español), a diferencia del resto
+    de data/ que usa ','. Normaliza nombres de departamento sin tilde
+    (ej. 'Quindio') contra DIVIPOLA_DEPARTAMENTO. Devuelve {} si el
+    archivo no existe."""
     if not csv_path or not os.path.exists(csv_path):
         return {}
     por_mun = defaultdict(lambda: {"n_sedes": 0, "n_sedes_criticas": 0, "matricula_afectada": 0, "docentes_afectados": 0})
     with open(csv_path, encoding="utf-8-sig") as f:
         for row in csv.DictReader(f, delimiter=";"):
-            dep = (row.get("Departamento") or "").strip()
+            dep = normalizar_nombre_departamento((row.get("Departamento") or "").strip())
             mun = (row.get("Municipio") or "").strip()
             if not dep or not mun:
                 continue

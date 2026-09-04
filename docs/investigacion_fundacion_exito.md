@@ -50,11 +50,16 @@ navegador humano de verdad (la IP residencial de Daniel).
 Daniel abrió el sitio en su navegador y encontró un botón de descarga
 con el detalle de **sedes educativas afectadas** -- lo bajó y lo compartió
 directamente, sin necesidad de scraping. Ver `data/README.md` para el
-detalle del archivo (`sedes_educativas_afectadas_choco_ago2026.csv`) y
+detalle del archivo (`sedes_educativas_afectadas_ago2026.csv`) y
 `load_sedes_educativas_afectadas()` en `actualizar_indice_terremoto.py`
 para cómo se agrega a `indicadores_largo.csv` (`fuente=FundacionExito`,
 nivel municipal: sedes afectadas, sedes en estado crítico, matrícula
 afectada, docentes afectados).
+
+**Ojo:** el primer archivo que compartió Daniel venía filtrado solo a
+Chocó (303 sedes) -- el sitio en realidad reporta a nivel **nacional**
+(6.028 sedes, 21 departamentos, 451 municipios). Se reemplazó por
+completo, no fue un merge.
 
 Es un snapshot manual -- si Daniel encuentra una versión más nueva en el
 sitio, reemplaza el CSV en `data/` con el mismo nombre y el loader lo

@@ -1,0 +1,558 @@
+nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fuente,valor
+departamental,Quindío,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,16.0
+departamental,Quindío,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,41.0
+departamental,Quindío,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,82.0
+departamental,Quindío,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,62.0
+departamental,Quindío,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,68.0
+departamental,Chocó,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,14.0
+departamental,Chocó,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,49.0
+departamental,Chocó,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,71.0
+departamental,Chocó,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,18.0
+departamental,Chocó,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,46.0
+departamental,Caldas,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,39.0
+departamental,Caldas,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,59.0
+departamental,Caldas,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,165.0
+departamental,Caldas,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,181.0
+departamental,Caldas,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,159.0
+departamental,Risaralda,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,25.0
+departamental,Risaralda,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,35.0
+departamental,Risaralda,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,103.0
+departamental,Risaralda,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,35.0
+departamental,Risaralda,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,109.0
+departamental,Valle del Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,93.0
+departamental,Valle del Cauca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,121.0
+departamental,Valle del Cauca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,244.0
+departamental,Valle del Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,80.0
+departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,263.0
+departamental,Tolima,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11.0
+departamental,Tolima,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,12.0
+departamental,Tolima,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,22.0
+departamental,Tolima,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,11.0
+departamental,Tolima,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,34.0
+departamental,Cauca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,11.0
+departamental,Cauca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,5.0
+departamental,Cauca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,18.0
+departamental,Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9.0
+departamental,Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,18.0
+departamental,Cundinamarca,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,8.0
+departamental,Cundinamarca,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,12.0
+departamental,Cundinamarca,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,26.0
+departamental,Cundinamarca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,15.0
+departamental,Cundinamarca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,37.0
+departamental,Antioquia,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,17.0
+departamental,Antioquia,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,20.0
+departamental,Antioquia,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,74.0
+departamental,Antioquia,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,28.0
+departamental,Antioquia,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,60.0
+departamental,Santander,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,1.0
+departamental,Santander,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,5.0
+departamental,Santander,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,5.0
+departamental,Santander,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9.0
+departamental,Santander,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,16.0
+departamental,Huila,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,2.0
+departamental,Huila,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,15.0
+departamental,Huila,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,7.0
+departamental,Huila,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,33.0
+departamental,Huila,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3.0
+departamental,Nariño,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,2.0
+departamental,Nariño,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,9.0
+departamental,Nariño,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,19.0
+departamental,Nariño,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,5.0
+departamental,Nariño,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,12.0
+departamental,Norte de Santander,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Norte de Santander,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,3.0
+departamental,Norte de Santander,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1.0
+departamental,Norte de Santander,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,3.0
+departamental,Norte de Santander,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2.0
+departamental,Sucre,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Sucre,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,2.0
+departamental,Sucre,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1.0
+departamental,Sucre,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Sucre,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3.0
+departamental,Atlántico,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Atlántico,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Atlántico,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,8.0
+departamental,Atlántico,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Atlántico,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,15.0
+departamental,Bolívar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Bolívar,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Bolívar,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,5.0
+departamental,Bolívar,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Bolívar,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,14.0
+departamental,Bogotá D.C.,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Bogotá D.C.,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Bogotá D.C.,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,30.0
+departamental,Bogotá D.C.,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Bogotá D.C.,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,96.0
+departamental,La Guajira,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,La Guajira,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,La Guajira,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1.0
+departamental,La Guajira,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,La Guajira,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2.0
+departamental,Cesar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Cesar,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Cesar,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1.0
+departamental,Cesar,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Cesar,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,7.0
+departamental,Meta,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Meta,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Meta,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1.0
+departamental,Meta,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Meta,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,6.0
+departamental,Córdoba,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Córdoba,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Córdoba,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1.0
+departamental,Córdoba,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Córdoba,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3.0
+departamental,Putumayo,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Putumayo,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Putumayo,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0.0
+departamental,Putumayo,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Putumayo,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2.0
+departamental,Caquetá,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Caquetá,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Caquetá,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0.0
+departamental,Caquetá,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Caquetá,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,2.0
+departamental,Magdalena,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Magdalena,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Magdalena,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0.0
+departamental,Magdalena,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Magdalena,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,3.0
+departamental,Boyacá,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0.0
+departamental,Boyacá,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0.0
+departamental,Boyacá,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,0.0
+departamental,Boyacá,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,0.0
+departamental,Boyacá,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,1.0
+municipal,Antioquia,Abejorral,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Alejandría,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Amagá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Amalfi,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Andes,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Angelópolis,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Angostura,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Anzá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Apartadó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Argelia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Armenia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Barbosa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Bello,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Betania,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Betulia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Caicedo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Caldas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Campamento,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Caracolí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Caramanta,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Carepa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Carolina del Príncipe,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Caucasia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Cañasgordas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Cisneros,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Ciudad Bolívar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Cocorná,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Concepción,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Concordia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Copacabana,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Dabeiba,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Donmatías,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Ebéjico,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,El Bagre,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,El Peñol,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,El Retiro,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,El Santuario,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Entrerríos,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Envigado,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Fredonia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Frontino,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Giraldo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Girardota,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Granada,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Guarne,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Gómez Plata,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Heliconia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Hispania,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Itagüí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Ituango,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Jardín,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Jericó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,La Ceja,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,La Estrella,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,La Pintada,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,La Unión,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Liborina,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Marinilla,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Medellín,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Montebello,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Nariño,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Peque,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Pueblorrico,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Puerto Nare,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Puerto Triunfo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Remedios,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Rionegro,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Sabaneta,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Salgar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,San Carlos,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,San Francisco,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,San Jerónimo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,San Luis,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,San Pedro de Urabá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,San Rafael,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,San Vicente Ferrer,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Santa Bárbara,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Santa Fe de Antioquia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Santa Rosa de Osos,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Santo Domingo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Sonsón,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Sopetrán,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Tarso,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Titiribí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Toledo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Turbo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Támesis,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Uramita,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Urrao,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Valdivia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Valparaíso,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Vegachí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Venecia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Vigía del Fuerte,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Yalí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Yarumal,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Yolombó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Yondó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Antioquia,Zaragoza,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Atlántico,Barranquilla,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Bogotá D.C.,Bogotá D.C.,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Bolívar,Cartagena,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Bolívar,San Pablo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Bolívar,Turbaco,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Boyacá,Chiquinquirá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Boyacá,Tunja,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Aguadas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Anserma,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Caldas,Aranzazu,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Belalcázar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Chinchiná,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Caldas,Filadelfia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,La Dorada,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,La Merced,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Manizales,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,100.0
+municipal,Caldas,Manzanares,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Marmato,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Caldas,Marquetalia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Marulanda,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Neira,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Caldas,Norcasia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Palestina,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Caldas,Pensilvania,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Pácora,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Riosucio,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Caldas,Risaralda,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Salamina,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Samaná,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,San José,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Supía,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Victoria,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caldas,Villamaría,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Caldas,Viterbo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Caquetá,Florencia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Almaguer,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Argelia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Balboa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Bolívar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Buenos Aires,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Cajibío,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Caldono,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Caloto,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Corinto,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,El Tambo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Florencia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Guachené,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Guapi,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Inzá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Jambaló,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,La Sierra,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,La Vega,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,López de Micay,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Mercaderes,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Miranda,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Morales,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Padilla,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Patía,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Piendamó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Popayán,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Puerto Tejada,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Puracé,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Rosas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,San Sebastián,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Santa Rosa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Santander de Quilichao,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Silvia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Sotará,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Sucre,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Suárez,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Timbiquí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Timbío,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Toribío,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cauca,Totoró,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cesar,Bosconia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cesar,Pailitas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cesar,San Diego,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cesar,Valledupar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Acandí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Alto Baudó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Atrato,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Bagadó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Bahía Solano,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Bajo Baudó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Bojayá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Condoto,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Cértegui,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,El Cantón del San Pablo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,El Carmen de Atrato,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,El Litoral del San Juan,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Istmina,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Lloró,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Medio Atrato,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Medio Baudó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Medio San Juan,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Nuquí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Nóvita,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,80.0
+municipal,Chocó,Quibdó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,100.0
+municipal,Chocó,Riosucio,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Río Iró,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,80.0
+municipal,Chocó,Río Quito,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,San José del Palmar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,100.0
+municipal,Chocó,Sipí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Chocó,Tadó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Chocó,Unión Panamericana,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Albán,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Anapoima,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,40.0
+municipal,Cundinamarca,Anolaima,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Apulo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Cundinamarca,Bituima,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Bojacá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Cabrera,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Cundinamarca,Cajicá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Choachí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Chía,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Cogua,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Cota,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Cucunubá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Cáqueza,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Cundinamarca,Funza,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Fusagasugá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Fúquene,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Girardot,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Granada,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Guachetá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Guaduas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Guataquí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Guatavita,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,La Mesa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,La Palma,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,La Peña,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Madrid,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Medina,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Mosquera,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Nilo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Nimaima,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Nocaima,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Pacho,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Paratebueno,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Pasca,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Puerto Salgar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Pulí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Ricaurte,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,San Antonio del Tequendama,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,San Francisco,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,San Juan de Rioseco,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Sasaima,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,40.0
+municipal,Cundinamarca,Soacha,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Sopó,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Subachoque,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Suesca,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Tabio,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Tena,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,80.0
+municipal,Cundinamarca,Tenjo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,40.0
+municipal,Cundinamarca,Tibacuy,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Tocaima,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,20.0
+municipal,Cundinamarca,Ubalá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Ubaque,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Cundinamarca,Vergara,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Villeta,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Yacopí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Zipacón,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Cundinamarca,Zipaquirá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Córdoba,Montería,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Acevedo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Agrado,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Aipe,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Baraya,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Campoalegre,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Colombia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,El Pital,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Elías,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Garzón,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Gigante,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Hobo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,La Plata,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Neiva,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Paicol,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Palermo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Pitalito,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Rivera,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Santa María,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Tello,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Teruel,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Timaná,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Villavieja,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Huila,Íquira,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,La Guajira,Riohacha,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Magdalena,Santa Marta,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Meta,Acacías,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Meta,Granada,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Meta,Villavicencio,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Barbacoas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Chachagüí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Consacá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Cuaspud,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Córdoba,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,El Peñol,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Francisco Pizarro,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Funes,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Ipiales,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,La Cruz,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Los Andes,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Mosquera,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Pasto,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Ricaurte,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Samaniego,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Sandoná,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Nariño,Tumaco,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Norte de Santander,Chinácota,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Norte de Santander,Cúcuta,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Norte de Santander,El Tarra,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Norte de Santander,Los Patios,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Norte de Santander,Lourdes,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Norte de Santander,Pamplona,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Norte de Santander,Silos,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Putumayo,Mocoa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Armenia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Quindío,Buenavista,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Calarcá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Circasia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Córdoba,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Filandia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Génova,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,La Tebaida,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Montenegro,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Pijao,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Quimbaya,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Quindío,Salento,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Apía,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Balboa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Belén de Umbría,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Risaralda,Dosquebradas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Risaralda,Guática,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,La Celia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Risaralda,La Virginia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Marsella,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Mistrató,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Pereira,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,100.0
+municipal,Risaralda,Pueblo Rico,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Quinchía,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Santa Rosa de Cabal,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Risaralda,Santuario,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Santander,Barrancabermeja,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Santander,Bucaramanga,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Santander,Confines,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Santander,Coromoro,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Santander,Floridablanca,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Sucre,Coveñas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Sucre,Sincelejo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Alpujarra,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Alvarado,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Anzoátegui,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Armero Guayabal,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Ataco,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Cajamarca,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Casabianca,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Chaparral,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Coello,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Cunday,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Dolores,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Espinal,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Falan,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Flandes,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Fresno,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Herveo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Honda,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Ibagué,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Icononzo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Lérida,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Líbano,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Mariquita,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Melgar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Murillo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Natagaima,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Ortega,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Palocabildo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Piedras,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Planadas,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Prado,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Purificación,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Rioblanco,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Roncesvalles,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Rovira,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Saldaña,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,San Antonio,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,San Luis,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Santa Isabel,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Suárez,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Venadillo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Villahermosa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Tolima,Villarrica,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Alcalá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Andalucía,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Ansermanuevo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Argelia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Bolívar,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Buenaventura,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,80.0
+municipal,Valle del Cauca,Buga,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Valle del Cauca,Bugalagrande,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Caicedonia,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Cali,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,100.0
+municipal,Valle del Cauca,Calima-El Darién,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,100.0
+municipal,Valle del Cauca,Candelaria,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Cartago,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Valle del Cauca,Dagua,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,El Cairo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,80.0
+municipal,Valle del Cauca,El Cerrito,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,El Dovio,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,El Águila,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Valle del Cauca,Florida,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Valle del Cauca,Ginebra,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Jamundí,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,La Cumbre,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,La Unión,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Valle del Cauca,La Victoria,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Obando,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Palmira,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Pradera,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Restrepo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Riofrío,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,40.0
+municipal,Valle del Cauca,Roldanillo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Valle del Cauca,San Pedro,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Sevilla,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,80.0
+municipal,Valle del Cauca,Toro,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Trujillo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Tuluá,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Ulloa,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Versalles,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Vijes,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Yotoco,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,0.0
+municipal,Valle del Cauca,Yumbo,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,60.0
+municipal,Valle del Cauca,Zarzal,Gravedad municipal,gravedad_oficial,Gravedad oficial (municipal),Categoría (0-100),Naboo/UNGRD,80.0

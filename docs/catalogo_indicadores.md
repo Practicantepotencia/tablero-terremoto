@@ -116,6 +116,47 @@ económico son los mismos de la tabla de arriba, a nivel municipal):
 | `undp_rapida_landslides` | Susceptibilidad a deslizamientos | Índice |
 | `undp_rapida_recovery_needs` | Necesidades de recuperación temprana | Índice |
 
+### ⚠️ Advertencia: las categorías de edificaciones de UNDP-RAPIDA no están confirmadas como mutuamente excluyentes
+
+`bdg_exp` (expuestas) y las categorías de afectación (`bdg_comm_aff`,
+`bdg_health_aff`, `bdg_edu_aff`, `bdg_homes_dmg`, `bdg_homes_dest`,
+`bdg_public_imp`, `bdg_other_imp`) declaran fuentes distintas en el propio
+item de ArcGIS -- `bdg_exp` sale de un modelo de exposición sobre huellas de
+Overture Maps, las categorías de afectación de evaluación de daño de
+Copernicus EMS. No hay un identificador de edificio individual en los datos
+(son conteos agregados por municipio), así que no hay forma de confirmar
+si las categorías son mutuamente excluyentes o si un mismo edificio puede
+quedar contado en más de una.
+
+Dos chequeos hechos sobre los 301 municipios con datos:
+
+1. **"Expuestas" no es un techo confiable.** En 32 de 301 municipios (11%),
+   la suma de las 7 categorías de afectación **supera** a `bdg_exp` -- a
+   veces por 100x (Cajibío, Cauca: suma = 1.588 vs. `bdg_exp` = 14; Jambaló,
+   Cauca: suma = 494 vs. `bdg_exp` = 0). Si "afectado" fuera un subconjunto
+   real de "expuesto", esto no podría pasar nunca. Indica que ambos grupos
+   de campos no son el mismo inventario de edificios visto en dos cortes,
+   sino (probablemente) dos modelos independientes que no siempre cuadran.
+2. **`bdg_comm_aff + bdg_public_imp` (instituciones) vs. `bdg_edu_aff`
+   (educación) nunca se invierte.** El primero es mayor o igual en el
+   100% de los 301 municipios (235 con desigualdad estricta, ej. Armenia:
+   941 vs. 48; ninguno al revés). Un orden estrictamente unidireccional en
+   todos los casos es compatible con que las edificaciones educativas
+   estén incluidas dentro del conteo de "comunitario" -- no lo prueba (podría
+   ser solo que "instituciones" es una categoría más amplia sin
+   superposición alguna), pero tampoco lo descarta.
+
+**Conclusión:** el riesgo de doble conteo entre categorías de edificaciones
+de UNDP-RAPIDA (por ejemplo, una escuela comunitaria contada tanto en
+`bdg_comm_aff` como en `bdg_edu_aff`) queda **abierto, ni confirmado ni
+descartado**. Cerrarlo requeriría documentación oficial de la taxonomía de
+edificios que no está publicada, o acceso a los datos a nivel de edificio
+individual (no disponible vía el Feature Service público). El índice
+ajustado (sección 6) no usa `bdg_exp` en ningún cálculo, así que la
+inconsistencia del punto 1 no se filtra al resultado -- pero si en el
+futuro se usara `bdg_exp` como techo de normalización o validación cruzada,
+esta advertencia aplicaría directamente.
+
 ## 6. Índice ajustado (Fase B) -- fuente variable según cascada
 
 Por cada dimensión *d* ∈ {vivienda, salud, educación, instituciones,

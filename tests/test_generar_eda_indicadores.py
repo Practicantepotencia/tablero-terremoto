@@ -17,6 +17,20 @@ def sample(value="12.5", date="2026-09-04"):
 
 
 class EdaTests(unittest.TestCase):
+    def test_decree_departments_come_from_normative_indicator(self):
+        rows = [
+            {**sample(), "departamento": "Chocó", "municipio": "", "nivel": "departamental", "indicador_id": "en_decreto_1171", "valor": "1"},
+            {**sample(), "departamento": "Córdoba", "municipio": "", "nivel": "departamental", "indicador_id": "en_decreto_1171", "valor": "0"},
+        ]
+        self.assertEqual(eda.decree_departments(rows), ["Chocó"])
+
+    def test_history_builds_decree_only_series(self):
+        rows = [sample("10"), {**sample("20"), "departamento": "Córdoba", "municipio": "Lorica"}]
+        history = eda.history_summary(rows, ["Chocó"])
+        decree = [r for r in history if r["departamento"] == "__DECRETO__"]
+        self.assertEqual(len(decree), 1)
+        self.assertEqual(decree[0]["mediana"], 10)
+
     def test_audit_accepts_clean_numeric_row(self):
         report = eda.audit([sample()])
         counts = {c["check"]: c["count"] for c in report["checks"]}
@@ -56,4 +70,5 @@ class EdaTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
 

@@ -11,8 +11,11 @@ echo ==== %date% %time% ==== >> actualizar_log.txt
 where python >nul 2>nul
 if %errorlevel%==0 (
     python actualizar_indice_terremoto.py >> actualizar_log.txt 2>&1
+    python generar_eda_indicadores.py >> actualizar_log.txt 2>&1
 ) else (
     py actualizar_indice_terremoto.py >> actualizar_log.txt 2>&1
+    py generar_eda_indicadores.py >> actualizar_log.txt 2>&1
 )
 
-echo Listo. Revisa dashboard_impacto_terremoto.html
+echo Listo. Revisa dashboard_impacto_terremoto.html y eda_indicadores.html
+

@@ -4,6 +4,13 @@ name: Actualizar tablero de impacto
 # computador esté encendido), y también se puede disparar a mano desde la
 # pestaña "Actions" del repo con el botón "Run workflow".
 on:
+  push:
+    branches: [formato-largo]
+    paths:
+      - ".github/workflows/actualizar.yml"
+      - "actualizar_indice_terremoto.py"
+      - "generar_eda_indicadores.py"
+      - "data/**"
   schedule:
     - cron: "0 */4 * * *"
   workflow_dispatch: {}

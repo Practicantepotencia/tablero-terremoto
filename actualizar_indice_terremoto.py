@@ -307,6 +307,10 @@ def load_undp_geosmart_rapida(adm1_url=ARCGIS_ADM1_URL, adm2_url=ARCGIS_ADM2_URL
         if not dep or dep not in DIVIPOLA_DEPARTAMENTO or not mun:
             continue
         valores = {c: attrs[c] for c in CAMPOS_UNDP_ADM2 if attrs.get(c) is not None}
+        # Conserva la llave municipal oficial para el inventario largo y el
+        # EDA. Antes se descargaba mpcodigo pero se descartaba silenciosamente.
+        if attrs.get("mpcodigo") is not None:
+            valores["_divipola"] = str(attrs["mpcodigo"]).split(".")[0].zfill(5)
         if valores:
             datos_mun[(dep, mun)] = valores
 
@@ -1128,10 +1132,16 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
     ]
     hoy = datetime.now(timezone.utc).date().isoformat()
     filas = []
+    divipola_municipal = {
+        clave: valores.get("_divipola", "")
+        for clave, valores in (datos_undp_por_municipio or {}).items()
+    }
 
     def fila(dep, mun, nivel, dimension, ind_id, ind_nombre, unidad, fuente, valor):
+        codigo = (divipola_municipal.get((dep, mun), "") if nivel == "municipal"
+                  else DIVIPOLA_DEPARTAMENTO.get(dep, ""))
         filas.append({
-            "divipola": DIVIPOLA_DEPARTAMENTO.get(dep, ""), "nivel": nivel,
+            "divipola": codigo, "nivel": nivel,
             "departamento": dep, "municipio": mun or "",
             "dimension": dimension, "indicador_id": ind_id, "indicador": ind_nombre,
             "unidad": unidad, "fuente": fuente, "valor": valor, "fecha_corte": hoy,
@@ -1202,6 +1212,8 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
     if datos_undp_por_municipio:
         for (dep, mun), valores in datos_undp_por_municipio.items():
             for campo, valor in valores.items():
+                if campo == "_divipola":
+                    continue
                 fila(dep, mun, "municipal", DIMENSION_UNDP_POR_CAMPO[campo],
                      f"undp_rapida_{campo}", LABEL_UNDP_POR_CAMPO[campo], UNIDAD_UNDP_POR_CAMPO[campo], "UNDP-RAPIDA", valor)
 
@@ -1211,10 +1223,12 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
         w.writerows(filas)
 
     if no_calculo_csv_path:
-        fieldnames_nc = ["nivel", "departamento", "municipio", "dimension", "indicador_id", "indicador", "unidad", "fuente", "valor"]
+        # Conserva la llave geográfica y la fecha: el EDA necesita ambas
+        # para evitar cruces por nombre y construir una evolución real.
+        fieldnames_nc = fieldnames
         filas_nc = [{k: f[k] for k in fieldnames_nc} for f in filas if f["fuente"] != "Calculo"]
         with open(no_calculo_csv_path, "w", newline="", encoding="utf-8") as f:
-            w = csv.DictWriter(f, fieldnames=fieldnames_nc)
+            w = csv.DictWriter(f, fieldnames=fieldnames_nc, lineterminator="\n")
             w.writeheader()
             w.writerows(filas_nc)
 
@@ -1851,7 +1865,7 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
     tab_nav_html = '\n  <div class="tab-nav" role="tablist">\n' + "\n".join(
         f'    <button class="tab-btn{" active" if i == 0 else ""}" data-tab="{key}" role="tab" aria-selected="{"true" if i == 0 else "false"}">{label}</button>'
         for i, (key, label) in enumerate(tab_defs)
-    ) + "\n  </div>"
+    ) + '\n    <a class="tab-btn" href="eda_indicadores.html" style="text-decoration:none">EDA de indicadores ↗</a>\n  </div>'
 
     html = f"""<!doctype html>
 <html lang="es">
@@ -2238,3 +2252,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

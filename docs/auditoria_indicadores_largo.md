@@ -1,5 +1,11 @@
 # Auditoría del inventario crudo y diseño del EDA territorial
 
+> Documento histórico de la auditoría inicial. La propuesta de promediar
+> percentiles de IPM y resultado descrita más abajo fue retirada. La metodología
+> vigente en esta rama está en [metodologia_recuperacion.md](metodologia_recuperacion.md):
+> orden por recuperación sola y fuentes sectoriales separadas. `fecha_corte`
+> se presenta como captura del inventario, no como fecha efectiva de observación.
+
 **Archivo auditado:** `indicadores_largo_no_calculo.csv` de la rama `formato-largo`  
 **Corte disponible al iniciar la auditoría:** 4 de septiembre de 2026  
 **Alcance:** estructura, cobertura, coherencia interna, duplicidad entre fuentes, comparabilidad geográfica y uso del IPM como línea base.

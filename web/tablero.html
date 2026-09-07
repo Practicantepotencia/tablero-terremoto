@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Necesidades de recuperación temprana, diagnóstico sectorial y cobertura de la evidencia territorial en Colombia.">
+<title>Recuperación temprana · Tablero territorial</title><style>__STYLE__</style></head>
+<body><main class="wrap">
+<div class="statusbar"><span class="pill">Análisis territorial</span><span id="capture-label"></span><span id="build-label" class="muted"></span></div>
+<header class="hero"><div class="kicker">Respuesta al terremoto · Colombia</div><h1>Necesidades de recuperación temprana</h1><p class="subtitle">Prioridades municipales, afectación por sector y vulnerabilidad previa, con la cobertura de cada fuente a la vista.</p></header>
+<nav class="tab-nav" role="tablist" aria-label="Vistas del tablero">
+<button type="button" id="tab-prioridades" class="tab-btn active" role="tab" aria-selected="true" aria-controls="prioridades" data-tab="prioridades">Prioridades</button>
+<button type="button" id="tab-diagnostico" class="tab-btn" role="tab" aria-selected="false" aria-controls="diagnostico" data-tab="diagnostico">Diagnóstico territorial</button>
+<button type="button" id="tab-metodo" class="tab-btn" role="tab" aria-selected="false" aria-controls="metodo" data-tab="metodo">Fuentes y método</button>
+</nav>
+<div class="filters global">
+<label>Universo territorial<select id="scope"><option value="decree">Departamentos del Decreto 1171</option><option value="all">Todos los departamentos del inventario</option></select></label>
+<label>Departamento<select id="dept"></select></label>
+<label>Captura del inventario<select id="date"></select></label>
+</div>
+<p id="scope-note" class="note"></p>
+<section id="prioridades" class="tab-panel" role="tabpanel" aria-labelledby="tab-prioridades">
+<div id="priority-kpis" class="tiles" aria-live="polite"></div>
+<div class="two">
+<div class="card"><div class="section-head"><h2>Ranking de recuperación</h2><label class="search">Buscar en la tabla<input id="priority-search" type="search" placeholder="Municipio o departamento"></label></div><p id="priority-note" class="note"></p><div id="priority-table" class="table-scroll"></div><button type="button" id="priority-more" class="secondary" hidden>Ver más municipios</button></div>
+<div class="card"><h2>Recuperación e IPM</h2><p class="note">El IPM contextualiza el resultado. Los ejes no constituyen mediciones independientes.</p><div id="scatter"></div><p id="scatter-detail" class="note" aria-live="polite">Selecciona un punto para abrir su ficha.</p><p id="scatter-note" class="note small"></p></div>
+</div>
+<div class="card"><div class="section-head"><h2>Qué necesita cada municipio</h2><span class="muted small">RAPIDA · valores originales por sector</span></div><p class="note">Municipios en el orden del ranking de recuperación. El color es el percentil de cada indicador por separado. «—» significa sin dato.</p><div id="matrix" class="table-scroll"></div></div>
+<div class="card"><h2>Seguimiento sobre los mismos municipios</h2><p class="note">Medianas de recuperación e IPM en paneles constantes entre capturas. Una captura nueva no acredita un cambio real en el terreno.</p><div id="priority-trend" class="two"></div></div>
+<details class="card"><summary id="missing-title">Municipios sin recuperación evaluada</summary><p class="note">Necesitan revisión de evidencia. Su ausencia del ranking no significa necesidad baja. Pueden tener observaciones sectoriales en otras fuentes.</p><div id="missing-table" class="table-scroll"></div></details>
+</section>
+<section id="diagnostico" class="tab-panel" role="tabpanel" aria-labelledby="tab-diagnostico" hidden>
+<div class="filters local">
+<label>Nivel<select id="level"><option value="municipal">Municipal</option><option value="departamental">Departamental</option></select></label>
+<label>Fuente<select id="source"></select></label>
+<label>Dimensión<select id="dimension"></select></label>
+<label class="wide">Indicador<select id="indicator"></select></label>
+</div>
+<p id="cohort-note" class="note"></p><div id="source-warning" class="notice"></div>
+<div id="sector-kpis" class="tiles" aria-live="polite"></div>
+<div class="two">
+<div class="card"><div class="section-head"><h2 id="sector-title">Ranking sectorial</h2><button type="button" id="download" class="secondary">Descargar selección CSV</button></div><div class="filters inline"><label>Orden<select id="order"><option value="desc">Mayor valor</option><option value="asc">Menor valor</option></select></label><label>Buscar en la tabla<input id="sector-search" type="search" placeholder="Territorio"></label></div><div id="sector-table" class="table-scroll"></div><button type="button" id="sector-more" class="secondary" hidden>Ver más territorios</button></div>
+<div class="card"><h2>Distribución del indicador</h2><div id="distribution"></div><p id="distribution-note" class="note"></p><h2>Evolución de la selección</h2><div id="sector-trend"></div></div>
+</div>
+<div class="card" id="profile-card"><div class="section-head"><h2>Ficha territorial</h2><label class="profile-picker">Territorio<select id="territory"></select></label></div><p id="profile-note" class="note"></p><div id="profile-kpis" class="tiles compact"></div><div id="profile-table" class="table-scroll"></div><details><summary>Historial del indicador en este territorio</summary><div id="profile-trend"></div></details></div>
+</section>
+<section id="metodo" class="tab-panel" role="tabpanel" aria-labelledby="tab-metodo" hidden>
+<div class="card"><h2>Cobertura de las fuentes</h2><p class="note">Universo, departamento y captura seleccionados. Los territorios pueden repetirse entre fuentes; sus coberturas no se suman.</p><div id="coverage-table" class="table-scroll"></div></div>
+<div class="two"><div class="card"><h2>Cómo se decide el orden</h2>
+<p>El ranking principal usa exclusivamente el valor publicado de necesidades de recuperación temprana de RAPIDA. No se le suma IPM, daño económico ni un promedio de sectores. Los empates comparten posición.</p>
+<p>«Tramo superior» significa valor igual o mayor al percentil 75 del universo territorial seleccionado. El filtro de departamento y la búsqueda no cambian este umbral. Solo se calcula con al menos cuatro municipios y valores diferentes. No es un umbral oficial de intervención.</p>
+<p>Cada ranking sectorial exige la misma fuente, indicador, nivel, unidad, definición registrada y captura. Las otras fuentes se consultan por separado. Nunca rellenan los huecos de la fuente elegida.</p>
+<p>Las magnitudes absolutas sirven para dimensionar la respuesta y dependen del tamaño territorial. No se calculan tasas sin denominadores compatibles y verificados.</p>
+<p>La cobertura de cinco sectores exige todos sus campos de referencia disponibles. Cuenta disponibilidad, no calidad o certeza. Los edificios de categorías distintas no se suman.</p>
+</div><div class="card"><h2>Qué sigue pendiente</h2>
+<p class="notice">La fecha de captura es la del inventario. Falta acreditar la fecha efectiva y la versión metodológica de cada observación. Las comparaciones dentro de una fuente siguen siendo provisionales.</p>
+<p>El IPM disponible es municipal y parcial. Su año base y correspondencia exacta con la medición oficial deben documentarse. El inventario no contiene los pesos ni la fórmula completa de recuperación temprana; el tablero conserva el resultado de la fuente.</p>
+<p>PNUD y RAPIDA comparten cifras en el solapamiento auditado. Su coincidencia no demuestra validación independiente. La fuente elegida tampoco elimina posibles errores internos o sesgos de cobertura.</p>
+<p>El decreto delimita el filtro administrativo. No demuestra daño en todos sus municipios, ni ausencia de daño fuera de ellos. Las observaciones ExE conservan una advertencia de atribución.</p>
+<p>La evolución usa únicamente territorios presentes en todas las capturas comparadas. Se informa su tamaño; no representa automáticamente al departamento completo.</p>
+</div></div>
+<div class="card"><h2>Controles de integridad</h2><div id="checks"></div><p class="note">Se excluyen registros inválidos o conflictivos; un dato ausente no se convierte en cero. Los nombres solo se vinculan si el código no es ambiguo.</p></div>
+<details class="card"><summary>Diccionario de la selección</summary><div id="dictionary" class="table-scroll"></div></details>
+<details class="card"><summary>Índices anteriores y documentación</summary><p>Los compuestos Naboo y ajustado por cascada se retiran de la vista operativa en esta rama. Sus archivos históricos se conservan para reproducibilidad, sin presentarlos como prioridades actuales.</p><p><a href="docs/metodologia_recuperacion.md">Metodología y transición</a> · <a href="docs/auditoria_indicadores_largo.md">Auditoría de los indicadores</a> · <a href="historial_indice.csv">Historial del índice original</a></p></details>
+</section>
+<footer><span id="footer-capture"></span><span>Necesidades y cobertura del inventario disponible. «Sin dato» nunca significa cero.</span></footer>
+<noscript><p>Activa JavaScript para filtrar y consultar el tablero. Los datos originales están en <a href="indicadores_largo_no_calculo.csv">el inventario CSV</a>.</p></noscript>
+</main><script>__MODEL__</script><script>const DATA=__DATA__;</script><script>__APP__</script></body></html>

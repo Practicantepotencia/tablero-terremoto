@@ -1,5 +1,9 @@
 # Índice ajustado (Fase B)
 
+> En `reestructuracion-recuperacion`, este diseño queda como legado. La vista
+> operativa usa [comparaciones por fuente y recuperación RAPIDA](metodologia_recuperacion.md).
+> El modo `--legado` permite reproducirlo explícitamente.
+
 **Estado:** integrado, en beta -- convive con el índice original, no lo
 reemplaza. Pestaña "Índice ajustado (beta)" en el tablero.
 

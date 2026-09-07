@@ -5,6 +5,7 @@
 No calcula ni reemplaza el índice de impacto. Su propósito es hacer visibles
 la cobertura, las necesidades sectoriales, la vulnerabilidad previa (IPM),
 los rankings y las limitaciones de comparabilidad de las fuentes.
+Los selectores conservan el indicador activo al cambiar el universo territorial.
 """
 import argparse
 import csv

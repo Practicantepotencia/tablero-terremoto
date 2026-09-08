@@ -12,10 +12,13 @@ where python >nul 2>nul
 if %errorlevel%==0 (
     python actualizar_indice_terremoto.py >> actualizar_log.txt 2>&1
     python generar_eda_indicadores.py >> actualizar_log.txt 2>&1
+    python generar_indice_educacion.py >> actualizar_log.txt 2>&1
 ) else (
     py actualizar_indice_terremoto.py >> actualizar_log.txt 2>&1
     py generar_eda_indicadores.py >> actualizar_log.txt 2>&1
+    py generar_indice_educacion.py >> actualizar_log.txt 2>&1
 )
 
-echo Listo. Revisa dashboard_impacto_terremoto.html y eda_indicadores.html
+echo Listo. Revisa index.html, eda_indicadores.html e indice_educacion.html
+
 

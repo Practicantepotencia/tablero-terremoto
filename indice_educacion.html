@@ -12,6 +12,7 @@
 <header class="top"><h1>Prioridad territorial por dimensión</h1><p>Índice de evidencia disponible: las variables de cada dimensión tienen el mismo peso máximo. El resultado combina intensidad observada y cobertura documental; una posición alta indica mayor prioridad en los datos disponibles, no atribución causal verificada al sismo.</p></header>
 <div class="card controls" style="margin-top:16px"><label>Dimensión<select id="dimension"></select></label><label>Escala del índice<select id="indexLevel"></select></label></div><nav class="tabs" aria-label="Vistas"><button class="tab active" data-view="ranking">Ranking territorial</button><button class="tab" data-view="datos">Datos de la dimensión</button><button class="tab" data-view="metodo">Método</button></nav>
 
+<section class="card" id="indexFormula" aria-live="polite"></section>
 <section id="ranking" class="view active">
   <div class="kpis" id="kpis"></div>
   <div class="card controls">
@@ -61,6 +62,7 @@ function setDimension(preferred){
   $('indexLevel').innerHTML=levels.map(x=>`<option value="${x}">${x==='municipal'?'Municipal':'Departamental'}</option>`).join('');
   $('indexLevel').value=level;
   D=dimension.levels[level];order=D.indicator_order;decree=new Set(D.decree_departments);
+  renderFormula();
   $('department').innerHTML='<option value="">Todos</option>';
   $('rawIndicator').innerHTML='<option value="">Todas</option>';
   $('rawSource').innerHTML='<option value="">Todas</option>';
@@ -75,6 +77,11 @@ function setDimension(preferred){
   [...new Set(D.inventory.map(x=>x.source))].sort().forEach(x=>$('rawSource').insertAdjacentHTML('beforeend',`<option>${esc(x)}</option>`));
   $('indicatorRows').innerHTML=D.indicators.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.level)}</td><td>${esc(x.source)}</td><td class="num">${x.n}</td><td class="num">${x.zeroes}</td><td class="num">${fmt(x.median,x.unit)}</td><td class="num">${fmt(x.max,x.unit)}</td><td>${x.used?'<span class="pill">Incluida en el índice</span>':'Solo inventario'}</td></tr>`).join('');
   renderRanking();renderRaw();
+}
+function renderFormula(){
+  if(D.name==='Marco normativo'){$('indexFormula').innerHTML='<h2>Marco normativo: sin índice</h2><p>El indicador 0/1 identifica pertenencia al decreto; no se suma como necesidad.</p>';return}
+  const names=order.map(id=>D.indicators.find(x=>x.id===id&&x.level===D.level)?.name||id);
+  $('indexFormula').innerHTML=`<h2>Fórmula · ${esc(D.name)} · ${esc(D.level)}</h2><div class="formula" style="white-space:normal;line-height:1.7">Índice = [${names.map(name=>`P(${esc(name)})`).join(' + ')}] / ${order.length}</div><p>P(x) = 100 × [territorios con valor menor que x + 0,5 × territorios con valor igual a x] / territorios con dato en esa variable.</p><p>Cada variable pesa ${(100/order.length).toLocaleString('es-CO',{maximumFractionDigits:2})}%. Todas tienen sentido positivo: un valor mayor da un percentil mayor o igual. Una variable ausente aporta 0 al índice por falta de cobertura; un cero observado recibe su percentil y sí cuenta como dato.</p><p>Intensidad = suma de percentiles observados / variables observadas. Cobertura = variables observadas / ${order.length}. Índice = intensidad × cobertura. La referencia de percentiles permanece fija al usar filtros.</p>${order.includes('3is_rescatados')?'<div class="note">Rescatados aporta P(rescatados) / '+order.length+'. Aquí un mayor número aumenta el índice. Este dato mezcla magnitud del evento y respuesta de rescate: no demuestra por sí solo mayor necesidad pendiente.</div>':''}`;
 }
 function rankingData(){const q=$('search').value.trim().toLocaleLowerCase('es'),min=+$('coverage').value,dep=$('department').value,scope=$('scope').value;return D.index.filter(x=>(scope==='all'||decree.has(x.department))&&(!dep||x.department===dep)&&x.coverage>=min&&(!q||`${x.municipality} ${x.department} ${x.code}`.toLocaleLowerCase('es').includes(q)))}
 function renderRanking(){const rows=rankingData();if(!rows.some(x=>x.key===selected))selected=rows[0]?.key||null;$('rankingRows').innerHTML=rows.map((x,i)=>`<tr data-key="${esc(x.key)}" class="${x.key===selected?'selected':''}"><td>${i+1}</td><td><b>${esc(x.municipality)}</b><br><small>${esc(x.code)}</small></td><td>${esc(x.department)}</td><td class="num"><b>${x.score.toFixed(1)}</b></td><td class="num">${x.intensity.toFixed(1)}</td><td class="num">${x.observed}/${order.length}</td></tr>`).join('')||'<tr><td colspan="6">No hay territorios puntuables con estos filtros.</td></tr>';document.querySelectorAll('#rankingRows tr[data-key]').forEach(tr=>tr.onclick=()=>{selected=tr.dataset.key;renderRanking()});$('bars').innerHTML=rows.slice(0,12).map(x=>`<div class="barrow"><span>${esc(x.municipality)}</span><div class="track"><div class="fill" style="width:${x.score}%"></div></div><b class="num">${x.score.toFixed(1)}</b></div>`).join('')||'<p>Sin datos.</p>';renderProfile(rows.find(x=>x.key===selected))}

@@ -99,13 +99,17 @@ function renderPriorities() {
   $('priority-more').hidden=p.items.length<=priorityLimit;
   scatter(p.pool,p.canBand?p.qr:null,p.qi);
   $('scatter-note').textContent=`${p.pool.filter(r=>r.ipm!=null).length} pares visibles. Líneas P75: recuperación ${fmt(p.qr,'Índice')} e IPM ${fmt(p.qi)}. Referencia: todo el universo territorial seleccionado, antes de filtrar departamento.`;
-  const matrix=model.matrix(state,p.items.slice(0,12));
-  $('matrix').innerHTML=table(['Municipio',...T.sectors.map(([name])=>name)],matrix.map(r=>`<tr><td>${geoButton(r)}</td>${r.cells.map(s=>`<td class="heat-cell">${s.cells.map(c=>c?`<span class="heat-item" style="background:rgba(31,95,174,${.04+.2*c.p/100})" title="${esc(`${c.i}. ${c.u}. P${Math.round(c.p)}`)}"><span>${esc(c.i)}</span><br><b>${c.u==='COP'?short(c.v):fmt(c.v,c.u)}</b> <span>${esc(c.u)}</span></span>`:'<span class="heat-item muted">—</span>').join('')}</td>`).join('')}</tr>`));
+  renderMatrix();
   const recMeta=model.catalog.filter(m=>m.f===T.RAPIDA&&m.lv==='municipal'&&m.id===T.RECOVERY);
   const ipmMeta=model.catalog.filter(m=>m.f===T.RAPIDA&&m.lv==='municipal'&&m.id===T.IPM);
   $('priority-trend').innerHTML=`<div><h3>Recuperación</h3>${recMeta.length===1?historyBlock(recMeta[0].key):'<p class="empty">Falta una definición única de recuperación.</p>'}</div><div><h3>IPM reportado</h3>${ipmMeta.length===1?historyBlock(ipmMeta[0].key):'<p class="empty">Falta una definición única de IPM.</p>'}</div>`;
   $('missing-title').textContent=`${p.missing.length} municipios del inventario sin recuperación evaluada`;
   $('missing-table').innerHTML=table(['Municipio','Estado'],p.missing.map(r=>`<tr><td>${geoButton(r,r.f)}</td><td>Sin dato de recuperación RAPIDA</td></tr>`));
+}
+function renderMatrix() {
+  const matrix=model.matrix({...state,matrixSearch:$('matrix-search').value});
+  $('matrix-count').textContent=`${matrix.length} municipios visibles · ${matrix.filter(r=>r.rank==null).length} sin recuperación evaluada. La búsqueda no cambia los colores ni el orden.`;
+  $('matrix').innerHTML=table(['Municipio',...T.sectors.map(([name])=>name)],matrix.map(r=>`<tr><td>${geoButton(r)}</td>${r.cells.map(s=>`<td class="heat-cell">${s.cells.map(c=>c?`<span class="heat-item" style="background:rgba(31,95,174,${.04+.2*c.p/100})" title="${esc(`${c.i}. ${c.u}. P${Math.round(c.p)}`)}"><span>${esc(c.i)}</span><br><b>${c.u==='COP'?short(c.v):fmt(c.v,c.u)}</b> <span>${esc(c.u)}</span></span>`:'<span class="heat-item muted">—</span>').join('')}</td>`).join('')}</tr>`));
 }
 function distribution(pool) {
   if(!pool.length)return '<p class="empty">No hay distribución para estos filtros.</p>';
@@ -172,6 +176,7 @@ document.querySelector('.tab-nav').addEventListener('keydown',event=>{
 $('order').addEventListener('change',()=>{state.order=$('order').value;renderDiagnostic();});
 $('territory').addEventListener('change',()=>{state.geo=$('territory').value;renderProfile();});
 $('priority-search').addEventListener('input',()=>{priorityLimit=25;renderPriorities();});
+$('matrix-search').addEventListener('input',()=>{renderMatrix();$('matrix').scrollTop=0;});
 $('sector-search').addEventListener('input',()=>{sectorLimit=25;renderDiagnostic();});
 $('priority-more').addEventListener('click',()=>{priorityLimit+=50;renderPriorities();});
 $('sector-more').addEventListener('click',()=>{sectorLimit+=50;renderDiagnostic();});

@@ -93,14 +93,18 @@
         delta: points.length >= 2 && common.size > 0 ? points.at(-1).v - points[0].v : null};
     }
     function matrix(state, recoveryItems) {
+      if (!recoveryItems) {
+        const p = priorities({...state, search: ''});
+        recoveryItems = [...p.items, ...p.missing.map(r => ({...r, rank: null}))];
+      }
       const base = visible(state).filter(r => r.f === RAPIDA && r.lv === 'municipal');
-      return recoveryItems.map(r => ({...r, cells: sectors.map(([name, ids]) => {
+      const fields = new Map(sectors.flatMap(([, ids]) => ids).map(id => {
+        const group = strict(base, id), values = group.map(r => r.v);
+        return [id, new Map(group.map(r => [r.geo, {...r, p: percentile(values, r.v)}]))];
+      }));
+      return recoveryItems.filter(r => searchMatch(r, (state.matrixSearch || '').trim())).map(r => ({...r, cells: sectors.map(([name, ids]) => {
         // Separate categories, never add potentially overlapping buildings.
-        const observations = ids.map(id => strict(base, id));
-        const cells = observations.map(group => {
-          const item = group.find(x => x.geo === r.geo);
-          return item ? {...item, p: percentile(group.map(x => x.v), item.v)} : null;
-        });
+        const cells = ids.map(id => fields.get(id).get(r.geo) || null);
         return {name, cells};
       })}));
     }

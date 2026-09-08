@@ -8,6 +8,31 @@ function row(geo, v, overrides={}) {
 }
 function model(rows) { return T.create({rows, dates:[...new Set(rows.map(r=>r.date))].sort()}); }
 
+test('matrix includes all municipalities, ranked first and unassessed last',()=>{
+  const m=model([...Array.from({length:20},(_,i)=>row(`m${i}`,20-i)),row('sin dato',7,{id:T.IPM})]);
+  const result=m.matrix(state);
+  assert.equal(result.length,21);
+  assert.deepEqual(result.slice(0,20).map(r=>r.geo),Array.from({length:20},(_,i)=>`m${i}`));
+  assert.equal(result.at(-1).rank,null);
+  assert.ok(result.at(-1).cells.every(s=>s.cells.every(c=>c===null)));
+});
+test('matrix search ignores accents, preserves percentiles and is independent of ranking search',()=>{
+  const id='undp_rapida_bdg_homes_dest';
+  const m=model([row('q',.8,{m:'Quibdó'}),row('b',.3),row('q',10,{id,m:'Quibdó'}),row('b',20,{id})]);
+  const all=m.matrix(state), found=m.matrix({...state,search:'nonexistent',matrixSearch:'  QUIBDO  '});
+  assert.equal(found.length,1);
+  assert.equal(found[0].rank,all[0].rank);
+  assert.deepEqual(found[0].cells,all[0].cells);
+  assert.equal(m.matrix({...state,matrixSearch:'inexistente'}).length,0);
+  assert.equal(m.matrix({...state,dept:'Cauca'}).length,0);
+});
+test('matrix respects decree and does not substitute another source',()=>{
+  const m=model([row('a',.8),row('b',.9,{d:'Cauca'}),row('c',10,{f:'PNUD',id:'undp_rapida_bdg_homes_dest'}),row('norm',1,{lv:'departamental',f:'Decreto1171',id:'en_decreto_1171'})]);
+  const result=m.matrix({...state,scope:'decree'});
+  assert.deepEqual(result.map(r=>r.geo),['a','c']);
+  assert.equal(result[1].cells[0].cells[0],null);
+});
+
 test('ranking uses only recovery; IPM and other sources do not change order',()=>{
   const m=model([row('a',.8),row('b',.5),row('a',1,{id:T.IPM,dim:'Vulnerabilidad'}),row('b',90,{id:T.IPM,dim:'Vulnerabilidad'}),row('b',900,{f:'PNUD'})]);
   assert.deepEqual(m.priorities(state).items.map(r=>r.geo),['a','b']);

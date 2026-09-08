@@ -10,6 +10,8 @@ on:
       - ".github/workflows/actualizar.yml"
       - "actualizar_indice_terremoto.py"
       - "generar_eda_indicadores.py"
+      - "generar_indice_educacion.py"
+      - "tests/test_indice_educacion.py"
       - "data/**"
   schedule:
     - cron: "0 */4 * * *"
@@ -34,14 +36,17 @@ jobs:
 
       - name: Generar tablero e índice
         run: |
+          python -m unittest discover -s tests
           python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
           python generar_eda_indicadores.py --out eda_indicadores.html
+          python generar_indice_educacion.py --out indice_educacion.html
 
       - name: Publicar cambios si hay datos nuevos
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Actualización automática del índice de impacto"
-          file_pattern: "index.html eda_indicadores.html indice_impacto_departamento.csv historial_indice.csv historial_indicadores_no_calculo.csv indicadores_largo.csv indicadores_largo_no_calculo.csv indice_ajustado_departamento.csv indice_ajustado_municipio.csv"
+          file_pattern: "index.html eda_indicadores.html indice_educacion.html indice_impacto_departamento.csv historial_indice.csv historial_indicadores_no_calculo.csv indicadores_largo.csv indicadores_largo_no_calculo.csv indice_ajustado_departamento.csv indice_ajustado_municipio.csv"
           commit_user_name: "tablero-terremoto-bot"
           commit_user_email: "actions@github.com"
+
 

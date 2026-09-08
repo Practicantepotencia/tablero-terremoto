@@ -20,6 +20,32 @@ def row(indicator_id, value, municipality="Quibdó", department="Chocó", level=
 
 
 class EducationIndexTests(unittest.TestCase):
+    def test_dimensions_use_their_own_denominator_and_geographic_level(self):
+        rows = [row("health_a", 4, dimension="Salud"), row("health_b", 8, dimension="Salud"),
+                row("debris_a", 20, level="departamental", dimension="Escombros")]
+        dimensions = {x["name"]: x["levels"] for x in educacion.build_dimensions(rows)["dimensions"]}
+        health = dimensions["Salud"]["municipal"]["index"][0]
+        self.assertEqual(health["total"], 2)
+        self.assertEqual(health["score"], 50)
+        self.assertNotIn("municipal", dimensions["Escombros"])
+        self.assertEqual(dimensions["Escombros"]["departamental"]["index"][0]["municipality"], "Chocó")
+
+    def test_sector_reassignment_and_normative_inventory(self):
+        rows = [row("undp_rapida_bdg_health_aff", 3, dimension="Infraestructura"),
+                row("en_decreto_1171", 1, level="departamental", dimension="Marco normativo")]
+        dimensions = {x["name"]: x["levels"] for x in educacion.build_dimensions(rows)["dimensions"]}
+        self.assertIn("Salud", dimensions)
+        self.assertNotIn("Infraestructura", dimensions)
+        self.assertEqual(dimensions["Marco normativo"]["departamental"]["index"], [])
+        self.assertEqual(len(dimensions["Marco normativo"]["departamental"]["inventory"]), 1)
+
+    def test_historical_duplicates_do_not_change_percentile_cohort(self):
+        old = row("pnud_cedu", 100)
+        old["fecha_corte"] = "2026-09-01"
+        current = row("pnud_cedu", 10)
+        other = row("pnud_cedu", 20, "Istmina")
+        self.assertEqual(educacion.build_index([old, current, other]), educacion.build_index([current, other]))
+
     def test_uses_exactly_eight_equal_weight_municipal_variables(self):
         self.assertEqual(len(educacion.MUNICIPAL_INDICATORS), 8)
         self.assertEqual(len(set(educacion.MUNICIPAL_INDICATORS)), 8)

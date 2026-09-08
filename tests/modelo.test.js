@@ -8,6 +8,35 @@ function row(geo, v, overrides={}) {
 }
 function model(rows) { return T.create({rows, dates:[...new Set(rows.map(r=>r.date))].sort()}); }
 
+test('ExE has four own columns and never borrows another source',()=>{
+  const ids=['sedes_edu_n_sedes','sedes_edu_n_sedes_criticas','sedes_edu_matricula_afectada','sedes_edu_docentes_afectados'];
+  const m=model([row('a',.9),...ids.map((id,i)=>row('a',i,{id,f:'FundacionExe',dim:'Educación',u:'Número'})),row('b',40,{id:ids[0],f:'PNUD'})]);
+  const s={...state,matrixSource:'FundacionExe'};
+  assert.deepEqual(m.matrixLayout(s).map(c=>c.name),['Sedes afectadas','Sedes críticas','Matrícula afectada','Docentes afectados']);
+  assert.deepEqual(m.matrix(s)[0].cells.map(c=>c.cells[0].v),[0,1,2,3]);
+  assert.ok(m.matrix(s)[1].cells.every(c=>c.cells[0]===null));
+  assert.equal(m.matrix(s)[0].f,'FundacionExe');
+});
+test('other sources preserve dimensions, units and cohort variants in separate cards',()=>{
+  const m=model([row('a',2,{f:'PNUD',id:'school',dim:'Educación',u:'Número'}),row('b',200,{f:'PNUD',id:'school',dim:'Educación',u:'COP'})]);
+  const s={...state,matrixSource:'PNUD'};
+  assert.equal(m.matrixLayout(s).length,1);
+  assert.equal(m.matrixLayout(s)[0].metrics.length,2);
+  assert.deepEqual(m.matrix(s).map(r=>r.cells[0].cells.filter(Boolean).map(c=>c.p)),[[50],[50]]);
+});
+test('department-only sources never duplicate totals across municipalities',()=>{
+  const m=model([row('a',.9),row('dep',45,{lv:'departamental',m:'',f:'Camaras',dim:'Productividad',id:'business'})]);
+  assert.equal(m.matrix({...state,matrixSource:'Camaras'})[0].cells.length,0);
+  const result=m.matrix({...state,matrixSource:'Camaras',matrixLevel:'departamental'});
+  assert.equal(result.length,1);
+  assert.equal(result[0].cells[0].cells[0].v,45);
+  assert.equal(result[0].lv,'departamental');
+});
+test('categorical source values do not get quantitative heat percentiles',()=>{
+  const m=model([row('a',0,{f:'Naboo/UNGRD',id:'gravedad_oficial',dim:'Gravedad municipal',u:'Categoría (0-100)'})]);
+  assert.equal(m.matrix({...state,matrixSource:'Naboo/UNGRD'})[0].cells[0].cells[0].p,null);
+});
+
 test('matrix includes all municipalities, ranked first and unassessed last',()=>{
   const m=model([...Array.from({length:20},(_,i)=>row(`m${i}`,20-i)),row('sin dato',7,{id:T.IPM})]);
   const result=m.matrix(state);

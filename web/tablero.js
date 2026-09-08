@@ -107,9 +107,21 @@ function renderPriorities() {
   $('missing-table').innerHTML=table(['Municipio','Estado'],p.missing.map(r=>`<tr><td>${geoButton(r,r.f)}</td><td>Sin dato de recuperación RAPIDA</td></tr>`));
 }
 function renderMatrix() {
-  const matrix=model.matrix({...state,matrixSearch:$('matrix-search').value});
-  $('matrix-count').textContent=`${matrix.length} municipios visibles · ${matrix.filter(r=>r.rank==null).length} sin recuperación evaluada. La búsqueda no cambia los colores ni el orden.`;
-  $('matrix').innerHTML=table(['Municipio',...T.sectors.map(([name])=>name)],matrix.map(r=>`<tr><td>${geoButton(r)}</td>${r.cells.map(s=>`<td class="heat-cell">${s.cells.map(c=>c?`<span class="heat-item" style="background:rgba(31,95,174,${.04+.2*c.p/100})" title="${esc(`${c.i}. ${c.u}. P${Math.round(c.p)}`)}"><span>${esc(c.i)}</span><br><b>${c.u==='COP'?short(c.v):fmt(c.v,c.u)}</b> <span>${esc(c.u)}</span></span>`:'<span class="heat-item muted">—</span>').join('')}</td>`).join('')}</tr>`));
+  const sources=sorted(model.catalog.map(m=>m.f));
+  state.matrixSource=setOptions('matrix-source',sources.map(f=>({value:f,label:DATA.sources[f]?.label||f})),state.matrixSource||T.RAPIDA);
+  const levels=['municipal','departamental'].filter(lv=>model.catalog.some(m=>m.f===state.matrixSource&&m.lv===lv));
+  state.matrixLevel=setOptions('matrix-level',levels.map(lv=>({value:lv,label:lv==='municipal'?'Municipal':'Departamental'})),state.matrixLevel||'municipal');
+  const selected={...state,matrixSearch:$('matrix-search').value};
+  const matrix=model.matrix(selected), layout=model.matrixLayout(selected), municipal=state.matrixLevel==='municipal';
+  const source=DATA.sources[state.matrixSource];
+  $('matrix-title').textContent=municipal?'Qué necesita cada municipio':'Qué reporta cada departamento';
+  $('matrix-caption').textContent=`${source?.label||state.matrixSource} · valores originales`;
+  $('matrix-note').textContent=(municipal?'Orden del ranking de recuperación RAPIDA, no un ranking de la fuente seleccionada; los no evaluados aparecen al final. ':'Orden alfabético. Datos departamentales: no se asignan a los municipios. ')+
+    'Cada color compara únicamente el mismo indicador, fuente, unidad, definición y captura. No significa necesidad pendiente ni atribución al sismo. «—» significa sin dato; las categorías se muestran sin percentil.';
+  $('matrix-warning').textContent=source?.note||'';
+  const withData=matrix.filter(r=>r.cells.some(s=>s.cells.some(Boolean))).length;
+  $('matrix-count').textContent=`${matrix.length} ${municipal?'municipios':'departamentos'} visibles · ${withData} con datos de esta fuente. La búsqueda no cambia los colores ni el orden.`;
+  $('matrix').innerHTML=table([municipal?'Municipio':'Departamento',...layout.map(s=>s.name)],matrix.map(r=>`<tr><td>${geoButton(r,state.matrixSource)}${attribution(r)}</td>${r.cells.map(s=>`<td class="heat-cell">${s.cells.map(c=>c?`<span class="heat-item" style="background:rgba(31,95,174,${c.p==null?.04:.04+.2*c.p/100})" title="${esc(`${c.i}. ${c.u}${c.p==null?'':`. P${Math.round(c.p)}`}`)}"><span>${esc(c.i)}</span><br><b>${c.u==='COP'?short(c.v):fmt(c.v,c.u)}</b> <span>${esc(c.u)}</span></span>`:'<span class="heat-item muted">—</span>').join('')}</td>`).join('')}</tr>`));
 }
 function distribution(pool) {
   if(!pool.length)return '<p class="empty">No hay distribución para estos filtros.</p>';
@@ -177,6 +189,8 @@ $('order').addEventListener('change',()=>{state.order=$('order').value;renderDia
 $('territory').addEventListener('change',()=>{state.geo=$('territory').value;renderProfile();});
 $('priority-search').addEventListener('input',()=>{priorityLimit=25;renderPriorities();});
 $('matrix-search').addEventListener('input',()=>{renderMatrix();$('matrix').scrollTop=0;});
+$('matrix-source').addEventListener('change',()=>{state.matrixSource=$('matrix-source').value;state.matrixLevel='municipal';renderMatrix();$('matrix').scrollTop=0;$('matrix').scrollLeft=0;});
+$('matrix-level').addEventListener('change',()=>{state.matrixLevel=$('matrix-level').value;renderMatrix();$('matrix').scrollTop=0;$('matrix').scrollLeft=0;});
 $('sector-search').addEventListener('input',()=>{sectorLimit=25;renderDiagnostic();});
 $('priority-more').addEventListener('click',()=>{priorityLimit+=50;renderPriorities();});
 $('sector-more').addEventListener('click',()=>{sectorLimit+=50;renderDiagnostic();});

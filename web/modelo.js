@@ -92,23 +92,49 @@
       return {points, n: common.size, ready: points.length >= 2 && common.size > 0,
         delta: points.length >= 2 && common.size > 0 ? points.at(-1).v - points[0].v : null};
     }
+    function matrixLayout(state) {
+      const source = state.matrixSource || RAPIDA, level = state.matrixLevel || 'municipal';
+      const metas = catalog.filter(m => m.f === source && m.lv === level);
+      if (source === RAPIDA && level === 'municipal') {
+        return sectors.map(([name, ids]) => ({name, metrics: ids.map(id => ({id, strict: true}))}));
+      }
+      const exe = [
+        ['Sedes afectadas', 'sedes_edu_n_sedes'], ['Sedes críticas', 'sedes_edu_n_sedes_criticas'],
+        ['Matrícula afectada', 'sedes_edu_matricula_afectada'], ['Docentes afectados', 'sedes_edu_docentes_afectados']
+      ];
+      const groups = new Map();
+      if (source === 'FundacionExe') exe.forEach(([name, id]) => groups.set(name, metas.filter(m => m.id === id)));
+      const assigned = new Set([...groups.values()].flat().map(m => m.key));
+      metas.filter(m => !assigned.has(m.key)).sort((a,b) => a.dim.localeCompare(b.dim,'es') || a.i.localeCompare(b.i,'es')).forEach(m => {
+        const name = source === 'FundacionExe' ? m.i : m.dim;
+        if (!groups.has(name)) groups.set(name, []);
+        groups.get(name).push(m);
+      });
+      return [...groups].filter(([, metrics]) => metrics.length).map(([name, metrics]) => ({name, metrics}));
+    }
     function matrix(state, recoveryItems) {
-      if (!recoveryItems) {
+      const source = state.matrixSource || RAPIDA, level = state.matrixLevel || 'municipal';
+      if (!recoveryItems && level === 'municipal') {
         const p = priorities({...state, search: ''});
         recoveryItems = [...p.items, ...p.missing.map(r => ({...r, rank: null}))];
       }
-      const base = visible(state).filter(r => r.f === RAPIDA && r.lv === 'municipal');
-      const fields = new Map(sectors.flatMap(([, ids]) => ids).map(id => {
-        const group = strict(base, id), values = group.map(r => r.v);
-        return [id, new Map(group.map(r => [r.geo, {...r, p: percentile(values, r.v)}]))];
+      const visibleRows = visible(state);
+      if (!recoveryItems) recoveryItems = [...new Map(visibleRows.filter(r => r.lv === level).map(r => [r.geo,r])).values()].sort(byName);
+      const base = visibleRows.filter(r => r.f === source && r.lv === level);
+      const layout = matrixLayout(state);
+      const fields = new Map(layout.flatMap(s => s.metrics).map(meta => {
+        const group = meta.strict ? strict(base, meta.id, source) : base.filter(r => cohort(r) === meta.key);
+        const values = group.map(r => r.v);
+        return [meta.key || meta.id, new Map(group.map(r => [r.geo, {...r,
+          p: /Categoría|Sí\/No/.test(r.u) ? null : percentile(values, r.v)}]))];
       }));
-      return recoveryItems.filter(r => searchMatch(r, (state.matrixSearch || '').trim())).map(r => ({...r, cells: sectors.map(([name, ids]) => {
+      return recoveryItems.filter(r => searchMatch(r, (state.matrixSearch || '').trim())).map(r => ({...r, f: source, cells: layout.map(({name, metrics}) => {
         // Separate categories, never add potentially overlapping buildings.
-        const cells = ids.map(id => fields.get(id).get(r.geo) || null);
+        const cells = metrics.map(meta => fields.get(meta.key || meta.id).get(r.geo) || null);
         return {name, cells};
       })}));
     }
-    return {catalog, decree, inScope, visible, strict, ranked, priorities, sector, profile, history, matrix};
+    return {catalog, decree, inScope, visible, strict, ranked, priorities, sector, profile, history, matrix, matrixLayout};
   }
   const api = {create, cohort, quantile, percentile, label, searchMatch, sectors, RECOVERY, IPM, RAPIDA};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

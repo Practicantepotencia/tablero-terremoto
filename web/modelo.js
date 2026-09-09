@@ -25,14 +25,18 @@
     .includes(search.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase());
   function create(data) {
     const rows = data.rows;
-    const catalog = [...new Map(rows.map(r => [cohort(r), {key: cohort(r), f: r.f, lv: r.lv, dim: r.dim, id: r.id, u: r.u, i: r.i}])).values()];
+    const supplemental = data.supplemental?.rows || [];
+    const catalog = [...new Map([...rows, ...supplemental].map(r => [cohort(r), {key: cohort(r), f: r.f, lv: r.lv, dim: r.dim, id: r.id, u: r.u, i: r.i, external: r.external, period: r.period}])).values()];
     function decree(date) {
       return new Set(rows.filter(r => r.date === date && r.id === 'en_decreto_1171' && r.f === 'Decreto1171' && r.v === 1).map(r => r.d));
     }
     function inScope(r, state) { return state.scope !== 'decree' || decree(state.date).has(r.d); }
     function visible(state, date = state.date, ignoreDept = false) {
       const deps = decree(state.date); // Same geographic boundary for historical comparisons.
-      return rows.filter(r => r.date === date && (state.scope !== 'decree' || deps.has(r.d)) && (ignoreDept || !state.dept || r.d === state.dept));
+      const snapshot = rows.filter(r => r.date === date);
+      // Published baseline periods are not invented historical inventory captures.
+      if (date === data.latest) snapshot.push(...supplemental);
+      return snapshot.filter(r => (state.scope !== 'decree' || deps.has(r.d)) && (ignoreDept || !state.dept || r.d === state.dept));
     }
     function strict(base, id, source = RAPIDA) {
       const found = base.filter(r => r.lv === 'municipal' && r.f === source && r.id === id);
@@ -64,7 +68,7 @@
       });
       const pool = enriched.filter(r => !state.dept || r.d === state.dept);
       const recGeos = new Set(rec.map(r => r.geo));
-      const municipalities = [...new Map(visible(state).filter(r => r.lv === 'municipal').map(r => [r.geo, r])).values()];
+      const municipalities = [...new Map(visible(state).filter(r => r.lv === 'municipal' && !r.external).map(r => [r.geo, r])).values()];
       return {items: ranked(pool, 'desc', state.search), pool, missing: municipalities.filter(r => !recGeos.has(r.geo)).sort(byName),
         total: municipalities.length, qr, qi, referenceN: rec.length, canBand,
         mixed: reference.some(r => r.id === RECOVERY && r.f === RAPIDA) && !rec.length};
@@ -121,6 +125,9 @@
       const visibleRows = visible(state);
       if (!recoveryItems) recoveryItems = [...new Map(visibleRows.filter(r => r.lv === level).map(r => [r.geo,r])).values()].sort(byName);
       const base = visibleRows.filter(r => r.f === source && r.lv === level);
+      const known = new Set(recoveryItems.map(r => r.geo));
+      const additional = [...new Map(base.filter(r => !known.has(r.geo)).map(r => [r.geo, r])).values()].sort(byName);
+      recoveryItems = recoveryItems.concat(additional);
       const layout = matrixLayout(state);
       const fields = new Map(layout.flatMap(s => s.metrics).map(meta => {
         const group = meta.strict ? strict(base, meta.id, source) : base.filter(r => cohort(r) === meta.key);

@@ -127,3 +127,24 @@ test('housing categories remain separate in the sector matrix',()=>{
   assert.equal(p.items[0].coverage,1);
   assert.deepEqual(m.matrix(state,p.items)[0].cells[0].cells.map(r=>r.v),[10,20]);
 });
+
+test('new baselines do not change RAPIDA ranking or missing-data denominator',()=>{
+  const rows=[row('a',.8),row('b',.3),row('c',10,{f:'PNUD',id:'homes'})];
+  const extra=row('nuevo',14.4,{f:'DANE-CNPV2018',id:'dane_ipm_total',external:true,period:'2018'});
+  const original=T.create({rows,dates:[date],latest:date});
+  const expanded=T.create({rows,dates:[date],latest:date,supplemental:{rows:[extra]}});
+  assert.deepEqual(expanded.priorities(state),original.priorities(state));
+  assert.equal(expanded.matrix({...state,matrixSource:extra.f,matrixSearch:'nuevo'}).length,1);
+  assert.equal(expanded.profile({...state,source:extra.f},'nuevo')[0].v,14.4);
+});
+
+test('supplemental tables respect scope and are not fabricated historical captures',()=>{
+  const extra=row('lorica',40,{f:'MEN-Estadisticas',id:'coverage',d:'Córdoba',external:true,period:'2024'});
+  const rows=[row('a',.8),row('norm',1,{lv:'departamental',f:'Decreto1171',id:'en_decreto_1171'})];
+  const m=T.create({rows,dates:['2026-09-06',date],latest:date,supplemental:{rows:[extra]}});
+  const s={...state,metric:T.cohort(extra)};
+  assert.equal(m.sector(s).pool.length,1);
+  assert.equal(m.sector({...s,scope:'decree'}).pool.length,0);
+  assert.equal(m.sector({...s,date:'2026-09-06'}).pool.length,0);
+  assert.equal(m.history(s,T.cohort(extra)).ready,false);
+});

@@ -44,7 +44,7 @@ def normalized(value):
                              if unicodedata.category(c) != "Mn").split())
 
 
-def prepare_payload(current, history=()):
+def prepare_payload(current, history=(), geographic_reference=()):
     from migrar_clasificacion_3is import normalize
     current = [normalize(r) for r in current]
     history = [normalize(r) for r in history]
@@ -93,6 +93,15 @@ def prepare_payload(current, history=()):
     for r in clean:
         if r["code"]:
             codes[(r["lv"], normalized(r["d"]), normalized(r["m"]))].add(r["code"])
+    reference_codes = defaultdict(set)
+    for r in geographic_reference:
+        if r.get('code'):
+            reference_codes[(r['lv'], normalized(r['d']), normalized(r['m']))].add(r['code'])
+    # Backfill only exact, unambiguous department + municipality names. Never
+    # replace a source code, infer from the municipality alone, or fuzzy-match.
+    for key, candidates in reference_codes.items():
+        if not codes[key] and len(candidates) == 1:
+            codes[key] = candidates
     grouped = defaultdict(list)
     for r in clean:
         key = (r["lv"], normalized(r["d"]), normalized(r["m"]))
@@ -122,8 +131,11 @@ def prepare_payload(current, history=()):
             "generated": datetime.now(timezone.utc).isoformat(timespec="seconds")}
 
 
-def build_html(current, history=()):
-    payload = prepare_payload(current, history)
+def build_html(current, history=(), supplemental=None):
+    payload = prepare_payload(current, history, (supplemental or {}).get('rows', []))
+    if supplemental:
+        payload['supplemental'] = supplemental
+        payload['sources'] = {**payload['sources'], **supplemental['sources']}
     template = (ROOT / "web" / "tablero.html").read_text(encoding="utf-8")
     for marker, filename in (("__STYLE__", "tablero.css"), ("__MODEL__", "modelo.js"), ("__APP__", "tablero.js")):
         template = template.replace(marker, (ROOT / "web" / filename).read_text(encoding="utf-8"))
@@ -131,7 +143,8 @@ def build_html(current, history=()):
     return template.replace("__DATA__", data.replace("<", "\\u003c"))
 
 
-def generate(input_path=CURRENT, history_path=HISTORY, out="index.html", eda_redirect="eda_indicadores.html", update_history=False):
+def generate(input_path=CURRENT, history_path=HISTORY, out="index.html", eda_redirect="eda_indicadores.html", update_history=False,
+             supplemental_path="data/fuentes_nuevas/datos.json"):
     current, history = read_rows(input_path), read_rows(history_path)
     if not current:
         raise ValueError(f"No hay inventario para generar el tablero: {input_path}")
@@ -147,7 +160,10 @@ def generate(input_path=CURRENT, history_path=HISTORY, out="index.html", eda_red
             writer.writerows(history)
         temporary.replace(target)
     output = Path(out)
-    output.write_text(build_html(current, history), encoding="utf-8")
+    supplemental = None
+    if supplemental_path and Path(supplemental_path).exists():
+        supplemental = json.loads(Path(supplemental_path).read_text(encoding='utf-8'))
+    output.write_text(build_html(current, history, supplemental), encoding="utf-8")
     if eda_redirect and Path(eda_redirect).resolve() != output.resolve():
         import os
         url = Path(os.path.relpath(output, Path(eda_redirect).parent)).as_posix()
@@ -163,8 +179,9 @@ def main():
     ap.add_argument("--out", default="index.html")
     ap.add_argument("--eda-redirect", default="eda_indicadores.html")
     ap.add_argument("--update-history", action="store_true")
+    ap.add_argument("--supplemental", default="data/fuentes_nuevas/datos.json", help="Tablas públicas adicionales verificadas")
     args = ap.parse_args()
-    output = generate(args.input, args.history, args.out, args.eda_redirect, args.update_history)
+    output = generate(args.input, args.history, args.out, args.eda_redirect, args.update_history, args.supplemental)
     print(f"Tablero unificado generado: {output}")
 
 

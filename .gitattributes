@@ -1,0 +1,2 @@
+# Keep downloaded provider originals byte-for-byte (including on Windows).
+data/fuentes_nuevas/originales/* -text

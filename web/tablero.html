@@ -16,6 +16,7 @@
 <label>Captura del inventario<select id="date"></select></label>
 </div>
 <p id="scope-note" class="note"></p>
+<div class="card" id="new-sources-intro" hidden><h2>Fuentes nuevas verificables</h2><p class="note">Consulta las tablas importadas y sus documentos originales. DANE y MEN describen condiciones previas; OPS/OMS reporta afectación del terremoto por departamento.</p><div id="new-source-shortcuts" class="filters inline"></div><p id="new-source-capture" class="note small"></p></div>
 <section id="prioridades" class="tab-panel" role="tabpanel" aria-labelledby="tab-prioridades">
 <div id="priority-kpis" class="tiles" aria-live="polite"></div>
 <div class="two">
@@ -42,16 +43,19 @@
 <div class="card" id="profile-card"><div class="section-head"><h2>Ficha territorial</h2><label class="profile-picker">Territorio<select id="territory"></select></label></div><p id="profile-note" class="note"></p><div id="profile-kpis" class="tiles compact"></div><div id="profile-table" class="table-scroll"></div><details><summary>Historial del indicador en este territorio</summary><div id="profile-trend"></div></details></div>
 </section>
 <section id="metodo" class="tab-panel" role="tabpanel" aria-labelledby="tab-metodo" hidden>
+<div class="card" id="new-sources-card" hidden><h2>Origen y versión de las nuevas fuentes</h2><div id="new-sources-table" class="table-scroll"></div><details><summary>Conciliación de las tablas de OPS/OMS con sus totales publicados</summary><p class="note">En desaparecidos, la suma departamental es 121 y el total publicado es 122. El pie de la tabla explica una persona sin departamento asignado. Se conserva la diferencia.</p><div id="new-source-checks" class="table-scroll"></div></details></div>
+<div class="card" id="external-sources" hidden><h2>Tablero original de OIM · alojamientos colectivos</h2><p class="note">Mapeo de Valle del Cauca, Risaralda, Caldas y Chocó, iniciado el 15 de agosto de 2026. El tablero de la OIM usa sus propios filtros y fecha de actualización; no responde a los filtros de este tablero.</p><div id="external-source-links"></div><button type="button" id="load-oim" class="secondary">Cargar tablero original de OIM aquí</button><div id="oim-viewer"></div></div>
 <div class="card"><h2>Cobertura de las fuentes</h2><p class="note">Universo, departamento y captura seleccionados. Los territorios pueden repetirse entre fuentes; sus coberturas no se suman.</p><div id="coverage-table" class="table-scroll"></div></div>
 <div class="two"><div class="card"><h2>Cómo se decide el orden</h2>
 <p>El ranking principal usa exclusivamente el valor publicado de necesidades de recuperación temprana de RAPIDA. No se le suma IPM, daño económico ni un promedio de sectores. Los empates comparten posición.</p>
 <p>«Tramo superior» significa valor igual o mayor al percentil 75 del universo territorial seleccionado. El filtro de departamento y la búsqueda no cambian este umbral. Solo se calcula con al menos cuatro municipios y valores diferentes. No es un umbral oficial de intervención.</p>
 <p>Cada ranking sectorial exige la misma fuente, indicador, nivel, unidad, definición registrada y captura. Las otras fuentes se consultan por separado. Nunca rellenan los huecos de la fuente elegida.</p>
+<p>Percentil por indicador = 100 × (territorios con valor menor + 0,5 × territorios con valor igual) / territorios con dato. En diagnóstico y matriz se recalcula con el universo y departamento seleccionados; buscar un nombre no altera esa base. Es posición relativa, no un índice de necesidad: una cobertura educativa alta no equivale a mayor daño.</p>
 <p>Las magnitudes absolutas sirven para dimensionar la respuesta y dependen del tamaño territorial. No se calculan tasas sin denominadores compatibles y verificados.</p>
 <p>La cobertura de cinco sectores exige todos sus campos de referencia disponibles. Cuenta disponibilidad, no calidad o certeza. Los edificios de categorías distintas no se suman.</p>
 </div><div class="card"><h2>Qué sigue pendiente</h2>
-<p class="notice">La fecha de captura es la del inventario. Falta acreditar la fecha efectiva y la versión metodológica de cada observación. Las comparaciones dentro de una fuente siguen siendo provisionales.</p>
-<p>El IPM disponible es municipal y parcial. Su año base y correspondencia exacta con la medición oficial deben documentarse. El inventario no contiene los pesos ni la fórmula completa de recuperación temprana; el tablero conserva el resultado de la fuente.</p>
+<p class="notice">Las fuentes originales conservan limitaciones en sus fechas efectivas. Las nuevas tablas incluyen periodo, descarga y localizador. Las fechas discordantes de la tabla de salud de OPS permanecen señaladas.</p>
+<p>El IPM de RAPIDA sigue teniendo un año base sin documentar. La fuente DANE añadida corresponde al CNPV 2018 y se consulta por separado. No se asume que ambas mediciones sean equivalentes ni se suman al índice de recuperación.</p>
 <p>PNUD y RAPIDA comparten cifras en el solapamiento auditado. Su coincidencia no demuestra validación independiente. La fuente elegida tampoco elimina posibles errores internos o sesgos de cobertura.</p>
 <p>El decreto delimita el filtro administrativo. No demuestra daño en todos sus municipios, ni ausencia de daño fuera de ellos. Las observaciones ExE conservan una advertencia de atribución.</p>
 <p>La evolución usa únicamente territorios presentes en todas las capturas comparadas. Se informa su tamaño; no representa automáticamente al departamento completo.</p>

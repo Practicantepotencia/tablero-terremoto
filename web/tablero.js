@@ -12,6 +12,7 @@ const table = (heads, rows) => rows.length ? `<table><thead><tr>${heads.map(h=>`
 const tile = (label, value, sub) => `<div class="tile"><div class="tile-label">${esc(label)}</div><div class="tile-value">${esc(value)}</div><div class="tile-sub">${esc(sub)}</div></div>`;
 const geoButton = (r, source = r.f) => `<button type="button" class="link" data-geo="${esc(r.geo)}" data-source="${esc(source)}">${esc(r.m || r.d)}</button>${r.m?`<div class="muted small">${esc(r.d)}</div>`:''}`;
 function attribution(r) {
+  if(r.external) return `<div class="small">${esc(r.role)} · periodo ${esc(r.period)}</div>`;
   if(r.f !== 'FundacionExe') return '';
   return `<div class="small">${model.decree(state.date).has(r.d)?'Atribución al sismo no verificada':'No atribuida al sismo'}</div>`;
 }
@@ -30,7 +31,7 @@ function globalControls() {
   $('scope-note').textContent = state.scope==='decree'
     ? `${model.decree(state.date).size} departamentos nombrados en el inventario del Decreto 1171. El ámbito administrativo no acredita afectación en cada municipio.`
     : 'Inventario completo. Incluye coberturas ajenas al sismo; revisa la atribución y la fuente de cada indicador.';
-  $('footer-capture').textContent = `Captura del inventario ${state.date}. Fecha efectiva de las observaciones pendiente de verificación por fuente.`;
+  $('footer-capture').textContent = `Captura del inventario ${state.date}. Las fuentes nuevas muestran su periodo publicado y fecha de descarga por separado.`;
 }
 function diagnosticControls() {
   const valid = model.catalog.filter(m=>m.lv===state.level && m.f!=='Decreto1171');
@@ -75,6 +76,8 @@ function scatter(items,qr,qi) {
 }
 function historyBlock(key,geo='') {
   if(!key)return '<p class="empty">Sin indicador seleccionado.</p>';
+  const meta=model.catalog.find(m=>m.key===key);
+  if(meta?.external)return `<p class="note">Versión publicada: ${esc(meta.period)}. Solo se ha importado este periodo de la fuente. No se dibuja evolución a partir de repetir la misma descarga.</p>`;
   const result=model.history(state,key,geo);
   if(!result.ready)return `<p class="empty">${result.points.length<2?'Solo hay una captura disponible. Se requieren al menos dos.':'No existe un panel de territorios presente en todas las capturas.'}</p>`;
   const [, , , ,unit]=JSON.parse(key), pts=result.points;
@@ -114,11 +117,11 @@ function renderMatrix() {
   const selected={...state,matrixSearch:$('matrix-search').value};
   const matrix=model.matrix(selected), layout=model.matrixLayout(selected), municipal=state.matrixLevel==='municipal';
   const source=DATA.sources[state.matrixSource];
-  $('matrix-title').textContent=municipal?'Qué necesita cada municipio':'Qué reporta cada departamento';
-  $('matrix-caption').textContent=`${source?.label||state.matrixSource} · valores originales`;
+  $('matrix-title').textContent=source?.kind?.includes('base')||state.matrixSource==='MEN-Estadisticas'?'Línea base de cada municipio':municipal?'Qué necesita cada municipio':'Qué reporta cada departamento';
+  $('matrix-caption').textContent=`${source?.label||state.matrixSource} · valores originales${source?.period?` · periodo ${source.period}`:''}`;
   $('matrix-note').textContent=(municipal?'Orden del ranking de recuperación RAPIDA, no un ranking de la fuente seleccionada; los no evaluados aparecen al final. ':'Orden alfabético. Datos departamentales: no se asignan a los municipios. ')+
     'Cada color compara únicamente el mismo indicador, fuente, unidad, definición y captura. No significa necesidad pendiente ni atribución al sismo. «—» significa sin dato; las categorías se muestran sin percentil.';
-  $('matrix-warning').textContent=source?.note||'';
+  $('matrix-warning').textContent=(source?.note||'')+(source?.period&&state.date!==DATA.latest?' Estas tablas adicionales se consultan en la captura más reciente del inventario.':'');
   const withData=matrix.filter(r=>r.cells.some(s=>s.cells.some(Boolean))).length;
   $('matrix-count').textContent=`${matrix.length} ${municipal?'municipios':'departamentos'} visibles · ${withData} con datos de esta fuente. La búsqueda no cambia los colores ni el orden.`;
   $('matrix').innerHTML=table([municipal?'Municipio':'Departamento',...layout.map(s=>s.name)],matrix.map(r=>`<tr><td>${geoButton(r,state.matrixSource)}${attribution(r)}</td>${r.cells.map(s=>`<td class="heat-cell">${s.cells.map(c=>c?`<span class="heat-item" style="background:rgba(31,95,174,${c.p==null?.04:.04+.2*c.p/100})" title="${esc(`${c.i}. ${c.u}${c.p==null?'':`. P${Math.round(c.p)}`}`)}"><span>${esc(c.i)}</span><br><b>${c.u==='COP'?short(c.v):fmt(c.v,c.u)}</b> <span>${esc(c.u)}</span></span>`:'<span class="heat-item muted">—</span>').join('')}</td>`).join('')}</tr>`));
@@ -132,13 +135,13 @@ function distribution(pool) {
 }
 function renderDiagnostic() {
   const s=model.sector({...state,search:$('sector-search').value}),meta=s.meta;
-  $('cohort-note').textContent=meta?`${DATA.sources[meta.f]?.label||meta.f} · ${meta.lv} · ${meta.u} · captura ${state.date}. La selección de fuente e indicador se conserva aunque el filtro deje la vista sin datos.`:'No hay indicadores registrados para este nivel.';
-  $('source-warning').textContent=DATA.sources[state.source]?.note||'Metodología de esta fuente pendiente de documentación.';
+  $('cohort-note').textContent=meta?`${DATA.sources[meta.f]?.label||meta.f} · ${meta.lv} · ${meta.u} · ${meta.external?`periodo de fuente ${meta.period}; descarga ${DATA.supplemental.retrieved_at.slice(0,10)}`:`captura ${state.date}`}. La selección de fuente e indicador se conserva aunque el filtro deje la vista sin datos.`:'No hay indicadores registrados para este nivel.';
+  $('source-warning').textContent=(DATA.sources[state.source]?.note||'Metodología de esta fuente pendiente de documentación.')+(meta?.external&&state.date!==DATA.latest?' Selecciona la captura más reciente para consultar las nuevas tablas.':'');
   const vals=s.pool.map(r=>r.v);
   $('sector-kpis').innerHTML=tile('Territorios con dato',`${s.pool.length} / ${s.total}`,'Respecto del inventario filtrado en este nivel')+
     tile('Mediana',fmt(T.quantile(vals,.5),meta?.u),meta?.u||'')+
     tile('Rango observado',vals.length?`${short(Math.min(...vals))} – ${short(Math.max(...vals))}`:'—',meta?.u||'')+
-    tile('Fuente de la comparación',state.source||'—','Corte efectivo y versión: no verificados');
+    tile('Fuente de la comparación',state.source||'—',meta?.external?`Periodo publicado: ${meta.period}`:'Corte efectivo y versión: no verificados');
   $('sector-title').textContent=meta?.i||'Ranking sectorial';
   $('sector-table').innerHTML=table(['#','Territorio',meta?.u||'Valor','Percentil'],s.items.slice(0,sectorLimit).map(r=>`<tr><td>${r.rank}</td><td>${geoButton(r)}${attribution(r)}</td><td class="num">${fmt(r.v,r.u)}</td><td class="num">P${Math.round(T.percentile(vals,r.v))}</td></tr>`));
   $('sector-more').hidden=s.items.length<=sectorLimit;
@@ -152,9 +155,11 @@ function renderProfile() {
   const rows=model.profile(state,state.geo);
   const r=model.visible(state).find(x=>x.geo===state.geo);
   $('profile-note').textContent=r?`${T.label(r)} · ${state.source}. Vínculo territorial: ${r.join}${r.code?` (${r.code})`:''}. Los percentiles usan la misma fuente, indicador y selección geográfica.`:'Sin territorio disponible en este universo.';
-  const rec=rows.find(x=>x.id===T.RECOVERY),ipm=rows.find(x=>x.id===T.IPM);
-  $('profile-kpis').innerHTML=tile('Recuperación',fmt(rec?.v,'Índice'),rec?'RAPIDA · valor original':'Sin dato en la fuente elegida')+tile('IPM',fmt(ipm?.v),ipm?'Año base no documentado':'Sin dato en la fuente elegida')+tile('Indicadores disponibles',rows.length,'Fuente y captura seleccionadas')+tile('Atribución',state.source==='FundacionExe'?'Por verificar':'Consultar fuente','El filtro del decreto es administrativo');
-  $('profile-table').innerHTML=rows.length?table(['Dimensión','Indicador','Valor','Unidad','Percentil'],rows.map(r=>`<tr><td>${esc(r.dim)}</td><td>${esc(r.i)}${attribution(r)}</td><td class="num">${fmt(r.v,r.u)}</td><td>${esc(r.u)}</td><td class="num">P${Math.round(r.percentile)}</td></tr>`)):'<p class="empty">Este territorio no tiene observaciones de la fuente elegida en esta captura. Puedes consultar otra fuente de forma explícita.</p>';
+  const rec=rows.find(x=>x.id===T.RECOVERY),ipm=rows.find(x=>x.id===(state.source==='DANE-CNPV2018'?'dane_ipm_total':T.IPM)),info=DATA.sources[state.source];
+  $('profile-kpis').innerHTML=info?.period
+    ?tile('Periodo de la fuente',info.period,'Publicado por el proveedor')+(ipm?tile('IPM censal',fmt(ipm.v),'DANE · CNPV 2018 (%)'):tile('Nivel territorial',state.level==='municipal'?'Municipal':'Departamental',`DIVIPOLA ${rows[0]?.code||'—'}`))+tile('Indicadores disponibles',rows.length,'Mismo territorio y fuente')+tile('Uso',rows[0]?.role||info.kind,'Ver documento original y localizador')
+    :tile('Recuperación',fmt(rec?.v,'Índice'),rec?'RAPIDA · valor original':'Sin dato en la fuente elegida')+tile('IPM',fmt(ipm?.v),ipm?'Año base no documentado':'Sin dato en la fuente elegida')+tile('Indicadores disponibles',rows.length,'Fuente y captura seleccionadas')+tile('Atribución',state.source==='FundacionExe'?'Por verificar':'Consultar fuente','El filtro del decreto es administrativo');
+  $('profile-table').innerHTML=rows.length?table(['Dimensión','Indicador','Valor','Unidad','Percentil',...(info?.period?['Verificación']:[])],rows.map(r=>`<tr><td>${esc(r.dim)}</td><td>${esc(r.i)}${attribution(r)}</td><td class="num">${fmt(r.v,r.u)}</td><td>${esc(r.u)}</td><td class="num">P${Math.round(r.percentile)}</td>${info?.period?`<td><a href="${esc(r.download||info.download)}" target="_blank" rel="noopener">Original</a><div class="small">${esc(r.locator)}</div>${r.period_note?`<div class="small">${esc(r.period_note)}</div>`:''}</td>`:''}</tr>`)):'<p class="empty">Este territorio no tiene observaciones de la fuente elegida en esta captura. Puedes consultar otra fuente de forma explícita.</p>';
   $('profile-trend').innerHTML=historyBlock(state.metric,state.geo);
 }
 function renderMethod() {
@@ -165,11 +170,25 @@ function renderMethod() {
     `<tr><td>Integridad de las capturas cargadas (todo el historial)</td><td>${DATA.issues.length?'Ver incidencias debajo':'Sin conflictos o valores inválidos detectados'}</td></tr>`,
     ...DATA.issues.map(i=>`<tr><td>${esc(i.label)}</td><td class="num">${i.n}</td></tr>`),
     `<tr><td>Municipios de esta selección sin DIVIPOLA</td><td class="num">${missingCodes}</td></tr>`,
-    '<tr><td>Fecha efectiva de observación por fila</td><td>No acreditada en el esquema actual</td></tr>',
+    '<tr><td>Periodo publicado por las nuevas fuentes</td><td>DANE 2018; MEN según año de la serie; OPS según reporte y salvedad de fechas en salud</td></tr>',
     '<tr><td>Probabilidad o nivel de confianza estadístico</td><td>No estimado; se muestra cobertura observada</td></tr>'
   ]);
   const metas=[...new Map(base.map(r=>[T.cohort(r),r])).values()];
   $('dictionary').innerHTML=table(['Indicador','Dimensión','Fuente','Nivel','Unidad'],metas.map(r=>`<tr><td>${esc(r.i)}<div class="small muted">${esc(r.id)}</div></td><td>${esc(r.dim)}</td><td>${esc(r.f)}</td><td>${esc(r.lv)}</td><td>${esc(r.u)}</td></tr>`));
+}
+function renderNewSources() {
+  const extra=DATA.supplemental;
+  if(!extra)return;
+  $('new-sources-intro').hidden=$('new-sources-card').hidden=$('external-sources').hidden=false;
+  $('new-source-capture').textContent=`${extra.rows.length.toLocaleString('es-CO')} observaciones importadas de tablas originales. Descarga verificada: ${extra.retrieved_at.slice(0,10)}. Disponibles con la captura más reciente del inventario.`;
+  $('new-source-shortcuts').innerHTML=Object.entries(extra.sources).map(([id,info])=>`<button type="button" class="secondary" data-new-source="${esc(id)}">${esc(info.label)}</button>`).join('')+'<button type="button" class="secondary" id="oim-shortcut">OIM · alojamientos</button>';
+  $('new-sources-table').innerHTML=table(['Fuente','Periodo publicado','Cobertura importada','Verificar'],Object.entries(extra.sources).map(([id,info])=>{const rows=extra.rows.filter(r=>r.f===id);return `<tr><td><a href="${esc(info.url)}" target="_blank" rel="noopener">${esc(info.label)}</a><div class="small">${esc(info.note)}</div></td><td>${esc(info.period)}</td><td>${new Set(rows.map(r=>r.geo)).size} territorios · ${new Set(rows.map(r=>r.id)).size} indicadores</td><td><a href="${esc(info.download)}" target="_blank" rel="noopener">Archivo del proveedor</a><br><a href="${esc(info.local)}" target="_blank" rel="noopener">Copia descargada</a></td></tr>`}));
+  $('new-source-checks').innerHTML=table(['Indicador','Suma con dato','Total publicado','Diferencia'],extra.checks.map(c=>`<tr><td>${esc(c.indicator)}</td><td>${fmt(c.sum_available)}</td><td>${fmt(c.reported_total)}</td><td>${fmt(c.difference)}</td></tr>`));
+  const oim=extra.documents[0];
+  $('external-source-links').innerHTML=`<p><a href="${esc(oim.url)}" target="_blank" rel="noopener">Publicación OIM en ReliefWeb</a> · <a href="${esc(oim.viewer)}" target="_blank" rel="noopener">Abrir tablero original</a> · <a href="${esc(oim.download)}" target="_blank" rel="noopener">PDF publicado el 19 de agosto</a></p>`;
+  $('load-oim').onclick=()=>{$('oim-viewer').innerHTML=`<iframe title="OIM: mapeo de alojamientos colectivos" src="${esc(oim.viewer)}" loading="lazy" style="width:100%;height:680px;border:0;margin-top:16px" allowfullscreen></iframe>`;$('load-oim').hidden=true};
+  $('oim-shortcut').onclick=()=>{activate('metodo');$('external-sources').scrollIntoView({block:'start'})};
+  document.querySelectorAll('[data-new-source]').forEach(b=>b.onclick=()=>{state.date=DATA.latest;state.source=b.dataset.newSource;state.level=state.source==='OPS-Sitrep7'?'departamental':'municipal';$('level').value=state.level;state.dim=state.source==='DANE-CNPV2018'?'Pobreza multidimensional':state.source==='MEN-Estadisticas'?'Cobertura neta':'Salud';state.metric='';refresh();activate('diagnostico');$('diagnostico').scrollIntoView({block:'start'})});
 }
 function refresh() {globalControls();diagnosticControls();renderPriorities();renderDiagnostic();renderMethod();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>activate(b.dataset.tab)));
@@ -201,9 +220,10 @@ $('download').addEventListener('click',()=>{
   const rows=model.sector({...state,search:$('sector-search').value}).items;
   // Quote every cell and neutralize spreadsheet formula injection in labels.
   const quote=v=>'"'+String(typeof v==='string'&&/^[=+@\-\t\r]/.test(v)?"'"+v:v??'').replaceAll('"','""')+'"';
-  const header=['puesto','divipola','departamento','municipio','nivel','fuente','indicador_id','indicador','valor','unidad','captura_inventario','fecha_fuente','atribucion'];
-  const lines=[header,...rows.map(r=>[r.rank,r.code,r.d,r.m,r.lv,r.f,r.id,r.i,r.v,r.u,r.date,'no acreditada',r.f==='FundacionExe'?(model.decree(state.date).has(r.d)?'no verificada':'no atribuida al sismo'):'consultar fuente'])];
+  const header=['puesto','divipola','departamento','municipio','nivel','fuente','indicador_id','indicador','valor','unidad','captura_o_descarga','periodo_fuente','atribucion','origen','localizador','nota_periodo'];
+  const lines=[header,...rows.map(r=>[r.rank,r.code,r.d,r.m,r.lv,r.f,r.id,r.i,r.v,r.u,r.date,r.period||'no acreditada',r.role||(r.f==='FundacionExe'?(model.decree(state.date).has(r.d)?'no verificada':'no atribuida al sismo'):'consultar fuente'),r.download||DATA.sources[r.f]?.download||DATA.sources[r.f]?.url,r.locator||'',r.period_note||''])];
   const blob=new Blob(['\ufeff'+lines.map(row=>row.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='seleccion-territorial.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 refresh();
+renderNewSources();

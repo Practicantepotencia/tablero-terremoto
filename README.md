@@ -5,6 +5,12 @@ con tres pestañas: Prioridades, Diagnóstico territorial y Fuentes y método.
 Conserva el lenguaje visual del tablero original: fondo gris, tarjetas blancas,
 acento azul, tablas y fichas desplegables.
 
+En `fuentes-nuevas` se añaden tablas originales DANE (IPM censal 2018), MEN
+(educación 2024), OPS/OMS (situación del terremoto, septiembre 2026) y acceso
+al visor de alojamientos de OIM. [Fuentes, límites y reproducción](docs/fuentes_nuevas.md).
+Para actualizarlas: `python -m pip install -r requirements_fuentes_nuevas.txt`,
+`python actualizar_fuentes_nuevas.py` y `python generar_tablero_recuperacion.py`.
+
 ## Consultar y generar
 
 Abre `index.html` directamente en un navegador. Es autocontenido y funciona
@@ -44,7 +50,8 @@ locales existentes.
   incidencias de integridad y limitaciones metodológicas.
 
 La fecha del inventario es una **captura**, no el corte efectivo de las
-observaciones. Falta acreditar la versión y fecha de cada fuente. No se
+observaciones. Las nuevas fuentes indican su periodo y copia verificable;
+en las fuentes anteriores puede faltar acreditar versión y fecha. No se
 presentan tasas sin denominadores verificados ni probabilidades de confianza.
 
 ## Desarrollo

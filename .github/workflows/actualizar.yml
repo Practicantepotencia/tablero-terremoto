@@ -4,10 +4,11 @@ on:
     - cron: '17 */4 * * *'
   workflow_dispatch: {}
   push:
-    branches: [main, formato-largo, reestructuracion-recuperacion]
+    branches: [main, formato-largo, reestructuracion-recuperacion, fuentes-nuevas]
     paths:
       - '.github/workflows/actualizar.yml'
       - '*.py'
+      - 'requirements_fuentes_nuevas.txt'
       - 'web/**'
       - 'tests/**'
       - 'data/**'
@@ -30,6 +31,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Instalar lectores de fuentes oficiales, si esta rama los utiliza
+        run: |
+          if [ -f requirements_fuentes_nuevas.txt ]; then
+            python -m pip install -r requirements_fuentes_nuevas.txt
+          fi
       - name: Verificar importación y cálculos
         run: |
           python -m unittest discover -s tests -v
@@ -39,6 +45,9 @@ jobs:
           fi
       - name: Descargar datos y regenerar vistas de esta rama
         run: |
+          if [ -f actualizar_fuentes_nuevas.py ]; then
+            python actualizar_fuentes_nuevas.py
+          fi
           python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
           python migrar_clasificacion_3is.py
           if [ -f generar_tablero_recuperacion.py ]; then
@@ -47,11 +56,12 @@ jobs:
             python generar_eda_indicadores.py --out eda_indicadores.html
             python generar_indice_educacion.py --out indice_educacion.html
           fi
+          python -m unittest discover -s tests -v
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: ${{ matrix.branch }}
           commit_message: 'Actualización automática de datos y tableros'
-          file_pattern: '*.html *.csv'
+          file_pattern: ${{ hashFiles('actualizar_fuentes_nuevas.py') != '' && '*.html *.csv data/fuentes_nuevas/' || '*.html *.csv' }}
           commit_user_name: tablero-terremoto-bot
           commit_user_email: actions@github.com
 

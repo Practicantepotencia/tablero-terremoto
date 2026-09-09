@@ -60,6 +60,20 @@ class PreparationTests(unittest.TestCase):
     def test_missing_date_does_not_become_today(self):
         self.assertEqual(tablero.prepare_payload([sample(fecha_corte="")])["rows"], [])
 
+    def test_external_reference_backfills_exact_names_without_replacing_existing_codes(self):
+        ref = [{'lv': 'municipal', 'd': 'Chocó', 'm': 'Quibdó', 'code': '27001'}]
+        result = tablero.prepare_payload([sample(municipio='QUIBDO', divipola='')], geographic_reference=ref)
+        self.assertEqual(result['rows'][0]['geo'], 'municipal:27001')
+        other = tablero.prepare_payload([sample(divipola='27002')], geographic_reference=ref)
+        self.assertEqual(other['rows'][0]['code'], '27002')
+        homonym = tablero.prepare_payload([sample(departamento='Otro', divipola='')], geographic_reference=ref)
+        self.assertEqual(homonym['rows'][0]['code'], '')
+
+    def test_ambiguous_external_reference_does_not_guess(self):
+        ref = [{'lv': 'municipal', 'd': 'Chocó', 'm': 'Quibdó', 'code': code} for code in ('27001', '27002')]
+        result = tablero.prepare_payload([sample(divipola='')], geographic_reference=ref)
+        self.assertEqual(result['rows'][0]['code'], '')
+
     def test_invalid_current_snapshot_is_not_replaced_by_older_valid_values(self):
         result = tablero.prepare_payload([sample(valor="nan")], [sample(fecha_corte="2026-09-06")])
         self.assertEqual(result["latest"], "2026-09-07")

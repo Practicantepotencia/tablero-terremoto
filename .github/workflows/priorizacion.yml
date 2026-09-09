@@ -1,0 +1,42 @@
+name: Verificar y generar priorización integrada
+on:
+  push:
+    branches: [priorizacion-integrada]
+    paths:
+      - 'web/**'
+      - 'tests/**'
+      - '*.py'
+      - 'data/linea_base_priorizacion.json'
+      - '.github/workflows/priorizacion.yml'
+permissions:
+  contents: write
+concurrency:
+  group: priorizacion-integrada
+  cancel-in-progress: false
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: priorizacion-integrada
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar identidad y cálculos
+        run: |
+          python -m unittest discover -s tests -v
+          node --test tests/modelo.test.js tests/priorizacion.test.js
+          node --check web/tablero.js
+      - name: Generar HTML desde las observaciones de esta rama
+        run: python generar_tablero_recuperacion.py
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: priorizacion-integrada
+          commit_message: 'Generar tablero de priorización integrada'
+          file_pattern: 'index.html eda_indicadores.html'
+          commit_user_name: tablero-terremoto-bot
+          commit_user_email: actions@github.com

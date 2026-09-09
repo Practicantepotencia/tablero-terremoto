@@ -60,6 +60,20 @@ class PreparationTests(unittest.TestCase):
     def test_missing_date_does_not_become_today(self):
         self.assertEqual(tablero.prepare_payload([sample(fecha_corte="")])["rows"], [])
 
+    def test_cali_alias_joins_reports_and_rapida_without_changing_values(self):
+        result = tablero.prepare_payload([
+            sample(departamento='Valle del Cauca', municipio='Cali', divipola='',
+                   fuente='3iS-Sheets', indicador_id='3is_colapsos', dimension='Infraestructura',
+                   indicador='Colapsos de edificaciones', unidad='Número', valor='515'),
+            sample(departamento='Valle del Cauca', municipio='Santiago de Cali', divipola='76001')])
+        self.assertEqual({r['geo'] for r in result['rows']}, {'municipal:76001'})
+        self.assertEqual(next(r['v'] for r in result['rows'] if r['id']=='3is_colapsos'),515)
+
+    def test_baseline_only_territories_do_not_expand_damage_universe(self):
+        result=tablero.prepare_payload([sample()])
+        self.assertEqual(len({r['geo'] for r in result['rows']}),1)
+        self.assertGreater(len(result['baseline']['rows']),1000)
+
     def test_invalid_current_snapshot_is_not_replaced_by_older_valid_values(self):
         result = tablero.prepare_payload([sample(valor="nan")], [sample(fecha_corte="2026-09-06")])
         self.assertEqual(result["latest"], "2026-09-07")

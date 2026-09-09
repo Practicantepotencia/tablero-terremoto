@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tablero unificado. Comparaciones por fuente, indicador, unidad y captura.
 
-No imputa valores, no calcula un compuesto y no escribe sobre las fuentes.
+Prepara observaciones y línea base para un compuesto con límites por faltantes.
 La fecha del inventario nunca se presenta como fecha de observación del sismo.
 """
 import argparse
@@ -20,6 +20,17 @@ HISTORY = "historial_indicadores_no_calculo.csv"
 RECOVERY = "undp_rapida_recovery_needs"
 IPM = "undp_rapida_mpi"
 RAPIDA = "UNDP-RAPIDA"
+BASELINE = ROOT / 'data/linea_base_priorizacion.json'
+# Equivalencias explícitas por departamento. El código debe existir en DANE.
+GEO_ALIASES = {
+    ('valle del cauca', 'santiago de cali'): '76001',
+    ('valle del cauca', 'cali'): '76001',
+    ('valle del cauca', 'anserma nuevo'): '76041',
+    ('valle del cauca', 'calima (darien)'): '76126',
+    ('choco', 'canton de san pablo'): '27135',
+    ('choco', 'carmen de atrato'): '27245',
+    ('choco', 'litoral de san juan'): '27250',
+}
 SOURCES = {
     RAPIDA: {"label": "UNDP · RAPIDA", "kind": "Evaluación y modelación", "url": "https://geosmart.undp.org/arcgis/apps/storymaps/stories/9d0ef01099a64edda2caecbd34135d7e", "note": "Cobertura parcial de la zona evaluada. El inventario no contiene la fórmula completa de recuperación ni el año base del IPM. No sumar IPM al resultado de recuperación."},
     "PNUD": {"label": "PNUD · estimación de daños", "kind": "Estimación", "url": "https://pnudco.github.io/Respuesta-a-crisis-y-recuperaci-n-temprana/", "note": "Vivienda y daño económico coinciden con RAPIDA en la cobertura común auditada. No constituyen corroboración independiente ni se suman entre fuentes."},
@@ -48,6 +59,11 @@ def prepare_payload(current, history=()):
     from migrar_clasificacion_3is import normalize
     current = [normalize(r) for r in current]
     history = [normalize(r) for r in history]
+    baseline = json.loads(BASELINE.read_text(encoding='utf-8')) if BASELINE.exists() else {'rows': []}
+    reference_names = defaultdict(set)
+    reference_codes = {r['code']: r for r in baseline['rows']}
+    for r in baseline['rows']:
+        reference_names[(normalized(r['d']), normalized(r['m']))].add(r['code'])
     # A current capture replaces the WHOLE capture of that date, including
     # missing sources. Old values must not resurrect a failed download.
     current_dates = {r.get("fecha_corte", "") for r in current}
@@ -60,6 +76,7 @@ def prepare_payload(current, history=()):
             pass
     issues = Counter()
     clean = []
+    invalid_names = set()
     for r in raw:
         if r.get("fuente") == "Calculo":
             continue
@@ -84,10 +101,22 @@ def prepare_payload(current, history=()):
         code = r.get("divipola", "").strip()
         expected = 5 if r["nivel"] == "municipal" else 2
         code = code if code.isdigit() and len(code) == expected else ""
+        original_code = code
+        if r['nivel'] == 'municipal':
+            name_key = (normalized(r['departamento']), normalized(r['municipio']))
+            known = reference_names.get(name_key, set())
+            alias = GEO_ALIASES.get(name_key)
+            resolved = alias if alias in reference_codes else next(iter(known), '') if len(known) == 1 else ''
+            if code and resolved and code != resolved:
+                issues['Código incompatible con la referencia DANE'] += 1
+                invalid_names.add(name_key)
+                continue
+            code = code or resolved
         clean.append({"lv": r["nivel"], "d": r["departamento"].strip(), "m": r.get("municipio", "").strip(),
                       "dim": r["dimension"], "id": r["indicador_id"], "i": r["indicador"],
                       "u": r["unidad"], "f": r["fuente"], "v": value,
-                      "date": r["fecha_corte"], "code": code})
+                      "date": r["fecha_corte"], "code": code,
+                      "identity_note": 'Equivalencia municipal explícita' if r['nivel']=='municipal' and name_key in GEO_ALIASES else 'Referencia DANE' if code and not original_code else ''})
     # Only unambiguous codes are shared between spelling-normalized names.
     codes = defaultdict(set)
     for r in clean:
@@ -96,6 +125,9 @@ def prepare_payload(current, history=()):
     grouped = defaultdict(list)
     for r in clean:
         key = (r["lv"], normalized(r["d"]), normalized(r["m"]))
+        if r['lv']=='municipal' and key[1:] in invalid_names:
+            issues['Filas con identidad geográfica ambigua'] += 1
+            continue
         known = codes[key]
         if len(known) > 1:
             issues["Filas con identidad geográfica ambigua"] += 1
@@ -117,7 +149,7 @@ def prepare_payload(current, history=()):
     rows.sort(key=lambda r: (r["date"], r["f"], r["id"], r["geo"]))
     dates = sorted(capture_dates)
     latest = max((d for d in current_dates if d in dates), default=dates[-1] if dates else "")
-    return {"rows": rows, "dates": dates, "latest": latest, "sources": SOURCES,
+    return {"rows": rows, "dates": dates, "latest": latest, "sources": SOURCES, "baseline": baseline,
             "issues": [{"label": k, "n": v} for k, v in sorted(issues.items()) if v],
             "generated": datetime.now(timezone.utc).isoformat(timespec="seconds")}
 
@@ -125,7 +157,7 @@ def prepare_payload(current, history=()):
 def build_html(current, history=()):
     payload = prepare_payload(current, history)
     template = (ROOT / "web" / "tablero.html").read_text(encoding="utf-8")
-    for marker, filename in (("__STYLE__", "tablero.css"), ("__MODEL__", "modelo.js"), ("__APP__", "tablero.js")):
+    for marker, filename in (("__STYLE__", "tablero.css"), ("__MODEL__", "modelo.js"), ("__PRIORITY_MODEL__", "priorizacion.js"), ("__APP__", "tablero.js")):
         template = template.replace(marker, (ROOT / "web" / filename).read_text(encoding="utf-8"))
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
     return template.replace("__DATA__", data.replace("<", "\\u003c"))

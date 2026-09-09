@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Necesidades de recuperación temprana, diagnóstico sectorial y cobertura de la evidencia territorial en Colombia.">
-<title>Recuperación temprana · Tablero territorial</title><style>__STYLE__</style></head>
+<title>Prioridades de recuperación · Colombia</title><style>__STYLE__</style></head>
 <body><main class="wrap">
 <div class="statusbar"><span class="pill">Análisis territorial</span><span id="capture-label"></span><span id="build-label" class="muted"></span></div>
-<header class="hero"><div class="kicker">Respuesta al terremoto · Colombia</div><h1>Necesidades de recuperación temprana</h1><p class="subtitle">Prioridades municipales, afectación por sector y vulnerabilidad previa, con la cobertura de cada fuente a la vista.</p></header>
+<header class="hero"><div class="kicker">Respuesta al terremoto · Colombia</div><h1>Dónde intervenir y qué necesita cada municipio</h1><p class="subtitle">Una matriz de necesidades. Prioridad calculada por sectores, con los datos y la cobertura que explican el orden.</p></header>
 <nav class="tab-nav" role="tablist" aria-label="Vistas del tablero">
 <button type="button" id="tab-prioridades" class="tab-btn active" role="tab" aria-selected="true" aria-controls="prioridades" data-tab="prioridades">Prioridades</button>
 <button type="button" id="tab-diagnostico" class="tab-btn" role="tab" aria-selected="false" aria-controls="diagnostico" data-tab="diagnostico">Diagnóstico territorial</button>
@@ -18,13 +18,11 @@
 <p id="scope-note" class="note"></p>
 <section id="prioridades" class="tab-panel" role="tabpanel" aria-labelledby="tab-prioridades">
 <div id="priority-kpis" class="tiles" aria-live="polite"></div>
-<div class="two">
-<div class="card"><div class="section-head"><h2>Ranking de recuperación</h2><label class="search">Buscar en la tabla<input id="priority-search" type="search" placeholder="Municipio o departamento"></label></div><p id="priority-note" class="note"></p><div id="priority-table" class="table-scroll"></div><button type="button" id="priority-more" class="secondary" hidden>Ver más municipios</button></div>
-<div class="card"><h2>Recuperación e IPM</h2><p class="note">El IPM contextualiza el resultado. Los ejes no constituyen mediciones independientes.</p><div id="scatter"></div><p id="scatter-detail" class="note" aria-live="polite">Selecciona un punto para abrir su ficha.</p><p id="scatter-note" class="note small"></p></div>
-</div>
-<div class="card"><div class="section-head"><h2 id="matrix-title">Qué necesita cada municipio</h2><span id="matrix-caption" class="muted small"></span></div><div class="filters matrix-controls"><label>Fuente<select id="matrix-source" aria-controls="matrix"></select></label><label>Escala disponible<select id="matrix-level" aria-controls="matrix"></select></label><label>Buscar territorio<input id="matrix-search" type="search" placeholder="Municipio o departamento" aria-controls="matrix"></label></div><p id="matrix-note" class="note"></p><p id="matrix-warning" class="note"></p><p id="matrix-count" class="note small" aria-live="polite"></p><div id="matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="matrix-title"></div></div>
-<div class="card"><h2>Seguimiento sobre los mismos municipios</h2><p class="note">Medianas de recuperación e IPM en paneles constantes entre capturas. Una captura nueva no acredita un cambio real en el terreno.</p><div id="priority-trend" class="two"></div></div>
-<details class="card"><summary id="missing-title">Municipios sin recuperación evaluada</summary><p class="note">Necesitan revisión de evidencia. Su ausencia del ranking no significa necesidad baja. Pueden tener observaciones sectoriales en otras fuentes.</p><div id="missing-table" class="table-scroll"></div></details>
+<div class="card matrix-card"><div class="section-head"><h2 id="matrix-title">Qué necesita cada municipio</h2><button id="priority-download" class="secondary" type="button">Descargar priorización</button></div>
+<div class="filters matrix-controls"><label>Ordenar municipios por<select id="priority-order"><option value="integrated">Prioridad documentada · modelo sectorial</option><option value="rapida">Recuperación RAPIDA · comparación</option><option value="uncertainty">Prioridad posible · revisar faltantes</option></select></label><label>Datos que quieres ver<select id="matrix-source" aria-controls="matrix"></select></label><label>Buscar en todos los municipios<input id="matrix-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="matrix"></label><label id="matrix-level-label" hidden>Escala disponible<select id="matrix-level" aria-controls="matrix"></select></label></div>
+<p id="priority-note" class="note"></p><details class="matrix-explanation"><summary>Fuentes y significado de los colores</summary><p id="matrix-caption" class="muted small"></p><p id="matrix-note" class="note"></p><p id="matrix-warning" class="note"></p></details><p id="matrix-count" class="note small" aria-live="polite"></p><div id="matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="matrix-title"></div></div>
+<section class="card" id="priority-detail" hidden aria-live="polite" aria-label="Descomposición de la prioridad municipal"></section>
+<details class="card"><summary>Cómo leer la prioridad y sus límites</summary><p>El puntaje combina seis sectores con el mismo peso. En vivienda, salud, educación y servicios comunitarios se conservan por separado los reportes 3iS y las cifras del inventario PNUD. Hogares e infraestructura usan 3iS. RAPIDA se usa como comparación, sin entrar a la fórmula.</p><p>El primer número es el límite inferior compatible con las observaciones. El intervalo muestra cuánto podría cambiar al completar los faltantes. Un intervalo amplio impide afirmar un puesto definitivo. Este orden conservador puede favorecer territorios mejor documentados; «Prioridad posible» permite revisar los que faltan por caracterizar.</p><p>La pobreza censal municipal de 2018 ajusta la prioridad hasta un 25% respecto al mismo daño. No crea prioridad donde no hay daño. Los pesos son una propuesta de decisión; se prueban 39 escenarios de sensibilidad.</p><button type="button" class="secondary" id="show-method">Ver fórmula, variables y sensibilidad</button></details>
 </section>
 <section id="diagnostico" class="tab-panel" role="tabpanel" aria-labelledby="tab-diagnostico" hidden>
 <div class="filters local">
@@ -42,24 +40,25 @@
 <div class="card" id="profile-card"><div class="section-head"><h2>Ficha territorial</h2><label class="profile-picker">Territorio<select id="territory"></select></label></div><p id="profile-note" class="note"></p><div id="profile-kpis" class="tiles compact"></div><div id="profile-table" class="table-scroll"></div><details><summary>Historial del indicador en este territorio</summary><div id="profile-trend"></div></details></div>
 </section>
 <section id="metodo" class="tab-panel" role="tabpanel" aria-labelledby="tab-metodo" hidden>
+<div id="priority-method" class="card"></div>
 <div class="card"><h2>Cobertura de las fuentes</h2><p class="note">Universo, departamento y captura seleccionados. Los territorios pueden repetirse entre fuentes; sus coberturas no se suman.</p><div id="coverage-table" class="table-scroll"></div></div>
 <div class="two"><div class="card"><h2>Cómo se decide el orden</h2>
-<p>El ranking principal usa exclusivamente el valor publicado de necesidades de recuperación temprana de RAPIDA. No se le suma IPM, daño económico ni un promedio de sectores. Los empates comparten posición.</p>
-<p>«Tramo superior» significa valor igual o mayor al percentil 75 del universo territorial seleccionado. El filtro de departamento y la búsqueda no cambian este umbral. Solo se calcula con al menos cuatro municipios y valores diferentes. No es un umbral oficial de intervención.</p>
+<p>El orden principal es el límite inferior del modelo sectorial. Los empates comparten posición. Se puede contrastar con RAPIDA o revisar el límite superior para orientar la búsqueda de información.</p>
+<p>La referencia de normalización cambia al elegir todos los departamentos o solo los del decreto. La búsqueda, el filtro de departamento y el selector de fuente solo cambian la vista, no el puntaje.</p>
 <p>Cada ranking sectorial exige la misma fuente, indicador, nivel, unidad, definición registrada y captura. Las otras fuentes se consultan por separado. Nunca rellenan los huecos de la fuente elegida.</p>
 <p>Las magnitudes absolutas sirven para dimensionar la respuesta y dependen del tamaño territorial. No se calculan tasas sin denominadores compatibles y verificados.</p>
-<p>La cobertura de cinco sectores exige todos sus campos de referencia disponibles. Cuenta disponibilidad, no calidad o certeza. Los edificios de categorías distintas no se suman.</p>
+<p>La cobertura pondera la fracción conocida de los 14 campos del modelo. Cuenta disponibilidad, no calidad o certeza. Las categorías de edificios se normalizan por separado; sus cantidades no se suman.</p>
 </div><div class="card"><h2>Qué sigue pendiente</h2>
 <p class="notice">La fecha de captura es la del inventario. Falta acreditar la fecha efectiva y la versión metodológica de cada observación. Las comparaciones dentro de una fuente siguen siendo provisionales.</p>
-<p>El IPM disponible es municipal y parcial. Su año base y correspondencia exacta con la medición oficial deben documentarse. El inventario no contiene los pesos ni la fórmula completa de recuperación temprana; el tablero conserva el resultado de la fuente.</p>
+<p>El modelo usa el IPM censal DANE 2018 ya verificado en fuentes-nuevas. Su antigüedad limita la representación de la vulnerabilidad actual. El IPM de RAPIDA se conserva únicamente en las consultas de esa fuente.</p>
 <p>PNUD y RAPIDA comparten cifras en el solapamiento auditado. Su coincidencia no demuestra validación independiente. La fuente elegida tampoco elimina posibles errores internos o sesgos de cobertura.</p>
 <p>El decreto delimita el filtro administrativo. No demuestra daño en todos sus municipios, ni ausencia de daño fuera de ellos. Las observaciones ExE conservan una advertencia de atribución.</p>
 <p>La evolución usa únicamente territorios presentes en todas las capturas comparadas. Se informa su tamaño; no representa automáticamente al departamento completo.</p>
 </div></div>
 <div class="card"><h2>Controles de integridad</h2><div id="checks"></div><p class="note">Se excluyen registros inválidos o conflictivos; un dato ausente no se convierte en cero. Los nombres solo se vinculan si el código no es ambiguo.</p></div>
 <details class="card"><summary>Diccionario de la selección</summary><div id="dictionary" class="table-scroll"></div></details>
-<details class="card"><summary>Índices anteriores y documentación</summary><p>Los compuestos Naboo y ajustado por cascada se retiran de la vista operativa en esta rama. Sus archivos históricos se conservan para reproducibilidad, sin presentarlos como prioridades actuales.</p><p><a href="docs/metodologia_recuperacion.md">Metodología y transición</a> · <a href="docs/auditoria_indicadores_largo.md">Auditoría de los indicadores</a> · <a href="historial_indice.csv">Historial del índice original</a></p></details>
+<details class="card"><summary>Documentación</summary><p><a href="docs/modelo_priorizacion.md">Modelo sectorial y decisiones metodológicas</a> · <a href="docs/auditoria_indicadores_largo.md">Auditoría de los indicadores</a> · <a href="historial_indice.csv">Historial del índice original</a></p></details>
 </section>
 <footer><span id="footer-capture"></span><span>Necesidades y cobertura del inventario disponible. «Sin dato» nunca significa cero.</span></footer>
 <noscript><p>Activa JavaScript para filtrar y consultar el tablero. Los datos originales están en <a href="indicadores_largo_no_calculo.csv">el inventario CSV</a>.</p></noscript>
-</main><script>__MODEL__</script><script>const DATA=__DATA__;</script><script>__APP__</script></body></html>
+</main><script>__MODEL__</script><script>__PRIORITY_MODEL__</script><script>const DATA=__DATA__;</script><script>__APP__</script></body></html>

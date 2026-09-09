@@ -1,5 +1,39 @@
 # Tablero territorial de recuperación temprana
 
+## Rama priorizacion-integrada
+
+Abre **index.html**. La matriz «Qué necesita cada municipio» es la vista
+principal: búsqueda en todos los municipios, selector de fuente con sus propias
+distinciones, puntaje sectorial y rango por faltantes. Se puede ordenar por el
+modelo propio, por RAPIDA o por el límite superior para revisar información faltante.
+
+El modelo combina 14 campos en seis sectores con peso igual y aplica un ajuste
+por IPM censal DANE 2018. Usa pesos fijos, separa canales y muestra la sensibilidad
+del orden. RAPIDA se conserva como comparación y no entra en la fórmula. La ficha
+de cada municipio muestra los valores originales y sus aportes.
+
+El orden por límite inferior es conservador y puede favorecer a municipios mejor
+documentados. El intervalo muestra esa limitación. No es un ranking validado en
+terreno ni una medición de ayudas pendientes. Método y resultados de la captura:
+[modelo_priorizacion.md](docs/modelo_priorizacion.md).
+
+```sh
+git fetch origin
+git switch priorizacion-integrada
+git pull --ff-only origin priorizacion-integrada
+python generar_tablero_recuperacion.py
+```
+
+La generación local no requiere descargar nuevas fuentes. La línea base reutiliza
+el archivo DANE ya verificado en `fuentes-nuevas`, con su procedencia conservada.
+El cruce municipal corrige Cali/Santiago de Cali y vincula sus 515 colapsos a
+infraestructura. No altera los valores originales de los CSV.
+
+Para comprobar el modelo: `node --test tests/modelo.test.js tests/priorizacion.test.js`.
+GitHub Actions verifica y genera el HTML al cambiar el código en esta rama.
+
+## Arquitectura heredada y consultas por fuente
+
 Esta rama integra el EDA y el tablero del índice en **un solo `index.html`**,
 con tres pestañas: Prioridades, Diagnóstico territorial y Fuentes y método.
 Conserva el lenguaje visual del tablero original: fondo gris, tarjetas blancas,
@@ -33,9 +67,8 @@ locales existentes.
 
 ## Lectura
 
-- **Prioridades:** orden por el valor original de recuperación RAPIDA. IPM
-  se muestra como contexto, no se suma. Se ven cobertura, municipios sin
-  evaluación, matriz sectorial y seguimiento de capturas en panel constante.
+- **Prioridades:** matriz de necesidades por municipio, orden del modelo
+  sectorial, contraste con RAPIDA e intervalos por datos faltantes.
 - **Diagnóstico territorial:** rankings, distribución y ficha por una sola
   fuente, indicador, definición, unidad, nivel y captura. Permite descargar
   la selección. Un indicador sin observaciones sigue seleccionado y muestra
@@ -50,7 +83,8 @@ presentan tasas sin denominadores verificados ni probabilidades de confianza.
 ## Desarrollo
 
 `generar_tablero_recuperacion.py` valida y prepara los registros. `web/modelo.js`
-contiene los cálculos sin interfaz; `web/tablero.js` controla filtros y vistas;
+contiene consultas por fuente y `web/priorizacion.js` el nuevo modelo;
+`web/tablero.js` controla filtros y vistas;
 `web/tablero.html` y `web/tablero.css` conservan la presentación. El generador
 inserta los recursos y datos en un único HTML.
 

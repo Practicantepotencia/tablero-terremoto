@@ -120,7 +120,7 @@
       }
       const visibleRows = visible(state);
       if (!recoveryItems) recoveryItems = [...new Map(visibleRows.filter(r => r.lv === level).map(r => [r.geo,r])).values()].sort(byName);
-      const base = visibleRows.filter(r => r.f === source && r.lv === level);
+      const base = visible(state, state.date, true).filter(r => r.f === source && r.lv === level);
       const layout = matrixLayout(state);
       const fields = new Map(layout.flatMap(s => s.metrics).map(meta => {
         const group = meta.strict ? strict(base, meta.id, source) : base.filter(r => cohort(r) === meta.key);

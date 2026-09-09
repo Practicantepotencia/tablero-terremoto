@@ -15,6 +15,7 @@ import math
 import os
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
+from migrar_clasificacion_3is import normalize
 
 
 CURRENT_DEFAULT = "indicadores_largo_no_calculo.csv"
@@ -32,7 +33,7 @@ def read_csv(path):
     if not path or not os.path.exists(path):
         return []
     with open(path, encoding="utf-8-sig", newline="") as f:
-        return list(csv.DictReader(f))
+        return [normalize(r) for r in csv.DictReader(f)]
 
 
 def as_number(value):

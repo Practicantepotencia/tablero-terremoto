@@ -24,6 +24,7 @@ import argparse
 import csv
 import io
 import json
+import math
 import os
 import sys
 import unicodedata
@@ -67,8 +68,8 @@ SEDES_EDUCATIVAS_CSV = "data/sedes_educativas_afectadas_ago2026.csv"
 # viviendas averiadas/destruidas, colapsos, salud, educativos, vías...).
 # Se descarga fresca en cada corrida (como registro.json), no es un
 # snapshot manual -- Google la sirve como CSV público sin autenticación.
-# Solo entra al inventario crudo (fuente=3iS-Sheets), NO se usa todavía
-# para recalcular ninguna dimensión del índice.
+# Alimenta el inventario crudo y las dimensiones que seleccionen 3iS
+# en el índice ajustado. El índice original de puntos Naboo no cambia.
 SHEETS_3IS_DATOS_TERRITORIALES_URL = (
     "https://docs.google.com/spreadsheets/d/1fQ-LTlIEljzOKvW23epwevJeWLWORi88xL7XxkpTMzY"
     "/gviz/tq?tqx=out:csv&sheet=Datos_Territoriales"
@@ -84,7 +85,7 @@ DIMENSION_3IS_POR_CAMPO = {
     "Fallecidos": "Impacto humano", "Heridos": "Impacto humano",
     "Desaparecidos": "Impacto humano", "Rescatados": "Impacto humano",
     "Familias": "Impacto humano",
-    "VivAveriadas": "Vivienda", "VivDestruidas": "Vivienda", "Colapsos": "Vivienda",
+    "VivAveriadas": "Vivienda", "VivDestruidas": "Vivienda", "Colapsos": "Infraestructura",
     "Salud": "Salud", "Educativos": "Educación", "Comunitarios": "Instituciones",
     "Vias": "Infraestructura", "Aeropuertos": "Infraestructura", "Acueductos": "Infraestructura",
 }
@@ -94,13 +95,13 @@ LABEL_3IS_POR_CAMPO = {
     "Fallecidos": "Fallecidos", "Heridos": "Heridos", "Desaparecidos": "Desaparecidos",
     "Rescatados": "Rescatados", "Familias": "Familias afectadas",
     "VivAveriadas": "Viviendas averiadas", "VivDestruidas": "Viviendas destruidas",
-    "Colapsos": "Colapsos", "Salud": "Puntos de salud afectados",
+    "Colapsos": "Colapsos de edificaciones", "Salud": "Puntos de salud afectados",
     "Educativos": "Puntos educativos afectados", "Comunitarios": "Puntos comunitarios afectados",
     "Vias": "Vías afectadas", "Aeropuertos": "Aeropuertos afectados", "Acueductos": "Acueductos afectados",
 }
 # Meses en español abreviados como los usa la hoja ("3 Sep 06:30") -- para
 # poder comparar cortes y quedarnos con el más reciente.
-MESES_ES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6, "Jul": 7, "Ago": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}
+MESES_CORTE_3IS = {"ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6, "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12}
 
 # Microsite de PNUD Colombia "Impacto Económico del Sismo -- Chocó"
 # (GitHub Pages, ver docs/investigacion_pnud.md) -- estimación propia de
@@ -578,11 +579,11 @@ def _clave_orden_corte(reporte):
     """'3 Sep 06:30' -> (mes, día, hora, minuto) para poder comparar cortes
     y encontrar el más reciente sin asumir el orden del CSV fuente."""
     try:
-        partes = reporte.split(" ")
+        partes = reporte.split()
         dia, mes_abrev, hhmm = partes[0], partes[1], partes[2]
         h, m = hhmm.split(":")
-        return (MESES_ES.get(mes_abrev, 0), int(dia), int(h), int(m))
-    except (ValueError, IndexError):
+        return (MESES_CORTE_3IS[mes_abrev.casefold()[:3]], int(dia), int(h), int(m))
+    except (ValueError, IndexError, KeyError):
         return (0, 0, 0, 0)
 
 
@@ -590,9 +591,10 @@ def _valores_3is(r):
     valores = {}
     for campo in CAMPOS_3IS_DATOS_TERRITORIALES:
         try:
-            valores[campo] = float(r.get(campo) or 0)
-        except ValueError:
-            valores[campo] = 0.0
+            valor = float(r.get(campo))
+            valores[campo] = valor if math.isfinite(valor) and valor >= 0 else None
+        except (TypeError, ValueError):
+            valores[campo] = None
     return valores
 
 
@@ -604,10 +606,8 @@ def load_3is_datos_territoriales(url=SHEETS_3IS_DATOS_TERRITORIALES_URL):
     municipal no siempre comparten el mismo corte en la hoja fuente, así
     que se calculan por separado en vez de asumir que van juntos). Solo
     materia prima para el inventario de formato largo (fuente=3iS-Sheets)
-    -- NO se usa para recalcular ninguna dimensión del índice todavía.
-    Devuelve (None, {}, None, {}) si falla la descarga o el parseo -- nunca
-    interrumpe la corrida (misma filosofía que el resto de fuentes
-    opcionales de data/)."""
+    Una fuente habilitada que falla cancela la actualización. Pasar None
+    deshabilita explícitamente esta fuente. Los vacíos se conservan como None."""
     vacio = (None, {}, None, {})
     if not url:
         return vacio
@@ -615,16 +615,22 @@ def load_3is_datos_territoriales(url=SHEETS_3IS_DATOS_TERRITORIALES_URL):
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=30) as resp:
             raw = resp.read().decode("utf-8-sig")
-    except Exception:
-        return vacio
+    except Exception as exc:
+        raise RuntimeError("No se pudo descargar 3iS; se cancela la actualización para no publicar un inventario incompleto") from exc
 
     try:
         filas = list(csv.DictReader(io.StringIO(raw)))
-    except csv.Error:
-        return vacio
+    except csv.Error as exc:
+        raise RuntimeError("CSV de 3iS inválido") from exc
+
+    if not filas or not {"Reporte", "Nivel", "Departamento", "Municipio", "Colapsos"}.issubset(filas[0]):
+        raise RuntimeError("La respuesta de 3iS no contiene el esquema esperado")
 
     deps = [r for r in filas if r.get("Nivel") == "Departamento" and r.get("Departamento")]
     munis = [r for r in filas if r.get("Nivel") == "Municipio" and r.get("Departamento") and r.get("Municipio")]
+
+    if not deps or not munis or any(_clave_orden_corte(r.get("Reporte", "")) == (0, 0, 0, 0) for r in deps + munis):
+        raise RuntimeError("3iS no contiene ambos niveles o incluye un reporte con fecha inválida")
 
     corte_dep = max({r["Reporte"] for r in deps}, key=_clave_orden_corte) if deps else None
     resultado_dep = {
@@ -860,8 +866,8 @@ def _cascada_valor_y_fuente(unidad, cascada):
     fuentes en la misma celda. (None, None) si ninguna la tiene."""
     for nombre, fuente_dict, campos in cascada:
         d = fuente_dict.get(unidad)
-        if d and any(c in d for c in campos):
-            return sum(d.get(c, 0) for c in campos), nombre
+        if d and all(d.get(c) is not None for c in campos):
+            return sum(d[c] for c in campos), nombre
     return None, None
 
 
@@ -2120,7 +2126,7 @@ def main():
     ap.add_argument("--historial", default=HISTORIAL_CSV_POR_DEFECTO, help="CSV donde se acumula el historial para la pestaña 'Por dimensión' (una fila por departamento por corrida, nunca se sobrescribe). Pasa '' vacío para desactivar el historial.")
     ap.add_argument("--formato-largo", default=INDICADORES_LARGO_CSV_POR_DEFECTO, help="CSV en formato largo (Fase A, ver docs/formato_largo.md) -- salida en paralelo al CSV ancho, no lo reemplaza. Pasa '' vacío para desactivarlo.")
     ap.add_argument("--no-calculo", default=NO_CALCULO_CSV_POR_DEFECTO, help="CSV derivado de --formato-largo filtrado a fuente != Calculo (solo materia prima cruda de fuentes externas). Se regenera solo en cada corrida. Pasa '' vacío para desactivarlo.")
-    ap.add_argument("--sheets-3is", default=SHEETS_3IS_DATOS_TERRITORIALES_URL, help="URL del CSV público (hoja 'Datos_Territoriales' del Sheets de 3iS, ver docs/investigacion_3is.md) con cifras oficiales por departamento -- solo alimenta el inventario crudo (fuente=3iS-Sheets), no recalcula el índice. Si falla la descarga, la corrida sigue sin ese dato. Pasa '' vacío para desactivarlo.")
+    ap.add_argument("--sheets-3is", default=SHEETS_3IS_DATOS_TERRITORIALES_URL, help="CSV público Datos_Territoriales de 3iS. Se selecciona el último reporte por nivel; los vacíos no son cero. Una descarga fallida cancela la actualización. Pasa una cadena vacía para desactivar la fuente.")
     ap.add_argument("--indice-ajustado-dep", default="indice_ajustado_departamento.csv", help="CSV del índice ajustado (Fase B, ver docs/indice_ajustado.md) por departamento -- SEGUNDO índice compuesto en paralelo al original, usando 3iS/PNUD/UNDP-RAPIDA/FundacionExe donde alcanzan. Pasa '' vacío para desactivarlo.")
     ap.add_argument("--indice-ajustado-mun", default="indice_ajustado_municipio.csv", help="CSV del índice ajustado (Fase B) por municipio -- solo municipios con dato en al menos una dimensión. Pasa '' vacío para desactivarlo.")
     args = ap.parse_args()
@@ -2168,7 +2174,7 @@ def main():
 
     corte_3is_dep, datos_3is_por_dep, corte_3is_mun, datos_3is_por_municipio = load_3is_datos_territoriales(args.sheets_3is or None)
     if datos_3is_por_dep:
-        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: cifras oficiales 3iS-Sheets (corte {corte_3is_dep}) -- {len(datos_3is_por_dep)} departamentos con dato (materia prima, no se usa para recalcular el índice)")
+        print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: cifras oficiales 3iS-Sheets (corte {corte_3is_dep}) -- {len(datos_3is_por_dep)} departamentos con dato")
     elif args.sheets_3is:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: no se pudo leer 3iS-Sheets esta corrida (red o formato) -- se sigue sin ese dato, no interrumpe la corrida")
     if datos_3is_por_municipio:

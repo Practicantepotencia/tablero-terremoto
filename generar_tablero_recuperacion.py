@@ -45,6 +45,9 @@ def normalized(value):
 
 
 def prepare_payload(current, history=()):
+    from migrar_clasificacion_3is import normalize
+    current = [normalize(r) for r in current]
+    history = [normalize(r) for r in history]
     # A current capture replaces the WHOLE capture of that date, including
     # missing sources. Old values must not resurrect a failed download.
     current_dates = {r.get("fecha_corte", "") for r in current}

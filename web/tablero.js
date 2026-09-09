@@ -97,22 +97,14 @@ function renderPriorities() {
   if(state.priorityGeo)renderPriorityDetail(state.priorityGeo,false);
 }
 function renderMatrix() {
-  const sources=sorted(model.catalog.map(m=>m.f)).filter(f=>f!=='Decreto1171');
-  state.matrixSource=setOptions('matrix-source',[{value:'integrated',label:'Necesidades por sector · componentes del modelo'},...sources.map(f=>({value:f,label:DATA.sources[f]?.label||f}))],state.matrixSource);
-  const integrated=state.matrixSource==='integrated';
-  const levels=integrated?['municipal']:['municipal','departamental'].filter(lv=>model.catalog.some(m=>m.f===state.matrixSource&&m.lv===lv));
-  state.matrixLevel=setOptions('matrix-level',levels.map(lv=>({value:lv,label:lv==='municipal'?'Municipal':'Departamental'})),state.matrixLevel||'municipal');
-  $('matrix-level-label').hidden=levels.length<2;
-  state.priorityDimension=setOptions('priority-dimension',[{value:'',label:'Índice global'},...Priorizacion.SECTORS.map(s=>({value:s.id,label:s.name}))],state.priorityDimension);
+  const integrated=true;
+  state.matrixSource='integrated';state.matrixLevel='municipal';
   const selected={...state,matrixSearch:$('matrix-search').value};
   const p=priorityModel.selection(selected),municipal=state.matrixLevel==='municipal';
   const selectedSector=Priorizacion.SECTORS.find(s=>s.id===state.priorityDimension);
-  const orderText=state.priorityOrder==='rapida'?'Orden de recuperación RAPIDA; el selector de dimensión no interviene':selectedSector?`${state.priorityOrder==='uncertainty'?'Puntaje posible':'Puntaje documentado'} de ${selectedSector.name}; puesto calculado únicamente entre municipios con algún dato en esa dimensión`:{integrated:'Límite inferior: prioridad respaldada por los datos disponibles',uncertainty:'Límite superior: dónde completar información podría cambiar la prioridad'}[state.priorityOrder];
-  $('priority-note').textContent=municipal?`${orderText}. Seis sectores con peso 1/6. Selecciona un municipio para ver su fórmula.`:'Los totales departamentales no se reparten entre municipios ni reciben puntaje municipal.';
+  const orderText=selectedSector?`Orden por ${selectedSector.name}: ${state.dimensionDirection==='asc'?'menor a mayor':'mayor a menor'}, usando el puntaje documentado. Municipios sin datos al final`:'Orden normal: prioridad global documentada de mayor a menor';
+  $('priority-note').textContent=municipal?`${orderText}. Pulsa una columna: mayor a menor → menor a mayor → orden normal. Selecciona un municipio para ver su fórmula.`:'Los totales departamentales no se reparten entre municipios ni reciben puntaje municipal.';
   if(state.matrixSource==='FundacionExe')$('priority-note').textContent+=' ExE: atribución de las sedes al sismo pendiente de verificar.';
-  $('priority-order').disabled=!municipal;
-  $('priority-dimension').disabled=!municipal;
-  $('priority-download').disabled=!municipal;
   const source=DATA.sources[state.matrixSource];
   $('matrix-title').textContent=municipal?'Qué necesita cada municipio':'Qué reporta cada departamento';
   $('matrix-caption').textContent=integrated?'3iS: reportes consolidados · PNUD: inventario de daños usado para la estimación · DANE 2018: vulnerabilidad':`${source?.label||state.matrixSource} · valores originales`;
@@ -122,8 +114,21 @@ function renderMatrix() {
   const placeCell=r=>{const sector=selectedSector&&r.sectors.find(s=>s.id===selectedSector.id),hasSector=sector&&sector.coverage>0;return `<td class="municipal-cell"><button class="link" type="button" data-priority-geo="${esc(r.geo)}">${esc(r.m)}</button><div class="muted small">${esc(r.d)}</div><div class="priority-number">${selectedSector?(hasSector?fmt(state.priorityOrder==='uncertainty'?sector.upper:sector.lower):'—'):(r.coverage>0?fmt(state.priorityOrder==='uncertainty'?r.upper:r.lower):'—')}<small> / 100</small></div><div class="small">${selectedSector?(hasSector?`${esc(selectedSector.name)} · ${compactRange(sector.lower,sector.upper)}`:'Sin datos en esta dimensión'):(r.coverage>0?`Prioridad · ${compactRange(r.lower,r.upper)}`:'Sin componentes puntuables')}</div><div class="small muted">Cobertura ${fmt(100*r.coverage)}% · ${r.available}/14 campos</div><div class="small muted">${selectedSector?`Puesto en dimensión ${r.dimensionRank??'—'} · global ${r.rank??'—'}`:`Puesto global ${r.rank??'—'}`} · RAPIDA ${r.recoveryRank??'—'}</div></td>`;};
   if(integrated){
     $('matrix-count').textContent=`${p.items.length} municipios visibles · ${p.referenceN} en la referencia. El filtro del decreto recalcula anclas, puntajes y posiciones. La búsqueda no los cambia.`;
-    const columns=selectedSector?[selectedSector,...Priorizacion.SECTORS.filter(s=>s.id!==selectedSector.id)]:Priorizacion.SECTORS;
+    const columns=Priorizacion.SECTORS;
     $('matrix').innerHTML=table(['Municipio y puntaje',...columns.map(s=>s.name)],p.items.map(r=>`<tr>${placeCell(r)}${columns.map(column=>{const s=r.sectors.find(x=>x.id===column.id);return `<td class="heat-cell ${selectedSector?.id===s.id?'selected-sector':''}"><div class="sector-score">${compactRange(s.lower,s.upper)} <span class="muted small">sector</span></div>${s.fields.map(f=>`<span class="heat-item ${f.row?'':'missing'}" style="background:rgba(31,95,174,${f.score==null?.025:.04+.2*f.score/100})" title="${esc(`${f.label}. ${f.row?`Valor ${fmt(f.row.v)}. Intensidad ${fmt(f.score)}. Aporte antes de IPM ${fmt(f.contribution)} puntos. Referencia n=${f.n}.`:'Sin observación. No se convierte en cero.'}`)}"><span>${esc(f.label)}</span><br><b>${f.row?fmt(f.row.v):'—'}</b> <span>${f.row?esc(f.row.u):'sin dato'}</span></span>`).join('')}</td>`;}).join('')}</tr>`));
+    $('matrix').querySelectorAll('thead th').forEach((th,i)=>{
+      if(!i)return;
+      const sector=columns[i-1],active=state.priorityDimension===sector.id;
+      th.setAttribute('aria-sort',active?(state.dimensionDirection==='asc'?'ascending':'descending'):'none');
+      th.innerHTML=`<button type="button" class="column-sort" data-sort-sector="${sector.id}">${esc(sector.name)} <span aria-hidden="true">${active?(state.dimensionDirection==='asc'?'↑':'↓'):'↕'}</span></button>`;
+      th.querySelector('button').onclick=()=>{
+        if(!active){state.priorityDimension=sector.id;state.dimensionDirection='desc';}
+        else if(state.dimensionDirection!=='asc')state.dimensionDirection='asc';
+        else {state.priorityDimension='';state.dimensionDirection='desc';}
+        renderMatrix();$('matrix').scrollTop=0;
+        $('matrix').querySelector(`[data-sort-sector="${sector.id}"]`).focus({preventScroll:true});
+      };
+    });
     return;
   }
   // La matriz conserva las distinciones internas de cada fuente, ordenada por el modelo elegido.
@@ -213,23 +218,11 @@ document.querySelector('.tab-nav').addEventListener('keydown',event=>{
 }));
 $('order').addEventListener('change',()=>{state.order=$('order').value;renderDiagnostic();});
 $('territory').addEventListener('change',()=>{state.geo=$('territory').value;renderProfile();});
-$('priority-order').addEventListener('change',()=>{state.priorityOrder=$('priority-order').value;renderMatrix();});
-$('priority-dimension').addEventListener('change',()=>{state.priorityDimension=$('priority-dimension').value;renderMatrix();$('matrix').scrollTop=0;$('matrix').scrollLeft=0;});
 $('show-method').addEventListener('click',()=>{activate('metodo');$('priority-method').scrollIntoView({behavior:'smooth'});});
 $('matrix-search').addEventListener('input',()=>{renderMatrix();$('matrix').scrollTop=0;});
-$('matrix-source').addEventListener('change',()=>{state.matrixSource=$('matrix-source').value;state.matrixLevel='municipal';renderMatrix();$('matrix').scrollTop=0;$('matrix').scrollLeft=0;});
-$('matrix-level').addEventListener('change',()=>{state.matrixLevel=$('matrix-level').value;renderMatrix();$('matrix').scrollTop=0;$('matrix').scrollLeft=0;});
 $('sector-search').addEventListener('input',()=>{sectorLimit=25;renderDiagnostic();});
 $('sector-more').addEventListener('click',()=>{sectorLimit+=50;renderDiagnostic();});
 document.addEventListener('click',event=>{const priority=event.target.closest('[data-priority-geo]');if(priority){renderPriorityDetail(priority.dataset.priorityGeo);return;}const item=event.target.closest('[data-geo]');if(item)openProfile(item.dataset.geo,item.dataset.source);});
-$('priority-download').addEventListener('click',()=>{
-  const p=priorityModel.selection({...state,matrixSearch:$('matrix-search').value});
-  const quote=v=>'"'+String(typeof v==='string'&&/^[=+@\-\t\r]/.test(v)?"'"+v:v??'').replaceAll('"','""')+'"';
-  const header=['puesto_documentado','divipola','departamento','municipio','limite_inferior','limite_superior','cobertura_ponderada','campos_disponibles','ipm_dane_2018','rapida_original','puesto_rapida','sensibilidad_puesto_min','sensibilidad_puesto_max','puesto_posible_min','puesto_posible_max','ambito_referencia','captura','modelo','formula',...Priorizacion.SECTORS.flatMap(s=>s.fields.map(f=>f.source+':'+f.id))];
-  const lines=[header,...p.items.map(r=>[r.rank,r.code,r.d,r.m,r.coverage?r.lower:null,r.upper,r.coverage,r.available,r.vulnerability,r.recovery,r.recoveryRank,r.rankMin,r.rankMax,r.bestRank,r.worstRank,state.scope,state.date,Priorizacion.VERSION,'P=D*(1+0.25*IPM/100)/1.25; D=media de 6 sectores',...r.sectors.flatMap(s=>s.fields.map(f=>f.row?.v??null))])];
-  const url=URL.createObjectURL(new Blob(['\ufeff'+lines.map(row=>row.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));
-  const a=document.createElement('a');a.href=url;a.download='priorizacion-sectorial.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-});
 $('download').addEventListener('click',()=>{
   const rows=model.sector({...state,search:$('sector-search').value}).items;
   // Quote every cell and neutralize spreadsheet formula injection in labels.

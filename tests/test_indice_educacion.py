@@ -87,6 +87,9 @@ class EducationIndexTests(unittest.TestCase):
         html = educacion.build_html([row("pnud_cedu", 10)])
         self.assertIn("Índice =", html)
         self.assertIn("application/json", html)
+        self.assertIn("function rescoredUniverse()", html)
+        self.assertIn("Base actual:", html)
+        self.assertIn("El universo recalcula la referencia", html)
         self.assertNotIn("return 'Sin dato\"", html)
 
 

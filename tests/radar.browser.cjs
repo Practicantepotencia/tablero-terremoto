@@ -1,0 +1,41 @@
+// Run after generating index.html. Requires Playwright; BROWSER_PATH is optional.
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const {pathToFileURL}=require('node:url');
+const path=require('node:path');
+(async()=>{
+ const browser=await chromium.launch({headless:true,...(process.env.BROWSER_PATH?{executablePath:process.env.BROWSER_PATH}:{})});
+ try {
+  const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+  page.on('pageerror',e=>errors.push(String(e)));
+  await page.goto(pathToFileURL(path.resolve(__dirname,'../index.html')).href);
+  await page.locator('#tab-radar').click();
+  await page.locator('#radar-search-0').fill('quibdo');
+  const result=page.locator('#radar-results-0 button');
+  assert.equal(await result.count(),1);assert.equal(await result.isVisible(),true);
+  await result.click();assert.equal(await page.locator('#radar-select-0').inputValue(),'municipal:27001');
+  assert.match(await page.locator('#radar-legend').innerText(),/Quibdó/);
+  await page.locator('#radar-search-2').fill('armenia');
+  await page.locator('#radar-results-2 button').filter({hasText:'Quindío'}).click();
+  const third=await page.locator('#radar-select-2').inputValue();
+  await page.locator('#radar-select-1').selectOption('');
+  assert.equal(await page.locator('#radar-select-2').inputValue(),third);
+  await page.locator('#radar-search-1').fill('zzzz-no-existe');
+  assert.equal(await page.locator('#radar-results-1 button').count(),0);
+  assert.match(await page.locator('#radar-results-1').innerText(),/Sin coincidencias/);
+  await page.locator('#radar-search-1').fill('buenaventura');
+  await page.locator('#radar-search-1').press('ArrowDown');await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#radar-select-1').inputValue(),'municipal:76109');
+  await page.locator('#radar-sectors [data-radar-m="2"][data-radar-axis="4"]').focus();
+  assert.match(await page.locator('#radar-inspector').innerText(),/Sin dato, no cero/);
+  await page.locator('#scope').selectOption('all');
+  assert.equal(await page.locator('#radar-select-2').inputValue(),third);
+  await page.setViewportSize({width:390,height:844});
+  await page.locator('#radar-search-0').fill('lorica');
+  await page.locator('#radar-results-0 button').click();
+  assert.equal(await page.locator('#radar-select-0').inputValue(),'municipal:23417');
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  assert.deepEqual(errors,[]);
+  console.log('Radar OK: visible search, accents, keyboard, empty results, stable slots, scope, mobile, inspector.');
+ } finally {await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

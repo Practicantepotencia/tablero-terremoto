@@ -14,6 +14,9 @@
 .radar-point:hover,.radar-point:focus { stroke:#111; stroke-width:4; outline:none; }
 .radar-inspector { border:1px solid var(--radar-border); border-radius:10px; padding:16px; min-width:0; }
 .radar-input { padding:12px 0; border-bottom:1px solid var(--radar-border); }
+.radar-results { max-height:220px; overflow:auto; border:1px solid var(--radar-border); border-radius:6px; margin-top:4px; }
+.radar-results button { display:block; width:100%; text-align:left; background:white; color:#07558a; border:0; border-bottom:1px solid #edf1f5; padding:10px; cursor:pointer; }
+.radar-results button:hover,.radar-results button:focus { background:#e3edf7; }
 .radar-inspector .formula { overflow-wrap:anywhere; }
 .radar-sectors > div { margin:12px 0; }
 .radar-sectors button { margin:5px 5px 0 0; }

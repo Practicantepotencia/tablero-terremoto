@@ -18,12 +18,22 @@
     const host=document.getElementById('radar-pickers');if(!host)return;
     const p=model.compute(state), places=p.all.filter(r=>!state.dept||r.d===state.dept).slice().sort((a,b)=>label(a).localeCompare(label(b),'es'));
     if(!initialized){selected=p.items.slice(0,2).map(r=>r.geo);initialized=true;}
-    selected=selected.filter(g=>places.some(r=>r.geo===g));
-    host.innerHTML=[0,1,2].map(i=>`<label>Municipio ${i+1}<input type="search" id="radar-search-${i}" placeholder="Buscar municipio o departamento" aria-label="Buscar municipio ${i+1}"><select id="radar-select-${i}" aria-label="Municipio ${i+1}"><option value="">Sin seleccionar</option>${places.map(r=>`<option value="${esc(r.geo)}" ${selected[i]===r.geo?'selected':''}>${esc(label(r))}</option>`).join('')}</select></label>`).join('');
+    selected=[0,1,2].map(i=>places.some(r=>r.geo===selected[i])?selected[i]:'');
+    host.innerHTML=[0,1,2].map(i=>`<div><label for="radar-search-${i}">Municipio ${i+1}</label><input type="search" id="radar-search-${i}" placeholder="Escribe y elige un resultado" aria-label="Buscar municipio ${i+1}" aria-controls="radar-results-${i}"><div id="radar-results-${i}" class="radar-results" hidden></div><p id="radar-count-${i}" class="small muted" role="status"></p><select id="radar-select-${i}" aria-label="Municipio ${i+1}"><option value="">Sin seleccionar</option>${places.map(r=>`<option value="${esc(r.geo)}" ${selected[i]===r.geo?'selected':''}>${esc(label(r))}</option>`).join('')}</select></div>`).join('');
     [0,1,2].forEach(i=>{
       const select=document.getElementById(`radar-select-${i}`);
-      document.getElementById(`radar-search-${i}`).oninput=e=>{const q=e.target.value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();Array.from(select.options).forEach(o=>{o.hidden=!!o.value&&!o.text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(q);});};
-      select.onchange=()=>{selected=[0,1,2].map(j=>document.getElementById(`radar-select-${j}`).value);selected=[...new Set(selected.filter(Boolean))];render(model,state);};
+      const input=document.getElementById(`radar-search-${i}`),results=document.getElementById(`radar-results-${i}`),count=document.getElementById(`radar-count-${i}`);
+      const choose=geo=>{selected[i]=geo;selected=selected.map((g,j)=>j!==i&&g===geo?'':g);render(model,state);document.getElementById(`radar-select-${i}`).focus();};
+      const fold=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+      input.oninput=()=>{
+        const q=fold(input.value);results.hidden=!q;
+        const matches=q?places.filter(r=>fold(label(r)).includes(q)):[];
+        count.textContent=q?`${matches.length} coincidencias en el ámbito y departamento seleccionados. Elige un resultado.`:'';
+        results.innerHTML=matches.map(r=>`<button type="button" data-radar-choice="${esc(r.geo)}">${esc(label(r))}</button>`).join('')||(q?'<p>Sin coincidencias. Revisa los filtros de universo y departamento.</p>':'');
+        results.querySelectorAll('button').forEach(b=>b.onclick=()=>choose(b.dataset.radarChoice));
+      };
+      input.onkeydown=e=>{if(e.key==='ArrowDown'||e.key==='Enter'){const first=results.querySelector('button');if(first){e.preventDefault();first.focus();}}if(e.key==='Escape'){results.hidden=true;}};
+      select.onchange=()=>choose(select.value);
     });
     current=selected.map(g=>places.find(r=>r.geo===g)).filter(Boolean);
     document.getElementById('radar-reference').textContent=`Modelo 1.1 · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos del inventario'}, ${p.referenceN} municipios; cada variable usa solo los que tienen dato comparable. Buscar o seleccionar municipios no recalcula la referencia; cambiar universo o captura sí.`;

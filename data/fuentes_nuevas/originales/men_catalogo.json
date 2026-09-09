@@ -1,0 +1,463 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "MEN_ESTADISTICAS_EN_EDUCACION_EN_PREESCOLAR, BÁSICA Y MEDIA_POR_MUNICIPIO",
+            "id" : "nudc-7mev",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Contiene información estadística de los niveles preescolar, básica y media relacionada con indicadores sectoriales por Municipio sin atípicos, desde el 2011 hasta 2024.\n\nNOTA: Para las tasas de cobertura bruta y neta  2019 y 2018  se realizarron con las proyecciones de población Censo 2018.\n\nCabe mencionar que los datos de cada indicador esta con punto decimal, al momento de exportar los datos se multiplica por 100, para convertirlo a porcentajes.\n\n\npara el detalle de las notas explicativas, por favor consulte el siguiente link http://bi.mineducacion.gov.co:8380/eportal/web/planeacion-basica/documentos?p_p_id=110_INSTANCE_ex7X&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_110_INSTANCE_ex7X_struts_action=%2Fdocument_library_display%2Fview_file_entry&_110_INSTANCE_ex7X_redirect=http%3A%2F%2Fbi.mineducacion.gov.co%3A8380%2Feportal%2Fweb%2Fplaneacion-basica%2Fdocumentos%2F-%2Fdocument_library_display%2Fex7X%2Fview%2F111648%3F_110_INSTANCE_ex7X_redirect%3Dhttp%253A%252F%252Fbi.mineducacion.gov.co%253A8380%252Feportal%252Fweb%252Fplaneacion-basica%252Fdocumentos%253Fp_p_id%253D110_INSTANCE_ex7X%2526p_p_lifecycle%253D0%2526p_p_state%253Dnormal%2526p_p_mode%253Dview%2526p_p_col_id%253Dcolumn-1%2526p_p_col_count%253D1&_110_INSTANCE_ex7X_fileEntryId=111654",
+            "attribution" : "Alcaldía de Pitalito, Huila",
+            "attribution_link" : "http://www.mineducacion.gov.co",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-05-18T17:52:58.000Z",
+            "createdAt" : "2016-10-27T14:08:43.000Z",
+            "metadata_updated_at" : "2026-05-18T17:52:58.000Z",
+            "data_updated_at" : "2025-11-13T21:34:21.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 445,
+                "page_views_last_month" : 2042,
+                "page_views_total" : 176578,
+                "page_views_last_week_log" : 8.800899899920305,
+                "page_views_last_month_log" : 10.996473488733228,
+                "page_views_total_log" : 17.42995425231941
+              },
+            "columns_name" :
+              [
+                "CÓDIGO_ETC",
+                "REPITENCIA",
+                "REPROBACIÓN_PRIMARIA",
+                "CÓDIGO_DEPARTAMENTO",
+                "TASA_MATRICULACIÓN_5_16",
+                "COBERTURA_BRUTA",
+                "COBERTURA_NETA_TRANSICIÓN",
+                "COBERTURA_NETA",
+                "POBLACIÓN_5_16",
+                "DESERCIÓN_MEDIA",
+                "COBERTURA_NETA_SECUNDARIA",
+                "REPROBACIÓN_TRANSICIÓN",
+                "AÑO",
+                "CÓDIGO_MUNICIPIO",
+                "APROBACIÓN_MEDIA",
+                "MUNICIPIO",
+                "REPITENCIA_MEDIA",
+                "APROBACIÓN_SECUNDARIA",
+                "REPITENCIA_SECUNDARIA",
+                "REPITENCIA_PRIMARIA",
+                "REPITENCIA_TRANSICIÓN",
+                "REPROBACIÓN_MEDIA",
+                "REPROBACIÓN_SECUNDARIA",
+                "REPROBACIÓN",
+                "ETC",
+                "APROBACIÓN_PRIMARIA",
+                "APROBACIÓN_TRANSICIÓN",
+                "DESERCIÓN_SECUNDARIA",
+                "DESERCIÓN_PRIMARIA",
+                "DESERCIÓN_TRANSICIÓN",
+                "APROBACIÓN",
+                "DESERCIÓN",
+                "SEDES_CONECTADAS_A_INTERNET",
+                "TAMAÑO_PROMEDIO_DE_GRUPO",
+                "COBERTURA_BRUTA_PRIMARIA",
+                "COBERTURA_BRUTA_TRANSICIÓN",
+                "COBERTURA_NETA_MEDIA",
+                "COBERTURA_BRUTA_SECUNDARIA",
+                "COBERTURA_BRUTA_MEDIA",
+                "COBERTURA_NETA_PRIMARIA",
+                "DEPARTAMENTO"
+              ],
+            "columns_field_name" :
+              [
+                "c_digo_etc",
+                "repitencia",
+                "reprobaci_n_primaria",
+                "c_digo_departamento",
+                "tasa_matriculaci_n_5_16",
+                "cobertura_bruta",
+                "cobertura_neta_transici_n",
+                "cobertura_neta",
+                "poblaci_n_5_16",
+                "deserci_n_media",
+                "cobertura_neta_secundaria",
+                "reprobaci_n_transici_n",
+                "a_o",
+                "c_digo_municipio",
+                "aprobaci_n_media",
+                "municipio",
+                "repitencia_media",
+                "aprobaci_n_secundaria",
+                "repitencia_secundaria",
+                "repitencia_primaria",
+                "repitencia_transici_n",
+                "reprobaci_n_media",
+                "reprobaci_n_secundaria",
+                "reprobaci_n",
+                "etc",
+                "aprobaci_n_primaria",
+                "aprobaci_n_transici_n",
+                "deserci_n_secundaria",
+                "deserci_n_primaria",
+                "deserci_n_transici_n",
+                "aprobaci_n",
+                "deserci_n",
+                "sedes_conectadas_a_internet",
+                "tama_o_promedio_de_grupo",
+                "cobertura_bruta_primaria",
+                "cobertura_bruta_transici_n",
+                "cobertura_neta_media",
+                "cobertura_bruta_secundaria",
+                "cobertura_bruta_media",
+                "cobertura_neta_primaria",
+                "departamento"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Código DANE de la ETC",
+                "Tasa de repitencia del sector oficial. Corresponde al porcentaje de alumnos matriculados en un año escolar en transición, primaria, secundaria y media que se encuentran repitiendo el mismo grado cursado el año anterior.",
+                "Tasa de reprobación de estudiantes del sector oficial en primaria. Identifica el porcentaje de alumnos en este nivel educativo que reprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Código DANE del Departamento ",
+                "Proporción de la población entre 5 y 16 años que se encuentra asistiendo al sistema educativo. Cuando las proyecciones de población del DANE no capturan adecuadamente los flujos migratorios internos, puede alcanzar valores mayores al 100%. ",
+                "Es la relación entre el número de estudiantes matriculados en transición, primaria, secundaria y media respecto a la población en edad teórica para cursar estos niveles (5 a 16 años). En algunos casos la demanda social es mayor a la población en edad teórica para cursar educación preescolar, básica y media (5 a 16 años), explicada por estudiantes en extraedad, por lo que el indicador toma valores superiores al 100%. ",
+                "Es la relación entre el número de estudiantes matriculados en transición que tienen la edad teórica para cursar este nivel (5 años) y el total de la población correspondiente a esa misma edad. Cuando las proyecciones de población del DANE no capturan adecuadamente los flujos migratorios internos, puede alcanzar valores mayores al 100%. ",
+                "Es la relación entre el número de estudiantes matriculados en transición, primaria, secundaria y media que tienen la edad teórica (5 a 16 años) y el total de la población correspondiente a esa misma edad. Cuando las proyecciones de población del DANE no capturan adecuadamente los flujos migratorios internos, puede alcanzar valores mayores al 100%",
+                "Población en edad teórica de estudiar (5 a 16 años) según proyecciones de población del DANE",
+                "Tasa de deserción intra - anual del sector oficial en media. Identifica la proporción de alumnos matriculados que por factores culturales, coyunturales o de prestación del servicio educativo, abandonan sus estudios durante el año lectivo.",
+                "Es la relación entre el número de estudiantes matriculados en secundaria que tienen la edad teórica para cursar este nivel (11 a 14 años) y el total de la población correspondiente a esa misma edad. Cuando las proyecciones de población del DANE no capturan adecuadamente los flujos migratorios internos, puede alcanzar valores mayores al 100%. ",
+                "Tasa de reprobación de estudiantes del sector oficial en transición. Identifica el porcentaje de alumnos en este nivel educativo que reprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Vigencia del indicador",
+                "Código DANE del Municipio",
+                "Tasa de aprobación de estudiantes del sector oficial en media. Identifica el porcentaje de alumnos en este nivel educativo que aprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Nombre del  Municipio",
+                "Tasa de repitencia del sector oficial. Corresponde al porcentaje de alumnos matriculados en media que se encuentran repitiendo el mismo grado cursado el año anterior.",
+                "Tasa de aprobación de estudiantes del sector oficial en secundaria. Identifica el porcentaje de alumnos en este nivel educativo que aprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Tasa de repitencia del sector oficial. Corresponde al porcentaje de alumnos matriculados en secundaria que se encuentran repitiendo el mismo grado cursado el año anterior.",
+                "Tasa de repitencia del sector oficial. Corresponde al porcentaje de alumnos matriculados en primaria que se encuentran repitiendo el mismo grado cursado el año anterior.",
+                "Tasa de repitencia del sector oficial. Corresponde al porcentaje de alumnos matriculados en transición que se encuentran repitiendo el mismo grado cursado el año anterior.",
+                "Tasa de reprobación de estudiantes del sector oficial en media. Identifica el porcentaje de alumnos en este nivel educativo que reprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Tasa de reprobación de estudiantes del sector oficial en secundaria. Identifica el porcentaje de alumnos en este nivel educativo que reprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Tasa de reprobación de estudiantes del sector oficial. Identifica el porcentaje de alumnos en educación preescolar, básica y media que reprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Nombre de la ETC",
+                "Tasa de aprobación de estudiantes del sector oficial en primaria. Identifica el porcentaje de alumnos en este nivel educativo que aprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Tasa de aprobación de estudiantes del sector oficial en transición. Identifica el porcentaje de alumnos en este nivel educativo que aprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "\t Tasa de deserción intra - anual del sector oficial en secundaria. Identifica la proporción de alumnos matriculados que por factores culturales, coyunturales o de prestación del servicio educativo, abandonan sus estudios durante el año lectivo.",
+                "\t Tasa de deserción intra - anual del sector oficial en primaria. Identifica la proporción de alumnos matriculados que por factores culturales, coyunturales o de prestación del servicio educativo, abandonan sus estudios durante el año lectivo.",
+                "Tasa de deserción intra - anual del sector oficial en transición. Identifica la proporción de alumnos matriculados que por factores culturales, coyunturales o de prestación del servicio educativo, abandonan sus estudios durante el año lectivo.",
+                "Tasa de aprobación de estudiantes del sector oficial. Identifica el porcentaje de alumnos en educación preescolar, básica y media que aprueba de acuerdo con los planes y programas de estudio vigentes.",
+                "Tasa de deserción intra - anual del sector oficial. Identifica la proporción de alumnos matriculados que por factores culturales, coyunturales o de prestación del servicio educativo, abandonan sus estudios durante el año lectivo.",
+                "Indica el porcentaje de sedes oficiales de Una Entidad Territorial Certificada que se encuentran conectadas a una red de Internet.",
+                "Corresponde al número promedio de estudiantes por grupo. Para su cálculo considera la matrícula y el número de grupos tanto del sector oficial como del no oficial",
+                "Es la relación entre el número de estudiantes matriculados en primaria respecto a la población en edad teórica para cursar este nivel (6 a 10 años). En algunos casos la demanda social es mayor a la población en edad teórica para cursar este nivel (6 a 10 años), explicada por estudiantes en extraedad, por lo que el indicador toma valores superiores al 100%. ",
+                "Es la relación entre el número de estudiantes matriculados en transición respecto a la población en edad teórica para cursar este nivel (5 años). En algunos casos la demanda social es mayor a la población en edad teórica para cursar este nivel (5 años), explicada por estudiantes en extraedad, por lo que el indicador toma valores superiores al 100%. ",
+                "\t Es la relación entre el número de estudiantes matriculados en media que tienen la edad teórica para cursar este nivel (15 a 16 años) y el total de la población correspondiente a esa misma edad. Cuando las proyecciones de población del DANE no capturan adecuadamente los flujos migratorios internos, puede alcanzar valores mayores al 100%. ",
+                "Es la relación entre el número de estudiantes matriculados en secundaria respecto a la población en edad teórica para cursar este nivel (11 a 14 años). En algunos casos la demanda social es mayor a la población en edad teórica para cursar este nivel (11 a 14 años), explicada por estudiantes en extraedad, por lo que el indicador toma valores superiores al 100%. ",
+                "\t Es la relación entre el número de estudiantes matriculados en media respecto a la población en edad teórica para cursar este nivel (15 a 16 años). En algunos casos la demanda social es mayor a la población en edad teórica para cursar este nivel (15 a 16 años), explicada por estudiantes en extraedad, por lo que el indicador toma valores superiores al 100%. ",
+                "Es la relación entre el número de estudiantes matriculados en primaria que tienen la edad teórica para cursar este nivel (6 a 10 años) y el total de la población correspondiente a esa misma edad. Cuando las proyecciones de población del DANE no capturan adecuadamente los flujos migratorios internos, puede alcanzar valores mayores al 100%. ",
+                "Nombre del Departamento"
+              ],
+            "columns_format" :
+              [
+                {},
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {},
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {},
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {},
+                {},
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {},
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {},
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "100",
+                  "view" : "percent_bar_and_text"
+                },
+                {}
+              ],
+            "download_count" : 28227,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2020-12-11T22:03:23.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Educación",
+            "domain_tags" :
+              [
+                "ministerio educación",
+                "estadísticas preescolar básica media",
+                "municipio"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Información-de-Datos_Idioma", "value" : "Español" },
+                {
+                  "key" : "Información-de-Datos_Cobertura-Geográfica",
+                  "value" : "Municipal"
+                },
+                {
+                  "key" : "Información-de-Datos_Frecuencia-de-Actualización",
+                  "value" : "Anual"
+                },
+                {
+                  "key" : "Información-de-la-Entidad_Sector",
+                  "value" : "Planeación"
+                },
+                {
+                  "key" : "Información-de-la-Entidad_Nombre-de-la-Entidad",
+                  "value" : "Alcaldía de Pitalito, Huila"
+                },
+                {
+                  "key" : "Información-de-la-Entidad_Orden",
+                  "value" : "Territorial"
+                },
+                {
+                  "key" : "Información-de-la-Entidad_Municipio",
+                  "value" : "Pitalito"
+                },
+                {
+                  "key" : "Información-de-la-Entidad_DIVIPOLA-Municipio",
+                  "value" : "41551"
+                },
+                {
+                  "key" : "Información-de-la-Entidad_Departamento",
+                  "value" : "Huila"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "www.datos.gov.co",
+            "license" : "Creative Commons Attribution | Share Alike 4.0 International"
+          },
+        "permalink" : "https://www.datos.gov.co/d/nudc-7mev",
+        "link" : "https://www.datos.gov.co/Educación/MEN_ESTADISTICAS_EN_EDUCACION_EN_PREESCOLAR-BÁSICA/nudc-7mev",
+        "owner" :
+          {
+            "id" : "ymvt-n7h8",
+            "user_type" : "interactive",
+            "display_name" : "Ministerio de Educación Nacional"
+          },
+        "creator" :
+          {
+            "id" : "ymvt-n7h8",
+            "user_type" : "interactive",
+            "display_name" : "Ministerio de Educación Nacional"
+          }
+      }
+    ],
+  "resultSetSize" : 1,
+  "timings" : { "serviceMillis" : 14, "searchMillis" : [ 1, 3 ] },
+  "warnings" : []
+}

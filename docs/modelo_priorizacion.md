@@ -15,6 +15,14 @@ visibles sin cambiar el orden elegido. Conserva RAPIDA y las distinciones intern
 de ExE, 3iS y las demás fuentes. Buscar y filtrar departamento no recalcula el
 puntaje; cambiar el ámbito del decreto o la captura sí lo recalcula.
 
+El selector `Puntaje para ordenar` permite cambiar del índice global a cualquiera
+de los seis sectores. En ese caso, el puesto sectorial se calcula únicamente entre
+municipios con algún dato en el sector seleccionado; los que no tienen datos quedan
+sin puesto, al final. `Puntaje documentado` ordena por el límite inferior y
+`Puntaje posible por faltantes` por el superior. El puesto global se conserva como
+referencia y la dimensión elegida pasa a la primera columna. RAPIDA mantiene su
+orden propio y no usa el selector sectorial.
+
 ## Variables y pesos
 
 Cada sector tiene peso **1/6**. Los pesos internos siempre suman uno; no se

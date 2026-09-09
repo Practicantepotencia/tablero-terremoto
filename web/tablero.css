@@ -20,4 +20,5 @@
 .radar-inspector .formula { overflow-wrap:anywhere; }
 .radar-sectors > div { margin:12px 0; }
 .radar-sectors button { margin:5px 5px 0 0; }
+.selected-sector { box-shadow:inset 3px 0 #07558a; background:#f7fbff; }
 @media(max-width:850px) { .radar-layout, #radar-pickers { grid-template-columns:1fr; } }

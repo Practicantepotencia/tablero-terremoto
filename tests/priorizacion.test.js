@@ -60,6 +60,14 @@ test('decreto cambia referencia, departamento y búsqueda conservan puntajes y p
  const c=m.selection({...state,scope:'decree'}).items[0];
  assert.equal(a.lower,b.lower);assert.equal(a.rank,b.rank);assert.ok(c.lower>a.lower);
 });
+test('selector de dimensión ordena por su puntaje y conserva el puesto global',()=>{
+ const rows=full('1',10).concat(full('2',10));
+ rows.find(r=>r.code==='1'&&r.id==='3is_familias').v=20;
+ const p=P.create(payload(rows,[{code:'1',v:20},{code:'2',v:20}])).selection({...state,priorityDimension:'hogares',priorityOrder:'integrated'});
+ assert.deepEqual(p.items.map(r=>r.code),['1','2']);
+ assert.deepEqual(p.items.map(r=>r.dimensionRank),[1,2]);
+ assert.ok(p.items.every(r=>r.rank!=null));
+});
 test('empates comparten puesto; sensibilidad y límites incluyen el caso base',()=>{
  const p=P.create(payload(full('1',10).concat(full('2',10)),[{code:'1',v:20},{code:'2',v:20}])).compute(state);
  assert.equal(p.scenarios,39);

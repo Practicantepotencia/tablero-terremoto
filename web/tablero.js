@@ -6,7 +6,7 @@ const fmt = (n, unit = '') => n == null || !Number.isFinite(n) ? '—' : new Int
   {maximumFractionDigits: unit === 'COP' ? 0 : unit === 'Índice' ? 3 : Math.abs(n)<1 ? 4 : 2}).format(n);
 const short = n => n == null ? '—' : new Intl.NumberFormat('es-CO', {notation:'compact',maximumFractionDigits:1}).format(n);
 const sorted = a => [...new Set(a)].sort((x,y) => x.localeCompare(y,'es'));
-const state = {scope:'decree',dept:'',date:DATA.latest,level:'municipal',source:T.RAPIDA,dim:'Vivienda',metric:'',order:'desc',geo:'',tab:'prioridades',matrixSource:'integrated',priorityOrder:'integrated',priorityGeo:''};
+const state = {scope:'decree',dept:'',date:DATA.latest,level:'municipal',source:T.RAPIDA,dim:'Vivienda',metric:'',order:'desc',geo:'',tab:'prioridades',matrixSource:'integrated',priorityOrder:'integrated',priorityDimension:'',priorityGeo:''};
 let priorityLimit = 25, sectorLimit = 25;
 const table = (heads, rows) => rows.length ? `<table><thead><tr>${heads.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>` : '<p class="empty">Sin datos para esta selección.</p>';
 const tile = (label, value, sub) => `<div class="tile"><div class="tile-label">${esc(label)}</div><div class="tile-value">${esc(value)}</div><div class="tile-sub">${esc(sub)}</div></div>`;
@@ -103,22 +103,27 @@ function renderMatrix() {
   const levels=integrated?['municipal']:['municipal','departamental'].filter(lv=>model.catalog.some(m=>m.f===state.matrixSource&&m.lv===lv));
   state.matrixLevel=setOptions('matrix-level',levels.map(lv=>({value:lv,label:lv==='municipal'?'Municipal':'Departamental'})),state.matrixLevel||'municipal');
   $('matrix-level-label').hidden=levels.length<2;
+  state.priorityDimension=setOptions('priority-dimension',[{value:'',label:'Índice global'},...Priorizacion.SECTORS.map(s=>({value:s.id,label:s.name}))],state.priorityDimension);
   const selected={...state,matrixSearch:$('matrix-search').value};
   const p=priorityModel.selection(selected),municipal=state.matrixLevel==='municipal';
-  const orderText={integrated:'Límite inferior: prioridad respaldada por los datos disponibles',rapida:'Orden de recuperación RAPIDA; el puntaje sectorial sigue visible',uncertainty:'Límite superior: dónde completar información podría cambiar la prioridad'}[state.priorityOrder];
+  const selectedSector=Priorizacion.SECTORS.find(s=>s.id===state.priorityDimension);
+  const orderText=state.priorityOrder==='rapida'?'Orden de recuperación RAPIDA; el selector de dimensión no interviene':selectedSector?`${state.priorityOrder==='uncertainty'?'Puntaje posible':'Puntaje documentado'} de ${selectedSector.name}; puesto calculado únicamente entre municipios con algún dato en esa dimensión`:{integrated:'Límite inferior: prioridad respaldada por los datos disponibles',uncertainty:'Límite superior: dónde completar información podría cambiar la prioridad'}[state.priorityOrder];
   $('priority-note').textContent=municipal?`${orderText}. Seis sectores con peso 1/6. Selecciona un municipio para ver su fórmula.`:'Los totales departamentales no se reparten entre municipios ni reciben puntaje municipal.';
   if(state.matrixSource==='FundacionExe')$('priority-note').textContent+=' ExE: atribución de las sedes al sismo pendiente de verificar.';
   $('priority-order').disabled=!municipal;
+  $('priority-dimension').disabled=!municipal;
   $('priority-download').disabled=!municipal;
   const source=DATA.sources[state.matrixSource];
   $('matrix-title').textContent=municipal?'Qué necesita cada municipio':'Qué reporta cada departamento';
   $('matrix-caption').textContent=integrated?'3iS: reportes consolidados · PNUD: inventario de daños usado para la estimación · DANE 2018: vulnerabilidad':`${source?.label||state.matrixSource} · valores originales`;
   $('matrix-note').textContent=integrated?'El intervalo propaga datos faltantes; no es un intervalo de confianza. El color representa la intensidad normalizada de cada campo. «—» es sin dato.':'Cada color es el percentil del mismo indicador y fuente dentro del ámbito seleccionado. La búsqueda y el departamento no alteran la referencia.';
   $('matrix-warning').textContent=integrated?'Las cifras PNUD y 3iS pueden compartir insumos. Cada sector mantiene un peso fijo; coincidir no cuenta como corroboración independiente.':source?.note||'';
-  const placeCell=r=>`<td class="municipal-cell"><button class="link" type="button" data-priority-geo="${esc(r.geo)}">${esc(r.m)}</button><div class="muted small">${esc(r.d)}</div><div class="priority-number">${r.coverage>0?fmt(r.lower):'—'}<small> / 100</small></div><div class="small">${r.coverage>0?`Intervalo ${fmt(r.lower)}–${fmt(r.upper)}`:'Sin componentes puntuables'}</div><div class="small muted">Cobertura ${fmt(100*r.coverage)}% · ${r.available}/14 campos</div><div class="small muted">Puesto documentado ${r.rank??'—'} · RAPIDA ${r.recoveryRank??'—'}</div></td>`;
+  const compactRange=(lo,hi)=>Math.abs(lo-hi)<1e-8?`${fmt(lo)} /100`:`Documentado ${fmt(lo)} · posible ${fmt(hi)} /100`;
+  const placeCell=r=>{const sector=selectedSector&&r.sectors.find(s=>s.id===selectedSector.id),hasSector=sector&&sector.coverage>0;return `<td class="municipal-cell"><button class="link" type="button" data-priority-geo="${esc(r.geo)}">${esc(r.m)}</button><div class="muted small">${esc(r.d)}</div><div class="priority-number">${selectedSector?(hasSector?fmt(state.priorityOrder==='uncertainty'?sector.upper:sector.lower):'—'):(r.coverage>0?fmt(state.priorityOrder==='uncertainty'?r.upper:r.lower):'—')}<small> / 100</small></div><div class="small">${selectedSector?(hasSector?`${esc(selectedSector.name)} · ${compactRange(sector.lower,sector.upper)}`:'Sin datos en esta dimensión'):(r.coverage>0?`Prioridad · ${compactRange(r.lower,r.upper)}`:'Sin componentes puntuables')}</div><div class="small muted">Cobertura ${fmt(100*r.coverage)}% · ${r.available}/14 campos</div><div class="small muted">${selectedSector?`Puesto en dimensión ${r.dimensionRank??'—'} · global ${r.rank??'—'}`:`Puesto global ${r.rank??'—'}`} · RAPIDA ${r.recoveryRank??'—'}</div></td>`;};
   if(integrated){
     $('matrix-count').textContent=`${p.items.length} municipios visibles · ${p.referenceN} en la referencia. El filtro del decreto recalcula anclas, puntajes y posiciones. La búsqueda no los cambia.`;
-    $('matrix').innerHTML=table(['Municipio y prioridad',...Priorizacion.SECTORS.map(s=>s.name)],p.items.map(r=>`<tr>${placeCell(r)}${r.sectors.map(s=>`<td class="heat-cell"><div class="sector-score">${fmt(s.lower)}–${fmt(s.upper)} <span class="muted small">/100 sector</span></div>${s.fields.map(f=>`<span class="heat-item ${f.row?'':'missing'}" style="background:rgba(31,95,174,${f.score==null?.025:.04+.2*f.score/100})" title="${esc(`${f.label}. ${f.row?`Valor ${fmt(f.row.v)}. Intensidad ${fmt(f.score)}. Aporte antes de IPM ${fmt(f.contribution)} puntos. Referencia n=${f.n}.`:'Sin observación. No se convierte en cero.'}`)}"><span>${esc(f.label)}</span><br><b>${f.row?fmt(f.row.v):'—'}</b> <span>${f.row?esc(f.row.u):'sin dato'}</span></span>`).join('')}</td>`).join('')}</tr>`));
+    const columns=selectedSector?[selectedSector,...Priorizacion.SECTORS.filter(s=>s.id!==selectedSector.id)]:Priorizacion.SECTORS;
+    $('matrix').innerHTML=table(['Municipio y puntaje',...columns.map(s=>s.name)],p.items.map(r=>`<tr>${placeCell(r)}${columns.map(column=>{const s=r.sectors.find(x=>x.id===column.id);return `<td class="heat-cell ${selectedSector?.id===s.id?'selected-sector':''}"><div class="sector-score">${compactRange(s.lower,s.upper)} <span class="muted small">sector</span></div>${s.fields.map(f=>`<span class="heat-item ${f.row?'':'missing'}" style="background:rgba(31,95,174,${f.score==null?.025:.04+.2*f.score/100})" title="${esc(`${f.label}. ${f.row?`Valor ${fmt(f.row.v)}. Intensidad ${fmt(f.score)}. Aporte antes de IPM ${fmt(f.contribution)} puntos. Referencia n=${f.n}.`:'Sin observación. No se convierte en cero.'}`)}"><span>${esc(f.label)}</span><br><b>${f.row?fmt(f.row.v):'—'}</b> <span>${f.row?esc(f.row.u):'sin dato'}</span></span>`).join('')}</td>`;}).join('')}</tr>`));
     return;
   }
   // La matriz conserva las distinciones internas de cada fuente, ordenada por el modelo elegido.
@@ -209,6 +214,7 @@ document.querySelector('.tab-nav').addEventListener('keydown',event=>{
 $('order').addEventListener('change',()=>{state.order=$('order').value;renderDiagnostic();});
 $('territory').addEventListener('change',()=>{state.geo=$('territory').value;renderProfile();});
 $('priority-order').addEventListener('change',()=>{state.priorityOrder=$('priority-order').value;renderMatrix();});
+$('priority-dimension').addEventListener('change',()=>{state.priorityDimension=$('priority-dimension').value;renderMatrix();$('matrix').scrollTop=0;$('matrix').scrollLeft=0;});
 $('show-method').addEventListener('click',()=>{activate('metodo');$('priority-method').scrollIntoView({behavior:'smooth'});});
 $('matrix-search').addEventListener('input',()=>{renderMatrix();$('matrix').scrollTop=0;});
 $('matrix-source').addEventListener('change',()=>{state.matrixSource=$('matrix-source').value;state.matrixLevel='municipal';renderMatrix();$('matrix').scrollTop=0;$('matrix').scrollLeft=0;});

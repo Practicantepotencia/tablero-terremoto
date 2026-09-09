@@ -110,8 +110,17 @@
       const result=compute(state);
       const order=state.priorityOrder||'integrated';
       let items=[...result.items,...result.missing];
-      if(order==='rapida')items.sort((a,b)=>(b.recovery??-1)-(a.recovery??-1)||T.label(a).localeCompare(T.label(b),'es'));
-      if(order==='uncertainty')items.sort((a,b)=>b.upper-a.upper||a.coverage-b.coverage||T.label(a).localeCompare(T.label(b),'es'));
+      const sectorIndex=SECTORS.findIndex(s=>s.id===state.priorityDimension);
+      if(sectorIndex>=0&&order!=='rapida'){
+        const value=order==='uncertainty'?'upper':'lower';
+        const known=items.filter(r=>r.sectors[sectorIndex].coverage>EPS).sort((a,b)=>b.sectors[sectorIndex][value]-a.sectors[sectorIndex][value]||T.label(a).localeCompare(T.label(b),'es'));
+        let previous=null,rank=0;
+        items=known.map((r,i)=>{const v=r.sectors[sectorIndex][value];if(i===0||!same(v,previous))rank=i+1;previous=v;return {...r,dimensionRank:rank};})
+          .concat(items.filter(r=>r.sectors[sectorIndex].coverage<=EPS).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')).map(r=>({...r,dimensionRank:null})));
+      } else {
+        if(order==='rapida')items.sort((a,b)=>(b.recovery??-1)-(a.recovery??-1)||T.label(a).localeCompare(T.label(b),'es'));
+        if(order==='uncertainty')items.sort((a,b)=>b.upper-a.upper||a.coverage-b.coverage||T.label(a).localeCompare(T.label(b),'es'));
+      }
       const inView=r=>(!state.dept||r.d===state.dept)&&T.searchMatch(r,state.matrixSearch||'');
       return {...result,items:items.filter(inView)};
     }

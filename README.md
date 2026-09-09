@@ -3,9 +3,11 @@
 ## Rama priorizacion-integrada
 
 Abre **index.html**. La matriz «Qué necesita cada municipio» es la vista
-principal: búsqueda en todos los municipios, selector de fuente con sus propias
-distinciones, puntaje sectorial y rango por faltantes. Se puede ordenar por el
-modelo propio, por RAPIDA o por el límite superior para revisar información faltante.
+principal: búsqueda de municipios, puntaje sectorial y rango por faltantes.
+Cada encabezado alterna orden descendente, ascendente y orden global normal.
+Inmediatamente debajo aparece una segunda matriz por cada 10.000 habitantes,
+con población municipal DANE 2026, conteos originales y cálculo verificable.
+Su búsqueda y orden son independientes. [Metodología relativa](docs/priorizacion_relativa.md).
 
 El modelo combina 17 campos en seis sectores con peso igual y aplica un ajuste
 por IPM censal DANE 2018. Usa pesos fijos, separa canales y muestra la sensibilidad

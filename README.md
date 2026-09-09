@@ -7,7 +7,7 @@ principal: búsqueda en todos los municipios, selector de fuente con sus propias
 distinciones, puntaje sectorial y rango por faltantes. Se puede ordenar por el
 modelo propio, por RAPIDA o por el límite superior para revisar información faltante.
 
-El modelo combina 14 campos en seis sectores con peso igual y aplica un ajuste
+El modelo combina 17 campos en seis sectores con peso igual y aplica un ajuste
 por IPM censal DANE 2018. Usa pesos fijos, separa canales y muestra la sensibilidad
 del orden. RAPIDA se conserva como comparación y no entra en la fórmula. La ficha
 de cada municipio muestra los valores originales y sus aportes.

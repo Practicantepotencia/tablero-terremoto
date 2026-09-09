@@ -1,4 +1,4 @@
-/* Modelo 1.1: escala proporcional, pesos fijos y límites por datos faltantes. */
+/* Modelo 1.2: escala proporcional, pesos fijos y límites por datos faltantes. */
 (function (root) {
   'use strict';
   const T = typeof module !== 'undefined' && module.exports ? require('./modelo.js') : root.Territorial;
@@ -8,7 +8,7 @@
   // Cada sector pesa 1/6. En sectores compartidos, cada canal pesa 1/2.
   // Los canales pueden compartir insumos: nunca se cuentan como validaciones independientes.
   const SECTORS = [
-    {id:'hogares', name:'Hogares afectados', fields:[reported('familias','Familias afectadas')]},
+    {id:'impacto_humano', name:'Impacto humano', fields:[reported('familias','Familias afectadas',.25),reported('fallecidos','Personas fallecidas',.25),reported('desaparecidos','Personas desaparecidas',.25),reported('heridos','Personas heridas',.25)]},
     {id:'vivienda', name:'Vivienda', fields:[reported('vivdestruidas','Destruidas · 3iS',.25),reported('vivaveriadas','Averiadas · 3iS',.25),estimated('vd','Destruidas · PNUD',.25),estimated('va','Averiadas · PNUD',.25)]},
     {id:'salud', name:'Salud', fields:[reported('salud','Puntos de salud · 3iS',.5),estimated('csalud','Centros de salud · PNUD',.5)]},
     {id:'educacion', name:'Educación', fields:[reported('educativos','Puntos educativos · 3iS',.5),estimated('cedu','Centros educativos · PNUD',.5)]},
@@ -127,6 +127,6 @@
     }
     return {compute,selection};
   }
-  const api={create,normalize,aggregate,ranks,SECTORS,VERSION:'1.1'};
+  const api={create,normalize,aggregate,ranks,SECTORS,VERSION:'1.2'};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.Priorizacion=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

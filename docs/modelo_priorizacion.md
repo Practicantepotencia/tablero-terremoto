@@ -1,4 +1,4 @@
-# Modelo de priorización sectorial 1.1
+# Modelo de priorización sectorial 1.2
 
 Rama `priorizacion-integrada`, creada desde `reestructuracion-recuperacion`,
 commit `e65bc81f2d384dc0f07f1a6ea1df3c0dd9af83c0`.
@@ -29,21 +29,21 @@ renormalizan por la disponibilidad de cada municipio.
 
 | Sector | Variables | Pesos internos |
 | --- | --- | --- |
-| Hogares afectados | Familias afectadas, 3iS | 100% |
+| Impacto humano | Familias afectadas, fallecidos, desaparecidos y heridos, 3iS | 25% cada campo |
 | Vivienda | Destruidas y averiadas, 3iS; destruidas y averiadas, PNUD | 25% cada campo |
 | Salud | Puntos de salud 3iS; centros de salud PNUD | 50% cada canal |
 | Educación | Puntos educativos 3iS; centros educativos PNUD | 50% cada canal |
 | Infraestructura y acceso | Colapsos de edificios, acueductos y vías, 3iS | 1/3 cada campo |
 | Servicios comunitarios | Puntos comunitarios 3iS; centros comunitarios PNUD | 50% cada canal |
 
-Son 14 campos de daño/afectación y una línea base de pobreza. No se interpreta
+Son 17 campos de daño/afectación y una línea base de pobreza. No se interpreta
 que un conteo de 3iS sea idéntico en definición al campo PNUD. Son entradas
 separadas, con normalización propia. Los dos canales pueden compartir reportes
 de origen: no representan votos independientes ni corroboración doble.
 Su participación 50/50 es una elección de diseño, no una probabilidad de acierto.
 
 Ponderar sectores por igual evita que infraestructura pese más solo por tener
-más variables. Hogares y vivienda pueden estar correlacionados: responden a
+más variables. Familias afectadas y vivienda pueden estar correlacionados: responden a
 demanda humana y daño material, pero no son independientes. El índice no suma
 sus cantidades como si fueran personas o edificios distintos.
 
@@ -130,9 +130,9 @@ El criterio de examinar estas decisiones sigue la guía de
 - Costos de reposición PNUD: repiten parte de las cantidades de daño físico
   multiplicadas por precios. Se consultan para dimensionar costos, sin otro voto.
 - Rescatados: actividad de respuesta realizada. No equivale a necesidad pendiente.
-- Fallecidos, heridos y desaparecidos: permanecen visibles en 3iS. La prioridad
-  de búsqueda, rescate o atención clínica inmediata requiere un protocolo distinto;
-  este índice aborda recuperación territorial.
+- Fallecidos, heridos y desaparecidos: entran ahora en Impacto humano por sus
+  consecuencias duraderas de duelo, búsqueda, rehabilitación, cuidados e ingresos.
+  Se mantienen como indicadores separados; no se suman como personas únicas.
 - ExE: conserva su matriz de sedes, criticidad, matrícula y docentes. La
   atribución al sismo no está acreditada por sede; no se usa para inflar el índice.
 - Cámaras y OPS departamentales: no se prorratean a municipios.
@@ -164,7 +164,7 @@ se exige el departamento correspondiente y un código existente en la referencia
 Los códigos incompatibles o ambiguos se excluyen y registran como incidencia.
 No hay emparejamiento aproximado por semejanza de texto.
 
-## Resultado de la captura auditada
+## Resultado histórico de la captura auditada (versión 1.1)
 
 Captura del inventario: 9 de septiembre de 2026. En los departamentos del decreto:
 509 identidades municipales después del cruce, 470 con algún componente, 39
@@ -219,3 +219,17 @@ a uno de los seis sectores. Su inspector muestra entradas, máximo, N de referen
 normalización, pesos, aportes, límites sectoriales y cálculo global con IPM.
 La línea discontinua representa faltantes, no un segundo dato observado. Los
 botones de sector permiten acceder a puntos superpuestos. El área no es el índice.
+
+## Cambio 1.2: impacto humano
+
+Se sustituye Hogares afectados por Impacto humano. Su fórmula es
+`H = (z_familias + z_fallecidos + z_desaparecidos + z_heridos) / 4`,
+donde cada `z = 100 × valor / máximo comparable` usa su propia referencia.
+Cada campo pesa 1/24 del compuesto antes del ajuste IPM. La dimensión conserva
+su peso de 1/6; los otros cinco sectores conservan sus pesos.
+El modelo contiene 17 campos. El reparto igual es una decisión explícita de
+ponderación, no una equivalencia entre familias, lesiones y pérdidas de vidas.
+Se propagan los faltantes manteniendo el peso, sin sumarlos como cero observado.
+Rescatados queda fuera. El inventario no permite deduplicar personas que cambian
+de estado entre reportes; se usa la misma captura y no se suman cortes históricos.
+El ranking histórico descrito arriba corresponde a 1.1 y no al nuevo modelo.

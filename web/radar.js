@@ -36,10 +36,10 @@
       select.onchange=()=>choose(select.value);
     });
     current=selected.map(g=>places.find(r=>r.geo===g)).filter(Boolean);
-    document.getElementById('radar-reference').textContent=`Modelo 1.1 · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos del inventario'}, ${p.referenceN} municipios; cada variable usa solo los que tienen dato comparable. Buscar o seleccionar municipios no recalcula la referencia; cambiar universo o captura sí.`;
+    document.getElementById('radar-reference').textContent=`Modelo 1.2 · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos del inventario'}, ${p.referenceN} municipios; cada variable usa solo los que tienen dato comparable. Buscar o seleccionar municipios no recalcula la referencia; cambiar universo o captura sí.`;
     let svg='<svg viewBox="0 0 660 540" aria-label="Radar de seis sectores, escala de cero a cien" role="group">';
     [20,40,60,80,100].forEach(v=>{svg+=`<polygon points="${polygon(Array(6).fill(v))}" fill="none" stroke="#d5dfe8"/><text x="338" y="${270-190*v/100+4}" class="radar-scale">${v}</text>`;});
-    const names=['Hogares','Vivienda','Salud','Educación','Infraestructura','Comunidad'];
+    const names=['Impacto humano','Vivienda','Salud','Educación','Infraestructura','Comunidad'];
     names.forEach((name,i)=>{const [x,y]=point(i,100),[tx,ty]=point(i,119);svg+=`<line x1="330" y1="270" x2="${x}" y2="${y}" stroke="#d5dfe8"/><text x="${tx}" y="${ty+5}" text-anchor="middle">${name}</text>`;});
     current.forEach((r,k)=>{svg+=`<polygon points="${polygon(r.sectors.map(s=>s.upper))}" fill="none" stroke="${colors[k]}" stroke-width="2" stroke-dasharray="6 5"/><polygon points="${polygon(r.sectors.map(s=>s.lower))}" fill="${colors[k]}" fill-opacity=".07" stroke="${colors[k]}" stroke-width="2.5"/>`;});
     current.forEach((r,k)=>r.sectors.forEach((s,i)=>{
@@ -47,7 +47,7 @@
       values.forEach((v,j)=>{const [x,y]=point(i,v);svg+=`<circle class="radar-point" cx="${x}" cy="${y}" r="6" fill="${j?'white':colors[k]}" stroke="${colors[k]}" stroke-width="2" tabindex="0" role="button" data-radar-m="${k}" data-radar-axis="${i}" aria-label="${esc(label(r))}, ${esc(s.name)}, ${fmt(s.lower)} a ${fmt(s.upper)}. Ver cálculo"><title>${esc(label(r))} · ${esc(s.name)}: ${fmt(s.lower)}–${fmt(s.upper)}. Consultar cálculo.</title></circle>`;});
     }));
     document.getElementById('radar-chart').innerHTML=current.length?svg+'</svg>':'<p class="empty">Selecciona un municipio para comenzar.</p>';
-    document.getElementById('radar-legend').innerHTML=current.map((r,k)=>`<p style="color:${colors[k]}"><strong>${esc(label(r))}</strong> · P: ${fmt(r.lower)}–${fmt(r.upper)} · ${r.available}/14 campos${!r.coverage?' · Sin puntaje documentado':''}</p>`).join('');
+    document.getElementById('radar-legend').innerHTML=current.map((r,k)=>`<p style="color:${colors[k]}"><strong>${esc(label(r))}</strong> · P: ${fmt(r.lower)}–${fmt(r.upper)} · ${r.available}/17 campos${!r.coverage?' · Sin puntaje documentado':''}</p>`).join('');
     document.getElementById('radar-sectors').innerHTML=current.map((r,k)=>`<div><strong style="color:${colors[k]}">${esc(label(r))}</strong><div>${r.sectors.map((s,i)=>`<button type="button" class="secondary" data-radar-m="${k}" data-radar-axis="${i}">${esc(s.name)}: ${fmt(s.lower)}–${fmt(s.upper)}</button>`).join('')}</div></div>`).join('');
     document.querySelectorAll('[data-radar-m]').forEach(el=>{const show=()=>inspect(Number(el.dataset.radarM),Number(el.dataset.radarAxis));el.onmouseenter=show;el.onfocus=show;el.onclick=show;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show();}};});
     const old=current.findIndex(r=>r.geo===active?.[0]);

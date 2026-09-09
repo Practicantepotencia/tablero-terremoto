@@ -4,11 +4,21 @@ const date='2026-09-09';
 function row(geo,f,id,v,extras={}){return {geo:'municipal:'+geo,code:geo,lv:'municipal',m:geo,d:'D',f,id,v,u:'Número',dim:'Campo',i:id,date,...extras};}
 function payload(rows,baseline=[]){return {rows,baseline:{rows:baseline},latest:date,dates:[date],sources:{}};}
 const state={scope:'all',date};
+test('impacto humano incluye cuatro entradas iguales y respeta cero y ausencia',()=>{
+ const values=[40,2,0,8];
+ const rows=P.SECTORS[0].fields.map((f,i)=>row('1',f.source,f.id,values[i]));
+ const r=P.create(payload(rows)).compute(state).items[0].sectors[0];
+ assert.equal(r.id,'impacto_humano');
+ assert.deepEqual(r.fields.map(f=>f.share),[.25,.25,.25,.25]);
+ assert.equal(r.lower,75);assert.equal(r.upper,75);
+ const missing=P.create(payload(rows.filter(x=>x.id!=='3is_desaparecidos'))).compute(state).items[0].sectors[0];
+ assert.equal(missing.lower,75);assert.equal(missing.upper,100);
+});
 function full(geo,value){return P.SECTORS.flatMap(s=>s.fields.map(f=>row(geo,f.source,f.id,value)));}
 test('cada sector conserva su peso fijo, incluso con distinto número de variables',()=>{
  assert.equal(P.SECTORS.length,6);
  for(const s of P.SECTORS)assert.ok(Math.abs(s.fields.reduce((n,f)=>n+f.share,0)-1)<1e-10);
- assert.equal(P.SECTORS.flatMap(s=>s.fields).length,14);
+ assert.equal(P.SECTORS.flatMap(s=>s.fields).length,17);
 });
 test('normalización proporcional conserva razones, cero y faltantes',()=>{
  assert.equal(P.normalize(0,null),0);assert.equal(P.normalize(null,100),null);
@@ -63,7 +73,7 @@ test('decreto cambia referencia, departamento y búsqueda conservan puntajes y p
 test('selector de dimensión ordena por su puntaje y conserva el puesto global',()=>{
  const rows=full('1',10).concat(full('2',10));
  rows.find(r=>r.code==='1'&&r.id==='3is_familias').v=20;
- const p=P.create(payload(rows,[{code:'1',v:20},{code:'2',v:20}])).selection({...state,priorityDimension:'hogares',priorityOrder:'integrated'});
+ const p=P.create(payload(rows,[{code:'1',v:20},{code:'2',v:20}])).selection({...state,priorityDimension:'impacto_humano',priorityOrder:'integrated'});
  assert.deepEqual(p.items.map(r=>r.code),['1','2']);
  assert.deepEqual(p.items.map(r=>r.dimensionRank),[1,2]);
  assert.ok(p.items.every(r=>r.rank!=null));
@@ -79,7 +89,7 @@ test('municipio solo ExE permanece consultable, sin un puesto global fabricado',
 });
 test('ejemplo calculado a mano: familias conocidas y resto faltante',()=>{
  const r=P.create(payload([row('1','3iS-Sheets','3is_familias',10)],[{code:'1',v:25}])).compute(state).items[0];
- assert.ok(Math.abs(r.lower-(100/6)*.85)<1e-8);
+ assert.ok(Math.abs(r.lower-(100/24)*.85)<1e-8);
  assert.ok(Math.abs(r.upper-85)<1e-8);
- assert.ok(Math.abs(r.coverage-1/6)<1e-8);
+ assert.ok(Math.abs(r.coverage-1/24)<1e-8);
 });

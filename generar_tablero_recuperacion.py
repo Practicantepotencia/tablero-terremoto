@@ -157,7 +157,7 @@ def prepare_payload(current, history=()):
 def build_html(current, history=()):
     payload = prepare_payload(current, history)
     template = (ROOT / "web" / "tablero.html").read_text(encoding="utf-8")
-    for marker, filename in (("__STYLE__", "tablero.css"), ("__MODEL__", "modelo.js"), ("__PRIORITY_MODEL__", "priorizacion.js"), ("__APP__", "tablero.js")):
+    for marker, filename in (("__STYLE__", "tablero.css"), ("__MODEL__", "modelo.js"), ("__PRIORITY_MODEL__", "priorizacion.js"), ("__RADAR__", "radar.js"), ("__APP__", "tablero.js")):
         template = template.replace(marker, (ROOT / "web" / filename).read_text(encoding="utf-8"))
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
     return template.replace("__DATA__", data.replace("<", "\\u003c"))

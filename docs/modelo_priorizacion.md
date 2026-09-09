@@ -1,4 +1,4 @@
-# Modelo de priorización sectorial 1.0
+# Modelo de priorización sectorial 1.1
 
 Rama `priorizacion-integrada`, creada desde `reestructuracion-recuperacion`,
 commit `e65bc81f2d384dc0f07f1a6ea1df3c0dd9af83c0`.
@@ -45,8 +45,8 @@ sus cantidades como si fueran personas o edificios distintos.
 Para cada campo `j`, con fuente, definición, unidad, nivel y captura fijos:
 
 ```
-a_j = percentil 95 de los valores positivos disponibles del campo j
-z_mj = 100 × min(1, ln(1+x_mj) / ln(1+a_j))
+a_j = máximo de los valores disponibles comparables del campo j
+z_mj = 100 × x_mj / a_j
 z_mj = 0 si x_mj es un cero explícito
 
 S_md = suma_j peso_interno_dj × z_mj
@@ -55,12 +55,18 @@ V_m = IPM censal DANE 2018 / 100
 P_m = D_m × (1 + 0.25 × V_m) / 1.25
 ```
 
-El P95 usa interpolación lineal sobre posiciones `(n-1) × 0.95`.
-El logaritmo conserva diferencias de magnitud y atenúa valores extremos. La
-saturación a partir del P95 impide que un valor extremo domine todo el resultado,
-pero elimina diferencias entre valores superiores al ancla. Por eso el valor
-original siempre queda visible. Con pocos positivos, el ancla es frágil y se
-muestra su tamaño de referencia; colapsos tiene solo seis positivos en esta captura.
+La versión 1.1 conserva proporciones entre cantidades de un mismo campo. No
+recorta en P95 ni aplica logaritmos. Solo el máximo alcanza 100 (salvo empates).
+Los ceros explícitos permanecen en cero, incluso si toda la referencia es cero.
+Un máximo extremo o erróneo puede comprimir el resto: esta escala tampoco es
+una validación de prioridad ni una tasa de afectación. Los límites de faltantes
+son condicionales a esta referencia; si aparece un valor mayor, se recalcula.
+
+La versión 1.0 buscaba atenuar extremos con logaritmo y recorte P95, pero igualaba
+12.098 y 20.998 familias a 100. Se retira ese diseño en todos los campos para
+mantener una regla consistente, no para producir un municipio ganador concreto.
+Ahora: Armenia = 100 × 12098/43052 = 28,1009; Buenaventura = 48,7736;
+Cali = 100 (referencia: 124 municipios con familias, captura 2026-09-09, decreto).
 
 La referencia incluye municipios con dato comparable en el ámbito administrativo
 elegido, antes de buscar o filtrar departamento. No se convierten los conteos en
@@ -156,9 +162,10 @@ No hay emparejamiento aproximado por semejanza de texto.
 Captura del inventario: 9 de septiembre de 2026. En los departamentos del decreto:
 509 identidades municipales después del cruce, 470 con algún componente, 39
 sin componentes y ninguna con los 14 campos completos. El top 20 de prioridad
-documentada comparte 11 municipios con el top 20 de RAPIDA.
+documentada comparte 10 municipios con el top 20 de RAPIDA.
 
-Los primeros son Armenia, Buenaventura, Trujillo, Montenegro y Quibdó. Sus
+Con la versión 1.1, los primeros por límite inferior son Pereira, Cali, Quibdó,
+Armenia y Buenaventura. Armenia pasa al puesto 4, con intervalo 23,7865–28,3909. Sus
 intervalos se solapan, de modo que ese orden exacto no se identifica solo con
 los datos observados. Santiago de Cali integra correctamente los **515 colapsos**
 3iS en infraestructura; su vivienda 3iS sigue sin dato y no se convierte en cero.
@@ -187,3 +194,21 @@ necesidades concretas. No se incorporaron sus demostraciones operativas. El mapa
 y EDAN/alojamientos son los módulos útiles para una fase posterior; antes de
 unir sus cifras hacen falta los archivos originales y procesos reproducibles.
 La prioridad actual es una matriz legible con una fórmula propia y descomposición.
+
+## Acueductos de Armenia y comparación radar
+
+Consulta directa realizada el 9 de septiembre de 2026 a la hoja pública
+[Datos_Territoriales de 3iS](https://docs.google.com/spreadsheets/d/1fQ-LTlIEljzOKvW23epwevJeWLWORi88xL7XxkpTMzY/edit).
+Se comprobó la respuesta GViz JSON tipada, no solo el formato visual del CSV:
+para Armenia, Quindío, reporte `9 Sep 06:30`, `Acueductos` es `null`, no `v:0`.
+Los reportes `8 Sep 06:30` y `7 Sep 06:30` también están vacíos.
+El reporte `27 Ago 06:30` sí contenía `v:1`. No hay fundamento para interpretar
+el vacío posterior como reparación o cero. No se rellena con el valor antiguo.
+
+La pestaña Comparar municipios, inmediatamente después de Prioridades, usa los
+mismos objetos calculados por el modelo. Admite hasta tres municipios, búsqueda
+por nombre y departamento, hover, foco de teclado y toque. Cada eje corresponde
+a uno de los seis sectores. Su inspector muestra entradas, máximo, N de referencia,
+normalización, pesos, aportes, límites sectoriales y cálculo global con IPM.
+La línea discontinua representa faltantes, no un segundo dato observado. Los
+botones de sector permiten acceder a puntos superpuestos. El área no es el índice.

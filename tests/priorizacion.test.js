@@ -10,10 +10,13 @@ test('cada sector conserva su peso fijo, incluso con distinto número de variabl
  for(const s of P.SECTORS)assert.ok(Math.abs(s.fields.reduce((n,f)=>n+f.share,0)-1)<1e-10);
  assert.equal(P.SECTORS.flatMap(s=>s.fields).length,14);
 });
-test('normalización respeta cero y magnitud, satura el extremo y conserva faltantes',()=>{
+test('normalización proporcional conserva razones, cero y faltantes',()=>{
  assert.equal(P.normalize(0,null),0);assert.equal(P.normalize(null,100),null);
  assert.equal(P.normalize(-1,100),null);assert.equal(P.normalize(1000,100),100);
  assert.ok(P.normalize(2,100)<P.normalize(50,100));
+ assert.equal(P.normalize(20,100),20);
+ assert.equal(P.normalize(40,100)/P.normalize(20,100),2);
+ assert.ok(P.normalize(12098,43052)<P.normalize(20998,43052));
 });
 test('un vacío amplía el intervalo sin transferir su peso a otra variable',()=>{
  const rows=full('1',10).concat(full('2',0));

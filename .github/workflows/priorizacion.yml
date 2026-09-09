@@ -31,6 +31,7 @@ jobs:
           python -m unittest discover -s tests -v
           node --test tests/modelo.test.js tests/priorizacion.test.js
           node --check web/tablero.js
+          node --check web/radar.js
       - name: Generar HTML desde las observaciones de esta rama
         run: python generar_tablero_recuperacion.py
       - uses: stefanzweifel/git-auto-commit-action@v5

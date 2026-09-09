@@ -1,4 +1,4 @@
-/* Modelo 1.0: necesidades sectoriales, pesos fijos y límites por datos faltantes. */
+/* Modelo 1.1: escala proporcional, pesos fijos y límites por datos faltantes. */
 (function (root) {
   'use strict';
   const T = typeof module !== 'undefined' && module.exports ? require('./modelo.js') : root.Territorial;
@@ -22,7 +22,7 @@
     if (!Number.isFinite(value) || value<0) return null;
     if (value===0) return 0;
     if (!(anchor>0)) return null;
-    return 100*clamp(Math.log1p(value)/Math.log1p(anchor),0,1);
+    return 100*clamp(value/anchor,0,1);
   }
   function aggregate(sectors, vulnerability, weights, alpha=.25) {
     const sum=weights.reduce((a,b)=>a+b,0);
@@ -55,7 +55,7 @@
         if(coherent)candidates.forEach(r=>{if(!byGeo.has(r.geo))byGeo.set(r.geo,[]);byGeo.get(r.geo).push(r);});
         const accepted=[...byGeo.values()].filter(rs=>rs.every(r=>r.v===rs[0].v)).map(rs=>rs[0]);
         const values=accepted.map(r=>r.v).filter(v=>Number.isFinite(v)&&v>=0);
-        const positive=values.filter(v=>v>0),anchor=T.quantile(positive,.95);
+        const positive=values.filter(v=>v>0),anchor=values.length?Math.max(...values):null;
         calibrations.set(f.id,{...f,anchor,n:values.length,positive:positive.length,coherent,values,rows:new Map(accepted.map(r=>[r.geo,r]))});
       });
       const recovery=territorial.strict(base,T.RECOVERY);
@@ -117,6 +117,6 @@
     }
     return {compute,selection};
   }
-  const api={create,normalize,aggregate,ranks,SECTORS,VERSION:'1.0'};
+  const api={create,normalize,aggregate,ranks,SECTORS,VERSION:'1.1'};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.Priorizacion=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

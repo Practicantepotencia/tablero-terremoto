@@ -7,6 +7,7 @@
 <header class="hero"><div class="kicker">Respuesta al terremoto · Colombia</div><h1>Dónde intervenir y qué necesita cada municipio</h1><p class="subtitle">Una matriz de necesidades. Prioridad calculada por sectores, con los datos y la cobertura que explican el orden.</p></header>
 <nav class="tab-nav" role="tablist" aria-label="Vistas del tablero">
 <button type="button" id="tab-prioridades" class="tab-btn active" role="tab" aria-selected="true" aria-controls="prioridades" data-tab="prioridades">Prioridades</button>
+<button type="button" id="tab-radar" class="tab-btn" role="tab" aria-selected="false" aria-controls="radar" data-tab="radar">Comparar municipios</button>
 <button type="button" id="tab-diagnostico" class="tab-btn" role="tab" aria-selected="false" aria-controls="diagnostico" data-tab="diagnostico">Diagnóstico territorial</button>
 <button type="button" id="tab-metodo" class="tab-btn" role="tab" aria-selected="false" aria-controls="metodo" data-tab="metodo">Fuentes y método</button>
 </nav>
@@ -23,6 +24,12 @@
 <p id="priority-note" class="note"></p><details class="matrix-explanation"><summary>Fuentes y significado de los colores</summary><p id="matrix-caption" class="muted small"></p><p id="matrix-note" class="note"></p><p id="matrix-warning" class="note"></p></details><p id="matrix-count" class="note small" aria-live="polite"></p><div id="matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="matrix-title"></div></div>
 <section class="card" id="priority-detail" hidden aria-live="polite" aria-label="Descomposición de la prioridad municipal"></section>
 <details class="card"><summary>Cómo leer la prioridad y sus límites</summary><p>El puntaje combina seis sectores con el mismo peso. En vivienda, salud, educación y servicios comunitarios se conservan por separado los reportes 3iS y las cifras del inventario PNUD. Hogares e infraestructura usan 3iS. RAPIDA se usa como comparación, sin entrar a la fórmula.</p><p>El primer número es el límite inferior compatible con las observaciones. El intervalo muestra cuánto podría cambiar al completar los faltantes. Un intervalo amplio impide afirmar un puesto definitivo. Este orden conservador puede favorecer territorios mejor documentados; «Prioridad posible» permite revisar los que faltan por caracterizar.</p><p>La pobreza censal municipal de 2018 ajusta la prioridad hasta un 25% respecto al mismo daño. No crea prioridad donde no hay daño. Los pesos son una propuesta de decisión; se prueban 39 escenarios de sensibilidad.</p><button type="button" class="secondary" id="show-method">Ver fórmula, variables y sensibilidad</button></details>
+</section>
+<section id="radar" class="tab-panel" role="tabpanel" aria-labelledby="tab-radar" hidden>
+<div class="card"><h2>Comparar necesidades sectoriales</h2><p class="note">Selecciona hasta tres municipios. Cada eje representa un sector de 0 a 100, no un porcentaje de daño. La línea continua es el límite documentado; la discontinua muestra el límite posible por faltantes. El área del polígono no es el índice global.</p>
+<div id="radar-pickers" class="filters"></div><p id="radar-reference" class="note"></p>
+<div class="radar-layout"><div><div id="radar-chart"></div><div id="radar-legend"></div></div><section id="radar-inspector" class="radar-inspector" aria-label="Cálculo del punto seleccionado"></section></div>
+<p class="note">Pasa el mouse sobre un punto para ver sus entradas y su resultado a la derecha. También puedes enfocarlo con Tab o tocarlo. Los botones de sector ofrecen la misma consulta cuando los puntos se superponen.</p><div id="radar-sectors" class="radar-sectors"></div></div>
 </section>
 <section id="diagnostico" class="tab-panel" role="tabpanel" aria-labelledby="tab-diagnostico" hidden>
 <div class="filters local">
@@ -61,4 +68,4 @@
 </section>
 <footer><span id="footer-capture"></span><span>Necesidades y cobertura del inventario disponible. «Sin dato» nunca significa cero.</span></footer>
 <noscript><p>Activa JavaScript para filtrar y consultar el tablero. Los datos originales están en <a href="indicadores_largo_no_calculo.csv">el inventario CSV</a>.</p></noscript>
-</main><script>__MODEL__</script><script>__PRIORITY_MODEL__</script><script>const DATA=__DATA__;</script><script>__APP__</script></body></html>
+</main><script>__MODEL__</script><script>__PRIORITY_MODEL__</script><script>const DATA=__DATA__;</script><script>__RADAR__</script><script>__APP__</script></body></html>

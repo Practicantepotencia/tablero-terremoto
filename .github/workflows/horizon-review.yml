@@ -24,6 +24,15 @@ jobs:
           pdftoppm -scale-to 1500 -png render/Horizon_ventajas_desventajas.pdf render/page
           pdftotext -layout render/Horizon_ventajas_desventajas.pdf render/texto.txt
           pdfinfo render/Horizon_ventajas_desventajas.pdf
+      - name: Emitir páginas para inspección visual del informe
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64
+          for page in sorted(Path('render').glob('page-*.png')):
+              print('HORIZON_PNG ' + page.name + ' ' + base64.b64encode(page.read_bytes()).decode())
+          print('HORIZON_TEXT ' + base64.b64encode(Path('render/texto.txt').read_bytes()).decode())
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: horizon-documento-revision

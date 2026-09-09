@@ -1,5 +1,14 @@
 # Tablero territorial de recuperación temprana
 
+## Rama horizon
+
+Esta rama parte de `reestructuracion-recuperacion`. Abre `comparar.html` para
+acceder al tablero actual y a `Horizon_Reconstruccion.html`, copia sin cambios
+del HTML recibido. La evaluación de integración está en
+[el informe](docs/horizon_comparacion.md) y en
+[Word](docs/Horizon_ventajas_desventajas.docx). La integración funcional se
+propone en el documento; los dos tableros se mantienen independientes.
+
 Esta rama integra el EDA y el tablero del índice en **un solo `index.html`**,
 con tres pestañas: Prioridades, Diagnóstico territorial y Fuentes y método.
 Conserva el lenguaje visual del tablero original: fondo gris, tarjetas blancas,

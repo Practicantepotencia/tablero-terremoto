@@ -1,0 +1,31 @@
+name: Verificar documento de Horizon
+on:
+  push:
+    branches: [horizon]
+    paths:
+      - 'docs/Horizon_ventajas_desventajas.docx'
+      - '.github/workflows/horizon-review.yml'
+permissions:
+  contents: read
+jobs:
+  documento:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar renderizador para revisar el documento
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libreoffice-writer poppler-utils
+      - name: Renderizar documento y conservar evidencia de lectura
+        run: |
+          mkdir -p render
+          libreoffice -env:UserInstallation=file:///tmp/horizon-lo-profile --headless --convert-to pdf --outdir render docs/Horizon_ventajas_desventajas.docx
+          test -s render/Horizon_ventajas_desventajas.pdf
+          pdftoppm -scale-to 1500 -png render/Horizon_ventajas_desventajas.pdf render/page
+          pdftotext -layout render/Horizon_ventajas_desventajas.pdf render/texto.txt
+          pdfinfo render/Horizon_ventajas_desventajas.pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: horizon-documento-revision
+          path: render/
+          retention-days: 7

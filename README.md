@@ -11,10 +11,12 @@ La tercera matriz usa bases propias verificadas por indicador y conserva los vac
 sin homologación. Las tres tienen búsqueda y orden independientes.
 En «Comparar municipios» aparecen los tres radares en el mismo orden.
 
-«Recuperación RAPIDA», antes de «Diagnóstico territorial» y «Fuentes y método»,
-conserva el ranking original y Recuperación e IPM. Incluye la nueva dispersión
-entre nuestro índice (selector absoluto / per cápita / sectorial) y el puesto
-o valor RAPIDA, con panel común, Pearson, Spearman, R² y cobertura.
+«Necesidad de recuperación temprana», antes de «Diagnóstico territorial» y «Fuentes y método»,
+conserva el ranking original y Necesidad de recuperación temprana e IPM. Incluye la nueva dispersión
+entre nuestro índice (selector absoluto / per cápita / relativo) y el puesto de
+necesidad de recuperación temprana, con Pearson, Spearman, R² y cobertura.
+Solo hay dos controles locales: versión del índice y resaltar municipio. Los pares
+se seleccionan mediante los filtros territoriales generales.
 [Guía y método de la integración](docs/tablero_unificado.md).
 
 El modelo combina 17 campos en seis sectores con peso igual y aplica un ajuste

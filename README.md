@@ -13,7 +13,7 @@ En «Comparar municipios» aparecen los tres radares en el mismo orden.
 
 «Necesidad de recuperación temprana», antes de «Diagnóstico territorial» y «Fuentes y método»,
 conserva el ranking original y Necesidad de recuperación temprana e IPM. Incluye la nueva dispersión
-entre nuestro índice (selector absoluto / per cápita / relativo) y el puesto de
+entre nuestro índice (selector absoluto / per cápita / relativo) y el puntaje original de
 necesidad de recuperación temprana, con Pearson, Spearman, R² y cobertura.
 Solo hay dos controles locales: versión del índice y resaltar municipio. Los pares
 se seleccionan mediante los filtros territoriales generales.

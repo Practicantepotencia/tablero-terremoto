@@ -220,7 +220,7 @@ function renderRapida(){
 }
 function renderComparison(){
   const mode=$('comparison-mode').value;
-  const c=Comparacion.compare(priorityModels,model,state,{mode,axis:'rank',panel:'available'}),pairs=c.pairs;
+  const c=Comparacion.compare(priorityModels,model,state,{mode,axis:'value',panel:'available'}),pairs=c.pairs;
   const names={absolute:'Absoluto',percapita:'Per cápita',sectorial:'Relativo'};
   const precision=n=>n==null?'—':new Intl.NumberFormat('es-CO',{maximumFractionDigits:4}).format(n);
   const search=$('comparison-search').value,matched=pairs.filter(r=>T.searchMatch({...r,lv:'municipal'},search));
@@ -228,8 +228,8 @@ function renderComparison(){
   $('comparison-note').textContent='Base: '+(state.scope==='decree'?'departamentos del decreto':'todos los departamentos')+(state.dept?' · '+state.dept:'')+' · captura '+state.date+'. '+c.n+' pares de '+c.total+' municipios.'+(search?' '+matched.length+' coincidencias resaltadas; la búsqueda no cambia los cálculos.':'');
   $('comparison-reference').textContent=c.referenceN+' municipios en la referencia; '+c.recoveryN+' con necesidad de recuperación temprana. Excluidos de la dispersión: '+exclusion+'. Se incluyen todos los pares disponibles de la versión seleccionada; no se rellenan faltantes.';
   $('comparison-kpis').innerHTML=tile('Pares comparables',c.n,'Municipios con ambos datos')+
-    tile('R²',precision(c.regression?.r2),'X: nuestro índice · Y: puesto de necesidad')+
-    tile('Pearson r',precision(c.regression?.r),'Negativo: más puntaje, mejor puesto')+
+    tile('R²',precision(c.regression?.r2),'X: nuestro índice · Y: puntaje de necesidad')+
+    tile('Pearson r',precision(c.regression?.r),'Positivo: puntajes altos juntos')+
     tile('Spearman ρ',precision(c.rho),'Rangos promedio en empates · solo estos pares');
   function detail(r){
     comparisonGeo=r?.geo||'';
@@ -237,13 +237,13 @@ function renderComparison(){
   }
   if(!pairs.length){$('comparison-chart').innerHTML='<p class="empty">No hay municipios con ambos datos en esta selección. Revisa los filtros generales o cambia la versión del índice.</p>';detail(null);}
   else{
-    const W=760,H=440,L=77,R=25,U=22,B=65,maxY=Math.max(2,...pairs.map(r=>r.y));
-    const sx=x=>L+x/100*(W-L-R),sy=y=>U+(y-1)/(maxY-1)*(H-U-B);
-    const xticks=[0,20,40,60,80,100],yticks=Array.from({length:5},(_,i)=>1+i*(maxY-1)/4);
+    const W=760,H=440,L=77,R=25,U=22,B=65,maxY=Math.max(.01,...pairs.map(r=>r.y))*1.06;
+    const sx=x=>L+x/100*(W-L-R),sy=y=>H-B-y/maxY*(H-U-B);
+    const xticks=[0,20,40,60,80,100],yticks=Array.from({length:5},(_,i)=>i*maxY/4);
     const line=c.regression,lo=Math.min(...pairs.map(r=>r.x)),hi=Math.max(...pairs.map(r=>r.x));
-    const rankTitle='Puesto (1 = mayor necesidad)';
+    const rankTitle='Puntaje de necesidad (escala original)';
     $('comparison-chart').innerHTML='<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="group" aria-label="'+esc(names[mode]+' frente a '+rankTitle)+'"><defs><clipPath id="comparison-clip"><rect x="'+L+'" y="'+U+'" width="'+(W-L-R)+'" height="'+(H-U-B)+'"/></clipPath></defs>'+
-      yticks.map(y=>'<line class="gridline" x1="'+L+'" x2="'+(W-R)+'" y1="'+sy(y)+'" y2="'+sy(y)+'"/><text x="'+(L-9)+'" y="'+(sy(y)+4)+'" text-anchor="end">'+Math.round(y)+'</text>').join('')+
+      yticks.map(y=>'<line class="gridline" x1="'+L+'" x2="'+(W-R)+'" y1="'+sy(y)+'" y2="'+sy(y)+'"/><text x="'+(L-9)+'" y="'+(sy(y)+4)+'" text-anchor="end">'+precision(y)+'</text>').join('')+
       xticks.map(x=>'<text x="'+sx(x)+'" y="'+(H-B+24)+'" text-anchor="middle">'+x+'</text>').join('')+
       '<line class="axis" x1="'+L+'" x2="'+(W-R)+'" y1="'+(H-B)+'" y2="'+(H-B)+'"/>'+
       (line?'<line clip-path="url(#comparison-clip)" x1="'+sx(lo)+'" x2="'+sx(hi)+'" y1="'+sy(line.intercept+line.slope*lo)+'" y2="'+sy(line.intercept+line.slope*hi)+'" stroke="#b95319" stroke-dasharray="7 5" stroke-width="2"><title>Ajuste lineal con intercepto</title></line>':'')+

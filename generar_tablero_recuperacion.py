@@ -32,7 +32,7 @@ GEO_ALIASES = {
     ('choco', 'litoral de san juan'): '27250',
 }
 SOURCES = {
-    RAPIDA: {"label": "UNDP · RAPIDA", "kind": "Evaluación y modelación", "url": "https://geosmart.undp.org/arcgis/apps/storymaps/stories/9d0ef01099a64edda2caecbd34135d7e", "note": "Cobertura parcial de la zona evaluada. El inventario no contiene la fórmula completa de recuperación ni el año base del IPM. No sumar IPM al resultado de recuperación."},
+    RAPIDA: {"label": "UNDP · RAPIDA", "kind": "Evaluación y modelación", "url": "https://geosmart.undp.org/arcgis/apps/storymaps/stories/9d0ef01099a64edda2caecbd34135d7e", "note": "Se conservan los valores publicados por PNUD/UNGRD; la cobertura depende del indicador y del ámbito seleccionado. La documentación incorporada al repositorio no permite reproducir la fórmula y los pesos de la necesidad de recuperación temprana ni verificar el año base del IPM de esta fuente. Ese IPM es distinto de la línea base DANE censal 2018 documentada para nuestro modelo. El puntaje original se consulta sin añadirle IPM."},
     "PNUD": {"label": "PNUD · estimación de daños", "kind": "Estimación", "url": "https://pnudco.github.io/Respuesta-a-crisis-y-recuperaci-n-temprana/", "note": "Vivienda y daño económico coinciden con RAPIDA en la cobertura común auditada. No constituyen corroboración independiente ni se suman entre fuentes."},
     "3iS-Sheets": {"label": "3iS · reportes territoriales", "kind": "Reportes consolidados", "url": "https://docs.google.com/spreadsheets/d/1fQ-LTlIEljzOKvW23epwevJeWLWORi88xL7XxkpTMzY", "note": "Cobertura de reportes por territorio. Su corte operativo no está conservado fila por fila en este inventario."},
     "FundacionExe": {"label": "Fundación ExE · sedes educativas", "kind": "Inventario de sedes", "url": "data/sedes_educativas_afectadas_ago2026.csv", "note": "Necesidades educativas de alcance amplio. Estar dentro de un departamento del decreto no prueba que el daño de cada sede sea causado por el sismo. Fuera de ese ámbito: no atribuida al sismo."},
@@ -206,3 +206,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

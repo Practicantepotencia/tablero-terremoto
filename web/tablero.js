@@ -163,7 +163,14 @@ function distribution(pool) {
 function renderDiagnostic() {
   const s=model.sector({...state,search:$('sector-search').value}),meta=s.meta;
   $('cohort-note').textContent=meta?`${DATA.sources[meta.f]?.label||meta.f} · ${meta.lv} · ${meta.u} · captura ${state.date}. La selección de fuente e indicador se conserva aunque el filtro deje la vista sin datos.`:'No hay indicadores registrados para este nivel.';
-  $('source-warning').textContent=DATA.sources[state.source]?.note||'Metodología de esta fuente pendiente de documentación.';
+  const sourceWarning=$('source-warning');
+  if(state.source===T.RAPIDA){
+    sourceWarning.className='note';
+    sourceWarning.textContent=`Cobertura del indicador seleccionado: ${s.pool.length} de ${s.total} territorios del inventario en este ámbito, nivel y departamento. ${s.total-s.pool.length} sin valor comparable; sin dato no significa cero. Se muestra el valor publicado por PNUD/UNGRD. Consulta sus límites en «Fuentes y método».`;
+  }else{
+    sourceWarning.className='notice';
+    sourceWarning.textContent=DATA.sources[state.source]?.note||'Metodología de esta fuente pendiente de documentación.';
+  }
   const vals=s.pool.map(r=>r.v);
   $('sector-kpis').innerHTML=tile('Territorios con dato',`${s.pool.length} / ${s.total}`,'Respecto del inventario filtrado en este nivel')+
     tile('Mediana',fmt(T.quantile(vals,.5),meta?.u),meta?.u||'')+
@@ -174,7 +181,6 @@ function renderDiagnostic() {
   $('sector-more').hidden=s.items.length<=sectorLimit;
   $('distribution').innerHTML=distribution(s.pool);
   $('distribution-note').textContent=`${s.pool.length} territorios. Percentiles y distribución dentro del mismo indicador, fuente, unidad y captura. La búsqueda solo reduce las tablas.`;
-  $('sector-trend').innerHTML=historyBlock(state.metric);
   $('download').disabled=!s.items.length;
   renderProfile();
 }
@@ -298,3 +304,4 @@ $('download').addEventListener('click',()=>{
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='seleccion-territorial.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 refresh();
+

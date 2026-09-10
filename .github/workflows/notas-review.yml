@@ -1,0 +1,33 @@
+name: Revisar notas metodológicas
+on:
+  push:
+    branches: [revision-notas-interfaz]
+permissions:
+  contents: read
+jobs:
+  documento:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libreoffice-writer poppler-utils
+          pip install pdf2image pillow
+      - name: Renderizar Word
+        run: |
+          python .qa/render_docx.py docs/notas_metodologicas.docx --output_dir render --emit_pdf --dpi 100
+          pdftotext -layout render/notas_metodologicas.pdf render/texto.txt
+      - name: Mostrar páginas para revisión
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64
+          for p in sorted(Path('render').glob('page-*.png')):
+              print('NOTAS_PNG ' + p.name + ' ' + base64.b64encode(p.read_bytes()).decode())
+          print('NOTAS_TEXT ' + base64.b64encode(Path('render/texto.txt').read_bytes()).decode())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: notas-revision
+          path: render/
+          retention-days: 3

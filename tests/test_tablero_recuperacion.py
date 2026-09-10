@@ -87,6 +87,9 @@ class PreparationTests(unittest.TestCase):
         self.assertEqual(source.count('role="tabpanel"'), 5)
         self.assertIn('id="tab-rapida"', source)
         self.assertIn('id="percapita-matrix"', source)
+        self.assertIn('>Necesidad de recuperación temprana</button>', source)
+        for removed in ('id="comparison-axis"', 'id="comparison-panel"', 'id="comparison-warning"'):
+            self.assertNotIn(removed, source)
         self.assertNotIn("__DATA__", source)
 
     def test_generate_preserves_raw_input_and_history_by_default(self):

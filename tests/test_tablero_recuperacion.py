@@ -84,7 +84,9 @@ class PreparationTests(unittest.TestCase):
         data = json.loads(re.search(r"const DATA=(.*?);</script>", source).group(1))
         self.assertEqual(len(data["rows"]), 1)
         self.assertNotIn("<script>alert(1)", source)
-        self.assertEqual(source.count('role="tabpanel"'), 4)
+        self.assertEqual(source.count('role="tabpanel"'), 5)
+        self.assertIn('id="tab-rapida"', source)
+        self.assertIn('id="percapita-matrix"', source)
         self.assertNotIn("__DATA__", source)
 
     def test_generate_preserves_raw_input_and_history_by_default(self):

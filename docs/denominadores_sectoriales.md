@@ -3,7 +3,9 @@
 Rama `denominadores-sectoriales`, creada desde `priorizacion-integrada` en
 `36e9afc`. Auditoría del 10 de septiembre de 2026. Numeradores del inventario
 capturado el 9 de septiembre de 2026. La captura no equivale a la fecha de cada
-observación en terreno. Solo cambian la segunda matriz y el segundo radar.
+observación en terreno. En la integración posterior, esta metodología corresponde
+a la tercera matriz y el tercer radar, junto a las versiones absoluta y per cápita,
+en ambas ramas. Ver [tablero unificado](tablero_unificado.md).
 
 ## San José del Palmar y Atrato
 

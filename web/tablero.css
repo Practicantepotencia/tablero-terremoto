@@ -6,9 +6,9 @@
 @media(max-width:750px){.matrix-card .matrix-controls{grid-template-columns:1fr}#matrix .municipal-cell{position:static;min-width:190px}#matrix th:first-child{left:auto;min-width:190px}.tab-nav{overflow-x:auto}.tab-btn{white-space:nowrap}.formula{font-size:14px}}
 @media(max-width:1000px){.two{grid-template-columns:1fr}.local{grid-template-columns:1fr 1fr}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.wrap{padding:18px 12px 35px}.global,.local,.matrix-controls{grid-template-columns:1fr}.tab-nav{gap:12px}.tab-btn{font-size:13px}.statusbar{gap:8px}.card{padding:14px}.tile{padding:12px}.tile-value{font-size:23px}.profile-picker{min-width:0;width:100%}.section-head .search{max-width:none;width:100%}select,input{font-size:16px;min-height:44px}.secondary,.link{min-height:40px}.table-scroll{max-height:520px}th,td{padding:9px 8px}.chart text{font-size:13px}}
 :root { --radar-border: #d5dfe8; }
-#radar-pickers, #radar-relative-pickers { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+#radar-pickers, #radar-relative-pickers, #radar-percapita-pickers { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
 .radar-layout { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:24px; align-items:start; }
-#radar-chart svg, #radar-relative-chart svg { width:100%; height:auto; font-size:14px; }
+#radar-chart svg, #radar-relative-chart svg, #radar-percapita-chart svg { width:100%; height:auto; font-size:14px; }
 .radar-scale { font-size:11px; fill:#5e6d7b; }
 .radar-point { cursor:pointer; }
 .radar-point:hover,.radar-point:focus { stroke:#111; stroke-width:4; outline:none; }
@@ -25,4 +25,10 @@
 #relative-card { scroll-margin-top:20px; }
 .column-sort { border:0; background:transparent; color:inherit; font:inherit; padding:8px 0; text-align:left; cursor:pointer; width:100%; }
 .column-sort:hover,.column-sort:focus-visible { color:#07558a; text-decoration:underline; }
-@media(max-width:850px) { .radar-layout, #radar-pickers, #radar-relative-pickers { grid-template-columns:1fr; } }
+@media(max-width:850px) { .radar-layout, #radar-pickers, #radar-relative-pickers, #radar-percapita-pickers { grid-template-columns:1fr; } }
+.comparison-controls {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.comparison-layout {display:grid;grid-template-columns:minmax(0,1.7fr) minmax(240px,1fr);gap:24px;align-items:start}
+.comparison-point {cursor:pointer;fill:#1f5fae;opacity:.65}
+.comparison-point.highlight {fill:#c55220;opacity:1;stroke:#732700;stroke-width:2}
+.comparison-point:hover,.comparison-point:focus {opacity:1;stroke:#111;stroke-width:3;outline:none}
+@media(max-width:850px){.comparison-layout,.comparison-controls{grid-template-columns:1fr}}

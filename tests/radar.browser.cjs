@@ -50,6 +50,11 @@ const path=require('node:path');
   await page.setViewportSize({width:1440,height:1000});
   const absoluteLegend=await page.locator('#radar-legend').innerText();
   await page.locator('#radar-relative-search-0').fill('pereira');
+  assert.equal(await page.locator('#radar-relative-results-0').getAttribute('class'),'radar-results');
+  assert.equal(await page.locator('#radar-relative-results-0 button').evaluate(el=>getComputedStyle(el).display),'block');
+  const relativeOptionWidth=await page.locator('#radar-relative-results-0 button').evaluate(el=>el.getBoundingClientRect().width);
+  const relativeMenuInnerWidth=await page.locator('#radar-relative-results-0').evaluate(el=>el.clientWidth);
+  assert.ok(Math.abs(relativeOptionWidth-relativeMenuInnerWidth)<=1);
   await page.locator('#radar-relative-results-0 button').click();
   assert.match(await page.locator('#radar-relative-legend').innerText(),/Pereira/);
   await page.locator('#radar-relative-sectors [data-radar-m="0"][data-radar-axis="0"]').focus();
@@ -68,3 +73,4 @@ const path=require('node:path');
   console.log('Radar OK: visible search, accents, keyboard, empty results, stable slots, scope, mobile, inspector.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
+

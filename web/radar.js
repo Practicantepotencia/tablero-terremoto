@@ -28,7 +28,7 @@
     const p=model.compute(state), places=p.all.filter(r=>!state.dept||r.d===state.dept).slice().sort((a,b)=>label(a).localeCompare(label(b),'es'));
     if(!initialized){selected=p.items.slice(0,2).map(r=>r.geo);initialized=true;}
     selected=[0,1,2].map(i=>places.some(r=>r.geo===selected[i])?selected[i]:'');
-    host.innerHTML=[0,1,2].map(i=>`<div><label for="radar-search-${i}">Municipio ${i+1}</label><input type="search" id="radar-search-${i}" placeholder="Escribe y elige un resultado" aria-label="Buscar municipio ${i+1}" aria-controls="radar-results-${i}"><div id="radar-results-${i}" class="radar-results" hidden></div><p id="radar-count-${i}" class="small muted" role="status"></p><select id="radar-select-${i}" aria-label="Municipio ${i+1}"><option value="">Sin seleccionar</option>${places.map(r=>`<option value="${esc(r.geo)}" ${selected[i]===r.geo?'selected':''}>${esc(label(r))}</option>`).join('')}</select></div>`).join('').replaceAll('"radar-','"'+prefix+'-');
+    host.innerHTML=[0,1,2].map(i=>`<div><label for="radar-search-${i}">Municipio ${i+1}</label><input type="search" id="radar-search-${i}" placeholder="Escribe y elige un resultado" aria-label="Buscar municipio ${i+1}" aria-controls="radar-results-${i}"><div id="radar-results-${i}" class="radar-results" hidden></div><p id="radar-count-${i}" class="small muted" role="status"></p><select id="radar-select-${i}" aria-label="Municipio ${i+1}"><option value="">Sin seleccionar</option>${places.map(r=>`<option value="${esc(r.geo)}" ${selected[i]===r.geo?'selected':''}>${esc(label(r))}</option>`).join('')}</select></div>`).join('').replaceAll('"radar-','"'+prefix+'-').replaceAll(`class="${prefix}-results"`,'class="radar-results"');
     [0,1,2].forEach(i=>{
       const select=get(`radar-select-${i}`);
       const input=get(`radar-search-${i}`),results=get(`radar-results-${i}`),count=get(`radar-count-${i}`);
@@ -67,3 +67,4 @@
   root.MunicipalRadar=createRadar('radar');
   root.RelativeMunicipalRadar=createRadar('radar-relative',true);
 })(globalThis);
+

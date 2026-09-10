@@ -1,5 +1,11 @@
 # Matriz relativa a la población
 
+> La vista per cápita es ahora la segunda matriz y el segundo radar en ambas ramas:
+> `priorizacion-integrada` y `denominadores-sectoriales`. La tercera vista usa
+> [denominadores propios de cada indicador](denominadores_sectoriales.md).
+> Los ejemplos numéricos de este documento corresponden a su captura indicada.
+> Ver [organización y comparación con RAPIDA](tablero_unificado.md).
+
 Esta vista se sitúa debajo de la matriz absoluta y antes de «Cómo leer la prioridad
 y sus límites». Compara afectación por habitante. Las dos matrices tienen búsquedas
 y ordenación independientes y comparten universo territorial, departamento y captura.

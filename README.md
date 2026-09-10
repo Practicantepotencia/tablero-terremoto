@@ -1,13 +1,21 @@
 # Tablero territorial de recuperación temprana
 
-## Rama priorizacion-integrada
+## Ramas priorizacion-integrada y denominadores-sectoriales
 
 Abre **index.html**. La matriz «Qué necesita cada municipio» es la vista
 principal: búsqueda de municipios, puntaje sectorial y rango por faltantes.
 Cada encabezado alterna orden descendente, ascendente y orden global normal.
 Inmediatamente debajo aparece una segunda matriz por cada 10.000 habitantes,
 con población municipal DANE 2026, conteos originales y cálculo verificable.
-Su búsqueda y orden son independientes. [Metodología relativa](docs/priorizacion_relativa.md).
+La tercera matriz usa bases propias verificadas por indicador y conserva los vacíos
+sin homologación. Las tres tienen búsqueda y orden independientes.
+En «Comparar municipios» aparecen los tres radares en el mismo orden.
+
+«Recuperación RAPIDA», antes de «Diagnóstico territorial» y «Fuentes y método»,
+conserva el ranking original y Recuperación e IPM. Incluye la nueva dispersión
+entre nuestro índice (selector absoluto / per cápita / sectorial) y el puesto
+o valor RAPIDA, con panel común, Pearson, Spearman, R² y cobertura.
+[Guía y método de la integración](docs/tablero_unificado.md).
 
 El modelo combina 17 campos en seis sectores con peso igual y aplica un ajuste
 por IPM censal DANE 2018. Usa pesos fijos, separa canales y muestra la sensibilidad

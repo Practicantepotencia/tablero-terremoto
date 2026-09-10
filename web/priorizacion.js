@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   const T = typeof module !== 'undefined' && module.exports ? require('./modelo.js') : root.Territorial;
+  const D = typeof module !== 'undefined' && module.exports ? require('./denominadores.js') : root.Denominadores;
   const field = (id, source, label, share) => ({id, source, label, share, unit:'Número'});
   const reported = (id, label, share=1) => field('3is_'+id, '3iS-Sheets', label, share);
   const estimated = (id, label, share=1) => field('pnud_'+id, 'PNUD', label, share);
@@ -38,7 +39,11 @@
     return sorted.map((r,i)=>{if(!i||!same(r[value],previous))rank=i+1;previous=r[value];return {...r,rank};});
   }
   function create(data, territorial=T.create(data), options={}) {
-    const relative=options.relative===true;
+    // Explicit modes keep the historical per-capita view separate from compatible stocks.
+    const mode=options.mode||(options.relative===true?'sectorial':'absolute');
+    if(!['absolute','percapita','sectorial'].includes(mode))throw new Error('Modo de priorización desconocido: '+mode);
+    const relative=mode!=='absolute';
+    const denominators=mode==='sectorial'?D.create(data):null;
     const cache=new Map();
     function compute(state) {
       // Solo ámbito y captura definen referencias; buscar/filtrar departamento no renormaliza.
@@ -55,9 +60,18 @@
       populationGroups.forEach((rs,code)=>{
         if(rs.length===1&&Number.isFinite(rs[0].population)&&rs[0].population>0)populations.set(code,rs[0]);
       });
+      const relativeMeasure=(r,id,code)=>{
+        if(mode==='sectorial')return denominators.measure(r,id,code,state.date);
+        const p=populations.get(code),valid=!!r&&Number.isFinite(r.v)&&r.v>=0;
+        return {rate:p&&valid?10000*r.v/p.population:null,multiplier:10000,relativeUnit:'/10.000 hab.',
+          denominatorLabel:'Población municipal proyectada',
+          denominator:p?{...p,value:p.population,unit:'Habitantes',reference_date:String(p.year)}:null,
+          denominatorSource:{label:'DANE · proyección municipal',url:data.population?.download||data.population?.url||'https://www.dane.gov.co/'},
+          reason:!p?'Sin población positiva, única y del año de la captura.':!valid?'Sin numerador válido.':''};
+      };
       const measure=r=>{if(!r||!Number.isFinite(r.v)||r.v<0)return null;
         if(!relative)return r.v;
-        const p=populations.get(r.code);return p?10000*r.v/p.population:null;};
+        return relativeMeasure(r,r.id,r.code).rate;};
       const calibrations=new Map();
       SECTORS.flatMap(s=>s.fields).forEach(f=>{
         const candidates=base.filter(r=>r.f===f.source&&r.id===f.id);
@@ -77,7 +91,7 @@
         const sectors=SECTORS.map(sector=>{
           const fields=sector.fields.map(f=>{
             const c=calibrations.get(f.id),r=c.rows.get(place.geo),value=measure(r),score=normalize(value,c.anchor);
-            return {...f,row:r||null,score,rate:relative?value:null,anchor:c.anchor,n:c.n,positive:c.positive,
+            return {...f,row:r||null,score,rate:relative?value:null,...(relative?relativeMeasure(r,f.id,place.code):{}),anchor:c.anchor,n:c.n,positive:c.positive,
               percentile:value!=null?T.percentile(c.values,value):null,contribution:score==null?null:score*f.share/6};
           });
           const lower=fields.reduce((s,f)=>s+(f.score??0)*f.share,0);
@@ -89,7 +103,7 @@
         const score=aggregate(sectors,vulnerability,weights);
         const coverage=sectors.reduce((s,d)=>s+d.coverage/6,0);
         const rec=recoveryRank.get(place.geo);
-        return {...place,...score,sectors,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,
+        return {...place,...score,sectors,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
           recovery:rec?.v??null,recoveryRank:rec?.rank??null,available:sectors.flatMap(s=>s.fields).filter(f=>f.score!=null).length,
           complete:coverage>1-EPS&&vulnerability!=null,rank:null,rankMin:null,rankMax:null};
       });
@@ -139,6 +153,14 @@
     }
     return {compute,selection};
   }
-  const api={create,normalize,aggregate,ranks,SECTORS,VERSION:'1.2'};
+  const bundles=new WeakMap();
+  function models(data){
+    if(!bundles.has(data)){
+      const territorial=T.create(data);
+      bundles.set(data,Object.fromEntries(['absolute','percapita','sectorial'].map(mode=>[mode,create(data,territorial,{mode})])));
+    }
+    return bundles.get(data);
+  }
+  const api={create,models,normalize,aggregate,ranks,SECTORS,VERSION:'1.2'};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.Priorizacion=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

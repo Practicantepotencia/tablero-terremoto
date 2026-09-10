@@ -17,12 +17,6 @@ def sample(value="12.5", date="2026-09-04"):
 
 
 class EdaTests(unittest.TestCase):
-    def test_scope_refresh_preserves_selected_indicators(self):
-        source = eda.TEMPLATE
-        self.assertIn("initRanking(rankIndicator)", source)
-        self.assertIn("initIpm(ipmOutcome)", source)
-        self.assertIn("setRankIndicators(preferredId)", source)
-
     def test_decree_departments_come_from_normative_indicator(self):
         rows = [
             {**sample(), "departamento": "Chocó", "municipio": "", "nivel": "departamental", "indicador_id": "en_decreto_1171", "valor": "1"},

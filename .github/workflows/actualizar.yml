@@ -30,14 +30,20 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Verificar importación y cálculos
         run: |
           python -m unittest discover -s tests -v
           if [ -f tests/modelo.test.js ]; then
-            node --test tests/modelo.test.js
+            node --test tests/*.test.js
             node --check web/tablero.js
           fi
       - name: Descargar datos y regenerar vistas de esta rama
+        # Publicar cambios de interfaz en main no depende de fuentes externas.
+        # Las descargas conservan su ejecución programada y manual.
+        if: github.event_name != 'push' || matrix.branch != 'main'
         run: |
           python actualizar_indice_terremoto.py --out index.html --csv indice_impacto_departamento.csv
           python migrar_clasificacion_3is.py
@@ -47,6 +53,9 @@ jobs:
             python generar_eda_indicadores.py --out eda_indicadores.html
             python generar_indice_educacion.py --out indice_educacion.html
           fi
+      - name: Publicar interfaz principal con el inventario conservado
+        if: github.event_name == 'push' && matrix.branch == 'main'
+        run: python generar_tablero_recuperacion.py
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: ${{ matrix.branch }}

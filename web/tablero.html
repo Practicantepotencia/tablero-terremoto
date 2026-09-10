@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Necesidades de recuperación temprana, diagnóstico sectorial y cobertura de la evidencia territorial en Colombia.">
+<title>Prioridades de recuperación · Colombia</title><style>__STYLE__</style></head>
+<body><main class="wrap">
+<div class="statusbar"><span class="pill">Análisis territorial</span><span id="capture-label"></span><span id="build-label" class="muted"></span></div>
+<header class="hero"><div class="kicker">Respuesta al terremoto · Colombia</div><h1>Dónde intervenir y qué necesita cada municipio</h1><p class="subtitle">Tres lecturas de las mismas necesidades: absoluta, per cápita y relativa a bases sectoriales verificadas. Datos, fórmulas y cobertura a la vista.</p></header>
+<nav class="tab-nav" role="tablist" aria-label="Vistas del tablero">
+<button type="button" id="tab-prioridades" class="tab-btn active" role="tab" aria-selected="true" aria-controls="prioridades" data-tab="prioridades">Prioridades</button>
+<button type="button" id="tab-radar" class="tab-btn" role="tab" aria-selected="false" aria-controls="radar" data-tab="radar">Comparar municipios</button>
+<button type="button" id="tab-rapida" class="tab-btn" role="tab" aria-selected="false" aria-controls="rapida" data-tab="rapida">Necesidad de recuperación temprana</button>
+<button type="button" id="tab-diagnostico" class="tab-btn" role="tab" aria-selected="false" aria-controls="diagnostico" data-tab="diagnostico">Diagnóstico territorial</button>
+<button type="button" id="tab-metodo" class="tab-btn" role="tab" aria-selected="false" aria-controls="metodo" data-tab="metodo">Fuentes y método</button>
+</nav>
+<div class="filters global">
+<label>Universo territorial<select id="scope"><option value="decree">Departamentos del Decreto 1171</option><option value="all">Todos los departamentos del inventario</option></select></label>
+<label>Departamento<select id="dept"></select></label>
+<label>Captura del inventario<select id="date"></select></label>
+</div>
+<p id="scope-note" class="note"></p>
+<section id="prioridades" class="tab-panel" role="tabpanel" aria-labelledby="tab-prioridades">
+<div id="priority-kpis" class="tiles" aria-live="polite"></div>
+<div class="card matrix-card"><div class="section-head"><h2 id="matrix-title">Qué necesita cada municipio</h2></div>
+<div class="filters matrix-controls"><label>Buscar municipio<input id="matrix-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="matrix"></label></div>
+<p id="priority-note" class="note"></p><details class="matrix-explanation"><summary>Fuentes y significado de los colores</summary><p id="matrix-caption" class="muted small"></p><p id="matrix-note" class="note"></p><p id="matrix-warning" class="note"></p></details><p id="matrix-count" class="note small" aria-live="polite"></p><div id="matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="matrix-title"></div></div>
+<section class="card" id="priority-detail" hidden aria-live="polite" aria-label="Descomposición de la prioridad municipal"></section>
+<div class="card matrix-card" id="percapita-card"><div class="section-head"><h2 id="percapita-title">Qué necesita cada municipio · per cápita</h2><span class="muted small">Todos los conteos por 10.000 habitantes</span></div>
+<div class="filters matrix-controls"><label>Buscar municipio<input id="percapita-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="percapita-matrix"></label></div>
+<p class="note">Concentración del reporte por residente, no proporción del parque de viviendas, sedes o infraestructura dañado. Una tasa de 3,8 heridos por 10.000 habitantes no significa 3,8 personas reales; consulta el conteo original.</p>
+<p id="percapita-note" class="note"></p><details class="matrix-explanation"><summary>Fórmula y cómo interpretar las tasas</summary><p id="percapita-formula" class="formula"></p><p>Familias por habitante no equivale a porcentaje de hogares afectados. Sedes de salud o educación por habitante no mide pérdida de capacidad ni acceso. Viviendas, vías, acueductos y edificios requieren sus propios inventarios para medir la proporción afectada: consulta la tercera matriz. La población proyectada no refleja desplazamientos posteriores al sismo.</p></details>
+<p id="percapita-count" class="note small" aria-live="polite"></p><div id="percapita-matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="percapita-title"></div><section id="percapita-detail" class="relative-detail" hidden aria-live="polite" aria-label="Cálculo per cápita municipal"></section></div>
+<div class="card matrix-card" id="relative-card"><div class="section-head"><h2 id="relative-title">Qué necesita cada municipio · relativo a su base sectorial</h2><span class="muted small">Denominador propio por indicador</span></div>
+<div class="filters matrix-controls"><label>Buscar municipio<input id="relative-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="relative-matrix"></label></div>
+<p class="notice">Comparación parcial: hay bases habilitadas para personas y vivienda. Los sectores sin denominador no tienen puntaje relativo; su ausencia no acredita menor necesidad. El orden global es solo el límite documentado y conserva el peso de los faltantes.</p><p id="relative-note" class="note"></p><details class="matrix-explanation"><summary>Fórmula y cómo interpretar las tasas</summary><p id="relative-formula" class="formula"></p><p>Personas: reportes por 10.000 habitantes. Viviendas: porcentaje respecto al total proyectado de viviendas, ocupadas y desocupadas. La proporción de viviendas y el puntaje normalizado son distintos. Familias, salud, educación, infraestructura y comunidad quedan sin valor relativo mientras no se verifique un denominador compatible. <a href="docs/denominadores_sectoriales.md">Ver lista de los 17 campos, fuentes y motivos de exclusión</a>.</p><p>Se conserva el ajuste por IPM censal 2018. Población proyectada es una referencia previa: no mide desplazamientos tras el sismo. Los reportes siguen teniendo las limitaciones de cobertura y clasificación del índice absoluto.</p></details>
+<p id="relative-count" class="note small" aria-live="polite"></p><div id="relative-matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="relative-title"></div><section id="relative-detail" class="relative-detail" hidden aria-live="polite" aria-label="Cálculo relativo municipal"></section></div>
+<details class="card"><summary>Cómo leer la prioridad y sus límites</summary><p>El puntaje combina seis sectores con el mismo peso. En vivienda, salud, educación y servicios comunitarios se conservan por separado los reportes 3iS y las cifras del inventario PNUD. Impacto humano e infraestructura usan 3iS. La necesidad de recuperación temprana se usa como comparación, sin entrar a la fórmula.</p><p>El primer número es el límite inferior compatible con las observaciones. El intervalo muestra cuánto podría cambiar al completar los faltantes. Un intervalo amplio impide afirmar un puesto definitivo. Este orden conservador puede favorecer territorios mejor documentados; «Prioridad posible» permite revisar los que faltan por caracterizar.</p><p>La pobreza censal municipal de 2018 ajusta la prioridad hasta un 25% respecto al mismo daño. No crea prioridad donde no hay daño. Los pesos son una propuesta de decisión; se prueban 39 escenarios de sensibilidad.</p><button type="button" class="secondary" id="show-method">Ver fórmula, variables y sensibilidad</button></details>
+</section>
+<section id="radar" class="tab-panel" role="tabpanel" aria-labelledby="tab-radar" hidden>
+<div class="card"><h2>Comparar necesidades sectoriales · absoluto</h2><p class="note">Selecciona hasta tres municipios. Cada eje representa un sector de 0 a 100, no un porcentaje de daño. La línea continua es el límite documentado; la discontinua muestra el límite posible por faltantes. El área del polígono no es el índice global.</p>
+<div id="radar-pickers" class="filters"></div><p id="radar-reference" class="note"></p>
+<p class="notice">Comunitario: las fuentes presentan esta categoría separada de salud y educación, pero no se ha verificado que sus establecimientos sean excluyentes. Puede haber doble ponderación de un mismo daño. No sumes estas cantidades como edificios únicos. <a href="docs/auditoria_comunitarios.md">Ver comprobación y límites</a>.</p>
+<div class="radar-layout"><div><div id="radar-chart"></div><div id="radar-legend"></div></div><section id="radar-inspector" class="radar-inspector" aria-label="Cálculo del punto seleccionado"></section></div>
+<p class="note">Pasa el mouse sobre un punto para ver sus entradas y su resultado a la derecha. También puedes enfocarlo con Tab o tocarlo. Los botones de sector ofrecen la misma consulta cuando los puntos se superponen.</p><div id="radar-sectors" class="radar-sectors"></div></div>
+<div class="card"><h2>Comparar necesidades sectoriales · per cápita</h2><p class="note">El mismo radar, con los conteos por 10.000 habitantes antes de normalizar de 0 a 100. No representa el porcentaje de instalaciones afectadas. Línea continua: documentado; discontinua: posible por faltantes. Los ejes sin datos no tienen puntos.</p>
+<div id="radar-percapita-pickers" class="filters"></div><p id="radar-percapita-reference" class="note"></p>
+<div class="radar-layout"><div><div id="radar-percapita-chart"></div><div id="radar-percapita-legend"></div></div><section id="radar-percapita-inspector" class="radar-inspector" aria-label="Cálculo per cápita del punto seleccionado"></section></div>
+<p class="note">Pasa el mouse, enfoca con Tab o toca un punto para ver el conteo original, la población, la tasa y el cálculo completo. Las selecciones son independientes de los otros radares.</p><div id="radar-percapita-sectors" class="radar-sectors"></div></div>
+<div class="card"><h2>Comparar necesidades sectoriales · relativo a su base</h2><p class="note">Selecciona hasta tres municipios. Cada eje representa un puntaje normalizado de 0 a 100 con el denominador propio de cada indicador. Personas por 10.000 habitantes y viviendas por 100 viviendas. Los sectores sin base válida no se dibujan; sus motivos se consultan en los botones de sector. La línea continua es el límite documentado; la discontinua muestra el límite posible por faltantes. El área del polígono no es el índice global.</p>
+<div id="radar-relative-pickers" class="filters"></div><p id="radar-relative-reference" class="note"></p>
+<p class="notice">Comparación parcial: hay bases habilitadas para personas y vivienda. Salud, educación, infraestructura y comunidad no tienen denominador homologado. Sus ejes quedan sin puntos; conserva la lectura de los faltantes al comparar municipios. <a href="docs/denominadores_sectoriales.md">Ver bases, fuentes y comprobación de San José del Palmar y Atrato</a>.</p>
+<div class="radar-layout"><div><div id="radar-relative-chart"></div><div id="radar-relative-legend"></div></div><section id="radar-relative-inspector" class="radar-inspector" aria-label="Cálculo relativo con denominador propio del punto seleccionado"></section></div>
+<p class="note">Pasa el mouse sobre un punto para ver sus entradas y su resultado a la derecha. También puedes enfocarlo con Tab o tocarlo. Los botones de sector ofrecen la misma consulta cuando los puntos se superponen.</p><div id="radar-relative-sectors" class="radar-sectors"></div></div>
+</section>
+<section id="rapida" class="tab-panel" role="tabpanel" aria-labelledby="tab-rapida" hidden>
+<p class="note">Resultado original de necesidades de recuperación temprana UNDP/PNUD RAPIDA. Se conserva sin mezclarlo ni sustituirlo por nuestro índice.</p>
+<div id="rapida-kpis" class="tiles" aria-live="polite"></div>
+<div class="two">
+<div class="card"><div class="section-head"><h2>Ranking de necesidad de recuperación temprana</h2><label class="search">Buscar en la tabla<input id="rapida-search" type="search" placeholder="Municipio o departamento"></label></div><p id="rapida-note" class="note"></p><div id="rapida-table" class="table-scroll"></div><button type="button" id="rapida-more" class="secondary" hidden>Ver más municipios</button></div>
+<div class="card"><h2>Necesidad de recuperación temprana e IPM</h2><p class="note">El IPM contextualiza el resultado. Los ejes no constituyen mediciones independientes.</p><div id="scatter"></div><p class="note">Selecciona un punto para abrir su ficha.</p><p id="scatter-note" class="note small"></p></div>
+</div>
+<div class="card" id="comparison-card"><h2>Nuestro índice frente a necesidad de recuperación temprana</h2>
+<div class="filters comparison-controls">
+<label>Nuestro índice<select id="comparison-mode"><option value="absolute">Absoluto</option><option value="percapita">Per cápita</option><option value="sectorial">Relativo</option></select></label>
+<label>Resaltar municipio<input id="comparison-search" type="search" placeholder="Nombre o departamento; no cambia R²"></label>
+</div>
+<p id="comparison-note" class="note" aria-live="polite"></p><div id="comparison-kpis" class="tiles"></div>
+<div class="comparison-layout"><div id="comparison-chart"></div><section id="comparison-detail" class="radar-inspector" aria-label="Municipio seleccionado en la dispersión" aria-live="polite"></section></div>
+<p id="comparison-fit" class="formula"></p>
+<details><summary>Cómo se calculan la comparación y R²</summary><p id="comparison-reference" class="note small"></p><p>X es el límite documentado de nuestro índice (0–100); Y es el puntaje original de necesidad de recuperación temprana, sin convertirlo en puesto ni reescalarlo a 100. Los valores más altos se dibujan arriba.</p><p>El ajuste es una recta con intercepto: Y = a + bX. Pearson r = cov(X,Y) / (desv(X) × desv(Y)); R² = r² = 1 − Σ(Y − Ŷ)² / Σ(Y − promedio Y)². Spearman es Pearson aplicado a los rangos de los pares, con rango promedio en empates. Los estadísticos usan precisión completa; no se calculan con menos de tres pares ni con una serie constante.</p><p>Una correlación positiva indica que los puntajes altos de nuestro índice tienden a acompañarse de puntajes altos de necesidad de recuperación temprana. R² no conserva ese signo ni prueba que alguno de los índices sea correcto. No se estima causalidad, significación estadística ni validación independiente: los modelos comparten parte de sus insumos.</p><p>El universo y la captura recalculan las anclas y los puestos de referencia. El departamento restringe los pares y recalcula r y R², pero no las anclas ni los puestos. La búsqueda solo resalta puntos. Se incluyen todos los municipios de los filtros generales que tengan ambos datos en la versión elegida. Al cambiar de versión, la cantidad de pares puede cambiar si faltan datos. La versión relativa conserva sus límites de cobertura; los detalles se consultan en «Fuentes y método». Ceros explícitos válidos se incluyen; faltantes no se imputan. Los límites superiores no entran en la regresión.</p></details>
+<details><summary>Municipios y valores usados</summary><div id="comparison-table" class="table-scroll"></div></details>
+</div>
+<details class="card"><summary id="rapida-missing-title">Municipios sin necesidad de recuperación temprana evaluada</summary><p class="note">Su ausencia del ranking no significa necesidad baja.</p><div id="rapida-missing-table" class="table-scroll"></div></details>
+</section>
+<section id="diagnostico" class="tab-panel" role="tabpanel" aria-labelledby="tab-diagnostico" hidden>
+<div class="filters local">
+<label>Nivel<select id="level"><option value="municipal">Municipal</option><option value="departamental">Departamental</option></select></label>
+<label>Fuente<select id="source"></select></label>
+<label>Dimensión<select id="dimension"></select></label>
+<label class="wide">Indicador<select id="indicator"></select></label>
+</div>
+<p id="cohort-note" class="note"></p><div id="source-warning" class="notice"></div>
+<div id="sector-kpis" class="tiles" aria-live="polite"></div>
+<div class="two">
+<div class="card"><div class="section-head"><h2 id="sector-title">Ranking sectorial</h2><button type="button" id="download" class="secondary">Descargar selección CSV</button></div><div class="filters inline"><label>Orden<select id="order"><option value="desc">Mayor valor</option><option value="asc">Menor valor</option></select></label><label>Buscar en la tabla<input id="sector-search" type="search" placeholder="Territorio"></label></div><div id="sector-table" class="table-scroll"></div><button type="button" id="sector-more" class="secondary" hidden>Ver más territorios</button></div>
+<div class="card"><h2>Distribución del indicador</h2><div id="distribution"></div><p id="distribution-note" class="note"></p><h2>Evolución de la selección</h2><div id="sector-trend"></div></div>
+</div>
+<div class="card" id="profile-card"><div class="section-head"><h2>Ficha territorial</h2><label class="profile-picker">Territorio<select id="territory"></select></label></div><p id="profile-note" class="note"></p><div id="profile-kpis" class="tiles compact"></div><div id="profile-table" class="table-scroll"></div><details><summary>Historial del indicador en este territorio</summary><div id="profile-trend"></div></details></div>
+</section>
+<section id="metodo" class="tab-panel" role="tabpanel" aria-labelledby="tab-metodo" hidden>
+<div id="priority-method" class="card"></div>
+<div class="card"><h2>Tres versiones, la misma fórmula sectorial</h2><p>Absoluto: conteos originales. Per cápita: todos los conteos por 10.000 habitantes DANE. Relativo sectorial: base compatible propia de cada indicador; conserva vacíos sin homologación. Las tasas se normalizan por su máximo comparable antes de aplicar los mismos pesos y el IPM. La escala 0–100 es un puntaje, no un porcentaje de daño.</p><p>La per cápita mide concentración por residente, no pérdida de capacidad. La relativa sectorial sigue siendo parcial y no permite interpretar falta de datos como menor necesidad. <a href="docs/tablero_unificado.md">Método de las tres vistas y comparación con necesidad de recuperación temprana</a> · <a href="docs/denominadores_sectoriales.md">Denominadores y exclusiones</a>.</p></div>
+<div class="card"><h2>Cobertura de las fuentes</h2><p class="note">Universo, departamento y captura seleccionados. Los territorios pueden repetirse entre fuentes; sus coberturas no se suman.</p><div id="coverage-table" class="table-scroll"></div></div>
+<div class="two"><div class="card"><h2>Cómo se decide el orden</h2>
+<p>El orden principal es el límite inferior del modelo sectorial. Los empates comparten posición. Se puede contrastar con la necesidad de recuperación temprana o revisar el límite superior para orientar la búsqueda de información.</p>
+<p>La referencia de normalización cambia al elegir todos los departamentos o solo los del decreto. La búsqueda, el filtro de departamento y el selector de fuente solo cambian la vista, no el puntaje.</p>
+<p>Cada ranking sectorial exige la misma fuente, indicador, nivel, unidad, definición registrada y captura. Las otras fuentes se consultan por separado. Nunca rellenan los huecos de la fuente elegida.</p>
+<p>Las magnitudes absolutas sirven para dimensionar la respuesta y dependen del tamaño territorial. No se calculan tasas sin denominadores compatibles y verificados.</p>
+<p>La cobertura pondera la fracción conocida de los 17 campos del modelo. Cuenta disponibilidad, no calidad o certeza. Las categorías de edificios se normalizan por separado; sus cantidades no se suman.</p>
+</div><div class="card"><h2>Qué sigue pendiente</h2>
+<p class="notice">La fecha de captura es la del inventario. Falta acreditar la fecha efectiva y la versión metodológica de cada observación. Las comparaciones dentro de una fuente siguen siendo provisionales.</p>
+<p>El modelo usa el IPM censal DANE 2018 ya verificado en fuentes-nuevas. Su antigüedad limita la representación de la vulnerabilidad actual. El IPM de RAPIDA se conserva únicamente en las consultas de esa fuente.</p>
+<p>PNUD y RAPIDA comparten cifras en el solapamiento auditado. Su coincidencia no demuestra validación independiente. La fuente elegida tampoco elimina posibles errores internos o sesgos de cobertura.</p>
+<p>El decreto delimita el filtro administrativo. No demuestra daño en todos sus municipios, ni ausencia de daño fuera de ellos. Las observaciones ExE conservan una advertencia de atribución.</p>
+<p>La evolución usa únicamente territorios presentes en todas las capturas comparadas. Se informa su tamaño; no representa automáticamente al departamento completo.</p>
+</div></div>
+<div class="card"><h2>Controles de integridad</h2><div id="checks"></div><p class="note">Se excluyen registros inválidos o conflictivos; un dato ausente no se convierte en cero. Los nombres solo se vinculan si el código no es ambiguo.</p></div>
+<details class="card"><summary>Diccionario de la selección</summary><div id="dictionary" class="table-scroll"></div></details>
+<details class="card"><summary>Documentación</summary><p><a href="docs/modelo_priorizacion.md">Modelo sectorial y decisiones metodológicas</a> · <a href="docs/auditoria_indicadores_largo.md">Auditoría de los indicadores</a> · <a href="historial_indice.csv">Historial del índice original</a></p></details>
+</section>
+<footer><span id="footer-capture"></span><span>Necesidades y cobertura del inventario disponible. «Sin dato» nunca significa cero.</span></footer>
+<noscript><p>Activa JavaScript para filtrar y consultar el tablero. Los datos originales están en <a href="indicadores_largo_no_calculo.csv">el inventario CSV</a>.</p></noscript>
+</main><script>__MODEL__</script><script>__DENOMINATORS__</script><script>__PRIORITY_MODEL__</script><script>const DATA=__DATA__;</script><script>__RADAR__</script><script>__RELATIVE__</script><script>__COMPARISON__</script><script>__APP__</script></body></html>

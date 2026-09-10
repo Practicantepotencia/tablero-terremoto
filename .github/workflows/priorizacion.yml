@@ -1,0 +1,49 @@
+name: Verificar y generar priorización integrada
+on:
+  push:
+    branches: [denominadores-sectoriales, priorizacion-integrada]
+    paths:
+      - 'web/**'
+      - 'tests/**'
+      - '*.py'
+      - 'data/linea_base_priorizacion.json'
+      - 'data/poblacion_relativa.json'
+      - 'data/denominadores_sectoriales.json'
+      - '.github/workflows/priorizacion.yml'
+permissions:
+  contents: write
+concurrency:
+  group: priorizacion-${{ github.ref_name }}
+  cancel-in-progress: false
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar identidad y cálculos
+        run: |
+          python -m unittest discover -s tests -v
+          node --test tests/modelo.test.js tests/priorizacion.test.js
+          node --test tests/relativo.test.js tests/unificado.test.js
+          node --check web/comparacion.js
+          node --check web/tablero.js
+          node --check web/radar.js
+          node --check web/relativo.js
+          node --check web/denominadores.js
+      - name: Generar HTML desde las observaciones de esta rama
+        run: python generar_tablero_recuperacion.py
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: ${{ github.ref_name }}
+          commit_message: 'Generar tablero de priorización integrada'
+          file_pattern: 'index.html eda_indicadores.html'
+          commit_user_name: tablero-terremoto-bot
+          commit_user_email: actions@github.com

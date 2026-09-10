@@ -1120,7 +1120,7 @@ LABEL_SEDES_EDUCATIVAS_POR_CAMPO = {
 }
 
 
-def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None, sedes_educativas_por_municipio=None, datos_pnud_por_dep=None, datos_pnud_por_municipio=None, datos_undp_por_dep=None, datos_undp_por_municipio=None):
+def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, no_calculo_csv_path=None, datos_3is_por_dep=None, datos_3is_por_municipio=None, sedes_educativas_por_municipio=None, datos_pnud_por_dep=None, datos_pnud_por_municipio=None, datos_undp_por_dep=None, datos_undp_por_municipio=None, naboo_disponible=True):
     """Fase A (ver docs/formato_largo.md): exporta los mismos indicadores
     que ya calcula el script a una tabla larga (un indicador x unidad
     geográfica por fila, con dimensión/unidad/fuente como metadatos) en
@@ -1157,7 +1157,8 @@ def export_formato_largo(rows, municipios, csv_path, empresarios_por_dep=None, n
         dep = r["departamento"]
         for d in DIMS:
             label = DIM_LABELS[d]
-            fila(dep, None, "departamental", label, f"{d}_n", f"Puntos registrados ({label})", "Número", "Naboo", r[f"{d}_n"])
+            if naboo_disponible:
+                fila(dep, None, "departamental", label, f"{d}_n", f"Puntos registrados ({label})", "Número", "Naboo", r[f"{d}_n"])
             fila(dep, None, "departamental", label, f"{d}_incidencia_tasa_100k", f"Tasa de incidencia ({label})", "Tasa x100k hab.", "Calculo", r[f"{d}_incidencia_tasa_100k"])
             fila(dep, None, "departamental", label, f"{d}_incidencia_idx", f"Incidencia ({label})", "Índice 0-100", "Calculo", r[f"{d}_incidencia_idx"])
             fila(dep, None, "departamental", label, f"{d}_severidad_promedio", f"Severidad promedio cruda ({label})", "Peso promedio", "Calculo", r[f"{d}_severidad_promedio"])
@@ -2113,9 +2114,12 @@ def build_html(rows, meta, autorefresh_seconds=14400, municipios=None, resumen_m
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Actualiza el índice de impacto del terremoto (local, sin Claude).")
+    ap = argparse.ArgumentParser(description="Actualiza el inventario y el tablero territorial; --legado reproduce los índices anteriores.")
     ap.add_argument("--url", default=URL_POR_DEFECTO, help="URL o ruta local de registro.json (por defecto: el endpoint público del sitio)")
-    ap.add_argument("--out", default="dashboard_impacto_terremoto.html", help="Ruta del HTML de salida")
+    ap.add_argument("--out", default="index.html", help="Ruta del tablero territorial unificado")
+    ap.add_argument("--legado", action="store_true", help="Reproduce los índices históricos y su HTML; usar --out con otra ruta")
+    ap.add_argument("--solo-datos", action="store_true", help="Actualiza el inventario sin generar tableros ni compuestos históricos")
+    ap.add_argument("--historial-indicadores", default="historial_indicadores_no_calculo.csv", help="Capturas del inventario crudo")
     ap.add_argument("--csv", default="indice_impacto_departamento.csv", help="Ruta del CSV del índice (para Excel/Power BI/lo que sea)")
     ap.add_argument("--poblacion", default=None, help=f"CSV externo de población por departamento o por municipio (opcional; por defecto usa {MUNICIPIOS_POBLACION_CSV} si existe, si no la tabla embebida). Pasa '' vacío para forzar la tabla embebida.")
     ap.add_argument("--sin-autorefresh", action="store_true", help="No agregar la etiqueta de autorrecarga cada 4h al HTML")
@@ -2128,11 +2132,16 @@ def main():
     args = ap.parse_args()
 
     print(f"[{datetime.now().isoformat(timespec='seconds')}] Descargando/leyendo: {args.url}")
+    naboo_disponible = True
     try:
         data = load_registro(args.url)
     except Exception as e:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] ERROR al obtener registro.json: {e}", file=sys.stderr)
-        sys.exit(1)
+        if args.legado:
+            sys.exit(1)
+        naboo_disponible = False
+        data = {"puntos": [], "actualizado": None}
+        print("Se continúa con otras fuentes. Naboo queda sin observaciones, no en cero.")
 
     poblacion_path = args.poblacion
     if poblacion_path is None:
@@ -2201,23 +2210,21 @@ def main():
     else:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo: no se pudo leer UNDP geosmart esta corrida (red o formato) -- se sigue sin ese dato, no interrumpe la corrida")
 
-    # Índice ajustado (Fase B, ver docs/indice_ajustado.md) -- se calcula
-    # SIEMPRE a partir de las variables ya cargadas arriba, en paralelo al
-    # índice original (que nunca se toca): un segundo índice compuesto que
-    # usa 3iS/PNUD/UNDP-RAPIDA/FundacionExe donde alcanzan, con Naboo solo
-    # como último respaldo departamental.
-    filas_ajustado_dep, filas_ajustado_mun = compute_indice_ajustado(
-        dep_pop, rows, municipios,
-        datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None,
-        datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None,
-        datos_undp_por_dep=datos_undp_por_dep or None, datos_undp_por_municipio=datos_undp_por_municipio or None,
-        sedes_educativas_por_municipio=sedes_educativas_en_decreto_por_municipio or None,
-    )
-    n_dep_con_dato = sum(1 for f in filas_ajustado_dep if f["n_dimensiones"] > 0)
-    print(f"[{datetime.now().isoformat(timespec='seconds')}] Índice ajustado (Fase B): {n_dep_con_dato}/{len(filas_ajustado_dep)} departamentos con al menos 1 dimensión, {len(filas_ajustado_mun)} municipios con dato -> {args.indice_ajustado_dep or '(desactivado)'}")
+    # La cascada solo se reproduce bajo petición explícita del modo legado.
+    filas_ajustado_dep, filas_ajustado_mun = ([], [])
+    if args.legado:
+        filas_ajustado_dep, filas_ajustado_mun = compute_indice_ajustado(
+            dep_pop, rows, municipios,
+            datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None,
+            datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None,
+            datos_undp_por_dep=datos_undp_por_dep or None, datos_undp_por_municipio=datos_undp_por_municipio or None,
+            sedes_educativas_por_municipio=sedes_educativas_en_decreto_por_municipio or None,
+        )
+        n_dep_con_dato = sum(1 for f in filas_ajustado_dep if f["n_dimensiones"] > 0)
+        print(f"Índice legado: {n_dep_con_dato} departamentos; {len(filas_ajustado_mun)} municipios")
 
     if args.formato_largo:
-        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None, sedes_educativas_por_municipio=sedes_educativas_por_municipio or None, datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None, datos_undp_por_dep=datos_undp_por_dep or None, datos_undp_por_municipio=datos_undp_por_municipio or None)
+        n_filas = export_formato_largo(rows, municipios, args.formato_largo, empresarios_por_dep=empresarios_por_dep or None, no_calculo_csv_path=args.no_calculo or None, datos_3is_por_dep=datos_3is_por_dep or None, datos_3is_por_municipio=datos_3is_por_municipio or None, sedes_educativas_por_municipio=sedes_educativas_por_municipio or None, datos_pnud_por_dep=datos_pnud_por_dep or None, datos_pnud_por_municipio=datos_pnud_por_municipio or None, datos_undp_por_dep=datos_undp_por_dep or None, datos_undp_por_municipio=datos_undp_por_municipio or None, naboo_disponible=naboo_disponible)
         print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): {n_filas} filas -> {args.formato_largo}")
         if args.no_calculo:
             print(f"[{datetime.now().isoformat(timespec='seconds')}] Inventario crudo (fuente != Calculo): -> {args.no_calculo}")
@@ -2236,6 +2243,19 @@ def main():
             rows = rows_reconstruidas
         else:
             print(f"[{datetime.now().isoformat(timespec='seconds')}] Formato largo (Fase A): VERIFICACIÓN FALLÓ ({pivote_detalle}) -- se sigue usando el cálculo original", file=sys.stderr)
+
+    if args.solo_datos:
+        print("Inventario crudo actualizado.")
+        return
+    if not args.legado:
+        from generar_tablero_recuperacion import generate
+        from pathlib import Path
+        if not args.formato_largo or not args.no_calculo:
+            raise SystemExit("El tablero unificado requiere --formato-largo y --no-calculo.")
+        generate(args.no_calculo, args.historial_indicadores, args.out,
+                 str(Path(args.out).with_name("eda_indicadores.html")), update_history=True)
+        print(f"Tablero territorial actualizado -> {args.out}")
+        return
 
     write_indice_csv(rows, args.csv)
     write_indice_ajustado_csv(filas_ajustado_dep, filas_ajustado_mun, args.indice_ajustado_dep or None, args.indice_ajustado_mun or None)

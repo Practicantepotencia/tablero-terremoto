@@ -1,5 +1,12 @@
 # Publicar el tablero como página web pública (GitHub Pages + GitHub Actions)
 
+> Publicación vigente: [tablero principal](https://practicantepotencia.github.io/tablero-terremoto/),
+> desde `main` y `/ (root)`. Usa el tablero unificado de tres matrices y tres radares.
+> `generar_tablero_recuperacion.py` regenera `index.html` sin descargar datos;
+> `actualizar_indice_terremoto.py --out index.html` descarga las fuentes y genera
+> esa misma interfaz. Ver [configuración actual](docs/publicacion_main.md).
+> Las instrucciones iniciales de abajo se conservan como referencia de instalación.
+
 Con esto, el tablero queda en una URL real tipo `https://TU_USUARIO.github.io/tablero-terremoto/`, y se actualiza solo cada 4 horas **corriendo en los servidores de GitHub** — ya no depende de que tu computador esté encendido.
 
 ## 0. Antes de empezar

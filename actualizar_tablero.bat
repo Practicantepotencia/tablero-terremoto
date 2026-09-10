@@ -17,5 +17,5 @@ if %errorlevel%==0 (
     py generar_eda_indicadores.py >> actualizar_log.txt 2>&1
 )
 
-echo Listo. Revisa dashboard_impacto_terremoto.html y eda_indicadores.html
+echo Listo. Revisa index.html. eda_indicadores.html redirige al mismo tablero.
 

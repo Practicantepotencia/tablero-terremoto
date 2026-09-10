@@ -28,9 +28,9 @@ function globalControls() {
   $('capture-label').textContent = `Captura: ${state.date || 'sin fecha válida'}`;
   $('build-label').textContent = `Generado: ${DATA.generated.slice(0,10)}`;
   $('scope-note').textContent = state.scope==='decree'
-    ? `${model.decree(state.date).size} departamentos nombrados en el inventario del Decreto 1171. El ámbito administrativo no acredita afectación en cada municipio.`
-    : 'Inventario completo. Incluye coberturas ajenas al sismo; revisa la atribución y la fuente de cada indicador.';
-  $('footer-capture').textContent = `Captura del inventario ${state.date}. Fecha efectiva de las observaciones pendiente de verificación por fuente.`;
+    ? `${model.decree(state.date).size} departamentos del decreto`
+    : 'Todos los departamentos del inventario';
+  $('footer-capture').textContent = `Captura ${state.date}`;
 }
 function diagnosticControls() {
   const valid = model.catalog.filter(m=>m.lv===state.level && m.f!=='Decreto1171');
@@ -40,7 +40,7 @@ function diagnosticControls() {
   const dims = sorted(sourceCatalog.map(m=>m.dim));
   state.dim = setOptions('dimension',dims.map(d=>({value:d,label:d})),state.dim);
   const metrics = sourceCatalog.filter(m=>m.dim===state.dim).sort((a,b)=>a.i.localeCompare(b.i,'es'));
-  state.metric = setOptions('indicator',metrics.map(m=>({value:m.key,label:`${m.i} (${m.u})`})),state.metric);
+  state.metric = setOptions('indicator',metrics.map(m=>({value:m.key,label:`${m.i} · ${m.u}`})),state.metric);
   const places = [...new Map(model.visible(state).filter(r=>r.lv===state.level).map(r=>[r.geo,r])).values()].sort((a,b)=>T.label(a).localeCompare(T.label(b),'es'));
   state.geo = setOptions('territory',places.map(r=>({value:r.geo,label:T.label(r)})),state.geo);
 }
@@ -103,17 +103,17 @@ function renderMatrix() {
   const p=priorityModel.selection(selected),municipal=state.matrixLevel==='municipal';
   const selectedSector=Priorizacion.SECTORS.find(s=>s.id===state.priorityDimension);
   const orderText=selectedSector?`Orden por ${selectedSector.name}: ${state.dimensionDirection==='asc'?'menor a mayor':'mayor a menor'}, usando el puntaje documentado. Municipios sin datos al final`:'Orden normal: prioridad global documentada de mayor a menor';
-  $('priority-note').textContent=municipal?`${orderText}. Pulsa una columna: mayor a menor → menor a mayor → orden normal. Selecciona un municipio para ver su fórmula.`:'Los totales departamentales no se reparten entre municipios ni reciben puntaje municipal.';
+  $('priority-note').textContent=municipal?`${selectedSector?selectedSector.name:"Prioridad documentada"} · ${state.dimensionDirection==="asc"?"menor a mayor":"mayor a menor"}. Pulsa una columna para ordenar.`:'Los totales departamentales no se reparten entre municipios ni reciben puntaje municipal.';
   if(state.matrixSource==='FundacionExe')$('priority-note').textContent+=' ExE: atribución de las sedes al sismo pendiente de verificar.';
   const source=DATA.sources[state.matrixSource];
   $('matrix-title').textContent=municipal?'Qué necesita cada municipio · absoluto':'Qué reporta cada departamento';
   $('matrix-caption').textContent=integrated?'3iS: reportes consolidados · PNUD: inventario de daños usado para la estimación · DANE 2018: vulnerabilidad':`${source?.label||state.matrixSource} · valores originales`;
-  $('matrix-note').textContent=integrated?'El intervalo propaga datos faltantes; no es un intervalo de confianza. El color representa la intensidad normalizada de cada campo. «—» es sin dato.':'Cada color es el percentil del mismo indicador y fuente dentro del ámbito seleccionado. La búsqueda y el departamento no alteran la referencia.';
-  $('matrix-warning').textContent=integrated?'Las cifras PNUD y 3iS pueden compartir insumos. Cada sector mantiene un peso fijo; coincidir no cuenta como corroboración independiente.':source?.note||'';
+  $('matrix-note').textContent=integrated?'Color: intensidad de cada variable. —: sin dato.':'Cada color es el percentil del mismo indicador y fuente dentro del ámbito seleccionado. La búsqueda y el departamento no alteran la referencia.';
+  $('matrix-warning').textContent=integrated?'':source?.note||'';
   const compactRange=(lo,hi)=>Math.abs(lo-hi)<1e-8?`${fmt(lo)} /100`:`Documentado ${fmt(lo)} · posible ${fmt(hi)} /100`;
   const placeCell=r=>{const sector=selectedSector&&r.sectors.find(s=>s.id===selectedSector.id),hasSector=sector&&sector.coverage>0;return `<td class="municipal-cell"><button class="link" type="button" data-priority-geo="${esc(r.geo)}">${esc(r.m)}</button><div class="muted small">${esc(r.d)}</div><div class="priority-number">${selectedSector?(hasSector?fmt(state.priorityOrder==='uncertainty'?sector.upper:sector.lower):'—'):(r.coverage>0?fmt(state.priorityOrder==='uncertainty'?r.upper:r.lower):'—')}<small> / 100</small></div><div class="small">${selectedSector?(hasSector?`${esc(selectedSector.name)} · ${compactRange(sector.lower,sector.upper)}`:'Sin datos en esta dimensión'):(r.coverage>0?`Prioridad · ${compactRange(r.lower,r.upper)}`:'Sin componentes puntuables')}</div><div class="small muted">Cobertura ${fmt(100*r.coverage)}% · ${r.available}/17 campos</div><div class="small muted">${selectedSector?`Puesto en dimensión ${r.dimensionRank??'—'} · global ${r.rank??'—'}`:`Puesto global ${r.rank??'—'}`} · Puesto de necesidad de recuperación temprana ${r.recoveryRank??'—'}</div></td>`;};
   if(integrated){
-    $('matrix-count').textContent=`${p.items.length} municipios visibles · ${p.referenceN} en la referencia. El filtro del decreto recalcula anclas, puntajes y posiciones. La búsqueda no los cambia.`;
+    $('matrix-count').textContent=`${p.items.length} municipios · referencia: ${p.referenceN}`;
     const columns=Priorizacion.SECTORS;
     $('matrix').innerHTML=table(['Municipio y puntaje',...columns.map(s=>s.name)],p.items.map(r=>`<tr>${placeCell(r)}${columns.map(column=>{const s=r.sectors.find(x=>x.id===column.id);return `<td class="heat-cell ${selectedSector?.id===s.id?'selected-sector':''}"><div class="sector-score">${compactRange(s.lower,s.upper)} <span class="muted small">sector</span></div>${s.fields.map(f=>`<span class="heat-item ${f.row?'':'missing'}" style="background:rgba(31,95,174,${f.score==null?.025:.04+.2*f.score/100})" title="${esc(`${f.label}. ${f.row?`Valor ${fmt(f.row.v)}. Intensidad ${fmt(f.score)}. Aporte antes de IPM ${fmt(f.contribution)} puntos. Referencia n=${f.n}.`:'Sin observación. No se convierte en cero.'}`)}"><span>${esc(f.label)}</span><br><b>${f.row?fmt(f.row.v):'—'}</b> <span>${f.row?esc(f.row.u):'sin dato'}</span></span>`).join('')}</td>`;}).join('')}</tr>`));
     $('matrix').querySelectorAll('thead th').forEach((th,i)=>{
@@ -151,7 +151,7 @@ function renderPriorityDetail(geo,scroll=true){
 }
 function renderPriorityMethod(){
   const p=priorityModel.compute(state);
-  $('priority-method').innerHTML=`<h2>Fórmula del modelo sectorial ${Priorizacion.VERSION}</h2><p class="formula">z = 100 × valor / máximo observado del indicador<br>Sector = suma de z × peso interno<br>D = (Impacto humano + Vivienda + Salud + Educación + Infraestructura + Comunidad) / 6<br>P = D × (1 + 0,25 × IPM censal / 100) / 1,25</p><p>Un cero explícito tiene intensidad cero. Si falta una observación, su intensidad puede estar entre 0 y 100. Se propagan ambos extremos sin repartir su peso a otra variable ni rellenarla desde otra fuente. Los valores originales se conservan. La escala proporcional conserva las razones entre cantidades de un mismo indicador, sin recorte P95. Es sensible a máximos extremos o erróneos y al tamaño municipal; no mide tasas de afectación.</p><p>Se usa la captura ${esc(state.date)} y el ámbito ${state.scope==='decree'?'de departamentos del decreto':'completo'}: ${p.referenceN} municipios del inventario. Cada ancla usa exclusivamente su propia fuente, definición y unidad. No son tasas de afectación: faltan denominadores compatibles de vivienda, servicios y matrícula.</p><div class="table-scroll">${table(['Sector (peso 1/6)','Variable','Fuente','Peso dentro del sector','Con dato / positivos','Máximo observado'],Priorizacion.SECTORS.flatMap(s=>s.fields.map(f=>{const c=p.calibrations.find(c=>c.id===f.id);return `<tr><td>${esc(s.name)}</td><td>${esc(f.label)}</td><td>${esc(f.source)}</td><td class="num">${fmt(f.share*100)}%</td><td class="num">${c.n} / ${c.positive}</td><td class="num">${fmt(c.anchor)}${c.positive<10?'<div class="small">Referencia positiva pequeña</div>':''}${!c.coherent?'<div class="small">Definiciones incompatibles: excluido</div>':''}</td></tr>`;})))}</div><h3>Qué se comprueba</h3><p>39 escenarios: pesos sectoriales iguales o un sector ±25%, cruzados con un ajuste de pobreza de 0%, 25% y 50%. La ficha muestra el rango de puestos del límite inferior. Es sensibilidad a decisiones metodológicas, no confianza estadística ni validación del daño. Los intervalos por faltantes se muestran por separado.</p><h3>Qué no entra en la suma</h3><p>La necesidad de recuperación temprana se usa como comparación. No se suman sus componentes duplicados con PNUD, ni costos de reposición que repiten el daño físico. Rescatados mide una respuesta realizada. Impacto humano incorpora familias afectadas, fallecidos, desaparecidos y heridos de 3iS, con un peso interno de 25% cada uno. Sus conteos se normalizan por separado: no se suman como personas únicas. ExE se mantiene en su matriz porque falta atribuir cada sede al sismo. OPS departamental y puntos Naboo no se asignan como daños municipales.</p><p>El modelo no mide necesidad neta pendiente: todavía faltan entregas, reparación realizada, costos de acceso y capacidades locales. Sus pesos son una propuesta explícita y el orden conservador puede favorecer territorios con más evidencia. <a href="https://knowledge4policy.ec.europa.eu/composite-indicators/toolkit_en/navigation-page/10-step-guide_en/step-8-sensitivity-analysis_en" target="_blank" rel="noopener">JRC: sensibilidad de indicadores compuestos</a>.</p>`;
+  $('priority-method').innerHTML=`<h2>Fórmula del modelo sectorial ${Priorizacion.VERSION}</h2><p class="formula">z = 100 × valor / máximo observado del indicador<br>Sector = suma de z × peso interno<br>D = (Impacto humano + Vivienda + Salud + Educación + Infraestructura + Comunidad) / 6<br>P = D × (1 + 0,25 × IPM censal / 100) / 1,25</p><details><summary>Variables y pesos</summary><div class="table-scroll">${table(['Sector (peso 1/6)','Variable','Fuente','Peso dentro del sector','Con dato / positivos','Máximo observado'],Priorizacion.SECTORS.flatMap(s=>s.fields.map(f=>{const c=p.calibrations.find(c=>c.id===f.id);return `<tr><td>${esc(s.name)}</td><td>${esc(f.label)}</td><td>${esc(f.source)}</td><td class="num">${fmt(f.share*100)}%</td><td class="num">${c.n} / ${c.positive}</td><td class="num">${fmt(c.anchor)}${c.positive<10?'<div class="small">Referencia positiva pequeña</div>':''}${!c.coherent?'<div class="small">Definiciones incompatibles: excluido</div>':''}</td></tr>`;})))}</div></details>`;
 }
 function distribution(pool) {
   if(!pool.length)return '<p class="empty">No hay distribución para estos filtros.</p>';
@@ -162,14 +162,14 @@ function distribution(pool) {
 }
 function renderDiagnostic() {
   const s=model.sector({...state,search:$('sector-search').value}),meta=s.meta;
-  $('cohort-note').textContent=meta?`${DATA.sources[meta.f]?.label||meta.f} · ${meta.lv} · ${meta.u} · captura ${state.date}. La selección de fuente e indicador se conserva aunque el filtro deje la vista sin datos.`:'No hay indicadores registrados para este nivel.';
+  $('cohort-note').textContent=meta?`${DATA.sources[meta.f]?.label||meta.f} · ${meta.u} · ${state.date}`:'No hay indicadores registrados para este nivel.';
   const sourceWarning=$('source-warning');
   if(state.source===T.RAPIDA){
     sourceWarning.className='note';
-    sourceWarning.textContent=`Cobertura del indicador seleccionado: ${s.pool.length} de ${s.total} territorios del inventario en este ámbito, nivel y departamento. ${s.total-s.pool.length} sin valor comparable; sin dato no significa cero. Se muestra el valor publicado por PNUD/UNGRD. Consulta sus límites en «Fuentes y método».`;
+    sourceWarning.textContent=`${s.pool.length} de ${s.total} territorios con dato · ${s.total-s.pool.length} sin dato`;
   }else{
-    sourceWarning.className='notice';
-    sourceWarning.textContent=DATA.sources[state.source]?.note||'Metodología de esta fuente pendiente de documentación.';
+    sourceWarning.className='note';
+    sourceWarning.textContent=state.source==='FundacionExe'?'Atribución al sismo no verificada.':'';
   }
   const vals=s.pool.map(r=>r.v);
   $('sector-kpis').innerHTML=tile('Territorios con dato',`${s.pool.length} / ${s.total}`,'Respecto del inventario filtrado en este nivel')+
@@ -180,7 +180,7 @@ function renderDiagnostic() {
   $('sector-table').innerHTML=table(['#','Territorio',meta?.u||'Valor','Percentil'],s.items.slice(0,sectorLimit).map(r=>`<tr><td>${r.rank}</td><td>${geoButton(r)}${attribution(r)}</td><td class="num">${fmt(r.v,r.u)}</td><td class="num">P${Math.round(T.percentile(vals,r.v))}</td></tr>`));
   $('sector-more').hidden=s.items.length<=sectorLimit;
   $('distribution').innerHTML=distribution(s.pool);
-  $('distribution-note').textContent=`${s.pool.length} territorios. Percentiles y distribución dentro del mismo indicador, fuente, unidad y captura. La búsqueda solo reduce las tablas.`;
+  $('distribution-note').textContent=`${s.pool.length} territorios comparables`;
   $('download').disabled=!s.items.length;
   renderProfile();
 }
@@ -196,7 +196,7 @@ function renderProfile() {
 function renderMethod() {
   renderPriorityMethod();
   const base=model.visible(state),sources=sorted(base.map(r=>r.f));
-  $('coverage-table').innerHTML=table(['Fuente','Municipios','Departamentos','Indicadores','Origen y límites'],sources.map(f=>{const r=base.filter(x=>x.f===f),info=DATA.sources[f];return `<tr><td><a href="${esc(info?.url||'#')}" target="_blank" rel="noopener">${esc(info?.label||f)}</a></td><td class="num">${new Set(r.filter(x=>x.lv==='municipal').map(x=>x.geo)).size}</td><td class="num">${new Set(r.map(x=>x.d)).size}</td><td class="num">${new Set(r.map(x=>x.id)).size}</td><td>${esc(info?.kind||'Fuente registrada')}<div class="small muted">${esc(info?.note||'Pendiente de documentación')}</div></td></tr>`; }));
+  $('coverage-table').innerHTML=table(['Fuente','Municipios','Departamentos','Indicadores','Origen y límites'],sources.map(f=>{const r=base.filter(x=>x.f===f),info=DATA.sources[f];return `<tr><td><a href="${esc(info?.url||'#')}" target="_blank" rel="noopener">${esc(info?.label||f)}</a></td><td class="num">${new Set(r.filter(x=>x.lv==='municipal').map(x=>x.geo)).size}</td><td class="num">${new Set(r.map(x=>x.d)).size}</td><td class="num">${new Set(r.map(x=>x.id)).size}</td><td>${esc(info?.kind||'Fuente registrada')}</td></tr>`; }));
   const missingCodes=new Set(base.filter(r=>r.lv==='municipal'&&!r.code).map(r=>r.geo)).size;
   $('checks').innerHTML=table(['Control','Resultado'],[
     `<tr><td>Integridad de las capturas cargadas (todo el historial)</td><td>${DATA.issues.length?'Ver incidencias debajo':'Sin conflictos o valores inválidos detectados'}</td></tr>`,
@@ -215,7 +215,7 @@ function renderRapida(){
     tile('Necesidad de recuperación temprana mediana',fmt(T.quantile(p.pool.map(r=>r.v),.5),'Índice'),'Índice original publicado por RAPIDA')+
     tile('En el tramo superior',p.canBand?p.pool.filter(r=>r.high).length:'—',p.canBand?'Umbral P75: '+fmt(p.qr,'Índice')+' · referencia: '+p.referenceN+' municipios':'Cobertura o variación insuficientes')+
     tile('IPM mediano',fmt(T.quantile(p.pool.map(r=>r.ipm),.5)),p.pool.filter(r=>r.ipm!=null).length+' municipios con necesidad de recuperación temprana e IPM');
-  $('rapida-note').textContent=p.mixed?'Definiciones incompatibles: ranking suspendido.':'Orden exclusivamente por necesidad de recuperación temprana. '+p.items.length+' municipios coinciden con la búsqueda. Captura '+state.date+'; corte de fuente no verificado. Cobertura: sectores con todos sus campos / 5. Los puestos de esta tabla se calculan dentro del departamento visible; el gráfico de comparación conserva los del ámbito completo.';
+  $('rapida-note').textContent=p.mixed?'Definiciones incompatibles: ranking suspendido.':p.items.length+' municipios · cobertura: sectores completos de 5';
   $('rapida-table').innerHTML=table(['#','Municipio','Necesidad de recuperación temprana','IPM','Cobertura'],p.items.slice(0,rapidaLimit).map(r=>'<tr><td>'+r.rank+'</td><td>'+geoButton(r)+(r.high?'<div class="badge high">Tramo superior</div>':'')+'</td><td class="num"><b>'+fmt(r.v,'Índice')+'</b></td><td class="num">'+fmt(r.ipm)+'</td><td>'+r.coverage+'/5'+(r.ipm==null?'<div class="small">Sin IPM</div>':'')+'</td></tr>'));
   $('rapida-more').hidden=p.items.length<=rapidaLimit;
   scatter(p.pool,p.canBand?p.qr:null,p.qi);
@@ -231,12 +231,12 @@ function renderComparison(){
   const precision=n=>n==null?'—':new Intl.NumberFormat('es-CO',{maximumFractionDigits:4}).format(n);
   const search=$('comparison-search').value,matched=pairs.filter(r=>T.searchMatch({...r,lv:'municipal'},search));
   const exclusion=c.excluded.index+' sin índice documentado; '+c.excluded.rapida+' sin necesidad de recuperación temprana comparable (categorías excluyentes)';
-  $('comparison-note').textContent='Base: '+(state.scope==='decree'?'departamentos del decreto':'todos los departamentos')+(state.dept?' · '+state.dept:'')+' · captura '+state.date+'. '+c.n+' pares de '+c.total+' municipios.'+(search?' '+matched.length+' coincidencias resaltadas; la búsqueda no cambia los cálculos.':'');
+  $('comparison-note').textContent='Base: '+(state.scope==='decree'?'departamentos del decreto':'todos los departamentos')+(state.dept?' · '+state.dept:'')+' · captura '+state.date+'. '+c.n+' pares de '+c.total+' municipios.'+(search?' '+matched.length+' coincidencias resaltadas.':'');
   $('comparison-reference').textContent=c.referenceN+' municipios en la referencia; '+c.recoveryN+' con necesidad de recuperación temprana. Excluidos de la dispersión: '+exclusion+'. Se incluyen todos los pares disponibles de la versión seleccionada; no se rellenan faltantes.';
   $('comparison-kpis').innerHTML=tile('Pares comparables',c.n,'Municipios con ambos datos')+
     tile('R²',precision(c.regression?.r2),'X: nuestro índice · Y: puntaje de necesidad')+
     tile('Pearson r',precision(c.regression?.r),'Positivo: puntajes altos juntos')+
-    tile('Spearman ρ',precision(c.rho),'Rangos promedio en empates · solo estos pares');
+    tile('Spearman ρ',precision(c.rho),'Asociación entre posiciones');
   function detail(r){
     comparisonGeo=r?.geo||'';
     $('comparison-detail').innerHTML=r?'<h3>'+esc(r.m)+', '+esc(r.d)+'</h3><p><b>'+names[mode]+': '+fmt(r.lower)+' /100</b><br>Posible por faltantes: '+fmt(r.upper)+' /100<br>Puesto nuestro: '+r.ownRank+'</p><p><b>Necesidad de recuperación temprana: '+precision(r.recovery)+'</b><br>Puesto en la referencia: '+r.recoveryRank+'</p><p>Cobertura: '+r.available+'/17 campos · '+fmt(100*r.coverage)+'% del peso.</p><p class="formula">Par usado: X = '+precision(r.x)+'; Y = '+precision(r.y)+'</p><button type="button" class="secondary" data-geo="'+esc(r.geo)+'" data-source="'+T.RAPIDA+'">Abrir diagnóstico territorial</button>':'<p>Pasa el mouse, enfoca con Tab o toca un municipio para consultar sus valores y cobertura.</p>';
@@ -265,7 +265,7 @@ function renderComparison(){
     });
     detail(pairs.find(r=>r.geo===comparisonGeo)||(search?matched[0]:null));
   }
-  $('comparison-fit').textContent=c.regression?'Recta discontinua: Y = '+precision(c.regression.intercept)+(c.regression.slope<0?' − ':' + ')+precision(Math.abs(c.regression.slope))+' × X. R² = '+precision(c.regression.r2)+'. No es una fórmula de priorización ni convierte puntajes en probabilidades.':c.reason;
+  $('comparison-fit').textContent=c.regression?'Recta discontinua: Y = '+precision(c.regression.intercept)+(c.regression.slope<0?' − ':' + ')+precision(Math.abs(c.regression.slope))+' × X. R² = '+precision(c.regression.r2)+'.':c.reason;
   $('comparison-table').innerHTML=table(['Municipio','Nuestro índice documentado','Posible','Puesto nuestro','Necesidad de recuperación temprana','Puesto de necesidad','Cobertura'],pairs.slice().sort((a,b)=>b.x-a.x).map(r=>'<tr><td>'+geoButton({...r,lv:'municipal'},T.RAPIDA)+'</td><td class="num">'+precision(r.x)+'</td><td class="num">'+precision(r.upper)+'</td><td class="num">'+r.ownRank+'</td><td class="num">'+precision(r.recovery)+'</td><td class="num">'+r.recoveryRank+'</td><td>'+r.available+'/17 · '+fmt(100*r.coverage)+'%</td></tr>'));
 }
 function refresh() {globalControls();diagnosticControls();renderPriorities();renderDiagnostic();renderMethod();MunicipalRadar.render(priorityModel,state);PerCapitaMunicipalRadar.render(priorityModel,state);RelativeMunicipalRadar.render(priorityModel,state);PrioridadPerCapita.render(state);PrioridadRelativa.render(state);renderRapida();}
@@ -304,4 +304,5 @@ $('download').addEventListener('click',()=>{
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='seleccion-territorial.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 refresh();
+
 

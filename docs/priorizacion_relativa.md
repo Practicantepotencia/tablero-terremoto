@@ -5,6 +5,12 @@ y sus límites». Compara afectación por habitante. Las dos matrices tienen bú
 y ordenación independientes y comparten universo territorial, departamento y captura.
 Los encabezados alternan mayor a menor, menor a mayor y orden global normal.
 
+En «Comparar municipios» también hay un segundo radar per cápita debajo del
+radar absoluto. Usa los mismos puntajes relativos que esta matriz, los mismos
+seis ejes y límites por faltantes. Permite seleccionar hasta tres municipios
+independientemente del radar superior. Cada punto muestra conteo, población,
+tasa por 10.000 habitantes, máxima tasa de referencia, pesos y resultado.
+
 ## Denominador verificable
 
 Se usa exclusivamente población total municipal proyectada para **2026**, DANE,

@@ -41,11 +41,16 @@ const {pathToFileURL}=require('node:url'),path=require('node:path');
   assert.equal(await page.locator('#comparison-card .comparison-controls select, #comparison-card .comparison-controls input').count(),2);
   assert.deepEqual(await page.locator('#comparison-mode option').allTextContents(),['Absoluto','Per cápita','Relativo']);
   const checkPairs=async()=>{
-    const expected=await page.evaluate(()=>Comparacion.compare(priorityModels,model,state,{mode:document.getElementById('comparison-mode').value,axis:'rank',panel:'available'}).pairs.map(r=>r.geo).sort());
+    const expected=await page.evaluate(()=>Comparacion.compare(priorityModels,model,state,{mode:document.getElementById('comparison-mode').value,axis:'value',panel:'available'}).pairs.map(r=>r.geo).sort());
     assert.deepEqual(await page.locator('[data-compare-geo]').evaluateAll(xs=>xs.map(x=>x.dataset.compareGeo).sort()),expected);
-    assert.match(await page.locator('#comparison-chart').innerText(),/Puesto \(1 = mayor necesidad\)/);
+    assert.match(await page.locator('#comparison-chart').innerText(),/Puntaje de necesidad/);
   };
   await checkPairs();
+  const valueCheck=await page.evaluate(()=>{
+    const c=Comparacion.compare(priorityModels,model,state,{mode:'absolute',axis:'value',panel:'available'});
+    return c.pairs.every(r=>r.y===r.recovery);
+  });
+  assert.equal(valueCheck,true);
   const decreePairs=await page.locator('[data-compare-geo]').count();
   const initial=await page.locator('#comparison-kpis').innerText();
   await page.locator('#comparison-mode').selectOption('percapita');

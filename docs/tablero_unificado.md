@@ -22,7 +22,7 @@ La per cápita restaura la comparación poblacional, no reemplaza ni relaja las 
 
 ## Comparación
 
-X es P documentado (límite inferior, 0–100), exactamente el de cada matriz y radar. Y es siempre el puesto de necesidad de recuperación temprana (fuente UNDP/PNUD RAPIDA). Los puestos se derivan del valor publicado; no se presenta un ranking oficial adicional.
+X es P documentado (límite inferior, 0–100), exactamente el de cada matriz y radar. Y es el puntaje original de necesidad de recuperación temprana (fuente UNDP/PNUD RAPIDA), sin convertirlo en puesto ni reescalarlo a 100. El eje aumenta hacia arriba.
 
 - La interfaz solo ofrece «Nuestro índice» (Absoluto, Per cápita, Relativo) y «Resaltar municipio». El universo, departamento y captura se seleccionan en los filtros generales.
 - Se incluyen todos los pares disponibles de la versión elegida dentro de esos filtros. No se exige que el municipio tenga puntaje en las otras versiones. N puede cambiar al cambiar de versión; se muestra junto al gráfico. Las exclusiones mutuamente excluyentes y los límites metodológicos están dentro del desplegable de método, sin aviso amarillo.
@@ -30,7 +30,7 @@ X es P documentado (límite inferior, 0–100), exactamente el de cada matriz y 
 - La búsqueda resalta puntos, no modifica la muestra ni los estadísticos.
 - Los ceros explícitos válidos se incluyen. No se imputan observaciones, denominadores ni puntuaciones totalmente ausentes. No se usa el límite superior en la regresión.
 
-Se calcula una regresión lineal con intercepto Y = a + bX. Pearson r conserva dirección; R² = r² mide el ajuste lineal descriptivo. Con puestos, concordancia significa **r negativo**: más puntaje propio, mejor puesto (menor número). Spearman usa rangos promedio para empates dentro de los pares. Los puestos visibles son de competencia (1, 2, 2, 4); no confundirlos con los rangos promedio usados en Spearman.
+Se calcula una regresión lineal con intercepto Y = a + bX. Pearson r conserva dirección; R² = r² mide el ajuste lineal descriptivo. Con puntajes, **r positivo** indica que valores altos de ambos índices tienden a presentarse juntos. Spearman usa rangos promedio para empates dentro de los pares. Los puestos visibles son de competencia (1, 2, 2, 4); no confundirlos con los rangos promedio usados en Spearman.
 
 No se muestra ajuste ni correlación con menos de tres pares o varianza nula. Se publican pendiente, intercepto, N, cobertura municipal y tabla de pares. El R² no estima causalidad, probabilidad, significación ni exactitud. PNUD, RAPIDA y 3iS pueden compartir insumos; no es validación independiente. El ranking conservador y la escasez de campos relativos afectan la asociación.
 

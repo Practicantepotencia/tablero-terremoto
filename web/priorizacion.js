@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   const T = typeof module !== 'undefined' && module.exports ? require('./modelo.js') : root.Territorial;
+  const D = typeof module !== 'undefined' && module.exports ? require('./denominadores.js') : root.Denominadores;
   const field = (id, source, label, share) => ({id, source, label, share, unit:'Número'});
   const reported = (id, label, share=1) => field('3is_'+id, '3iS-Sheets', label, share);
   const estimated = (id, label, share=1) => field('pnud_'+id, 'PNUD', label, share);
@@ -39,6 +40,7 @@
   }
   function create(data, territorial=T.create(data), options={}) {
     const relative=options.relative===true;
+    const denominators=relative?D.create(data):null;
     const cache=new Map();
     function compute(state) {
       // Solo ámbito y captura definen referencias; buscar/filtrar departamento no renormaliza.
@@ -57,7 +59,7 @@
       });
       const measure=r=>{if(!r||!Number.isFinite(r.v)||r.v<0)return null;
         if(!relative)return r.v;
-        const p=populations.get(r.code);return p?10000*r.v/p.population:null;};
+        return denominators.measure(r,r.id,r.code,state.date).rate;};
       const calibrations=new Map();
       SECTORS.flatMap(s=>s.fields).forEach(f=>{
         const candidates=base.filter(r=>r.f===f.source&&r.id===f.id);
@@ -77,7 +79,7 @@
         const sectors=SECTORS.map(sector=>{
           const fields=sector.fields.map(f=>{
             const c=calibrations.get(f.id),r=c.rows.get(place.geo),value=measure(r),score=normalize(value,c.anchor);
-            return {...f,row:r||null,score,rate:relative?value:null,anchor:c.anchor,n:c.n,positive:c.positive,
+            return {...f,row:r||null,score,rate:relative?value:null,...(relative?denominators.measure(r,f.id,place.code,state.date):{}),anchor:c.anchor,n:c.n,positive:c.positive,
               percentile:value!=null?T.percentile(c.values,value):null,contribution:score==null?null:score*f.share/6};
           });
           const lower=fields.reduce((s,f)=>s+(f.score??0)*f.share,0);

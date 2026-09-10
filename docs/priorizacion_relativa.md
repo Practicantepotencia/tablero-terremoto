@@ -1,5 +1,10 @@
 # Matriz relativa a la población
 
+> Documento histórico de `priorizacion-integrada`. En la rama
+> `denominadores-sectoriales` la segunda matriz y el segundo radar se sustituyen
+> por [denominadores propios de cada indicador](denominadores_sectoriales.md).
+> Los rankings y ejemplos per cápita de este documento no describen esa nueva vista.
+
 Esta vista se sitúa debajo de la matriz absoluta y antes de «Cómo leer la prioridad
 y sus límites». Compara afectación por habitante. Las dos matrices tienen búsquedas
 y ordenación independientes y comparten universo territorial, departamento y captura.

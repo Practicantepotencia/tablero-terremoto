@@ -110,6 +110,68 @@ independientes que casualmente coinciden. Vale la pena tenerlo en cuenta
 si en el futuro se usa alguna de las dos para el índice: no tratarlas como
 confirmación cruzada real.
 
+## Estructura de pesos del índice de necesidades de recuperación temprana (hallazgo posterior, 11 sep 2026)
+
+**Corrección a lo dicho arriba y en `generar_tablero_recuperacion.py`:** no es cierto que "la documentación no permita reproducir la fórmula y los pesos" -- el texto narrativo del StoryMap (`.../data?f=json`, capturado vía diagnóstico temporal en el workflow, no vive en el repo) sí describe la estructura:
+
+```
+R = 0,50·I + 0,30·Vs + 0,20·Vf
+```
+
+- **I (50%, Impactos del Sismo):** "Promedio entre impactos a personas (fallecidos,
+  heridos y desaparecidos) y estructuras (edificaciones públicas y viviendas)
+  en municipios con intensidad de sismo ≥5 en la escala MMI (UNGRD, agosto 2026)."
+- **Vs (30%, Vulnerabilidad Socioeconómica):** "índice de pobreza multidimensional
+  a nivel municipal (proyecciones de PNUD al 2025 con base en datos del DANE)."
+- **Vf (20%, Vulnerabilidad Física):** susceptibilidad a movimientos en masa
+  (SGC, 2010) + susceptibilidad a licuefacción de suelos (Global Earthquake
+  Model / Todorovic et al., 2026).
+
+**Lo que esto NO alcanza a probar** (para no repetir el mismo salto):
+conocer la estructura de pesos no es reproducir el índice. Falta, al menos:
+cómo se normaliza cada subcomponente antes de combinarlo, qué subpesos usa
+el promedio "personas vs. estructuras" dentro de `I` (el texto no lo dice),
+cómo se combinan las dos susceptibilidades dentro de `Vf`, y cómo se tratan
+los faltantes. Sin eso, no se puede calcular `R` desde cero ni comprobar que
+coincide con `undp_rapida_recovery_needs` publicado. Reproducirlo de verdad
+requeriría, como mínimo, un ajuste numérico contra los 301 valores publicados
+para inferir la normalización faltante -- no se hizo aquí.
+
+**Comparación honesta con nuestro ajuste por IPM** (no una validación --
+son mecanismos distintos): nuestro `P = D×(1+0,25·v)/1,25` se reescribe como
+`P = 0,8·D + 0,2·D·v` (`v` = IPM/100). El término de pobreza **multiplica a
+`D`**: si no hay daño medido, el ajuste no aporta nada sin importar el IPM.
+El `Vs` de RAPIDA es aditivo e independiente de `I` -- un municipio con IPM
+alto y sismo apenas sentido igual suma esos puntos. No son comparables en
+magnitud (30% vs. "hasta 20% del resultado final, y solo si D>0"), y que
+RAPIDA pese la pobreza en 30% no justifica ni cuestiona nuestro 25%: siguen
+siendo dos preguntas independientes. (Precisión: 30% no es un tercio de 100
+ni está a la par del 50% de impactos -- es claramente menor.)
+
+**Sobre la vulnerabilidad física (Vf):** no es automáticamente un vacío que
+debamos llenar. Susceptibilidad a deslizamiento/licuefacción describe una
+condición previa del terreno, no necesariamente daño ocurrido ni necesidad
+pendiente -- si el daño físico real ya está en los 17 campos de nuestro
+modelo, agregar esto podría estar reponderando la misma realidad con otro
+nombre, no añadiendo información nueva. Sin evaluarlo con cuidado, no se
+incorpora.
+
+**Sobre el IPM "2025" (`undp_rapida_mpi`):** el texto distingue explícitamente
+dos indicadores de pobreza citados en el StoryMap -- "pobreza monetaria"
+(atribuida como "PNUD (2026), con base en datos del DANE (2018)", usada en
+otro contexto del análisis) y "pobreza multidimensional" (la que alimenta
+`Vs`, descrita como "proyecciones de PNUD al 2025"). No hay confirmación de
+que el campo `undp_rapida_mpi` que ya tenemos en `indicadores_largo_no_calculo.csv`
+(301 municipios) sea exactamente ese segundo indicador y no el primero --
+es una inferencia por coincidencia temática, no una verificación por ID de
+campo. Tampoco existe metodología publicada de esa proyección a 2025 (¿qué
+extrapola, con qué margen de error?), ni una razón para preferir una
+proyección sin metodología sobre una medición censal completa (DANE 2018,
+1.122 territorios vs. 301 de RAPIDA). "Más reciente" no es lo mismo que
+"más verificado ni más comparable" -- no se sustituye la línea base sin
+resolver esto primero, y sin evaluar antes ambos IPM con todo lo demás del
+modelo fijo (mismo daño, mismos pesos, mismos municipios).
+
 ## Qué falta
 
 - **`mpcodigo`** (código DIVIPOLA municipal de 5 dígitos, limpio) viene

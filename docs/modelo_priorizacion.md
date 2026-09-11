@@ -127,6 +127,13 @@ El criterio de examinar estas decisiones sigue la guía de
 
 - Recuperación RAPIDA: referencia comparativa; no realimentamos el modelo con
   el resultado que queremos superar. Sus campos duplicados con PNUD tampoco entran.
+  Su estructura de pesos (50% impactos, 30% vulnerabilidad socioeconómica, 20%
+  vulnerabilidad física) está documentada -- ver `docs/investigacion_undp_geosmart.md`
+  -- pero no es reproducible sin su normalización interna, y no valida ni
+  cuestiona nuestro ajuste del 25% por IPM: son mecanismos distintos (el
+  nuestro multiplica el daño, el de RAPIDA suma un término independiente).
+  No se cambia la línea base DANE 2018 ni se agrega vulnerabilidad física a
+  este modelo solo por parecernos más a RAPIDA.
 - Costos de reposición PNUD: repiten parte de las cantidades de daño físico
   multiplicadas por precios. Se consultan para dimensionar costos, sin otro voto.
 - Rescatados: actividad de respuesta realizada. No equivale a necesidad pendiente.

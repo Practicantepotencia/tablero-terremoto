@@ -33,21 +33,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: DIAGNOSTICO temporal -- metodologia IPM/recuperacion RAPIDA
-        if: github.event_name == 'workflow_dispatch'
-        run: |
-          set -x
-          curl -sS "https://geosmart.undp.org/arcgis/sharing/rest/content/items/9d0ef01099a64edda2caecbd34135d7e/data?f=json" -o storymap.json
-          echo "SIZE:"; wc -c storymap.json
-          python3 - << 'EOF'
-          import json, re
-          text = open('storymap.json', encoding='utf-8').read()
-          for kw in ['Vulnerabilidad Física', 'MMI (UNGRD']:
-              idxs = [m.start() for m in re.finditer(re.escape(kw), text, re.IGNORECASE)]
-              print(f"--- '{kw}': {len(idxs)} ocurrencias ---")
-              for i in idxs[:2]:
-                  print(repr(text[max(0,i-900):i+500]))
-          EOF
       - name: Verificar importación y cálculos
         run: |
           python -m unittest discover -s tests -v

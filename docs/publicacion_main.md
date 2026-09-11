@@ -30,3 +30,26 @@ el generador operativo es el del tablero unificado, no el índice histórico.
 
 Las ramas de trabajo conservan sus propios tableros. No se borran sus historiales
 ni se publica una nueva dirección.
+
+## Auditorías
+
+- [Auditoría profunda, 11 sep 2026](auditoria_profunda_2026-09-11.md) --
+  verifica el modelo de priorización contra su código, la cobertura real de
+  pruebas (incluidas las de navegador, fuera de CI), estado de despliegue,
+  higiene de ramas y documentación desactualizada.
+
+## Arquitectura anterior (histórica, no publicada)
+
+Antes del modelo sectorial 1.2, `main` publicaba el índice compuesto
+original (Naboo) y, en paralelo como beta, un índice ajustado con fuentes
+institucionales (PNUD, UNDP-RAPIDA, 3iS). Ambos se conservan como cálculo
+en `actualizar_indice_terremoto.py` pero ya no son la interfaz pública --
+ver arquitectura verificada en la auditoría de arriba. Documentación de esa
+generación, por si hace falta consultarla:
+
+- [Metodología de extracción por fuente](metodologia_fuentes.md)
+- [Índice ajustado (Fase B)](indice_ajustado.md)
+- [Catálogo de indicadores](catalogo_indicadores.md) -- incluye la
+  advertencia sobre posible doble conteo en categorías de edificaciones de
+  UNDP-RAPIDA (`bdg_comm_aff`/`bdg_edu_aff`), contenida hoy al modelo
+  sectorial: no entra a su puntaje de priorización.

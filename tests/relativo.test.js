@@ -5,7 +5,7 @@ const denominator=(code,value,kind='poblacion',extra={})=>({code,value,kind,year
 const data=(rows,bases)=>({rows,dates:[date],latest:date,baseline:{rows:[]},population:{rows:[]},sources:{},
  denominators:{event_date:'2026-08-10',sources:{official:{url:'https://www.dane.gov.co/',published:'2025-12-24',sha256:'test-fixture'}},rows:bases}});
 const rel=d=>P.create(d,undefined,{relative:true}).compute(state);
-const injured=r=>r.sectors[0].fields[3];
+const injured=r=>r.sectors[0].fields.find(f=>f.id==='3is_heridos');
 test('relativizar antes de normalizar puede invertir el orden absoluto',()=>{
  const d=data([row('05001',100),row('05002',20)],[denominator('05001',100000),denominator('05002',1000)]);
  const a=P.create(d).compute(state),r=rel(d);
@@ -39,8 +39,8 @@ test('ni población ni bases candidatas sustituyen inventarios sin homologar',()
  d.denominators.candidates=[{code:'27050',kind:'sedes_ips',value:3}];
  const r=rel(d).missing[0];assert.equal(r.sectors[2].fields[0].rate,null);assert.equal(r.sectors[2].fields[0].score,null);
  assert.match(r.sectors[2].fields[0].reason,/homologar/);
- const f=rel(data([row('05001',1,{id:'3is_familias'})],[denominator('05001',100,'hogares')])).missing[0].sectors[0].fields[0];
- assert.equal(f.rate,null);assert.match(f.reason,/familias/);
+ const families=rel(data([row('05001',1,{id:'3is_familias'})],[denominator('05001',100,'hogares')]));
+ assert.equal(families.items.length,0);assert.ok(families.missing[0].sectors.flatMap(s=>s.fields).every(f=>f.id!=='3is_familias'));
 });
 test('numerador que supera universo se rechaza en vez de truncarse',()=>{
  const d=data([row('05001',101,{id:'pnud_vd',f:'PNUD'})],[denominator('05001',100,'viviendas')]);
@@ -49,7 +49,7 @@ test('numerador que supera universo se rechaza en vez de truncarse',()=>{
 });
 test('faltantes conservan su peso y no se convierten en ceros observados',()=>{
  const r=rel(data([row('05001',10)],[denominator('05001',100)])).items[0];
- assert.equal(r.sectors[0].lower,25);assert.equal(r.sectors[0].upper,100);assert.equal(r.available,1);
+ assert.ok(Math.abs(r.sectors[0].lower-100/3)<1e-8);assert.ok(Math.abs(r.sectors[0].upper-100)<1e-8);assert.equal(r.available,1);
  assert.equal(r.sectors[2].coverage,0);assert.equal(r.sectors[2].lower,0);assert.equal(r.sectors[2].upper,100);
 });
 test('ámbito recalcula; búsqueda y departamento conservan referencia',()=>{
@@ -60,9 +60,9 @@ test('ámbito recalcula; búsqueda y departamento conservan referencia',()=>{
  const b=model.selection({...state,dept:'D',matrixSearch:'05001'}).items[0];assert.equal(a.lower,b.lower);assert.equal(a.rank,b.rank);
  const c=model.selection({...state,scope:'decree'}).items.find(r=>r.code==='05001');assert.ok(c.lower>a.lower);
 });
-test('los 17 campos tienen decisión explícita; solo siete están habilitados',()=>{
+test('los 16 campos activos tienen decisión explícita; solo siete están habilitados',()=>{
  const ids=P.SECTORS.flatMap(s=>s.fields).map(f=>f.id).sort();
- assert.deepEqual(Object.keys(D.RULES).sort(),ids);
+ assert.equal(ids.length,16);assert.ok(ids.every(id=>D.RULES[id]));
  assert.equal(Object.values(D.RULES).filter(r=>r.enabled).length,7);
 });
 test('población antigua sin registro verificado no sirve de fallback',()=>{

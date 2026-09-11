@@ -1,4 +1,4 @@
-/* Modelo 1.2: escala proporcional, pesos fijos y límites por datos faltantes. */
+/* Modelo 1.3: impacto total/grave, pesos fijos y límites por datos faltantes. */
 (function (root) {
   'use strict';
   const T = typeof module !== 'undefined' && module.exports ? require('./modelo.js') : root.Territorial;
@@ -9,13 +9,22 @@
   // Cada sector pesa 1/6. En sectores compartidos, cada canal pesa 1/2.
   // Los canales pueden compartir insumos: nunca se cuentan como validaciones independientes.
   const SECTORS = [
-    {id:'impacto_humano', name:'Impacto humano', fields:[reported('familias','Familias afectadas',.25),reported('fallecidos','Personas fallecidas',.25),reported('desaparecidos','Personas desaparecidas',.25),reported('heridos','Personas heridas',.25)]},
+    {id:'impacto_humano', name:'Impacto humano', fields:[reported('fallecidos','Personas fallecidas',1/3),reported('desaparecidos','Personas desaparecidas',1/3),reported('heridos','Personas heridas',1/3)]},
     {id:'vivienda', name:'Vivienda', fields:[reported('vivdestruidas','Destruidas · 3iS',.25),reported('vivaveriadas','Averiadas · 3iS',.25),estimated('vd','Destruidas · PNUD',.25),estimated('va','Averiadas · PNUD',.25)]},
     {id:'salud', name:'Salud', fields:[reported('salud','Puntos de salud · 3iS',.5),estimated('csalud','Centros de salud · PNUD',.5)]},
     {id:'educacion', name:'Educación', fields:[reported('educativos','Puntos educativos · 3iS',.5),estimated('cedu','Centros educativos · PNUD',.5)]},
     {id:'infraestructura', name:'Infraestructura y acceso', fields:[reported('colapsos','Colapsos de edificios',1/3),reported('acueductos','Acueductos afectados',1/3),reported('vias','Vías afectadas (conteo)',1/3)]},
     {id:'comunidad', name:'Servicios comunitarios', fields:[reported('comunitarios','Puntos comunitarios · 3iS',.5),estimated('ccom','Centros comunitarios · PNUD',.5)]}
   ];
+  function sectorsFor(severity='total') {
+    if(!['total','grave'].includes(severity))throw new Error('Tipo de impacto desconocido: '+severity);
+    const excluded=new Set(severity==='grave'?['3is_heridos','3is_vivaveriadas','pnud_va']:[]);
+    return SECTORS.map(s=>{
+      const fields=s.fields.filter(f=>!excluded.has(f.id));
+      const sum=fields.reduce((n,f)=>n+f.share,0);
+      return {...s,fields:fields.map(f=>({...f,share:f.share/sum}))};
+    });
+  }
   const clamp = (v,lo,hi) => Math.min(hi,Math.max(lo,v));
   const EPS = 1e-8;
   const same = (a,b) => Math.abs(a-b)<EPS;
@@ -46,8 +55,10 @@
     const denominators=mode==='sectorial'?D.create(data):null;
     const cache=new Map();
     function compute(state) {
-      // Solo ámbito y captura definen referencias; buscar/filtrar departamento no renormaliza.
-      const key=JSON.stringify([state.scope,state.date]);
+      // Cambiar impacto cambia componentes, no el universo de referencia de cada campo.
+      const severity=state.severity||'total',definitions=sectorsFor(severity);
+      const fieldCount=definitions.reduce((n,s)=>n+s.fields.length,0);
+      const key=JSON.stringify([state.scope,state.date,severity]);
       if(cache.has(key))return cache.get(key);
       const base=territorial.visible({...state,dept:''}).filter(r=>r.lv==='municipal');
       const places=[...new Map(base.map(r=>[r.geo,r])).values()];
@@ -73,7 +84,7 @@
         if(!relative)return r.v;
         return relativeMeasure(r,r.id,r.code).rate;};
       const calibrations=new Map();
-      SECTORS.flatMap(s=>s.fields).forEach(f=>{
+      definitions.flatMap(s=>s.fields).forEach(f=>{
         const candidates=base.filter(r=>r.f===f.source&&r.id===f.id);
         const cohorts=new Set(candidates.map(T.cohort));
         const coherent=cohorts.size<=1 && candidates.every(r=>r.u===f.unit);
@@ -86,9 +97,9 @@
       });
       const recovery=territorial.strict(base,T.RECOVERY);
       const recoveryRank=new Map(territorial.ranked(recovery).map(r=>[r.geo,r]));
-      const weights=SECTORS.map(()=>1);
+      const weights=definitions.map(()=>1);
       const items=places.map(place=>{
-        const sectors=SECTORS.map(sector=>{
+        const sectors=definitions.map(sector=>{
           const fields=sector.fields.map(f=>{
             const c=calibrations.get(f.id),r=c.rows.get(place.geo),value=measure(r),score=normalize(value,c.anchor);
             return {...f,row:r||null,score,rate:relative?value:null,...(relative?relativeMeasure(r,f.id,place.code):{}),anchor:c.anchor,n:c.n,positive:c.positive,
@@ -103,7 +114,7 @@
         const score=aggregate(sectors,vulnerability,weights);
         const coverage=sectors.reduce((s,d)=>s+d.coverage/6,0);
         const rec=recoveryRank.get(place.geo);
-        return {...place,...score,sectors,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
+        return {...place,...score,sectors,severity,fieldCount,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
           recovery:rec?.v??null,recoveryRank:rec?.rank??null,available:sectors.flatMap(s=>s.fields).filter(f=>f.score!=null).length,
           complete:coverage>1-EPS&&vulnerability!=null,rank:null,rankMin:null,rankMax:null};
       });
@@ -129,7 +140,7 @@
       const rapidaTop=recovery.filter(r=>recoveryRank.get(r.geo).rank<=20);
       const result={items:ranked,missing:items.filter(r=>r.coverage<=EPS).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')),
         all:items,calibrations:[...calibrations.values()].map(({rows,values,...r})=>r),scenarios,
-        overlap:rapidaTop.filter(r=>top.has(r.geo)).length,rapidaTopN:rapidaTop.length,referenceN:places.length};
+        overlap:rapidaTop.filter(r=>top.has(r.geo)).length,rapidaTopN:rapidaTop.length,referenceN:places.length,definitions,severity,fieldCount};
       cache.set(key,result);return result;
     }
     function selection(state) {
@@ -161,6 +172,6 @@
     }
     return bundles.get(data);
   }
-  const api={create,models,normalize,aggregate,ranks,SECTORS,VERSION:'1.2'};
+  const api={create,models,normalize,aggregate,ranks,SECTORS,sectorsFor,VERSION:'1.3'};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.Priorizacion=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

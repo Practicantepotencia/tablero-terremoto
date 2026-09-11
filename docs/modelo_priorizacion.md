@@ -1,5 +1,9 @@
 # Modelo de priorización sectorial 1.2
 
+> Antecedente histórico. En la rama `impacto-grave-total` rige el [modelo 1.3:
+> impacto total y grave](impacto_grave_total.md), con 16/13 campos. Las definiciones
+> de impacto humano y vivienda de esa nota reemplazan las siguientes.
+
 Rama `priorizacion-integrada`, creada desde `reestructuracion-recuperacion`,
 commit `e65bc81f2d384dc0f07f1a6ea1df3c0dd9af83c0`.
 

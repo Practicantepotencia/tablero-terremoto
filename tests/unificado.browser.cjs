@@ -9,6 +9,36 @@ const {pathToFileURL}=require('node:url'),path=require('node:path');
   assert.deepEqual(await page.locator('[data-tab]').allTextContents(),['Prioridades','Comparar municipios','Necesidad de recuperación temprana','Diagnóstico territorial','Fuentes y método']);
   assert.equal(await page.locator('.matrix-card').count(),3);
   const ids=await page.locator('[id]').evaluateAll(xs=>xs.map(x=>x.id));assert.equal(ids.length,new Set(ids).size);
+  assert.equal(await page.locator('#priority-kpis .tile').count(),3);
+  assert.doesNotMatch(await page.locator('#priority-kpis').innerText(),/Cobertura ponderada mediana/);
+  const initialChoices=await page.locator('#radar select').evaluateAll(xs=>xs.map(x=>x.value));
+  const originalMatrix=await page.locator('#matrix').innerText();
+  const originalRecovery=await page.locator('#rapida-table').innerText();
+  await page.locator('#severity').selectOption('grave');
+  assert.match(await page.locator('#severity-note').innerText(),/Grave/);
+  for(const id of ['matrix','percapita-matrix','relative-matrix']){
+    const matrix=await page.locator('#'+id).innerText();
+    assert.doesNotMatch(matrix,/Personas heridas|Averiadas|Familias afectadas/);
+    assert.match(matrix,/\/13 campos/);
+    assert.match(matrix,/Personas fallecidas/);assert.match(matrix,/Personas desaparecidas/);
+  }
+  assert.deepEqual(await page.locator('#radar select').evaluateAll(xs=>xs.map(x=>x.value)),initialChoices);
+  for(const id of ['radar','radar-percapita','radar-relative']){
+    assert.match(await page.locator('#'+id+'-reference').innerText(),/1.3 · Grave/);
+    assert.match(await page.locator('#'+id+'-legend').innerText(),/\/13 campos/);
+  }
+  assert.equal(await page.locator('#priority-method tbody tr').count(),13);
+  assert.equal(await page.locator('#rapida-table').innerText(),originalRecovery);
+  assert.notEqual(await page.locator('#matrix').innerText(),originalMatrix);
+  for(const mode of ['absolute','percapita','sectorial']){
+    await page.locator('#comparison-mode').selectOption(mode,{force:true});
+    const paired=await page.evaluate(()=>Comparacion.compare(priorityModels,model,state,{mode:document.getElementById('comparison-mode').value,axis:'value',panel:'available'}));
+    assert.ok(paired.pairs.length>0);assert.ok(paired.pairs.every(r=>r.fieldCount===13));
+  }
+  await page.locator('#comparison-mode').selectOption('absolute',{force:true});
+  await page.locator('#severity').selectOption('total');
+  assert.equal(await page.locator('#matrix').innerText(),originalMatrix);
+  assert.equal(await page.locator('#priority-method tbody tr').count(),16);
   const abs=await page.locator('#matrix').innerText(),rel=await page.locator('#relative-matrix').innerText();
   const normal=await page.locator('#percapita-matrix tbody').innerText();
   const th=page.locator('#percapita-matrix [data-relative-sort="salud"]');

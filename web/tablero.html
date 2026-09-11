@@ -16,8 +16,10 @@
 <label>Universo territorial<select id="scope"><option value="decree">Departamentos del Decreto 1171</option><option value="all">Todos los departamentos del inventario</option></select></label>
 <label>Departamento<select id="dept"></select></label>
 <label>Captura del inventario<select id="date"></select></label>
+<label>Impacto<select id="severity" aria-describedby="severity-note"><option value="total">Total</option><option value="grave">Grave</option></select></label>
 </div>
 <p id="scope-note" class="note"></p>
+<p id="severity-note" class="note small" aria-live="polite"></p>
 <section id="prioridades" class="tab-panel" role="tabpanel" aria-labelledby="tab-prioridades">
 <div id="priority-kpis" class="tiles" aria-live="polite"></div>
 <div class="card matrix-card"><div class="section-head"><h2 id="matrix-title">Qué necesita cada municipio</h2></div>
@@ -88,14 +90,12 @@
 </section>
 <section id="metodo" class="tab-panel" role="tabpanel" aria-labelledby="tab-metodo" hidden>
 <div id="priority-method" class="card"></div>
-<div class="card"><h2>Guía metodológica</h2><p>Definiciones, denominadores, límites, fuentes y lectura de los gráficos.</p><p><a href="docs/notas_metodologicas.docx" download>Descargar documento Word</a> · <a href="docs/notas_metodologicas.md" target="_blank" rel="noopener">Leer las notas</a></p></div>
+<div class="card"><h2>Guía metodológica</h2><p><a href="docs/impacto_grave_total.md">Impacto total y grave · modelo 1.3</a></p><p><a href="docs/notas_metodologicas.docx" download>Antecedentes del modelo 1.2 · Word</a> · <a href="docs/notas_metodologicas.md" target="_blank" rel="noopener">Notas anteriores</a></p></div>
 <div class="card"><h2>Cobertura de las fuentes</h2><div id="coverage-table" class="table-scroll"></div></div>
 <details class="card"><summary>Controles de integridad</summary><div id="checks"></div></details>
 <details class="card"><summary>Diccionario de la selección</summary><div id="dictionary" class="table-scroll"></div></details>
 <details class="card"><summary>Documentación</summary><p><a href="docs/modelo_priorizacion.md">Modelo sectorial y decisiones metodológicas</a> · <a href="docs/auditoria_indicadores_largo.md">Auditoría de los indicadores</a> · <a href="historial_indice.csv">Historial del índice original</a></p></details>
 </section>
-<footer><span id="footer-capture"></span><span>Sin dato no significa cero. <a href="docs/notas_metodologicas.docx" download>Guía metodológica</a></span></footer>
+<footer><span id="footer-capture"></span><span>Sin dato no significa cero. <a href="docs/impacto_grave_total.md">Guía metodológica</a></span></footer>
 <noscript><p>Activa JavaScript para filtrar y consultar el tablero. Los datos originales están en <a href="indicadores_largo_no_calculo.csv">el inventario CSV</a>.</p></noscript>
 </main><script>__MODEL__</script><script>__DENOMINATORS__</script><script>__PRIORITY_MODEL__</script><script>const DATA=__DATA__;</script><script>__RADAR__</script><script>__RELATIVE__</script><script>__COMPARISON__</script><script>__APP__</script></body></html>
-
-

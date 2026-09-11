@@ -6,7 +6,7 @@ const fmt = (n, unit = '') => n == null || !Number.isFinite(n) ? '—' : new Int
   {maximumFractionDigits: unit === 'COP' ? 0 : unit === 'Índice' ? 3 : Math.abs(n)<1 ? 4 : 2}).format(n);
 const short = n => n == null ? '—' : new Intl.NumberFormat('es-CO', {notation:'compact',maximumFractionDigits:1}).format(n);
 const sorted = a => [...new Set(a)].sort((x,y) => x.localeCompare(y,'es'));
-const state = {scope:'decree',dept:'',date:DATA.latest,level:'municipal',source:T.RAPIDA,dim:'Vivienda',metric:'',order:'desc',geo:'',tab:'prioridades',matrixSource:'integrated',priorityOrder:'integrated',priorityDimension:'',priorityGeo:''};
+const state = {scope:'decree',severity:'total',dept:'',date:DATA.latest,level:'municipal',source:T.RAPIDA,dim:'Vivienda',metric:'',order:'desc',geo:'',tab:'prioridades',matrixSource:'integrated',priorityOrder:'integrated',priorityDimension:'',priorityGeo:''};
 let priorityLimit = 25, sectorLimit = 25, rapidaLimit=25, comparisonGeo='';
 const table = (heads, rows) => rows.length ? `<table><thead><tr>${heads.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>` : '<p class="empty">Sin datos para esta selección.</p>';
 const tile = (label, value, sub) => `<div class="tile"><div class="tile-label">${esc(label)}</div><div class="tile-value">${esc(value)}</div><div class="tile-sub">${esc(sub)}</div></div>`;
@@ -30,6 +30,8 @@ function globalControls() {
   $('scope-note').textContent = state.scope==='decree'
     ? `${model.decree(state.date).size} departamentos del decreto`
     : 'Todos los departamentos del inventario';
+  $('severity').value=state.severity;
+  $('severity-note').textContent=state.severity==='grave'?'Grave: fallecidos y desaparecidos · viviendas destruidas.':'Total: fallecidos, desaparecidos y heridos · viviendas destruidas y averiadas.';
   $('footer-capture').textContent = `Captura ${state.date}`;
 }
 function diagnosticControls() {
@@ -89,9 +91,8 @@ function historyBlock(key,geo='') {
 }
 function renderPriorities() {
   const p=priorityModel.selection(state), scored=p.items.filter(r=>r.coverage>0);
-  $('priority-kpis').innerHTML=tile('Municipios con evidencia',`${scored.length} / ${p.items.length}`,'Al menos un campo de los 17 del modelo')+
+  $('priority-kpis').innerHTML=tile('Municipios con evidencia',`${scored.length} / ${p.items.length}`,`Al menos un campo de los ${p.fieldCount} del modelo`)+
     tile('Con todos los campos',p.items.filter(r=>r.complete).length,'Si faltan datos, se muestra un intervalo')+
-    tile('Cobertura ponderada mediana',scored.length?`${fmt(T.quantile(scored.map(r=>100*r.coverage),.5))}%`:'—','Disponibilidad de componentes; no certeza')+
     tile('Coincidencias con mayor necesidad de recuperación temprana',`${p.overlap} / ${p.rapidaTopN}`,'Top 20 con empates · universo de referencia');
   renderMatrix();
   if(state.priorityGeo)renderPriorityDetail(state.priorityGeo,false);
@@ -101,7 +102,7 @@ function renderMatrix() {
   state.matrixSource='integrated';state.matrixLevel='municipal';
   const selected={...state,matrixSearch:$('matrix-search').value};
   const p=priorityModel.selection(selected),municipal=state.matrixLevel==='municipal';
-  const selectedSector=Priorizacion.SECTORS.find(s=>s.id===state.priorityDimension);
+  const selectedSector=Priorizacion.sectorsFor(state.severity).find(s=>s.id===state.priorityDimension);
   const orderText=selectedSector?`Orden por ${selectedSector.name}: ${state.dimensionDirection==='asc'?'menor a mayor':'mayor a menor'}, usando el puntaje documentado. Municipios sin datos al final`:'Orden normal: prioridad global documentada de mayor a menor';
   $('priority-note').textContent=municipal?`${selectedSector?selectedSector.name:"Prioridad documentada"} · ${state.dimensionDirection==="asc"?"menor a mayor":"mayor a menor"}. Pulsa una columna para ordenar.`:'Los totales departamentales no se reparten entre municipios ni reciben puntaje municipal.';
   if(state.matrixSource==='FundacionExe')$('priority-note').textContent+=' ExE: atribución de las sedes al sismo pendiente de verificar.';
@@ -111,10 +112,10 @@ function renderMatrix() {
   $('matrix-note').textContent=integrated?'Color: intensidad de cada variable. —: sin dato.':'Cada color es el percentil del mismo indicador y fuente dentro del ámbito seleccionado. La búsqueda y el departamento no alteran la referencia.';
   $('matrix-warning').textContent=integrated?'':source?.note||'';
   const compactRange=(lo,hi)=>Math.abs(lo-hi)<1e-8?`${fmt(lo)} /100`:`Documentado ${fmt(lo)} · posible ${fmt(hi)} /100`;
-  const placeCell=r=>{const sector=selectedSector&&r.sectors.find(s=>s.id===selectedSector.id),hasSector=sector&&sector.coverage>0;return `<td class="municipal-cell"><button class="link" type="button" data-priority-geo="${esc(r.geo)}">${esc(r.m)}</button><div class="muted small">${esc(r.d)}</div><div class="priority-number">${selectedSector?(hasSector?fmt(state.priorityOrder==='uncertainty'?sector.upper:sector.lower):'—'):(r.coverage>0?fmt(state.priorityOrder==='uncertainty'?r.upper:r.lower):'—')}<small> / 100</small></div><div class="small">${selectedSector?(hasSector?`${esc(selectedSector.name)} · ${compactRange(sector.lower,sector.upper)}`:'Sin datos en esta dimensión'):(r.coverage>0?`Prioridad · ${compactRange(r.lower,r.upper)}`:'Sin componentes puntuables')}</div><div class="small muted">Cobertura ${fmt(100*r.coverage)}% · ${r.available}/17 campos</div><div class="small muted">${selectedSector?`Puesto en dimensión ${r.dimensionRank??'—'} · global ${r.rank??'—'}`:`Puesto global ${r.rank??'—'}`} · Puesto de necesidad de recuperación temprana ${r.recoveryRank??'—'}</div></td>`;};
+  const placeCell=r=>{const sector=selectedSector&&r.sectors.find(s=>s.id===selectedSector.id),hasSector=sector&&sector.coverage>0;return `<td class="municipal-cell"><button class="link" type="button" data-priority-geo="${esc(r.geo)}">${esc(r.m)}</button><div class="muted small">${esc(r.d)}</div><div class="priority-number">${selectedSector?(hasSector?fmt(state.priorityOrder==='uncertainty'?sector.upper:sector.lower):'—'):(r.coverage>0?fmt(state.priorityOrder==='uncertainty'?r.upper:r.lower):'—')}<small> / 100</small></div><div class="small">${selectedSector?(hasSector?`${esc(selectedSector.name)} · ${compactRange(sector.lower,sector.upper)}`:'Sin datos en esta dimensión'):(r.coverage>0?`Prioridad · ${compactRange(r.lower,r.upper)}`:'Sin componentes puntuables')}</div><div class="small muted">Cobertura ${fmt(100*r.coverage)}% · ${r.available}/${r.fieldCount} campos</div><div class="small muted">${selectedSector?`Puesto en dimensión ${r.dimensionRank??'—'} · global ${r.rank??'—'}`:`Puesto global ${r.rank??'—'}`} · Puesto de necesidad de recuperación temprana ${r.recoveryRank??'—'}</div></td>`;};
   if(integrated){
     $('matrix-count').textContent=`${p.items.length} municipios · referencia: ${p.referenceN}`;
-    const columns=Priorizacion.SECTORS;
+    const columns=Priorizacion.sectorsFor(state.severity);
     $('matrix').innerHTML=table(['Municipio y puntaje',...columns.map(s=>s.name)],p.items.map(r=>`<tr>${placeCell(r)}${columns.map(column=>{const s=r.sectors.find(x=>x.id===column.id);return `<td class="heat-cell ${selectedSector?.id===s.id?'selected-sector':''}"><div class="sector-score">${compactRange(s.lower,s.upper)} <span class="muted small">sector</span></div>${s.fields.map(f=>`<span class="heat-item ${f.row?'':'missing'}" style="background:rgba(31,95,174,${f.score==null?.025:.04+.2*f.score/100})" title="${esc(`${f.label}. ${f.row?`Valor ${fmt(f.row.v)}. Intensidad ${fmt(f.score)}. Aporte antes de IPM ${fmt(f.contribution)} puntos. Referencia n=${f.n}.`:'Sin observación. No se convierte en cero.'}`)}"><span>${esc(f.label)}</span><br><b>${f.row?fmt(f.row.v):'—'}</b> <span>${f.row?esc(f.row.u):'sin dato'}</span></span>`).join('')}</td>`;}).join('')}</tr>`));
     $('matrix').querySelectorAll('thead th').forEach((th,i)=>{
       if(!i)return;
@@ -151,7 +152,7 @@ function renderPriorityDetail(geo,scroll=true){
 }
 function renderPriorityMethod(){
   const p=priorityModel.compute(state);
-  $('priority-method').innerHTML=`<h2>Fórmula del modelo sectorial ${Priorizacion.VERSION}</h2><p class="formula">z = 100 × valor / máximo observado del indicador<br>Sector = suma de z × peso interno<br>D = (Impacto humano + Vivienda + Salud + Educación + Infraestructura + Comunidad) / 6<br>P = D × (1 + 0,25 × IPM censal / 100) / 1,25</p><details><summary>Variables y pesos</summary><div class="table-scroll">${table(['Sector (peso 1/6)','Variable','Fuente','Peso dentro del sector','Con dato / positivos','Máximo observado'],Priorizacion.SECTORS.flatMap(s=>s.fields.map(f=>{const c=p.calibrations.find(c=>c.id===f.id);return `<tr><td>${esc(s.name)}</td><td>${esc(f.label)}</td><td>${esc(f.source)}</td><td class="num">${fmt(f.share*100)}%</td><td class="num">${c.n} / ${c.positive}</td><td class="num">${fmt(c.anchor)}${c.positive<10?'<div class="small">Referencia positiva pequeña</div>':''}${!c.coherent?'<div class="small">Definiciones incompatibles: excluido</div>':''}</td></tr>`;})))}</div></details>`;
+  $('priority-method').innerHTML=`<h2>Fórmula del modelo sectorial ${Priorizacion.VERSION} · ${state.severity==='grave'?'Grave':'Total'}</h2><p><a href="docs/impacto_grave_total.md">Definiciones y viabilidad de las bases sectoriales</a></p><p class="formula">z = 100 × valor / máximo observado del indicador<br>Sector = suma de z × peso interno<br>D = (Impacto humano + Vivienda + Salud + Educación + Infraestructura + Comunidad) / 6<br>P = D × (1 + 0,25 × IPM censal / 100) / 1,25</p><details><summary>Variables y pesos</summary><div class="table-scroll">${table(['Sector (peso 1/6)','Variable','Fuente','Peso dentro del sector','Con dato / positivos','Máximo observado'],Priorizacion.sectorsFor(state.severity).flatMap(s=>s.fields.map(f=>{const c=p.calibrations.find(c=>c.id===f.id);return `<tr><td>${esc(s.name)}</td><td>${esc(f.label)}</td><td>${esc(f.source)}</td><td class="num">${fmt(f.share*100)}%</td><td class="num">${c.n} / ${c.positive}</td><td class="num">${fmt(c.anchor)}${c.positive<10?'<div class="small">Referencia positiva pequeña</div>':''}${!c.coherent?'<div class="small">Definiciones incompatibles: excluido</div>':''}</td></tr>`;})))}</div></details>`;
 }
 function distribution(pool) {
   if(!pool.length)return '<p class="empty">No hay distribución para estos filtros.</p>';
@@ -239,7 +240,7 @@ function renderComparison(){
     tile('Spearman ρ',precision(c.rho),'Asociación entre posiciones');
   function detail(r){
     comparisonGeo=r?.geo||'';
-    $('comparison-detail').innerHTML=r?'<h3>'+esc(r.m)+', '+esc(r.d)+'</h3><p><b>'+names[mode]+': '+fmt(r.lower)+' /100</b><br>Posible por faltantes: '+fmt(r.upper)+' /100<br>Puesto nuestro: '+r.ownRank+'</p><p><b>Necesidad de recuperación temprana: '+precision(r.recovery)+'</b><br>Puesto en la referencia: '+r.recoveryRank+'</p><p>Cobertura: '+r.available+'/17 campos · '+fmt(100*r.coverage)+'% del peso.</p><p class="formula">Par usado: X = '+precision(r.x)+'; Y = '+precision(r.y)+'</p><button type="button" class="secondary" data-geo="'+esc(r.geo)+'" data-source="'+T.RAPIDA+'">Abrir diagnóstico territorial</button>':'<p>Pasa el mouse, enfoca con Tab o toca un municipio para consultar sus valores y cobertura.</p>';
+    $('comparison-detail').innerHTML=r?'<h3>'+esc(r.m)+', '+esc(r.d)+'</h3><p><b>'+names[mode]+': '+fmt(r.lower)+' /100</b><br>Posible por faltantes: '+fmt(r.upper)+' /100<br>Puesto nuestro: '+r.ownRank+'</p><p><b>Necesidad de recuperación temprana: '+precision(r.recovery)+'</b><br>Puesto en la referencia: '+r.recoveryRank+'</p><p>Cobertura: '+r.available+'/'+r.fieldCount+' campos · '+fmt(100*r.coverage)+'% del peso.</p><p class="formula">Par usado: X = '+precision(r.x)+'; Y = '+precision(r.y)+'</p><button type="button" class="secondary" data-geo="'+esc(r.geo)+'" data-source="'+T.RAPIDA+'">Abrir diagnóstico territorial</button>':'<p>Pasa el mouse, enfoca con Tab o toca un municipio para consultar sus valores y cobertura.</p>';
   }
   if(!pairs.length){$('comparison-chart').innerHTML='<p class="empty">No hay municipios con ambos datos en esta selección. Revisa los filtros generales o cambia la versión del índice.</p>';detail(null);}
   else{
@@ -266,7 +267,7 @@ function renderComparison(){
     detail(pairs.find(r=>r.geo===comparisonGeo)||(search?matched[0]:null));
   }
   $('comparison-fit').textContent=c.regression?'Recta discontinua: Y = '+precision(c.regression.intercept)+(c.regression.slope<0?' − ':' + ')+precision(Math.abs(c.regression.slope))+' × X. R² = '+precision(c.regression.r2)+'.':c.reason;
-  $('comparison-table').innerHTML=table(['Municipio','Nuestro índice documentado','Posible','Puesto nuestro','Necesidad de recuperación temprana','Puesto de necesidad','Cobertura'],pairs.slice().sort((a,b)=>b.x-a.x).map(r=>'<tr><td>'+geoButton({...r,lv:'municipal'},T.RAPIDA)+'</td><td class="num">'+precision(r.x)+'</td><td class="num">'+precision(r.upper)+'</td><td class="num">'+r.ownRank+'</td><td class="num">'+precision(r.recovery)+'</td><td class="num">'+r.recoveryRank+'</td><td>'+r.available+'/17 · '+fmt(100*r.coverage)+'%</td></tr>'));
+  $('comparison-table').innerHTML=table(['Municipio','Nuestro índice documentado','Posible','Puesto nuestro','Necesidad de recuperación temprana','Puesto de necesidad','Cobertura'],pairs.slice().sort((a,b)=>b.x-a.x).map(r=>'<tr><td>'+geoButton({...r,lv:'municipal'},T.RAPIDA)+'</td><td class="num">'+precision(r.x)+'</td><td class="num">'+precision(r.upper)+'</td><td class="num">'+r.ownRank+'</td><td class="num">'+precision(r.recovery)+'</td><td class="num">'+r.recoveryRank+'</td><td>'+r.available+'/'+r.fieldCount+' · '+fmt(100*r.coverage)+'%</td></tr>'));
 }
 function refresh() {globalControls();diagnosticControls();renderPriorities();renderDiagnostic();renderMethod();MunicipalRadar.render(priorityModel,state);PerCapitaMunicipalRadar.render(priorityModel,state);RelativeMunicipalRadar.render(priorityModel,state);PrioridadPerCapita.render(state);PrioridadRelativa.render(state);renderRapida();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>activate(b.dataset.tab)));
@@ -277,7 +278,7 @@ document.querySelector('.tab-nav').addEventListener('keydown',event=>{
   const j=event.key==='Home'?0:event.key==='End'?tabs.length-1:(i+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
   tabs[j].focus();activate(tabs[j].dataset.tab);
 });
-['scope','dept','date'].forEach(id=>$(id).addEventListener('change',()=>{state[id]=$(id).value;priorityLimit=sectorLimit=rapidaLimit=25;refresh();}));
+['scope','dept','date','severity'].forEach(id=>$(id).addEventListener('change',()=>{state[id]=$(id).value;priorityLimit=sectorLimit=rapidaLimit=25;refresh();}));
 ['level','source','dimension','indicator'].forEach(id=>$(id).addEventListener('change',()=>{
   const field={dimension:'dim',indicator:'metric'}[id]||id;state[field]=$(id).value;
   diagnosticControls();sectorLimit=25;renderDiagnostic();
@@ -304,5 +305,3 @@ $('download').addEventListener('click',()=>{
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='seleccion-territorial.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 refresh();
-
-

@@ -1,7 +1,7 @@
 name: Verificar y generar priorización integrada
 on:
   push:
-    branches: [denominadores-sectoriales, priorizacion-integrada]
+    branches: [denominadores-sectoriales, priorizacion-integrada, impacto-grave-total]
     paths:
       - 'web/**'
       - 'tests/**'

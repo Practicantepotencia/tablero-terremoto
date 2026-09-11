@@ -1,5 +1,8 @@
 # Denominadores sectoriales: decisión y evidencia
 
+> Auditoría original. En `impacto-grave-total`, los [campos activos del modelo 1.3](impacto_grave_total.md)
+> son 16 en total y 13 en grave; familias permanece en el inventario, fuera del índice.
+
 Rama `denominadores-sectoriales`, creada desde `priorizacion-integrada` en
 `36e9afc`. Auditoría del 10 de septiembre de 2026. Numeradores del inventario
 capturado el 9 de septiembre de 2026. La captura no equivale a la fecha de cada

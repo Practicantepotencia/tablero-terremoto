@@ -48,7 +48,7 @@
       select.onchange=()=>choose(select.value);
     });
     current=selected.map(g=>places.find(r=>r.geo===g)).filter(Boolean);
-    get('radar-reference').textContent=`Modelo 1.2${relative?(percapita?' · Per cápita · población DANE ':' · Denominadores sectoriales · bases DANE ')+String(state.date).slice(0,4):''} · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos del inventario'}, ${p.referenceN} municipios.`;
+    get('radar-reference').textContent=`Modelo ${Priorizacion.VERSION} · ${state.severity==='grave'?'Grave':'Total'}${relative?(percapita?' · Per cápita · población DANE ':' · Denominadores sectoriales · bases DANE ')+String(state.date).slice(0,4):''} · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos del inventario'}, ${p.referenceN} municipios.`;
     let svg='<svg viewBox="0 0 660 540" aria-label="Radar de seis sectores, escala de cero a cien" role="group">';
     [20,40,60,80,100].forEach(v=>{svg+=`<polygon points="${polygon(Array(6).fill(v))}" fill="none" stroke="#d5dfe8"/><text x="338" y="${270-190*v/100+4}" class="radar-scale">${v}</text>`;});
     const names=['Impacto humano','Vivienda','Salud','Educación','Infraestructura','Comunidad'];
@@ -71,7 +71,7 @@
       values.forEach((v,j)=>{const [x,y]=point(i,v);svg+=`<circle class="radar-point" cx="${x}" cy="${y}" r="6" fill="${j?'white':colors[k]}" stroke="${colors[k]}" stroke-width="2" tabindex="0" role="button" data-radar-m="${k}" data-radar-axis="${i}" aria-label="${esc(label(r))}, ${esc(s.name)}, ${fmt(s.lower)} a ${fmt(s.upper)}. Ver cálculo"><title>${esc(label(r))} · ${esc(s.name)}: ${fmt(s.lower)}–${fmt(s.upper)}. Consultar cálculo.</title></circle>`;});
     }));
     get('radar-chart').innerHTML=current.length?svg+'</svg>':'<p class="empty">Selecciona un municipio para comenzar.</p>';
-    get('radar-legend').innerHTML=current.map((r,k)=>`<p style="color:${colors[k]}"><strong>${esc(label(r))}</strong> · P: ${fmt(r.lower)}–${fmt(r.upper)} · ${r.available}/17 campos${!r.coverage?' · Sin puntaje documentado':''}</p>`).join('');
+    get('radar-legend').innerHTML=current.map((r,k)=>`<p style="color:${colors[k]}"><strong>${esc(label(r))}</strong> · P: ${fmt(r.lower)}–${fmt(r.upper)} · ${r.available}/${r.fieldCount} campos${!r.coverage?' · Sin puntaje documentado':''}</p>`).join('');
     get('radar-sectors').innerHTML=current.map((r,k)=>`<div><strong style="color:${colors[k]}">${esc(label(r))}</strong><div>${r.sectors.map((s,i)=>`<button type="button" class="secondary" data-radar-m="${k}" data-radar-axis="${i}">${esc(s.name)}: ${relative&&!s.coverage?'Sin datos relativos':fmt(s.lower)+'–'+fmt(s.upper)}</button>`).join('')}</div></div>`).join('');
     host.closest('.card').querySelectorAll('[data-radar-m]').forEach(el=>{const show=()=>inspect(Number(el.dataset.radarM),Number(el.dataset.radarAxis));el.onmouseenter=show;el.onfocus=show;el.onclick=show;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show();}};});
     const old=current.findIndex(r=>r.geo===active?.[0]);
@@ -83,5 +83,3 @@
   root.RelativeMunicipalRadar=createRadar('radar-relative','sectorial');
   root.PerCapitaMunicipalRadar=createRadar('radar-percapita','percapita');
 })(globalThis);
-
-

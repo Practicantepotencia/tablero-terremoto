@@ -71086,7 +71086,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 13,departamental,Bolívar,,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 13,departamental,Bolívar,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-11
 13,departamental,Bolívar,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
-13,departamental,Bolívar,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,8.0,2026-09-11
+13,departamental,Bolívar,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,11.0,2026-09-11
 13,departamental,Bolívar,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 13,departamental,Bolívar,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,11.0,2026-09-11
 13,departamental,Bolívar,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
@@ -71201,17 +71201,17 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 19,departamental,Cauca,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,14.0,2026-09-11
 19,departamental,Cauca,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 19,departamental,Cauca,,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
-19,departamental,Cauca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,93.0,2026-09-11
+19,departamental,Cauca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,178.0,2026-09-11
 19,departamental,Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 19,departamental,Cauca,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,327.0,2026-09-11
 19,departamental,Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
-19,departamental,Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,7066.0,2026-09-11
+19,departamental,Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,7032.0,2026-09-11
 19,departamental,Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
 19,departamental,Cauca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
-19,departamental,Cauca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,20.0,2026-09-11
+19,departamental,Cauca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,17.0,2026-09-11
 19,departamental,Cauca,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,7.0,2026-09-11
-19,departamental,Cauca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,6817.0,2026-09-11
-19,departamental,Cauca,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,317.0,2026-09-11
+19,departamental,Cauca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,6754.0,2026-09-11
+19,departamental,Cauca,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,318.0,2026-09-11
 19,departamental,Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,18,2026-09-11
 19,departamental,Cauca,,Educación,educacion_n,Puntos registrados (Educación),Número,Naboo,9,2026-09-11
 19,departamental,Cauca,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-11
@@ -71242,7 +71242,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 20,departamental,Cesar,,Instituciones,instituciones_n,Puntos registrados (Instituciones),Número,Naboo,1,2026-09-11
 20,departamental,Cesar,,Salud,salud_n,Puntos registrados (Salud),Número,Naboo,0,2026-09-11
 20,departamental,Cesar,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,0,2026-09-11
-27,departamental,Chocó,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,29.0,2026-09-11
+27,departamental,Chocó,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,70.0,2026-09-11
 27,departamental,Chocó,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27,departamental,Chocó,,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27,departamental,Chocó,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,175.0,2026-09-11
@@ -71668,12 +71668,12 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 73,departamental,Tolima,,Vivienda,vivienda_n,Puntos registrados (Vivienda),Número,Naboo,12,2026-09-11
 76,departamental,Valle del Cauca,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 76,departamental,Valle del Cauca,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-11
-76,departamental,Valle del Cauca,,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,515.0,2026-09-11
+76,departamental,Valle del Cauca,,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,530.0,2026-09-11
 76,departamental,Valle del Cauca,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,3440.0,2026-09-11
 76,departamental,Valle del Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,27.0,2026-09-11
 76,departamental,Valle del Cauca,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,1390.0,2026-09-11
 76,departamental,Valle del Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,199.0,2026-09-11
-76,departamental,Valle del Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,127044.0,2026-09-11
+76,departamental,Valle del Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,129131.0,2026-09-11
 76,departamental,Valle del Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,2904.0,2026-09-11
 76,departamental,Valle del Cauca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,88.0,2026-09-11
 76,departamental,Valle del Cauca,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,103.0,2026-09-11
@@ -78593,7 +78593,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 ,municipal,Chocó,Acandí,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExe,899,2026-09-11
 ,municipal,Chocó,Acandí,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExe,3,2026-09-11
 ,municipal,Chocó,Acandí,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExe,0,2026-09-11
-27025,municipal,Chocó,Alto Baudó,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27025,municipal,Chocó,Alto Baudó,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-11
 27025,municipal,Chocó,Alto Baudó,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27025,municipal,Chocó,Alto Baudó,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27025,municipal,Chocó,Alto Baudó,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,4.0,2026-09-11
@@ -78647,7 +78647,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27025,municipal,Chocó,Alto Baudó,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.56263842,2026-09-11
 27025,municipal,Chocó,Alto Baudó,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,5.6797454,2026-09-11
 27025,municipal,Chocó,Alto Baudó,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-27050,municipal,Chocó,Atrato,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,4.0,2026-09-11
+27050,municipal,Chocó,Atrato,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-11
 27050,municipal,Chocó,Atrato,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27050,municipal,Chocó,Atrato,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27050,municipal,Chocó,Atrato,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,7.0,2026-09-11
@@ -78701,7 +78701,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27050,municipal,Chocó,Atrato,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.49887677,2026-09-11
 27050,municipal,Chocó,Atrato,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,55.99469253,2026-09-11
 27050,municipal,Chocó,Atrato,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-27073,municipal,Chocó,Bagadó,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27073,municipal,Chocó,Bagadó,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
 27073,municipal,Chocó,Bagadó,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27073,municipal,Chocó,Bagadó,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27073,municipal,Chocó,Bagadó,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,25.0,2026-09-11
@@ -78809,7 +78809,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27075,municipal,Chocó,Bahía Solano,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.4468053,2026-09-11
 27075,municipal,Chocó,Bahía Solano,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,0,2026-09-11
 27075,municipal,Chocó,Bahía Solano,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-27077,municipal,Chocó,Bajo Baudó,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27077,municipal,Chocó,Bajo Baudó,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,14.0,2026-09-11
 27077,municipal,Chocó,Bajo Baudó,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27077,municipal,Chocó,Bajo Baudó,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27077,municipal,Chocó,Bajo Baudó,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
@@ -78863,7 +78863,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27077,municipal,Chocó,Bajo Baudó,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.55663411,2026-09-11
 27077,municipal,Chocó,Bajo Baudó,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,1.47145953,2026-09-11
 27077,municipal,Chocó,Bajo Baudó,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-27099,municipal,Chocó,Bojayá,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27099,municipal,Chocó,Bojayá,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
 27099,municipal,Chocó,Bojayá,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27099,municipal,Chocó,Bojayá,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27099,municipal,Chocó,Bojayá,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
@@ -78917,7 +78917,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27099,municipal,Chocó,Bojayá,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.38749107,2026-09-11
 27099,municipal,Chocó,Bojayá,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,4.9039795,2026-09-11
 27099,municipal,Chocó,Bojayá,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-,municipal,Chocó,Cantón de San Pablo,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
+,municipal,Chocó,Cantón de San Pablo,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-11
 ,municipal,Chocó,Cantón de San Pablo,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Cantón de San Pablo,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Cantón de San Pablo,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,10.0,2026-09-11
@@ -78969,7 +78969,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 ,municipal,Chocó,Carmen de Atrato,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Carmen de Atrato,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,12.0,2026-09-11
 ,municipal,Chocó,Carmen de Atrato,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-11
-,municipal,Chocó,Carmen del Darién,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,8.0,2026-09-11
+,municipal,Chocó,Carmen del Darién,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-11
 ,municipal,Chocó,Carmen del Darién,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Carmen del Darién,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Carmen del Darién,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-11
@@ -78998,7 +78998,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 ,municipal,Chocó,Carmen del Darién,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExe,1670,2026-09-11
 ,municipal,Chocó,Carmen del Darién,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExe,9,2026-09-11
 ,municipal,Chocó,Carmen del Darién,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExe,0,2026-09-11
-27205,municipal,Chocó,Condoto,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27205,municipal,Chocó,Condoto,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
 27205,municipal,Chocó,Condoto,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27205,municipal,Chocó,Condoto,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27205,municipal,Chocó,Condoto,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,4.0,2026-09-11
@@ -79222,7 +79222,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 ,municipal,Chocó,El Litoral del San Juan,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExe,74,2026-09-11
 ,municipal,Chocó,El Litoral del San Juan,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExe,3,2026-09-11
 ,municipal,Chocó,El Litoral del San Juan,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExe,1,2026-09-11
-27361,municipal,Chocó,Istmina,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27361,municipal,Chocó,Istmina,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
 27361,municipal,Chocó,Istmina,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27361,municipal,Chocó,Istmina,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27361,municipal,Chocó,Istmina,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
@@ -79300,7 +79300,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27372,municipal,Chocó,Juradó,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.36261045,2026-09-11
 27372,municipal,Chocó,Juradó,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,0,2026-09-11
 27372,municipal,Chocó,Juradó,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-,municipal,Chocó,Litoral de San Juan,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+,municipal,Chocó,Litoral de San Juan,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,4.0,2026-09-11
 ,municipal,Chocó,Litoral de San Juan,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Litoral de San Juan,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Litoral de San Juan,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
@@ -79314,7 +79314,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 ,municipal,Chocó,Litoral de San Juan,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Litoral de San Juan,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,673.0,2026-09-11
 ,municipal,Chocó,Litoral de San Juan,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,231.0,2026-09-11
-27413,municipal,Chocó,Lloró,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27413,municipal,Chocó,Lloró,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-11
 27413,municipal,Chocó,Lloró,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27413,municipal,Chocó,Lloró,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27413,municipal,Chocó,Lloró,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
@@ -79368,7 +79368,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27413,municipal,Chocó,Lloró,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.46947603,2026-09-11
 27413,municipal,Chocó,Lloró,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,11.73397594,2026-09-11
 27413,municipal,Chocó,Lloró,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-27425,municipal,Chocó,Medio Atrato,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-11
+27425,municipal,Chocó,Medio Atrato,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,4.0,2026-09-11
 27425,municipal,Chocó,Medio Atrato,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27425,municipal,Chocó,Medio Atrato,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27425,municipal,Chocó,Medio Atrato,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
@@ -79422,7 +79422,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27425,municipal,Chocó,Medio Atrato,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.47006231,2026-09-11
 27425,municipal,Chocó,Medio Atrato,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,0,2026-09-11
 27425,municipal,Chocó,Medio Atrato,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-27430,municipal,Chocó,Medio Baudó,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27430,municipal,Chocó,Medio Baudó,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,8.0,2026-09-11
 27430,municipal,Chocó,Medio Baudó,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27430,municipal,Chocó,Medio Baudó,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27430,municipal,Chocó,Medio Baudó,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,21.0,2026-09-11
@@ -79609,7 +79609,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27495,municipal,Chocó,Nuquí,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.42182927,2026-09-11
 27495,municipal,Chocó,Nuquí,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,0.03132919,2026-09-11
 27495,municipal,Chocó,Nuquí,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-27491,municipal,Chocó,Nóvita,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27491,municipal,Chocó,Nóvita,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-11
 27491,municipal,Chocó,Nóvita,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27491,municipal,Chocó,Nóvita,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27491,municipal,Chocó,Nóvita,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,10.0,2026-09-11
@@ -79765,7 +79765,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27600,municipal,Chocó,Rio Quito,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.45003802,2026-09-11
 27600,municipal,Chocó,Rio Quito,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,48.59328973,2026-09-11
 27600,municipal,Chocó,Rio Quito,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-27615,municipal,Chocó,Riosucio,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
+27615,municipal,Chocó,Riosucio,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-11
 27615,municipal,Chocó,Riosucio,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27615,municipal,Chocó,Riosucio,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27615,municipal,Chocó,Riosucio,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-11
@@ -79819,7 +79819,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27615,municipal,Chocó,Riosucio,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.45775831,2026-09-11
 27615,municipal,Chocó,Riosucio,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,0,2026-09-11
 27615,municipal,Chocó,Riosucio,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-,municipal,Chocó,Río Iró,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+,municipal,Chocó,Río Iró,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
 ,municipal,Chocó,Río Iró,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Río Iró,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,Río Iró,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,6.0,2026-09-11
@@ -79903,7 +79903,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 27660,municipal,Chocó,San José Del Palmar,Recuperación,undp_rapida_recovery_needs,Necesidades de recuperación temprana,Índice,UNDP-RAPIDA,0.42955332,2026-09-11
 27660,municipal,Chocó,San José Del Palmar,Infraestructura,undp_rapida_roads_exp_km,Vías expuestas (km),km,UNDP-RAPIDA,51.6785516,2026-09-11
 27660,municipal,Chocó,San José Del Palmar,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
-,municipal,Chocó,San José del Palmar,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
+,municipal,Chocó,San José del Palmar,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-11
 ,municipal,Chocó,San José del Palmar,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,San José del Palmar,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Chocó,San José del Palmar,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,3.0,2026-09-11
@@ -80066,7 +80066,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 ,municipal,Chocó,Unguía,Educación,sedes_edu_matricula_afectada,Matrícula afectada,Número,FundacionExe,805,2026-09-11
 ,municipal,Chocó,Unguía,Educación,sedes_edu_n_sedes,Sedes educativas afectadas,Número,FundacionExe,3,2026-09-11
 ,municipal,Chocó,Unguía,Educación,sedes_edu_n_sedes_criticas,Sedes educativas en estado crítico,Número,FundacionExe,0,2026-09-11
-27810,municipal,Chocó,Unión Panamericana,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
+27810,municipal,Chocó,Unión Panamericana,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-11
 27810,municipal,Chocó,Unión Panamericana,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27810,municipal,Chocó,Unión Panamericana,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 27810,municipal,Chocó,Unión Panamericana,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,13.0,2026-09-11
@@ -86995,12 +86995,12 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 76122,municipal,Valle del Cauca,Caicedonia,Infraestructura,undp_rapida_roads_imp_km,Vías impactadas (km),km,UNDP-RAPIDA,0,2026-09-11
 ,municipal,Valle del Cauca,Cali,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Valle del Cauca,Cali,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
-,municipal,Valle del Cauca,Cali,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,515.0,2026-09-11
+,municipal,Valle del Cauca,Cali,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,530.0,2026-09-11
 ,municipal,Valle del Cauca,Cali,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-11
 ,municipal,Valle del Cauca,Cali,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,27.0,2026-09-11
 ,municipal,Valle del Cauca,Cali,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,214.0,2026-09-11
 ,municipal,Valle del Cauca,Cali,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,155.0,2026-09-11
-,municipal,Valle del Cauca,Cali,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,43052.0,2026-09-11
+,municipal,Valle del Cauca,Cali,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,45139.0,2026-09-11
 ,municipal,Valle del Cauca,Cali,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1517.0,2026-09-11
 ,municipal,Valle del Cauca,Cali,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,88.0,2026-09-11
 ,municipal,Valle del Cauca,Cali,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,10.0,2026-09-11

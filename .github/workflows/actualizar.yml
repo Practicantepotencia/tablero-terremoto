@@ -42,24 +42,12 @@ jobs:
           python3 - << 'EOF'
           import json, re
           text = open('storymap.json', encoding='utf-8').read()
-          kws = ['peso','ponder','IPM','vulnerab','0.25','0,25','25%','factor','recuper','MPI','multidimension','pobreza','monetaria','2026','2018','base year','baseline']
-          for kw in kws:
+          for kw in ['Vulnerabilidad Física', 'MMI (UNGRD']:
               idxs = [m.start() for m in re.finditer(re.escape(kw), text, re.IGNORECASE)]
               print(f"--- '{kw}': {len(idxs)} ocurrencias ---")
-              for i in idxs[:3]:
-                  print(repr(text[max(0,i-150):i+150]))
+              for i in idxs[:2]:
+                  print(repr(text[max(0,i-900):i+500]))
           EOF
-          echo "=== metadata de capa municipal (campos, alias, descripciones) ==="
-          curl -sS "https://geosmart.undp.org/arcgis/rest/services/COL_RAPIDA_earthquake_adm2_20260810/FeatureServer/0?f=json" -o layer_meta.json
-          python3 -c "
-          import json
-          d = json.load(open('layer_meta.json'))
-          print('description:', d.get('description'))
-          print('serviceDescription:', d.get('serviceItemId'), d.get('editingInfo'))
-          for f in d.get('fields', []):
-              if f['name'].lower() in ('mpi','recovery_needs') or 'mpi' in f['name'].lower() or 'recovery' in f['name'].lower():
-                  print(f)
-          "
       - name: Verificar importación y cálculos
         run: |
           python -m unittest discover -s tests -v

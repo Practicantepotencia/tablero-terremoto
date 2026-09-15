@@ -1,0 +1,66 @@
+{
+  "runtime": "JavaScript V8 disponible en sesión; Node/Python locales no ejecutables por fallo de sandbox",
+  "count": 36,
+  "passed": [
+    "Gaussian solve",
+    "Poisson constant has mean 4",
+    "Departments strictly disjoint",
+    "Target excluded from predictors 0",
+    "Target excluded from predictors 1",
+    "Target excluded from predictors 2",
+    "Boost fits a known step",
+    "R squared exact prediction",
+    "MAE hand calculation",
+    "Entire urgency experiment deterministic including selection and abstentions",
+    "Input snapshot never mutated",
+    "One OOF prediction per observed municipality 0",
+    "No predicted-missing municipality used in validation 0",
+    "Every outer test department excluded from fitting 0",
+    "No zero/non-finite count predictions 0",
+    "Unsupported estimates withheld 0",
+    "Newton model converged when selected 0",
+    "One OOF prediction per observed municipality 1",
+    "No predicted-missing municipality used in validation 1",
+    "Every outer test department excluded from fitting 1",
+    "No zero/non-finite count predictions 1",
+    "Unsupported estimates withheld 1",
+    "Newton model converged when selected 1",
+    "One OOF prediction per observed municipality 2",
+    "No predicted-missing municipality used in validation 2",
+    "Every outer test department excluded from fitting 2",
+    "No zero/non-finite count predictions 2",
+    "Unsupported estimates withheld 2",
+    "Newton model converged when selected 2",
+    "Prediction invariant to forbidden target value: mediana_por_poblacion",
+    "Prediction invariant to forbidden target value: poisson_demografia",
+    "Prediction invariant to forbidden target value: poisson_capacidades",
+    "Prediction invariant to forbidden target value: boosting_demografia",
+    "Prediction invariant to forbidden target value: boosting_capacidades",
+    "Poisson regression learns exponential relationship",
+    "Group folds exhaustive and no repeated departments"
+  ],
+  "unperformed": [
+    "No ejecución con scikit-learn",
+    "Sin verificación independiente del código contra otra librería ML",
+    "Sin validación temporal con capacidad 2026 observada",
+    "Sin validación con ceros reales"
+  ],
+  "committed_test_cases_run_in_V8": [
+    "Solución lineal y modelos con respuesta analítica conocida",
+    "Boosting recupera un escalón conocido",
+    "Métricas reproducen cálculos sencillos",
+    "Particiones departamentales exhaustivas, sin mezcla",
+    "Etiquetas y casos faltantes nunca entran como predictores objetivo",
+    "Preprocesamiento usa únicamente el conjunto entregado como entrenamiento",
+    "Predicciones guardadas: una por observado; abstenciones y soporte explícitos",
+    "Experimento de urgencias exactamente reproducible, entradas inmutables"
+  ],
+  "reproducer_in_V8": {
+    "files_identical": [
+      "resultados.json",
+      "validacion.csv",
+      "estimaciones_faltantes.csv"
+    ],
+    "note": "Mismo código CLI ejecutado con adaptadores de lectura/escritura en memoria. No ejecución local de Node."
+  }
+}

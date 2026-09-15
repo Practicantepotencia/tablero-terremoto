@@ -1,0 +1,17 @@
+'use strict';
+const fs=require('node:fs');
+const path=require('node:path');
+const ML=require('./ml_salud.cjs');
+const root=path.resolve(__dirname,'..');
+const directory=path.join(root,'experimentos','ml_salud');
+const input=JSON.parse(fs.readFileSync(path.join(directory,'entrada.json'),'utf8'));
+const results=input.targets.map((_,target)=>ML.finishResult(ML.evaluateTarget(input,target,(fold,model)=>console.log(input.targets[target].id,'fold',fold,model))));
+const toCSV=(headers,rows)=>headers.join(",")+"\n"+rows.map(row=>row.map(v=>{const s=v===null||v===undefined?"":typeof v==="object"?JSON.stringify(v):String(v);return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}).join(",")).join("\n")+"\n";
+const metrics=results.map(x=>({target:x.target.id,chosen:x.final_selection.config.id,observed:x.train_n,missing:x.missing_n,experimental_supported:x.predictions.filter(p=>p.exploratory_supported).length,withheld:x.predictions.filter(p=>!p.exploratory_supported).length,outer_validation:x.metrics,under_50000:x.small_under_50000,comparison:x.final_selection.scores,folds:x.folds,error_band:x.error_band}));
+const artifact={created:"2026-09-15",status:"exploratory_only_no_dashboard_changes",selection_metric:"mean(abs(log(max(prediction,1))-log(observed)))",validation:"5 outer department folds; 3 inner department folds; final fit selects using 5 department folds; no untouched external test",runtime:"dependency-free JavaScript V8, not scikit-learn",metrics,results};
+fs.writeFileSync(path.join(directory,'resultados.json'),JSON.stringify(artifact));
+const oofHeaders=["denominador","codigo","municipio","departamento","poblacion_2026","grupo_validacion","modelo","observado_2022","predicho_sin_ver_departamento","error_predicho_menos_observado"];
+const missingHeaders=["denominador","codigo","municipio","departamento","poblacion_2026","estimacion_experimental_condicionada_a_existencia","tiene_soporte_minimo","abstencion","ejemplos_patron","banda_error_descriptiva_inferior","banda_error_descriptiva_superior","razones","habilitado_para_indice"];
+fs.writeFileSync(path.join(directory,'validacion.csv'),toCSV(oofHeaders,results.flatMap(x=>x.oof.map(o=>[x.target.id,o.code,o.municipality,o.department,o.population_2026,o.fold,o.model,o.observed,o.predicted,o.error]))));
+fs.writeFileSync(path.join(directory,'estimaciones_faltantes.csv'),toCSV(missingHeaders,results.flatMap(x=>x.predictions.map(p=>[x.target.id,p.code,p.municipality,p.department,p.population_2026,p.released_estimate,p.exploratory_supported,!p.exploratory_supported,p.missing_pattern_observed_n,p.descriptive_error_band?.[0],p.descriptive_error_band?.[1],p.reasons,false]))));
+console.log('Experimento regenerado. Tablero y denominadores oficiales sin cambios.');

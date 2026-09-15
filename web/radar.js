@@ -48,7 +48,7 @@
       select.onchange=()=>choose(select.value);
     });
     current=selected.map(g=>places.find(r=>r.geo===g)).filter(Boolean);
-    get('radar-reference').textContent=`Modelo ${Priorizacion.VERSION} · ${state.severity==='grave'?'Grave':'Total'}${relative?(percapita?' · Per cápita · población DANE ':' · Denominadores sectoriales · bases DANE ')+String(state.date).slice(0,4):''} · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos del inventario'}, ${p.referenceN} municipios.`;
+    get('radar-reference').textContent=`Modelo ${Priorizacion.VERSION} · ${state.severity==='grave'?'Grave':'Total'}${relative?(percapita?' · Per cápita · población DANE ':' · Denominadores sectoriales · población y vivienda DANE ')+String(state.date).slice(0,4):''} · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos del inventario'}, ${p.referenceN} municipios.`;
     let svg='<svg viewBox="0 0 660 540" aria-label="Radar de seis sectores, escala de cero a cien" role="group">';
     [20,40,60,80,100].forEach(v=>{svg+=`<polygon points="${polygon(Array(6).fill(v))}" fill="none" stroke="#d5dfe8"/><text x="338" y="${270-190*v/100+4}" class="radar-scale">${v}</text>`;});
     const names=['Impacto humano','Vivienda','Salud','Educación','Infraestructura','Comunidad'];

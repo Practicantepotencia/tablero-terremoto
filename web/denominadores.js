@@ -32,7 +32,42 @@
       if(!groups.has(key))groups.set(key,[]);
       groups.get(key).push(r);
     });
+
+    // Experimental Health pressure against a fixed historical stock, NOT a loss percentage.
+    function healthMeasure(row,id,code,date){
+      const v=payload.health_variant;
+      const catalog={
+        consulta_externa:['consultorios_externos_reps','Consultorios de consulta externa','puntos/consultorio externo'],
+        urgencias:['consultorios_urgencias_reps','Consultorios de urgencias','puntos/consultorio de urgencias'],
+        hospitalizacion:['camas_generales_reps','Camas generales adultas y pediátricas','puntos/cama general']
+      };
+      const expected=catalog[v?.id];
+      const base={rate:null,denominator:null,denominatorSource:null,multiplier:1,
+        relativeKind:expected?.[0]||'',relativeUnit:expected?.[2]||'',
+        denominatorLabel:expected?expected[1]+' registrados en REPS · corte 2022-11-05':'Base histórica de salud',
+        reason:''};
+      if(!expected||v.mode!=='capacity_pressure'||v.baseline_year!==2022||v.kind!==expected[0])
+        return {...base,reason:'Propuesta de salud no validada'};
+      if(!/^\d{5}$/.test(code||'')||!/^\d{4}-\d{2}-\d{2}$/.test(date||''))
+        return {...base,reason:'Sin municipio o captura verificable'};
+      const rs=groups.get([expected[0],code,2022].join('|'))||[];
+      if(rs.length!==1)return {...base,reason:rs.length?'Base histórica duplicada o ambigua':'Sin capacidad positiva registrada para esta base; no equivale a cero'};
+      const d=rs[0],source=sources[d.source];
+      if(d.status!=='verified_historical'||!Number.isFinite(d.value)||d.value<=0||d.area!=='Total'||
+        d.unit!==expected[1]||d.reference_date!=='2022-11-05'||d.source!=='reps_capacity_2022'||
+        !source?.url||!/^[a-f0-9]{64}$/.test(source.sha256||'')||!source.mirror_url||
+        !/^\d{4}-\d{2}-\d{2}$/.test(source.published||'')||!payload.event_date||
+        d.reference_date>payload.event_date||source.published>payload.event_date||
+        d.reference_date>date||source.published>date)
+        return {...base,reason:'Base de salud sin procedencia, fecha o unidad verificada'};
+      const valid={...base,denominator:d,denominatorSource:source};
+      if(!row||row.id!==id||row.u!=='Número'||!Number.isFinite(row.v)||row.v<0)
+        return {...valid,reason:'Sin conteo de afectación comparable'};
+      // Different units: allow ratios above one, never label them as percentages.
+      return {...valid,rate:row.v/d.value};
+    }
     function measure(row,id,code,date){
+      if(payload.health_variant&&['3is_salud','pnud_csalud'].includes(id))return healthMeasure(row,id,code,date);
       const rule=RULES[id], year=Number(String(date).slice(0,4));
       const base={rate:null,denominator:null,denominatorSource:null,relativeUnit:rule?.unit||'',multiplier:rule?.multiplier||100,
         denominatorLabel:rule?.label||'Sin denominador definido',reason:'',relativeKind:rule?.kind||''};

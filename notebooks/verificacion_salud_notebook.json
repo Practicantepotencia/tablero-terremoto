@@ -1,0 +1,94 @@
+{
+  "created": "2026-09-15",
+  "status": "static_and_data_checks_only",
+  "python_executed": false,
+  "jupyter_rendered": false,
+  "source_commit": "a350ca6591174542e76b08d108e4d4e15c629b4c",
+  "checks": [
+    {
+      "name": "Formato Jupyter 4.5",
+      "passed": true
+    },
+    {
+      "name": "IDs únicos",
+      "passed": true
+    },
+    {
+      "name": "49 celdas, 23 ejecutables",
+      "passed": true
+    },
+    {
+      "name": "Sin ejecuciones o salidas fabricadas",
+      "passed": true
+    },
+    {
+      "name": "No llamadas shell ni subprocesos",
+      "passed": true
+    },
+    {
+      "name": "Exportación opt-in",
+      "passed": true
+    },
+    {
+      "name": "Hash y corte fijados",
+      "passed": true
+    },
+    {
+      "name": "Sin carga ejecutable externa",
+      "passed": true
+    },
+    {
+      "name": "Coincidencia del esquema CSV",
+      "passed": true
+    },
+    {
+      "name": "Base nacional correcta",
+      "passed": true
+    },
+    {
+      "name": "Modelo original converge",
+      "passed": true
+    },
+    {
+      "name": "203 estimaciones admisibles",
+      "passed": true
+    },
+    {
+      "name": "192 estimaciones brutas en piso",
+      "passed": true
+    },
+    {
+      "name": "Salud decree cuadra con escenario",
+      "passed": true
+    },
+    {
+      "name": "Únicas diferencias son límites nulos/0 decree",
+      "passed": true
+    },
+    {
+      "name": "Salud all cuadra con escenario",
+      "passed": true
+    },
+    {
+      "name": "Únicas diferencias son límites nulos/0 all",
+      "passed": true
+    },
+    {
+      "name": "Faltantes comparados como límites, sin alterar datos",
+      "passed": true
+    },
+    {
+      "name": "Ningún aviso de Python ya ejecutado",
+      "passed": true
+    },
+    {
+      "name": "No backticks escapados de construcción en Markdown",
+      "passed": true
+    }
+  ],
+  "counts": {
+    "cells": 49,
+    "code_cells": 23
+  },
+  "note": "Estructura JSON y reglas/datos verificados en JavaScript V8. AST/pruebas NumPy/ejecución integral pendientes; tests/test_notebook_salud.py y aserciones del notebook permiten verificarlas en un entorno Python funcional."
+}

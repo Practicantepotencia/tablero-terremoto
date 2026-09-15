@@ -1,0 +1,9 @@
+# Python 3.10+ recomendado. Rangos compatibles; registrar versiones al ejecutar.
+numpy>=1.24,<3
+pandas>=2,<4
+matplotlib>=3.7,<4
+scikit-learn>=1.3,<2
+jupyterlab>=4,<5
+nbformat>=5.9,<6
+nbconvert>=7,<8
+ipykernel>=6,<8

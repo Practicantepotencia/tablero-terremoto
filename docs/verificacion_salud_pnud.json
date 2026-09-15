@@ -1,0 +1,512 @@
+{
+  "version": "health_pnud_only",
+  "updated": "2026-09-15",
+  "branch": "salud-relativa-urgencias",
+  "parent": "07be69bed87f511c64a361a2e4ed35843fcb1347",
+  "capture": "2026-09-11",
+  "scope": "Solo Salud sectorial relativa; PNUD peso 1. Absoluto, per cápita, otros sectores, IPM y datos originales conservados.",
+  "not_ml_imputation": true,
+  "observed_capacity_changed": false,
+  "runtime": "V8. Sin terminal local ni inspección visual en navegador real.",
+  "unit_tests": [
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "impacto humano total incluye tres entradas iguales y respeta cero y ausencia",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "cada sector conserva su peso fijo, incluso con distinto número de variables",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "normalización proporcional conserva razones, cero y faltantes",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "un vacío amplía el intervalo sin transferir su peso a otra variable",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "pobreza sola no crea daño y falta de IPM propaga límites",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "RAPIDA, ExE, rescatados y costos no alteran la puntuación propia",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "mismo dato duplicado no vota dos veces; datos conflictivos se excluyen",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "no combina unidades ni definiciones diferentes del mismo campo",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "decreto cambia referencia, departamento y búsqueda conservan puntajes y puestos",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "selector de dimensión ordena por su puntaje y conserva el puesto global",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "empates comparten puesto; sensibilidad y límites incluyen el caso base",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "municipio solo ExE permanece consultable, sin un puesto global fabricado",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "ejemplo calculado a mano: fallecidos conocidos y resto faltante",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "grave cambia componentes y pesos, no duplica sectores ni pierde el total en caché",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/priorizacion.test.js",
+      "name": "grave conserva ausencias y permite invertir el orden de humano y vivienda",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "relativizar antes de normalizar puede invertir el orden absoluto",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "vivienda usa viviendas, aunque la población dé otro orden",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "ausente, cero, negativo, otro año, duplicado o sin procedencia no crea tasa ni siquiera con numerador cero",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "cero explícito con base verificada es cero; un numerador ausente sigue ausente",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "ni población ni bases candidatas sustituyen inventarios sin homologar",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "numerador que supera universo se rechaza en vez de truncarse",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "faltantes conservan su peso y no se convierten en ceros observados",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "ámbito recalcula; búsqueda y departamento conservan referencia",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "los 16 campos activos tienen decisión explícita; solo siete están habilitados",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/relativo.test.js",
+      "name": "población antigua sin registro verificado no sirve de fallback",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa.test.js",
+      "name": "presión histórica permite cociente mayor que uno; no es porcentaje",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa.test.js",
+      "name": "ambas fuentes usan la misma base sin sumar sus conteos",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa.test.js",
+      "name": "cero explícito se conserva; ausencia de conteo o denominador es null",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa.test.js",
+      "name": "no divide entre denominadores inválidos ni ambiguos",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa.test.js",
+      "name": "rechaza año falso, fecha postevento, otra unidad, estado candidato o fuente sin hash",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa.test.js",
+      "name": "rechaza numeradores incompatibles y modo no validado",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa.test.js",
+      "name": "bases reales únicas, positivas e identificadas como históricas",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa.test.js",
+      "name": "agregación usa municipio de la sede, no municipio de casa matriz; deduplica copias",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "Salud sectorial contiene exclusivamente PNUD con peso 1 y máximo PNUD",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "cambiar o retirar 3iS Salud no cambia el cálculo sectorial",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "PnUd ausente no se rellena con un conteo 3iS disponible",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "cero PNUD válido conserva cero, incluso si 3iS reporta 999",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "sin denominador PNUD no se calcula Salud ni se imputa capacidad",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "impacto grave también usa solo PNUD y ajusta el número de campos",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "absoluto y per cápita conservan sus dos canales anteriores",
+      "pass": true
+    }
+  ],
+  "snapshot_checks": [
+    {
+      "variant": "urgencias",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "kind": "PNUD_full_weight_other_sectors_unchanged",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "mode": "absolute",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "mode": "percapita",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "variant": "urgencias",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "kind": "PNUD_full_weight_other_sectors_unchanged",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "mode": "absolute",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "mode": "percapita",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "variant": "urgencias",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "kind": "PNUD_full_weight_other_sectors_unchanged",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "variant": "urgencias",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "kind": "audit_exact_scores_bounds_ranks",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "mode": "absolute",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "mode": "percapita",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "variant": "urgencias",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "kind": "PNUD_full_weight_other_sectors_unchanged",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "variant": "urgencias",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "kind": "audit_exact_scores_bounds_ranks",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "mode": "absolute",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "mode": "percapita",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "variant": "urgencias",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "kind": "audit_exact_scores_bounds_ranks",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "variant": "urgencias",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "kind": "audit_exact_scores_bounds_ranks",
+      "pass": true,
+      "n": 509
+    }
+  ],
+  "audit_ui_checks": [
+    {
+      "name": "Fuente única y sin selector 3iS",
+      "pass": true
+    },
+    {
+      "name": "Atrato sin base urgencias no recibe imputación",
+      "pass": true
+    },
+    {
+      "name": "PNUD única: índice global coincide con comparación recalculada",
+      "pass": true
+    },
+    {
+      "name": "Búsqueda y detalle de municipio con PNUD sin 3iS",
+      "pass": true
+    },
+    {
+      "name": "decree/total/original",
+      "pass": true
+    },
+    {
+      "name": "decree/total/common",
+      "pass": true
+    },
+    {
+      "name": "decree/grave/original",
+      "pass": true
+    },
+    {
+      "name": "decree/grave/common",
+      "pass": true
+    },
+    {
+      "name": "all/total/original",
+      "pass": true
+    },
+    {
+      "name": "all/total/common",
+      "pass": true
+    },
+    {
+      "name": "all/grave/original",
+      "pass": true
+    },
+    {
+      "name": "all/grave/common",
+      "pass": true
+    },
+    {
+      "name": "Opciones antiguas no reactivan 3iS",
+      "pass": true
+    },
+    {
+      "name": "Datos permanecen inmutables",
+      "pass": true
+    }
+  ],
+  "r2_decree_total": 0.3778612562316315,
+  "paired": 286,
+  "examples": [
+    {
+      "code": "27050",
+      "municipality": "Atrato",
+      "pnud": 9,
+      "denominator": null,
+      "ratio": null,
+      "health": null,
+      "global": 7.168609793781091,
+      "rank": 20
+    },
+    {
+      "code": "27660",
+      "municipality": "San José Del Palmar",
+      "pnud": 1,
+      "denominator": 1,
+      "ratio": 1,
+      "health": 6.25,
+      "global": 5.084302742025558,
+      "rank": 34
+    },
+    {
+      "code": "66001",
+      "municipality": "Pereira",
+      "pnud": 34,
+      "denominator": 42,
+      "ratio": 0.8095238095238095,
+      "health": 5.059523809523809,
+      "global": 11.519528615599642,
+      "rank": 7
+    },
+    {
+      "code": "76001",
+      "municipality": "Santiago de Cali",
+      "pnud": 10,
+      "denominator": 179,
+      "ratio": 0.055865921787709494,
+      "health": 0.34916201117318435,
+      "global": 1.792455669705108,
+      "rank": 72
+    },
+    {
+      "code": "63001",
+      "municipality": "Armenia",
+      "pnud": 5,
+      "denominator": 18,
+      "ratio": 0.2777777777777778,
+      "health": 1.7361111111111112,
+      "global": 2.7140964191897594,
+      "rank": 63
+    }
+  ],
+  "preserved": "La verificación histórica de la versión 50/50 permanece en docs/verificacion_salud_relativa.json."
+}

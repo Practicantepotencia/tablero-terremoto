@@ -1,0 +1,512 @@
+{
+  "version": "health_pnud_only",
+  "updated": "2026-09-15",
+  "branch": "salud-relativa-hospitalizacion",
+  "parent": "6d6b9ef2e8a639aef5c77a6aeb5ca205ee726254",
+  "capture": "2026-09-11",
+  "scope": "Solo Salud sectorial relativa; PNUD peso 1. Absoluto, per cápita, otros sectores, IPM y datos originales conservados.",
+  "not_ml_imputation": true,
+  "observed_capacity_changed": false,
+  "runtime": "V8. Sin terminal local ni inspección visual en navegador real.",
+  "unit_tests": [
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "impacto humano total incluye tres entradas iguales y respeta cero y ausencia",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "cada sector conserva su peso fijo, incluso con distinto número de variables",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "normalización proporcional conserva razones, cero y faltantes",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "un vacío amplía el intervalo sin transferir su peso a otra variable",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "pobreza sola no crea daño y falta de IPM propaga límites",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "RAPIDA, ExE, rescatados y costos no alteran la puntuación propia",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "mismo dato duplicado no vota dos veces; datos conflictivos se excluyen",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "no combina unidades ni definiciones diferentes del mismo campo",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "decreto cambia referencia, departamento y búsqueda conservan puntajes y puestos",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "selector de dimensión ordena por su puntaje y conserva el puesto global",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "empates comparten puesto; sensibilidad y límites incluyen el caso base",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "municipio solo ExE permanece consultable, sin un puesto global fabricado",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "ejemplo calculado a mano: fallecidos conocidos y resto faltante",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "grave cambia componentes y pesos, no duplica sectores ni pierde el total en caché",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/priorizacion.test.js",
+      "name": "grave conserva ausencias y permite invertir el orden de humano y vivienda",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "relativizar antes de normalizar puede invertir el orden absoluto",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "vivienda usa viviendas, aunque la población dé otro orden",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "ausente, cero, negativo, otro año, duplicado o sin procedencia no crea tasa ni siquiera con numerador cero",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "cero explícito con base verificada es cero; un numerador ausente sigue ausente",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "ni población ni bases candidatas sustituyen inventarios sin homologar",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "numerador que supera universo se rechaza en vez de truncarse",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "faltantes conservan su peso y no se convierten en ceros observados",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "ámbito recalcula; búsqueda y departamento conservan referencia",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "los 16 campos activos tienen decisión explícita; solo siete están habilitados",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/relativo.test.js",
+      "name": "población antigua sin registro verificado no sirve de fallback",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa.test.js",
+      "name": "presión histórica permite cociente mayor que uno; no es porcentaje",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa.test.js",
+      "name": "ambas fuentes usan la misma base sin sumar sus conteos",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa.test.js",
+      "name": "cero explícito se conserva; ausencia de conteo o denominador es null",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa.test.js",
+      "name": "no divide entre denominadores inválidos ni ambiguos",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa.test.js",
+      "name": "rechaza año falso, fecha postevento, otra unidad, estado candidato o fuente sin hash",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa.test.js",
+      "name": "rechaza numeradores incompatibles y modo no validado",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa.test.js",
+      "name": "bases reales únicas, positivas e identificadas como históricas",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa.test.js",
+      "name": "agregación usa municipio de la sede, no municipio de casa matriz; deduplica copias",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "Salud sectorial contiene exclusivamente PNUD con peso 1 y máximo PNUD",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "cambiar o retirar 3iS Salud no cambia el cálculo sectorial",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "PnUd ausente no se rellena con un conteo 3iS disponible",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "cero PNUD válido conserva cero, incluso si 3iS reporta 999",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "sin denominador PNUD no se calcula Salud ni se imputa capacidad",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "impacto grave también usa solo PNUD y ajusta el número de campos",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "file": "tests/salud_relativa_pnud.test.js",
+      "name": "absoluto y per cápita conservan sus dos canales anteriores",
+      "pass": true
+    }
+  ],
+  "snapshot_checks": [
+    {
+      "variant": "hospitalizacion",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "kind": "PNUD_full_weight_other_sectors_unchanged",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "mode": "absolute",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "mode": "percapita",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "variant": "hospitalizacion",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "kind": "PNUD_full_weight_other_sectors_unchanged",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "mode": "absolute",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "mode": "percapita",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "variant": "hospitalizacion",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "kind": "PNUD_full_weight_other_sectors_unchanged",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "variant": "hospitalizacion",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "kind": "audit_exact_scores_bounds_ranks",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "mode": "absolute",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "mode": "percapita",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "variant": "hospitalizacion",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "kind": "PNUD_full_weight_other_sectors_unchanged",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "variant": "hospitalizacion",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "kind": "audit_exact_scores_bounds_ranks",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "mode": "absolute",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "mode": "percapita",
+      "kind": "exact_old_output",
+      "pass": true,
+      "n": 631
+    },
+    {
+      "variant": "hospitalizacion",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "kind": "audit_exact_scores_bounds_ranks",
+      "pass": true,
+      "n": 509
+    },
+    {
+      "variant": "hospitalizacion",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "kind": "audit_exact_scores_bounds_ranks",
+      "pass": true,
+      "n": 509
+    }
+  ],
+  "audit_ui_checks": [
+    {
+      "name": "Fuente única y sin selector 3iS",
+      "pass": true
+    },
+    {
+      "name": "Atrato sin base urgencias no recibe imputación",
+      "pass": true
+    },
+    {
+      "name": "PNUD única: índice global coincide con comparación recalculada",
+      "pass": true
+    },
+    {
+      "name": "Búsqueda y detalle de municipio con PNUD sin 3iS",
+      "pass": true
+    },
+    {
+      "name": "decree/total/original",
+      "pass": true
+    },
+    {
+      "name": "decree/total/common",
+      "pass": true
+    },
+    {
+      "name": "decree/grave/original",
+      "pass": true
+    },
+    {
+      "name": "decree/grave/common",
+      "pass": true
+    },
+    {
+      "name": "all/total/original",
+      "pass": true
+    },
+    {
+      "name": "all/total/common",
+      "pass": true
+    },
+    {
+      "name": "all/grave/original",
+      "pass": true
+    },
+    {
+      "name": "all/grave/common",
+      "pass": true
+    },
+    {
+      "name": "Opciones antiguas no reactivan 3iS",
+      "pass": true
+    },
+    {
+      "name": "Datos permanecen inmutables",
+      "pass": true
+    }
+  ],
+  "r2_decree_total": 0.3675491283832285,
+  "paired": 286,
+  "examples": [
+    {
+      "code": "27050",
+      "municipality": "Atrato",
+      "pnud": 9,
+      "denominator": 10,
+      "ratio": 0.9,
+      "health": 39.37500000000001,
+      "global": 13.225797293781092,
+      "rank": 5
+    },
+    {
+      "code": "27660",
+      "municipality": "San José Del Palmar",
+      "pnud": 1,
+      "denominator": 5,
+      "ratio": 0.2,
+      "health": 8.75,
+      "global": 5.466886075358892,
+      "rank": 30
+    },
+    {
+      "code": "66001",
+      "municipality": "Pereira",
+      "pnud": 34,
+      "denominator": 970,
+      "ratio": 0.03505154639175258,
+      "health": 1.5335051546391754,
+      "global": 11.031645167718771,
+      "rank": 8
+    },
+    {
+      "code": "76001",
+      "municipality": "Santiago de Cali",
+      "pnud": 10,
+      "denominator": 3465,
+      "ratio": 0.002886002886002886,
+      "health": 0.12626262626262627,
+      "global": 1.7618515841568883,
+      "rank": 86
+    },
+    {
+      "code": "63001",
+      "municipality": "Armenia",
+      "pnud": 5,
+      "denominator": 542,
+      "ratio": 0.00922509225092251,
+      "health": 0.4035977859778598,
+      "global": 2.530031911878019,
+      "rank": 71
+    }
+  ],
+  "preserved": "La verificación histórica de la versión 50/50 permanece en docs/verificacion_salud_relativa.json."
+}

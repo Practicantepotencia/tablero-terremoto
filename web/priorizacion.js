@@ -56,7 +56,13 @@
     const cache=new Map();
     function compute(state) {
       // Cambiar impacto cambia componentes, no el universo de referencia de cada campo.
-      const severity=state.severity||'total',definitions=sectorsFor(severity);
+      const severity=state.severity||'total';
+      // Only the experimental sector-relative Health component switches to PNUD.
+      // Absolute/per-capita views and all other sectors retain their definitions.
+      const definitions=sectorsFor(severity).map(s=>
+        mode==='sectorial'&&data.denominators?.health_variant&&s.id==='salud'
+          ? {...s,fields:[estimated('csalud','Centros de salud · PNUD',1)]}
+          : s);
       const fieldCount=definitions.reduce((n,s)=>n+s.fields.length,0);
       const key=JSON.stringify([state.scope,state.date,severity]);
       if(cache.has(key))return cache.get(key);

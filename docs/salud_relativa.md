@@ -1,7 +1,7 @@
 # Salud relativa: Hospitalización general
 
 Propuesta experimental publicada en `salud-relativa-hospitalizacion`, sobre `impacto-grave-total` (beefea8362b5ef05b850085c36a788fda83d31fe).
-Solo modifica Salud en la tercera matriz, tercer radar y agregados relativos dependientes. Absoluto, per cápita, pesos, IPM, severidad total/grave, otras dimensiones, capturas y diseño se conservan.
+Solo modifica Salud en la tercera matriz, tercer radar y agregados relativos dependientes. Absoluto, per cápita, peso de cada sector (1/6), IPM, severidad total/grave, otras dimensiones, capturas y diseño se conservan. En Salud relativa, PNUD es ahora el único canal y recibe el 100% del peso interno; 3iS no se usa como respaldo ni como segundo aporte.
 
 ## Denominador de esta rama
 
@@ -23,15 +23,17 @@ Base observada: **2022-11-05**, no 2026. 810 territorios DIVIPOLA con una base p
 
 ## Fórmula sin cambiar el modelo general
 
-Para municipio m y cada fuente j (3iS o PNUD):
+Para municipio m, usando exclusivamente el conteo de centros afectados de PNUD:
 
 ```text
-q[m,j] = puntos o centros afectados[m,j] / capacidad histórica[m]
-z[m,j] = 100 × q[m,j] / máximo(q[*,j]) en la referencia seleccionada
-Salud inferior = 0,5 × z[m,3iS] + 0,5 × z[m,PNUD]
+q[m] = centros afectados PNUD[m] / capacidad histórica[m]
+z[m] = 100 × q[m] / máximo(q[*]) de PNUD en la referencia seleccionada
+Salud inferior = z[m] · peso interno 1
 ```
 
-Cada máximo mantiene fuente, indicador, unidad y captura separados. El filtro decreto/todos recalcula la referencia; búsqueda y departamento no recalibran. Si toda la referencia válida es cero, el puntaje de los ceros explícitos es cero. Los dos canales mantienen su peso original; no se suman los conteos ni se consideran evidencia independiente.
+El máximo mantiene indicador, unidad, fuente PNUD y captura separados. El filtro decreto/todos recalcula la referencia; búsqueda y departamento no recalibran. Los ceros explícitos con base válida conservan puntaje cero. Si falta el numerador PNUD o el denominador, Salud conserva límites 0–100: no se rellena con 3iS ni se predice capacidad.
+
+La ausencia de un segundo reporte 3iS ya no reduce a la mitad el aporte de un dato PNUD disponible. Elegir PNUD no demuestra que sus conteos sean más recientes: 19 de los 88 municipios con ambos reportes diferían en la captura auditada. Los inventarios originales y las otras dimensiones no se modifican.
 
 La unidad mostrada es **puntos/cama general**, nunca porcentaje. Un cociente superior a 1 es admisible porque numerador y denominador son unidades distintas. El puntaje normalizado 0–100 compara cocientes; **100 no significa pérdida del 100% de la atención**.
 
@@ -41,23 +43,23 @@ Sin denominador positivo, único, con código y fecha verificables: **sin dato r
 
 Departamentos del decreto; captura **2026-09-11**; impacto total.
 
-| Municipio | Afectados 3iS / PNUD | Denominador | Cociente 3iS / PNUD | Salud /100 |
+| Municipio | Afectados PNUD | Denominador | Cociente PNUD | Salud /100 |
 |---|---:|---:|---:|---:|
-| Atrato | 9 / 9 | 10 | 0.9000 / 0.9000 | 39.3750 |
-| San José Del Palmar | 1 / 1 | 5 | 0.2000 / 0.2000 | 8.7500 |
-| Pereira | 34 / 34 | 970 | 0.0351 / 0.0351 | 1.5335 |
-| Santiago de Cali | 10 / 10 | 3465 | 0.0029 / 0.0029 | 0.1263 |
-| Armenia | 9 / 5 | 542 | 0.0166 / 0.0092 | 0.5650 |
+| Atrato | 9 | 10 | 0.9000 | 39.3750 |
+| San José Del Palmar | 1 | 5 | 0.2000 | 8.7500 |
+| Pereira | 34 | 970 | 0.0351 | 1.5335 |
+| Santiago de Cali | 10 | 3465 | 0.0029 | 0.1263 |
+| Armenia | 5 | 542 | 0.0092 | 0.4036 |
 
 Estos resultados no resuelven la correspondencia nominal de los 9 puntos afectados de Atrato. La ausencia de base de urgencias, por ejemplo, no demuestra ausencia de servicios.
 
 ## Comparación de cobertura
 
-| Propuesta | Rama | Al menos una fuente calculable | Ambas fuentes calculables |
-|---|---|---:|---:|
-| Consulta externa | `salud-relativa-consulta-externa` | 463/509 | 87/509 |
-| Urgencias | `salud-relativa-urgencias` | 393/509 | 77/509 |
-| Hospitalización general | `salud-relativa-hospitalizacion` | 391/509 | 82/509 |
+| Propuesta | Rama | PNUD con base calculable |
+|---|---|---:|
+| Consulta externa | `salud-relativa-consulta-externa` | 463/509 |
+| Urgencias | `salud-relativa-urgencias` | 393/509 |
+| Hospitalización general | `salud-relativa-hospitalizacion` | 391/509 |
 
 Las tres propuestas comparten el mismo registro y sus limitaciones. No son tres fuentes independientes. Comparar los rankings requiere atender también a cobertura y faltantes: un municipio no debe interpretarse como menos necesitado solo por carecer de denominador.
 
@@ -76,12 +78,16 @@ Descargar el CSV original del enlace inmutable anterior, sin abrirlo y volver a 
 ```sh
 node scripts/preparar_salud_relativa.cjs RUTA_AL_CSV_ORIGINAL
 python generar_tablero_recuperacion.py --eda-redirect index.html
-node --test tests/priorizacion.test.js tests/salud_relativa.test.js
+node --test tests/priorizacion.test.js tests/salud_relativa.test.js tests/salud_relativa_pnud.test.js
 node tests/salud_relativa_aislamiento.cjs
 ```
 
 El preparador verifica el SHA-256 antes de escribir, extrae el municipio del código de **sede**, valida nombres contra DANE con equivalencias explícitas, suma capacidad por categoría, deduplica copias idénticas y excluye el municipio si hay conflictos. La invocación mostrada del generador conserva el historial y evita escribir el HTML de redirección del EDA. No utilizar --update-history ni actualizar otras fuentes como parte de esta propuesta.
 
-Pruebas realizadas antes de publicar: 25 regresiones originales (15 de priorización y 10 de relativización); 24 pruebas de salud/agregación entre las tres variantes; 180 comprobaciones de aislamiento (cinco capturas, dos ámbitos, dos severidades, tres variantes); renderizado por harness DOM para comprobar que absoluto y per cápita no cambian y que la nota se muestra una sola vez. Se comprobó sintaxis de los ocho scripts embebidos y conservación de todo el historial. Se ejecutaron en V8; el terminal/Node/Python y el navegador real local no estuvieron disponibles. Resultados en `docs/verificacion_salud_relativa.json`.
+## Verificación de la actualización PNUD única
 
-No se modificó `main`, ninguna otra rama existente ni la publicación de GitHub Pages.
+Se aprobaron 120 pruebas unitarias/regresiones entre las tres variantes, incluyendo ausencia, cero, máximo propio, no respaldo con 3iS y peso interno 1. Se verificaron los resultados completos de los ámbitos decreto/todos y severidades total/grave: otros sectores intactos, absoluto/per cápita idénticos, y la auditoría reproduciendo los puntajes, límites y posiciones de los tres tableros. La auditoría pasó además 14 pruebas de lógica de interfaz.
+
+Las comprobaciones se ejecutaron en V8; el terminal local no estuvo disponible. No se afirma una verificación visual en navegador real. Evidencia actual: `docs/verificacion_salud_pnud.json`. El archivo `docs/verificacion_salud_relativa.json` conserva las pruebas históricas de la versión anterior 50/50 y no describe la versión PNUD única.
+
+No se reentrenó ningún modelo ni se imputó capacidad. Los datos crudos, los denominadores observados y la procedencia se conservan. Esta actualización afecta únicamente las tres ramas de Salud relativa y su auditoría independiente; no modifica `main` ni GitHub Pages.

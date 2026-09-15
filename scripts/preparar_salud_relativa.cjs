@@ -62,7 +62,7 @@ function main(){
  const result=aggregateReps(parseCSV(original.toString('utf8')),population.rows,snapshot.config);
  if(result.rejected.length)throw Error('Revisar registros excluidos antes de reemplazar la base: '+JSON.stringify(result.rejected));
  den.rows=den.rows.filter(r=>r.kind!==snapshot.config.kind).concat(result.rows);
- const next={config:snapshot.config,source,records:result.selected,audit:{duplicates:result.duplicates,rejected:result.rejected,invalid_codes:result.invalid_codes,aliases:result.aliases}};
+ const next={config:snapshot.config,source,records:result.selected,municipal_rows:result.rows,audit:{duplicates:result.duplicates,rejected:result.rejected,invalid_codes:result.invalid_codes,aliases:result.aliases}};
  fs.writeFileSync(denPath,JSON.stringify(den,null,2)+'\n','utf8');
  fs.writeFileSync(snapshotPath,JSON.stringify(next,null,2)+'\n','utf8');
  process.stdout.write(result.rows.length+' bases territoriales. Regenerar index.html con generar_tablero_recuperacion.py.\n');

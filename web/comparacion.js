@@ -46,7 +46,8 @@
       if(panel==='common'&&!MODES.every(k=>maps[k].has(place.geo))){excluded.common++;continue;}
       pairs.push({geo:place.geo,m:place.m,d:place.d,x:own.lower,y:axis==='rank'?rec.rank:rec.v,
         lower:own.lower,upper:own.upper,ownRank:own.rank,recoveryRank:rec.rank,recovery:rec.v,
-        available:own.available,fieldCount:own.fieldCount,severity:own.severity,coverage:own.coverage});
+        available:own.available,fieldCount:own.fieldCount,severity:own.severity,coverage:own.coverage,
+        ...(own.mlScenario?{mlScenario:true,imputedAvailable:own.imputedAvailable,observedCoverage:own.observedCoverage}:{})});
     }
     return {pairs,...statistics(pairs),excluded,total:universe.length,referenceN:results[mode].referenceN,
       recoveryN:recovery.size,mode,panel,axis};

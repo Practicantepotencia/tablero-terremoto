@@ -228,19 +228,21 @@ function renderRapida(){
 function renderComparison(){
   const mode=$('comparison-mode').value;
   const c=Comparacion.compare(priorityModels,model,state,{mode,axis:'value',panel:'available'}),pairs=c.pairs;
-  const names={absolute:'Absoluto',percapita:'Per cápita',sectorial:'Relativo'};
+  const scenario=mode==='sectorial'&&DATA.denominators?.health_variant?.ml?.enabled===true;
+  const names={absolute:'Absoluto',percapita:'Per cápita',sectorial:scenario?'Relativo · escenario ML':'Relativo'};
+  const comparisonCoverage=r=>scenario?r.available+'/'+r.fieldCount+' calculados · '+r.imputedAvailable+' bases ML':r.available+'/'+r.fieldCount+' · '+fmt(100*r.coverage)+'%';
   const precision=n=>n==null?'—':new Intl.NumberFormat('es-CO',{maximumFractionDigits:4}).format(n);
   const search=$('comparison-search').value,matched=pairs.filter(r=>T.searchMatch({...r,lv:'municipal'},search));
-  const exclusion=c.excluded.index+' sin índice documentado; '+c.excluded.rapida+' sin necesidad de recuperación temprana comparable (categorías excluyentes)';
+  const exclusion=c.excluded.index+(scenario?' sin índice calculable; ':' sin índice documentado; ')+c.excluded.rapida+' sin necesidad de recuperación temprana comparable (categorías excluyentes)';
   $('comparison-note').textContent='Base: '+(state.scope==='decree'?'departamentos del decreto':'todos los departamentos')+(state.dept?' · '+state.dept:'')+' · captura '+state.date+'. '+c.n+' pares de '+c.total+' municipios.'+(search?' '+matched.length+' coincidencias resaltadas.':'');
-  $('comparison-reference').textContent=c.referenceN+' municipios en la referencia; '+c.recoveryN+' con necesidad de recuperación temprana. Excluidos de la dispersión: '+exclusion+'. Se incluyen todos los pares disponibles de la versión seleccionada; no se rellenan faltantes.';
+  $('comparison-reference').textContent=c.referenceN+' municipios en la referencia; '+c.recoveryN+' con necesidad de recuperación temprana. Excluidos de la dispersión: '+exclusion+'. '+(scenario?'Se usa el escenario ML de Salud; no se imputa la necesidad de recuperación temprana.':'Se incluyen todos los pares disponibles de la versión seleccionada; no se rellenan faltantes.');
   $('comparison-kpis').innerHTML=tile('Pares comparables',c.n,'Municipios con ambos datos')+
     tile('R²',precision(c.regression?.r2),'X: nuestro índice · Y: puntaje de necesidad')+
     tile('Pearson r',precision(c.regression?.r),'Positivo: puntajes altos juntos')+
     tile('Spearman ρ',precision(c.rho),'Asociación entre posiciones');
   function detail(r){
     comparisonGeo=r?.geo||'';
-    $('comparison-detail').innerHTML=r?'<h3>'+esc(r.m)+', '+esc(r.d)+'</h3><p><b>'+names[mode]+': '+fmt(r.lower)+' /100</b><br>Posible por faltantes: '+fmt(r.upper)+' /100<br>Puesto nuestro: '+r.ownRank+'</p><p><b>Necesidad de recuperación temprana: '+precision(r.recovery)+'</b><br>Puesto en la referencia: '+r.recoveryRank+'</p><p>Cobertura: '+r.available+'/'+r.fieldCount+' campos · '+fmt(100*r.coverage)+'% del peso.</p><p class="formula">Par usado: X = '+precision(r.x)+'; Y = '+precision(r.y)+'</p><button type="button" class="secondary" data-geo="'+esc(r.geo)+'" data-source="'+T.RAPIDA+'">Abrir diagnóstico territorial</button>':'<p>Pasa el mouse, enfoca con Tab o toca un municipio para consultar sus valores y cobertura.</p>';
+    $('comparison-detail').innerHTML=r?'<h3>'+esc(r.m)+', '+esc(r.d)+'</h3><p><b>'+names[mode]+': '+fmt(r.lower)+' /100</b><br>Posible por faltantes: '+fmt(r.upper)+' /100<br>Puesto nuestro: '+r.ownRank+'</p><p><b>Necesidad de recuperación temprana: '+precision(r.recovery)+'</b><br>Puesto en la referencia: '+r.recoveryRank+'</p><p>'+(scenario?comparisonCoverage(r):'Cobertura: '+r.available+'/'+r.fieldCount+' campos · '+fmt(100*r.coverage)+'% del peso')+'.</p><p class="formula">Par usado: X = '+precision(r.x)+'; Y = '+precision(r.y)+'</p><button type="button" class="secondary" data-geo="'+esc(r.geo)+'" data-source="'+T.RAPIDA+'">Abrir diagnóstico territorial</button>':'<p>Pasa el mouse, enfoca con Tab o toca un municipio para consultar sus valores y cobertura.</p>';
   }
   if(!pairs.length){$('comparison-chart').innerHTML='<p class="empty">No hay municipios con ambos datos en esta selección. Revisa los filtros generales o cambia la versión del índice.</p>';detail(null);}
   else{
@@ -258,7 +260,7 @@ function renderComparison(){
         const hit=!!search&&T.searchMatch({...r,lv:'municipal'},search);
         return '<circle class="comparison-point '+(hit?'highlight':'')+'" cx="'+sx(r.x)+'" cy="'+sy(r.y)+'" r="'+(hit?7:4.5)+'" data-compare-geo="'+esc(r.geo)+'" tabindex="0" role="button" aria-label="'+esc(r.m+', '+r.d+'. Nuestro índice '+precision(r.x)+'. '+rankTitle+' '+precision(r.y)+'. Ver datos.')+'"><title>'+esc(r.m+', '+r.d)+' · '+precision(r.x)+' /100 · Necesidad de recuperación temprana '+precision(r.recovery)+' · puesto '+r.recoveryRank+'</title></circle>';
       }).join('')+
-      '<text x="'+(W/2)+'" y="'+(H-13)+'" text-anchor="middle">'+names[mode]+' · puntaje documentado (0–100)</text><text transform="translate(20 '+(H/2)+') rotate(-90)" text-anchor="middle">'+rankTitle+'</text></svg>';
+      '<text x="'+(W/2)+'" y="'+(H-13)+'" text-anchor="middle">'+names[mode]+' · '+(scenario?'puntaje':'puntaje documentado')+' (0–100)</text><text transform="translate(20 '+(H/2)+') rotate(-90)" text-anchor="middle">'+rankTitle+'</text></svg>';
     $('comparison-chart').querySelectorAll('[data-compare-geo]').forEach(el=>{
       const show=()=>detail(pairs.find(r=>r.geo===el.dataset.compareGeo));
       el.onmouseenter=show;el.onfocus=show;el.onclick=show;
@@ -267,7 +269,7 @@ function renderComparison(){
     detail(pairs.find(r=>r.geo===comparisonGeo)||(search?matched[0]:null));
   }
   $('comparison-fit').textContent=c.regression?'Recta discontinua: Y = '+precision(c.regression.intercept)+(c.regression.slope<0?' − ':' + ')+precision(Math.abs(c.regression.slope))+' × X. R² = '+precision(c.regression.r2)+'.':c.reason;
-  $('comparison-table').innerHTML=table(['Municipio','Nuestro índice documentado','Posible','Puesto nuestro','Necesidad de recuperación temprana','Puesto de necesidad','Cobertura'],pairs.slice().sort((a,b)=>b.x-a.x).map(r=>'<tr><td>'+geoButton({...r,lv:'municipal'},T.RAPIDA)+'</td><td class="num">'+precision(r.x)+'</td><td class="num">'+precision(r.upper)+'</td><td class="num">'+r.ownRank+'</td><td class="num">'+precision(r.recovery)+'</td><td class="num">'+r.recoveryRank+'</td><td>'+r.available+'/'+r.fieldCount+' · '+fmt(100*r.coverage)+'%</td></tr>'));
+  $('comparison-table').innerHTML=table(['Municipio',scenario?'Nuestro índice · escenario ML':'Nuestro índice documentado','Posible','Puesto nuestro','Necesidad de recuperación temprana','Puesto de necesidad','Cobertura'],pairs.slice().sort((a,b)=>b.x-a.x).map(r=>'<tr><td>'+geoButton({...r,lv:'municipal'},T.RAPIDA)+'</td><td class="num">'+precision(r.x)+'</td><td class="num">'+precision(r.upper)+'</td><td class="num">'+r.ownRank+'</td><td class="num">'+precision(r.recovery)+'</td><td class="num">'+r.recoveryRank+'</td><td>'+comparisonCoverage(r)+'</td></tr>'));
 }
 function refresh() {globalControls();diagnosticControls();renderPriorities();renderDiagnostic();renderMethod();MunicipalRadar.render(priorityModel,state);PerCapitaMunicipalRadar.render(priorityModel,state);RelativeMunicipalRadar.render(priorityModel,state);PrioridadPerCapita.render(state);PrioridadRelativa.render(state);renderRapida();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>activate(b.dataset.tab)));

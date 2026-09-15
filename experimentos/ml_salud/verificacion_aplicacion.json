@@ -1,0 +1,318 @@
+{
+  "branch": "salud-relativa-urgencias-ml",
+  "parent_branch": "salud-relativa-consulta-externa",
+  "parent_commit": "acc6bf777f27c0c08b93352b9029ff1ed94f788c",
+  "checks": {
+    "legacy_unit": [
+      {
+        "file": "health",
+        "name": "presión histórica permite cociente mayor que uno; no es porcentaje",
+        "pass": true
+      },
+      {
+        "file": "health",
+        "name": "ambas fuentes usan la misma base sin sumar sus conteos",
+        "pass": true
+      },
+      {
+        "file": "health",
+        "name": "cero explícito se conserva; ausencia de conteo o denominador es null",
+        "pass": true
+      },
+      {
+        "file": "health",
+        "name": "no divide entre denominadores inválidos ni ambiguos",
+        "pass": true
+      },
+      {
+        "file": "health",
+        "name": "rechaza año falso, fecha postevento, otra unidad, estado candidato o fuente sin hash",
+        "pass": true
+      },
+      {
+        "file": "health",
+        "name": "rechaza numeradores incompatibles y modo no validado",
+        "pass": true
+      },
+      {
+        "file": "health",
+        "name": "bases reales únicas, positivas e identificadas como históricas",
+        "pass": true
+      },
+      {
+        "file": "health",
+        "name": "agregación usa municipio de la sede, no municipio de casa matriz; deduplica copias",
+        "pass": true
+      },
+      {
+        "file": "pnud",
+        "name": "Salud sectorial contiene exclusivamente PNUD con peso 1 y máximo PNUD",
+        "pass": true
+      },
+      {
+        "file": "pnud",
+        "name": "cambiar o retirar 3iS Salud no cambia el cálculo sectorial",
+        "pass": true
+      },
+      {
+        "file": "pnud",
+        "name": "PNUD ausente no se rellena con un conteo 3iS disponible",
+        "pass": true
+      },
+      {
+        "file": "pnud",
+        "name": "cero PNUD válido conserva cero, incluso si 3iS reporta 999",
+        "pass": true
+      },
+      {
+        "file": "pnud",
+        "name": "sin denominador PNUD no se calcula Salud ni se imputa capacidad",
+        "pass": true
+      },
+      {
+        "file": "pnud",
+        "name": "impacto grave también usa solo PNUD y ajusta el número de campos",
+        "pass": true
+      },
+      {
+        "file": "pnud",
+        "name": "absoluto y per cápita conservan sus dos canales anteriores",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "impacto humano total incluye tres entradas iguales y respeta cero y ausencia",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "cada sector conserva su peso fijo, incluso con distinto número de variables",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "normalización proporcional conserva razones, cero y faltantes",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "un vacío amplía el intervalo sin transferir su peso a otra variable",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "pobreza sola no crea daño y falta de IPM propaga límites",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "RAPIDA, ExE, rescatados y costos no alteran la puntuación propia",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "mismo dato duplicado no vota dos veces; datos conflictivos se excluyen",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "no combina unidades ni definiciones diferentes del mismo campo",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "decreto cambia referencia, departamento y búsqueda conservan puntajes y puestos",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "selector de dimensión ordena por su puntaje y conserva el puesto global",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "empates comparten puesto; sensibilidad y límites incluyen el caso base",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "municipio solo ExE permanece consultable, sin un puesto global fabricado",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "ejemplo calculado a mano: fallecidos conocidos y resto faltante",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "grave cambia componentes y pesos, no duplica sectores ni pierde el total en caché",
+        "pass": true
+      },
+      {
+        "file": "priority",
+        "name": "grave conserva ausencias y permite invertir el orden de humano y vivienda",
+        "pass": true
+      }
+    ],
+    "ml_unit": [
+      {
+        "name": "203 estimaciones separadas de los 901 observados de urgencias",
+        "pass": true
+      },
+      {
+        "name": "Atrato: 9 puntos / 1 consultorio estimado = 9; nunca porcentaje",
+        "pass": true
+      },
+      {
+        "name": "ML requiere opt-in explícito y no rellena el numerador ni 3iS",
+        "pass": true
+      },
+      {
+        "name": "Dato observado siempre tiene precedencia y no se sustituye si es inválido",
+        "pass": true
+      },
+      {
+        "name": "No acepta estimaciones fuera de soporte, unidades, modelo o procedencia",
+        "pass": true
+      },
+      {
+        "name": "Modelo de 2026 no se extiende silenciosamente a otro año",
+        "pass": true
+      },
+      {
+        "name": "Muestra sintética: máximo, puntaje, aporte y cobertura ML trazables",
+        "pass": true
+      }
+    ],
+    "model_isolation": [
+      {
+        "check": "Other five sectors identical",
+        "scope": "decree",
+        "severity": "total",
+        "municipalities": 509
+      },
+      {
+        "check": "Full result identical",
+        "mode": "absolute",
+        "scope": "decree",
+        "severity": "total",
+        "municipalities": 509
+      },
+      {
+        "check": "Full result identical",
+        "mode": "percapita",
+        "scope": "decree",
+        "severity": "total",
+        "municipalities": 509
+      },
+      {
+        "check": "Existing observed urgency point scores identical",
+        "scope": "decree",
+        "severity": "total"
+      },
+      {
+        "check": "Other five sectors identical",
+        "scope": "decree",
+        "severity": "grave",
+        "municipalities": 509
+      },
+      {
+        "check": "Full result identical",
+        "mode": "absolute",
+        "scope": "decree",
+        "severity": "grave",
+        "municipalities": 509
+      },
+      {
+        "check": "Full result identical",
+        "mode": "percapita",
+        "scope": "decree",
+        "severity": "grave",
+        "municipalities": 509
+      },
+      {
+        "check": "Existing observed urgency point scores identical",
+        "scope": "decree",
+        "severity": "grave"
+      },
+      {
+        "check": "Other five sectors identical",
+        "scope": "all",
+        "severity": "total",
+        "municipalities": 631
+      },
+      {
+        "check": "Full result identical",
+        "mode": "absolute",
+        "scope": "all",
+        "severity": "total",
+        "municipalities": 631
+      },
+      {
+        "check": "Full result identical",
+        "mode": "percapita",
+        "scope": "all",
+        "severity": "total",
+        "municipalities": 631
+      },
+      {
+        "check": "Existing observed urgency point scores identical",
+        "scope": "all",
+        "severity": "total"
+      },
+      {
+        "check": "Other five sectors identical",
+        "scope": "all",
+        "severity": "grave",
+        "municipalities": 631
+      },
+      {
+        "check": "Full result identical",
+        "mode": "absolute",
+        "scope": "all",
+        "severity": "grave",
+        "municipalities": 631
+      },
+      {
+        "check": "Full result identical",
+        "mode": "percapita",
+        "scope": "all",
+        "severity": "grave",
+        "municipalities": 631
+      },
+      {
+        "check": "Existing observed urgency point scores identical",
+        "scope": "all",
+        "severity": "grave"
+      }
+    ],
+    "ui_logic": [
+      "Per-capita matrix output unchanged",
+      "Relative matrix marks estimated denominator and separate coverage",
+      "Relative inspector shows original numerator divided by ML denominator",
+      "Absolute and per-capita radar HTML unchanged",
+      "Relative radar consumes the same ML field and formula",
+      "Relative radar identifies scenario instead of documented lower bound",
+      "UNGRD comparison receives same score and ML provenance"
+    ],
+    "embedded_html": {
+      "index_parent_blob": "39bd1f12652ce1f642d96e1f3131047f2e2a97e2",
+      "only_denominator_payload_changed": true,
+      "all_inline_scripts_parse": true,
+      "script_count": 8,
+      "style_unchanged": true
+    },
+    "builder_idempotent": true
+  },
+  "runtime": "JavaScript V8. Tests and DOM adapters in memory; not native Node/Python or browser screenshot.",
+  "browser_visual_check": false,
+  "data_counts": {
+    "observed_urgency": 901,
+    "eligible_ml": 203,
+    "abstained": 18,
+    "in_decree_health_calculable": 463,
+    "additional_decree_health": 70
+  },
+  "deployment": "Experimental branch only. No CI or Pages changes."
+}

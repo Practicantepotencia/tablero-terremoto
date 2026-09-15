@@ -3,7 +3,9 @@ const P=require('../web/priorizacion.js'),stock=require('../data/denominadores_s
 const date='2026-09-11',state={scope:'all',date,severity:'total'};
 const codes=['27050','27660'];
 function fixture(){
+ // Pruebas del modelo observado: ML desactivado; el escenario tiene pruebas propias.
  const denominators=JSON.parse(JSON.stringify(stock)),v=denominators.health_variant;
+ delete v.ml; delete denominators.health_imputations;
  const template=denominators.rows.find(r=>r.kind===v.kind);
  denominators.rows=denominators.rows.filter(r=>r.kind!==v.kind).concat(codes.map(code=>({...template,code,value:2})));
  const rows=codes.flatMap((code,i)=>P.SECTORS.flatMap(s=>s.fields.map(f=>({

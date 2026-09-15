@@ -51,6 +51,23 @@
       if(!/^\d{5}$/.test(code||'')||!/^\d{4}-\d{2}-\d{2}$/.test(date||''))
         return {...base,reason:'Sin municipio o captura verificable'};
       const rs=groups.get([expected[0],code,2022].join('|'))||[];
+      if(rs.length===0&&v.ml?.enabled===true&&id==='pnud_csalud'){
+        const ml=v.ml, estimates=(payload.health_imputations||[]).filter(r=>r.kind===expected[0]&&r.code===code&&r.year===2022);
+        const unknown={...base,reason:'Sin estimación ML elegible; no se supone cero'};
+        if(v.id!=='urgencias'||ml.scenario_id!=='urgencias_ml_2026_09_15'||ml.model_id!=='poisson_capacidades'||
+          ml.retrospective_scenario!==true||ml.population_year!==Number(date.slice(0,4))||estimates.length!==1)return unknown;
+        const e=estimates[0],source=sources[e.source];
+        if(e.status!=='estimated_ml'||e.source!==ml.source||e.scenario_id!==ml.scenario_id||e.model_id!==ml.model_id||
+          !Number.isFinite(e.value)||e.value<1||e.unit!==expected[1]||e.area!=='Total'||e.reference_date!=='2022-11-05'||
+          e.reference_date>date||e.positive_only!==true||e.support_n<30||!Number.isFinite(e.support_n)||e.out_of_range!==false||
+          e.population_year!==ml.population_year||e.estimated_at!==ml.estimated_at||!source?.url||source.published!==ml.estimated_at||
+          !/^[a-f0-9]{40}$/.test(source.artifact_blob_sha||'')||!/^[a-f0-9]{40}$/.test(source.predictions_blob_sha||''))return unknown;
+        const estimated={...base,denominator:e,denominatorSource:source,estimated:true,
+          denominatorLabel:'Consultorios de urgencias · estimación ML de capacidad 2022'};
+        if(!row||row.id!==id||row.u!=='Número'||!Number.isFinite(row.v)||row.v<0)
+          return {...estimated,reason:'Sin conteo PNUD de afectación comparable'};
+        return {...estimated,rate:row.v/e.value};
+      }
       if(rs.length!==1)return {...base,reason:rs.length?'Base histórica duplicada o ambigua':'Sin capacidad positiva registrada para esta base; no equivale a cero'};
       const d=rs[0],source=sources[d.source];
       if(d.status!=='verified_historical'||!Number.isFinite(d.value)||d.value<=0||d.area!=='Total'||

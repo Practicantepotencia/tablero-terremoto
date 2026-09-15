@@ -120,7 +120,13 @@
         const score=aggregate(sectors,vulnerability,weights);
         const coverage=sectors.reduce((s,d)=>s+d.coverage/6,0);
         const rec=recoveryRank.get(place.geo);
-        return {...place,...score,sectors,severity,fieldCount,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
+        const mlScenario=mode==='sectorial'&&data.denominators?.health_variant?.ml?.enabled===true;
+        const allFields=sectors.flatMap(s=>s.fields);
+        const observedCoverage=sectors.reduce((sum,s)=>sum+s.fields.reduce((a,f)=>a+(f.score!=null&&!f.estimated?f.share:0),0)/6,0);
+        const provenance=mlScenario?{mlScenario:true,
+          imputedAvailable:allFields.filter(f=>f.score!=null&&f.estimated).length,
+          observedAvailable:allFields.filter(f=>f.score!=null&&!f.estimated).length,observedCoverage}:{};
+        return {...place,...score,...provenance,sectors,severity,fieldCount,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
           recovery:rec?.v??null,recoveryRank:rec?.rank??null,available:sectors.flatMap(s=>s.fields).filter(f=>f.score!=null).length,
           complete:coverage>1-EPS&&vulnerability!=null,rank:null,rankMin:null,rankMax:null};
       });

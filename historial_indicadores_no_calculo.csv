@@ -142148,7 +142148,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 17,departamental,Caldas,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,159,2026-09-15
 17,departamental,Caldas,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-15
 17,departamental,Caldas,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,1164,2026-09-15
-17,departamental,Caldas,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-15
+17,departamental,Caldas,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,6.0,2026-09-15
 17,departamental,Caldas,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,329.0,2026-09-15
 17,departamental,Caldas,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 17,departamental,Caldas,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
@@ -142187,7 +142187,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 66,departamental,Risaralda,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,109,2026-09-15
 66,departamental,Risaralda,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-15
 66,departamental,Risaralda,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,7035,2026-09-15
-66,departamental,Risaralda,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,110.0,2026-09-15
+66,departamental,Risaralda,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,111.0,2026-09-15
 66,departamental,Risaralda,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,588.0,2026-09-15
 66,departamental,Risaralda,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,81.0,2026-09-15
 66,departamental,Risaralda,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,274.0,2026-09-15
@@ -142226,9 +142226,9 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 76,departamental,Valle del Cauca,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,263,2026-09-15
 76,departamental,Valle del Cauca,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-15
 76,departamental,Valle del Cauca,,Productividad,empresarios_afectados,Empresarios afectados (grave/crítico),Número,Camaras,4801,2026-09-15
-76,departamental,Valle del Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,199.0,2026-09-15
+76,departamental,Valle del Cauca,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,201.0,2026-09-15
 76,departamental,Valle del Cauca,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,2904.0,2026-09-15
-76,departamental,Valle del Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,27.0,2026-09-15
+76,departamental,Valle del Cauca,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,21.0,2026-09-15
 76,departamental,Valle del Cauca,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,88.0,2026-09-15
 76,departamental,Valle del Cauca,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,129131.0,2026-09-15
 76,departamental,Valle del Cauca,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,53496.0,2026-09-15
@@ -142379,17 +142379,17 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 05,departamental,Antioquia,,Productividad (proxy),econ_proxy_n,Puntos registrados (Productividad (proxy)),Número,Naboo,60,2026-09-15
 05,departamental,Antioquia,,Marco normativo,en_decreto_1171,En Decreto 1171 de 2026 (desastre nacional),Sí/No (1-0),Decreto1171,1,2026-09-15
 05,departamental,Antioquia,,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-15
-05,departamental,Antioquia,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,24.0,2026-09-15
+05,departamental,Antioquia,,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,35.0,2026-09-15
 05,departamental,Antioquia,,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-15
 05,departamental,Antioquia,,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
-05,departamental,Antioquia,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,4359.0,2026-09-15
-05,departamental,Antioquia,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,4320.0,2026-09-15
-05,departamental,Antioquia,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,39.0,2026-09-15
+05,departamental,Antioquia,,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,9502.0,2026-09-15
+05,departamental,Antioquia,,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,9312.0,2026-09-15
+05,departamental,Antioquia,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,190.0,2026-09-15
 05,departamental,Antioquia,,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
-05,departamental,Antioquia,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,31.0,2026-09-15
-05,departamental,Antioquia,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,526.0,2026-09-15
-05,departamental,Antioquia,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,247.0,2026-09-15
-05,departamental,Antioquia,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,7.0,2026-09-15
+05,departamental,Antioquia,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,36.0,2026-09-15
+05,departamental,Antioquia,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,639.0,2026-09-15
+05,departamental,Antioquia,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,220.0,2026-09-15
+05,departamental,Antioquia,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,17.0,2026-09-15
 05,departamental,Antioquia,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 05,departamental,Antioquia,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,9.0,2026-09-15
 05,departamental,Antioquia,,Vivienda,pnud_vd,Viviendas destruidas,Número,PNUD,39,2026-09-15
@@ -142463,8 +142463,8 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 41,departamental,Huila,,Vivienda,3is_vivdestruidas,"Viviendas destruidas (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 41,departamental,Huila,,Infraestructura,3is_colapsos,"Colapsos de edificaciones (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 41,departamental,Huila,,Salud,3is_salud,"Puntos de salud afectados (3iS, oficial)",Número,3iS-Sheets,17.0,2026-09-15
-41,departamental,Huila,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,181.0,2026-09-15
-41,departamental,Huila,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,23.0,2026-09-15
+41,departamental,Huila,,Educación,3is_educativos,"Puntos educativos afectados (3iS, oficial)",Número,3iS-Sheets,183.0,2026-09-15
+41,departamental,Huila,,Instituciones,3is_comunitarios,"Puntos comunitarios afectados (3iS, oficial)",Número,3iS-Sheets,26.0,2026-09-15
 41,departamental,Huila,,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,101.0,2026-09-15
 41,departamental,Huila,,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 41,departamental,Huila,,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
@@ -143743,7 +143743,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 76130,municipal,Valle del Cauca,Candelaria,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 76130,municipal,Valle del Cauca,Candelaria,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 76130,municipal,Valle del Cauca,Candelaria,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
-76147,municipal,Valle del Cauca,Cartago,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
+76147,municipal,Valle del Cauca,Cartago,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,1.0,2026-09-15
 76147,municipal,Valle del Cauca,Cartago,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,30.0,2026-09-15
 76147,municipal,Valle del Cauca,Cartago,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 76147,municipal,Valle del Cauca,Cartago,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
@@ -144009,9 +144009,9 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 76622,municipal,Valle del Cauca,Roldanillo,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-15
 76622,municipal,Valle del Cauca,Roldanillo,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 76622,municipal,Valle del Cauca,Roldanillo,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
-,municipal,Valle del Cauca,Cali,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,155.0,2026-09-15
+,municipal,Valle del Cauca,Cali,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,156.0,2026-09-15
 ,municipal,Valle del Cauca,Cali,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,1517.0,2026-09-15
-,municipal,Valle del Cauca,Cali,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,27.0,2026-09-15
+,municipal,Valle del Cauca,Cali,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,21.0,2026-09-15
 ,municipal,Valle del Cauca,Cali,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,88.0,2026-09-15
 ,municipal,Valle del Cauca,Cali,Impacto humano,3is_familias,"Familias afectadas (3iS, oficial)",Número,3iS-Sheets,45139.0,2026-09-15
 ,municipal,Valle del Cauca,Cali,Vivienda,3is_vivaveriadas,"Viviendas averiadas (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
@@ -144303,7 +144303,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 66456,municipal,Risaralda,Mistrató,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 66456,municipal,Risaralda,Mistrató,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 66456,municipal,Risaralda,Mistrató,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,2.0,2026-09-15
-66001,municipal,Risaralda,Pereira,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,97.0,2026-09-15
+66001,municipal,Risaralda,Pereira,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,98.0,2026-09-15
 66001,municipal,Risaralda,Pereira,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,259.0,2026-09-15
 66001,municipal,Risaralda,Pereira,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,78.0,2026-09-15
 66001,municipal,Risaralda,Pereira,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,260.0,2026-09-15
@@ -144653,7 +144653,7 @@ divipola,nivel,departamento,municipio,dimension,indicador_id,indicador,unidad,fu
 17388,municipal,Caldas,La Merced,Infraestructura,3is_vias,"Vías afectadas (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 17388,municipal,Caldas,La Merced,Infraestructura,3is_aeropuertos,"Aeropuertos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 17388,municipal,Caldas,La Merced,Infraestructura,3is_acueductos,"Acueductos afectados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
-17001,municipal,Caldas,Manizales,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,5.0,2026-09-15
+17001,municipal,Caldas,Manizales,Impacto humano,3is_fallecidos,"Fallecidos (3iS, oficial)",Número,3iS-Sheets,6.0,2026-09-15
 17001,municipal,Caldas,Manizales,Impacto humano,3is_heridos,"Heridos (3iS, oficial)",Número,3iS-Sheets,211.0,2026-09-15
 17001,municipal,Caldas,Manizales,Impacto humano,3is_desaparecidos,"Desaparecidos (3iS, oficial)",Número,3iS-Sheets,,2026-09-15
 17001,municipal,Caldas,Manizales,Impacto humano,3is_rescatados,"Rescatados (3iS, oficial)",Número,3iS-Sheets,,2026-09-15

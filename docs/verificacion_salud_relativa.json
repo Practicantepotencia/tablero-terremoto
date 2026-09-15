@@ -1,0 +1,1694 @@
+{
+  "original_regression": [
+    {
+      "name": "impacto humano total incluye tres entradas iguales y respeta cero y ausencia",
+      "pass": true
+    },
+    {
+      "name": "cada sector conserva su peso fijo, incluso con distinto número de variables",
+      "pass": true
+    },
+    {
+      "name": "normalización proporcional conserva razones, cero y faltantes",
+      "pass": true
+    },
+    {
+      "name": "un vacío amplía el intervalo sin transferir su peso a otra variable",
+      "pass": true
+    },
+    {
+      "name": "pobreza sola no crea daño y falta de IPM propaga límites",
+      "pass": true
+    },
+    {
+      "name": "RAPIDA, ExE, rescatados y costos no alteran la puntuación propia",
+      "pass": true
+    },
+    {
+      "name": "mismo dato duplicado no vota dos veces; datos conflictivos se excluyen",
+      "pass": true
+    },
+    {
+      "name": "no combina unidades ni definiciones diferentes del mismo campo",
+      "pass": true
+    },
+    {
+      "name": "decreto cambia referencia, departamento y búsqueda conservan puntajes y puestos",
+      "pass": true
+    },
+    {
+      "name": "selector de dimensión ordena por su puntaje y conserva el puesto global",
+      "pass": true
+    },
+    {
+      "name": "empates comparten puesto; sensibilidad y límites incluyen el caso base",
+      "pass": true
+    },
+    {
+      "name": "municipio solo ExE permanece consultable, sin un puesto global fabricado",
+      "pass": true
+    },
+    {
+      "name": "ejemplo calculado a mano: fallecidos conocidos y resto faltante",
+      "pass": true
+    },
+    {
+      "name": "grave cambia componentes y pesos, no duplica sectores ni pierde el total en caché",
+      "pass": true
+    },
+    {
+      "name": "grave conserva ausencias y permite invertir el orden de humano y vivienda",
+      "pass": true
+    }
+  ],
+  "health_tests": [
+    {
+      "variant": "consulta_externa",
+      "name": "presión histórica permite cociente mayor que uno; no es porcentaje",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "name": "ambas fuentes usan la misma base sin sumar sus conteos",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "name": "cero explícito se conserva; ausencia de conteo o denominador es null",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "name": "no divide entre denominadores inválidos ni ambiguos",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "name": "rechaza año falso, fecha postevento, otra unidad, estado candidato o fuente sin hash",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "name": "rechaza numeradores incompatibles y modo no validado",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "name": "bases reales únicas, positivas e identificadas como históricas",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "name": "agregación usa municipio de la sede, no municipio de casa matriz; deduplica copias",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "name": "presión histórica permite cociente mayor que uno; no es porcentaje",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "name": "ambas fuentes usan la misma base sin sumar sus conteos",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "name": "cero explícito se conserva; ausencia de conteo o denominador es null",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "name": "no divide entre denominadores inválidos ni ambiguos",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "name": "rechaza año falso, fecha postevento, otra unidad, estado candidato o fuente sin hash",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "name": "rechaza numeradores incompatibles y modo no validado",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "name": "bases reales únicas, positivas e identificadas como históricas",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "name": "agregación usa municipio de la sede, no municipio de casa matriz; deduplica copias",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "name": "presión histórica permite cociente mayor que uno; no es porcentaje",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "name": "ambas fuentes usan la misma base sin sumar sus conteos",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "name": "cero explícito se conserva; ausencia de conteo o denominador es null",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "name": "no divide entre denominadores inválidos ni ambiguos",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "name": "rechaza año falso, fecha postevento, otra unidad, estado candidato o fuente sin hash",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "name": "rechaza numeradores incompatibles y modo no validado",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "name": "bases reales únicas, positivas e identificadas como históricas",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "name": "agregación usa municipio de la sede, no municipio de casa matriz; deduplica copias",
+      "pass": true
+    }
+  ],
+  "isolation": [
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-07",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-08",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-09",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-10",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "all",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "total",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "consulta_externa",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "urgencias",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "absolute",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "percapita",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "mode": "sectorial_non_health_unchanged",
+      "date": "2026-09-11",
+      "scope": "decree",
+      "severity": "grave",
+      "pass": true
+    }
+  ],
+  "render_harness": [
+    {
+      "variant": "consulta_externa",
+      "absolute_percapita_render_unchanged": true,
+      "health_relative_radar_source": true,
+      "one_notice": true
+    },
+    {
+      "variant": "urgencias",
+      "absolute_percapita_render_unchanged": true,
+      "health_relative_radar_source": true,
+      "one_notice": true
+    },
+    {
+      "variant": "hospitalizacion",
+      "absolute_percapita_render_unchanged": true,
+      "health_relative_radar_source": true,
+      "one_notice": true
+    }
+  ],
+  "execution": "JavaScript V8 con harness de módulos/DOM; Node, Python y navegador real no disponibles por fallo local de permisos.",
+  "source_sha256": "d50fbbce6a0ffff914b9e717a2d3109d57264ab67dbf444cfd86d410af69ea3f",
+  "base_commit": "beefea8362b5ef05b850085c36a788fda83d31fe",
+  "capture": "2026-09-11",
+  "original_relative_tests": [
+    {
+      "name": "relativizar antes de normalizar puede invertir el orden absoluto",
+      "pass": true
+    },
+    {
+      "name": "vivienda usa viviendas, aunque la población dé otro orden",
+      "pass": true
+    },
+    {
+      "name": "ausente, cero, negativo, otro año, duplicado o sin procedencia no crea tasa ni siquiera con numerador cero",
+      "pass": true
+    },
+    {
+      "name": "cero explícito con base verificada es cero; un numerador ausente sigue ausente",
+      "pass": true
+    },
+    {
+      "name": "ni población ni bases candidatas sustituyen inventarios sin homologar",
+      "pass": true
+    },
+    {
+      "name": "numerador que supera universo se rechaza en vez de truncarse",
+      "pass": true
+    },
+    {
+      "name": "faltantes conservan su peso y no se convierten en ceros observados",
+      "pass": true
+    },
+    {
+      "name": "ámbito recalcula; búsqueda y departamento conservan referencia",
+      "pass": true
+    },
+    {
+      "name": "los 16 campos activos tienen decisión explícita; solo siete están habilitados",
+      "pass": true
+    },
+    {
+      "name": "población antigua sin registro verificado no sirve de fallback",
+      "pass": true
+    }
+  ]
+}

@@ -67273,6 +67273,8 @@
     "mode": "capacity_pressure",
     "baseline_year": 2022,
     "kind": "consultorios_externos_reps",
-    "notice": "Salud: puntos afectados por consultorio de consulta externa registrado en REPS al 05-11-2022. Base histórica: mide presión, no porcentaje de capacidad perdida."
+    "notice": "Salud: centros afectados según PNUD por consultorio de consulta externa registrado en REPS al 05-11-2022. Base histórica: mide presión, no porcentaje de capacidad perdida.",
+    "numerator_source": "PNUD",
+    "numerator_id": "pnud_csalud"
   }
 }

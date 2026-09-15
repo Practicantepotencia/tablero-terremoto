@@ -1,55 +1,76 @@
-# Notebook didáctico: ML de Salud / urgencias
+# Notebook corregido: ML de urgencias donde falta el registro
 
-Archivo: [salud_urgencias_ml_paso_a_paso.ipynb](salud_urgencias_ml_paso_a_paso.ipynb).
+[Notebook](salud_urgencias_ml_paso_a_paso.ipynb) · [Abrir en Colab](https://colab.research.google.com/github/Practicantepotencia/tablero-terremoto/blob/salud-relativa-urgencias-ml/notebooks/salud_urgencias_ml_paso_a_paso.ipynb)
 
-[Abrir en Google Colab](https://colab.research.google.com/github/Practicantepotencia/tablero-terremoto/blob/salud-relativa-urgencias-ml/notebooks/salud_urgencias_ml_paso_a_paso.ipynb).
-Colab necesita acceso al repositorio; si no lo tiene, descarga el notebook y ábrelo localmente con el repositorio disponible.
+## Resultado de esta revisión
+
+En los 69 observados menores de 10.000 habitantes sin registro de camas, ninguno de los dos Poisson mejora el error proporcional de «siempre 1»; la mediana de comparables empata. La selección interna dirigida escoge la constante en los cinco grupos exteriores. Esto no verifica existencia de capacidad en los faltantes ni autoriza imputar 1.
+
+El grupo principal representa 146 de 203 estimaciones aplicadas; 173 de 203 carecen de registro de camas. Se muestran primero estos grupos; el R² nacional y el grupo diagnóstico de 1–5 consultorios aparecen después como contexto.
+
+La revisión es exploratoria, posterior al examen de la misma muestra. No es un nuevo test externo. La pequeña desventaja del modelo aplicado en el grupo principal se concentra en dos municipios de Nariño.
 
 ## Qué incluye
 
-24 pasos, más referencias, con carga verificable de archivos, cobertura, preprocesamiento sin fuga de datos, regresión Poisson regularizada, boosting, comparación de cinco candidatos, selección anidada por departamentos, gráficos, ejemplos municipales, estimaciones y abstenciones, fórmula de Salud y caso completo de Atrato. Muestra sensibilidad al piso 1 y distingue datos observados, estimaciones y resultados archivados.
+- Cuatro métodos, entrenados y comparados sobre los mismos municipios.
+- Selección interna por el grupo principal, con departamentos exteriores reservados.
+- Resultados por población, disponibilidad de camas, grupo exterior y departamento.
+- Referencias constante y mediana, error proporcional, MAE, R² y proporción dentro de ±1.
+- Bandas descriptivas de diferencias emparejadas al remuestrear departamentos.
+- Ejemplos favorables y desfavorables; 174 estimaciones aplicadas en el piso 1.
+- Matriz conjunta de sensibilidad Atrato/Trujillo: máximos, Salud y puestos recalculados.
+- Comparación de la reproducción Python con las salidas JavaScript guardadas.
 
-El notebook traduce a Python/NumPy el algoritmo JavaScript original, conservando el criterio de selección, grupos y parámetros. Incluye una comprobación opcional con PoissonRegressor de scikit-learn. No afirma que una traducción sea idéntica sin compararla: las celdas verifican coeficientes y predicciones contra los archivos originales.
+El notebook tiene 54 celdas, 26 ejecutables. No vuelve a ajustar boosting: la prueba prometida compara constante, mediana de comparables y los dos Poisson. El ensayo original completo permanece en el historial Git y en sus archivos originales.
 
-## Ejecución local
+## Archivos de resultados
 
-Desde la raíz del repositorio:
+- [Comparación y predicciones](../experimentos/ml_salud/revision_faltantes/comparacion.json)
+- [CSV comparado](../experimentos/ml_salud/revision_faltantes/validacion_comparada.csv)
+- [Sensibilidad y cambios por municipio](../experimentos/ml_salud/revision_faltantes/sensibilidad.json)
+- [Interpretación de la revisión](../docs/revision_ml_salud_faltantes.md)
+- [Código del cálculo ejecutado](../scripts/revisar_ml_salud.cjs)
+
+Datos originales congelados en `a350ca6591174542e76b08d108e4d4e15c629b4c`. Resultados de esta revisión congelados en `01cfb4916e52357f61db4eba3c961cf8fa7eeaf2`. Cada descarga se verifica con su hash Git; no se toma una versión nueva silenciosamente.
+
+## Ejecutar
+
+En Colab: **Entorno de ejecución → Ejecutar todas**. Se necesitan permisos de lectura del repositorio. En local, desde la raíz:
 
 ```powershell
 python -m pip install -r notebooks/requirements-salud.txt
 python -m jupyter lab notebooks/salud_urgencias_ml_paso_a_paso.ipynb
 ```
 
-O abre el archivo en VS Code, elige un kernel Python y pulsa **Ejecutar todo**. Las dependencias pueden instalarse desde la primera celda comentada.
+También se abre en VS Code con un kernel Python. Las dependencias se pueden instalar desde la primera celda comentada. Las descargas suman unos 30 MB.
 
-En Colab: **Entorno de ejecución → Ejecutar todas**. Entrenar todos los candidatos puede tardar varios minutos. Las descargas son aproximadamente 27 MB. Se muestran avances por grupo exterior.
+El ámbito del puntaje se cambia en el paso 18 entre `"decree"` y `"all"`. Reejecuta desde allí para actualizar la sensibilidad; esto no altera la muestra nacional de entrenamiento.
 
-Las celdas se ejecutan en orden. Cambiar `AMBITO` entre `"decree"` y `"all"` y ejecutar desde el paso 18 cambia el conjunto de referencia del puntaje de Salud; no cambia la muestra nacional de entrenamiento.
+## Verificación
 
-## Corte e integridad
+**Sí se ejecutó la nueva comparación y la sensibilidad en JavaScript V8.** Se verificaron 901 predicciones de cada candidato, la selección interna, 18 escenarios con el motor original y la reproducción determinista. Los cuatro cuerpos de prueba de Node se ejecutaron en V8 con adaptadores en memoria.
 
-Datos fijados al commit `a350ca6591174542e76b08d108e4d4e15c629b4c`. Cada archivo se verifica con su hash Git. El notebook no toma versiones nuevas automáticamente. Las versiones de bibliotecas son rangos compatibles, no un entorno bloqueado; el cuaderno imprime las utilizadas y comprueba tolerancias numéricas.
+**No se ejecutaron aquí las nuevas celdas Python ni se renderizaron sus gráficos** por el bloqueo del entorno. Se entregan sin salidas ficticias. La ejecución satisfactoria del notebook anterior comunicada por el usuario no se atribuye a esta revisión.
 
-El ML utiliza capacidad REPS 2022, población proyectada 2026 e IPM censal 2018. Los daños y el ámbito del tablero corresponden a la captura 2026-09-11. No acredita capacidad operativa actual ni existencia del servicio donde falta registro.
-
-El puntaje de Salud se recalcula aquí. El ranking global de seis dimensiones se lee del informe ya guardado y se identifica como archivado; se verifica el incremento de Atrato, sin fingir reentrenar ni recalcular las otras dimensiones.
-
-## Verificación y límites de esta entrega
-
-**Python no pudo ejecutarse durante la autoría por el fallo de permisos del entorno.** Se entrega sin salidas ni contadores de ejecución ficticios. Se verificaron en JavaScript la estructura del notebook, el origen de los artefactos y el cálculo de Salud del corte congelado. La traducción Python, sus pruebas y su renderización Jupyter están pendientes de una ejecución real.
-
-Comprobaciones locales de estructura, sintaxis y ejemplos sintéticos:
+Pruebas locales:
 
 ```powershell
 python -m unittest discover -s tests -p "test_notebook_salud.py" -v
+node --test tests/revision_ml_salud.test.cjs
 ```
 
-Para comprobar ejecución completa sin sobrescribir el original:
+Reproducir los archivos de la revisión con Node:
 
 ```powershell
-python -m jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output salud_urgencias_ml_ejecutado.ipynb notebooks/salud_urgencias_ml_paso_a_paso.ipynb
+node scripts/revisar_ml_salud.cjs
 ```
 
-Ejecuta y revisa todo antes de presentar. Si una comprobación no pasa, no presentes esa ejecución como reproducción exacta. La exportación de datos está desactivada; activarla crea una carpeta nueva. El notebook no modifica index.html, main ni los datos del modelo.
+Ese script sobrescribe únicamente los tres resultados de `experimentos/ml_salud/revision_faltantes/`, con comprobaciones de integridad de entradas y motor. No cambia el tablero ni sus denominadores.
 
-Una estimación no es un registro oficial. El mínimo 1 no verifica existencia del servicio. Los límites de faltantes del tablero no incorporan incertidumbre de ML.
+Ejecutar y guardar una copia del notebook:
+
+```powershell
+python -m jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output salud_urgencias_revision_ejecutado.ipynb notebooks/salud_urgencias_ml_paso_a_paso.ipynb
+```
+
+Revisa la ejecución completa antes de presentar. La exportación está desactivada y, si se activa, crea una carpeta nueva.

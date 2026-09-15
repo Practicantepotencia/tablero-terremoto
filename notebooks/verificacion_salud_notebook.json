@@ -1,94 +1,164 @@
 {
   "created": "2026-09-15",
-  "status": "static_and_data_checks_only",
+  "revision": 2,
+  "status": "computed_in_javascript_python_not_executed",
   "python_executed": false,
   "jupyter_rendered": false,
-  "source_commit": "a350ca6591174542e76b08d108e4d4e15c629b4c",
+  "data_commit": "a350ca6591174542e76b08d108e4d4e15c629b4c",
+  "analysis_commit": "01cfb4916e52357f61db4eba3c961cf8fa7eeaf2",
+  "counts": {
+    "cells": 54,
+    "code_cells": 26
+  },
   "checks": [
     {
-      "name": "Formato Jupyter 4.5",
+      "name": "901 OOF, cada municipio una sola vez",
       "passed": true
     },
     {
-      "name": "IDs únicos",
+      "name": "Coincidencia con 901 predicciones originales",
       "passed": true
     },
     {
-      "name": "49 celdas, 23 ejecutables",
+      "name": "Ningún departamento reservado en entrenamiento",
       "passed": true
     },
     {
-      "name": "Sin ejecuciones o salidas fabricadas",
+      "name": "Poisson converge en todos los ajustes exteriores",
       "passed": true
     },
     {
-      "name": "No llamadas shell ni subprocesos",
+      "name": "Selección interna primaria elige constante en 5 grupos",
       "passed": true
     },
     {
-      "name": "Exportación opt-in",
+      "name": "69 primarios, 125 sin camas",
       "passed": true
     },
     {
-      "name": "Hash y corte fijados",
+      "name": "No hay mejora de error primario",
       "passed": true
     },
     {
-      "name": "Sin carga ejecutable externa",
+      "name": "Sensibilidad 18 escenarios",
       "passed": true
     },
     {
-      "name": "Coincidencia del esquema CSV",
+      "name": "decree reproduce baseline sin cambios",
       "passed": true
     },
     {
-      "name": "Base nacional correcta",
+      "name": "decree cambia ancla a Atrato, 9",
       "passed": true
     },
     {
-      "name": "Modelo original converge",
+      "name": "decree tercera ancla Acandí",
       "passed": true
     },
     {
-      "name": "203 estimaciones admisibles",
+      "name": "decree A1 T1: puntajes acotados",
       "passed": true
     },
     {
-      "name": "192 estimaciones brutas en piso",
+      "name": "decree A1 T2: puntajes acotados",
       "passed": true
     },
     {
-      "name": "Salud decree cuadra con escenario",
+      "name": "decree A1 T3: puntajes acotados",
       "passed": true
     },
     {
-      "name": "Únicas diferencias son límites nulos/0 decree",
+      "name": "decree A2 T1: puntajes acotados",
       "passed": true
     },
     {
-      "name": "Salud all cuadra con escenario",
+      "name": "decree A2 T2: puntajes acotados",
       "passed": true
     },
     {
-      "name": "Únicas diferencias son límites nulos/0 all",
+      "name": "decree A2 T3: puntajes acotados",
       "passed": true
     },
     {
-      "name": "Faltantes comparados como límites, sin alterar datos",
+      "name": "decree A3 T1: puntajes acotados",
       "passed": true
     },
     {
-      "name": "Ningún aviso de Python ya ejecutado",
+      "name": "decree A3 T2: puntajes acotados",
       "passed": true
     },
     {
-      "name": "No backticks escapados de construcción en Markdown",
+      "name": "decree A3 T3: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all reproduce baseline sin cambios",
+      "passed": true
+    },
+    {
+      "name": "all cambia ancla a Atrato, 9",
+      "passed": true
+    },
+    {
+      "name": "all tercera ancla Acandí",
+      "passed": true
+    },
+    {
+      "name": "all A1 T1: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all A1 T2: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all A1 T3: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all A2 T1: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all A2 T2: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all A2 T3: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all A3 T1: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all A3 T2: puntajes acotados",
+      "passed": true
+    },
+    {
+      "name": "all A3 T3: puntajes acotados",
       "passed": true
     }
   ],
-  "counts": {
-    "cells": 49,
-    "code_cells": 23
-  },
-  "note": "Estructura JSON y reglas/datos verificados en JavaScript V8. AST/pruebas NumPy/ejecución integral pendientes; tests/test_notebook_salud.py y aserciones del notebook permiten verificarlas en un entorno Python funcional."
+  "node_test_logic_run_in_v8": [
+    {
+      "name": "reproduce every corrected prediction and selection deterministically",
+      "passed": true
+    },
+    {
+      "name": "target cohort, references, folds and bootstrap are explicit",
+      "passed": true
+    },
+    {
+      "name": "original ML OOF and constant reference are checked, not invented",
+      "passed": true
+    },
+    {
+      "name": "sensitivity recomputes the maximum, including a third municipality",
+      "passed": true
+    }
+  ],
+  "limitations": "Python AST, notebook execution and rendered charts were not run in the authoring environment. Tests and Python assertions are provided. Node test bodies ran in V8 with in-memory fs/path/assert adapters, not native Node.",
+  "identity_global_max_abs_difference": 3.552713678800501e-15,
+  "dashboard_unchanged": true
 }

@@ -51,7 +51,7 @@ class NotebookSaludTest(unittest.TestCase):
         except ImportError:
             self.skipTest("NumPy no instalado; sintaxis y estructura sí se verifican.")
         namespace = {"np": np, "warnings": warnings}
-        wanted = {"ajustar_poisson", "metricas", "valor_arbol", "ajustar_boosting"}
+        wanted = {"ajustar_poisson", "metricas"}
         for code in self.codes:
             tree = ast.parse(code)
             for node in tree.body:
@@ -64,11 +64,17 @@ class NotebookSaludTest(unittest.TestCase):
         self.assertAlmostEqual(namespace["metricas"]([1, 100], [2, 200])["mean_absolute_log_error"],
                                float(np.log(2)), places=7)
         self.assertEqual(namespace["metricas"]([1, 2, 3], [1, 2, 3])["r2"], 1.)
-        X, y = np.zeros((40, 2)), np.full(40, 3.)
-        boost = namespace["ajustar_boosting"](X, y, rounds=3)
-        predicted = np.expm1(boost["base"] + boost["rate"] * sum(
-            namespace["valor_arbol"](t, X) for t in boost["trees"]))
-        np.testing.assert_allclose(predicted, y, rtol=1e-10)
+
+    def test_revision_has_four_methods_and_targeted_selection(self):
+        joined = "\n".join(self.codes)
+        for method in ["siempre_1", "mediana_comparables", "poisson_demografia", "poisson_capacidades"]:
+            self.assertIn(method, joined)
+        self.assertIn('mascara & grupo_principal(frame)', joined)
+        self.assertIn('ancla_nueva = p["presion_nueva"].max()', joined)
+        self.assertIn('bootstrap_departamentos', joined)
+        self.assertEqual(self.nb["metadata"]["revision"]["version"], 2)
+        self.assertFalse(self.nb["metadata"]["revision"]["dashboard_modified"])
+
 
 
 if __name__ == "__main__":

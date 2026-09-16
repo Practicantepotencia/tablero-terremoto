@@ -10,7 +10,7 @@
   // Cada sector pesa 1/5. En sectores compartidos, cada canal pesa 1/2.
   // Los canales pueden compartir insumos: nunca se cuentan como validaciones independientes.
   const SECTORS = [
-    {id:'impacto_humano', name:'Impacto humano', fields:[reported('familias','Familias afectadas',.25),reported('fallecidos','Personas fallecidas',.25),reported('desaparecidos','Personas desaparecidas',.25),reported('heridos','Personas heridas',.25)]},
+    {id:'impacto_humano', name:'Impacto humano', fields:[reported('familias','Familias afectadas',1/3),reported('fallecidos','Personas fallecidas',1/3),reported('desaparecidos','Personas desaparecidas',1/3)]},
     {id:'vivienda', name:'Vivienda', fields:[reported('vivdestruidas','Destruidas · 3iS',.25),reported('vivaveriadas','Averiadas · 3iS',.25),estimated('vd','Destruidas · PNUD',.25),estimated('va','Averiadas · PNUD',.25)]},
     {id:'salud', name:'Salud', fields:[reported('salud','Puntos de salud · 3iS',.5),estimated('csalud','Centros de salud · PNUD',.5)]},
     {id:'educacion', name:'Educación', fields:[reported('educativos','Puntos educativos · 3iS',.5),estimated('cedu','Centros educativos · PNUD',.5)]},

@@ -1,7 +1,7 @@
 name: Verificar escenarios de presión asistencial
 on:
   push:
-    branches: [salud-presion-urgencias, salud-presion-hospitalizacion]
+    branches: [salud-presion-urgencias-sin-heridos-ih, salud-presion-hospitalizacion-sin-heridos-ih]
     paths: ['web/**', 'scripts/**', 'tests/**', 'generar_tablero_recuperacion.py', 'data/presion_salud.json', '.github/workflows/presion-salud.yml']
 permissions:
   contents: write
@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -29,6 +30,7 @@ jobs:
           python scripts/reconstruir_capacidad_presion.py
           python generar_tablero_recuperacion.py
           node scripts/auditar_presion_salud.cjs
+          node scripts/auditar_sin_heridos_ih.cjs
       - name: Prueba de interfaz y radar
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0
@@ -42,4 +44,4 @@ jobs:
         with:
           branch: ${{ github.ref_name }}
           commit_message: 'Generar y auditar escenario experimental de presión asistencial'
-          file_pattern: 'index.html eda_indicadores.html docs/verificacion_presion_salud.json'
+          file_pattern: 'index.html eda_indicadores.html docs/verificacion_presion_salud.json docs/verificacion_sin_heridos_ih.json'

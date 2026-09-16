@@ -89,7 +89,7 @@ function historyBlock(key,geo='') {
 }
 function renderPriorities() {
   const p=priorityModel.selection(state), scored=p.items.filter(r=>r.coverage>0);
-  $('priority-kpis').innerHTML=tile('Municipios con evidencia',`${scored.length} / ${p.items.length}`,'Al menos un campo de los 15 del modelo')+
+  $('priority-kpis').innerHTML=tile('Municipios con evidencia',`${scored.length} / ${p.items.length}`,'Al menos un campo de los '+Priorizacion.FIELD_COUNT+' del modelo')+
     tile('Con todos los campos',p.items.filter(r=>r.complete).length,'Si faltan datos, se muestra un intervalo')+
     tile('Cobertura ponderada mediana',scored.length?`${fmt(T.quantile(scored.map(r=>100*r.coverage),.5))}%`:'—','Disponibilidad de componentes; no certeza')+
     tile('Coincidencias con mayor necesidad de recuperación temprana',`${p.overlap} / ${p.rapidaTopN}`,'Top 20 con empates · universo de referencia');

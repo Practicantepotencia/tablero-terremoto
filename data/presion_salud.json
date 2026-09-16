@@ -4,7 +4,7 @@
   "mode": "urgencias",
   "base_commit": "3f4550ee1dde564cba007e677c9f657278e99a72",
   "event_date": "2026-08-10",
-  "note": "Carga potencial: heridos reportados / consultorios de urgencias REPS 2022. Sin ML; no es ocupación hospitalaria. Heridos también participa en Impacto humano.",
+  "note": "Carga potencial: heridos reportados / consultorios de urgencias REPS 2022. Sin ML; no es ocupación hospitalaria. Heridos se usa solo en Salud en este índice.",
   "capacity": {
     "kind": "consultorios_urgencias_reps",
     "label": "Consultorios de urgencias · REPS 2022",
@@ -15073,5 +15073,16 @@
     "source_file": "data/salud_capacidad_reps_2022.json",
     "source_commit": "25be2d4e29c57de20e51372fd417e7802d7d762e",
     "git_blob": "befeabb329d69336e0d67a4636c68bf587c2c70c"
+  },
+  "human_impact_variant": {
+    "id": "sin-heridos-ih",
+    "parent_branch": "salud-presion-urgencias",
+    "parent_commit": "ac0a7887729a805fb3af60186b25ae6f8466cf25",
+    "fields": [
+      "3is_familias",
+      "3is_fallecidos",
+      "3is_desaparecidos"
+    ],
+    "internal_weight": "1/3"
   }
 }

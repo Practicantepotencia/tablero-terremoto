@@ -9,8 +9,8 @@ function data(){
  rows:Object.entries(catalog).map(([kind,c])=>({...c,kind,code:'27050',value:kind==='sedes_ips'?3:30,area:'Total',status:'observed_registry_proxy'}))};
  return {rows:[row(),row('3is_salud'),row('pnud_cedu',6),row('3is_educativos',6)],dates:[date],latest:date,baseline:{rows:[]},population:{rows:[{code:'27050',year:2026,population:10000}]},denominators:{event_date:'2026-08-10',rows:[],sources:{},registry_proxies:proxy}};
 }
-test('cinco dimensiones y quince campos; pesos internos suman uno',()=>{
- assert.equal(P.SECTORS.length,5);assert.equal(P.FIELD_COUNT,15);assert.ok(!P.SECTORS.some(s=>s.id==='comunidad'));
+test('cinco dimensiones y catorce campos; pesos internos suman uno',()=>{
+ assert.equal(P.SECTORS.length,5);assert.equal(P.FIELD_COUNT,14);assert.ok(!P.SECTORS.some(s=>s.id==='comunidad'));
  for(const s of P.SECTORS)assert.ok(Math.abs(s.fields.reduce((n,f)=>n+f.share,0)-1)<1e-12);
 });
 test('Atrato 9/3 = 3 se conserva, sin ML y sin tratarlo como porcentaje',()=>{
@@ -46,7 +46,7 @@ test('inventarios solo cambian relativo; absoluto y per cápita no se alteran',(
  for(const mode of ['absolute','percapita'])
   assert.deepEqual(P.create(d,undefined,{mode}).compute({scope:'all',date}),P.create(before,undefined,{mode}).compute({scope:'all',date}));
  const r=P.models(d).sectorial.compute({scope:'all',date}).items[0];
- assert.equal(r.available,4);assert.equal(r.fieldCount,15);assert.equal(r.sectors[2].lower,100);assert.equal(r.sectors[3].lower,100);
+ assert.equal(r.available,4);assert.equal(r.fieldCount,14);assert.equal(r.sectors[2].lower,100);assert.equal(r.sectors[3].lower,100);
  assert.equal(r.coverage,.4);assert.equal(r.damageLower,40);
  assert.equal(r.sectors[4].coverage,0);
 });

@@ -3,6 +3,16 @@
 Base común: relativo-reps-simat-sin-comunitarios, commit 3f4550ee1dde564cba007e677c9f657278e99a72.
 Main y el sitio de producción no se modifican. Son escenarios, no una metodología validada para decidir asignaciones por sí sola.
 
+## Variante sin heridos en Impacto humano
+
+Ramas hijas salud-presion-urgencias-sin-heridos-ih y salud-presion-hospitalizacion-sin-heridos-ih, cada una derivada de su escenario sanitario homónimo. El commit padre exacto está en data/presion_salud.json, human_impact_variant.parent_commit.
+
+Se retira solo heridos de Impacto humano en los tres índices (absoluto, per cápita y relativo). Se conservan familias afectadas, fallecidos y desaparecidos, con peso interno 1/3 cada uno. No es la variante de gravedad estricta: no se retiran familias ni viviendas averiadas.
+
+H = (z_familias + z_fallecidos + z_desaparecidos) / 3. Cada z usa la normalización y denominador propios de la vista. Los faltantes conservan su tercio como desconocido, no se redistribuye entre los disponibles. El peso del sector sigue siendo 1/5.
+
+Heridos sigue alimentando Salud exclusivamente en el modelo relativo de presión; los componentes de Salud absoluto/per cápita conservan sus indicadores de infraestructura. Los reportes originales de heridos se mantienen en el inventario y el diagnóstico territorial. No se eliminan datos.
+
 ## Dos preguntas calculables con los datos municipales
 
 - salud-presion-urgencias: heridos reportados por 3iS / consultorios de urgencias registrados en REPS, corte 5 de noviembre de 2022.
@@ -27,14 +37,14 @@ Los campos faltantes siguen generando límites documentado/posible, no intervalo
 
 ## Qué cambia y qué no
 
-Solo cambia el componente Salud del modelo relativo sectorial y su efecto matemático sobre índice global, ranking, comparación con RAPIDA y radar.
-Los modelos absoluto y per cápita permanecen idénticos. Educación SIMAT, vivienda, infraestructura, Impacto humano, IPM, fuentes originales, fechas del inventario y filtros se conservan. No se añaden pestañas ni nuevas opciones.
-La cobertura del relativo cuenta 14 variables en lugar de 15 porque Salud contiene un solo campo.
+El escenario padre sustituye Salud por carga potencial en el relativo; esta variante hija retira heridos de Impacto humano y recalcula sus consecuencias en índices, rankings y radares.
+En las ramas hijas, Impacto humano cambia en los tres modelos. Educación SIMAT, vivienda, infraestructura, Salud, IPM, fuentes originales, fechas del inventario y filtros conservan su cálculo respecto de cada padre. Cambian los índices globales, rankings y comparaciones derivados de Impacto humano. No se añaden pestañas ni nuevas opciones.
+La cobertura cuenta 14 campos en absoluto/per cápita y 13 en el relativo de presión, donde Salud contiene un solo campo.
 La explicación del escenario se añade en un único lugar, sobre la tercera interfaz. La ficha y radar mantienen la fórmula habitual con la nueva unidad.
 
 ## Limitaciones decisivas
 
-1. **Heridos también está en Impacto humano.** Conservar el resto del tablero implica compartir este insumo entre dos dimensiones. En la tercera interfaz recibe 1/20 del promedio a través de Impacto humano (con otro denominador) y 1/5 a través de Salud. No son daños independientes ni dos fuentes de confirmación. Antes de adoptar esta propuesta habría que decidir explícitamente sobre esa duplicación conceptual.
+1. **Heridos participa solo en Salud en el relativo de presión.** Se elimina su incorporación explícita a Impacto humano. Esto no demuestra independencia estadística entre dimensiones ni convierte el cociente en ocupación observada.
 2. **2022 no es 2026.** El inventario histórico no acredita capacidad operativa al momento del sismo. No se llama capacidad actual.
 3. No conocemos derivaciones, gravedad, duración de hospitalización, rotación, personal, equipamiento disponible ni demanda habitual. Los heridos acumulados son una aproximación a demanda adicional, no el flujo diario ni su causa única.
 4. El máximo sigue condicionando la escala. Se conserva para aislar el cambio de variable y permitir comparación con el modelo actual, no porque esté validado clínicamente.
@@ -57,3 +67,7 @@ docs/verificacion_presion_salud.json contiene los resultados reales de cada rama
 - Inventario de heridos de la rama base: indicadores_largo_no_calculo.csv y su historial, indicador 3is_heridos, fuente 3iS-Sheets.
 - Tablero 3iS: https://docs.google.com/spreadsheets/d/1fQ-LTlIEljzOKvW23epwevJeWLWORi88xL7XxkpTMzY
 - Presión operativa directa y obstáculos: docs/presion_operativa_fuentes.md.
+
+## Comprobación de la variante
+
+scripts/auditar_sin_heridos_ih.cjs compara contra el código del commit padre sobre los mismos datos: verifica igualdad exacta de los otros cuatro sectores en los tres modos, conservación de Salud y sus anclas, pesos 1/3, fórmulas, cobertura y ausencia de heridos en Impacto humano. Los resultados y movimientos de ranking se guardan en docs/verificacion_sin_heridos_ih.json. Main y ambas ramas padre permanecen intactas.

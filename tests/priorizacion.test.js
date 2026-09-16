@@ -4,21 +4,21 @@ const date='2026-09-09';
 function row(geo,f,id,v,extras={}){return {geo:'municipal:'+geo,code:geo,lv:'municipal',m:geo,d:'D',f,id,v,u:'Número',dim:'Campo',i:id,date,...extras};}
 function payload(rows,baseline=[]){return {rows,baseline:{rows:baseline},latest:date,dates:[date],sources:{}};}
 const state={scope:'all',date};
-test('impacto humano incluye cuatro entradas iguales y respeta cero y ausencia',()=>{
- const values=[40,2,0,8];
+test('impacto humano incluye tres entradas iguales, sin heridos y respeta cero y ausencia',()=>{
+ const values=[40,2,0];
  const rows=P.SECTORS[0].fields.map((f,i)=>row('1',f.source,f.id,values[i]));
  const r=P.create(payload(rows)).compute(state).items[0].sectors[0];
  assert.equal(r.id,'impacto_humano');
- assert.deepEqual(r.fields.map(f=>f.share),[.25,.25,.25,.25]);
- assert.equal(r.lower,75);assert.equal(r.upper,75);
+ assert.deepEqual(r.fields.map(f=>f.share),[1/3,1/3,1/3]);
+ assert.ok(Math.abs(r.lower-200/3)<1e-8);assert.ok(Math.abs(r.upper-200/3)<1e-8);
  const missing=P.create(payload(rows.filter(x=>x.id!=='3is_desaparecidos'))).compute(state).items[0].sectors[0];
- assert.equal(missing.lower,75);assert.equal(missing.upper,100);
+ assert.ok(Math.abs(missing.lower-200/3)<1e-8);assert.ok(Math.abs(missing.upper-100)<1e-8);
 });
 function full(geo,value){return P.SECTORS.flatMap(s=>s.fields.map(f=>row(geo,f.source,f.id,value)));}
 test('cada sector conserva su peso fijo, incluso con distinto número de variables',()=>{
  assert.equal(P.SECTORS.length,5);
  for(const s of P.SECTORS)assert.ok(Math.abs(s.fields.reduce((n,f)=>n+f.share,0)-1)<1e-10);
- assert.equal(P.SECTORS.flatMap(s=>s.fields).length,15);
+ assert.equal(P.SECTORS.flatMap(s=>s.fields).length,14);
 });
 test('normalización proporcional conserva razones, cero y faltantes',()=>{
  assert.equal(P.normalize(0,null),0);assert.equal(P.normalize(null,100),null);
@@ -89,7 +89,7 @@ test('municipio solo ExE permanece consultable, sin un puesto global fabricado',
 });
 test('ejemplo calculado a mano: familias conocidas y resto faltante',()=>{
  const r=P.create(payload([row('1','3iS-Sheets','3is_familias',10)],[{code:'1',v:25}])).compute(state).items[0];
- assert.ok(Math.abs(r.lower-(100/20)*.85)<1e-8);
+ assert.ok(Math.abs(r.lower-(100/15)*.85)<1e-8);
  assert.ok(Math.abs(r.upper-85)<1e-8);
- assert.ok(Math.abs(r.coverage-1/20)<1e-8);
+ assert.ok(Math.abs(r.coverage-1/15)<1e-8);
 });

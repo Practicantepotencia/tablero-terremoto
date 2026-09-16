@@ -1,14 +1,14 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const P=require('../web/priorizacion.js'),T=require('../web/modelo.js'),C=require('../web/comparacion.js');
 const date='2026-09-09',state={date,scope:'all'};
-const row=(code,v,extra={})=>({geo:'municipal:'+code,code,lv:'municipal',m:code,d:'D',date,id:'3is_heridos',f:'3iS-Sheets',u:'Número',dim:'Personas',i:'Heridos',v,...extra});
+const row=(code,v,extra={})=>({geo:'municipal:'+code,code,lv:'municipal',m:code,d:'D',date,id:'3is_fallecidos',f:'3iS-Sheets',u:'Número',dim:'Personas',i:'Fallecidos',v,...extra});
 const data=()=>({rows:[row('1',100),row('2',20),row('3',0)],population:{rows:[{code:'1',year:2026,population:100000},{code:'2',year:2026,population:1000}]},baseline:{rows:[]}});
 test('tres modos separados: absoluto, tasas poblacionales y denominadores homologados',()=>{
  const d=data(),models=P.models(d);
  assert.equal(models,P.models(d));
  assert.equal(models.absolute.compute(state).items[0].code,'1');
  const p=models.percapita.compute(state);assert.equal(p.items[0].code,'2');
- const a=p.items.find(r=>r.code==='1').sectors[0].fields[3];
+ const a=p.items.find(r=>r.code==='1').sectors[0].fields[1];
  assert.equal(a.rate,10);assert.equal(a.anchor,200);assert.equal(a.score,5);
  assert.equal(p.missing[0].code,'3'); // zero without population is unknown
  assert.equal(models.sectorial.compute(state).items.length,0); // no compatible verified registry
@@ -20,7 +20,7 @@ test('per cápita no inventa bases ausentes, duplicadas, negativas ni de otro a�
   assert.equal(P.models(d).percapita.compute(state).items.length,0);
  }
  const d=data();d.rows=[row('1',0)];
- assert.equal(P.models(d).percapita.compute(state).items[0].sectors[0].fields[3].score,0);
+ assert.equal(P.models(d).percapita.compute(state).items[0].sectors[0].fields[1].score,0);
 });
 test('regresión con intercepto y signo: R² no pierde la dirección de Pearson visible',()=>{
  const s=C.statistics([{x:1,y:7},{x:2,y:5},{x:3,y:3},{x:4,y:1}]);

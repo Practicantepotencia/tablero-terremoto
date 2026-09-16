@@ -7,14 +7,21 @@ await page.waitForSelector('#relative-matrix table');
 const res=await page.evaluate(()=>{
  const state={scope:'decree',date:DATA.latest,dept:''},result=Priorizacion.models(DATA).sectorial.compute(state);
  const r=result.items.find(m=>m.code==='66001'),h=r.sectors.find(s=>s.id==='salud').fields[0];
- return {fields:r.fieldCount,raw:h.row.v,base:h.denominator.value,ratio:h.rate,score:h.score,mode:DATA.healthPressure.mode,n:result.referenceN};
+ return {human:r.sectors[0].fields.map(f=>f.id),fields:r.fieldCount,raw:h.row.v,base:h.denominator.value,ratio:h.rate,score:h.score,mode:DATA.healthPressure.mode,n:result.referenceN};
 });
-assert.equal(res.fields,14);assert.ok(res.ratio>=0);assert.ok(Math.abs(res.ratio-res.raw/res.base)<1e-8);
+assert.equal(res.fields,13);assert.deepEqual(res.human,['3is_familias','3is_fallecidos','3is_desaparecidos']);assert.ok(res.ratio>=0);assert.ok(Math.abs(res.ratio-res.raw/res.base)<1e-8);
 await page.locator('#relative-search').fill('Pereira');await page.waitForTimeout(100);
 assert.equal(await page.locator('#relative-matrix tbody tr').count(),1);
 assert.match(await page.locator('#relative-matrix').innerText(),/Heridos frente a/);
 await page.locator('#relative-matrix [data-relative-geo]').click();
 assert.match(await page.locator('#relative-detail').innerText(),/REPS/);
+for(const selector of ['#matrix','#percapita-matrix','#relative-matrix']){
+ const human=page.locator(selector+' tbody tr').first().locator('td').nth(1);
+ assert.doesNotMatch(await human.innerText(),/Personas heridas/);
+ assert.match(await human.innerText(),/Familias afectadas/);
+ assert.match(await human.innerText(),/Personas fallecidas/);
+ assert.match(await human.innerText(),/Personas desaparecidas/);
+}
 // Exercise the same radar objects, independently of tab visibility.
 await page.evaluate(()=>RelativeMunicipalRadar.render(null,{scope:'decree',date:DATA.latest,dept:''}));
 await page.evaluate(()=>{

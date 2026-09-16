@@ -1,4 +1,5 @@
 {
+  "audit_mode": "human_impact_change_with_cascade_disabled",
   "parent_branch": "salud-presion-urgencias",
   "parent_commit": "ac0a7887729a805fb3af60186b25ae6f8466cf25",
   "capture": "2026-09-16",

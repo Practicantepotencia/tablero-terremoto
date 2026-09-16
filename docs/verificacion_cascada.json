@@ -1,0 +1,1380 @@
+{
+  "parent_commit": "bdbcf1604d1d988ea4d5dfeeb1e8099721520c37",
+  "mode": "urgencias",
+  "capture": "2026-09-16",
+  "policy": "PNUD válido incluido 0; si falta/no utilizable, 3iS; nunca combinar ambos",
+  "scopes": {
+    "decree": {
+      "absolute": {
+        "reference": 509,
+        "with_score": 470,
+        "health_with_data": 470,
+        "fields": [
+          {
+            "id": "pnud_vd",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 470,
+            "anchor": 9134,
+            "channels": [
+              {
+                "id": "pnud_vd",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivdestruidas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_va",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 470,
+            "anchor": 29974,
+            "channels": [
+              {
+                "id": "pnud_va",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivaveriadas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_csalud",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 470,
+            "anchor": 34,
+            "channels": [
+              {
+                "id": "pnud_csalud",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_salud",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_cedu",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 470,
+            "anchor": 214,
+            "channels": [
+              {
+                "id": "pnud_cedu",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_educativos",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          }
+        ],
+        "top10": [
+          {
+            "code": "66001",
+            "name": "Pereira",
+            "score": 61.72167475709305,
+            "rank": 1,
+            "previous_score": 61.076188226032016,
+            "previous_rank": 1,
+            "available": 9,
+            "fields": 10
+          },
+          {
+            "code": "76001",
+            "name": "Santiago de Cali",
+            "score": 39.27649773755656,
+            "rank": 2,
+            "previous_score": 38.445775048480925,
+            "previous_rank": 2,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "27001",
+            "name": "Quibdó",
+            "score": 31.15865587226885,
+            "rank": 3,
+            "previous_score": 30.68539238369585,
+            "previous_rank": 3,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "66170",
+            "name": "Dosquebradas",
+            "score": 18.598142888498952,
+            "rank": 4,
+            "previous_score": 18.387014287683776,
+            "previous_rank": 5,
+            "available": 10,
+            "fields": 10
+          },
+          {
+            "code": "63001",
+            "name": "Armenia",
+            "score": 13.7737034455355,
+            "rank": 5,
+            "previous_score": 14.562926697365828,
+            "previous_rank": 6,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "17001",
+            "name": "Manizales",
+            "score": 12.735435075105645,
+            "rank": 6,
+            "previous_score": 10.451816754254144,
+            "previous_rank": 10,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "76109",
+            "name": "Buenaventura",
+            "score": 12.582321043037307,
+            "rank": 7,
+            "previous_score": 19.95979767855133,
+            "previous_rank": 4,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 12.414701600449156,
+            "rank": 8,
+            "previous_score": 11.918412032819012,
+            "previous_rank": 7,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "27025",
+            "name": "Alto Baudó",
+            "score": 11.317380010411386,
+            "rank": 9,
+            "previous_score": 10.970611770405103,
+            "previous_rank": 9,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "76520",
+            "name": "Palmira",
+            "score": 11.142240380380029,
+            "rank": 10,
+            "previous_score": 10.972851114611695,
+            "previous_rank": 8,
+            "available": 5,
+            "fields": 10
+          }
+        ],
+        "examples": [
+          {
+            "code": "66001",
+            "name": "Pereira",
+            "score": 61.72167475709305,
+            "rank": 1,
+            "previous_score": 61.076188226032016,
+            "previous_rank": 1,
+            "available": 9,
+            "fields": 10
+          },
+          {
+            "code": "76001",
+            "name": "Santiago de Cali",
+            "score": 39.27649773755656,
+            "rank": 2,
+            "previous_score": 38.445775048480925,
+            "previous_rank": 2,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 12.414701600449156,
+            "rank": 8,
+            "previous_score": 11.918412032819012,
+            "previous_rank": 7,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "27050",
+            "name": "Atrato",
+            "score": 8.459782347806907,
+            "rank": 11,
+            "previous_score": 8.424987719675281,
+            "previous_rank": 11,
+            "available": 8,
+            "fields": 10
+          }
+        ]
+      },
+      "percapita": {
+        "reference": 509,
+        "with_score": 468,
+        "health_with_data": 468,
+        "fields": [
+          {
+            "id": "pnud_vd",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 468,
+            "anchor": 700.1747077005779,
+            "channels": [
+              {
+                "id": "pnud_vd",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivdestruidas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_va",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 468,
+            "anchor": 1936.9009584664536,
+            "channels": [
+              {
+                "id": "pnud_va",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivaveriadas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_csalud",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 468,
+            "anchor": 13.778322106552357,
+            "channels": [
+              {
+                "id": "pnud_csalud",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_salud",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_cedu",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 468,
+            "anchor": 41.07424960505529,
+            "channels": [
+              {
+                "id": "pnud_cedu",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_educativos",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          }
+        ],
+        "top10": [
+          {
+            "code": "27050",
+            "name": "Atrato",
+            "score": 44.96384328559826,
+            "rank": 1,
+            "previous_score": 43.78923980338838,
+            "previous_rank": 1,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "27745",
+            "name": "Sipí",
+            "score": 43.76026947058891,
+            "rank": 2,
+            "previous_score": 39.53495069243969,
+            "previous_rank": 2,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "63111",
+            "name": "Buenavista",
+            "score": 29.756685248252985,
+            "rank": 3,
+            "previous_score": 26.527301124066433,
+            "previous_rank": 5,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 28.57373368613508,
+            "rank": 4,
+            "previous_score": 25.539240231814286,
+            "previous_rank": 6,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "76243",
+            "name": "El Águila",
+            "score": 28.326960596951018,
+            "rank": 5,
+            "previous_score": 25.475373036163994,
+            "previous_rank": 7,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "76054",
+            "name": "Argelia",
+            "score": 26.029499652615264,
+            "rank": 6,
+            "previous_score": 28.46111684023804,
+            "previous_rank": 3,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "27810",
+            "name": "Unión Panamericana",
+            "score": 23.361123462504437,
+            "rank": 7,
+            "previous_score": 20.29095317538664,
+            "previous_rank": 12,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "63302",
+            "name": "Génova",
+            "score": 23.02187231056657,
+            "rank": 8,
+            "previous_score": 23.01502470517073,
+            "previous_rank": 8,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "27787",
+            "name": "Tadó",
+            "score": 22.40518390409826,
+            "rank": 9,
+            "previous_score": 21.04672790002386,
+            "previous_rank": 10,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "76863",
+            "name": "Versalles",
+            "score": 22.220545526120382,
+            "rank": 10,
+            "previous_score": 19.286650273776953,
+            "previous_rank": 14,
+            "available": 6,
+            "fields": 10
+          }
+        ],
+        "examples": [
+          {
+            "code": "27050",
+            "name": "Atrato",
+            "score": 44.96384328559826,
+            "rank": 1,
+            "previous_score": 43.78923980338838,
+            "previous_rank": 1,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 28.57373368613508,
+            "rank": 4,
+            "previous_score": 25.539240231814286,
+            "previous_rank": 6,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "66001",
+            "name": "Pereira",
+            "score": 19.09243058510472,
+            "rank": 17,
+            "previous_score": 18.184190742768642,
+            "previous_rank": 15,
+            "available": 9,
+            "fields": 10
+          },
+          {
+            "code": "76001",
+            "name": "Santiago de Cali",
+            "score": 5.467349504447116,
+            "rank": 96,
+            "previous_score": 5.417864371400203,
+            "previous_rank": 84,
+            "available": 8,
+            "fields": 10
+          }
+        ]
+      },
+      "sectorial": {
+        "reference": 509,
+        "with_score": 468,
+        "health_with_data": 71,
+        "fields": [
+          {
+            "id": "pnud_vd",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 468,
+            "anchor": 16.167091836734695,
+            "channels": [
+              {
+                "id": "pnud_vd",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivdestruidas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_va",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 468,
+            "anchor": 48.648648648648646,
+            "channels": [
+              {
+                "id": "pnud_va",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivaveriadas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_cedu",
+            "selected_sources": {
+              "PNUD": 470,
+              "3iS-Sheets": 0
+            },
+            "usable": 468,
+            "anchor": 1.4705882352941178,
+            "channels": [
+              {
+                "id": "pnud_cedu",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_educativos",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          }
+        ],
+        "top10": [
+          {
+            "code": "76606",
+            "name": "Restrepo",
+            "score": 34.61172004773693,
+            "rank": 1,
+            "previous_score": 33.02826994649341,
+            "previous_rank": 1,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 28.365878804256234,
+            "rank": 2,
+            "previous_score": 25.08203344085826,
+            "previous_rank": 5,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "76497",
+            "name": "Obando",
+            "score": 27.9201743265682,
+            "rank": 3,
+            "previous_score": 28.081665085467137,
+            "previous_rank": 2,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "76126",
+            "name": "Calima",
+            "score": 26.682745756838678,
+            "rank": 4,
+            "previous_score": 25.792895282066286,
+            "previous_rank": 4,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "76020",
+            "name": "Alcalá",
+            "score": 26.630634597001137,
+            "rank": 5,
+            "previous_score": 26.931355742983225,
+            "previous_rank": 3,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "27745",
+            "name": "Sipí",
+            "score": 25.7608405115405,
+            "rank": 6,
+            "previous_score": 23.4982931841153,
+            "previous_rank": 7,
+            "available": 3,
+            "fields": 10
+          },
+          {
+            "code": "66170",
+            "name": "Dosquebradas",
+            "score": 24.664139182991214,
+            "rank": 7,
+            "previous_score": 24.34542770098698,
+            "previous_rank": 6,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "76823",
+            "name": "Toro",
+            "score": 22.570920627558856,
+            "rank": 8,
+            "previous_score": 23.319754757722485,
+            "previous_rank": 8,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "76243",
+            "name": "El Águila",
+            "score": 22.10369818558487,
+            "rank": 9,
+            "previous_score": 20.502422786566946,
+            "previous_rank": 11,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "63111",
+            "name": "Buenavista",
+            "score": 21.84706586475812,
+            "rank": 10,
+            "previous_score": 20.952656125262873,
+            "previous_rank": 10,
+            "available": 3,
+            "fields": 10
+          }
+        ],
+        "examples": [
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 28.365878804256234,
+            "rank": 2,
+            "previous_score": 25.08203344085826,
+            "previous_rank": 5,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "66001",
+            "name": "Pereira",
+            "score": 20.71758369595838,
+            "rank": 11,
+            "previous_score": 20.00199923971443,
+            "previous_rank": 12,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "27050",
+            "name": "Atrato",
+            "score": 14.62313508151777,
+            "rank": 26,
+            "previous_score": 14.256100173589942,
+            "previous_rank": 29,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "76001",
+            "name": "Santiago de Cali",
+            "score": 6.02696297206603,
+            "rank": 83,
+            "previous_score": 6.02696297206603,
+            "previous_rank": 77,
+            "available": 6,
+            "fields": 10
+          }
+        ]
+      }
+    },
+    "all": {
+      "absolute": {
+        "reference": 631,
+        "with_score": 534,
+        "health_with_data": 534,
+        "fields": [
+          {
+            "id": "pnud_vd",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 534,
+            "anchor": 9134,
+            "channels": [
+              {
+                "id": "pnud_vd",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivdestruidas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_va",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 534,
+            "anchor": 29974,
+            "channels": [
+              {
+                "id": "pnud_va",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivaveriadas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_csalud",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 534,
+            "anchor": 34,
+            "channels": [
+              {
+                "id": "pnud_csalud",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_salud",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_cedu",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 534,
+            "anchor": 214,
+            "channels": [
+              {
+                "id": "pnud_cedu",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_educativos",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          }
+        ],
+        "top10": [
+          {
+            "code": "66001",
+            "name": "Pereira",
+            "score": 61.72167475709305,
+            "rank": 1,
+            "previous_score": 61.076188226032016,
+            "previous_rank": 1,
+            "available": 9,
+            "fields": 10
+          },
+          {
+            "code": "76001",
+            "name": "Santiago de Cali",
+            "score": 39.27649773755656,
+            "rank": 2,
+            "previous_score": 38.445775048480925,
+            "previous_rank": 2,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "27001",
+            "name": "Quibdó",
+            "score": 31.15865587226885,
+            "rank": 3,
+            "previous_score": 30.68539238369585,
+            "previous_rank": 3,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "66170",
+            "name": "Dosquebradas",
+            "score": 18.598142888498952,
+            "rank": 4,
+            "previous_score": 18.387014287683776,
+            "previous_rank": 5,
+            "available": 10,
+            "fields": 10
+          },
+          {
+            "code": "63001",
+            "name": "Armenia",
+            "score": 13.7737034455355,
+            "rank": 5,
+            "previous_score": 14.562926697365828,
+            "previous_rank": 6,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "17001",
+            "name": "Manizales",
+            "score": 12.735435075105645,
+            "rank": 6,
+            "previous_score": 10.451816754254144,
+            "previous_rank": 10,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "76109",
+            "name": "Buenaventura",
+            "score": 12.582321043037307,
+            "rank": 7,
+            "previous_score": 19.95979767855133,
+            "previous_rank": 4,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 12.414701600449156,
+            "rank": 8,
+            "previous_score": 11.918412032819012,
+            "previous_rank": 7,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "27025",
+            "name": "Alto Baudó",
+            "score": 11.317380010411386,
+            "rank": 9,
+            "previous_score": 10.970611770405103,
+            "previous_rank": 9,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "76520",
+            "name": "Palmira",
+            "score": 11.142240380380029,
+            "rank": 10,
+            "previous_score": 10.972851114611695,
+            "previous_rank": 8,
+            "available": 5,
+            "fields": 10
+          }
+        ],
+        "examples": [
+          {
+            "code": "66001",
+            "name": "Pereira",
+            "score": 61.72167475709305,
+            "rank": 1,
+            "previous_score": 61.076188226032016,
+            "previous_rank": 1,
+            "available": 9,
+            "fields": 10
+          },
+          {
+            "code": "76001",
+            "name": "Santiago de Cali",
+            "score": 39.27649773755656,
+            "rank": 2,
+            "previous_score": 38.445775048480925,
+            "previous_rank": 2,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 12.414701600449156,
+            "rank": 8,
+            "previous_score": 11.918412032819012,
+            "previous_rank": 7,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "27050",
+            "name": "Atrato",
+            "score": 8.459782347806907,
+            "rank": 11,
+            "previous_score": 8.424987719675281,
+            "previous_rank": 11,
+            "available": 8,
+            "fields": 10
+          }
+        ]
+      },
+      "percapita": {
+        "reference": 631,
+        "with_score": 532,
+        "health_with_data": 532,
+        "fields": [
+          {
+            "id": "pnud_vd",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 532,
+            "anchor": 700.1747077005779,
+            "channels": [
+              {
+                "id": "pnud_vd",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivdestruidas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_va",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 532,
+            "anchor": 1936.9009584664536,
+            "channels": [
+              {
+                "id": "pnud_va",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivaveriadas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_csalud",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 532,
+            "anchor": 13.778322106552357,
+            "channels": [
+              {
+                "id": "pnud_csalud",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_salud",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_cedu",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 532,
+            "anchor": 41.07424960505529,
+            "channels": [
+              {
+                "id": "pnud_cedu",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_educativos",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          }
+        ],
+        "top10": [
+          {
+            "code": "27050",
+            "name": "Atrato",
+            "score": 44.96384328559826,
+            "rank": 1,
+            "previous_score": 43.78923980338838,
+            "previous_rank": 1,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "27745",
+            "name": "Sipí",
+            "score": 43.76026947058891,
+            "rank": 2,
+            "previous_score": 39.53495069243969,
+            "previous_rank": 2,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "63111",
+            "name": "Buenavista",
+            "score": 29.756685248252985,
+            "rank": 3,
+            "previous_score": 26.527301124066433,
+            "previous_rank": 5,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 28.57373368613508,
+            "rank": 4,
+            "previous_score": 25.539240231814286,
+            "previous_rank": 6,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "76243",
+            "name": "El Águila",
+            "score": 28.326960596951018,
+            "rank": 5,
+            "previous_score": 25.475373036163994,
+            "previous_rank": 7,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "76054",
+            "name": "Argelia",
+            "score": 26.029499652615264,
+            "rank": 6,
+            "previous_score": 28.46111684023804,
+            "previous_rank": 3,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "27810",
+            "name": "Unión Panamericana",
+            "score": 23.361123462504437,
+            "rank": 7,
+            "previous_score": 20.29095317538664,
+            "previous_rank": 12,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "63302",
+            "name": "Génova",
+            "score": 23.02187231056657,
+            "rank": 8,
+            "previous_score": 23.01502470517073,
+            "previous_rank": 8,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "27787",
+            "name": "Tadó",
+            "score": 22.40518390409826,
+            "rank": 9,
+            "previous_score": 21.04672790002386,
+            "previous_rank": 10,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "76863",
+            "name": "Versalles",
+            "score": 22.220545526120382,
+            "rank": 10,
+            "previous_score": 19.286650273776953,
+            "previous_rank": 14,
+            "available": 6,
+            "fields": 10
+          }
+        ],
+        "examples": [
+          {
+            "code": "27050",
+            "name": "Atrato",
+            "score": 44.96384328559826,
+            "rank": 1,
+            "previous_score": 43.78923980338838,
+            "previous_rank": 1,
+            "available": 8,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 28.57373368613508,
+            "rank": 4,
+            "previous_score": 25.539240231814286,
+            "previous_rank": 6,
+            "available": 7,
+            "fields": 10
+          },
+          {
+            "code": "66001",
+            "name": "Pereira",
+            "score": 19.09243058510472,
+            "rank": 17,
+            "previous_score": 18.184190742768642,
+            "previous_rank": 15,
+            "available": 9,
+            "fields": 10
+          },
+          {
+            "code": "76001",
+            "name": "Santiago de Cali",
+            "score": 5.467349504447116,
+            "rank": 96,
+            "previous_score": 5.417864371400203,
+            "previous_rank": 84,
+            "available": 8,
+            "fields": 10
+          }
+        ]
+      },
+      "sectorial": {
+        "reference": 631,
+        "with_score": 532,
+        "health_with_data": 71,
+        "fields": [
+          {
+            "id": "pnud_vd",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 532,
+            "anchor": 16.167091836734695,
+            "channels": [
+              {
+                "id": "pnud_vd",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivdestruidas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_va",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 532,
+            "anchor": 48.648648648648646,
+            "channels": [
+              {
+                "id": "pnud_va",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_vivaveriadas",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          },
+          {
+            "id": "pnud_cedu",
+            "selected_sources": {
+              "PNUD": 534,
+              "3iS-Sheets": 0
+            },
+            "usable": 532,
+            "anchor": 1.4705882352941178,
+            "channels": [
+              {
+                "id": "pnud_cedu",
+                "source": "PNUD",
+                "coherent": true
+              },
+              {
+                "id": "3is_educativos",
+                "source": "3iS-Sheets",
+                "coherent": true
+              }
+            ]
+          }
+        ],
+        "top10": [
+          {
+            "code": "76606",
+            "name": "Restrepo",
+            "score": 34.61172004773693,
+            "rank": 1,
+            "previous_score": 33.02826994649341,
+            "previous_rank": 1,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 28.365878804256234,
+            "rank": 2,
+            "previous_score": 25.08203344085826,
+            "previous_rank": 5,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "76497",
+            "name": "Obando",
+            "score": 27.9201743265682,
+            "rank": 3,
+            "previous_score": 28.081665085467137,
+            "previous_rank": 2,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "76126",
+            "name": "Calima",
+            "score": 26.682745756838678,
+            "rank": 4,
+            "previous_score": 25.792895282066286,
+            "previous_rank": 4,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "76020",
+            "name": "Alcalá",
+            "score": 26.630634597001137,
+            "rank": 5,
+            "previous_score": 26.931355742983225,
+            "previous_rank": 3,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "27745",
+            "name": "Sipí",
+            "score": 25.7608405115405,
+            "rank": 6,
+            "previous_score": 23.4982931841153,
+            "previous_rank": 7,
+            "available": 3,
+            "fields": 10
+          },
+          {
+            "code": "66170",
+            "name": "Dosquebradas",
+            "score": 24.664139182991214,
+            "rank": 7,
+            "previous_score": 24.34542770098698,
+            "previous_rank": 6,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "76823",
+            "name": "Toro",
+            "score": 22.570920627558856,
+            "rank": 8,
+            "previous_score": 23.319754757722485,
+            "previous_rank": 8,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "76243",
+            "name": "El Águila",
+            "score": 22.10369818558487,
+            "rank": 9,
+            "previous_score": 20.502422786566946,
+            "previous_rank": 11,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "63111",
+            "name": "Buenavista",
+            "score": 21.84706586475812,
+            "rank": 10,
+            "previous_score": 20.952656125262873,
+            "previous_rank": 10,
+            "available": 3,
+            "fields": 10
+          }
+        ],
+        "examples": [
+          {
+            "code": "76828",
+            "name": "Trujillo",
+            "score": 28.365878804256234,
+            "rank": 2,
+            "previous_score": 25.08203344085826,
+            "previous_rank": 5,
+            "available": 5,
+            "fields": 10
+          },
+          {
+            "code": "66001",
+            "name": "Pereira",
+            "score": 20.71758369595838,
+            "rank": 11,
+            "previous_score": 20.00199923971443,
+            "previous_rank": 12,
+            "available": 6,
+            "fields": 10
+          },
+          {
+            "code": "27050",
+            "name": "Atrato",
+            "score": 14.62313508151777,
+            "rank": 26,
+            "previous_score": 14.256100173589942,
+            "previous_rank": 29,
+            "available": 4,
+            "fields": 10
+          },
+          {
+            "code": "76001",
+            "name": "Santiago de Cali",
+            "score": 6.02696297206603,
+            "rank": 83,
+            "previous_score": 6.02696297206603,
+            "previous_rank": 77,
+            "available": 6,
+            "fields": 10
+          }
+        ]
+      }
+    }
+  }
+}

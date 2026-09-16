@@ -17,9 +17,9 @@
     "decree": {
       "comparison": {
         "n": 286,
-        "r2": 0.4482420909418095,
-        "pearson": 0.6695088430646824,
-        "spearman": 0.7417795826103589
+        "r2": 0.44423530190748883,
+        "pearson": 0.666509791306541,
+        "spearman": 0.7201088097287339
       },
       "reference": 509,
       "health_with_data": 71,
@@ -46,7 +46,7 @@
           "ratio": 60,
           "anchor": 60,
           "health": 100,
-          "global": 33.02826994649341,
+          "global": 34.61172004773693,
           "rank": 1,
           "reason": ""
         },
@@ -59,8 +59,8 @@
           "ratio": 57.5,
           "anchor": 60,
           "health": 95.83333333333334,
-          "global": 24.34542770098698,
-          "rank": 6,
+          "global": 24.664139182991214,
+          "rank": 7,
           "reason": ""
         },
         {
@@ -72,8 +72,8 @@
           "ratio": 57,
           "anchor": 60,
           "health": 95,
-          "global": 28.081665085467137,
-          "rank": 2,
+          "global": 27.9201743265682,
+          "rank": 3,
           "reason": ""
         },
         {
@@ -85,8 +85,8 @@
           "ratio": 52.888888888888886,
           "anchor": 60,
           "health": 88.14814814814814,
-          "global": 22.723871181970587,
-          "rank": 9,
+          "global": 19.082806212711386,
+          "rank": 16,
           "reason": ""
         },
         {
@@ -98,7 +98,7 @@
           "ratio": 37.5,
           "anchor": 60,
           "health": 62.5,
-          "global": 18.748778934233048,
+          "global": 18.615969464899685,
           "rank": 17,
           "reason": ""
         },
@@ -111,7 +111,7 @@
           "ratio": 37,
           "anchor": 60,
           "health": 61.66666666666667,
-          "global": 25.792895282066286,
+          "global": 26.682745756838678,
           "rank": 4,
           "reason": ""
         },
@@ -124,8 +124,8 @@
           "ratio": 36,
           "anchor": 60,
           "health": 60,
-          "global": 25.08203344085826,
-          "rank": 5,
+          "global": 28.365878804256234,
+          "rank": 2,
           "reason": ""
         },
         {
@@ -137,8 +137,8 @@
           "ratio": 35,
           "anchor": 60,
           "health": 58.333333333333336,
-          "global": 14.647458235282935,
-          "rank": 27,
+          "global": 14.67442170531659,
+          "rank": 25,
           "reason": ""
         },
         {
@@ -150,7 +150,7 @@
           "ratio": 31,
           "anchor": 60,
           "health": 51.66666666666667,
-          "global": 23.319754757722485,
+          "global": 22.570920627558856,
           "rank": 8,
           "reason": ""
         },
@@ -163,7 +163,7 @@
           "ratio": 29,
           "anchor": 60,
           "health": 48.333333333333336,
-          "global": 14.29638307000435,
+          "global": 13.978536839435165,
           "rank": 28,
           "reason": ""
         }
@@ -178,8 +178,8 @@
           "ratio": 13.181818181818182,
           "anchor": 60,
           "health": 21.96969696969697,
-          "global": 19.67028372528029,
-          "rank": 13,
+          "global": 20.58310715960105,
+          "rank": 12,
           "reason": ""
         },
         {
@@ -191,8 +191,8 @@
           "ratio": null,
           "anchor": 60,
           "health": null,
-          "global": 14.256100173589942,
-          "rank": 29,
+          "global": 14.62313508151777,
+          "rank": 26,
           "reason": "Sin capacidad registrada: no se supone cero ni se imputa"
         },
         {
@@ -204,8 +204,8 @@
           "ratio": 2,
           "anchor": 60,
           "health": 3.3333333333333335,
-          "global": 5.040380585615674,
-          "rank": 93,
+          "global": 5.323770114615317,
+          "rank": 99,
           "reason": ""
         },
         {
@@ -217,8 +217,8 @@
           "ratio": 6.166666666666667,
           "anchor": 60,
           "health": 10.277777777777779,
-          "global": 20.00199923971443,
-          "rank": 12,
+          "global": 20.71758369595838,
+          "rank": 11,
           "reason": ""
         },
         {
@@ -231,7 +231,7 @@
           "anchor": 60,
           "health": 14.124767225325884,
           "global": 6.02696297206603,
-          "rank": 77,
+          "rank": 83,
           "reason": ""
         },
         {
@@ -243,8 +243,8 @@
           "ratio": 36,
           "anchor": 60,
           "health": 60,
-          "global": 25.08203344085826,
-          "rank": 5,
+          "global": 28.365878804256234,
+          "rank": 2,
           "reason": ""
         }
       ],
@@ -258,8 +258,21 @@
           "ratio": 60,
           "anchor": 60,
           "health": 100,
-          "global": 33.02826994649341,
+          "global": 34.61172004773693,
           "rank": 1,
+          "reason": ""
+        },
+        {
+          "code": "76828",
+          "name": "Trujillo",
+          "department": "Valle del Cauca",
+          "numerator": 36,
+          "denominator": 1,
+          "ratio": 36,
+          "anchor": 60,
+          "health": 60,
+          "global": 28.365878804256234,
+          "rank": 2,
           "reason": ""
         },
         {
@@ -271,20 +284,7 @@
           "ratio": 57,
           "anchor": 60,
           "health": 95,
-          "global": 28.081665085467137,
-          "rank": 2,
-          "reason": ""
-        },
-        {
-          "code": "76020",
-          "name": "Alcalá",
-          "department": "Valle del Cauca",
-          "numerator": 20,
-          "denominator": 1,
-          "ratio": 20,
-          "anchor": 60,
-          "health": 33.33333333333333,
-          "global": 26.931355742983225,
+          "global": 27.9201743265682,
           "rank": 3,
           "reason": ""
         },
@@ -297,34 +297,21 @@
           "ratio": 37,
           "anchor": 60,
           "health": 61.66666666666667,
-          "global": 25.792895282066286,
+          "global": 26.682745756838678,
           "rank": 4,
           "reason": ""
         },
         {
-          "code": "76828",
-          "name": "Trujillo",
+          "code": "76020",
+          "name": "Alcalá",
           "department": "Valle del Cauca",
-          "numerator": 36,
+          "numerator": 20,
           "denominator": 1,
-          "ratio": 36,
+          "ratio": 20,
           "anchor": 60,
-          "health": 60,
-          "global": 25.08203344085826,
+          "health": 33.33333333333333,
+          "global": 26.630634597001137,
           "rank": 5,
-          "reason": ""
-        },
-        {
-          "code": "66170",
-          "name": "Dosquebradas",
-          "department": "Risaralda",
-          "numerator": 230,
-          "denominator": 4,
-          "ratio": 57.5,
-          "anchor": 60,
-          "health": 95.83333333333334,
-          "global": 24.34542770098698,
-          "rank": 6,
           "reason": ""
         },
         {
@@ -336,9 +323,22 @@
           "ratio": null,
           "anchor": 60,
           "health": null,
-          "global": 23.4982931841153,
-          "rank": 7,
+          "global": 25.7608405115405,
+          "rank": 6,
           "reason": "Sin reporte de heridos comparable en esta captura"
+        },
+        {
+          "code": "66170",
+          "name": "Dosquebradas",
+          "department": "Risaralda",
+          "numerator": 230,
+          "denominator": 4,
+          "ratio": 57.5,
+          "anchor": 60,
+          "health": 95.83333333333334,
+          "global": 24.664139182991214,
+          "rank": 7,
+          "reason": ""
         },
         {
           "code": "76823",
@@ -349,20 +349,20 @@
           "ratio": 31,
           "anchor": 60,
           "health": 51.66666666666667,
-          "global": 23.319754757722485,
+          "global": 22.570920627558856,
           "rank": 8,
           "reason": ""
         },
         {
-          "code": "76109",
-          "name": "Buenaventura",
+          "code": "76243",
+          "name": "El Águila",
           "department": "Valle del Cauca",
-          "numerator": 476,
-          "denominator": 9,
-          "ratio": 52.888888888888886,
+          "numerator": 25,
+          "denominator": 1,
+          "ratio": 25,
           "anchor": 60,
-          "health": 88.14814814814814,
-          "global": 22.723871181970587,
+          "health": 41.66666666666667,
+          "global": 22.10369818558487,
           "rank": 9,
           "reason": ""
         },
@@ -375,7 +375,7 @@
           "ratio": null,
           "anchor": 60,
           "health": null,
-          "global": 20.952656125262873,
+          "global": 21.84706586475812,
           "rank": 10,
           "reason": "Sin reporte de heridos comparable en esta captura"
         }
@@ -384,61 +384,61 @@
         {
           "code": "76606",
           "new_rank": 1,
-          "previous_rank": 10
+          "previous_rank": 7
+        },
+        {
+          "code": "76828",
+          "new_rank": 2,
+          "previous_rank": 1
         },
         {
           "code": "76497",
-          "new_rank": 2,
-          "previous_rank": 21
-        },
-        {
-          "code": "76020",
           "new_rank": 3,
-          "previous_rank": 3
+          "previous_rank": 24
         },
         {
           "code": "76126",
           "new_rank": 4,
-          "previous_rank": 17
+          "previous_rank": 11
         },
         {
-          "code": "76828",
+          "code": "76020",
           "new_rank": 5,
-          "previous_rank": 1
-        },
-        {
-          "code": "66170",
-          "new_rank": 6,
-          "previous_rank": 52
+          "previous_rank": 4
         },
         {
           "code": "27745",
-          "new_rank": 7,
+          "new_rank": 6,
           "previous_rank": 2
+        },
+        {
+          "code": "66170",
+          "new_rank": 7,
+          "previous_rank": 48
         },
         {
           "code": "76823",
           "new_rank": 8,
-          "previous_rank": 15
+          "previous_rank": 20
         },
         {
-          "code": "76109",
+          "code": "76243",
           "new_rank": 9,
-          "previous_rank": 61
+          "previous_rank": 14
         },
         {
           "code": "63111",
           "new_rank": 10,
-          "previous_rank": 4
+          "previous_rank": 3
         }
       ]
     },
     "all": {
       "comparison": {
         "n": 287,
-        "r2": 0.449325729456412,
-        "pearson": 0.6703176332578549,
-        "spearman": 0.7437321011879662
+        "r2": 0.4456459142770428,
+        "pearson": 0.6675671608737527,
+        "spearman": 0.7222415726375007
       },
       "reference": 631,
       "health_with_data": 71,
@@ -465,7 +465,7 @@
           "ratio": 60,
           "anchor": 60,
           "health": 100,
-          "global": 33.02826994649341,
+          "global": 34.61172004773693,
           "rank": 1,
           "reason": ""
         },
@@ -478,8 +478,8 @@
           "ratio": 57.5,
           "anchor": 60,
           "health": 95.83333333333334,
-          "global": 24.34542770098698,
-          "rank": 6,
+          "global": 24.664139182991214,
+          "rank": 7,
           "reason": ""
         },
         {
@@ -491,8 +491,8 @@
           "ratio": 57,
           "anchor": 60,
           "health": 95,
-          "global": 28.081665085467137,
-          "rank": 2,
+          "global": 27.9201743265682,
+          "rank": 3,
           "reason": ""
         },
         {
@@ -504,8 +504,8 @@
           "ratio": 52.888888888888886,
           "anchor": 60,
           "health": 88.14814814814814,
-          "global": 22.723871181970587,
-          "rank": 9,
+          "global": 19.082806212711386,
+          "rank": 16,
           "reason": ""
         },
         {
@@ -517,7 +517,7 @@
           "ratio": 37.5,
           "anchor": 60,
           "health": 62.5,
-          "global": 18.748778934233048,
+          "global": 18.615969464899685,
           "rank": 17,
           "reason": ""
         },
@@ -530,7 +530,7 @@
           "ratio": 37,
           "anchor": 60,
           "health": 61.66666666666667,
-          "global": 25.792895282066286,
+          "global": 26.682745756838678,
           "rank": 4,
           "reason": ""
         },
@@ -543,8 +543,8 @@
           "ratio": 36,
           "anchor": 60,
           "health": 60,
-          "global": 25.08203344085826,
-          "rank": 5,
+          "global": 28.365878804256234,
+          "rank": 2,
           "reason": ""
         },
         {
@@ -556,8 +556,8 @@
           "ratio": 35,
           "anchor": 60,
           "health": 58.333333333333336,
-          "global": 14.647458235282935,
-          "rank": 27,
+          "global": 14.67442170531659,
+          "rank": 25,
           "reason": ""
         },
         {
@@ -569,7 +569,7 @@
           "ratio": 31,
           "anchor": 60,
           "health": 51.66666666666667,
-          "global": 23.319754757722485,
+          "global": 22.570920627558856,
           "rank": 8,
           "reason": ""
         },
@@ -582,7 +582,7 @@
           "ratio": 29,
           "anchor": 60,
           "health": 48.333333333333336,
-          "global": 14.29638307000435,
+          "global": 13.978536839435165,
           "rank": 28,
           "reason": ""
         }
@@ -597,8 +597,8 @@
           "ratio": 13.181818181818182,
           "anchor": 60,
           "health": 21.96969696969697,
-          "global": 19.67028372528029,
-          "rank": 13,
+          "global": 20.58310715960105,
+          "rank": 12,
           "reason": ""
         },
         {
@@ -610,8 +610,8 @@
           "ratio": null,
           "anchor": 60,
           "health": null,
-          "global": 14.256100173589942,
-          "rank": 29,
+          "global": 14.62313508151777,
+          "rank": 26,
           "reason": "Sin capacidad registrada: no se supone cero ni se imputa"
         },
         {
@@ -623,8 +623,8 @@
           "ratio": 2,
           "anchor": 60,
           "health": 3.3333333333333335,
-          "global": 5.040380585615674,
-          "rank": 93,
+          "global": 5.323770114615317,
+          "rank": 99,
           "reason": ""
         },
         {
@@ -636,8 +636,8 @@
           "ratio": 6.166666666666667,
           "anchor": 60,
           "health": 10.277777777777779,
-          "global": 20.00199923971443,
-          "rank": 12,
+          "global": 20.71758369595838,
+          "rank": 11,
           "reason": ""
         },
         {
@@ -650,7 +650,7 @@
           "anchor": 60,
           "health": 14.124767225325884,
           "global": 6.02696297206603,
-          "rank": 77,
+          "rank": 83,
           "reason": ""
         },
         {
@@ -662,8 +662,8 @@
           "ratio": 36,
           "anchor": 60,
           "health": 60,
-          "global": 25.08203344085826,
-          "rank": 5,
+          "global": 28.365878804256234,
+          "rank": 2,
           "reason": ""
         }
       ],
@@ -677,8 +677,21 @@
           "ratio": 60,
           "anchor": 60,
           "health": 100,
-          "global": 33.02826994649341,
+          "global": 34.61172004773693,
           "rank": 1,
+          "reason": ""
+        },
+        {
+          "code": "76828",
+          "name": "Trujillo",
+          "department": "Valle del Cauca",
+          "numerator": 36,
+          "denominator": 1,
+          "ratio": 36,
+          "anchor": 60,
+          "health": 60,
+          "global": 28.365878804256234,
+          "rank": 2,
           "reason": ""
         },
         {
@@ -690,20 +703,7 @@
           "ratio": 57,
           "anchor": 60,
           "health": 95,
-          "global": 28.081665085467137,
-          "rank": 2,
-          "reason": ""
-        },
-        {
-          "code": "76020",
-          "name": "Alcalá",
-          "department": "Valle del Cauca",
-          "numerator": 20,
-          "denominator": 1,
-          "ratio": 20,
-          "anchor": 60,
-          "health": 33.33333333333333,
-          "global": 26.931355742983225,
+          "global": 27.9201743265682,
           "rank": 3,
           "reason": ""
         },
@@ -716,34 +716,21 @@
           "ratio": 37,
           "anchor": 60,
           "health": 61.66666666666667,
-          "global": 25.792895282066286,
+          "global": 26.682745756838678,
           "rank": 4,
           "reason": ""
         },
         {
-          "code": "76828",
-          "name": "Trujillo",
+          "code": "76020",
+          "name": "Alcalá",
           "department": "Valle del Cauca",
-          "numerator": 36,
+          "numerator": 20,
           "denominator": 1,
-          "ratio": 36,
+          "ratio": 20,
           "anchor": 60,
-          "health": 60,
-          "global": 25.08203344085826,
+          "health": 33.33333333333333,
+          "global": 26.630634597001137,
           "rank": 5,
-          "reason": ""
-        },
-        {
-          "code": "66170",
-          "name": "Dosquebradas",
-          "department": "Risaralda",
-          "numerator": 230,
-          "denominator": 4,
-          "ratio": 57.5,
-          "anchor": 60,
-          "health": 95.83333333333334,
-          "global": 24.34542770098698,
-          "rank": 6,
           "reason": ""
         },
         {
@@ -755,9 +742,22 @@
           "ratio": null,
           "anchor": 60,
           "health": null,
-          "global": 23.4982931841153,
-          "rank": 7,
+          "global": 25.7608405115405,
+          "rank": 6,
           "reason": "Sin reporte de heridos comparable en esta captura"
+        },
+        {
+          "code": "66170",
+          "name": "Dosquebradas",
+          "department": "Risaralda",
+          "numerator": 230,
+          "denominator": 4,
+          "ratio": 57.5,
+          "anchor": 60,
+          "health": 95.83333333333334,
+          "global": 24.664139182991214,
+          "rank": 7,
+          "reason": ""
         },
         {
           "code": "76823",
@@ -768,20 +768,20 @@
           "ratio": 31,
           "anchor": 60,
           "health": 51.66666666666667,
-          "global": 23.319754757722485,
+          "global": 22.570920627558856,
           "rank": 8,
           "reason": ""
         },
         {
-          "code": "76109",
-          "name": "Buenaventura",
+          "code": "76243",
+          "name": "El Águila",
           "department": "Valle del Cauca",
-          "numerator": 476,
-          "denominator": 9,
-          "ratio": 52.888888888888886,
+          "numerator": 25,
+          "denominator": 1,
+          "ratio": 25,
           "anchor": 60,
-          "health": 88.14814814814814,
-          "global": 22.723871181970587,
+          "health": 41.66666666666667,
+          "global": 22.10369818558487,
           "rank": 9,
           "reason": ""
         },
@@ -794,7 +794,7 @@
           "ratio": null,
           "anchor": 60,
           "health": null,
-          "global": 20.952656125262873,
+          "global": 21.84706586475812,
           "rank": 10,
           "reason": "Sin reporte de heridos comparable en esta captura"
         }
@@ -803,52 +803,52 @@
         {
           "code": "76606",
           "new_rank": 1,
-          "previous_rank": 10
+          "previous_rank": 7
+        },
+        {
+          "code": "76828",
+          "new_rank": 2,
+          "previous_rank": 1
         },
         {
           "code": "76497",
-          "new_rank": 2,
-          "previous_rank": 21
-        },
-        {
-          "code": "76020",
           "new_rank": 3,
-          "previous_rank": 3
+          "previous_rank": 24
         },
         {
           "code": "76126",
           "new_rank": 4,
-          "previous_rank": 17
+          "previous_rank": 11
         },
         {
-          "code": "76828",
+          "code": "76020",
           "new_rank": 5,
-          "previous_rank": 1
-        },
-        {
-          "code": "66170",
-          "new_rank": 6,
-          "previous_rank": 52
+          "previous_rank": 4
         },
         {
           "code": "27745",
-          "new_rank": 7,
+          "new_rank": 6,
           "previous_rank": 2
+        },
+        {
+          "code": "66170",
+          "new_rank": 7,
+          "previous_rank": 48
         },
         {
           "code": "76823",
           "new_rank": 8,
-          "previous_rank": 15
+          "previous_rank": 20
         },
         {
-          "code": "76109",
+          "code": "76243",
           "new_rank": 9,
-          "previous_rank": 61
+          "previous_rank": 14
         },
         {
           "code": "63111",
           "new_rank": 10,
-          "previous_rank": 4
+          "previous_rank": 3
         }
       ]
     }

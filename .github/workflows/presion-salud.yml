@@ -31,6 +31,7 @@ jobs:
           python generar_tablero_recuperacion.py
           node scripts/auditar_presion_salud.cjs
           node scripts/auditar_sin_heridos_ih.cjs
+          node scripts/auditar_cascada.cjs
       - name: Prueba de interfaz y radar
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0
@@ -44,4 +45,4 @@ jobs:
         with:
           branch: ${{ github.ref_name }}
           commit_message: 'Generar y auditar escenario experimental de presión asistencial'
-          file_pattern: 'index.html eda_indicadores.html docs/verificacion_presion_salud.json docs/verificacion_sin_heridos_ih.json'
+          file_pattern: 'index.html eda_indicadores.html docs/verificacion_presion_salud.json docs/verificacion_sin_heridos_ih.json docs/verificacion_cascada.json'

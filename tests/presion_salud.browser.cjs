@@ -9,7 +9,7 @@ const res=await page.evaluate(()=>{
  const r=result.items.find(m=>m.code==='66001'),h=r.sectors.find(s=>s.id==='salud').fields[0];
  return {human:r.sectors[0].fields.map(f=>f.id),fields:r.fieldCount,raw:h.row.v,base:h.denominator.value,ratio:h.rate,score:h.score,mode:DATA.healthPressure.mode,n:result.referenceN};
 });
-assert.equal(res.fields,13);assert.deepEqual(res.human,['3is_familias','3is_fallecidos','3is_desaparecidos']);assert.ok(res.ratio>=0);assert.ok(Math.abs(res.ratio-res.raw/res.base)<1e-8);
+assert.equal(res.fields,10);assert.deepEqual(res.human,['3is_familias','3is_fallecidos','3is_desaparecidos']);assert.ok(res.ratio>=0);assert.ok(Math.abs(res.ratio-res.raw/res.base)<1e-8);
 await page.locator('#relative-search').fill('Pereira');await page.waitForTimeout(100);
 assert.equal(await page.locator('#relative-matrix tbody tr').count(),1);
 assert.match(await page.locator('#relative-matrix').innerText(),/Heridos frente a/);
@@ -32,5 +32,14 @@ assert.match(await page.locator('#radar-relative-inspector').innerText(),/Herido
 const selects=page.locator('[id$="radar-select-0"], [id*="radar"][id$="select-0"]');
 assert.ok(await selects.count()>=3);
 await page.screenshot({path:'experimentos/presion_salud/interfaz.png',fullPage:false});
+const check=await page.evaluate(()=>{
+ const state={scope:'decree',date:DATA.latest,dept:''};
+ return ['absolute','percapita','sectorial'].map(mode=>{
+  const r=Priorizacion.models(DATA)[mode].compute(state).all.find(r=>r.code==='66001');
+  return {mode,fields:r.fieldCount,counts:r.sectors.map(s=>s.fields.length),sources:r.sectors[1].fields.map(f=>f.source)};
+ });
+});
+for(const r of check){assert.equal(r.fields,10);assert.deepEqual(r.counts,[3,2,1,1,3]);assert.ok(r.sources.every(s=>s==='PNUD'||s==='3iS-Sheets'));}
+assert.match(await page.locator('#priority-method').innerText(),/PNUD.*3iS/);
 assert.deepEqual(errors,[]);await browser.close();console.log('UI pressure scenario OK',res);
 })().catch(e=>{console.error(e);process.exit(1);});

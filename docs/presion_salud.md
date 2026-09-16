@@ -1,3 +1,5 @@
+> Actualización de esta rama: se usa la [cascada PNUD → 3iS](cascada_pnud_3is.md) por variable, con **10 campos únicos** en cada índice. Salud relativa conserva heridos/capacidad. Los conteos de 14/13 campos de la descripción histórica inferior corresponden al estado anterior a esta actualización.
+
 # Escenarios experimentales de presión sobre la atención
 
 Base común: relativo-reps-simat-sin-comunitarios, commit 3f4550ee1dde564cba007e677c9f657278e99a72.

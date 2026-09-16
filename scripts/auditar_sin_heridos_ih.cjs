@@ -2,7 +2,9 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const {execFileSync}=require('node:child_process'),{createRequire}=require('node:module'),path=require('node:path');
 const P=require('../web/priorizacion.js');
 const parse=html=>JSON.parse(html.match(/const DATA=([\s\S]*?);<\/script>/)[1]);
-const data=parse(fs.readFileSync('index.html','utf8'));
+const fullData=parse(fs.readFileSync('index.html','utf8'));
+// Isolate the earlier human-impact change from the later cascade policy.
+const data={...fullData,healthPressure:{...fullData.healthPressure,source_cascade:{enabled:false}}};
 const variant=data.healthPressure.human_impact_variant;
 assert.equal(variant.id,'sin-heridos-ih');
 assert.match(variant.parent_commit,/^[a-f0-9]{40}$/);
@@ -14,7 +16,7 @@ const sandbox={module:{exports:{}},require:createRequire(path.resolve('web/prior
 vm.runInNewContext(git('web/priorizacion.js'),sandbox);
 const parent=sandbox.module.exports;
 const clean=x=>JSON.parse(JSON.stringify(x)),close=(x,y)=>assert.ok(Math.abs(x-y)<1e-8,x+' != '+y);
-const output={parent_branch:variant.parent_branch,parent_commit:variant.parent_commit,capture:data.latest,mode:data.healthPressure.mode,
+const output={audit_mode:'human_impact_change_with_cascade_disabled',parent_branch:variant.parent_branch,parent_commit:variant.parent_commit,capture:data.latest,mode:data.healthPressure.mode,
  formula:'Impacto humano = (z_familias + z_fallecidos + z_desaparecidos) / 3',scopes:{}};
 for(const scope of ['decree','all']){
  const state={scope,date:data.latest,dept:''},modes={};

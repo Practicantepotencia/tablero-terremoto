@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const P=require('../web/priorizacion.js'),H=require('../web/presion_salud.js'),C=require('../web/comparacion.js'),T=require('../web/modelo.js');
 const raw=fs.readFileSync('index.html','utf8').match(/const DATA=([\s\S]*?);<\/script>/);
-assert.ok(raw);const data=JSON.parse(raw[1]),reference={...data,healthPressure:null};
+assert.ok(raw);const data=JSON.parse(raw[1]),reference={...data,healthPressure:{...data.healthPressure,enabled:false}};
 const baseline=P.models(reference),scenario=P.models(data);
 const output={base_commit:data.healthPressure.base_commit,mode:data.healthPressure.mode,capture:data.latest,capacity:data.healthPressure.audit,scopes:{}};
 for(const scope of ['decree','all']){
@@ -13,7 +13,7 @@ for(const scope of ['decree','all']){
  assert.equal(now.referenceN,old.referenceN);
  const original=new Map(old.all.map(r=>[r.geo,r]));
  for(const r of now.all){
-   const a=original.get(r.geo);assert.ok(a);assert.equal(r.fieldCount,13);
+   const a=original.get(r.geo);assert.ok(a);assert.equal(r.fieldCount,data.healthPressure.source_cascade?.enabled?10:13);
    assert.equal(r.sectors.length,5);
    assert.equal(r.recovery,a.recovery);assert.equal(r.vulnerability,a.vulnerability);
    for(let i=0;i<5;i++)if(r.sectors[i].id!=='salud')assert.deepEqual(r.sectors[i],a.sectors[i],'Solo cambia Salud: '+r.code);

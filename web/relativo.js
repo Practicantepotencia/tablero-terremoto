@@ -20,7 +20,7 @@
   }
   function fieldTile(f){
     const title=f.rate==null?f.reason:f.label+' · '+f.source+'. '+f.denominatorLabel+': '+fmt(f.denominator.value)+'. Puntaje '+fmt(f.score)+'. Máxima tasa '+fmt(f.anchor)+'; N='+f.n+'. '+(f.proxyNote||'');
-    return '<span class="heat-item '+(f.score==null?'missing':'')+'" style="background:rgba(31,95,174,'+(f.score==null?.025:.04+.2*f.score/100)+')" title="'+esc(title)+'"><span>'+esc(f.label)+'</span><br>'+(f.rate==null?'<b>—</b> sin dato relativo':'<b>'+fmt(f.rate)+'</b> '+esc(f.relativeUnit))+'<div class="small muted">Original: '+(f.row?fmt(f.row.v)+' '+esc(f.unit):'sin dato')+'</div><div class="small muted">'+(f.denominator?'Base: '+fmt(f.denominator.value)+' '+esc(f.denominator.unit)+' · '+f.denominator.year:'Sin denominador homologado')+'</div></span>';
+    return '<span class="heat-item '+(f.score==null?'missing':'')+'" style="background:rgba(31,95,174,'+(f.score==null?.025:.04+.2*f.score/100)+')" title="'+esc(title)+'"><span>'+esc(f.label)+(f.candidates?' · '+esc(f.source):'')+'</span><br>'+(f.rate==null?'<b>—</b> sin dato relativo':'<b>'+fmt(f.rate)+'</b> '+esc(f.relativeUnit))+'<div class="small muted">Original: '+(f.row?fmt(f.row.v)+' '+esc(f.unit):'sin dato')+'</div><div class="small muted">'+(f.denominator?'Base: '+fmt(f.denominator.value)+' '+esc(f.denominator.unit)+' · '+f.denominator.year:'Sin denominador homologado')+'</div></span>';
   }
   function render(state){
     if(!$('relative-matrix'))return;

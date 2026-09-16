@@ -16,6 +16,32 @@
     {id:'educacion', name:'Educación', fields:[reported('educativos','Puntos educativos · 3iS',.5),estimated('cedu','Centros educativos · PNUD',.5)]},
     {id:'infraestructura', name:'Infraestructura y acceso', fields:[reported('colapsos','Colapsos de edificios',1/3),reported('acueductos','Acueductos afectados',1/3),reported('vias','Vías afectadas (conteo)',1/3)]}
   ];
+  const CASCADE_FIELDS={
+    vivienda:[{id:'pnud_vd',fallback:'3is_vivdestruidas',label:'Viviendas destruidas',share:.5},{id:'pnud_va',fallback:'3is_vivaveriadas',label:'Viviendas averiadas',share:.5}],
+    salud:[{id:'pnud_csalud',fallback:'3is_salud',label:'Centros de salud afectados',share:1}],
+    educacion:[{id:'pnud_cedu',fallback:'3is_educativos',label:'Centros educativos afectados',share:1}]
+  };
+  function cascadedSectors(){
+    return SECTORS.map(s=>CASCADE_FIELDS[s.id]?{...s,fields:CASCADE_FIELDS[s.id].map(f=>({
+      ...field(f.id,'PNUD',f.label,f.share),candidates:[{id:f.id,source:'PNUD'},{id:f.fallback,source:'3iS-Sheets'}]
+    }))}:s);
+  }
+  function chooseCascade(base,f){
+    // Validate each source independently before crossing the declared equivalent indicators.
+    const channels=f.candidates.map(source=>{
+      const candidates=base.filter(r=>r.f===source.source&&r.id===source.id);
+      const coherent=new Set(candidates.map(T.cohort)).size<=1&&candidates.every(r=>r.u===f.unit);
+      const groups=new Map();
+      if(coherent)candidates.forEach(r=>{if(!groups.has(r.geo))groups.set(r.geo,[]);groups.get(r.geo).push(r);});
+      const rows=new Map([...groups].filter(([,rs])=>rs.every(r=>Number.isFinite(r.v)&&r.v>=0&&r.v===rs[0].v)).map(([geo,rs])=>[geo,rs[0]]));
+      return {...source,coherent,rows};
+    });
+    const rows=new Map(),sourceCounts={PNUD:0,'3iS-Sheets':0};
+    for(const source of channels)for(const [geo,row]of source.rows){
+      if(!rows.has(geo)){rows.set(geo,row);sourceCounts[source.source]++;}
+    }
+    return {rows,sourceCounts,channels:channels.map(({rows,...c})=>c),coherent:channels.some(c=>c.coherent)};
+  }
   const FIELD_COUNT = SECTORS.reduce((n,s)=>n+s.fields.length,0);
   const clamp = (v,lo,hi) => Math.min(hi,Math.max(lo,v));
   const EPS = 1e-8;
@@ -46,7 +72,9 @@
     const relative=mode!=='absolute';
     const denominators=mode==='sectorial'?D.create(data):null;
     const pressure=H.create(data);
-    const sectorDefs=mode==='sectorial'&&pressure.enabled?SECTORS.map(s=>s.id==='salud'?{...s,fields:[pressure.field]}:s):SECTORS;
+    const sourceCascade=data.healthPressure?.source_cascade?.enabled===true;
+    const definitions=sourceCascade?cascadedSectors():SECTORS;
+    const sectorDefs=mode==='sectorial'&&pressure.enabled?definitions.map(s=>s.id==='salud'?{...s,fields:[pressure.field]}:s):definitions;
     const fieldCount=sectorDefs.reduce((n,s)=>n+s.fields.length,0);
     const cache=new Map();
     function compute(state) {
@@ -78,6 +106,12 @@
         return relativeMeasure(r,r.id,r.code).rate;};
       const calibrations=new Map();
       sectorDefs.flatMap(s=>s.fields).forEach(f=>{
+        if(f.candidates){
+          const selected=chooseCascade(base,f),accepted=[...selected.rows.values()];
+          const values=accepted.map(measure).filter(v=>Number.isFinite(v)&&v>=0);
+          calibrations.set(f.id,{...f,...selected,anchor:values.length?Math.max(...values):null,n:values.length,positive:values.filter(v=>v>0).length,values});
+          return;
+        }
         const candidates=(f.id===H.ID&&mode==='sectorial'?pressure.rows(base):base).filter(r=>r.f===f.source&&r.id===f.id);
         const cohorts=new Set(candidates.map(T.cohort));
         const coherent=cohorts.size<=1 && candidates.every(r=>r.u===f.unit);
@@ -95,7 +129,7 @@
         const sectors=sectorDefs.map(sector=>{
           const fields=sector.fields.map(f=>{
             const c=calibrations.get(f.id),r=c.rows.get(place.geo),value=measure(r),score=normalize(value,c.anchor);
-            return {...f,row:r||null,score,rate:relative?value:null,...(relative?relativeMeasure(r,f.id,place.code):{}),anchor:c.anchor,n:c.n,positive:c.positive,
+            return {...f,...(f.candidates?{source:r?.f||'PNUD → 3iS-Sheets',selectedIndicator:r?.id??null,cascadeFallback:r?.f==='3iS-Sheets'}:{}),row:r||null,score,rate:relative?value:null,...(relative?relativeMeasure(r,r?.id||f.id,place.code):{}),anchor:c.anchor,n:c.n,positive:c.positive,
               percentile:value!=null?T.percentile(c.values,value):null,contribution:score==null?null:score*f.share/sectorDefs.length};
           });
           const lower=fields.reduce((s,f)=>s+(f.score??0)*f.share,0);
@@ -131,7 +165,7 @@
       }
       const top=new Set(ranked.filter(r=>r.rank<=20).map(r=>r.geo));
       const rapidaTop=recovery.filter(r=>recoveryRank.get(r.geo).rank<=20);
-      const result={items:ranked,missing:items.filter(r=>r.coverage<=EPS).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')),
+      const result={definitions:sectorDefs,items:ranked,missing:items.filter(r=>r.coverage<=EPS).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')),
         all:items,calibrations:[...calibrations.values()].map(({rows,values,...r})=>r),scenarios,
         overlap:rapidaTop.filter(r=>top.has(r.geo)).length,rapidaTopN:rapidaTop.length,referenceN:places.length};
       cache.set(key,result);return result;
@@ -165,6 +199,6 @@
     }
     return bundles.get(data);
   }
-  const api={create,models,normalize,aggregate,ranks,SECTORS,FIELD_COUNT,VERSION:'1.2-RS'};
+  const api={create,models,normalize,aggregate,ranks,SECTORS,FIELD_COUNT,VERSION:'1.2-RS',CASCADE_FIELDS,chooseCascade};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.Priorizacion=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

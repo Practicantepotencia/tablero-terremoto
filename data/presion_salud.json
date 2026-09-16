@@ -15084,5 +15084,10 @@
       "3is_desaparecidos"
     ],
     "internal_weight": "1/3"
+  },
+  "source_cascade": {
+    "enabled": true,
+    "policy": "pnud_then_3is",
+    "parent_commit": "bdbcf1604d1d988ea4d5dfeeb1e8099721520c37"
   }
 }

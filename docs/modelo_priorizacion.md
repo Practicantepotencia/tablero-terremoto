@@ -1,3 +1,5 @@
+> Política vigente: [PNUD como fuente principal y 3iS como respaldo](cascada_pnud_3is.md), una sola observación por variable, **10 campos en las tres vistas**. Se conserva Impacto humano sin heridos y Salud relativa de presión. La documentación histórica inferior describe etapas previas.
+
 > Variante actual de esta rama: **Impacto humano sin heridos**, tres variables con peso 1/3 (familias, fallecidos y desaparecidos), cinco sectores. El relativo de presión utiliza heridos solo en Salud. Son 14 campos en absoluto/per cápita y 13 en relativo. La descripción y resultados históricos inferiores no sustituyen la [metodología vigente de esta variante](presion_salud.md).
 
 # Modelo de priorización sectorial 1.2

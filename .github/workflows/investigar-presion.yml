@@ -1,0 +1,25 @@
+name: Investigar fuentes de presión asistencial
+on:
+  push:
+    branches: [salud-presion-urgencias]
+    paths: ['scripts/investigar_presion_salud.py', '.github/workflows/investigar-presion.yml']
+permissions:
+  contents: write
+jobs:
+  investigar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pypdf
+      - run: python scripts/investigar_presion_salud.py
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: ${{ github.ref_name }}
+          commit_message: 'Guardar auditoría de acceso a fuentes sanitarias'
+          file_pattern: 'experimentos/presion_salud/*.json'

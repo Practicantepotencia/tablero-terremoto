@@ -1,0 +1,45 @@
+name: Verificar escenarios de presión asistencial
+on:
+  push:
+    branches: [salud-presion-urgencias, salud-presion-hospitalizacion]
+    paths: ['web/**', 'scripts/**', 'tests/**', 'generar_tablero_recuperacion.py', 'data/presion_salud.json', '.github/workflows/presion-salud.yml']
+permissions:
+  contents: write
+concurrency:
+  group: presion-${{ github.ref_name }}
+  cancel-in-progress: false
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Pruebas de cálculo y regeneración
+        run: |
+          python -m unittest discover -s tests -v
+          node --test tests/*.test.js
+          python scripts/reconstruir_capacidad_presion.py
+          python generar_tablero_recuperacion.py
+          node scripts/auditar_presion_salud.cjs
+      - name: Prueba de interfaz y radar
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+          node tests/presion_salud.browser.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prueba-interfaz-${{ github.ref_name }}
+          path: experimentos/presion_salud/interfaz.png
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: ${{ github.ref_name }}
+          commit_message: 'Generar y auditar escenario experimental de presión asistencial'
+          file_pattern: 'index.html eda_indicadores.html docs/verificacion_presion_salud.json'

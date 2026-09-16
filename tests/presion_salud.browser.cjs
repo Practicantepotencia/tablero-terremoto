@@ -1,0 +1,29 @@
+const assert=require('node:assert/strict'),{chromium}=require('playwright'),path=require('node:path');
+(async()=>{
+const browser=await chromium.launch({headless:true}),page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+page.on('pageerror',e=>errors.push(e.message));
+await page.goto('file://'+path.resolve('index.html'),{waitUntil:'load'});
+await page.waitForSelector('#relative-matrix table');
+const res=await page.evaluate(()=>{
+ const state={scope:'decree',date:DATA.latest,dept:''},result=Priorizacion.models(DATA).sectorial.compute(state);
+ const r=result.items.find(m=>m.code==='66001'),h=r.sectors.find(s=>s.id==='salud').fields[0];
+ return {fields:r.fieldCount,raw:h.row.v,base:h.denominator.value,ratio:h.rate,score:h.score,mode:DATA.healthPressure.mode,n:result.referenceN};
+});
+assert.equal(res.fields,14);assert.ok(res.ratio>=0);assert.ok(Math.abs(res.ratio-res.raw/res.base)<1e-8);
+await page.locator('#relative-search').fill('Pereira');await page.waitForTimeout(100);
+assert.equal(await page.locator('#relative-matrix tbody tr').count(),1);
+assert.match(await page.locator('#relative-matrix').innerText(),/Heridos frente a/);
+await page.locator('#relative-matrix [data-relative-geo]').click();
+assert.match(await page.locator('#relative-detail').innerText(),/REPS/);
+// Exercise the same radar objects, independently of tab visibility.
+await page.evaluate(()=>RelativeMunicipalRadar.render(null,{scope:'decree',date:DATA.latest,dept:''}));
+await page.evaluate(()=>{
+ const s=document.getElementById('radar-relative-select-0');s.value='municipal:66001';s.dispatchEvent(new Event('change'));
+ document.querySelector('#radar-relative-chart [data-radar-m="0"][data-radar-axis="2"]')?.dispatchEvent(new Event('mouseenter'));
+});
+assert.match(await page.locator('#radar-relative-inspector').innerText(),/Heridos frente a/);
+const selects=page.locator('[id$="radar-select-0"], [id*="radar"][id$="select-0"]');
+assert.ok(await selects.count()>=3);
+await page.screenshot({path:'experimentos/presion_salud/interfaz.png',fullPage:false});
+assert.deepEqual(errors,[]);await browser.close();console.log('UI pressure scenario OK',res);
+})().catch(e=>{console.error(e);process.exit(1);});

@@ -20,10 +20,10 @@ for key,url in URLS.items():
    pts=data.get("puntos",[])
    item.update(keys=list(data),points=len(pts))
    rows=[p for p in pts if p.get("tipo")=="HOSPITAL"]
-   item["health_points"]=len(rows);item["sample"]=rows[:2]
+   item["health_points"]=len(rows);item["sample"]=[{"code":r.get("codigo"),"name":r.get("direccion")} for r in rows[:2]]
    Path("experimentos/presion_salud").mkdir(parents=True,exist_ok=True)
-   Path("experimentos/presion_salud/naboo_salud.json").write_text(json.dumps({"url":url,"checked":out["checked"],"sha256":item["sha256"],"rows":rows},ensure_ascii=False,indent=2),encoding="utf-8")
-   item["pressure_mentions"]=[p for p in rows if re.search(r"ocupa|satura|camas|cierre",json.dumps(p),re.I)][:8]
+   Path("experimentos/presion_salud/naboo_salud.json").write_text(json.dumps({"url":url,"checked":out["checked"],"sha256":item["sha256"],"rows":[{"code":r.get("codigo"),"municipality":r.get("municipio"),"department":r.get("departamento"),"name":r.get("direccion"),"classification":r.get("severidad"),"status":r.get("estado"),"evidence_ids":list(dict.fromkeys(e.get("fuenteId") for e in r.get("evidencias",[])))} for r in rows]},ensure_ascii=False,indent=2),encoding="utf-8")
+   item["pressure_mentions_count"]=sum(bool(re.search(r"ocupa|satura|camas|cierre",json.dumps(p),re.I)) for p in rows)
   elif key=="reps_metadata":
    data=json.loads(raw);item["name"]=data.get("name");item["columns"]=[c["fieldName"] for c in data.get("columns",[])];item["modified"]=data.get("rowsUpdatedAt")
   elif key=="ops_sitrep8":

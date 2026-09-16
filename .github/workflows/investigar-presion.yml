@@ -1,8 +1,6 @@
 name: Investigar fuentes de presión asistencial
 on:
-  push:
-    branches: [salud-presion-urgencias]
-    paths: ['scripts/investigar_presion_salud.py', '.github/workflows/investigar-presion.yml']
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:

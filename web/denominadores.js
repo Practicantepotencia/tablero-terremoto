@@ -1,6 +1,7 @@
 /* Bases sectoriales verificadas. Un inventario candidato no habilita una tasa. */
 (function(root){
   'use strict';
+  const H = typeof module !== 'undefined' && module.exports ? require('./presion_salud.js') : root.PresionSalud;
   const spec=(kind,label,multiplier,unit,enabled,reason='')=>({kind,label,multiplier,unit,enabled,reason});
   const people=()=>spec('poblacion','Población municipal DANE del mismo año',10000,'/10.000 habitantes',true);
   const homes=()=>spec('viviendas','Total de viviendas DANE, ocupadas y desocupadas',100,'% de la base de viviendas',true);
@@ -23,6 +24,7 @@
       'El numerador es un conteo de vías afectadas. Falta el inventario de esas mismas vías/tramos; kilómetros de red no son un denominador compatible.')
   };
   function create(data){
+    const pressure=H.create(data);
     const payload=data.denominators||{}, groups=new Map(), sources=payload.sources||{};
     (payload.rows||[]).forEach(r=>{
       const key=[r.kind,r.code,r.year].join('|');
@@ -58,6 +60,7 @@
         proxyNote:row.v>d.value?'Afectados superiores al inventario registrado; cociente proxy, no porcentaje de sedes dañadas.':''};
     }
     function measure(row,id,code,date){
+      if(pressure.enabled&&id===H.ID)return pressure.measure(row,id,code,date);
       if(payload.registry_proxies?.enabled===true&&['3is_salud','pnud_csalud','3is_educativos','pnud_cedu'].includes(id))
         return registryMeasure(row,id,code,date);
       const rule=RULES[id], year=Number(String(date).slice(0,4));

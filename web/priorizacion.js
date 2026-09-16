@@ -3,6 +3,7 @@
   'use strict';
   const T = typeof module !== 'undefined' && module.exports ? require('./modelo.js') : root.Territorial;
   const D = typeof module !== 'undefined' && module.exports ? require('./denominadores.js') : root.Denominadores;
+  const H = typeof module !== 'undefined' && module.exports ? require('./presion_salud.js') : root.PresionSalud;
   const field = (id, source, label, share) => ({id, source, label, share, unit:'Número'});
   const reported = (id, label, share=1) => field('3is_'+id, '3iS-Sheets', label, share);
   const estimated = (id, label, share=1) => field('pnud_'+id, 'PNUD', label, share);
@@ -44,6 +45,9 @@
     if(!['absolute','percapita','sectorial'].includes(mode))throw new Error('Modo de priorización desconocido: '+mode);
     const relative=mode!=='absolute';
     const denominators=mode==='sectorial'?D.create(data):null;
+    const pressure=H.create(data);
+    const sectorDefs=mode==='sectorial'&&pressure.enabled?SECTORS.map(s=>s.id==='salud'?{...s,fields:[pressure.field]}:s):SECTORS;
+    const fieldCount=sectorDefs.reduce((n,s)=>n+s.fields.length,0);
     const cache=new Map();
     function compute(state) {
       // Solo ámbito y captura definen referencias; buscar/filtrar departamento no renormaliza.
@@ -73,8 +77,8 @@
         if(!relative)return r.v;
         return relativeMeasure(r,r.id,r.code).rate;};
       const calibrations=new Map();
-      SECTORS.flatMap(s=>s.fields).forEach(f=>{
-        const candidates=base.filter(r=>r.f===f.source&&r.id===f.id);
+      sectorDefs.flatMap(s=>s.fields).forEach(f=>{
+        const candidates=(f.id===H.ID&&mode==='sectorial'?pressure.rows(base):base).filter(r=>r.f===f.source&&r.id===f.id);
         const cohorts=new Set(candidates.map(T.cohort));
         const coherent=cohorts.size<=1 && candidates.every(r=>r.u===f.unit);
         const byGeo=new Map();
@@ -86,13 +90,13 @@
       });
       const recovery=territorial.strict(base,T.RECOVERY);
       const recoveryRank=new Map(territorial.ranked(recovery).map(r=>[r.geo,r]));
-      const weights=SECTORS.map(()=>1);
+      const weights=sectorDefs.map(()=>1);
       const items=places.map(place=>{
-        const sectors=SECTORS.map(sector=>{
+        const sectors=sectorDefs.map(sector=>{
           const fields=sector.fields.map(f=>{
             const c=calibrations.get(f.id),r=c.rows.get(place.geo),value=measure(r),score=normalize(value,c.anchor);
             return {...f,row:r||null,score,rate:relative?value:null,...(relative?relativeMeasure(r,f.id,place.code):{}),anchor:c.anchor,n:c.n,positive:c.positive,
-              percentile:value!=null?T.percentile(c.values,value):null,contribution:score==null?null:score*f.share/SECTORS.length};
+              percentile:value!=null?T.percentile(c.values,value):null,contribution:score==null?null:score*f.share/sectorDefs.length};
           });
           const lower=fields.reduce((s,f)=>s+(f.score??0)*f.share,0);
           const unknown=fields.filter(f=>f.score==null).reduce((s,f)=>s+100*f.share,0);
@@ -101,9 +105,9 @@
         });
         const baseline=baselines.get(place.code),vulnerability=baseline&&baseline.v<=100?baseline.v:null;
         const score=aggregate(sectors,vulnerability,weights);
-        const coverage=sectors.reduce((s,d)=>s+d.coverage/SECTORS.length,0);
+        const coverage=sectors.reduce((s,d)=>s+d.coverage/sectorDefs.length,0);
         const rec=recoveryRank.get(place.geo);
-        return {...place,...score,sectors,fieldCount:FIELD_COUNT,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
+        return {...place,...score,sectors,fieldCount:fieldCount,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
           recovery:rec?.v??null,recoveryRank:rec?.rank??null,available:sectors.flatMap(s=>s.fields).filter(f=>f.score!=null).length,
           complete:coverage>1-EPS&&vulnerability!=null,rank:null,rankMin:null,rankMax:null};
       });
@@ -114,7 +118,7 @@
         r.worstRank=1+ranked.filter(o=>o.geo!==r.geo&&o.upper>r.lower+EPS).length;
       });
       const scenarioWeights=[weights];
-      for(let i=0;i<SECTORS.length;i++)for(const factor of [.75,1.25])scenarioWeights.push(weights.map((w,j)=>j===i?w*factor:w));
+      for(let i=0;i<sectorDefs.length;i++)for(const factor of [.75,1.25])scenarioWeights.push(weights.map((w,j)=>j===i?w*factor:w));
       let scenarios=0;
       for(const alpha of [0,.25,.5])for(const w of scenarioWeights){
         scenarios++;
@@ -136,7 +140,7 @@
       const result=compute(state);
       const order=state.priorityOrder||'integrated';
       let items=[...result.items,...result.missing];
-      const sectorIndex=SECTORS.findIndex(s=>s.id===state.priorityDimension);
+      const sectorIndex=sectorDefs.findIndex(s=>s.id===state.priorityDimension);
       if(sectorIndex>=0&&order!=='rapida'){
         const value=order==='uncertainty'?'upper':'lower';
         const known=items.filter(r=>r.sectors[sectorIndex].coverage>EPS).sort((a,b)=>b.sectors[sectorIndex][value]-a.sectors[sectorIndex][value]||T.label(a).localeCompare(T.label(b),'es'));

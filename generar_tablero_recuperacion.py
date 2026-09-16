@@ -67,6 +67,8 @@ def prepare_payload(current, history=()):
     proxy_path = ROOT / 'data/denominadores_reps_simat.json'
     if proxy_path.exists():
         denominators['registry_proxies'] = json.loads(proxy_path.read_text(encoding='utf-8'))
+    pressure_path = ROOT / 'data/presion_salud.json'
+    pressure = json.loads(pressure_path.read_text(encoding='utf-8')) if pressure_path.exists() else None
     reference_names = defaultdict(set)
     reference_codes = {r['code']: r for r in baseline['rows']}
     for r in baseline['rows']:
@@ -156,7 +158,7 @@ def prepare_payload(current, history=()):
     rows.sort(key=lambda r: (r["date"], r["f"], r["id"], r["geo"]))
     dates = sorted(capture_dates)
     latest = max((d for d in current_dates if d in dates), default=dates[-1] if dates else "")
-    return {"rows": rows, "dates": dates, "latest": latest, "sources": SOURCES, "baseline": baseline, "population": population, "denominators": denominators,
+    return {"rows": rows, "dates": dates, "latest": latest, "sources": SOURCES, "baseline": baseline, "population": population, "denominators": denominators, "healthPressure": pressure,
             "issues": [{"label": k, "n": v} for k, v in sorted(issues.items()) if v],
             "generated": datetime.now(timezone.utc).isoformat(timespec="seconds")}
 
@@ -164,7 +166,7 @@ def prepare_payload(current, history=()):
 def build_html(current, history=()):
     payload = prepare_payload(current, history)
     template = (ROOT / "web" / "tablero.html").read_text(encoding="utf-8")
-    for marker, filename in (("__STYLE__", "tablero.css"), ("__MODEL__", "modelo.js"), ("__DENOMINATORS__", "denominadores.js"), ("__PRIORITY_MODEL__", "priorizacion.js"), ("__RADAR__", "radar.js"), ("__RELATIVE__", "relativo.js"), ("__COMPARISON__", "comparacion.js"), ("__APP__", "tablero.js")):
+    for marker, filename in (("__STYLE__", "tablero.css"), ("__MODEL__", "modelo.js"), ("__HEALTH_PRESSURE__", "presion_salud.js"), ("__DENOMINATORS__", "denominadores.js"), ("__PRIORITY_MODEL__", "priorizacion.js"), ("__RADAR__", "radar.js"), ("__RELATIVE__", "relativo.js"), ("__COMPARISON__", "comparacion.js"), ("__APP__", "tablero.js")):
         template = template.replace(marker, (ROOT / "web" / filename).read_text(encoding="utf-8"))
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
     return template.replace("__DATA__", data.replace("<", "\\u003c"))

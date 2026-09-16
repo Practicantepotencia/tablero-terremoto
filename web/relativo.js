@@ -30,6 +30,7 @@
     const sector=Priorizacion.SECTORS.find(s=>s.id===sectorId),year=String(state.date).slice(0,4);
     $('relative-note').textContent=(sector?'Orden por '+sector.name+', '+(direction==='desc'?'mayor a menor':'menor a mayor'):'Orden por prioridad documentada')+'. '+(percapita?'Todos los conteos por 10.000 habitantes.':'Personas: por 10.000 habitantes; vivienda: por 100 viviendas.')+' DANE '+year+'.';
     if(!percapita&&DATA.denominators?.registry_proxies?.notice)$('relative-note').textContent+=' '+DATA.denominators.registry_proxies.notice;
+    if(!percapita&&DATA.healthPressure?.enabled)$('relative-note').textContent+=' Salud: '+DATA.healthPressure.note;
     $('relative-formula').textContent=(percapita?'Cada variable: tasa = valor × 10.000 / población municipal; puntaje':'Cada variable: tasa = valor × factor / denominador propio; puntaje')+' = 100 × tasa / máxima tasa comparable. Cinco sectores de igual peso y ajuste IPM. Referencia: '+(state.scope==='decree'?'departamentos del decreto':'inventario completo')+', captura '+state.date+'. '+(percapita?'':'Bases verificadas el '+(DATA.denominators?.checked?.slice(0,10)||'—')+'.');
     $('relative-count').textContent=result.items.length+' municipios visibles · '+result.items.filter(r=>r.coverage>0).length+' con algún puntaje relativo · '+result.referenceN+' en la referencia.';
     let html='<table>'+headers([percapita?'Municipio y prioridad per cápita':'Municipio y prioridad relativa',...Priorizacion.SECTORS.map(s=>s.name)])+'<tbody>';

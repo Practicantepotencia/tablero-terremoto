@@ -44,3 +44,14 @@ Se descargó y examinó. La densidad de ocupación hallada corresponde a alojami
 
 Hay evidencia institucional que permite medir ocupación real en casos concretos. En la búsqueda realizada no se obtuvo una serie homogénea de ocupación municipal para integrar una tercera comparación nacional.
 Por eso se entregan dos ramas calculables de carga potencial y esta auditoría de medición operativa, sin rellenar municipios ausentes ni convertir casos aislados en ocupación municipal.
+
+## SIHO y SISPRO
+
+Se revisaron también las páginas oficiales:
+- https://www.sispro.gov.co/central-prestadores-de-servicios/Pages/Prestadores-de-Servicios.aspx
+- https://www.sispro.gov.co/central-prestadores-de-servicios/Pages/SIHO-Sistema-de-gestion-hospitalaria.aspx
+- https://prestadores.minsalud.gov.co/SIHO/
+
+SISPRO describe las consultas de gestión de la red pública como anuales y por entidad territorial/nivel de atención. SIHO cubre empresas sociales del Estado, no automáticamente toda la red privada.
+Los accesos examinados no entregaron una tabla municipal homogénea de ocupación posterior al sismo (una página entró en bucle de redirección y el acceso SIHO no devolvió datos tabulares al lector).
+No se interpreta este resultado de acceso como inexistencia de los registros.

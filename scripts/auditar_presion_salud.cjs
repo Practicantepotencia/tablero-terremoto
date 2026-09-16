@@ -1,5 +1,5 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const P=require('../web/priorizacion.js'),H=require('../web/presion_salud.js');
+const P=require('../web/priorizacion.js'),H=require('../web/presion_salud.js'),C=require('../web/comparacion.js'),T=require('../web/modelo.js');
 const raw=fs.readFileSync('index.html','utf8').match(/const DATA=([\s\S]*?);<\/script>/);
 assert.ok(raw);const data=JSON.parse(raw[1]),reference={...data,healthPressure:null};
 const baseline=P.models(reference),scenario=P.models(data);
@@ -32,7 +32,8 @@ for(const scope of ['decree','all']){
  assert.deepEqual(select.calibrations,now.calibrations,'Búsqueda no altera anclas');
  const scored=now.items.filter(r=>r.sectors.find(s=>s.id==='salud').coverage>0);
  const health=r=>{const f=r.sectors.find(s=>s.id==='salud').fields[0];return {code:r.code,name:r.m,department:r.d,numerator:f.row?.v??null,denominator:f.denominator?.value??null,ratio:f.rate,anchor:f.anchor,health:f.score,global:r.lower,rank:now.items.find(x=>x.geo===r.geo)?.rank??null,reason:f.reason};};
- output.scopes[scope]={reference:now.referenceN,health_with_data:scored.length,health_positive:scored.filter(r=>r.sectors.find(s=>s.id==='salud').lower>0).length,
+ const comparison=C.compare(scenario,T.create(data),state,{mode:'sectorial',panel:'available',axis:'value'});
+ output.scopes[scope]={comparison:{n:comparison.n,r2:comparison.regression?.r2??null,pearson:comparison.regression?.r??null,spearman:comparison.rho},reference:now.referenceN,health_with_data:scored.length,health_positive:scored.filter(r=>r.sectors.find(s=>s.id==='salud').lower>0).length,
  missing_health:now.all.length-scored.length,calibration:now.calibrations.find(r=>r.id===H.ID),
  top_health:scored.slice().sort((a,b)=>b.sectors[2].lower-a.sectors[2].lower).slice(0,10).map(health),
  examples:now.all.filter(r=>['27050','27660','66001','76828','27001','76001'].includes(r.code)).map(health),

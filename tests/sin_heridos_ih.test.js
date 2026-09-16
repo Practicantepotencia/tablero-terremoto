@@ -30,7 +30,10 @@ test('heridos queda fuera de Impacto humano en los tres modos y ambos escenarios
   }
   const health=after.all.find(r=>r.code==='27050').sectors[2].fields[0];
   assert.equal(health.id,H.ID);assert.equal(health.score,0);assert.equal(health.share,1);
-  for(const mode of ['absolute','percapita'])assert.deepEqual(P.models(d)[mode].compute(state),P.models(changed)[mode].compute(state));
+  // Place metadata retains the original last raw observation, including v.
+  // Compare every calculated output while excluding only that raw metadata value.
+  const scores=result=>({...result,...Object.fromEntries(['items','all','missing'].map(k=>[k,result[k].map(({v,...r})=>r)]))});
+  for(const mode of ['absolute','percapita'])assert.deepEqual(scores(P.models(d)[mode].compute(state)),scores(P.models(changed)[mode].compute(state)));
  }
 });
 test('un reporte solo de heridos no crea evidencia en Impacto humano',()=>{

@@ -15,6 +15,12 @@
   },
   "scopes": {
     "decree": {
+      "comparison": {
+        "n": 286,
+        "r2": 0.45274580041910745,
+        "pearson": 0.6728638795619122,
+        "spearman": 0.7480320594676192
+      },
       "reference": 509,
       "health_with_data": 71,
       "health_positive": 71,
@@ -428,6 +434,12 @@
       ]
     },
     "all": {
+      "comparison": {
+        "n": 287,
+        "r2": 0.4537748916799105,
+        "pearson": 0.6736281553497526,
+        "spearman": 0.7499225836868884
+      },
       "reference": 631,
       "health_with_data": 71,
       "health_positive": 71,

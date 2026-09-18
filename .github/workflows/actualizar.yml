@@ -35,13 +35,30 @@ jobs:
           node-version: '22'
       - name: DIAGNOSTICO temporal -- anexo IDF
         if: github.event_name == 'workflow_dispatch'
+        continue-on-error: true
         run: |
-          set -o pipefail
           pip install openpyxl -q
-          mkdir -p /tmp/idf
-          U="https://colaboracion.dnp.gov.co/CDT/Desarrollo%20Territorial/Desempeno_Fiscal/ResultadosIDF_Nueva_MetodologIa_2023_Act.xlsx"
-          curl -sS -L --max-time 180 "$U" -o /tmp/idf/idf.xlsx
-          ls -l /tmp/idf/idf.xlsx
+          mkdir -p /tmp/idf && cd /tmp/idf
+          H=colaboracion.dnp.gov.co
+          # El servidor del DNP no envia la cadena intermedia. En vez de
+          # desactivar la verificacion, se descarga el intermedio desde la
+          # extension AIA del propio certificado y se arma un bundle.
+          openssl s_client -connect $H:443 -servername $H </dev/null 2>/dev/null > srv.txt || true
+          AIA=$(openssl x509 -in srv.txt -noout -text 2>/dev/null | grep -oE 'CA Issuers - URI:http[^ ]*' | head -1 | sed 's/.*URI://')
+          echo "AIA: $AIA"
+          cp /etc/ssl/certs/ca-certificates.crt bundle.pem
+          if [ -n "$AIA" ]; then
+            curl -sS -L --max-time 60 "$AIA" -o inter.der || true
+            ( openssl x509 -inform DER -in inter.der -out inter.pem 2>/dev/null \
+              || openssl x509 -inform PEM -in inter.der -out inter.pem 2>/dev/null ) || true
+            if [ -s inter.pem ]; then
+              openssl x509 -in inter.pem -noout -subject
+              cat inter.pem >> bundle.pem
+            fi
+          fi
+          U="https://$H/CDT/Desarrollo%20Territorial/Desempeno_Fiscal/ResultadosIDF_Nueva_MetodologIa_2023_Act.xlsx"
+          curl -sS -L --max-time 240 --cacert bundle.pem "$U" -o idf.xlsx
+          ls -l idf.xlsx && file idf.xlsx
           python3 - <<'PYEOF'
           import openpyxl, re, sys
           wb = openpyxl.load_workbook('/tmp/idf/idf.xlsx', data_only=True, read_only=True)
@@ -58,7 +75,7 @@ jobs:
                   if ('digo' in txt or 'divipola' in txt) and ('idf' in txt or 'fiscal' in txt):
                       hdr = i; break
               print('=== HOJA', name, '| fila encabezado:', hdr)
-              for i, r in enumerate(rows[:12]):
+              for i, r in enumerate(rows[:10]):
                   print('  r%02d' % i, [str(c)[:34] for c in r[:14]])
               if hdr is None:
                   continue

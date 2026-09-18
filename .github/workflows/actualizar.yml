@@ -33,6 +33,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: DIAGNOSTICO temporal -- anexo IDF
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          pip install openpyxl -q
+          for U in "https://ciffit.dnp.gov.co/CIFFIT/DesempenoFiscal" "https://ciffit.dnp.gov.co/ciffit/WebPages/Consulta/DesempenoFiscal"; do
+            echo "=== $U ==="
+            curl -sS -L --max-time 60 "$U" -o page.html || true
+            grep -oiE 'href="[^"]*"' page.html | grep -iE 'xlsx|xls|zip|csv|anexo|idf' | sort -u | head -40
+          done
       - name: Verificar importación y cálculos
         run: |
           python -m unittest discover -s tests -v

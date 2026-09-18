@@ -40,82 +40,50 @@ jobs:
           pip install openpyxl -q
           mkdir -p /tmp/idf && cd /tmp/idf
           H=colaboracion.dnp.gov.co
-          # El servidor del DNP no envia la cadena intermedia. En vez de
-          # desactivar la verificacion, se descarga el intermedio desde la
-          # extension AIA del propio certificado y se arma un bundle.
           openssl s_client -connect $H:443 -servername $H </dev/null 2>/dev/null > srv.txt || true
           AIA=$(openssl x509 -in srv.txt -noout -text 2>/dev/null | grep -oE 'CA Issuers - URI:http[^ ]*' | head -1 | sed 's/.*URI://')
-          echo "AIA: $AIA"
           cp /etc/ssl/certs/ca-certificates.crt bundle.pem
           if [ -n "$AIA" ]; then
             curl -sS -L --max-time 60 "$AIA" -o inter.der || true
-            ( openssl x509 -inform DER -in inter.der -out inter.pem 2>/dev/null \
-              || openssl x509 -inform PEM -in inter.der -out inter.pem 2>/dev/null ) || true
-            if [ -s inter.pem ]; then
-              openssl x509 -in inter.pem -noout -subject
-              cat inter.pem >> bundle.pem
-            fi
+            openssl x509 -inform DER -in inter.der -out inter.pem 2>/dev/null || true
+            [ -s inter.pem ] && cat inter.pem >> bundle.pem
           fi
           U="https://$H/CDT/Desarrollo%20Territorial/Desempeno_Fiscal/ResultadosIDF_Nueva_MetodologIa_2023_Act.xlsx"
           curl -sS -L --max-time 240 --cacert bundle.pem "$U" -o idf.xlsx
-          ls -l idf.xlsx && file idf.xlsx
+          ls -l idf.xlsx
           python3 - <<'PYEOF'
-          import openpyxl, re, sys
+          import openpyxl, re
           wb = openpyxl.load_workbook('/tmp/idf/idf.xlsx', data_only=True, read_only=True)
-          print('HOJAS:', wb.sheetnames)
-          for name in wb.sheetnames:
-              ws = wb[name]
-              rows = []
-              for i, r in enumerate(ws.iter_rows(values_only=True)):
-                  rows.append(r)
-                  if i > 40: break
-              hdr = None
-              for i, r in enumerate(rows):
-                  txt = ' '.join(str(c) for c in r if c is not None).lower()
-                  if ('digo' in txt or 'divipola' in txt) and ('idf' in txt or 'fiscal' in txt):
-                      hdr = i; break
-              print('=== HOJA', name, '| fila encabezado:', hdr)
-              for i, r in enumerate(rows[:10]):
-                  print('  r%02d' % i, [str(c)[:34] for c in r[:14]])
-              if hdr is None:
+          ws = wb['Municipios 2023']
+          rows = list(ws.iter_rows(min_row=1, max_row=8, values_only=True))
+          head = [str(c) if c is not None else '' for c in rows[6]]
+          ci = head.index('Código')
+          oficial = head.index('Nuevo IDF')
+          sinb = head.index('Nuevo IDF (sin bonos)')
+          print('columnas -> codigo=%d oficial=%d sin_bonos=%d' % (ci, oficial, sinb))
+          n = 0
+          for r in ws.iter_rows(min_row=8, values_only=True):
+              if ci >= len(r):
                   continue
-              head = [str(c) if c is not None else '' for c in rows[hdr]]
-              print('  ENCABEZADO:', head)
-              ci = next((j for j, h in enumerate(head)
-                         if re.search(r'c(ó|o)digo', h, re.I) and re.search(r'mun|entidad|dane|divipola', h, re.I)), None)
-              if ci is None:
-                  ci = next((j for j, h in enumerate(head) if re.search(r'c(ó|o)digo|divipola', h, re.I)), None)
-              vi = next((j for j, h in enumerate(head)
-                         if re.search(r'\bidf\b', h, re.I) and not re.search(r'rank|posici|grupo|clasific', h, re.I)), None)
-              if vi is None:
-                  vi = next((j for j, h in enumerate(head)
-                             if re.search(r'puntaje|indicador de desempe', h, re.I)), None)
-              print('  columna codigo:', ci, head[ci] if ci is not None else None)
-              print('  columna idf   :', vi, head[vi] if vi is not None else None)
-              if ci is None or vi is None:
+              c = r[ci]
+              if c is None:
                   continue
-              n = 0
-              print('CSVINICIO')
-              for r in ws.iter_rows(min_row=hdr + 2, values_only=True):
-                  if ci >= len(r) or vi >= len(r):
-                      continue
-                  c, v = r[ci], r[vi]
-                  if c is None or v is None:
-                      continue
-                  cs = re.sub(r'\D', '', str(c))
-                  if len(cs) == 4:
-                      cs = '0' + cs
-                  if len(cs) != 5:
-                      continue
+              cs = re.sub(r'\D', '', str(c)).zfill(5)
+              if len(cs) != 5:
+                  continue
+              def num(j):
+                  if j >= len(r) or r[j] is None:
+                      return ''
                   try:
-                      fv = float(str(v).replace(',', '.'))
+                      return '%.4f' % float(str(r[j]).replace(',', '.'))
                   except ValueError:
-                      continue
-                  print('IDF,%s,%.4f' % (cs, fv))
-                  n += 1
-              print('CSVFIN filas=%d' % n)
-              if n > 500:
-                  sys.exit(0)
+                      return ''
+              a, b = num(oficial), num(sinb)
+              if not a and not b:
+                  continue
+              print('IDF,%s,%s,%s' % (cs, a, b))
+              n += 1
+          print('CSVFIN filas=%d' % n)
           PYEOF
       - name: Verificar importación y cálculos
         run: |

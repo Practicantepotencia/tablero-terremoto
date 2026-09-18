@@ -36,12 +36,70 @@ jobs:
       - name: DIAGNOSTICO temporal -- anexo IDF
         if: github.event_name == 'workflow_dispatch'
         run: |
+          set -o pipefail
           pip install openpyxl -q
-          for U in "https://ciffit.dnp.gov.co/CIFFIT/DesempenoFiscal" "https://ciffit.dnp.gov.co/ciffit/WebPages/Consulta/DesempenoFiscal"; do
-            echo "=== $U ==="
-            curl -sS -L --max-time 60 "$U" -o page.html || true
-            grep -oiE 'href="[^"]*"' page.html | grep -iE 'xlsx|xls|zip|csv|anexo|idf' | sort -u | head -40
-          done
+          mkdir -p /tmp/idf
+          U="https://colaboracion.dnp.gov.co/CDT/Desarrollo%20Territorial/Desempeno_Fiscal/ResultadosIDF_Nueva_MetodologIa_2023_Act.xlsx"
+          curl -sS -L --max-time 180 "$U" -o /tmp/idf/idf.xlsx
+          ls -l /tmp/idf/idf.xlsx
+          python3 - <<'PYEOF'
+          import openpyxl, re, sys
+          wb = openpyxl.load_workbook('/tmp/idf/idf.xlsx', data_only=True, read_only=True)
+          print('HOJAS:', wb.sheetnames)
+          for name in wb.sheetnames:
+              ws = wb[name]
+              rows = []
+              for i, r in enumerate(ws.iter_rows(values_only=True)):
+                  rows.append(r)
+                  if i > 40: break
+              hdr = None
+              for i, r in enumerate(rows):
+                  txt = ' '.join(str(c) for c in r if c is not None).lower()
+                  if ('digo' in txt or 'divipola' in txt) and ('idf' in txt or 'fiscal' in txt):
+                      hdr = i; break
+              print('=== HOJA', name, '| fila encabezado:', hdr)
+              for i, r in enumerate(rows[:12]):
+                  print('  r%02d' % i, [str(c)[:34] for c in r[:14]])
+              if hdr is None:
+                  continue
+              head = [str(c) if c is not None else '' for c in rows[hdr]]
+              print('  ENCABEZADO:', head)
+              ci = next((j for j, h in enumerate(head)
+                         if re.search(r'c(ó|o)digo', h, re.I) and re.search(r'mun|entidad|dane|divipola', h, re.I)), None)
+              if ci is None:
+                  ci = next((j for j, h in enumerate(head) if re.search(r'c(ó|o)digo|divipola', h, re.I)), None)
+              vi = next((j for j, h in enumerate(head)
+                         if re.search(r'\bidf\b', h, re.I) and not re.search(r'rank|posici|grupo|clasific', h, re.I)), None)
+              if vi is None:
+                  vi = next((j for j, h in enumerate(head)
+                             if re.search(r'puntaje|indicador de desempe', h, re.I)), None)
+              print('  columna codigo:', ci, head[ci] if ci is not None else None)
+              print('  columna idf   :', vi, head[vi] if vi is not None else None)
+              if ci is None or vi is None:
+                  continue
+              n = 0
+              print('CSVINICIO')
+              for r in ws.iter_rows(min_row=hdr + 2, values_only=True):
+                  if ci >= len(r) or vi >= len(r):
+                      continue
+                  c, v = r[ci], r[vi]
+                  if c is None or v is None:
+                      continue
+                  cs = re.sub(r'\D', '', str(c))
+                  if len(cs) == 4:
+                      cs = '0' + cs
+                  if len(cs) != 5:
+                      continue
+                  try:
+                      fv = float(str(v).replace(',', '.'))
+                  except ValueError:
+                      continue
+                  print('IDF,%s,%.4f' % (cs, fv))
+                  n += 1
+              print('CSVFIN filas=%d' % n)
+              if n > 500:
+                  sys.exit(0)
+          PYEOF
       - name: Verificar importación y cálculos
         run: |
           python -m unittest discover -s tests -v

@@ -1,5 +1,5 @@
 {
-  "capture": "2026-09-20",
+  "capture": "2026-09-21",
   "formula": "Impacto humano = (z_fallecidos + z_desaparecidos) / 2",
   "displayed_fields": 10,
   "scored_fields": 9,

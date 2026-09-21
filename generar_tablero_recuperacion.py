@@ -69,6 +69,8 @@ def prepare_payload(current, history=()):
         denominators['registry_proxies'] = json.loads(proxy_path.read_text(encoding='utf-8'))
     pressure_path = ROOT / 'data/presion_salud.json'
     pressure = json.loads(pressure_path.read_text(encoding='utf-8')) if pressure_path.exists() else None
+    fiscal_path = ROOT / 'data/idf_municipal_2023.json'
+    fiscal = json.loads(fiscal_path.read_text(encoding='utf-8')) if fiscal_path.exists() else {'rows': []}
     reference_names = defaultdict(set)
     reference_codes = {r['code']: r for r in baseline['rows']}
     for r in baseline['rows']:
@@ -158,7 +160,7 @@ def prepare_payload(current, history=()):
     rows.sort(key=lambda r: (r["date"], r["f"], r["id"], r["geo"]))
     dates = sorted(capture_dates)
     latest = max((d for d in current_dates if d in dates), default=dates[-1] if dates else "")
-    return {"rows": rows, "dates": dates, "latest": latest, "sources": SOURCES, "baseline": baseline, "population": population, "denominators": denominators, "healthPressure": pressure,
+    return {"rows": rows, "dates": dates, "latest": latest, "sources": SOURCES, "baseline": baseline, "population": population, "denominators": denominators, "healthPressure": pressure, "fiscal": fiscal,
             "issues": [{"label": k, "n": v} for k, v in sorted(issues.items()) if v],
             "generated": datetime.now(timezone.utc).isoformat(timespec="seconds")}
 

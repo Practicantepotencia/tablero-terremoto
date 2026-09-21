@@ -30,7 +30,7 @@
 <p id="percapita-note" class="note"></p><details class="matrix-explanation"><summary>Fórmula y cómo interpretar las tasas</summary><p id="percapita-formula" class="formula"></p></details>
 <p id="percapita-count" class="note small" aria-live="polite"></p><div id="percapita-matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="percapita-title"></div><section id="percapita-detail" class="relative-detail" hidden aria-live="polite" aria-label="Cálculo per cápita municipal"></section></div>
 <div class="card matrix-card" id="relative-card"><div class="section-head"><h2 id="relative-title">Qué necesita cada municipio · relativo</h2><span class="muted small">Denominador propio por indicador</span></div>
-<div class="filters matrix-controls"><label>Buscar municipio<input id="relative-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="relative-matrix"></label></div>
+<div class="filters matrix-controls"><label>Nivel del índice relativo<select id="relative-depth" data-relative-depth aria-controls="relative-matrix"></select></label><label>Buscar municipio<input id="relative-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="relative-matrix"></label></div>
 <p id="relative-note" class="note"></p><details class="matrix-explanation"><summary>Fórmula y cómo interpretar las tasas</summary><p id="relative-formula" class="formula"></p></details>
 <p id="relative-count" class="note small" aria-live="polite"></p><div id="relative-matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="relative-title"></div><section id="relative-detail" class="relative-detail" hidden aria-live="polite" aria-label="Cálculo relativo municipal"></section></div>
 <div class="card"><p>Puntaje 0–100. Documentado: evidencia disponible; posible: límite por faltantes.</p><button type="button" class="secondary" id="show-method">Ver método y fórmulas</button></div>
@@ -46,6 +46,7 @@
 <div class="radar-layout"><div><div id="radar-percapita-chart"></div><div id="radar-percapita-legend"></div></div><section id="radar-percapita-inspector" class="radar-inspector" aria-label="Cálculo per cápita del punto seleccionado"></section></div>
 <p class="note">Selecciona un punto o sector para ver su fórmula.</p><div id="radar-percapita-sectors" class="radar-sectors"></div></div>
 <div class="card"><h2>Comparar necesidades sectoriales · relativo</h2><p class="note">Salud relativa a capacidad registrada.</p>
+<div class="filters"><label>Nivel del índice relativo<select id="radar-relative-depth" data-relative-depth aria-controls="radar-relative-chart radar-relative-legend"></select></label></div>
 <div id="radar-relative-pickers" class="filters"></div><p id="radar-relative-reference" class="note"></p>
 
 <div class="radar-layout"><div><div id="radar-relative-chart"></div><div id="radar-relative-legend"></div></div><section id="radar-relative-inspector" class="radar-inspector" aria-label="Cálculo relativo con denominador propio del punto seleccionado"></section></div>
@@ -63,6 +64,7 @@
 <label>Nuestro índice<select id="comparison-mode"><option value="absolute">Absoluto</option><option value="percapita">Per cápita</option><option value="sectorial">Relativo</option></select></label>
 <label>Resaltar municipio<input id="comparison-search" type="search" placeholder="Nombre o departamento"></label>
 </div>
+<div id="comparison-depth-control" class="filters" hidden><label>Nivel del índice relativo<select id="comparison-depth" data-relative-depth aria-controls="comparison-chart comparison-kpis"></select></label></div>
 <p id="comparison-note" class="note" aria-live="polite"></p><div id="comparison-kpis" class="tiles"></div>
 <div class="comparison-layout"><div id="comparison-chart"></div><section id="comparison-detail" class="radar-inspector" aria-label="Municipio seleccionado en la dispersión" aria-live="polite"></section></div>
 <p id="comparison-fit" class="formula"></p>

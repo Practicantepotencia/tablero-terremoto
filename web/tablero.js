@@ -6,7 +6,7 @@ const fmt = (n, unit = '') => n == null || !Number.isFinite(n) ? '—' : new Int
   {maximumFractionDigits: unit === 'COP' ? 0 : unit === 'Índice' ? 3 : Math.abs(n)<1 ? 4 : 2}).format(n);
 const short = n => n == null ? '—' : new Intl.NumberFormat('es-CO', {notation:'compact',maximumFractionDigits:1}).format(n);
 const sorted = a => [...new Set(a)].sort((x,y) => x.localeCompare(y,'es'));
-const state = {scope:'decree',dept:'',date:DATA.latest,level:'municipal',source:T.RAPIDA,dim:'Vivienda',metric:'',order:'desc',geo:'',tab:'prioridades',matrixSource:'integrated',priorityOrder:'integrated',priorityDimension:'',priorityGeo:''};
+const state = {scope:'decree',dept:'',date:DATA.latest,level:'municipal',source:T.RAPIDA,dim:'Vivienda',metric:'',order:'desc',geo:'',tab:'prioridades',matrixSource:'integrated',priorityOrder:'integrated',priorityDimension:'',priorityGeo:'',relativeDepth:'ipm'};
 let priorityLimit = 25, sectorLimit = 25, rapidaLimit=25, comparisonGeo='';
 const table = (heads, rows) => rows.length ? `<table><thead><tr>${heads.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>` : '<p class="empty">Sin datos para esta selección.</p>';
 const tile = (label, value, sub) => `<div class="tile"><div class="tile-label">${esc(label)}</div><div class="tile-value">${esc(value)}</div><div class="tile-sub">${esc(sub)}</div></div>`;
@@ -153,6 +153,11 @@ function renderPriorityMethod(){
   const p=priorityModel.compute(state);
   $('priority-method').innerHTML=`<h2>Fórmula del modelo sectorial ${Priorizacion.VERSION}</h2><p class="formula">z = 100 × valor / máximo observado del indicador<br>${DATA.healthPressure?.education_relative_policy?.normalization==='fixed_inventory_cap_1'?'Educación relativa: z = 100 × min(centros afectados / sedes registradas, 1)<br>':''}Sector = suma de z × peso interno<br>${DATA.healthPressure?.human_impact_policy?.families_informational_only?'Impacto humano = (z fallecidos + z desaparecidos) / 2. Familias: solo consulta.<br>':''}${DATA.healthPressure?.housing_weight_policy?.enabled?'Vivienda = ('+DATA.healthPressure.housing_weight_policy.destroyed+' × z destruidas + '+DATA.healthPressure.housing_weight_policy.damaged+' × z averiadas) / '+(DATA.healthPressure.housing_weight_policy.destroyed+DATA.healthPressure.housing_weight_policy.damaged)+'<br>':''}${DATA.healthPressure?.source_cascade?.enabled?'Fuente por variable: PNUD; si falta, 3iS. El cero es válido.<br>':''}D = (Impacto humano + Vivienda + Salud + Educación + Infraestructura) / 5<br>P = D × (1 + 0,25 × IPM censal / 100) / 1,25</p><details><summary>Variables y pesos</summary><div class="table-scroll">${table(['Sector (peso 1/5)','Variable','Fuente','Peso dentro del sector','Con dato / positivos','Máximo observado'],p.definitions.flatMap(s=>s.fields.map(f=>{const c=p.calibrations.find(c=>c.id===f.id);return `<tr><td>${esc(s.name)}</td><td>${esc(f.label)}</td><td>${esc(f.candidates?'PNUD → 3iS-Sheets':f.source)}</td><td class="num">${fmt(f.share*100)}%</td><td class="num">${c.n} / ${c.positive}</td><td class="num">${fmt(c.anchor)}${c.positive<10?'<div class="small">Referencia positiva pequeña</div>':''}${!c.coherent?'<div class="small">Definiciones incompatibles: excluido</div>':''}</td></tr>`;})))}</div></details>`;
 }
+function renderRelativeMethod(){
+  const p=document.createElement('details');
+  p.innerHTML='<summary>Tres niveles del índice relativo</summary><p class="formula">Índice = D<br>Índice con IPM = P = D × (1 + 0,25 × IPM/100) / 1,25<br>Opción C = P × (1 − IDF/100)</p><p>D es el promedio de los cinco sectores. IPM: DANE censal 2018. IDF: <a href="'+esc(DATA.fiscal?.url||'https://www.dnp.gov.co/')+'" target="_blank" rel="noopener">DNP, Nuevo IDF municipal 2023</a>, hoja Municipios 2023, columna Nuevo IDF (con bonos). Un IDF alto reduce el puntaje de la opción C. Es un escenario de menor desempeño fiscal, no una proporción medida de financiación externa ni de daño.</p><p>Sin IDF válido no se calcula el tercer nivel ni se le asigna puesto. Sin IPM se conservan los límites por faltantes. Los sectores y sus pesos no cambian: el ajuste afecta el puntaje global, los puestos y la comparación, no los ejes sectoriales del radar. No se vuelve a normalizar por el máximo.</p><p><a href="docs/niveles_indice_relativo.md">Fuente, reproducción y límites</a></p>';
+  $('priority-method').append(p);
+}
 function distribution(pool) {
   if(!pool.length)return '<p class="empty">No hay distribución para estos filtros.</p>';
   const vals=pool.map(r=>r.v),min=Math.min(...vals),max=Math.max(...vals),n=min===max?1:8;
@@ -226,8 +231,9 @@ function renderRapida(){
 }
 function renderComparison(){
   const mode=$('comparison-mode').value;
+  $('comparison-depth-control').hidden=mode!=='sectorial';
   const c=Comparacion.compare(priorityModels,model,state,{mode,axis:'value',panel:'available'}),pairs=c.pairs;
-  const names={absolute:'Absoluto',percapita:'Per cápita',sectorial:'Relativo'};
+  const names={absolute:'Absoluto',percapita:'Per cápita',sectorial:'Relativo · '+Priorizacion.DEPTHS[state.relativeDepth]};
   const precision=n=>n==null?'—':new Intl.NumberFormat('es-CO',{maximumFractionDigits:4}).format(n);
   const search=$('comparison-search').value,matched=pairs.filter(r=>T.searchMatch({...r,lv:'municipal'},search));
   const exclusion=c.excluded.index+' sin índice documentado; '+c.excluded.rapida+' sin necesidad de recuperación temprana comparable (categorías excluyentes)';
@@ -268,7 +274,7 @@ function renderComparison(){
   $('comparison-fit').textContent=c.regression?'Recta discontinua: Y = '+precision(c.regression.intercept)+(c.regression.slope<0?' − ':' + ')+precision(Math.abs(c.regression.slope))+' × X. R² = '+precision(c.regression.r2)+'.':c.reason;
   $('comparison-table').innerHTML=table(['Municipio','Nuestro índice documentado','Posible','Puesto nuestro','Necesidad de recuperación temprana','Puesto de necesidad','Cobertura'],pairs.slice().sort((a,b)=>b.x-a.x).map(r=>'<tr><td>'+geoButton({...r,lv:'municipal'},T.RAPIDA)+'</td><td class="num">'+precision(r.x)+'</td><td class="num">'+precision(r.upper)+'</td><td class="num">'+r.ownRank+'</td><td class="num">'+precision(r.recovery)+'</td><td class="num">'+r.recoveryRank+'</td><td>'+r.available+'/'+r.fieldCount+' · '+fmt(100*r.coverage)+'%</td></tr>'));
 }
-function refresh() {globalControls();diagnosticControls();renderPriorities();renderDiagnostic();renderMethod();MunicipalRadar.render(priorityModel,state);PerCapitaMunicipalRadar.render(priorityModel,state);RelativeMunicipalRadar.render(priorityModel,state);PrioridadPerCapita.render(state);PrioridadRelativa.render(state);renderRapida();}
+function refresh() {globalControls();diagnosticControls();renderPriorities();renderDiagnostic();renderMethod();renderRelativeMethod();MunicipalRadar.render(priorityModel,state);PerCapitaMunicipalRadar.render(priorityModel,state);RelativeMunicipalRadar.render(priorityModel,state);PrioridadPerCapita.render(state);PrioridadRelativa.render(state);renderRapida();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>activate(b.dataset.tab)));
 document.querySelector('.tab-nav').addEventListener('keydown',event=>{
   if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
@@ -302,6 +308,17 @@ $('download').addEventListener('click',()=>{
   const lines=[header,...rows.map(r=>[r.rank,r.code,r.d,r.m,r.lv,r.f,r.id,r.i,r.v,r.u,r.date,'no acreditada',r.f==='FundacionExe'?(model.decree(state.date).has(r.d)?'no verificada':'no atribuida al sismo'):'consultar fuente'])];
   const blob=new Blob(['\ufeff'+lines.map(row=>row.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='seleccion-territorial.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+document.querySelectorAll('[data-relative-depth]').forEach(select=>{
+  select.innerHTML=Object.entries(Priorizacion.DEPTHS).map(([value,label])=>'<option value="'+value+'">'+label+'</option>').join('');
+  select.value=state.relativeDepth;
+  select.addEventListener('change',()=>{
+    state.relativeDepth=select.value;
+    document.querySelectorAll('[data-relative-depth]').forEach(other=>other.value=state.relativeDepth);
+    PrioridadRelativa.render(state);
+    RelativeMunicipalRadar.render(priorityModel,state);
+    renderComparison();
+  });
 });
 refresh();
 

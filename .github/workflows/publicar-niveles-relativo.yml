@@ -1,0 +1,46 @@
+name: Verificar y generar niveles del índice relativo
+on:
+  push:
+    branches: [indice-relativo-ipm-idf]
+    paths-ignore:
+      - index.html
+      - docs/verificacion_niveles_relativo.json
+permissions:
+  contents: write
+concurrency:
+  group: publicar-niveles-relativo
+  cancel-in-progress: false
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar y generar sin descargar ni modificar fuentes
+        run: |
+          python -m unittest discover -s tests -v
+          node --test tests/*.test.js
+          python generar_tablero_recuperacion.py --eda-redirect ""
+          node scripts/auditar_niveles_relativo.cjs a08ab81928ceb43d3707785392e0d94db4b5958f
+      - name: Comprobar los selectores y el tablero
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+          node tests/niveles_relativo.browser.cjs
+          node tests/unificado.browser.cjs
+      - name: Publicar únicamente el HTML generado y su auditoría
+        run: |
+          git config user.name 'tablero-terremoto-bot'
+          git config user.email 'actions@github.com'
+          git add -- index.html docs/verificacion_niveles_relativo.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Generar tablero relativo con IPM e IDF: datos conservados'
+            git push origin HEAD:indice-relativo-ipm-idf
+          fi

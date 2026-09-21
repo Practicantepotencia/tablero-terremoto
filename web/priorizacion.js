@@ -74,6 +74,41 @@
     const vLo=vulnerability==null?0:vulnerability/100, vHi=vulnerability==null?1:vulnerability/100;
     return {lower:lo*(1+alpha*vLo)/(1+alpha), upper:hi*(1+alpha*vHi)/(1+alpha),damageLower:lo,damageUpper:hi};
   }
+  const DEPTHS={index:'Índice',ipm:'Índice con IPM',ipm_idf:'Índice con IPM y opción C de IDF'};
+  function fiscalRegistry(fiscal){
+    const groups=new Map(),accepted=new Map();
+    for(const r of fiscal?.rows||[]){
+      if(!groups.has(r.code))groups.set(r.code,[]);
+      groups.get(r.code).push(r);
+    }
+    groups.forEach((rs,code)=>{
+      const r=rs[0];
+      if(rs.length===1&&/^\d{5}$/.test(code)&&r.year===2023&&Number.isFinite(r.value)&&r.value>=0&&r.value<=100)accepted.set(code,r);
+    });
+    return accepted;
+  }
+  function depthAdjustment(depth,vulnerability,fiscal,alpha=.25){
+    if(!Object.hasOwn(DEPTHS,depth))throw new Error('Nivel relativo desconocido: '+depth);
+    const factorLower=depth==='index'?1:(1+alpha*(vulnerability??0)/100)/(1+alpha);
+    const factorUpper=depth==='index'?1:(1+alpha*(vulnerability??100)/100)/(1+alpha);
+    const fiscalFactor=depth==='ipm_idf'?(fiscal==null?null:1-fiscal.value/100):1;
+    return {depth,label:DEPTHS[depth],factorLower:fiscalFactor==null?null:factorLower*fiscalFactor,
+      factorUpper:fiscalFactor==null?null:factorUpper*fiscalFactor,fiscalFactor,
+      formula:depth==='index'?'P = D':depth==='ipm'?'P = D × (1 + 0,25 × IPM/100) / 1,25':'P = [D × (1 + 0,25 × IPM/100) / 1,25] × (1 − IDF/100)'};
+  }
+  function adjustedAggregate(sectors,vulnerability,weights,depth,fiscal,alpha=.25){
+    const score=aggregate(sectors,vulnerability,weights,alpha),a=depthAdjustment(depth,vulnerability,fiscal,alpha);
+    // Keep the historical IPM arithmetic unchanged; apply C once, without renormalizing.
+    return {...score,lower:depth==='index'?score.damageLower:a.fiscalFactor==null?null:score.lower*a.fiscalFactor,
+      upper:depth==='index'?score.damageUpper:a.fiscalFactor==null?null:score.upper*a.fiscalFactor,adjustment:a};
+  }
+  function adjustmentNote(r,format=String){
+    const a=r.adjustment||depthAdjustment('ipm',r.vulnerability,null);
+    if(a.depth==='index')return 'Promedio sectorial sin ajustes de IPM ni IDF.';
+    const ipm='IPM DANE 2018: '+(r.vulnerability==null?'sin dato; se propaga 0–100':format(r.vulnerability)+'%')+'.';
+    if(a.depth==='ipm')return ipm;
+    return ipm+' IDF DNP 2023: '+(r.fiscal?format(r.fiscal.value)+'; factor fiscal = '+format(a.fiscalFactor):'sin dato válido; este escenario no tiene puntaje ni puesto')+'.';
+  }
   function ranks(items, value='lower') {
     const sorted=items.slice().sort((a,b)=>b[value]-a[value] || T.label(a).localeCompare(T.label(b),'es'));
     let previous, rank=0;
@@ -84,6 +119,7 @@
     const mode=options.mode||(options.relative===true?'sectorial':'absolute');
     if(!['absolute','percapita','sectorial'].includes(mode))throw new Error('Modo de priorización desconocido: '+mode);
     const relative=mode!=='absolute';
+    const fiscalByCode=fiscalRegistry(data.fiscal);
     const denominators=mode==='sectorial'?D.create(data):null;
     const pressure=H.create(data);
     const sourceCascade=data.healthPressure?.source_cascade?.enabled===true;
@@ -103,7 +139,9 @@
     const cache=new Map();
     function compute(state) {
       // Solo ámbito y captura definen referencias; buscar/filtrar departamento no renormaliza.
-      const key=JSON.stringify([state.scope,state.date]);
+      const depth=mode==='sectorial'?(state.relativeDepth||'ipm'):'ipm';
+      if(!Object.hasOwn(DEPTHS,depth))throw new Error('Nivel relativo desconocido: '+depth);
+      const key=JSON.stringify([state.scope,state.date,depth]);
       if(cache.has(key))return cache.get(key);
       const base=territorial.visible({...state,dept:''}).filter(r=>r.lv==='municipal');
       const places=[...new Map(base.map(r=>[r.geo,r])).values()];
@@ -167,14 +205,16 @@
           return {...sector,fields,lower:clamp(lower,0,100),upper:clamp(lower+unknown,0,100),coverage:coverage<EPS?0:coverage};
         });
         const baseline=baselines.get(place.code),vulnerability=baseline&&baseline.v<=100?baseline.v:null;
-        const score=aggregate(sectors,vulnerability,weights);
+        const fiscal=fiscalByCode.get(place.code)||null;
+        const score=mode==='sectorial'?adjustedAggregate(sectors,vulnerability,weights,depth,fiscal):aggregate(sectors,vulnerability,weights);
         const coverage=sectors.reduce((s,d)=>s+d.coverage/sectorDefs.length,0);
         const rec=recoveryRank.get(place.geo);
-        return {...place,...score,sectors,fieldCount:fieldCount,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
+        return {...place,...score,...(mode==='sectorial'?{fiscal}:{}),sectors,fieldCount:fieldCount,coverage,baseline:baseline||null,vulnerability,population:populations.get(place.code)||null,relative,mode,
           recovery:rec?.v??null,recoveryRank:rec?.rank??null,available:sectors.flatMap(s=>s.fields).filter(f=>f.share>0&&f.score!=null).length,
-          complete:coverage>1-EPS&&vulnerability!=null,rank:null,rankMin:null,rankMax:null};
+          complete:coverage>1-EPS&&(depth==='index'||vulnerability!=null)&&(depth!=='ipm_idf'||fiscal!=null),rank:null,rankMin:null,rankMax:null};
       });
-      const scored=items.filter(r=>r.coverage>EPS), ranked=ranks(scored);
+      const hasScore=r=>r.coverage>EPS&&Number.isFinite(r.lower);
+      const scored=items.filter(hasScore), ranked=ranks(scored);
       // Posición compatible con límites por faltantes; no es intervalo de confianza.
       ranked.forEach(r=>{
         r.bestRank=1+ranked.filter(o=>o.geo!==r.geo&&o.lower>r.upper+EPS).length;
@@ -183,9 +223,9 @@
       const scenarioWeights=[weights];
       for(let i=0;i<sectorDefs.length;i++)for(const factor of [.75,1.25])scenarioWeights.push(weights.map((w,j)=>j===i?w*factor:w));
       let scenarios=0;
-      for(const alpha of [0,.25,.5])for(const w of scenarioWeights){
+      for(const alpha of (depth==='index'?[0]:[0,.25,.5]))for(const w of scenarioWeights){
         scenarios++;
-        const simulation=ranks(ranked.map(r=>({...r,...aggregate(r.sectors,r.vulnerability,w,alpha)})));
+        const simulation=ranks(ranked.map(r=>({...r,...(mode==='sectorial'?adjustedAggregate(r.sectors,r.vulnerability,w,depth,r.fiscal,alpha):aggregate(r.sectors,r.vulnerability,w,alpha))})));
         simulation.forEach(r=>{
           const target=ranked.find(x=>x.geo===r.geo);
           target.rankMin=target.rankMin==null?r.rank:Math.min(target.rankMin,r.rank);
@@ -194,7 +234,7 @@
       }
       const top=new Set(ranked.filter(r=>r.rank<=20).map(r=>r.geo));
       const rapidaTop=recovery.filter(r=>recoveryRank.get(r.geo).rank<=20);
-      const result={definitions:sectorDefs,items:ranked,missing:items.filter(r=>r.coverage<=EPS).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')),
+      const result={definitions:sectorDefs,items:ranked,missing:items.filter(r=>!hasScore(r)).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')),
         all:items,calibrations:[...calibrations.values()].map(({rows,values,...r})=>r),scenarios,
         overlap:rapidaTop.filter(r=>top.has(r.geo)).length,rapidaTopN:rapidaTop.length,referenceN:places.length};
       cache.set(key,result);return result;
@@ -213,7 +253,7 @@
         if(state.dimensionDirection==='asc')items=items.filter(r=>r.dimensionRank!=null).sort((a,b)=>a.sectors[sectorIndex][value]-b.sectors[sectorIndex][value]||T.label(a).localeCompare(T.label(b),'es')).concat(items.filter(r=>r.dimensionRank==null));
       } else {
         if(order==='rapida')items.sort((a,b)=>(b.recovery??-1)-(a.recovery??-1)||T.label(a).localeCompare(T.label(b),'es'));
-        if(order==='uncertainty')items.sort((a,b)=>b.upper-a.upper||a.coverage-b.coverage||T.label(a).localeCompare(T.label(b),'es'));
+        if(order==='uncertainty')items.sort((a,b)=>(b.upper??-1)-(a.upper??-1)||a.coverage-b.coverage||T.label(a).localeCompare(T.label(b),'es'));
       }
       const inView=r=>(!state.dept||r.d===state.dept)&&T.searchMatch(r,state.matrixSearch||'');
       return {...result,items:items.filter(inView)};
@@ -228,6 +268,6 @@
     }
     return bundles.get(data);
   }
-  const api={create,models,normalize,aggregate,ranks,SECTORS,FIELD_COUNT,VERSION:'1.2-RS',CASCADE_FIELDS,chooseCascade};
+  const api={create,models,normalize,aggregate,adjustedAggregate,depthAdjustment,adjustmentNote,fiscalRegistry,DEPTHS,ranks,SECTORS,FIELD_COUNT,VERSION:'1.2-RS',CASCADE_FIELDS,chooseCascade};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.Priorizacion=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

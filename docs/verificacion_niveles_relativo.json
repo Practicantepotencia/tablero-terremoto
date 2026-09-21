@@ -1,0 +1,783 @@
+{
+  "capture": "2026-09-21",
+  "baseline_ref": "a08ab81928ceb43d3707785392e0d94db4b5958f",
+  "idf": {
+    "year": 2023,
+    "n": 1102,
+    "sha256": "8ed6c18c648b614b546d4777fb1a77859ced24bac960342f1ea0b47384ac35f1"
+  },
+  "scopes": {
+    "decree": {
+      "levels": {
+        "index": {
+          "reference": 509,
+          "scored": 468,
+          "with_idf": 498,
+          "without_idf": [
+            {
+              "code": "",
+              "name": "Nuevo Belén de Bajirá"
+            },
+            {
+              "code": "",
+              "name": "Pto Nare(La Magdalena)"
+            },
+            {
+              "code": "",
+              "name": "Sotará - Paispamba"
+            },
+            {
+              "code": "",
+              "name": "Carolina del Príncipe"
+            },
+            {
+              "code": "",
+              "name": "El Peñol"
+            },
+            {
+              "code": "",
+              "name": "Piendamó"
+            },
+            {
+              "code": "",
+              "name": "Sotará"
+            },
+            {
+              "code": "",
+              "name": "El Pital"
+            },
+            {
+              "code": "",
+              "name": "Cúcuta"
+            },
+            {
+              "code": "",
+              "name": "Armero Guayabal"
+            },
+            {
+              "code": "",
+              "name": "Calima-El Darién"
+            }
+          ],
+          "comparison": {
+            "n": 286,
+            "r2": 0.38265825949108295,
+            "pearson": 0.6185937758263358,
+            "rho": 0.6654016892384901
+          },
+          "pereira": {
+            "code": "66001",
+            "name": "Pereira",
+            "lower": 31.44925516101982,
+            "upper": 51.44925516101982,
+            "rank": 5,
+            "damage": 31.44925516101982,
+            "ipm": 15.1,
+            "idf": 75.23225403040647
+          },
+          "top5": [
+            {
+              "code": "76606",
+              "name": "Restrepo",
+              "lower": 44.741696149036066,
+              "upper": 84.74169614903606,
+              "rank": 1,
+              "damage": 44.741696149036066,
+              "ipm": 20.7,
+              "idf": 52.51514450499201
+            },
+            {
+              "code": "76126",
+              "name": "Calima",
+              "lower": 38.240646876411745,
+              "upper": 68.24064687641174,
+              "rank": 2,
+              "damage": 38.240646876411745,
+              "ipm": 25.7,
+              "idf": 48.63212769717042
+            },
+            {
+              "code": "76828",
+              "name": "Trujillo",
+              "lower": 34.32741878998225,
+              "upper": 64.32741878998223,
+              "rank": 3,
+              "damage": 34.32741878998225,
+              "ipm": 34.9,
+              "idf": 63.97945424254591
+            },
+            {
+              "code": "27745",
+              "name": "Sipí",
+              "lower": 31.789705012986154,
+              "upper": 91.78970501298616,
+              "rank": 4,
+              "damage": 31.789705012986154,
+              "ipm": 69.7,
+              "idf": 63.77532267877349
+            },
+            {
+              "code": "66001",
+              "name": "Pereira",
+              "lower": 31.44925516101982,
+              "upper": 51.44925516101982,
+              "rank": 5,
+              "damage": 31.44925516101982,
+              "ipm": 15.1,
+              "idf": 75.23225403040647
+            }
+          ]
+        },
+        "ipm": {
+          "reference": 509,
+          "scored": 468,
+          "with_idf": 498,
+          "without_idf": [
+            {
+              "code": "",
+              "name": "Nuevo Belén de Bajirá"
+            },
+            {
+              "code": "",
+              "name": "Pto Nare(La Magdalena)"
+            },
+            {
+              "code": "",
+              "name": "Sotará - Paispamba"
+            },
+            {
+              "code": "",
+              "name": "Carolina del Príncipe"
+            },
+            {
+              "code": "",
+              "name": "El Peñol"
+            },
+            {
+              "code": "",
+              "name": "Piendamó"
+            },
+            {
+              "code": "",
+              "name": "Sotará"
+            },
+            {
+              "code": "",
+              "name": "El Pital"
+            },
+            {
+              "code": "",
+              "name": "Cúcuta"
+            },
+            {
+              "code": "",
+              "name": "Armero Guayabal"
+            },
+            {
+              "code": "",
+              "name": "Calima-El Darién"
+            }
+          ],
+          "comparison": {
+            "n": 286,
+            "r2": 0.39594488747407197,
+            "pearson": 0.6292415176020031,
+            "rho": 0.6752503149937972
+          },
+          "pereira": {
+            "code": "66001",
+            "name": "Pereira",
+            "lower": 26.109171634678653,
+            "upper": 42.71317163467865,
+            "rank": 8,
+            "damage": 31.44925516101982,
+            "ipm": 15.1,
+            "idf": 75.23225403040647
+          },
+          "top5": [
+            {
+              "code": "76606",
+              "name": "Restrepo",
+              "lower": 37.64566313979894,
+              "upper": 71.30166313979893,
+              "rank": 1,
+              "damage": 44.741696149036066,
+              "ipm": 20.7,
+              "idf": 52.51514450499201
+            },
+            {
+              "code": "76126",
+              "name": "Calima",
+              "lower": 32.558086750576955,
+              "upper": 58.10008675057695,
+              "rank": 2,
+              "damage": 38.240646876411745,
+              "ipm": 25.7,
+              "idf": 48.63212769717042
+            },
+            {
+              "code": "27745",
+              "name": "Sipí",
+              "lower": 29.863248889199195,
+              "upper": 86.2272488891992,
+              "rank": 3,
+              "damage": 31.789705012986154,
+              "ipm": 69.7,
+              "idf": 63.77532267877349
+            },
+            {
+              "code": "76828",
+              "name": "Trujillo",
+              "lower": 29.85798886352656,
+              "upper": 55.95198886352655,
+              "rank": 4,
+              "damage": 34.32741878998225,
+              "ipm": 34.9,
+              "idf": 63.97945424254591
+            },
+            {
+              "code": "27073",
+              "name": "Bagadó",
+              "lower": 29.00880461204354,
+              "upper": 67.48880461204354,
+              "rank": 5,
+              "damage": 30.15468254890181,
+              "ipm": 81,
+              "idf": 37.06073334070602
+            }
+          ]
+        },
+        "ipm_idf": {
+          "reference": 509,
+          "scored": 468,
+          "with_idf": 498,
+          "without_idf": [
+            {
+              "code": "",
+              "name": "Nuevo Belén de Bajirá"
+            },
+            {
+              "code": "",
+              "name": "Pto Nare(La Magdalena)"
+            },
+            {
+              "code": "",
+              "name": "Sotará - Paispamba"
+            },
+            {
+              "code": "",
+              "name": "Carolina del Príncipe"
+            },
+            {
+              "code": "",
+              "name": "El Peñol"
+            },
+            {
+              "code": "",
+              "name": "Piendamó"
+            },
+            {
+              "code": "",
+              "name": "Sotará"
+            },
+            {
+              "code": "",
+              "name": "El Pital"
+            },
+            {
+              "code": "",
+              "name": "Cúcuta"
+            },
+            {
+              "code": "",
+              "name": "Armero Guayabal"
+            },
+            {
+              "code": "",
+              "name": "Calima-El Darién"
+            }
+          ],
+          "comparison": {
+            "n": 286,
+            "r2": 0.3410789236946593,
+            "pearson": 0.5840196261211256,
+            "rho": 0.6737323400167187
+          },
+          "pereira": {
+            "code": "66001",
+            "name": "Pereira",
+            "lower": 6.466653305242381,
+            "upper": 10.57908984603369,
+            "rank": 31,
+            "damage": 31.44925516101982,
+            "ipm": 15.1,
+            "idf": 75.23225403040647
+          },
+          "top5": [
+            {
+              "code": "63401",
+              "name": "La Tebaida",
+              "lower": 19.437127620278616,
+              "upper": 48.88867938885442,
+              "rank": 1,
+              "damage": 26.398782343302706,
+              "ipm": 27.4,
+              "idf": 13.86420282938755
+            },
+            {
+              "code": "27073",
+              "name": "Bagadó",
+              "lower": 18.257928889447655,
+              "upper": 42.47695869994398,
+              "rank": 2,
+              "damage": 30.15468254890181,
+              "ipm": 81,
+              "idf": 37.06073334070602
+            },
+            {
+              "code": "76606",
+              "name": "Restrepo",
+              "lower": 17.875988742071016,
+              "upper": 33.857491707470906,
+              "rank": 3,
+              "damage": 44.741696149036066,
+              "ipm": 20.7,
+              "idf": 52.51514450499201
+            },
+            {
+              "code": "76126",
+              "name": "Calima",
+              "lower": 16.724396426280844,
+              "upper": 29.844778369869573,
+              "rank": 4,
+              "damage": 38.240646876411745,
+              "ipm": 25.7,
+              "idf": 48.63212769717042
+            },
+            {
+              "code": "76377",
+              "name": "La Cumbre",
+              "lower": 14.879764030137569,
+              "upper": 44.75956016714509,
+              "rank": 5,
+              "damage": 19.91949873005765,
+              "ipm": 25.3,
+              "idf": 12.180237076747249
+            }
+          ]
+        }
+      },
+      "baseline_unchanged": true
+    },
+    "all": {
+      "levels": {
+        "index": {
+          "reference": 631,
+          "scored": 532,
+          "with_idf": 616,
+          "without_idf": [
+            {
+              "code": "",
+              "name": "Nuevo Belén de Bajirá"
+            },
+            {
+              "code": "",
+              "name": "Pto Nare(La Magdalena)"
+            },
+            {
+              "code": "",
+              "name": "Sotará - Paispamba"
+            },
+            {
+              "code": "",
+              "name": "Carolina del Príncipe"
+            },
+            {
+              "code": "",
+              "name": "El Peñol"
+            },
+            {
+              "code": "",
+              "name": "Bogotá D.C."
+            },
+            {
+              "code": "",
+              "name": "Cartagena"
+            },
+            {
+              "code": "",
+              "name": "Piendamó"
+            },
+            {
+              "code": "",
+              "name": "Sotará"
+            },
+            {
+              "code": "",
+              "name": "El Pital"
+            },
+            {
+              "code": "",
+              "name": "Cuaspud"
+            },
+            {
+              "code": "",
+              "name": "Tumaco"
+            },
+            {
+              "code": "",
+              "name": "Cúcuta"
+            },
+            {
+              "code": "",
+              "name": "Armero Guayabal"
+            },
+            {
+              "code": "",
+              "name": "Calima-El Darién"
+            }
+          ],
+          "comparison": {
+            "n": 287,
+            "r2": 0.3843775335922032,
+            "pearson": 0.619981881664459,
+            "rho": 0.6680588592844197
+          },
+          "pereira": {
+            "code": "66001",
+            "name": "Pereira",
+            "lower": 31.44925516101982,
+            "upper": 51.44925516101982,
+            "rank": 5,
+            "damage": 31.44925516101982,
+            "ipm": 15.1,
+            "idf": 75.23225403040647
+          },
+          "top5": [
+            {
+              "code": "76606",
+              "name": "Restrepo",
+              "lower": 44.741696149036066,
+              "upper": 84.74169614903606,
+              "rank": 1,
+              "damage": 44.741696149036066,
+              "ipm": 20.7,
+              "idf": 52.51514450499201
+            },
+            {
+              "code": "76126",
+              "name": "Calima",
+              "lower": 38.240646876411745,
+              "upper": 68.24064687641174,
+              "rank": 2,
+              "damage": 38.240646876411745,
+              "ipm": 25.7,
+              "idf": 48.63212769717042
+            },
+            {
+              "code": "76828",
+              "name": "Trujillo",
+              "lower": 34.32741878998225,
+              "upper": 64.32741878998223,
+              "rank": 3,
+              "damage": 34.32741878998225,
+              "ipm": 34.9,
+              "idf": 63.97945424254591
+            },
+            {
+              "code": "27745",
+              "name": "Sipí",
+              "lower": 31.789705012986154,
+              "upper": 91.78970501298616,
+              "rank": 4,
+              "damage": 31.789705012986154,
+              "ipm": 69.7,
+              "idf": 63.77532267877349
+            },
+            {
+              "code": "66001",
+              "name": "Pereira",
+              "lower": 31.44925516101982,
+              "upper": 51.44925516101982,
+              "rank": 5,
+              "damage": 31.44925516101982,
+              "ipm": 15.1,
+              "idf": 75.23225403040647
+            }
+          ]
+        },
+        "ipm": {
+          "reference": 631,
+          "scored": 532,
+          "with_idf": 616,
+          "without_idf": [
+            {
+              "code": "",
+              "name": "Nuevo Belén de Bajirá"
+            },
+            {
+              "code": "",
+              "name": "Pto Nare(La Magdalena)"
+            },
+            {
+              "code": "",
+              "name": "Sotará - Paispamba"
+            },
+            {
+              "code": "",
+              "name": "Carolina del Príncipe"
+            },
+            {
+              "code": "",
+              "name": "El Peñol"
+            },
+            {
+              "code": "",
+              "name": "Bogotá D.C."
+            },
+            {
+              "code": "",
+              "name": "Cartagena"
+            },
+            {
+              "code": "",
+              "name": "Piendamó"
+            },
+            {
+              "code": "",
+              "name": "Sotará"
+            },
+            {
+              "code": "",
+              "name": "El Pital"
+            },
+            {
+              "code": "",
+              "name": "Cuaspud"
+            },
+            {
+              "code": "",
+              "name": "Tumaco"
+            },
+            {
+              "code": "",
+              "name": "Cúcuta"
+            },
+            {
+              "code": "",
+              "name": "Armero Guayabal"
+            },
+            {
+              "code": "",
+              "name": "Calima-El Darién"
+            }
+          ],
+          "comparison": {
+            "n": 287,
+            "r2": 0.3976453421256319,
+            "pearson": 0.6305912639147738,
+            "rho": 0.6778187433291777
+          },
+          "pereira": {
+            "code": "66001",
+            "name": "Pereira",
+            "lower": 26.109171634678653,
+            "upper": 42.71317163467865,
+            "rank": 8,
+            "damage": 31.44925516101982,
+            "ipm": 15.1,
+            "idf": 75.23225403040647
+          },
+          "top5": [
+            {
+              "code": "76606",
+              "name": "Restrepo",
+              "lower": 37.64566313979894,
+              "upper": 71.30166313979893,
+              "rank": 1,
+              "damage": 44.741696149036066,
+              "ipm": 20.7,
+              "idf": 52.51514450499201
+            },
+            {
+              "code": "76126",
+              "name": "Calima",
+              "lower": 32.558086750576955,
+              "upper": 58.10008675057695,
+              "rank": 2,
+              "damage": 38.240646876411745,
+              "ipm": 25.7,
+              "idf": 48.63212769717042
+            },
+            {
+              "code": "27745",
+              "name": "Sipí",
+              "lower": 29.863248889199195,
+              "upper": 86.2272488891992,
+              "rank": 3,
+              "damage": 31.789705012986154,
+              "ipm": 69.7,
+              "idf": 63.77532267877349
+            },
+            {
+              "code": "76828",
+              "name": "Trujillo",
+              "lower": 29.85798886352656,
+              "upper": 55.95198886352655,
+              "rank": 4,
+              "damage": 34.32741878998225,
+              "ipm": 34.9,
+              "idf": 63.97945424254591
+            },
+            {
+              "code": "27073",
+              "name": "Bagadó",
+              "lower": 29.00880461204354,
+              "upper": 67.48880461204354,
+              "rank": 5,
+              "damage": 30.15468254890181,
+              "ipm": 81,
+              "idf": 37.06073334070602
+            }
+          ]
+        },
+        "ipm_idf": {
+          "reference": 631,
+          "scored": 532,
+          "with_idf": 616,
+          "without_idf": [
+            {
+              "code": "",
+              "name": "Nuevo Belén de Bajirá"
+            },
+            {
+              "code": "",
+              "name": "Pto Nare(La Magdalena)"
+            },
+            {
+              "code": "",
+              "name": "Sotará - Paispamba"
+            },
+            {
+              "code": "",
+              "name": "Carolina del Príncipe"
+            },
+            {
+              "code": "",
+              "name": "El Peñol"
+            },
+            {
+              "code": "",
+              "name": "Bogotá D.C."
+            },
+            {
+              "code": "",
+              "name": "Cartagena"
+            },
+            {
+              "code": "",
+              "name": "Piendamó"
+            },
+            {
+              "code": "",
+              "name": "Sotará"
+            },
+            {
+              "code": "",
+              "name": "El Pital"
+            },
+            {
+              "code": "",
+              "name": "Cuaspud"
+            },
+            {
+              "code": "",
+              "name": "Tumaco"
+            },
+            {
+              "code": "",
+              "name": "Cúcuta"
+            },
+            {
+              "code": "",
+              "name": "Armero Guayabal"
+            },
+            {
+              "code": "",
+              "name": "Calima-El Darién"
+            }
+          ],
+          "comparison": {
+            "n": 287,
+            "r2": 0.3426219219285629,
+            "pearson": 0.5853391512008768,
+            "rho": 0.6763825554507579
+          },
+          "pereira": {
+            "code": "66001",
+            "name": "Pereira",
+            "lower": 6.466653305242381,
+            "upper": 10.57908984603369,
+            "rank": 31,
+            "damage": 31.44925516101982,
+            "ipm": 15.1,
+            "idf": 75.23225403040647
+          },
+          "top5": [
+            {
+              "code": "63401",
+              "name": "La Tebaida",
+              "lower": 19.437127620278616,
+              "upper": 48.88867938885442,
+              "rank": 1,
+              "damage": 26.398782343302706,
+              "ipm": 27.4,
+              "idf": 13.86420282938755
+            },
+            {
+              "code": "27073",
+              "name": "Bagadó",
+              "lower": 18.257928889447655,
+              "upper": 42.47695869994398,
+              "rank": 2,
+              "damage": 30.15468254890181,
+              "ipm": 81,
+              "idf": 37.06073334070602
+            },
+            {
+              "code": "76606",
+              "name": "Restrepo",
+              "lower": 17.875988742071016,
+              "upper": 33.857491707470906,
+              "rank": 3,
+              "damage": 44.741696149036066,
+              "ipm": 20.7,
+              "idf": 52.51514450499201
+            },
+            {
+              "code": "76126",
+              "name": "Calima",
+              "lower": 16.724396426280844,
+              "upper": 29.844778369869573,
+              "rank": 4,
+              "damage": 38.240646876411745,
+              "ipm": 25.7,
+              "idf": 48.63212769717042
+            },
+            {
+              "code": "76377",
+              "name": "La Cumbre",
+              "lower": 14.879764030137569,
+              "upper": 44.75956016714509,
+              "rank": 5,
+              "damage": 19.91949873005765,
+              "ipm": 25.3,
+              "idf": 12.180237076747249
+            }
+          ]
+        }
+      },
+      "baseline_unchanged": true
+    }
+  }
+}

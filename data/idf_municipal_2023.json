@@ -1,0 +1,8830 @@
+{
+  "label": "DNP · Nuevo IDF municipal 2023",
+  "year": 2023,
+  "unit": "Índice 0–100",
+  "url": "https://colaboracion.dnp.gov.co/CDT/Desarrollo%20Territorial/Desempeno_Fiscal/ResultadosIDF_Nueva_MetodologIa_2023_Act.xlsx",
+  "page": "https://www.dnp.gov.co/LaEntidad_/subdireccion-general-descentralizacion-desarrollo-territorial/direccion-descentralizacion-fortalecimiento-fiscal/Paginas/informacion-fiscal-y-financiera.aspx",
+  "sheet": "Municipios 2023",
+  "column": "Nuevo IDF",
+  "downloaded": "2026-09-21",
+  "sha256": "8ed6c18c648b614b546d4777fb1a77859ced24bac960342f1ea0b47384ac35f1",
+  "file": "data/fuentes/ResultadosIDF_Nueva_MetodologIa_2023_Act.xlsx",
+  "rows": [
+    {
+      "code": "05001",
+      "d": "ANTIOQUIA",
+      "m": "MEDELLÍN",
+      "value": 69.78015980192276,
+      "year": 2023,
+      "cell": "AE8"
+    },
+    {
+      "code": "05002",
+      "d": "ANTIOQUIA",
+      "m": "ABEJORRAL",
+      "value": 65.49887848289697,
+      "year": 2023,
+      "cell": "AE9"
+    },
+    {
+      "code": "05004",
+      "d": "ANTIOQUIA",
+      "m": "ABRIAQUÍ",
+      "value": 63.30439494085761,
+      "year": 2023,
+      "cell": "AE10"
+    },
+    {
+      "code": "05021",
+      "d": "ANTIOQUIA",
+      "m": "ALEJANDRÍA",
+      "value": 51.87270155498809,
+      "year": 2023,
+      "cell": "AE11"
+    },
+    {
+      "code": "05030",
+      "d": "ANTIOQUIA",
+      "m": "AMAGÁ",
+      "value": 64.42532383059722,
+      "year": 2023,
+      "cell": "AE12"
+    },
+    {
+      "code": "05031",
+      "d": "ANTIOQUIA",
+      "m": "AMALFI",
+      "value": 60.46140916899155,
+      "year": 2023,
+      "cell": "AE13"
+    },
+    {
+      "code": "05034",
+      "d": "ANTIOQUIA",
+      "m": "ANDES",
+      "value": 59.91195431093564,
+      "year": 2023,
+      "cell": "AE14"
+    },
+    {
+      "code": "05036",
+      "d": "ANTIOQUIA",
+      "m": "ANGELÓPOLIS",
+      "value": 72.06384439963588,
+      "year": 2023,
+      "cell": "AE15"
+    },
+    {
+      "code": "05038",
+      "d": "ANTIOQUIA",
+      "m": "ANGOSTURA",
+      "value": 62.255829255617755,
+      "year": 2023,
+      "cell": "AE16"
+    },
+    {
+      "code": "05040",
+      "d": "ANTIOQUIA",
+      "m": "ANORÍ",
+      "value": 54.663181716474476,
+      "year": 2023,
+      "cell": "AE17"
+    },
+    {
+      "code": "05042",
+      "d": "ANTIOQUIA",
+      "m": "SANTAFE DE ANTIOQUIA",
+      "value": 64.37182373568126,
+      "year": 2023,
+      "cell": "AE18"
+    },
+    {
+      "code": "05044",
+      "d": "ANTIOQUIA",
+      "m": "ANZÁ",
+      "value": 52.74203494036534,
+      "year": 2023,
+      "cell": "AE19"
+    },
+    {
+      "code": "05045",
+      "d": "ANTIOQUIA",
+      "m": "APARTADÓ",
+      "value": 52.095902954680014,
+      "year": 2023,
+      "cell": "AE20"
+    },
+    {
+      "code": "05051",
+      "d": "ANTIOQUIA",
+      "m": "ARBOLETES",
+      "value": 47.2348772975691,
+      "year": 2023,
+      "cell": "AE21"
+    },
+    {
+      "code": "05055",
+      "d": "ANTIOQUIA",
+      "m": "ARGELIA ",
+      "value": 48.91423217916597,
+      "year": 2023,
+      "cell": "AE22"
+    },
+    {
+      "code": "05059",
+      "d": "ANTIOQUIA",
+      "m": "ARMENIA ",
+      "value": 63.25716667418153,
+      "year": 2023,
+      "cell": "AE23"
+    },
+    {
+      "code": "05079",
+      "d": "ANTIOQUIA",
+      "m": "BARBOSA ",
+      "value": 49.905174548118524,
+      "year": 2023,
+      "cell": "AE24"
+    },
+    {
+      "code": "05086",
+      "d": "ANTIOQUIA",
+      "m": "BELMIRA",
+      "value": 59.16725442129686,
+      "year": 2023,
+      "cell": "AE25"
+    },
+    {
+      "code": "05088",
+      "d": "ANTIOQUIA",
+      "m": "BELLO",
+      "value": 62.55844866684339,
+      "year": 2023,
+      "cell": "AE26"
+    },
+    {
+      "code": "05091",
+      "d": "ANTIOQUIA",
+      "m": "BETANIA",
+      "value": 61.66026658810451,
+      "year": 2023,
+      "cell": "AE27"
+    },
+    {
+      "code": "05093",
+      "d": "ANTIOQUIA",
+      "m": "BETULIA ",
+      "value": 50.03430476225873,
+      "year": 2023,
+      "cell": "AE28"
+    },
+    {
+      "code": "05101",
+      "d": "ANTIOQUIA",
+      "m": "CIUDAD BOLIVAR",
+      "value": 59.88914531272249,
+      "year": 2023,
+      "cell": "AE29"
+    },
+    {
+      "code": "05107",
+      "d": "ANTIOQUIA",
+      "m": "BRICEÑO ",
+      "value": 59.30856102994238,
+      "year": 2023,
+      "cell": "AE30"
+    },
+    {
+      "code": "05113",
+      "d": "ANTIOQUIA",
+      "m": "BURITICÁ",
+      "value": 72.06926305858873,
+      "year": 2023,
+      "cell": "AE31"
+    },
+    {
+      "code": "05120",
+      "d": "ANTIOQUIA",
+      "m": "CÁCERES",
+      "value": 56.99406287858588,
+      "year": 2023,
+      "cell": "AE32"
+    },
+    {
+      "code": "05125",
+      "d": "ANTIOQUIA",
+      "m": "CAICEDO",
+      "value": 52.92468703311202,
+      "year": 2023,
+      "cell": "AE33"
+    },
+    {
+      "code": "05129",
+      "d": "ANTIOQUIA",
+      "m": "CALDAS ",
+      "value": 77.8609958916936,
+      "year": 2023,
+      "cell": "AE34"
+    },
+    {
+      "code": "05134",
+      "d": "ANTIOQUIA",
+      "m": "CAMPAMENTO",
+      "value": 53.74887137780235,
+      "year": 2023,
+      "cell": "AE35"
+    },
+    {
+      "code": "05138",
+      "d": "ANTIOQUIA",
+      "m": "CAÑASGORDAS",
+      "value": 71.42230902375408,
+      "year": 2023,
+      "cell": "AE36"
+    },
+    {
+      "code": "05142",
+      "d": "ANTIOQUIA",
+      "m": "CARACOLÍ",
+      "value": 43.15433133432903,
+      "year": 2023,
+      "cell": "AE37"
+    },
+    {
+      "code": "05145",
+      "d": "ANTIOQUIA",
+      "m": "CARAMANTA",
+      "value": 72.89217822704335,
+      "year": 2023,
+      "cell": "AE38"
+    },
+    {
+      "code": "05147",
+      "d": "ANTIOQUIA",
+      "m": "CAREPA",
+      "value": 55.829862171368035,
+      "year": 2023,
+      "cell": "AE39"
+    },
+    {
+      "code": "05148",
+      "d": "ANTIOQUIA",
+      "m": "EL CARMEN DE VIBORAL",
+      "value": 60.53774796045256,
+      "year": 2023,
+      "cell": "AE40"
+    },
+    {
+      "code": "05150",
+      "d": "ANTIOQUIA",
+      "m": "CAROLINA DEL PRINCIPE",
+      "value": 14.305873790683126,
+      "year": 2023,
+      "cell": "AE41"
+    },
+    {
+      "code": "05154",
+      "d": "ANTIOQUIA",
+      "m": "CAUCASIA",
+      "value": 54.27801701442704,
+      "year": 2023,
+      "cell": "AE42"
+    },
+    {
+      "code": "05172",
+      "d": "ANTIOQUIA",
+      "m": "CHIGORODÓ",
+      "value": 62.42902534906715,
+      "year": 2023,
+      "cell": "AE43"
+    },
+    {
+      "code": "05190",
+      "d": "ANTIOQUIA",
+      "m": "CISNEROS",
+      "value": 60.81892402049659,
+      "year": 2023,
+      "cell": "AE44"
+    },
+    {
+      "code": "05197",
+      "d": "ANTIOQUIA",
+      "m": "COCORNÁ",
+      "value": 54.03257854837233,
+      "year": 2023,
+      "cell": "AE45"
+    },
+    {
+      "code": "05206",
+      "d": "ANTIOQUIA",
+      "m": "CONCEPCIÓN ",
+      "value": 74.91707592023404,
+      "year": 2023,
+      "cell": "AE46"
+    },
+    {
+      "code": "05209",
+      "d": "ANTIOQUIA",
+      "m": "CONCORDIA ",
+      "value": 54.75698659202494,
+      "year": 2023,
+      "cell": "AE47"
+    },
+    {
+      "code": "05212",
+      "d": "ANTIOQUIA",
+      "m": "COPACABANA",
+      "value": 74.5149566978361,
+      "year": 2023,
+      "cell": "AE48"
+    },
+    {
+      "code": "05234",
+      "d": "ANTIOQUIA",
+      "m": "DABEIBA",
+      "value": 63.62822068671539,
+      "year": 2023,
+      "cell": "AE49"
+    },
+    {
+      "code": "05237",
+      "d": "ANTIOQUIA",
+      "m": "DON MATÍAS",
+      "value": 75.73493964630809,
+      "year": 2023,
+      "cell": "AE50"
+    },
+    {
+      "code": "05240",
+      "d": "ANTIOQUIA",
+      "m": "EBÉJICO",
+      "value": 60.58537104814406,
+      "year": 2023,
+      "cell": "AE51"
+    },
+    {
+      "code": "05250",
+      "d": "ANTIOQUIA",
+      "m": "EL BAGRE",
+      "value": 63.633900249015554,
+      "year": 2023,
+      "cell": "AE52"
+    },
+    {
+      "code": "05264",
+      "d": "ANTIOQUIA",
+      "m": "ENTRERRIOS",
+      "value": 58.25268382165066,
+      "year": 2023,
+      "cell": "AE53"
+    },
+    {
+      "code": "05266",
+      "d": "ANTIOQUIA",
+      "m": "ENVIGADO",
+      "value": 76.19901921224555,
+      "year": 2023,
+      "cell": "AE54"
+    },
+    {
+      "code": "05282",
+      "d": "ANTIOQUIA",
+      "m": "FREDONIA",
+      "value": 51.02581492897092,
+      "year": 2023,
+      "cell": "AE55"
+    },
+    {
+      "code": "05284",
+      "d": "ANTIOQUIA",
+      "m": "FRONTINO",
+      "value": 50.77034083222955,
+      "year": 2023,
+      "cell": "AE56"
+    },
+    {
+      "code": "05306",
+      "d": "ANTIOQUIA",
+      "m": "GIRALDO",
+      "value": 58.54445248649188,
+      "year": 2023,
+      "cell": "AE57"
+    },
+    {
+      "code": "05308",
+      "d": "ANTIOQUIA",
+      "m": "GIRARDOTA",
+      "value": 58.53120631388001,
+      "year": 2023,
+      "cell": "AE58"
+    },
+    {
+      "code": "05310",
+      "d": "ANTIOQUIA",
+      "m": "GÓMEZ PLATA",
+      "value": 55.56061878700571,
+      "year": 2023,
+      "cell": "AE59"
+    },
+    {
+      "code": "05313",
+      "d": "ANTIOQUIA",
+      "m": "GRANADA ",
+      "value": 64.87537689959292,
+      "year": 2023,
+      "cell": "AE60"
+    },
+    {
+      "code": "05315",
+      "d": "ANTIOQUIA",
+      "m": "GUADALUPE ",
+      "value": 66.45202173254712,
+      "year": 2023,
+      "cell": "AE61"
+    },
+    {
+      "code": "05318",
+      "d": "ANTIOQUIA",
+      "m": "GUARNE",
+      "value": 70.89746827428934,
+      "year": 2023,
+      "cell": "AE62"
+    },
+    {
+      "code": "05321",
+      "d": "ANTIOQUIA",
+      "m": "GUATAPÉ",
+      "value": 57.35836769306804,
+      "year": 2023,
+      "cell": "AE63"
+    },
+    {
+      "code": "05347",
+      "d": "ANTIOQUIA",
+      "m": "HELICONIA",
+      "value": 49.72701749310582,
+      "year": 2023,
+      "cell": "AE64"
+    },
+    {
+      "code": "05353",
+      "d": "ANTIOQUIA",
+      "m": "HISPANIA",
+      "value": 60.25724814287334,
+      "year": 2023,
+      "cell": "AE65"
+    },
+    {
+      "code": "05360",
+      "d": "ANTIOQUIA",
+      "m": "ITAGÜÍ",
+      "value": 81.4568493999637,
+      "year": 2023,
+      "cell": "AE66"
+    },
+    {
+      "code": "05361",
+      "d": "ANTIOQUIA",
+      "m": "ITUANGO",
+      "value": 61.8466378394384,
+      "year": 2023,
+      "cell": "AE67"
+    },
+    {
+      "code": "05364",
+      "d": "ANTIOQUIA",
+      "m": "JARDÍN",
+      "value": 64.7123392877338,
+      "year": 2023,
+      "cell": "AE68"
+    },
+    {
+      "code": "05368",
+      "d": "ANTIOQUIA",
+      "m": "JERICÓ ",
+      "value": 68.1079163444469,
+      "year": 2023,
+      "cell": "AE69"
+    },
+    {
+      "code": "05376",
+      "d": "ANTIOQUIA",
+      "m": "LA CEJA DEL TAMBO",
+      "value": 67.10779462898884,
+      "year": 2023,
+      "cell": "AE70"
+    },
+    {
+      "code": "05380",
+      "d": "ANTIOQUIA",
+      "m": "LA ESTRELLA",
+      "value": 75.34086068586716,
+      "year": 2023,
+      "cell": "AE71"
+    },
+    {
+      "code": "05390",
+      "d": "ANTIOQUIA",
+      "m": "LA PINTADA",
+      "value": 57.766455675491734,
+      "year": 2023,
+      "cell": "AE72"
+    },
+    {
+      "code": "05400",
+      "d": "ANTIOQUIA",
+      "m": "LA UNIÓN ",
+      "value": 76.42111627103719,
+      "year": 2023,
+      "cell": "AE73"
+    },
+    {
+      "code": "05411",
+      "d": "ANTIOQUIA",
+      "m": "LIBORINA",
+      "value": 54.825490750411404,
+      "year": 2023,
+      "cell": "AE74"
+    },
+    {
+      "code": "05425",
+      "d": "ANTIOQUIA",
+      "m": "MACEO",
+      "value": 68.30171887172838,
+      "year": 2023,
+      "cell": "AE75"
+    },
+    {
+      "code": "05440",
+      "d": "ANTIOQUIA",
+      "m": "MARINILLA",
+      "value": 54.228343951507,
+      "year": 2023,
+      "cell": "AE76"
+    },
+    {
+      "code": "05467",
+      "d": "ANTIOQUIA",
+      "m": "MONTEBELLO",
+      "value": 33.12291802769767,
+      "year": 2023,
+      "cell": "AE77"
+    },
+    {
+      "code": "05475",
+      "d": "ANTIOQUIA",
+      "m": "MURINDÓ",
+      "value": 46.69122434965712,
+      "year": 2023,
+      "cell": "AE78"
+    },
+    {
+      "code": "05480",
+      "d": "ANTIOQUIA",
+      "m": "MUTATÁ",
+      "value": 55.82494631056953,
+      "year": 2023,
+      "cell": "AE79"
+    },
+    {
+      "code": "05483",
+      "d": "ANTIOQUIA",
+      "m": "NARIÑO ",
+      "value": 55.174594623404296,
+      "year": 2023,
+      "cell": "AE80"
+    },
+    {
+      "code": "05490",
+      "d": "ANTIOQUIA",
+      "m": "NECOCLÍ",
+      "value": 55.82454689464571,
+      "year": 2023,
+      "cell": "AE81"
+    },
+    {
+      "code": "05495",
+      "d": "ANTIOQUIA",
+      "m": "NECHÍ",
+      "value": 58.09231647009075,
+      "year": 2023,
+      "cell": "AE82"
+    },
+    {
+      "code": "05501",
+      "d": "ANTIOQUIA",
+      "m": "OLAYA",
+      "value": 51.185293161794874,
+      "year": 2023,
+      "cell": "AE83"
+    },
+    {
+      "code": "05541",
+      "d": "ANTIOQUIA",
+      "m": "EL PEÑOL ",
+      "value": 63.27578554790141,
+      "year": 2023,
+      "cell": "AE84"
+    },
+    {
+      "code": "05543",
+      "d": "ANTIOQUIA",
+      "m": "PEQUE",
+      "value": 55.62336511139936,
+      "year": 2023,
+      "cell": "AE85"
+    },
+    {
+      "code": "05576",
+      "d": "ANTIOQUIA",
+      "m": "PUEBLORRICO ",
+      "value": 56.117302059483364,
+      "year": 2023,
+      "cell": "AE86"
+    },
+    {
+      "code": "05579",
+      "d": "ANTIOQUIA",
+      "m": "PUERTO BERRÍO",
+      "value": 58.566258380331085,
+      "year": 2023,
+      "cell": "AE87"
+    },
+    {
+      "code": "05585",
+      "d": "ANTIOQUIA",
+      "m": "PUERTO NARE (LA MAGDALENA)",
+      "value": 54.33821966865615,
+      "year": 2023,
+      "cell": "AE88"
+    },
+    {
+      "code": "05591",
+      "d": "ANTIOQUIA",
+      "m": "PUERTO TRIUNFO",
+      "value": 69.00704947007647,
+      "year": 2023,
+      "cell": "AE89"
+    },
+    {
+      "code": "05604",
+      "d": "ANTIOQUIA",
+      "m": "REMEDIOS",
+      "value": 47.994258586640264,
+      "year": 2023,
+      "cell": "AE90"
+    },
+    {
+      "code": "05607",
+      "d": "ANTIOQUIA",
+      "m": "EL RETIRO",
+      "value": 70.23679195054058,
+      "year": 2023,
+      "cell": "AE91"
+    },
+    {
+      "code": "05615",
+      "d": "ANTIOQUIA",
+      "m": "RIONEGRO ",
+      "value": 78.17077779227847,
+      "year": 2023,
+      "cell": "AE92"
+    },
+    {
+      "code": "05628",
+      "d": "ANTIOQUIA",
+      "m": "SABANALARGA ",
+      "value": 47.40790387487622,
+      "year": 2023,
+      "cell": "AE93"
+    },
+    {
+      "code": "05631",
+      "d": "ANTIOQUIA",
+      "m": "SABANETA",
+      "value": 59.008566253040605,
+      "year": 2023,
+      "cell": "AE94"
+    },
+    {
+      "code": "05642",
+      "d": "ANTIOQUIA",
+      "m": "SALGAR",
+      "value": 58.97541662310426,
+      "year": 2023,
+      "cell": "AE95"
+    },
+    {
+      "code": "05647",
+      "d": "ANTIOQUIA",
+      "m": "SAN ANDRÉS DE CUERQUIA",
+      "value": 56.52212080385575,
+      "year": 2023,
+      "cell": "AE96"
+    },
+    {
+      "code": "05649",
+      "d": "ANTIOQUIA",
+      "m": "SAN CARLOS ",
+      "value": 59.695215843853575,
+      "year": 2023,
+      "cell": "AE97"
+    },
+    {
+      "code": "05652",
+      "d": "ANTIOQUIA",
+      "m": "SAN FRANCISCO ",
+      "value": 56.91935692324175,
+      "year": 2023,
+      "cell": "AE98"
+    },
+    {
+      "code": "05656",
+      "d": "ANTIOQUIA",
+      "m": "SAN JERÓNIMO",
+      "value": 58.5671277040702,
+      "year": 2023,
+      "cell": "AE99"
+    },
+    {
+      "code": "05658",
+      "d": "ANTIOQUIA",
+      "m": "SAN JOSÉ DE LA MONTAÑA",
+      "value": 47.12284284633505,
+      "year": 2023,
+      "cell": "AE100"
+    },
+    {
+      "code": "05659",
+      "d": "ANTIOQUIA",
+      "m": "SAN JUAN DE URABÁ",
+      "value": 58.94939492200456,
+      "year": 2023,
+      "cell": "AE101"
+    },
+    {
+      "code": "05660",
+      "d": "ANTIOQUIA",
+      "m": "SAN LUIS ",
+      "value": 62.60581799364066,
+      "year": 2023,
+      "cell": "AE102"
+    },
+    {
+      "code": "05664",
+      "d": "ANTIOQUIA",
+      "m": "SAN PEDRO DE LOS MILAGROS",
+      "value": 13.784867693438,
+      "year": 2023,
+      "cell": "AE103"
+    },
+    {
+      "code": "05665",
+      "d": "ANTIOQUIA",
+      "m": "SAN PEDRO DE URABA",
+      "value": 64.18144636972022,
+      "year": 2023,
+      "cell": "AE104"
+    },
+    {
+      "code": "05667",
+      "d": "ANTIOQUIA",
+      "m": "SAN RAFAEL",
+      "value": 66.53889882875171,
+      "year": 2023,
+      "cell": "AE105"
+    },
+    {
+      "code": "05670",
+      "d": "ANTIOQUIA",
+      "m": "SAN ROQUE",
+      "value": 56.11470315517856,
+      "year": 2023,
+      "cell": "AE106"
+    },
+    {
+      "code": "05674",
+      "d": "ANTIOQUIA",
+      "m": "SAN VICENTE",
+      "value": 64.61234789989177,
+      "year": 2023,
+      "cell": "AE107"
+    },
+    {
+      "code": "05679",
+      "d": "ANTIOQUIA",
+      "m": "SANTA BÁRBARA ",
+      "value": 30.50267075446812,
+      "year": 2023,
+      "cell": "AE108"
+    },
+    {
+      "code": "05686",
+      "d": "ANTIOQUIA",
+      "m": "SANTA ROSA DE OSOS",
+      "value": 61.43629750106827,
+      "year": 2023,
+      "cell": "AE109"
+    },
+    {
+      "code": "05690",
+      "d": "ANTIOQUIA",
+      "m": "SANTO DOMINGO",
+      "value": 66.08326903030266,
+      "year": 2023,
+      "cell": "AE110"
+    },
+    {
+      "code": "05697",
+      "d": "ANTIOQUIA",
+      "m": "SANTUARIO ",
+      "value": 64.23939615792494,
+      "year": 2023,
+      "cell": "AE111"
+    },
+    {
+      "code": "05736",
+      "d": "ANTIOQUIA",
+      "m": "SEGOVIA",
+      "value": 72.64645491722538,
+      "year": 2023,
+      "cell": "AE112"
+    },
+    {
+      "code": "05756",
+      "d": "ANTIOQUIA",
+      "m": "SONSÓN",
+      "value": 69.52425991767686,
+      "year": 2023,
+      "cell": "AE113"
+    },
+    {
+      "code": "05761",
+      "d": "ANTIOQUIA",
+      "m": "SOPETRÁN",
+      "value": 68.98391763856417,
+      "year": 2023,
+      "cell": "AE114"
+    },
+    {
+      "code": "05789",
+      "d": "ANTIOQUIA",
+      "m": "TÁMESIS",
+      "value": 45.12429269901661,
+      "year": 2023,
+      "cell": "AE115"
+    },
+    {
+      "code": "05790",
+      "d": "ANTIOQUIA",
+      "m": "TARAZÁ",
+      "value": 46.35929052141842,
+      "year": 2023,
+      "cell": "AE116"
+    },
+    {
+      "code": "05792",
+      "d": "ANTIOQUIA",
+      "m": "TARSO",
+      "value": 36.042949464723534,
+      "year": 2023,
+      "cell": "AE117"
+    },
+    {
+      "code": "05809",
+      "d": "ANTIOQUIA",
+      "m": "TITIRIBÍ",
+      "value": 55.26796907308952,
+      "year": 2023,
+      "cell": "AE118"
+    },
+    {
+      "code": "05819",
+      "d": "ANTIOQUIA",
+      "m": "TOLEDO ",
+      "value": 49.010860622089055,
+      "year": 2023,
+      "cell": "AE119"
+    },
+    {
+      "code": "05837",
+      "d": "ANTIOQUIA",
+      "m": "TURBO",
+      "value": 41.19201131306953,
+      "year": 2023,
+      "cell": "AE120"
+    },
+    {
+      "code": "05842",
+      "d": "ANTIOQUIA",
+      "m": "URAMITA",
+      "value": 40.158868951058565,
+      "year": 2023,
+      "cell": "AE121"
+    },
+    {
+      "code": "05847",
+      "d": "ANTIOQUIA",
+      "m": "URRAO",
+      "value": 52.40667490917065,
+      "year": 2023,
+      "cell": "AE122"
+    },
+    {
+      "code": "05854",
+      "d": "ANTIOQUIA",
+      "m": "VALDIVIA",
+      "value": 60.69323938886565,
+      "year": 2023,
+      "cell": "AE123"
+    },
+    {
+      "code": "05856",
+      "d": "ANTIOQUIA",
+      "m": "VALPARAÍSO ",
+      "value": 43.01315599125545,
+      "year": 2023,
+      "cell": "AE124"
+    },
+    {
+      "code": "05858",
+      "d": "ANTIOQUIA",
+      "m": "VEGACHÍ",
+      "value": 63.98006820346909,
+      "year": 2023,
+      "cell": "AE125"
+    },
+    {
+      "code": "05861",
+      "d": "ANTIOQUIA",
+      "m": "VENECIA ",
+      "value": 51.668881391170494,
+      "year": 2023,
+      "cell": "AE126"
+    },
+    {
+      "code": "05873",
+      "d": "ANTIOQUIA",
+      "m": "VIGÍA DEL FUERTE",
+      "value": 64.58218169761325,
+      "year": 2023,
+      "cell": "AE127"
+    },
+    {
+      "code": "05885",
+      "d": "ANTIOQUIA",
+      "m": "YALÍ",
+      "value": 60.75294282771617,
+      "year": 2023,
+      "cell": "AE128"
+    },
+    {
+      "code": "05887",
+      "d": "ANTIOQUIA",
+      "m": "YARUMAL",
+      "value": 68.1351264364904,
+      "year": 2023,
+      "cell": "AE129"
+    },
+    {
+      "code": "05890",
+      "d": "ANTIOQUIA",
+      "m": "YOLOMBÓ",
+      "value": 71.0354690669632,
+      "year": 2023,
+      "cell": "AE130"
+    },
+    {
+      "code": "05893",
+      "d": "ANTIOQUIA",
+      "m": "YONDÓ (CASABE)",
+      "value": 67.04065593952495,
+      "year": 2023,
+      "cell": "AE131"
+    },
+    {
+      "code": "05895",
+      "d": "ANTIOQUIA",
+      "m": "ZARAGOZA",
+      "value": 66.92526006650483,
+      "year": 2023,
+      "cell": "AE132"
+    },
+    {
+      "code": "08001",
+      "d": "ATLÁNTICO",
+      "m": "BARRANQUILLA, DISTRITO ESPECIAL, INDUSTRIAL Y PORTUARIO",
+      "value": 72.66414710455155,
+      "year": 2023,
+      "cell": "AE154"
+    },
+    {
+      "code": "08078",
+      "d": "ATLÁNTICO",
+      "m": "BARANOA",
+      "value": 63.309228116865114,
+      "year": 2023,
+      "cell": "AE150"
+    },
+    {
+      "code": "08137",
+      "d": "ATLÁNTICO",
+      "m": "CAMPO DE LA CRUZ",
+      "value": 49.87981246054617,
+      "year": 2023,
+      "cell": "AE138"
+    },
+    {
+      "code": "08141",
+      "d": "ATLÁNTICO",
+      "m": "CANDELARIA ",
+      "value": 43.22924638843719,
+      "year": 2023,
+      "cell": "AE135"
+    },
+    {
+      "code": "08296",
+      "d": "ATLÁNTICO",
+      "m": "GALAPA",
+      "value": 57.2832041992622,
+      "year": 2023,
+      "cell": "AE145"
+    },
+    {
+      "code": "08372",
+      "d": "ATLÁNTICO",
+      "m": "JUAN DE ACOSTA",
+      "value": 53.34581230283989,
+      "year": 2023,
+      "cell": "AE142"
+    },
+    {
+      "code": "08421",
+      "d": "ATLÁNTICO",
+      "m": "LURUACO",
+      "value": 58.01623665482575,
+      "year": 2023,
+      "cell": "AE146"
+    },
+    {
+      "code": "08433",
+      "d": "ATLÁNTICO",
+      "m": "MALAMBO",
+      "value": 45.18841624079906,
+      "year": 2023,
+      "cell": "AE136"
+    },
+    {
+      "code": "08436",
+      "d": "ATLÁNTICO",
+      "m": "MANATÍ",
+      "value": 51.30979795349447,
+      "year": 2023,
+      "cell": "AE141"
+    },
+    {
+      "code": "08520",
+      "d": "ATLÁNTICO",
+      "m": "PALMAR DE VARELA",
+      "value": 70.96365471730189,
+      "year": 2023,
+      "cell": "AE153"
+    },
+    {
+      "code": "08549",
+      "d": "ATLÁNTICO",
+      "m": "PIOJÓ",
+      "value": 35.88321385846499,
+      "year": 2023,
+      "cell": "AE134"
+    },
+    {
+      "code": "08558",
+      "d": "ATLÁNTICO",
+      "m": "POLONUEVO",
+      "value": 6.234815665410571,
+      "year": 2023,
+      "cell": "AE133"
+    },
+    {
+      "code": "08560",
+      "d": "ATLÁNTICO",
+      "m": "PONEDERA",
+      "value": 54.45460832228784,
+      "year": 2023,
+      "cell": "AE143"
+    },
+    {
+      "code": "08573",
+      "d": "ATLÁNTICO",
+      "m": "PUERTO COLOMBIA",
+      "value": 59.3978594658151,
+      "year": 2023,
+      "cell": "AE148"
+    },
+    {
+      "code": "08606",
+      "d": "ATLÁNTICO",
+      "m": "REPELÓN",
+      "value": 50.235180460617855,
+      "year": 2023,
+      "cell": "AE139"
+    },
+    {
+      "code": "08634",
+      "d": "ATLÁNTICO",
+      "m": "SABANAGRANDE",
+      "value": 58.302242758981855,
+      "year": 2023,
+      "cell": "AE147"
+    },
+    {
+      "code": "08638",
+      "d": "ATLÁNTICO",
+      "m": "SABANALARGA ",
+      "value": 72.82174047923466,
+      "year": 2023,
+      "cell": "AE155"
+    },
+    {
+      "code": "08675",
+      "d": "ATLÁNTICO",
+      "m": "SANTA LUCÍA",
+      "value": 50.71233816331823,
+      "year": 2023,
+      "cell": "AE140"
+    },
+    {
+      "code": "08685",
+      "d": "ATLÁNTICO",
+      "m": "SANTO TOMAS",
+      "value": 56.205222415677724,
+      "year": 2023,
+      "cell": "AE144"
+    },
+    {
+      "code": "08758",
+      "d": "ATLÁNTICO",
+      "m": "SOLEDAD",
+      "value": 64.87114155793702,
+      "year": 2023,
+      "cell": "AE151"
+    },
+    {
+      "code": "08770",
+      "d": "ATLÁNTICO",
+      "m": "SUAN",
+      "value": 45.805656042810256,
+      "year": 2023,
+      "cell": "AE137"
+    },
+    {
+      "code": "08832",
+      "d": "ATLÁNTICO",
+      "m": "TUBARÁ",
+      "value": 62.6465184172918,
+      "year": 2023,
+      "cell": "AE149"
+    },
+    {
+      "code": "08849",
+      "d": "ATLÁNTICO",
+      "m": "USIACURÍ",
+      "value": 65.13473680504228,
+      "year": 2023,
+      "cell": "AE152"
+    },
+    {
+      "code": "11001",
+      "d": "BOGOTÁ, D.C.",
+      "m": "BOGOTÁ D.C.",
+      "value": 90.06524622178468,
+      "year": 2023,
+      "cell": "AE156"
+    },
+    {
+      "code": "13001",
+      "d": "BOLÍVAR",
+      "m": "CARTAGENA DE INDIAS, DISTRITO TURISTICO Y CULTURAL",
+      "value": 59.246471070715515,
+      "year": 2023,
+      "cell": "AE157"
+    },
+    {
+      "code": "13006",
+      "d": "BOLÍVAR",
+      "m": "ACHÍ",
+      "value": 48.36279363837636,
+      "year": 2023,
+      "cell": "AE158"
+    },
+    {
+      "code": "13030",
+      "d": "BOLÍVAR",
+      "m": "ALTO DEL ROSARIO",
+      "value": 62.73009470187091,
+      "year": 2023,
+      "cell": "AE159"
+    },
+    {
+      "code": "13042",
+      "d": "BOLÍVAR",
+      "m": "ARENAL",
+      "value": 59.547923555344155,
+      "year": 2023,
+      "cell": "AE160"
+    },
+    {
+      "code": "13052",
+      "d": "BOLÍVAR",
+      "m": "ARJONA",
+      "value": 45.51241359739546,
+      "year": 2023,
+      "cell": "AE161"
+    },
+    {
+      "code": "13062",
+      "d": "BOLÍVAR",
+      "m": "ARROYOHONDO",
+      "value": 54.526436903607404,
+      "year": 2023,
+      "cell": "AE162"
+    },
+    {
+      "code": "13074",
+      "d": "BOLÍVAR",
+      "m": "BARRANCO DE LOBA",
+      "value": 49.43771891796342,
+      "year": 2023,
+      "cell": "AE163"
+    },
+    {
+      "code": "13140",
+      "d": "BOLÍVAR",
+      "m": "CALAMAR ",
+      "value": 52.25149102594504,
+      "year": 2023,
+      "cell": "AE164"
+    },
+    {
+      "code": "13160",
+      "d": "BOLÍVAR",
+      "m": "CANTAGALLO",
+      "value": 53.24775754765718,
+      "year": 2023,
+      "cell": "AE165"
+    },
+    {
+      "code": "13188",
+      "d": "BOLÍVAR",
+      "m": "CICUCO",
+      "value": 21.663008752493575,
+      "year": 2023,
+      "cell": "AE166"
+    },
+    {
+      "code": "13212",
+      "d": "BOLÍVAR",
+      "m": "CÓRDOBA ",
+      "value": 50.13491960507901,
+      "year": 2023,
+      "cell": "AE167"
+    },
+    {
+      "code": "13222",
+      "d": "BOLÍVAR",
+      "m": "CLEMENCIA",
+      "value": 38.76899710657169,
+      "year": 2023,
+      "cell": "AE168"
+    },
+    {
+      "code": "13244",
+      "d": "BOLÍVAR",
+      "m": "EL CARMEN DE BOLIVAR",
+      "value": 55.37661966153212,
+      "year": 2023,
+      "cell": "AE169"
+    },
+    {
+      "code": "13248",
+      "d": "BOLÍVAR",
+      "m": "EL GUAMO ",
+      "value": 49.437093875317544,
+      "year": 2023,
+      "cell": "AE170"
+    },
+    {
+      "code": "13268",
+      "d": "BOLÍVAR",
+      "m": "EL PEÑON ",
+      "value": 43.581788927786384,
+      "year": 2023,
+      "cell": "AE171"
+    },
+    {
+      "code": "13300",
+      "d": "BOLÍVAR",
+      "m": "HATILLO DE LOBA",
+      "value": 47.89461519035001,
+      "year": 2023,
+      "cell": "AE172"
+    },
+    {
+      "code": "13430",
+      "d": "BOLÍVAR",
+      "m": "MAGANGUÉ",
+      "value": 63.57928992619302,
+      "year": 2023,
+      "cell": "AE173"
+    },
+    {
+      "code": "13433",
+      "d": "BOLÍVAR",
+      "m": "MAHATES",
+      "value": 33.56375538803846,
+      "year": 2023,
+      "cell": "AE174"
+    },
+    {
+      "code": "13440",
+      "d": "BOLÍVAR",
+      "m": "MARGARITA",
+      "value": 52.425875211245184,
+      "year": 2023,
+      "cell": "AE175"
+    },
+    {
+      "code": "13442",
+      "d": "BOLÍVAR",
+      "m": "MARIA LA BAJA",
+      "value": 43.98302453438219,
+      "year": 2023,
+      "cell": "AE176"
+    },
+    {
+      "code": "13458",
+      "d": "BOLÍVAR",
+      "m": "MONTECRISTO",
+      "value": 50.85896739249546,
+      "year": 2023,
+      "cell": "AE177"
+    },
+    {
+      "code": "13468",
+      "d": "BOLÍVAR",
+      "m": "SANTA CRUZ DE MOMPÓX",
+      "value": 44.10348631109113,
+      "year": 2023,
+      "cell": "AE178"
+    },
+    {
+      "code": "13473",
+      "d": "BOLÍVAR",
+      "m": "MORALES ",
+      "value": 63.450996079262005,
+      "year": 2023,
+      "cell": "AE179"
+    },
+    {
+      "code": "13490",
+      "d": "BOLÍVAR",
+      "m": "NOROSI",
+      "value": 65.72269387270619,
+      "year": 2023,
+      "cell": "AE180"
+    },
+    {
+      "code": "13549",
+      "d": "BOLÍVAR",
+      "m": "PINILLOS",
+      "value": 50.333958401243244,
+      "year": 2023,
+      "cell": "AE181"
+    },
+    {
+      "code": "13580",
+      "d": "BOLÍVAR",
+      "m": "REGIDOR",
+      "value": 51.01044391531669,
+      "year": 2023,
+      "cell": "AE182"
+    },
+    {
+      "code": "13600",
+      "d": "BOLÍVAR",
+      "m": "RIOVIEJO",
+      "value": 48.4006104889032,
+      "year": 2023,
+      "cell": "AE183"
+    },
+    {
+      "code": "13620",
+      "d": "BOLÍVAR",
+      "m": "SAN CRISTÓBAL",
+      "value": 40.60799463616607,
+      "year": 2023,
+      "cell": "AE184"
+    },
+    {
+      "code": "13647",
+      "d": "BOLÍVAR",
+      "m": "SAN ESTANISLAO",
+      "value": 55.010445237026055,
+      "year": 2023,
+      "cell": "AE185"
+    },
+    {
+      "code": "13650",
+      "d": "BOLÍVAR",
+      "m": "SAN FERNANDO",
+      "value": 50.29005815668861,
+      "year": 2023,
+      "cell": "AE186"
+    },
+    {
+      "code": "13654",
+      "d": "BOLÍVAR",
+      "m": "SAN JACINTO ",
+      "value": 46.070801737494875,
+      "year": 2023,
+      "cell": "AE187"
+    },
+    {
+      "code": "13655",
+      "d": "BOLÍVAR",
+      "m": "SAN JACINTO DEL CAUCA",
+      "value": 51.08951747984071,
+      "year": 2023,
+      "cell": "AE188"
+    },
+    {
+      "code": "13657",
+      "d": "BOLÍVAR",
+      "m": "SAN JUAN NEPOMUCENO",
+      "value": 56.18901183977234,
+      "year": 2023,
+      "cell": "AE189"
+    },
+    {
+      "code": "13667",
+      "d": "BOLÍVAR",
+      "m": "SAN MARTÍN DE LOBA",
+      "value": 42.86469274234138,
+      "year": 2023,
+      "cell": "AE190"
+    },
+    {
+      "code": "13670",
+      "d": "BOLÍVAR",
+      "m": "SAN PABLO ",
+      "value": 50.91298136748275,
+      "year": 2023,
+      "cell": "AE191"
+    },
+    {
+      "code": "13673",
+      "d": "BOLÍVAR",
+      "m": "SANTA CATALINA ",
+      "value": 51.050777883096224,
+      "year": 2023,
+      "cell": "AE192"
+    },
+    {
+      "code": "13683",
+      "d": "BOLÍVAR",
+      "m": "SANTA ROSA NORTE",
+      "value": 62.996073159594154,
+      "year": 2023,
+      "cell": "AE193"
+    },
+    {
+      "code": "13688",
+      "d": "BOLÍVAR",
+      "m": "SANTA ROSA DEL SUR",
+      "value": 56.56874419219324,
+      "year": 2023,
+      "cell": "AE194"
+    },
+    {
+      "code": "13744",
+      "d": "BOLÍVAR",
+      "m": "SIMITÍ",
+      "value": 51.362446437023024,
+      "year": 2023,
+      "cell": "AE195"
+    },
+    {
+      "code": "13760",
+      "d": "BOLÍVAR",
+      "m": "SOPLAVIENTO",
+      "value": 52.365998489445204,
+      "year": 2023,
+      "cell": "AE196"
+    },
+    {
+      "code": "13780",
+      "d": "BOLÍVAR",
+      "m": "TALAIGUA NUEVO",
+      "value": 38.74674961171567,
+      "year": 2023,
+      "cell": "AE197"
+    },
+    {
+      "code": "13810",
+      "d": "BOLÍVAR",
+      "m": "TIQUISIO",
+      "value": 43.67443565862203,
+      "year": 2023,
+      "cell": "AE198"
+    },
+    {
+      "code": "13836",
+      "d": "BOLÍVAR",
+      "m": "TURBACO",
+      "value": 63.83823293374574,
+      "year": 2023,
+      "cell": "AE199"
+    },
+    {
+      "code": "13838",
+      "d": "BOLÍVAR",
+      "m": "TURBANA",
+      "value": 57.710768067828695,
+      "year": 2023,
+      "cell": "AE200"
+    },
+    {
+      "code": "13873",
+      "d": "BOLÍVAR",
+      "m": "VILLANUEVA ",
+      "value": 43.90291155952444,
+      "year": 2023,
+      "cell": "AE201"
+    },
+    {
+      "code": "13894",
+      "d": "BOLÍVAR",
+      "m": "ZAMBRANO",
+      "value": 62.98555336362476,
+      "year": 2023,
+      "cell": "AE202"
+    },
+    {
+      "code": "15001",
+      "d": "BOYACÁ",
+      "m": "TUNJA",
+      "value": 61.66684687498115,
+      "year": 2023,
+      "cell": "AE203"
+    },
+    {
+      "code": "15022",
+      "d": "BOYACÁ",
+      "m": "ALMEIDA",
+      "value": 42.38399659577898,
+      "year": 2023,
+      "cell": "AE204"
+    },
+    {
+      "code": "15047",
+      "d": "BOYACÁ",
+      "m": "AQUITANIA",
+      "value": 54.97749148056503,
+      "year": 2023,
+      "cell": "AE205"
+    },
+    {
+      "code": "15051",
+      "d": "BOYACÁ",
+      "m": "ARCABUCO",
+      "value": 71.08198332704592,
+      "year": 2023,
+      "cell": "AE206"
+    },
+    {
+      "code": "15087",
+      "d": "BOYACÁ",
+      "m": "BELÉN ",
+      "value": 65.31596080827231,
+      "year": 2023,
+      "cell": "AE207"
+    },
+    {
+      "code": "15090",
+      "d": "BOYACÁ",
+      "m": "BERBEO",
+      "value": 48.8744530500976,
+      "year": 2023,
+      "cell": "AE208"
+    },
+    {
+      "code": "15092",
+      "d": "BOYACÁ",
+      "m": "BETÉITIVA",
+      "value": 47.60874569285839,
+      "year": 2023,
+      "cell": "AE209"
+    },
+    {
+      "code": "15097",
+      "d": "BOYACÁ",
+      "m": "BOAVITA",
+      "value": 58.102631602521114,
+      "year": 2023,
+      "cell": "AE210"
+    },
+    {
+      "code": "15104",
+      "d": "BOYACÁ",
+      "m": "BOYACÁ",
+      "value": 60.460422558621616,
+      "year": 2023,
+      "cell": "AE211"
+    },
+    {
+      "code": "15106",
+      "d": "BOYACÁ",
+      "m": "BRICEÑO ",
+      "value": 54.75254254647726,
+      "year": 2023,
+      "cell": "AE212"
+    },
+    {
+      "code": "15109",
+      "d": "BOYACÁ",
+      "m": "BUENAVISTA ",
+      "value": 57.546247045896344,
+      "year": 2023,
+      "cell": "AE213"
+    },
+    {
+      "code": "15114",
+      "d": "BOYACÁ",
+      "m": "BUSBANZÁ",
+      "value": 57.5742803741758,
+      "year": 2023,
+      "cell": "AE214"
+    },
+    {
+      "code": "15131",
+      "d": "BOYACÁ",
+      "m": "CALDAS ",
+      "value": 51.541141550886316,
+      "year": 2023,
+      "cell": "AE215"
+    },
+    {
+      "code": "15135",
+      "d": "BOYACÁ",
+      "m": "CAMPOHERMOSO",
+      "value": 71.91813786197065,
+      "year": 2023,
+      "cell": "AE216"
+    },
+    {
+      "code": "15162",
+      "d": "BOYACÁ",
+      "m": "CERINZA",
+      "value": 53.84960200704207,
+      "year": 2023,
+      "cell": "AE217"
+    },
+    {
+      "code": "15172",
+      "d": "BOYACÁ",
+      "m": "CHINAVITA",
+      "value": 50.91289455091854,
+      "year": 2023,
+      "cell": "AE218"
+    },
+    {
+      "code": "15176",
+      "d": "BOYACÁ",
+      "m": "CHIQUINQUIRÁ",
+      "value": 68.79434660771643,
+      "year": 2023,
+      "cell": "AE219"
+    },
+    {
+      "code": "15180",
+      "d": "BOYACÁ",
+      "m": "CHISCAS",
+      "value": 44.365703206952674,
+      "year": 2023,
+      "cell": "AE220"
+    },
+    {
+      "code": "15183",
+      "d": "BOYACÁ",
+      "m": "CHITA",
+      "value": 62.39561688573225,
+      "year": 2023,
+      "cell": "AE221"
+    },
+    {
+      "code": "15185",
+      "d": "BOYACÁ",
+      "m": "CHITARAQUE",
+      "value": 62.0683209648137,
+      "year": 2023,
+      "cell": "AE222"
+    },
+    {
+      "code": "15187",
+      "d": "BOYACÁ",
+      "m": "CHIVATÁ",
+      "value": 58.28996887350469,
+      "year": 2023,
+      "cell": "AE223"
+    },
+    {
+      "code": "15189",
+      "d": "BOYACÁ",
+      "m": "CIÉNEGA ",
+      "value": 66.78226969898087,
+      "year": 2023,
+      "cell": "AE224"
+    },
+    {
+      "code": "15204",
+      "d": "BOYACÁ",
+      "m": "CÓMBITA",
+      "value": 61.36920416881411,
+      "year": 2023,
+      "cell": "AE225"
+    },
+    {
+      "code": "15212",
+      "d": "BOYACÁ",
+      "m": "COPER",
+      "value": 54.659766021391434,
+      "year": 2023,
+      "cell": "AE226"
+    },
+    {
+      "code": "15215",
+      "d": "BOYACÁ",
+      "m": "CORRALES",
+      "value": 70.81943837096608,
+      "year": 2023,
+      "cell": "AE227"
+    },
+    {
+      "code": "15218",
+      "d": "BOYACÁ",
+      "m": "COVARACHÍA",
+      "value": 65.33033904106618,
+      "year": 2023,
+      "cell": "AE228"
+    },
+    {
+      "code": "15223",
+      "d": "BOYACÁ",
+      "m": "CUBARÁ",
+      "value": 68.92252279303995,
+      "year": 2023,
+      "cell": "AE229"
+    },
+    {
+      "code": "15224",
+      "d": "BOYACÁ",
+      "m": "CUCAITA",
+      "value": 44.439316747869334,
+      "year": 2023,
+      "cell": "AE230"
+    },
+    {
+      "code": "15226",
+      "d": "BOYACÁ",
+      "m": "CUÍTIVA",
+      "value": 62.28642488716781,
+      "year": 2023,
+      "cell": "AE231"
+    },
+    {
+      "code": "15232",
+      "d": "BOYACÁ",
+      "m": "CHÍQUIZA (SAN PEDRO DE IGUAQUE)",
+      "value": 61.89486530631724,
+      "year": 2023,
+      "cell": "AE232"
+    },
+    {
+      "code": "15236",
+      "d": "BOYACÁ",
+      "m": "CHIVOR",
+      "value": 58.27367563966569,
+      "year": 2023,
+      "cell": "AE233"
+    },
+    {
+      "code": "15238",
+      "d": "BOYACÁ",
+      "m": "DUITAMA",
+      "value": 57.692940917302835,
+      "year": 2023,
+      "cell": "AE234"
+    },
+    {
+      "code": "15244",
+      "d": "BOYACÁ",
+      "m": "EL COCUY",
+      "value": 60.271299237739804,
+      "year": 2023,
+      "cell": "AE235"
+    },
+    {
+      "code": "15248",
+      "d": "BOYACÁ",
+      "m": "EL ESPINO",
+      "value": 48.61334451277956,
+      "year": 2023,
+      "cell": "AE236"
+    },
+    {
+      "code": "15272",
+      "d": "BOYACÁ",
+      "m": "FIRAVITOBA",
+      "value": 74.40092758102413,
+      "year": 2023,
+      "cell": "AE237"
+    },
+    {
+      "code": "15276",
+      "d": "BOYACÁ",
+      "m": "FLORESTA",
+      "value": 60.28415911913422,
+      "year": 2023,
+      "cell": "AE238"
+    },
+    {
+      "code": "15293",
+      "d": "BOYACÁ",
+      "m": "GACHANTIVÁ",
+      "value": 54.01845702178168,
+      "year": 2023,
+      "cell": "AE239"
+    },
+    {
+      "code": "15296",
+      "d": "BOYACÁ",
+      "m": "GÁMEZA",
+      "value": 50.97305154725927,
+      "year": 2023,
+      "cell": "AE240"
+    },
+    {
+      "code": "15299",
+      "d": "BOYACÁ",
+      "m": "GARAGOA",
+      "value": 64.09743624604042,
+      "year": 2023,
+      "cell": "AE241"
+    },
+    {
+      "code": "15317",
+      "d": "BOYACÁ",
+      "m": "GUACAMAYAS",
+      "value": 58.88461523022683,
+      "year": 2023,
+      "cell": "AE242"
+    },
+    {
+      "code": "15322",
+      "d": "BOYACÁ",
+      "m": "GUATEQUE",
+      "value": 67.08687434377407,
+      "year": 2023,
+      "cell": "AE243"
+    },
+    {
+      "code": "15325",
+      "d": "BOYACÁ",
+      "m": "GUAYATÁ",
+      "value": 54.46638841574871,
+      "year": 2023,
+      "cell": "AE244"
+    },
+    {
+      "code": "15332",
+      "d": "BOYACÁ",
+      "m": "GÜICÁN",
+      "value": 46.475183325916696,
+      "year": 2023,
+      "cell": "AE245"
+    },
+    {
+      "code": "15362",
+      "d": "BOYACÁ",
+      "m": "IZA",
+      "value": 60.983658835388184,
+      "year": 2023,
+      "cell": "AE246"
+    },
+    {
+      "code": "15367",
+      "d": "BOYACÁ",
+      "m": "JENESANO",
+      "value": 62.93102796006933,
+      "year": 2023,
+      "cell": "AE247"
+    },
+    {
+      "code": "15368",
+      "d": "BOYACÁ",
+      "m": "JERICÓ ",
+      "value": 55.13847765135085,
+      "year": 2023,
+      "cell": "AE248"
+    },
+    {
+      "code": "15377",
+      "d": "BOYACÁ",
+      "m": "LABRANZAGRANDE",
+      "value": 62.48540024516118,
+      "year": 2023,
+      "cell": "AE249"
+    },
+    {
+      "code": "15380",
+      "d": "BOYACÁ",
+      "m": "LA CAPILLA",
+      "value": 55.216654749448175,
+      "year": 2023,
+      "cell": "AE250"
+    },
+    {
+      "code": "15401",
+      "d": "BOYACÁ",
+      "m": "LA VICTORIA ",
+      "value": 44.54284374582684,
+      "year": 2023,
+      "cell": "AE251"
+    },
+    {
+      "code": "15403",
+      "d": "BOYACÁ",
+      "m": "LA UVITA",
+      "value": 65.3369540290602,
+      "year": 2023,
+      "cell": "AE252"
+    },
+    {
+      "code": "15407",
+      "d": "BOYACÁ",
+      "m": "VILLA DE LEYVA",
+      "value": 65.8105456111503,
+      "year": 2023,
+      "cell": "AE253"
+    },
+    {
+      "code": "15425",
+      "d": "BOYACÁ",
+      "m": "MACANAL",
+      "value": 68.32276535180081,
+      "year": 2023,
+      "cell": "AE254"
+    },
+    {
+      "code": "15442",
+      "d": "BOYACÁ",
+      "m": "MARIPÍ",
+      "value": 47.4398554207351,
+      "year": 2023,
+      "cell": "AE255"
+    },
+    {
+      "code": "15455",
+      "d": "BOYACÁ",
+      "m": "MIRAFLORES ",
+      "value": 65.94028466264604,
+      "year": 2023,
+      "cell": "AE256"
+    },
+    {
+      "code": "15464",
+      "d": "BOYACÁ",
+      "m": "MONGUA",
+      "value": 64.11218524170063,
+      "year": 2023,
+      "cell": "AE257"
+    },
+    {
+      "code": "15466",
+      "d": "BOYACÁ",
+      "m": "MONGUÍ",
+      "value": 68.26496639771523,
+      "year": 2023,
+      "cell": "AE258"
+    },
+    {
+      "code": "15469",
+      "d": "BOYACÁ",
+      "m": "MONIQUIRÁ",
+      "value": 67.64223584144035,
+      "year": 2023,
+      "cell": "AE259"
+    },
+    {
+      "code": "15476",
+      "d": "BOYACÁ",
+      "m": "MOTAVITA",
+      "value": 60.77834846515387,
+      "year": 2023,
+      "cell": "AE260"
+    },
+    {
+      "code": "15480",
+      "d": "BOYACÁ",
+      "m": "MUZO",
+      "value": 60.28294020664869,
+      "year": 2023,
+      "cell": "AE261"
+    },
+    {
+      "code": "15491",
+      "d": "BOYACÁ",
+      "m": "NOBSA",
+      "value": 86.45649663967222,
+      "year": 2023,
+      "cell": "AE262"
+    },
+    {
+      "code": "15494",
+      "d": "BOYACÁ",
+      "m": "NUEVO COLÓN",
+      "value": 58.77669754110088,
+      "year": 2023,
+      "cell": "AE263"
+    },
+    {
+      "code": "15500",
+      "d": "BOYACÁ",
+      "m": "OICATÁ",
+      "value": 59.64939851055135,
+      "year": 2023,
+      "cell": "AE264"
+    },
+    {
+      "code": "15507",
+      "d": "BOYACÁ",
+      "m": "OTANCHE",
+      "value": 59.432964200530094,
+      "year": 2023,
+      "cell": "AE265"
+    },
+    {
+      "code": "15511",
+      "d": "BOYACÁ",
+      "m": "PACHAVITA",
+      "value": 43.40868496106055,
+      "year": 2023,
+      "cell": "AE266"
+    },
+    {
+      "code": "15514",
+      "d": "BOYACÁ",
+      "m": "PÁEZ ",
+      "value": 54.097773932326675,
+      "year": 2023,
+      "cell": "AE267"
+    },
+    {
+      "code": "15516",
+      "d": "BOYACÁ",
+      "m": "PAIPA",
+      "value": 69.48796608437586,
+      "year": 2023,
+      "cell": "AE268"
+    },
+    {
+      "code": "15518",
+      "d": "BOYACÁ",
+      "m": "PAJARITO",
+      "value": 61.48046456682478,
+      "year": 2023,
+      "cell": "AE269"
+    },
+    {
+      "code": "15522",
+      "d": "BOYACÁ",
+      "m": "PANQUEBA",
+      "value": 70.8077018784222,
+      "year": 2023,
+      "cell": "AE270"
+    },
+    {
+      "code": "15531",
+      "d": "BOYACÁ",
+      "m": "PAUNA",
+      "value": 52.08117248924022,
+      "year": 2023,
+      "cell": "AE271"
+    },
+    {
+      "code": "15533",
+      "d": "BOYACÁ",
+      "m": "PAYA",
+      "value": 69.54574625272676,
+      "year": 2023,
+      "cell": "AE272"
+    },
+    {
+      "code": "15537",
+      "d": "BOYACÁ",
+      "m": "PAZ DEL RIO",
+      "value": 61.82815396088219,
+      "year": 2023,
+      "cell": "AE273"
+    },
+    {
+      "code": "15542",
+      "d": "BOYACÁ",
+      "m": "PESCA",
+      "value": 67.17463791243597,
+      "year": 2023,
+      "cell": "AE274"
+    },
+    {
+      "code": "15550",
+      "d": "BOYACÁ",
+      "m": "PISBA",
+      "value": 58.39243753770142,
+      "year": 2023,
+      "cell": "AE275"
+    },
+    {
+      "code": "15572",
+      "d": "BOYACÁ",
+      "m": "PUERTO BOYACÁ",
+      "value": 53.21485275022112,
+      "year": 2023,
+      "cell": "AE276"
+    },
+    {
+      "code": "15580",
+      "d": "BOYACÁ",
+      "m": "QUÍPAMA",
+      "value": 52.468452649376715,
+      "year": 2023,
+      "cell": "AE277"
+    },
+    {
+      "code": "15599",
+      "d": "BOYACÁ",
+      "m": "RAMIRIQUÍ",
+      "value": 56.98572516415719,
+      "year": 2023,
+      "cell": "AE278"
+    },
+    {
+      "code": "15600",
+      "d": "BOYACÁ",
+      "m": "RÁQUIRA",
+      "value": 64.16175500054351,
+      "year": 2023,
+      "cell": "AE279"
+    },
+    {
+      "code": "15621",
+      "d": "BOYACÁ",
+      "m": "RONDÓN",
+      "value": 61.37245778207731,
+      "year": 2023,
+      "cell": "AE280"
+    },
+    {
+      "code": "15632",
+      "d": "BOYACÁ",
+      "m": "SABOYÁ",
+      "value": 61.41572993067609,
+      "year": 2023,
+      "cell": "AE281"
+    },
+    {
+      "code": "15638",
+      "d": "BOYACÁ",
+      "m": "SÁCHICA",
+      "value": 61.22133067986834,
+      "year": 2023,
+      "cell": "AE282"
+    },
+    {
+      "code": "15646",
+      "d": "BOYACÁ",
+      "m": "SAMACÁ",
+      "value": 77.85358046800685,
+      "year": 2023,
+      "cell": "AE283"
+    },
+    {
+      "code": "15660",
+      "d": "BOYACÁ",
+      "m": "SAN EDUARDO",
+      "value": 58.796482430544344,
+      "year": 2023,
+      "cell": "AE284"
+    },
+    {
+      "code": "15664",
+      "d": "BOYACÁ",
+      "m": "SAN JOSÉ DE PARE",
+      "value": 62.21259163587435,
+      "year": 2023,
+      "cell": "AE285"
+    },
+    {
+      "code": "15667",
+      "d": "BOYACÁ",
+      "m": "SAN LUIS DE GACENO",
+      "value": 51.320309990908044,
+      "year": 2023,
+      "cell": "AE286"
+    },
+    {
+      "code": "15673",
+      "d": "BOYACÁ",
+      "m": "SAN MATEO",
+      "value": 57.36376718030059,
+      "year": 2023,
+      "cell": "AE287"
+    },
+    {
+      "code": "15676",
+      "d": "BOYACÁ",
+      "m": "SAN MIGUEL DE SEMA",
+      "value": 59.32272150841035,
+      "year": 2023,
+      "cell": "AE288"
+    },
+    {
+      "code": "15681",
+      "d": "BOYACÁ",
+      "m": "SAN PABLO DE BORBUR",
+      "value": 62.76233541442084,
+      "year": 2023,
+      "cell": "AE289"
+    },
+    {
+      "code": "15686",
+      "d": "BOYACÁ",
+      "m": "SANTANA",
+      "value": 60.97930779031482,
+      "year": 2023,
+      "cell": "AE290"
+    },
+    {
+      "code": "15690",
+      "d": "BOYACÁ",
+      "m": "SANTA MARÍA ",
+      "value": 62.08432401978162,
+      "year": 2023,
+      "cell": "AE291"
+    },
+    {
+      "code": "15693",
+      "d": "BOYACÁ",
+      "m": "SANTA ROSA DE VITERBO",
+      "value": 59.30688319070689,
+      "year": 2023,
+      "cell": "AE292"
+    },
+    {
+      "code": "15696",
+      "d": "BOYACÁ",
+      "m": "SANTA SOFÍA",
+      "value": 69.82518730946822,
+      "year": 2023,
+      "cell": "AE293"
+    },
+    {
+      "code": "15720",
+      "d": "BOYACÁ",
+      "m": "SATIVANORTE",
+      "value": 55.478171304777305,
+      "year": 2023,
+      "cell": "AE294"
+    },
+    {
+      "code": "15723",
+      "d": "BOYACÁ",
+      "m": "SATIVASUR",
+      "value": 56.393776500448304,
+      "year": 2023,
+      "cell": "AE295"
+    },
+    {
+      "code": "15740",
+      "d": "BOYACÁ",
+      "m": "SIACHOQUE",
+      "value": 64.66337265651217,
+      "year": 2023,
+      "cell": "AE296"
+    },
+    {
+      "code": "15753",
+      "d": "BOYACÁ",
+      "m": "SOATÁ",
+      "value": 62.243437513474206,
+      "year": 2023,
+      "cell": "AE297"
+    },
+    {
+      "code": "15755",
+      "d": "BOYACÁ",
+      "m": "SOCOTÁ",
+      "value": 67.87597435437557,
+      "year": 2023,
+      "cell": "AE298"
+    },
+    {
+      "code": "15757",
+      "d": "BOYACÁ",
+      "m": "SOCHA",
+      "value": 72.04524430786083,
+      "year": 2023,
+      "cell": "AE299"
+    },
+    {
+      "code": "15759",
+      "d": "BOYACÁ",
+      "m": "SOGAMOSO",
+      "value": 58.98790886312793,
+      "year": 2023,
+      "cell": "AE300"
+    },
+    {
+      "code": "15761",
+      "d": "BOYACÁ",
+      "m": "SOMONDOCO",
+      "value": 39.27256373350756,
+      "year": 2023,
+      "cell": "AE301"
+    },
+    {
+      "code": "15762",
+      "d": "BOYACÁ",
+      "m": "SORA",
+      "value": 59.73042400846798,
+      "year": 2023,
+      "cell": "AE302"
+    },
+    {
+      "code": "15763",
+      "d": "BOYACÁ",
+      "m": "SOTAQUIRÁ",
+      "value": 63.1696902733827,
+      "year": 2023,
+      "cell": "AE303"
+    },
+    {
+      "code": "15764",
+      "d": "BOYACÁ",
+      "m": "SORACÁ",
+      "value": 66.6261332607522,
+      "year": 2023,
+      "cell": "AE304"
+    },
+    {
+      "code": "15774",
+      "d": "BOYACÁ",
+      "m": "SUSACÓN",
+      "value": 40.83762486663273,
+      "year": 2023,
+      "cell": "AE305"
+    },
+    {
+      "code": "15776",
+      "d": "BOYACÁ",
+      "m": "SUTAMARCHÁN",
+      "value": 64.3324253589922,
+      "year": 2023,
+      "cell": "AE306"
+    },
+    {
+      "code": "15778",
+      "d": "BOYACÁ",
+      "m": "SUTATENZA",
+      "value": 47.93074698135913,
+      "year": 2023,
+      "cell": "AE307"
+    },
+    {
+      "code": "15790",
+      "d": "BOYACÁ",
+      "m": "TASCO",
+      "value": 52.286950141313824,
+      "year": 2023,
+      "cell": "AE308"
+    },
+    {
+      "code": "15798",
+      "d": "BOYACÁ",
+      "m": "TENZA",
+      "value": 59.168479477347454,
+      "year": 2023,
+      "cell": "AE309"
+    },
+    {
+      "code": "15804",
+      "d": "BOYACÁ",
+      "m": "TIBANÁ",
+      "value": 65.8144784759296,
+      "year": 2023,
+      "cell": "AE310"
+    },
+    {
+      "code": "15806",
+      "d": "BOYACÁ",
+      "m": "TIBASOSA",
+      "value": 66.69671923070565,
+      "year": 2023,
+      "cell": "AE311"
+    },
+    {
+      "code": "15808",
+      "d": "BOYACÁ",
+      "m": "TINJACÁ",
+      "value": 47.64021739207365,
+      "year": 2023,
+      "cell": "AE312"
+    },
+    {
+      "code": "15810",
+      "d": "BOYACÁ",
+      "m": "TIPACOQUE",
+      "value": 48.06423516222155,
+      "year": 2023,
+      "cell": "AE313"
+    },
+    {
+      "code": "15814",
+      "d": "BOYACÁ",
+      "m": "TOCA",
+      "value": 68.9148529039952,
+      "year": 2023,
+      "cell": "AE314"
+    },
+    {
+      "code": "15816",
+      "d": "BOYACÁ",
+      "m": "TOGÜÍ",
+      "value": 55.38734337614948,
+      "year": 2023,
+      "cell": "AE315"
+    },
+    {
+      "code": "15820",
+      "d": "BOYACÁ",
+      "m": "TÓPAGA",
+      "value": 54.08899688779598,
+      "year": 2023,
+      "cell": "AE316"
+    },
+    {
+      "code": "15822",
+      "d": "BOYACÁ",
+      "m": "TOTA",
+      "value": 56.259424225871605,
+      "year": 2023,
+      "cell": "AE317"
+    },
+    {
+      "code": "15832",
+      "d": "BOYACÁ",
+      "m": "TUNUNGUÁ",
+      "value": 48.45437208409544,
+      "year": 2023,
+      "cell": "AE318"
+    },
+    {
+      "code": "15835",
+      "d": "BOYACÁ",
+      "m": "TURMEQUÉ",
+      "value": 59.51754690100289,
+      "year": 2023,
+      "cell": "AE319"
+    },
+    {
+      "code": "15837",
+      "d": "BOYACÁ",
+      "m": "TUTA",
+      "value": 79.00219615662044,
+      "year": 2023,
+      "cell": "AE320"
+    },
+    {
+      "code": "15839",
+      "d": "BOYACÁ",
+      "m": "TUTASÁ",
+      "value": 13.331006043422997,
+      "year": 2023,
+      "cell": "AE321"
+    },
+    {
+      "code": "15842",
+      "d": "BOYACÁ",
+      "m": "ÚMBITA",
+      "value": 68.70240490507521,
+      "year": 2023,
+      "cell": "AE322"
+    },
+    {
+      "code": "15861",
+      "d": "BOYACÁ",
+      "m": "VENTAQUEMADA",
+      "value": 64.4429791332341,
+      "year": 2023,
+      "cell": "AE323"
+    },
+    {
+      "code": "15879",
+      "d": "BOYACÁ",
+      "m": "VIRACACHÁ",
+      "value": 56.62960330183466,
+      "year": 2023,
+      "cell": "AE324"
+    },
+    {
+      "code": "15897",
+      "d": "BOYACÁ",
+      "m": "ZETAQUIRA",
+      "value": 56.98260884395258,
+      "year": 2023,
+      "cell": "AE325"
+    },
+    {
+      "code": "17001",
+      "d": "CALDAS",
+      "m": "MANIZALES",
+      "value": 69.14694672461742,
+      "year": 2023,
+      "cell": "AE326"
+    },
+    {
+      "code": "17013",
+      "d": "CALDAS",
+      "m": "AGUADAS ",
+      "value": 61.23276021201835,
+      "year": 2023,
+      "cell": "AE327"
+    },
+    {
+      "code": "17042",
+      "d": "CALDAS",
+      "m": "ANSERMA DE LOS CABALLEROS",
+      "value": 55.62384599361118,
+      "year": 2023,
+      "cell": "AE328"
+    },
+    {
+      "code": "17050",
+      "d": "CALDAS",
+      "m": "ARANZAZU",
+      "value": 60.46316299706217,
+      "year": 2023,
+      "cell": "AE329"
+    },
+    {
+      "code": "17088",
+      "d": "CALDAS",
+      "m": "BELALCÁZAR",
+      "value": 57.546994009478084,
+      "year": 2023,
+      "cell": "AE330"
+    },
+    {
+      "code": "17174",
+      "d": "CALDAS",
+      "m": "CHINCHINÁ",
+      "value": 56.69989588897348,
+      "year": 2023,
+      "cell": "AE331"
+    },
+    {
+      "code": "17272",
+      "d": "CALDAS",
+      "m": "FILADELFIA",
+      "value": 63.425714183841045,
+      "year": 2023,
+      "cell": "AE332"
+    },
+    {
+      "code": "17380",
+      "d": "CALDAS",
+      "m": "LA DORADA",
+      "value": 64.07972759491271,
+      "year": 2023,
+      "cell": "AE333"
+    },
+    {
+      "code": "17388",
+      "d": "CALDAS",
+      "m": "LA MERCED",
+      "value": 55.31049745768519,
+      "year": 2023,
+      "cell": "AE334"
+    },
+    {
+      "code": "17433",
+      "d": "CALDAS",
+      "m": "MANZANARES",
+      "value": 50.48583486409011,
+      "year": 2023,
+      "cell": "AE335"
+    },
+    {
+      "code": "17442",
+      "d": "CALDAS",
+      "m": "MARMATO",
+      "value": 66.43088771727787,
+      "year": 2023,
+      "cell": "AE336"
+    },
+    {
+      "code": "17444",
+      "d": "CALDAS",
+      "m": "MARQUETALIA",
+      "value": 45.01683796379231,
+      "year": 2023,
+      "cell": "AE337"
+    },
+    {
+      "code": "17446",
+      "d": "CALDAS",
+      "m": "MARULANDA",
+      "value": 52.82607573006898,
+      "year": 2023,
+      "cell": "AE338"
+    },
+    {
+      "code": "17486",
+      "d": "CALDAS",
+      "m": "NEIRA",
+      "value": 66.75048558357987,
+      "year": 2023,
+      "cell": "AE339"
+    },
+    {
+      "code": "17495",
+      "d": "CALDAS",
+      "m": "NORCASIA",
+      "value": 67.94820612469529,
+      "year": 2023,
+      "cell": "AE340"
+    },
+    {
+      "code": "17513",
+      "d": "CALDAS",
+      "m": "PÁCORA",
+      "value": 58.06384789606581,
+      "year": 2023,
+      "cell": "AE341"
+    },
+    {
+      "code": "17524",
+      "d": "CALDAS",
+      "m": "PALESTINA ",
+      "value": 56.27052623739041,
+      "year": 2023,
+      "cell": "AE342"
+    },
+    {
+      "code": "17541",
+      "d": "CALDAS",
+      "m": "PENSILVANIA",
+      "value": 63.1054616423898,
+      "year": 2023,
+      "cell": "AE343"
+    },
+    {
+      "code": "17614",
+      "d": "CALDAS",
+      "m": "RIOSUCIO ",
+      "value": 59.80039564989687,
+      "year": 2023,
+      "cell": "AE344"
+    },
+    {
+      "code": "17616",
+      "d": "CALDAS",
+      "m": "RISARALDA",
+      "value": 57.2117264791172,
+      "year": 2023,
+      "cell": "AE345"
+    },
+    {
+      "code": "17653",
+      "d": "CALDAS",
+      "m": "SALAMINA ",
+      "value": 55.00414943011313,
+      "year": 2023,
+      "cell": "AE346"
+    },
+    {
+      "code": "17662",
+      "d": "CALDAS",
+      "m": "SAMANÁ",
+      "value": 59.43474971741727,
+      "year": 2023,
+      "cell": "AE347"
+    },
+    {
+      "code": "17665",
+      "d": "CALDAS",
+      "m": "SAN JOSÉ ",
+      "value": 57.39411237115728,
+      "year": 2023,
+      "cell": "AE348"
+    },
+    {
+      "code": "17777",
+      "d": "CALDAS",
+      "m": "SUPÍA",
+      "value": 61.12510437679495,
+      "year": 2023,
+      "cell": "AE349"
+    },
+    {
+      "code": "17867",
+      "d": "CALDAS",
+      "m": "VICTORIA",
+      "value": 58.67352608338897,
+      "year": 2023,
+      "cell": "AE350"
+    },
+    {
+      "code": "17873",
+      "d": "CALDAS",
+      "m": "VILLAMARÍA",
+      "value": 68.64953125620748,
+      "year": 2023,
+      "cell": "AE351"
+    },
+    {
+      "code": "17877",
+      "d": "CALDAS",
+      "m": "VITERBO",
+      "value": 52.146551011443606,
+      "year": 2023,
+      "cell": "AE352"
+    },
+    {
+      "code": "18001",
+      "d": "CAQUETÁ",
+      "m": "FLORENCIA ",
+      "value": 54.48984775534974,
+      "year": 2023,
+      "cell": "AE353"
+    },
+    {
+      "code": "18029",
+      "d": "CAQUETÁ",
+      "m": "ALBANIA ",
+      "value": 55.19764452973982,
+      "year": 2023,
+      "cell": "AE354"
+    },
+    {
+      "code": "18094",
+      "d": "CAQUETÁ",
+      "m": "BELÉN DE LOS ANDAQUÍES",
+      "value": 54.00415845653881,
+      "year": 2023,
+      "cell": "AE355"
+    },
+    {
+      "code": "18150",
+      "d": "CAQUETÁ",
+      "m": "CARTAGENA DEL CHAIRÁ",
+      "value": 59.11595914999937,
+      "year": 2023,
+      "cell": "AE356"
+    },
+    {
+      "code": "18205",
+      "d": "CAQUETÁ",
+      "m": "CURILLO",
+      "value": 57.23272505777762,
+      "year": 2023,
+      "cell": "AE357"
+    },
+    {
+      "code": "18247",
+      "d": "CAQUETÁ",
+      "m": "EL DONCELLO",
+      "value": 50.20294955514245,
+      "year": 2023,
+      "cell": "AE358"
+    },
+    {
+      "code": "18256",
+      "d": "CAQUETÁ",
+      "m": "EL PAUJIL",
+      "value": 55.473450242639714,
+      "year": 2023,
+      "cell": "AE359"
+    },
+    {
+      "code": "18410",
+      "d": "CAQUETÁ",
+      "m": "LA MONTAÑITA",
+      "value": 61.189121868624184,
+      "year": 2023,
+      "cell": "AE360"
+    },
+    {
+      "code": "18460",
+      "d": "CAQUETÁ",
+      "m": "MILÁN",
+      "value": 51.16437582810521,
+      "year": 2023,
+      "cell": "AE361"
+    },
+    {
+      "code": "18479",
+      "d": "CAQUETÁ",
+      "m": "MORELIA",
+      "value": 51.35627919711267,
+      "year": 2023,
+      "cell": "AE362"
+    },
+    {
+      "code": "18592",
+      "d": "CAQUETÁ",
+      "m": "PUERTO RICO ",
+      "value": 59.72778775409166,
+      "year": 2023,
+      "cell": "AE363"
+    },
+    {
+      "code": "18610",
+      "d": "CAQUETÁ",
+      "m": "SAN JOSÉ DE LA FRAGUA",
+      "value": 61.915969587205964,
+      "year": 2023,
+      "cell": "AE364"
+    },
+    {
+      "code": "18753",
+      "d": "CAQUETÁ",
+      "m": "SAN VICENTE DEL CAGUÁN",
+      "value": 56.04884472803541,
+      "year": 2023,
+      "cell": "AE365"
+    },
+    {
+      "code": "18756",
+      "d": "CAQUETÁ",
+      "m": "SOLANO",
+      "value": 42.653462419491554,
+      "year": 2023,
+      "cell": "AE366"
+    },
+    {
+      "code": "18785",
+      "d": "CAQUETÁ",
+      "m": "SOLITA",
+      "value": 48.3130593883363,
+      "year": 2023,
+      "cell": "AE367"
+    },
+    {
+      "code": "18860",
+      "d": "CAQUETÁ",
+      "m": "VALPARAÍSO ",
+      "value": 12.444307610582028,
+      "year": 2023,
+      "cell": "AE368"
+    },
+    {
+      "code": "19001",
+      "d": "CAUCA",
+      "m": "POPAYÁN",
+      "value": 59.628743475793726,
+      "year": 2023,
+      "cell": "AE369"
+    },
+    {
+      "code": "19022",
+      "d": "CAUCA",
+      "m": "ALMAGUER",
+      "value": 51.664060128447716,
+      "year": 2023,
+      "cell": "AE370"
+    },
+    {
+      "code": "19050",
+      "d": "CAUCA",
+      "m": "ARGELIA ",
+      "value": 60.743829313577194,
+      "year": 2023,
+      "cell": "AE371"
+    },
+    {
+      "code": "19075",
+      "d": "CAUCA",
+      "m": "BALBOA ",
+      "value": 54.395201807779785,
+      "year": 2023,
+      "cell": "AE372"
+    },
+    {
+      "code": "19100",
+      "d": "CAUCA",
+      "m": "BOLÍVAR ",
+      "value": 49.721264509469684,
+      "year": 2023,
+      "cell": "AE373"
+    },
+    {
+      "code": "19110",
+      "d": "CAUCA",
+      "m": "BUENOS AIRES",
+      "value": 56.62455490988879,
+      "year": 2023,
+      "cell": "AE374"
+    },
+    {
+      "code": "19130",
+      "d": "CAUCA",
+      "m": "CAJIBÍO",
+      "value": 53.02815351661903,
+      "year": 2023,
+      "cell": "AE375"
+    },
+    {
+      "code": "19137",
+      "d": "CAUCA",
+      "m": "CALDONO",
+      "value": 45.01123495381459,
+      "year": 2023,
+      "cell": "AE376"
+    },
+    {
+      "code": "19142",
+      "d": "CAUCA",
+      "m": "CALOTO",
+      "value": 57.560595406969554,
+      "year": 2023,
+      "cell": "AE377"
+    },
+    {
+      "code": "19212",
+      "d": "CAUCA",
+      "m": "CORINTO",
+      "value": 54.925216053912706,
+      "year": 2023,
+      "cell": "AE378"
+    },
+    {
+      "code": "19256",
+      "d": "CAUCA",
+      "m": "EL TAMBO ",
+      "value": 49.16898687388449,
+      "year": 2023,
+      "cell": "AE379"
+    },
+    {
+      "code": "19290",
+      "d": "CAUCA",
+      "m": "FLORENCIA ",
+      "value": 67.66524258261259,
+      "year": 2023,
+      "cell": "AE380"
+    },
+    {
+      "code": "19300",
+      "d": "CAUCA",
+      "m": "GUACHENÉ",
+      "value": 68.85557270256123,
+      "year": 2023,
+      "cell": "AE381"
+    },
+    {
+      "code": "19318",
+      "d": "CAUCA",
+      "m": "GUAPI",
+      "value": 55.75222511813222,
+      "year": 2023,
+      "cell": "AE382"
+    },
+    {
+      "code": "19355",
+      "d": "CAUCA",
+      "m": "INZÁ",
+      "value": 58.17942427696528,
+      "year": 2023,
+      "cell": "AE383"
+    },
+    {
+      "code": "19364",
+      "d": "CAUCA",
+      "m": "JAMBALÓ",
+      "value": 51.06943858807451,
+      "year": 2023,
+      "cell": "AE384"
+    },
+    {
+      "code": "19392",
+      "d": "CAUCA",
+      "m": "LA SIERRA",
+      "value": 51.50975117257436,
+      "year": 2023,
+      "cell": "AE385"
+    },
+    {
+      "code": "19397",
+      "d": "CAUCA",
+      "m": "LA VEGA ",
+      "value": 48.43584402725762,
+      "year": 2023,
+      "cell": "AE386"
+    },
+    {
+      "code": "19418",
+      "d": "CAUCA",
+      "m": "LÓPEZ DE MICAY",
+      "value": 69.4559653223782,
+      "year": 2023,
+      "cell": "AE387"
+    },
+    {
+      "code": "19450",
+      "d": "CAUCA",
+      "m": "MERCADERES",
+      "value": 46.15222064303349,
+      "year": 2023,
+      "cell": "AE388"
+    },
+    {
+      "code": "19455",
+      "d": "CAUCA",
+      "m": "MIRANDA",
+      "value": 64.77136879838844,
+      "year": 2023,
+      "cell": "AE389"
+    },
+    {
+      "code": "19473",
+      "d": "CAUCA",
+      "m": "MORALES ",
+      "value": 54.55423175741359,
+      "year": 2023,
+      "cell": "AE390"
+    },
+    {
+      "code": "19513",
+      "d": "CAUCA",
+      "m": "PADILLA",
+      "value": 50.58798671432612,
+      "year": 2023,
+      "cell": "AE391"
+    },
+    {
+      "code": "19517",
+      "d": "CAUCA",
+      "m": "PÁEZ (BELALCÁZAR) ",
+      "value": 62.89731738224162,
+      "year": 2023,
+      "cell": "AE392"
+    },
+    {
+      "code": "19532",
+      "d": "CAUCA",
+      "m": "PATÍA (EL BORDO)",
+      "value": 45.89963430155247,
+      "year": 2023,
+      "cell": "AE393"
+    },
+    {
+      "code": "19533",
+      "d": "CAUCA",
+      "m": "PIAMONTE",
+      "value": 54.90051043731912,
+      "year": 2023,
+      "cell": "AE394"
+    },
+    {
+      "code": "19548",
+      "d": "CAUCA",
+      "m": "PIENDAMÓ",
+      "value": 59.04815489429632,
+      "year": 2023,
+      "cell": "AE395"
+    },
+    {
+      "code": "19573",
+      "d": "CAUCA",
+      "m": "PUERTO TEJADA",
+      "value": 47.562715820724804,
+      "year": 2023,
+      "cell": "AE396"
+    },
+    {
+      "code": "19585",
+      "d": "CAUCA",
+      "m": "PURACÉ (COCONUCO)",
+      "value": 48.98560607241492,
+      "year": 2023,
+      "cell": "AE397"
+    },
+    {
+      "code": "19622",
+      "d": "CAUCA",
+      "m": "ROSAS",
+      "value": 51.071963666123686,
+      "year": 2023,
+      "cell": "AE398"
+    },
+    {
+      "code": "19693",
+      "d": "CAUCA",
+      "m": "SAN SEBASTIÁN",
+      "value": 51.23832648399484,
+      "year": 2023,
+      "cell": "AE399"
+    },
+    {
+      "code": "19698",
+      "d": "CAUCA",
+      "m": "SANTANDER DE QUILICHAO",
+      "value": 59.307662392604456,
+      "year": 2023,
+      "cell": "AE400"
+    },
+    {
+      "code": "19701",
+      "d": "CAUCA",
+      "m": "SANTA ROSA ",
+      "value": 61.20082365901916,
+      "year": 2023,
+      "cell": "AE401"
+    },
+    {
+      "code": "19743",
+      "d": "CAUCA",
+      "m": "SILVIA",
+      "value": 41.6453957989214,
+      "year": 2023,
+      "cell": "AE402"
+    },
+    {
+      "code": "19760",
+      "d": "CAUCA",
+      "m": "SOTARÁ (PAISPAMBA)",
+      "value": 51.804763592221455,
+      "year": 2023,
+      "cell": "AE403"
+    },
+    {
+      "code": "19780",
+      "d": "CAUCA",
+      "m": "SUÁREZ ",
+      "value": 53.082712363078414,
+      "year": 2023,
+      "cell": "AE404"
+    },
+    {
+      "code": "19785",
+      "d": "CAUCA",
+      "m": "SUCRE ",
+      "value": 55.8530021503408,
+      "year": 2023,
+      "cell": "AE405"
+    },
+    {
+      "code": "19807",
+      "d": "CAUCA",
+      "m": "TIMBÍO",
+      "value": 56.88017626595715,
+      "year": 2023,
+      "cell": "AE406"
+    },
+    {
+      "code": "19809",
+      "d": "CAUCA",
+      "m": "TIMBIQUÍ",
+      "value": 67.82740777656241,
+      "year": 2023,
+      "cell": "AE407"
+    },
+    {
+      "code": "19821",
+      "d": "CAUCA",
+      "m": "TORIBÍO",
+      "value": 59.04499558698262,
+      "year": 2023,
+      "cell": "AE408"
+    },
+    {
+      "code": "19824",
+      "d": "CAUCA",
+      "m": "TOTORÓ",
+      "value": 55.0747217427884,
+      "year": 2023,
+      "cell": "AE409"
+    },
+    {
+      "code": "19845",
+      "d": "CAUCA",
+      "m": "VILLARRICA ",
+      "value": 63.69229559211291,
+      "year": 2023,
+      "cell": "AE410"
+    },
+    {
+      "code": "20001",
+      "d": "CESAR",
+      "m": "VALLEDUPAR",
+      "value": 61.09873040753819,
+      "year": 2023,
+      "cell": "AE411"
+    },
+    {
+      "code": "20011",
+      "d": "CESAR",
+      "m": "AGUACHICA",
+      "value": 53.57273719853066,
+      "year": 2023,
+      "cell": "AE412"
+    },
+    {
+      "code": "20013",
+      "d": "CESAR",
+      "m": "AGUSTÍN CODAZZI",
+      "value": 74.96059226725927,
+      "year": 2023,
+      "cell": "AE413"
+    },
+    {
+      "code": "20032",
+      "d": "CESAR",
+      "m": "ASTREA",
+      "value": 47.04937949635726,
+      "year": 2023,
+      "cell": "AE414"
+    },
+    {
+      "code": "20045",
+      "d": "CESAR",
+      "m": "BECERRIL",
+      "value": 68.44431882779458,
+      "year": 2023,
+      "cell": "AE415"
+    },
+    {
+      "code": "20060",
+      "d": "CESAR",
+      "m": "BOSCONIA",
+      "value": 54.06448815052099,
+      "year": 2023,
+      "cell": "AE416"
+    },
+    {
+      "code": "20175",
+      "d": "CESAR",
+      "m": "CHIMICHAGUA",
+      "value": 52.50675755037123,
+      "year": 2023,
+      "cell": "AE417"
+    },
+    {
+      "code": "20178",
+      "d": "CESAR",
+      "m": "CHIRIGUANÁ",
+      "value": 60.37153896637859,
+      "year": 2023,
+      "cell": "AE418"
+    },
+    {
+      "code": "20228",
+      "d": "CESAR",
+      "m": "CURUMANÍ",
+      "value": 50.042779935597295,
+      "year": 2023,
+      "cell": "AE419"
+    },
+    {
+      "code": "20238",
+      "d": "CESAR",
+      "m": "EL COPEY",
+      "value": 60.678248017181375,
+      "year": 2023,
+      "cell": "AE420"
+    },
+    {
+      "code": "20250",
+      "d": "CESAR",
+      "m": "EL PASO",
+      "value": 59.01663755089253,
+      "year": 2023,
+      "cell": "AE421"
+    },
+    {
+      "code": "20295",
+      "d": "CESAR",
+      "m": "GAMARRA",
+      "value": 69.25470795997448,
+      "year": 2023,
+      "cell": "AE422"
+    },
+    {
+      "code": "20310",
+      "d": "CESAR",
+      "m": "GONZÁLEZ",
+      "value": 51.13091053990616,
+      "year": 2023,
+      "cell": "AE423"
+    },
+    {
+      "code": "20383",
+      "d": "CESAR",
+      "m": "LA GLORIA",
+      "value": 69.71062769401567,
+      "year": 2023,
+      "cell": "AE424"
+    },
+    {
+      "code": "20400",
+      "d": "CESAR",
+      "m": "LA JAGUA DE IBIRICO",
+      "value": 72.91809971593909,
+      "year": 2023,
+      "cell": "AE425"
+    },
+    {
+      "code": "20443",
+      "d": "CESAR",
+      "m": "MANAURE (BALCÓN DEL CESAR)",
+      "value": 64.1440727317141,
+      "year": 2023,
+      "cell": "AE426"
+    },
+    {
+      "code": "20517",
+      "d": "CESAR",
+      "m": "PAILITAS",
+      "value": 58.57680884527369,
+      "year": 2023,
+      "cell": "AE427"
+    },
+    {
+      "code": "20550",
+      "d": "CESAR",
+      "m": "PELAYA",
+      "value": 62.02243649761711,
+      "year": 2023,
+      "cell": "AE428"
+    },
+    {
+      "code": "20570",
+      "d": "CESAR",
+      "m": "PUEBLO BELLO",
+      "value": 50.37446917362474,
+      "year": 2023,
+      "cell": "AE429"
+    },
+    {
+      "code": "20614",
+      "d": "CESAR",
+      "m": "RÍO DE ORO",
+      "value": 60.279141633475945,
+      "year": 2023,
+      "cell": "AE430"
+    },
+    {
+      "code": "20621",
+      "d": "CESAR",
+      "m": "LA PAZ (ROBLES) ",
+      "value": 69.20433949985473,
+      "year": 2023,
+      "cell": "AE431"
+    },
+    {
+      "code": "20710",
+      "d": "CESAR",
+      "m": "SAN ALBERTO",
+      "value": 64.82249161505136,
+      "year": 2023,
+      "cell": "AE432"
+    },
+    {
+      "code": "20750",
+      "d": "CESAR",
+      "m": "SAN DIEGO",
+      "value": 55.46788331718743,
+      "year": 2023,
+      "cell": "AE433"
+    },
+    {
+      "code": "20770",
+      "d": "CESAR",
+      "m": "SAN MARTÍN ",
+      "value": 62.91102597737567,
+      "year": 2023,
+      "cell": "AE434"
+    },
+    {
+      "code": "20787",
+      "d": "CESAR",
+      "m": "TAMALAMEQUE",
+      "value": 43.52964462274694,
+      "year": 2023,
+      "cell": "AE435"
+    },
+    {
+      "code": "23001",
+      "d": "CÓRDOBA",
+      "m": "MONTERÍA",
+      "value": 66.38318219566116,
+      "year": 2023,
+      "cell": "AE436"
+    },
+    {
+      "code": "23068",
+      "d": "CÓRDOBA",
+      "m": "AYAPEL",
+      "value": 60.26477704507396,
+      "year": 2023,
+      "cell": "AE437"
+    },
+    {
+      "code": "23079",
+      "d": "CÓRDOBA",
+      "m": "BUENAVISTA ",
+      "value": 58.1213140689044,
+      "year": 2023,
+      "cell": "AE438"
+    },
+    {
+      "code": "23090",
+      "d": "CÓRDOBA",
+      "m": "CANALETE",
+      "value": 11.302324899111554,
+      "year": 2023,
+      "cell": "AE439"
+    },
+    {
+      "code": "23162",
+      "d": "CÓRDOBA",
+      "m": "CERETÉ",
+      "value": 53.939946835500955,
+      "year": 2023,
+      "cell": "AE440"
+    },
+    {
+      "code": "23168",
+      "d": "CÓRDOBA",
+      "m": "CHIMÁ ",
+      "value": 39.63965926584081,
+      "year": 2023,
+      "cell": "AE441"
+    },
+    {
+      "code": "23182",
+      "d": "CÓRDOBA",
+      "m": "CHINÚ",
+      "value": 68.9053498036587,
+      "year": 2023,
+      "cell": "AE442"
+    },
+    {
+      "code": "23189",
+      "d": "CÓRDOBA",
+      "m": "CIÉNAGA DE ORO",
+      "value": 51.03676111820714,
+      "year": 2023,
+      "cell": "AE443"
+    },
+    {
+      "code": "23300",
+      "d": "CÓRDOBA",
+      "m": "COTORRA",
+      "value": 56.73240394395688,
+      "year": 2023,
+      "cell": "AE444"
+    },
+    {
+      "code": "23350",
+      "d": "CÓRDOBA",
+      "m": "LA APARTADA",
+      "value": 61.447132891641125,
+      "year": 2023,
+      "cell": "AE445"
+    },
+    {
+      "code": "23417",
+      "d": "CÓRDOBA",
+      "m": "SANTA CRUZ DE LORICA",
+      "value": 57.178336556804496,
+      "year": 2023,
+      "cell": "AE446"
+    },
+    {
+      "code": "23419",
+      "d": "CÓRDOBA",
+      "m": "LOS CÓRDOBAS",
+      "value": 64.17969665950835,
+      "year": 2023,
+      "cell": "AE447"
+    },
+    {
+      "code": "23464",
+      "d": "CÓRDOBA",
+      "m": "MOMÍL",
+      "value": 49.55530418480035,
+      "year": 2023,
+      "cell": "AE448"
+    },
+    {
+      "code": "23466",
+      "d": "CÓRDOBA",
+      "m": "MONTELÍBANO",
+      "value": 61.8142595470836,
+      "year": 2023,
+      "cell": "AE449"
+    },
+    {
+      "code": "23500",
+      "d": "CÓRDOBA",
+      "m": "MOÑITOS",
+      "value": 51.718703018074386,
+      "year": 2023,
+      "cell": "AE450"
+    },
+    {
+      "code": "23555",
+      "d": "CÓRDOBA",
+      "m": "PLANETA RICA",
+      "value": 69.7305595155456,
+      "year": 2023,
+      "cell": "AE451"
+    },
+    {
+      "code": "23570",
+      "d": "CÓRDOBA",
+      "m": "PUEBLO NUEVO",
+      "value": 58.66835718415645,
+      "year": 2023,
+      "cell": "AE452"
+    },
+    {
+      "code": "23574",
+      "d": "CÓRDOBA",
+      "m": "PUERTO ESCONDIDO",
+      "value": 52.59358029514398,
+      "year": 2023,
+      "cell": "AE453"
+    },
+    {
+      "code": "23580",
+      "d": "CÓRDOBA",
+      "m": "PUERTO LIBERTADOR",
+      "value": 61.6297060634641,
+      "year": 2023,
+      "cell": "AE454"
+    },
+    {
+      "code": "23586",
+      "d": "CÓRDOBA",
+      "m": "PURÍSIMA",
+      "value": 51.815045156246626,
+      "year": 2023,
+      "cell": "AE455"
+    },
+    {
+      "code": "23660",
+      "d": "CÓRDOBA",
+      "m": "SAHAGÚN",
+      "value": 55.9195119466796,
+      "year": 2023,
+      "cell": "AE456"
+    },
+    {
+      "code": "23670",
+      "d": "CÓRDOBA",
+      "m": "SAN ANDRÉS DE SOTAVENTO",
+      "value": 63.650121114702955,
+      "year": 2023,
+      "cell": "AE457"
+    },
+    {
+      "code": "23672",
+      "d": "CÓRDOBA",
+      "m": "SAN ANTERO",
+      "value": 51.95201434273152,
+      "year": 2023,
+      "cell": "AE458"
+    },
+    {
+      "code": "23675",
+      "d": "CÓRDOBA",
+      "m": "SAN BERNARDO DEL VIENTO",
+      "value": 61.13563681882951,
+      "year": 2023,
+      "cell": "AE459"
+    },
+    {
+      "code": "23678",
+      "d": "CÓRDOBA",
+      "m": "SAN CARLOS ",
+      "value": 40.86818110960735,
+      "year": 2023,
+      "cell": "AE460"
+    },
+    {
+      "code": "23682",
+      "d": "CÓRDOBA",
+      "m": "SAN JOSE DE URE",
+      "value": 69.50267350538819,
+      "year": 2023,
+      "cell": "AE461"
+    },
+    {
+      "code": "23686",
+      "d": "CÓRDOBA",
+      "m": "SAN PELAYO",
+      "value": 43.70570349765199,
+      "year": 2023,
+      "cell": "AE462"
+    },
+    {
+      "code": "23807",
+      "d": "CÓRDOBA",
+      "m": "TIERRALTA",
+      "value": 61.15232303519148,
+      "year": 2023,
+      "cell": "AE463"
+    },
+    {
+      "code": "23815",
+      "d": "CÓRDOBA",
+      "m": "TUCHIN",
+      "value": 65.53274900019521,
+      "year": 2023,
+      "cell": "AE464"
+    },
+    {
+      "code": "23855",
+      "d": "CÓRDOBA",
+      "m": "VALENCIA",
+      "value": 60.215162204377165,
+      "year": 2023,
+      "cell": "AE465"
+    },
+    {
+      "code": "25001",
+      "d": "CUNDINAMARCA",
+      "m": "AGUA DE DIOS",
+      "value": 64.24972463033164,
+      "year": 2023,
+      "cell": "AE466"
+    },
+    {
+      "code": "25019",
+      "d": "CUNDINAMARCA",
+      "m": "ALBÁN",
+      "value": 75.34745746078828,
+      "year": 2023,
+      "cell": "AE467"
+    },
+    {
+      "code": "25035",
+      "d": "CUNDINAMARCA",
+      "m": "ANAPOIMA",
+      "value": 66.64051652764815,
+      "year": 2023,
+      "cell": "AE468"
+    },
+    {
+      "code": "25040",
+      "d": "CUNDINAMARCA",
+      "m": "ANOLAIMA",
+      "value": 64.9464650117339,
+      "year": 2023,
+      "cell": "AE469"
+    },
+    {
+      "code": "25053",
+      "d": "CUNDINAMARCA",
+      "m": "ARBELÁEZ",
+      "value": 62.31399873035588,
+      "year": 2023,
+      "cell": "AE470"
+    },
+    {
+      "code": "25086",
+      "d": "CUNDINAMARCA",
+      "m": "BELTRÁN",
+      "value": 54.19440295609301,
+      "year": 2023,
+      "cell": "AE471"
+    },
+    {
+      "code": "25095",
+      "d": "CUNDINAMARCA",
+      "m": "BITUIMA",
+      "value": 60.052447613000844,
+      "year": 2023,
+      "cell": "AE472"
+    },
+    {
+      "code": "25099",
+      "d": "CUNDINAMARCA",
+      "m": "BOJACÁ",
+      "value": 66.33612839069622,
+      "year": 2023,
+      "cell": "AE473"
+    },
+    {
+      "code": "25120",
+      "d": "CUNDINAMARCA",
+      "m": "CABRERA ",
+      "value": 61.70094930829766,
+      "year": 2023,
+      "cell": "AE474"
+    },
+    {
+      "code": "25123",
+      "d": "CUNDINAMARCA",
+      "m": "CACHIPAY",
+      "value": 69.93147189841676,
+      "year": 2023,
+      "cell": "AE475"
+    },
+    {
+      "code": "25126",
+      "d": "CUNDINAMARCA",
+      "m": "CAJICA",
+      "value": 72.75229392232525,
+      "year": 2023,
+      "cell": "AE476"
+    },
+    {
+      "code": "25148",
+      "d": "CUNDINAMARCA",
+      "m": "CAPARRAPÍ",
+      "value": 51.85894388950745,
+      "year": 2023,
+      "cell": "AE477"
+    },
+    {
+      "code": "25151",
+      "d": "CUNDINAMARCA",
+      "m": "CÁQUEZA",
+      "value": 69.38953096710252,
+      "year": 2023,
+      "cell": "AE478"
+    },
+    {
+      "code": "25154",
+      "d": "CUNDINAMARCA",
+      "m": "CARMEN DE CARUPA",
+      "value": 60.466042092178455,
+      "year": 2023,
+      "cell": "AE479"
+    },
+    {
+      "code": "25168",
+      "d": "CUNDINAMARCA",
+      "m": "CHAGUANÍ",
+      "value": 44.506194002502134,
+      "year": 2023,
+      "cell": "AE480"
+    },
+    {
+      "code": "25175",
+      "d": "CUNDINAMARCA",
+      "m": "CHIA",
+      "value": 65.9485720069548,
+      "year": 2023,
+      "cell": "AE481"
+    },
+    {
+      "code": "25178",
+      "d": "CUNDINAMARCA",
+      "m": "CHIPAQUE",
+      "value": 79.42587788791687,
+      "year": 2023,
+      "cell": "AE482"
+    },
+    {
+      "code": "25181",
+      "d": "CUNDINAMARCA",
+      "m": "CHOACHÍ",
+      "value": 66.9273909874699,
+      "year": 2023,
+      "cell": "AE483"
+    },
+    {
+      "code": "25183",
+      "d": "CUNDINAMARCA",
+      "m": "CHOCONTÁ",
+      "value": 60.006437492502805,
+      "year": 2023,
+      "cell": "AE484"
+    },
+    {
+      "code": "25200",
+      "d": "CUNDINAMARCA",
+      "m": "COGUA",
+      "value": 70.40770832502064,
+      "year": 2023,
+      "cell": "AE485"
+    },
+    {
+      "code": "25214",
+      "d": "CUNDINAMARCA",
+      "m": "COTA",
+      "value": 64.70224617404924,
+      "year": 2023,
+      "cell": "AE486"
+    },
+    {
+      "code": "25224",
+      "d": "CUNDINAMARCA",
+      "m": "CUCUNUBÁ",
+      "value": 65.77493241095458,
+      "year": 2023,
+      "cell": "AE487"
+    },
+    {
+      "code": "25245",
+      "d": "CUNDINAMARCA",
+      "m": "MESITAS DEL COLEGIO",
+      "value": 74.62001517074451,
+      "year": 2023,
+      "cell": "AE488"
+    },
+    {
+      "code": "25258",
+      "d": "CUNDINAMARCA",
+      "m": "EL PEÑÓN ",
+      "value": 48.22008695274302,
+      "year": 2023,
+      "cell": "AE489"
+    },
+    {
+      "code": "25260",
+      "d": "CUNDINAMARCA",
+      "m": "EL ROSAL",
+      "value": 56.14866632122972,
+      "year": 2023,
+      "cell": "AE490"
+    },
+    {
+      "code": "25269",
+      "d": "CUNDINAMARCA",
+      "m": "FACATATIVÁ",
+      "value": 60.35430412539482,
+      "year": 2023,
+      "cell": "AE491"
+    },
+    {
+      "code": "25279",
+      "d": "CUNDINAMARCA",
+      "m": "FÓMEQUE",
+      "value": 68.6139151094603,
+      "year": 2023,
+      "cell": "AE492"
+    },
+    {
+      "code": "25281",
+      "d": "CUNDINAMARCA",
+      "m": "FOSCA",
+      "value": 55.114526346011885,
+      "year": 2023,
+      "cell": "AE493"
+    },
+    {
+      "code": "25286",
+      "d": "CUNDINAMARCA",
+      "m": "FUNZA",
+      "value": 71.53156277180882,
+      "year": 2023,
+      "cell": "AE494"
+    },
+    {
+      "code": "25288",
+      "d": "CUNDINAMARCA",
+      "m": "FÚQUENE",
+      "value": 69.42266810897402,
+      "year": 2023,
+      "cell": "AE495"
+    },
+    {
+      "code": "25290",
+      "d": "CUNDINAMARCA",
+      "m": "FUSAGASUGÁ",
+      "value": 62.731495048111725,
+      "year": 2023,
+      "cell": "AE496"
+    },
+    {
+      "code": "25293",
+      "d": "CUNDINAMARCA",
+      "m": "GACHALÁ",
+      "value": 66.06522056427487,
+      "year": 2023,
+      "cell": "AE497"
+    },
+    {
+      "code": "25295",
+      "d": "CUNDINAMARCA",
+      "m": "GACHANCIPÁ",
+      "value": 64.88802633878879,
+      "year": 2023,
+      "cell": "AE498"
+    },
+    {
+      "code": "25297",
+      "d": "CUNDINAMARCA",
+      "m": "GACHETÁ",
+      "value": 54.444512968839476,
+      "year": 2023,
+      "cell": "AE499"
+    },
+    {
+      "code": "25299",
+      "d": "CUNDINAMARCA",
+      "m": "GAMA",
+      "value": 73.93416801511405,
+      "year": 2023,
+      "cell": "AE500"
+    },
+    {
+      "code": "25307",
+      "d": "CUNDINAMARCA",
+      "m": "GIRARDOT",
+      "value": 61.58270361002565,
+      "year": 2023,
+      "cell": "AE501"
+    },
+    {
+      "code": "25312",
+      "d": "CUNDINAMARCA",
+      "m": "GRANADA ",
+      "value": 71.59911889807753,
+      "year": 2023,
+      "cell": "AE502"
+    },
+    {
+      "code": "25317",
+      "d": "CUNDINAMARCA",
+      "m": "GUACHETÁ",
+      "value": 76.49918808684339,
+      "year": 2023,
+      "cell": "AE503"
+    },
+    {
+      "code": "25320",
+      "d": "CUNDINAMARCA",
+      "m": "GUADUAS",
+      "value": 61.84387395185002,
+      "year": 2023,
+      "cell": "AE504"
+    },
+    {
+      "code": "25322",
+      "d": "CUNDINAMARCA",
+      "m": "GUASCA",
+      "value": 14.889938837999745,
+      "year": 2023,
+      "cell": "AE505"
+    },
+    {
+      "code": "25324",
+      "d": "CUNDINAMARCA",
+      "m": "GUATAQUÍ",
+      "value": 64.0960347391756,
+      "year": 2023,
+      "cell": "AE506"
+    },
+    {
+      "code": "25326",
+      "d": "CUNDINAMARCA",
+      "m": "GUATAVITA",
+      "value": 64.21487774089529,
+      "year": 2023,
+      "cell": "AE507"
+    },
+    {
+      "code": "25328",
+      "d": "CUNDINAMARCA",
+      "m": "GUAYABAL DE SÍQUIMA",
+      "value": 65.60414574969475,
+      "year": 2023,
+      "cell": "AE508"
+    },
+    {
+      "code": "25335",
+      "d": "CUNDINAMARCA",
+      "m": "GUAYABETAL",
+      "value": 56.602487234874516,
+      "year": 2023,
+      "cell": "AE509"
+    },
+    {
+      "code": "25339",
+      "d": "CUNDINAMARCA",
+      "m": "GUTIÉRREZ",
+      "value": 63.65148931510615,
+      "year": 2023,
+      "cell": "AE510"
+    },
+    {
+      "code": "25368",
+      "d": "CUNDINAMARCA",
+      "m": "JERUSALÉN",
+      "value": 70.55552013785189,
+      "year": 2023,
+      "cell": "AE511"
+    },
+    {
+      "code": "25372",
+      "d": "CUNDINAMARCA",
+      "m": "JUNÍN",
+      "value": 50.99682441455288,
+      "year": 2023,
+      "cell": "AE512"
+    },
+    {
+      "code": "25377",
+      "d": "CUNDINAMARCA",
+      "m": "LA CALERA",
+      "value": 63.12615935245366,
+      "year": 2023,
+      "cell": "AE513"
+    },
+    {
+      "code": "25386",
+      "d": "CUNDINAMARCA",
+      "m": "LA MESA",
+      "value": 78.34730757553905,
+      "year": 2023,
+      "cell": "AE514"
+    },
+    {
+      "code": "25394",
+      "d": "CUNDINAMARCA",
+      "m": "LA PALMA",
+      "value": 55.63260137022644,
+      "year": 2023,
+      "cell": "AE515"
+    },
+    {
+      "code": "25398",
+      "d": "CUNDINAMARCA",
+      "m": "LA PEÑA",
+      "value": 66.07054214115274,
+      "year": 2023,
+      "cell": "AE516"
+    },
+    {
+      "code": "25402",
+      "d": "CUNDINAMARCA",
+      "m": "LA VEGA ",
+      "value": 66.2913531393516,
+      "year": 2023,
+      "cell": "AE517"
+    },
+    {
+      "code": "25407",
+      "d": "CUNDINAMARCA",
+      "m": "LENGUAZAQUE",
+      "value": 57.99055967369867,
+      "year": 2023,
+      "cell": "AE518"
+    },
+    {
+      "code": "25426",
+      "d": "CUNDINAMARCA",
+      "m": "MACHETÁ",
+      "value": 59.36301352233326,
+      "year": 2023,
+      "cell": "AE519"
+    },
+    {
+      "code": "25430",
+      "d": "CUNDINAMARCA",
+      "m": "MADRID ",
+      "value": 63.71891333376939,
+      "year": 2023,
+      "cell": "AE520"
+    },
+    {
+      "code": "25436",
+      "d": "CUNDINAMARCA",
+      "m": "MANTA",
+      "value": 58.41818238493121,
+      "year": 2023,
+      "cell": "AE521"
+    },
+    {
+      "code": "25438",
+      "d": "CUNDINAMARCA",
+      "m": "MEDINA",
+      "value": 66.97538094478058,
+      "year": 2023,
+      "cell": "AE522"
+    },
+    {
+      "code": "25473",
+      "d": "CUNDINAMARCA",
+      "m": "MOSQUERA ",
+      "value": 75.74382209871183,
+      "year": 2023,
+      "cell": "AE523"
+    },
+    {
+      "code": "25483",
+      "d": "CUNDINAMARCA",
+      "m": "NARIÑO ",
+      "value": 63.52372674416443,
+      "year": 2023,
+      "cell": "AE524"
+    },
+    {
+      "code": "25486",
+      "d": "CUNDINAMARCA",
+      "m": "NEMOCÓN",
+      "value": 59.492878802808875,
+      "year": 2023,
+      "cell": "AE525"
+    },
+    {
+      "code": "25488",
+      "d": "CUNDINAMARCA",
+      "m": "NILO",
+      "value": 66.01306380619812,
+      "year": 2023,
+      "cell": "AE526"
+    },
+    {
+      "code": "25489",
+      "d": "CUNDINAMARCA",
+      "m": "NIMAIMA",
+      "value": 79.46548846311599,
+      "year": 2023,
+      "cell": "AE527"
+    },
+    {
+      "code": "25491",
+      "d": "CUNDINAMARCA",
+      "m": "NOCAIMA",
+      "value": 64.98028041892694,
+      "year": 2023,
+      "cell": "AE528"
+    },
+    {
+      "code": "25506",
+      "d": "CUNDINAMARCA",
+      "m": "VENECIA ",
+      "value": 63.013198064211004,
+      "year": 2023,
+      "cell": "AE529"
+    },
+    {
+      "code": "25513",
+      "d": "CUNDINAMARCA",
+      "m": "PACHO",
+      "value": 69.70182743083492,
+      "year": 2023,
+      "cell": "AE530"
+    },
+    {
+      "code": "25518",
+      "d": "CUNDINAMARCA",
+      "m": "PAIME",
+      "value": 75.02262394478774,
+      "year": 2023,
+      "cell": "AE531"
+    },
+    {
+      "code": "25524",
+      "d": "CUNDINAMARCA",
+      "m": "PANDI",
+      "value": 65.49952526985008,
+      "year": 2023,
+      "cell": "AE532"
+    },
+    {
+      "code": "25530",
+      "d": "CUNDINAMARCA",
+      "m": "PARATEBUENO",
+      "value": 68.62131443682101,
+      "year": 2023,
+      "cell": "AE533"
+    },
+    {
+      "code": "25535",
+      "d": "CUNDINAMARCA",
+      "m": "PASCA",
+      "value": 58.86154910531557,
+      "year": 2023,
+      "cell": "AE534"
+    },
+    {
+      "code": "25572",
+      "d": "CUNDINAMARCA",
+      "m": "PUERTO SALGAR",
+      "value": 35.59724039603504,
+      "year": 2023,
+      "cell": "AE535"
+    },
+    {
+      "code": "25580",
+      "d": "CUNDINAMARCA",
+      "m": "PULÍ",
+      "value": 54.89828111516184,
+      "year": 2023,
+      "cell": "AE536"
+    },
+    {
+      "code": "25592",
+      "d": "CUNDINAMARCA",
+      "m": "QUEBRADANEGRA",
+      "value": 64.28724013495508,
+      "year": 2023,
+      "cell": "AE537"
+    },
+    {
+      "code": "25594",
+      "d": "CUNDINAMARCA",
+      "m": "QUETAME",
+      "value": 47.56414020627615,
+      "year": 2023,
+      "cell": "AE538"
+    },
+    {
+      "code": "25596",
+      "d": "CUNDINAMARCA",
+      "m": "QUIPILE",
+      "value": 66.7109931331157,
+      "year": 2023,
+      "cell": "AE539"
+    },
+    {
+      "code": "25599",
+      "d": "CUNDINAMARCA",
+      "m": "APULO ",
+      "value": 66.26327993760236,
+      "year": 2023,
+      "cell": "AE540"
+    },
+    {
+      "code": "25612",
+      "d": "CUNDINAMARCA",
+      "m": "RICAURTE ",
+      "value": 80.1566918715011,
+      "year": 2023,
+      "cell": "AE541"
+    },
+    {
+      "code": "25645",
+      "d": "CUNDINAMARCA",
+      "m": "SAN ANTONIO DEL TEQUENDAMA",
+      "value": 68.6742423969962,
+      "year": 2023,
+      "cell": "AE542"
+    },
+    {
+      "code": "25649",
+      "d": "CUNDINAMARCA",
+      "m": "SAN BERNARDO ",
+      "value": 63.46636961967523,
+      "year": 2023,
+      "cell": "AE543"
+    },
+    {
+      "code": "25653",
+      "d": "CUNDINAMARCA",
+      "m": "SAN CAYETANO ",
+      "value": 59.41739627043836,
+      "year": 2023,
+      "cell": "AE544"
+    },
+    {
+      "code": "25658",
+      "d": "CUNDINAMARCA",
+      "m": "SAN FRANCISCO ",
+      "value": 66.85437720511253,
+      "year": 2023,
+      "cell": "AE545"
+    },
+    {
+      "code": "25662",
+      "d": "CUNDINAMARCA",
+      "m": "SAN JUAN DE RIO SECO",
+      "value": 70.04527740777534,
+      "year": 2023,
+      "cell": "AE546"
+    },
+    {
+      "code": "25718",
+      "d": "CUNDINAMARCA",
+      "m": "SASAIMA",
+      "value": 53.52930555691292,
+      "year": 2023,
+      "cell": "AE547"
+    },
+    {
+      "code": "25736",
+      "d": "CUNDINAMARCA",
+      "m": "SESQUILÉ",
+      "value": 59.997746798796825,
+      "year": 2023,
+      "cell": "AE548"
+    },
+    {
+      "code": "25740",
+      "d": "CUNDINAMARCA",
+      "m": "SIBATÉ",
+      "value": 64.48154919803186,
+      "year": 2023,
+      "cell": "AE549"
+    },
+    {
+      "code": "25743",
+      "d": "CUNDINAMARCA",
+      "m": "SILVANIA",
+      "value": 63.81865004243183,
+      "year": 2023,
+      "cell": "AE550"
+    },
+    {
+      "code": "25745",
+      "d": "CUNDINAMARCA",
+      "m": "SIMIJACA",
+      "value": 69.44186165455187,
+      "year": 2023,
+      "cell": "AE551"
+    },
+    {
+      "code": "25754",
+      "d": "CUNDINAMARCA",
+      "m": "SOACHA",
+      "value": 68.95733362855555,
+      "year": 2023,
+      "cell": "AE552"
+    },
+    {
+      "code": "25758",
+      "d": "CUNDINAMARCA",
+      "m": "SOPÓ",
+      "value": 75.87232827761221,
+      "year": 2023,
+      "cell": "AE553"
+    },
+    {
+      "code": "25769",
+      "d": "CUNDINAMARCA",
+      "m": "SUBACHOQUE",
+      "value": 67.99523893245589,
+      "year": 2023,
+      "cell": "AE554"
+    },
+    {
+      "code": "25772",
+      "d": "CUNDINAMARCA",
+      "m": "SUESCA",
+      "value": 65.21355007480497,
+      "year": 2023,
+      "cell": "AE555"
+    },
+    {
+      "code": "25777",
+      "d": "CUNDINAMARCA",
+      "m": "SUPATÁ",
+      "value": 73.13117943567865,
+      "year": 2023,
+      "cell": "AE556"
+    },
+    {
+      "code": "25779",
+      "d": "CUNDINAMARCA",
+      "m": "SUSA",
+      "value": 59.468102107349374,
+      "year": 2023,
+      "cell": "AE557"
+    },
+    {
+      "code": "25781",
+      "d": "CUNDINAMARCA",
+      "m": "SUTATAUSA",
+      "value": 68.80886754153927,
+      "year": 2023,
+      "cell": "AE558"
+    },
+    {
+      "code": "25785",
+      "d": "CUNDINAMARCA",
+      "m": "TABIO",
+      "value": 60.01210891796558,
+      "year": 2023,
+      "cell": "AE559"
+    },
+    {
+      "code": "25793",
+      "d": "CUNDINAMARCA",
+      "m": "TAUSA",
+      "value": 68.31306396163308,
+      "year": 2023,
+      "cell": "AE560"
+    },
+    {
+      "code": "25797",
+      "d": "CUNDINAMARCA",
+      "m": "TENA",
+      "value": 73.22344615098098,
+      "year": 2023,
+      "cell": "AE561"
+    },
+    {
+      "code": "25799",
+      "d": "CUNDINAMARCA",
+      "m": "TENJO",
+      "value": 69.15707545342987,
+      "year": 2023,
+      "cell": "AE562"
+    },
+    {
+      "code": "25805",
+      "d": "CUNDINAMARCA",
+      "m": "TIBACUY",
+      "value": 67.44708043154067,
+      "year": 2023,
+      "cell": "AE563"
+    },
+    {
+      "code": "25807",
+      "d": "CUNDINAMARCA",
+      "m": "TIBIRITA",
+      "value": 68.0959743867477,
+      "year": 2023,
+      "cell": "AE564"
+    },
+    {
+      "code": "25815",
+      "d": "CUNDINAMARCA",
+      "m": "TOCAIMA",
+      "value": 71.10521920013424,
+      "year": 2023,
+      "cell": "AE565"
+    },
+    {
+      "code": "25817",
+      "d": "CUNDINAMARCA",
+      "m": "TOCANCIPÁ",
+      "value": 79.71558802097516,
+      "year": 2023,
+      "cell": "AE566"
+    },
+    {
+      "code": "25823",
+      "d": "CUNDINAMARCA",
+      "m": "TOPAIPÍ",
+      "value": 52.40358199630644,
+      "year": 2023,
+      "cell": "AE567"
+    },
+    {
+      "code": "25839",
+      "d": "CUNDINAMARCA",
+      "m": "UBALÁ",
+      "value": 56.948972835779074,
+      "year": 2023,
+      "cell": "AE568"
+    },
+    {
+      "code": "25841",
+      "d": "CUNDINAMARCA",
+      "m": "UBAQUE",
+      "value": 63.43166146337329,
+      "year": 2023,
+      "cell": "AE569"
+    },
+    {
+      "code": "25843",
+      "d": "CUNDINAMARCA",
+      "m": "UBATÉ",
+      "value": 62.7486000395035,
+      "year": 2023,
+      "cell": "AE570"
+    },
+    {
+      "code": "25845",
+      "d": "CUNDINAMARCA",
+      "m": "UNE",
+      "value": 62.5930067124952,
+      "year": 2023,
+      "cell": "AE571"
+    },
+    {
+      "code": "25851",
+      "d": "CUNDINAMARCA",
+      "m": "ÚTICA",
+      "value": 60.17932047870406,
+      "year": 2023,
+      "cell": "AE572"
+    },
+    {
+      "code": "25862",
+      "d": "CUNDINAMARCA",
+      "m": "VERGARA",
+      "value": 58.431159810945665,
+      "year": 2023,
+      "cell": "AE573"
+    },
+    {
+      "code": "25867",
+      "d": "CUNDINAMARCA",
+      "m": "VIANÍ",
+      "value": 68.7964935533278,
+      "year": 2023,
+      "cell": "AE574"
+    },
+    {
+      "code": "25871",
+      "d": "CUNDINAMARCA",
+      "m": "VILLAGÓMEZ",
+      "value": 61.29850070974203,
+      "year": 2023,
+      "cell": "AE575"
+    },
+    {
+      "code": "25873",
+      "d": "CUNDINAMARCA",
+      "m": "VILLAPINZÓN",
+      "value": 70.94052792460462,
+      "year": 2023,
+      "cell": "AE576"
+    },
+    {
+      "code": "25875",
+      "d": "CUNDINAMARCA",
+      "m": "VILLETA",
+      "value": 69.919551412011,
+      "year": 2023,
+      "cell": "AE577"
+    },
+    {
+      "code": "25878",
+      "d": "CUNDINAMARCA",
+      "m": "VIOTÁ",
+      "value": 67.29905273270387,
+      "year": 2023,
+      "cell": "AE578"
+    },
+    {
+      "code": "25885",
+      "d": "CUNDINAMARCA",
+      "m": "YACOPÍ",
+      "value": 61.99430523877868,
+      "year": 2023,
+      "cell": "AE579"
+    },
+    {
+      "code": "25898",
+      "d": "CUNDINAMARCA",
+      "m": "ZIPACÓN",
+      "value": 58.72566750807751,
+      "year": 2023,
+      "cell": "AE580"
+    },
+    {
+      "code": "25899",
+      "d": "CUNDINAMARCA",
+      "m": "ZIPAQUIRÁ",
+      "value": 67.44329248884515,
+      "year": 2023,
+      "cell": "AE581"
+    },
+    {
+      "code": "27001",
+      "d": "CHOCÓ",
+      "m": "QUIBDÓ",
+      "value": 56.74975217801146,
+      "year": 2023,
+      "cell": "AE582"
+    },
+    {
+      "code": "27006",
+      "d": "CHOCÓ",
+      "m": "ACANDÍ",
+      "value": 51.901503518536884,
+      "year": 2023,
+      "cell": "AE583"
+    },
+    {
+      "code": "27025",
+      "d": "CHOCÓ",
+      "m": "ALTO BAUDÓ  (PIE DE PATO)",
+      "value": 59.16940148032873,
+      "year": 2023,
+      "cell": "AE584"
+    },
+    {
+      "code": "27050",
+      "d": "CHOCÓ",
+      "m": "ATRATO",
+      "value": 56.509020221570495,
+      "year": 2023,
+      "cell": "AE585"
+    },
+    {
+      "code": "27073",
+      "d": "CHOCÓ",
+      "m": "BAGADÓ",
+      "value": 37.06073334070602,
+      "year": 2023,
+      "cell": "AE586"
+    },
+    {
+      "code": "27075",
+      "d": "CHOCÓ",
+      "m": "BAHÍA SOLANO ",
+      "value": 50.1904362843144,
+      "year": 2023,
+      "cell": "AE587"
+    },
+    {
+      "code": "27077",
+      "d": "CHOCÓ",
+      "m": "BAJO BAUDÓ ",
+      "value": 64.46174829029682,
+      "year": 2023,
+      "cell": "AE588"
+    },
+    {
+      "code": "27099",
+      "d": "CHOCÓ",
+      "m": "BOJAYÁ  (BELLAVISTA)",
+      "value": 65.40486261700245,
+      "year": 2023,
+      "cell": "AE589"
+    },
+    {
+      "code": "27135",
+      "d": "CHOCÓ",
+      "m": "EL CANTÓN DE SAN PABLO (MANAGRÚ)",
+      "value": 65.03659593949229,
+      "year": 2023,
+      "cell": "AE590"
+    },
+    {
+      "code": "27150",
+      "d": "CHOCÓ",
+      "m": "CARMEN DEL DARIEN",
+      "value": 58.34773902889734,
+      "year": 2023,
+      "cell": "AE591"
+    },
+    {
+      "code": "27160",
+      "d": "CHOCÓ",
+      "m": "CERTEGUÍ",
+      "value": 48.41184872411041,
+      "year": 2023,
+      "cell": "AE592"
+    },
+    {
+      "code": "27205",
+      "d": "CHOCÓ",
+      "m": "CONDOTO",
+      "value": 65.88485406577621,
+      "year": 2023,
+      "cell": "AE593"
+    },
+    {
+      "code": "27245",
+      "d": "CHOCÓ",
+      "m": "EL CARMEN DE ATRATO",
+      "value": 41.623065013024984,
+      "year": 2023,
+      "cell": "AE594"
+    },
+    {
+      "code": "27250",
+      "d": "CHOCÓ",
+      "m": "LITORAL DEL SAN JUAN  (SANTA GENOVEVA DE D.)",
+      "value": 77.6398446761092,
+      "year": 2023,
+      "cell": "AE595"
+    },
+    {
+      "code": "27361",
+      "d": "CHOCÓ",
+      "m": "ISTMINA",
+      "value": 54.31521736473805,
+      "year": 2023,
+      "cell": "AE596"
+    },
+    {
+      "code": "27372",
+      "d": "CHOCÓ",
+      "m": "JURADÓ",
+      "value": 47.655409594223514,
+      "year": 2023,
+      "cell": "AE597"
+    },
+    {
+      "code": "27413",
+      "d": "CHOCÓ",
+      "m": "LLORÓ",
+      "value": 6.244613050505555,
+      "year": 2023,
+      "cell": "AE598"
+    },
+    {
+      "code": "27425",
+      "d": "CHOCÓ",
+      "m": "MEDIO ATRATO",
+      "value": 75.23983138070514,
+      "year": 2023,
+      "cell": "AE599"
+    },
+    {
+      "code": "27430",
+      "d": "CHOCÓ",
+      "m": "MEDIO BAUDÓ",
+      "value": 15.172141142098745,
+      "year": 2023,
+      "cell": "AE600"
+    },
+    {
+      "code": "27450",
+      "d": "CHOCÓ",
+      "m": "MEDIO SAN JUAN",
+      "value": 60.64901863130313,
+      "year": 2023,
+      "cell": "AE601"
+    },
+    {
+      "code": "27491",
+      "d": "CHOCÓ",
+      "m": "NÓVITA",
+      "value": 61.697603237864676,
+      "year": 2023,
+      "cell": "AE602"
+    },
+    {
+      "code": "27495",
+      "d": "CHOCÓ",
+      "m": "NUQUÍ",
+      "value": 64.44719013938527,
+      "year": 2023,
+      "cell": "AE603"
+    },
+    {
+      "code": "27580",
+      "d": "CHOCÓ",
+      "m": "RIO IRÓ",
+      "value": 58.98428717808637,
+      "year": 2023,
+      "cell": "AE604"
+    },
+    {
+      "code": "27600",
+      "d": "CHOCÓ",
+      "m": "RIO QUITO",
+      "value": 50.598529691963904,
+      "year": 2023,
+      "cell": "AE605"
+    },
+    {
+      "code": "27615",
+      "d": "CHOCÓ",
+      "m": "RIOSUCIO ",
+      "value": 60.368841342941515,
+      "year": 2023,
+      "cell": "AE606"
+    },
+    {
+      "code": "27660",
+      "d": "CHOCÓ",
+      "m": "SAN JOSÉ DEL PALMAR",
+      "value": 58.05390226502125,
+      "year": 2023,
+      "cell": "AE607"
+    },
+    {
+      "code": "27745",
+      "d": "CHOCÓ",
+      "m": "SIPÍ",
+      "value": 63.77532267877349,
+      "year": 2023,
+      "cell": "AE608"
+    },
+    {
+      "code": "27787",
+      "d": "CHOCÓ",
+      "m": "TADÓ",
+      "value": 48.484373602930226,
+      "year": 2023,
+      "cell": "AE609"
+    },
+    {
+      "code": "27800",
+      "d": "CHOCÓ",
+      "m": "UNGUÍA",
+      "value": 5.983529206206713,
+      "year": 2023,
+      "cell": "AE610"
+    },
+    {
+      "code": "27810",
+      "d": "CHOCÓ",
+      "m": "UNIÓN PANAMERICANA",
+      "value": 53.82083917803168,
+      "year": 2023,
+      "cell": "AE611"
+    },
+    {
+      "code": "41001",
+      "d": "HUILA",
+      "m": "NEIVA",
+      "value": 53.90544774605323,
+      "year": 2023,
+      "cell": "AE612"
+    },
+    {
+      "code": "41006",
+      "d": "HUILA",
+      "m": "ACEVEDO",
+      "value": 63.58476904927471,
+      "year": 2023,
+      "cell": "AE613"
+    },
+    {
+      "code": "41013",
+      "d": "HUILA",
+      "m": "EL AGRADO",
+      "value": 66.49887155883297,
+      "year": 2023,
+      "cell": "AE614"
+    },
+    {
+      "code": "41016",
+      "d": "HUILA",
+      "m": "AIPE",
+      "value": 69.12262415235571,
+      "year": 2023,
+      "cell": "AE615"
+    },
+    {
+      "code": "41020",
+      "d": "HUILA",
+      "m": "ALGECIRAS",
+      "value": 60.309287092281465,
+      "year": 2023,
+      "cell": "AE616"
+    },
+    {
+      "code": "41026",
+      "d": "HUILA",
+      "m": "ALTAMIRA",
+      "value": 56.29675866536378,
+      "year": 2023,
+      "cell": "AE617"
+    },
+    {
+      "code": "41078",
+      "d": "HUILA",
+      "m": "BARAYA",
+      "value": 53.64938854096992,
+      "year": 2023,
+      "cell": "AE618"
+    },
+    {
+      "code": "41132",
+      "d": "HUILA",
+      "m": "CAMPOALEGRE",
+      "value": 57.70278507245824,
+      "year": 2023,
+      "cell": "AE619"
+    },
+    {
+      "code": "41206",
+      "d": "HUILA",
+      "m": "COLOMBIA",
+      "value": 50.78467278611706,
+      "year": 2023,
+      "cell": "AE620"
+    },
+    {
+      "code": "41244",
+      "d": "HUILA",
+      "m": "ELÍAS",
+      "value": 48.90031771073685,
+      "year": 2023,
+      "cell": "AE621"
+    },
+    {
+      "code": "41298",
+      "d": "HUILA",
+      "m": "GARZÓN",
+      "value": 60.75124335067049,
+      "year": 2023,
+      "cell": "AE622"
+    },
+    {
+      "code": "41306",
+      "d": "HUILA",
+      "m": "GIGANTE",
+      "value": 67.97861778132828,
+      "year": 2023,
+      "cell": "AE623"
+    },
+    {
+      "code": "41319",
+      "d": "HUILA",
+      "m": "GUADALUPE ",
+      "value": 47.667483041812986,
+      "year": 2023,
+      "cell": "AE624"
+    },
+    {
+      "code": "41349",
+      "d": "HUILA",
+      "m": "HOBO",
+      "value": 64.03719630556787,
+      "year": 2023,
+      "cell": "AE625"
+    },
+    {
+      "code": "41357",
+      "d": "HUILA",
+      "m": "IQUIRA",
+      "value": 54.28297490615231,
+      "year": 2023,
+      "cell": "AE626"
+    },
+    {
+      "code": "41359",
+      "d": "HUILA",
+      "m": "ISNOS",
+      "value": 62.6372897313521,
+      "year": 2023,
+      "cell": "AE627"
+    },
+    {
+      "code": "41378",
+      "d": "HUILA",
+      "m": "LA ARGENTINA",
+      "value": 67.51406999693393,
+      "year": 2023,
+      "cell": "AE628"
+    },
+    {
+      "code": "41396",
+      "d": "HUILA",
+      "m": "LA PLATA",
+      "value": 60.170251579035465,
+      "year": 2023,
+      "cell": "AE629"
+    },
+    {
+      "code": "41483",
+      "d": "HUILA",
+      "m": "NÁTAGA",
+      "value": 55.3055087332759,
+      "year": 2023,
+      "cell": "AE630"
+    },
+    {
+      "code": "41503",
+      "d": "HUILA",
+      "m": "OPORAPA",
+      "value": 53.67262684040989,
+      "year": 2023,
+      "cell": "AE631"
+    },
+    {
+      "code": "41518",
+      "d": "HUILA",
+      "m": "PAICOL",
+      "value": 58.9049690869214,
+      "year": 2023,
+      "cell": "AE632"
+    },
+    {
+      "code": "41524",
+      "d": "HUILA",
+      "m": "PALERMO",
+      "value": 61.0101313793284,
+      "year": 2023,
+      "cell": "AE633"
+    },
+    {
+      "code": "41530",
+      "d": "HUILA",
+      "m": "PALESTINA ",
+      "value": 58.13871956234459,
+      "year": 2023,
+      "cell": "AE634"
+    },
+    {
+      "code": "41548",
+      "d": "HUILA",
+      "m": "EL PITAL",
+      "value": 56.05188875520818,
+      "year": 2023,
+      "cell": "AE635"
+    },
+    {
+      "code": "41551",
+      "d": "HUILA",
+      "m": "PITALITO",
+      "value": 54.89796091400625,
+      "year": 2023,
+      "cell": "AE636"
+    },
+    {
+      "code": "41615",
+      "d": "HUILA",
+      "m": "RIVERA",
+      "value": 63.02890741520834,
+      "year": 2023,
+      "cell": "AE637"
+    },
+    {
+      "code": "41660",
+      "d": "HUILA",
+      "m": "SALADOBLANCO",
+      "value": 50.94411077835174,
+      "year": 2023,
+      "cell": "AE638"
+    },
+    {
+      "code": "41668",
+      "d": "HUILA",
+      "m": "SAN AGUSTÍN",
+      "value": 60.94458821088864,
+      "year": 2023,
+      "cell": "AE639"
+    },
+    {
+      "code": "41676",
+      "d": "HUILA",
+      "m": "SANTA MARÍA ",
+      "value": 14.205305862344076,
+      "year": 2023,
+      "cell": "AE640"
+    },
+    {
+      "code": "41770",
+      "d": "HUILA",
+      "m": "SUAZA",
+      "value": 61.51873553327156,
+      "year": 2023,
+      "cell": "AE641"
+    },
+    {
+      "code": "41791",
+      "d": "HUILA",
+      "m": "TÁRQUI",
+      "value": 59.50303252199696,
+      "year": 2023,
+      "cell": "AE642"
+    },
+    {
+      "code": "41797",
+      "d": "HUILA",
+      "m": "TESALIA",
+      "value": 63.162490515122954,
+      "year": 2023,
+      "cell": "AE643"
+    },
+    {
+      "code": "41799",
+      "d": "HUILA",
+      "m": "TELLO",
+      "value": 54.58496699419783,
+      "year": 2023,
+      "cell": "AE644"
+    },
+    {
+      "code": "41801",
+      "d": "HUILA",
+      "m": "TERUEL",
+      "value": 47.087265523427575,
+      "year": 2023,
+      "cell": "AE645"
+    },
+    {
+      "code": "41807",
+      "d": "HUILA",
+      "m": "TIMANÁ",
+      "value": 62.125803926991736,
+      "year": 2023,
+      "cell": "AE646"
+    },
+    {
+      "code": "41872",
+      "d": "HUILA",
+      "m": "VILLAVIEJA",
+      "value": 53.501614513949306,
+      "year": 2023,
+      "cell": "AE647"
+    },
+    {
+      "code": "41885",
+      "d": "HUILA",
+      "m": "YAGUARA",
+      "value": 75.72546804138783,
+      "year": 2023,
+      "cell": "AE648"
+    },
+    {
+      "code": "44001",
+      "d": "LA GUAJIRA",
+      "m": "RIOHACHA",
+      "value": 51.361662247054156,
+      "year": 2023,
+      "cell": "AE649"
+    },
+    {
+      "code": "44035",
+      "d": "LA GUAJIRA",
+      "m": "ALBANIA ",
+      "value": 59.16136894704218,
+      "year": 2023,
+      "cell": "AE650"
+    },
+    {
+      "code": "44078",
+      "d": "LA GUAJIRA",
+      "m": "BARRANCAS",
+      "value": 58.77057273487793,
+      "year": 2023,
+      "cell": "AE651"
+    },
+    {
+      "code": "44090",
+      "d": "LA GUAJIRA",
+      "m": "DIBULLA",
+      "value": 67.09193977940122,
+      "year": 2023,
+      "cell": "AE652"
+    },
+    {
+      "code": "44098",
+      "d": "LA GUAJIRA",
+      "m": "DISTRACCIÓN",
+      "value": 59.52922328769124,
+      "year": 2023,
+      "cell": "AE653"
+    },
+    {
+      "code": "44110",
+      "d": "LA GUAJIRA",
+      "m": "EL MOLINO",
+      "value": 66.08776769228058,
+      "year": 2023,
+      "cell": "AE654"
+    },
+    {
+      "code": "44279",
+      "d": "LA GUAJIRA",
+      "m": "FONSECA",
+      "value": 68.98542660888049,
+      "year": 2023,
+      "cell": "AE655"
+    },
+    {
+      "code": "44378",
+      "d": "LA GUAJIRA",
+      "m": "HATO NUEVO",
+      "value": 66.15128052398951,
+      "year": 2023,
+      "cell": "AE656"
+    },
+    {
+      "code": "44420",
+      "d": "LA GUAJIRA",
+      "m": "LA JAGUA DEL PILAR",
+      "value": 59.22313399266706,
+      "year": 2023,
+      "cell": "AE657"
+    },
+    {
+      "code": "44430",
+      "d": "LA GUAJIRA",
+      "m": "MAICAO",
+      "value": 56.6863794901014,
+      "year": 2023,
+      "cell": "AE658"
+    },
+    {
+      "code": "44560",
+      "d": "LA GUAJIRA",
+      "m": "MANAURE",
+      "value": 53.04870280301571,
+      "year": 2023,
+      "cell": "AE659"
+    },
+    {
+      "code": "44650",
+      "d": "LA GUAJIRA",
+      "m": "SAN JUAN DEL CESAR",
+      "value": 61.76589037099842,
+      "year": 2023,
+      "cell": "AE660"
+    },
+    {
+      "code": "44847",
+      "d": "LA GUAJIRA",
+      "m": "URIBIA",
+      "value": 46.48815472669729,
+      "year": 2023,
+      "cell": "AE661"
+    },
+    {
+      "code": "44855",
+      "d": "LA GUAJIRA",
+      "m": "URUMITA",
+      "value": 47.99998098931326,
+      "year": 2023,
+      "cell": "AE662"
+    },
+    {
+      "code": "44874",
+      "d": "LA GUAJIRA",
+      "m": "VILLANUEVA ",
+      "value": 49.22739700021685,
+      "year": 2023,
+      "cell": "AE663"
+    },
+    {
+      "code": "47001",
+      "d": "MAGDALENA",
+      "m": "SANTA MARTA, DISTRITO TURISTICO, CULTURAL E HISTORICO",
+      "value": 66.200011977547,
+      "year": 2023,
+      "cell": "AE664"
+    },
+    {
+      "code": "47030",
+      "d": "MAGDALENA",
+      "m": "ALGARROBO",
+      "value": 50.7741239550988,
+      "year": 2023,
+      "cell": "AE665"
+    },
+    {
+      "code": "47053",
+      "d": "MAGDALENA",
+      "m": "ARACATACA",
+      "value": 38.80286761032916,
+      "year": 2023,
+      "cell": "AE666"
+    },
+    {
+      "code": "47058",
+      "d": "MAGDALENA",
+      "m": "ARIGUANÍ",
+      "value": 54.67205757820641,
+      "year": 2023,
+      "cell": "AE667"
+    },
+    {
+      "code": "47161",
+      "d": "MAGDALENA",
+      "m": "CERRO DE SAN ANTONIO",
+      "value": 52.477842597665344,
+      "year": 2023,
+      "cell": "AE668"
+    },
+    {
+      "code": "47170",
+      "d": "MAGDALENA",
+      "m": "CHIVOLO",
+      "value": 59.00571199067129,
+      "year": 2023,
+      "cell": "AE669"
+    },
+    {
+      "code": "47189",
+      "d": "MAGDALENA",
+      "m": "CIÉNAGA",
+      "value": 59.86564438150664,
+      "year": 2023,
+      "cell": "AE670"
+    },
+    {
+      "code": "47205",
+      "d": "MAGDALENA",
+      "m": "CONCORDIA ",
+      "value": 51.20415134250608,
+      "year": 2023,
+      "cell": "AE671"
+    },
+    {
+      "code": "47245",
+      "d": "MAGDALENA",
+      "m": "EL BANCO",
+      "value": 41.51405029933838,
+      "year": 2023,
+      "cell": "AE672"
+    },
+    {
+      "code": "47258",
+      "d": "MAGDALENA",
+      "m": "EL PIÑÓN",
+      "value": 10.57977479513676,
+      "year": 2023,
+      "cell": "AE673"
+    },
+    {
+      "code": "47268",
+      "d": "MAGDALENA",
+      "m": "EL RETÉN",
+      "value": 48.50373309394623,
+      "year": 2023,
+      "cell": "AE674"
+    },
+    {
+      "code": "47288",
+      "d": "MAGDALENA",
+      "m": "FUNDACIÓN",
+      "value": 54.302477282439604,
+      "year": 2023,
+      "cell": "AE675"
+    },
+    {
+      "code": "47318",
+      "d": "MAGDALENA",
+      "m": "GUAMAL ",
+      "value": 41.90897190763479,
+      "year": 2023,
+      "cell": "AE676"
+    },
+    {
+      "code": "47460",
+      "d": "MAGDALENA",
+      "m": "NUEVA GRANADA",
+      "value": 61.757508798939014,
+      "year": 2023,
+      "cell": "AE677"
+    },
+    {
+      "code": "47541",
+      "d": "MAGDALENA",
+      "m": "PEDRAZA",
+      "value": 40.03311564581336,
+      "year": 2023,
+      "cell": "AE678"
+    },
+    {
+      "code": "47545",
+      "d": "MAGDALENA",
+      "m": "PIJIÑO DEL CARMEN",
+      "value": 56.62835349550413,
+      "year": 2023,
+      "cell": "AE679"
+    },
+    {
+      "code": "47551",
+      "d": "MAGDALENA",
+      "m": "PIVIJAY",
+      "value": 46.078605203284454,
+      "year": 2023,
+      "cell": "AE680"
+    },
+    {
+      "code": "47555",
+      "d": "MAGDALENA",
+      "m": "PLATO",
+      "value": 57.20010376550889,
+      "year": 2023,
+      "cell": "AE681"
+    },
+    {
+      "code": "47570",
+      "d": "MAGDALENA",
+      "m": "PUEBLOVIEJO",
+      "value": 48.04733360580471,
+      "year": 2023,
+      "cell": "AE682"
+    },
+    {
+      "code": "47605",
+      "d": "MAGDALENA",
+      "m": "REMOLINO",
+      "value": 49.27327892902363,
+      "year": 2023,
+      "cell": "AE683"
+    },
+    {
+      "code": "47660",
+      "d": "MAGDALENA",
+      "m": "SABANAS DE SAN ANGEL",
+      "value": 60.079852105829175,
+      "year": 2023,
+      "cell": "AE684"
+    },
+    {
+      "code": "47675",
+      "d": "MAGDALENA",
+      "m": "SALAMINA ",
+      "value": 45.628235315699754,
+      "year": 2023,
+      "cell": "AE685"
+    },
+    {
+      "code": "47692",
+      "d": "MAGDALENA",
+      "m": "SAN SEBASTIAN DE BUENAVISTA",
+      "value": 54.64978330444717,
+      "year": 2023,
+      "cell": "AE686"
+    },
+    {
+      "code": "47703",
+      "d": "MAGDALENA",
+      "m": "SAN ZENÓN",
+      "value": 47.18935851334446,
+      "year": 2023,
+      "cell": "AE687"
+    },
+    {
+      "code": "47707",
+      "d": "MAGDALENA",
+      "m": "SANTA ANA",
+      "value": 58.80369348981752,
+      "year": 2023,
+      "cell": "AE688"
+    },
+    {
+      "code": "47720",
+      "d": "MAGDALENA",
+      "m": "SANTA BÁRBARA DE PINTO",
+      "value": 52.07023258455775,
+      "year": 2023,
+      "cell": "AE689"
+    },
+    {
+      "code": "47745",
+      "d": "MAGDALENA",
+      "m": "SITIONUEVO",
+      "value": 49.756827866222785,
+      "year": 2023,
+      "cell": "AE690"
+    },
+    {
+      "code": "47798",
+      "d": "MAGDALENA",
+      "m": "TENERIFE",
+      "value": 46.54026072807777,
+      "year": 2023,
+      "cell": "AE691"
+    },
+    {
+      "code": "47960",
+      "d": "MAGDALENA",
+      "m": "ZAPAYÁN",
+      "value": 11.899436562194225,
+      "year": 2023,
+      "cell": "AE692"
+    },
+    {
+      "code": "47980",
+      "d": "MAGDALENA",
+      "m": "ZONA BANANERA",
+      "value": 58.96685663161154,
+      "year": 2023,
+      "cell": "AE693"
+    },
+    {
+      "code": "50001",
+      "d": "META",
+      "m": "VILLAVICENCIO",
+      "value": 68.29869864339332,
+      "year": 2023,
+      "cell": "AE694"
+    },
+    {
+      "code": "50006",
+      "d": "META",
+      "m": "ACACÍAS",
+      "value": 54.37655432427043,
+      "year": 2023,
+      "cell": "AE695"
+    },
+    {
+      "code": "50110",
+      "d": "META",
+      "m": "BARRANCA DE UPÍA",
+      "value": 70.87211616634852,
+      "year": 2023,
+      "cell": "AE696"
+    },
+    {
+      "code": "50124",
+      "d": "META",
+      "m": "CABUYARO",
+      "value": 61.81901265932672,
+      "year": 2023,
+      "cell": "AE697"
+    },
+    {
+      "code": "50150",
+      "d": "META",
+      "m": "CASTILLA LA NUEVA",
+      "value": 57.81556272955251,
+      "year": 2023,
+      "cell": "AE698"
+    },
+    {
+      "code": "50223",
+      "d": "META",
+      "m": "CUBARRAL",
+      "value": 59.17911674268706,
+      "year": 2023,
+      "cell": "AE699"
+    },
+    {
+      "code": "50226",
+      "d": "META",
+      "m": "CUMARAL",
+      "value": 58.36599144402545,
+      "year": 2023,
+      "cell": "AE700"
+    },
+    {
+      "code": "50245",
+      "d": "META",
+      "m": "EL CALVARIO",
+      "value": 56.69854883989239,
+      "year": 2023,
+      "cell": "AE701"
+    },
+    {
+      "code": "50251",
+      "d": "META",
+      "m": "EL CASTILLO",
+      "value": 61.89458640926387,
+      "year": 2023,
+      "cell": "AE702"
+    },
+    {
+      "code": "50270",
+      "d": "META",
+      "m": "EL DORADO",
+      "value": 54.72316362089279,
+      "year": 2023,
+      "cell": "AE703"
+    },
+    {
+      "code": "50287",
+      "d": "META",
+      "m": "FUENTE DE ORO",
+      "value": 54.410303887085504,
+      "year": 2023,
+      "cell": "AE704"
+    },
+    {
+      "code": "50313",
+      "d": "META",
+      "m": "GRANADA ",
+      "value": 56.94738554758217,
+      "year": 2023,
+      "cell": "AE705"
+    },
+    {
+      "code": "50318",
+      "d": "META",
+      "m": "GUAMAL ",
+      "value": 64.93019911647329,
+      "year": 2023,
+      "cell": "AE706"
+    },
+    {
+      "code": "50325",
+      "d": "META",
+      "m": "MAPIRIPÁN",
+      "value": 54.3227833690036,
+      "year": 2023,
+      "cell": "AE707"
+    },
+    {
+      "code": "50330",
+      "d": "META",
+      "m": "MESETAS",
+      "value": 57.15115229052762,
+      "year": 2023,
+      "cell": "AE708"
+    },
+    {
+      "code": "50350",
+      "d": "META",
+      "m": "LA MACARENA",
+      "value": 59.1536452998292,
+      "year": 2023,
+      "cell": "AE709"
+    },
+    {
+      "code": "50370",
+      "d": "META",
+      "m": "LA URIBE",
+      "value": 55.553907489720046,
+      "year": 2023,
+      "cell": "AE710"
+    },
+    {
+      "code": "50400",
+      "d": "META",
+      "m": "LEJANÍAS",
+      "value": 55.66184256096229,
+      "year": 2023,
+      "cell": "AE711"
+    },
+    {
+      "code": "50450",
+      "d": "META",
+      "m": "PUERTO CONCORDIA",
+      "value": 57.74692455131253,
+      "year": 2023,
+      "cell": "AE712"
+    },
+    {
+      "code": "50568",
+      "d": "META",
+      "m": "PUERTO GAITÁN",
+      "value": 58.06023844827244,
+      "year": 2023,
+      "cell": "AE713"
+    },
+    {
+      "code": "50573",
+      "d": "META",
+      "m": "PUERTO LÓPEZ",
+      "value": 63.05698934396342,
+      "year": 2023,
+      "cell": "AE714"
+    },
+    {
+      "code": "50577",
+      "d": "META",
+      "m": "PUERTO LLERAS",
+      "value": 65.2556030640077,
+      "year": 2023,
+      "cell": "AE715"
+    },
+    {
+      "code": "50590",
+      "d": "META",
+      "m": "PUERTO RICO ",
+      "value": 42.23359983746847,
+      "year": 2023,
+      "cell": "AE716"
+    },
+    {
+      "code": "50606",
+      "d": "META",
+      "m": "RESTREPO ",
+      "value": 66.58136263363515,
+      "year": 2023,
+      "cell": "AE717"
+    },
+    {
+      "code": "50680",
+      "d": "META",
+      "m": "SAN CARLOS DE GUAROA",
+      "value": 61.84839480073528,
+      "year": 2023,
+      "cell": "AE718"
+    },
+    {
+      "code": "50683",
+      "d": "META",
+      "m": "SAN JUAN DE ARAMA",
+      "value": 55.713555419061095,
+      "year": 2023,
+      "cell": "AE719"
+    },
+    {
+      "code": "50686",
+      "d": "META",
+      "m": "SAN JUANITO",
+      "value": 46.99627438891365,
+      "year": 2023,
+      "cell": "AE720"
+    },
+    {
+      "code": "50689",
+      "d": "META",
+      "m": "SAN MARTÍN ",
+      "value": 56.972721334108385,
+      "year": 2023,
+      "cell": "AE721"
+    },
+    {
+      "code": "50711",
+      "d": "META",
+      "m": "VISTA HERMOSA",
+      "value": 61.65850326795623,
+      "year": 2023,
+      "cell": "AE722"
+    },
+    {
+      "code": "52001",
+      "d": "NARIÑO",
+      "m": "SAN JUAN DE PASTO",
+      "value": 63.52975667709397,
+      "year": 2023,
+      "cell": "AE723"
+    },
+    {
+      "code": "52019",
+      "d": "NARIÑO",
+      "m": "ALBÁN (SAN JOSÉ)",
+      "value": 49.54175031279624,
+      "year": 2023,
+      "cell": "AE724"
+    },
+    {
+      "code": "52022",
+      "d": "NARIÑO",
+      "m": "ALDANA",
+      "value": 54.8355850529735,
+      "year": 2023,
+      "cell": "AE725"
+    },
+    {
+      "code": "52036",
+      "d": "NARIÑO",
+      "m": "ANCUYA",
+      "value": 62.45359300127051,
+      "year": 2023,
+      "cell": "AE726"
+    },
+    {
+      "code": "52051",
+      "d": "NARIÑO",
+      "m": "ARBOLEDA ",
+      "value": 64.06890554722229,
+      "year": 2023,
+      "cell": "AE727"
+    },
+    {
+      "code": "52079",
+      "d": "NARIÑO",
+      "m": "BARBACOAS",
+      "value": 61.27770750004848,
+      "year": 2023,
+      "cell": "AE728"
+    },
+    {
+      "code": "52083",
+      "d": "NARIÑO",
+      "m": "BELÉN ",
+      "value": 56.282532975253226,
+      "year": 2023,
+      "cell": "AE729"
+    },
+    {
+      "code": "52110",
+      "d": "NARIÑO",
+      "m": "BUESACO",
+      "value": 64.50408824099677,
+      "year": 2023,
+      "cell": "AE730"
+    },
+    {
+      "code": "52203",
+      "d": "NARIÑO",
+      "m": "COLÓN (GÉNOVA) ",
+      "value": 51.47817335046889,
+      "year": 2023,
+      "cell": "AE731"
+    },
+    {
+      "code": "52207",
+      "d": "NARIÑO",
+      "m": "CONSACÁ",
+      "value": 63.86261327865097,
+      "year": 2023,
+      "cell": "AE732"
+    },
+    {
+      "code": "52210",
+      "d": "NARIÑO",
+      "m": "CONTADERO",
+      "value": 60.07508037161746,
+      "year": 2023,
+      "cell": "AE733"
+    },
+    {
+      "code": "52215",
+      "d": "NARIÑO",
+      "m": "CÓRDOBA ",
+      "value": 62.56552204343888,
+      "year": 2023,
+      "cell": "AE734"
+    },
+    {
+      "code": "52224",
+      "d": "NARIÑO",
+      "m": "CUASPUD (CARLOSAMA)",
+      "value": 51.09912352433081,
+      "year": 2023,
+      "cell": "AE735"
+    },
+    {
+      "code": "52227",
+      "d": "NARIÑO",
+      "m": "CUMBAL",
+      "value": 58.685577321890165,
+      "year": 2023,
+      "cell": "AE736"
+    },
+    {
+      "code": "52233",
+      "d": "NARIÑO",
+      "m": "CUMBITARA",
+      "value": 62.80058224523996,
+      "year": 2023,
+      "cell": "AE737"
+    },
+    {
+      "code": "52240",
+      "d": "NARIÑO",
+      "m": "CHACHAGüÍ",
+      "value": 63.77517086858441,
+      "year": 2023,
+      "cell": "AE738"
+    },
+    {
+      "code": "52250",
+      "d": "NARIÑO",
+      "m": "EL CHARCO",
+      "value": 51.72584815289109,
+      "year": 2023,
+      "cell": "AE739"
+    },
+    {
+      "code": "52254",
+      "d": "NARIÑO",
+      "m": "EL PEÑOL ",
+      "value": 39.11525974640797,
+      "year": 2023,
+      "cell": "AE740"
+    },
+    {
+      "code": "52256",
+      "d": "NARIÑO",
+      "m": "EL ROSARIO",
+      "value": 58.60622667721763,
+      "year": 2023,
+      "cell": "AE741"
+    },
+    {
+      "code": "52258",
+      "d": "NARIÑO",
+      "m": "EL TABLÓN DE GÓMEZ",
+      "value": 64.21585658694252,
+      "year": 2023,
+      "cell": "AE742"
+    },
+    {
+      "code": "52260",
+      "d": "NARIÑO",
+      "m": "EL TAMBO ",
+      "value": 66.2993345740689,
+      "year": 2023,
+      "cell": "AE743"
+    },
+    {
+      "code": "52287",
+      "d": "NARIÑO",
+      "m": "FUNES",
+      "value": 28.45417141540016,
+      "year": 2023,
+      "cell": "AE744"
+    },
+    {
+      "code": "52317",
+      "d": "NARIÑO",
+      "m": "GUACHUCAL",
+      "value": 50.59495313975625,
+      "year": 2023,
+      "cell": "AE745"
+    },
+    {
+      "code": "52320",
+      "d": "NARIÑO",
+      "m": "GUAITARILLA",
+      "value": 58.654143972545775,
+      "year": 2023,
+      "cell": "AE746"
+    },
+    {
+      "code": "52323",
+      "d": "NARIÑO",
+      "m": "GUALMATÁN",
+      "value": 67.5957537589656,
+      "year": 2023,
+      "cell": "AE747"
+    },
+    {
+      "code": "52352",
+      "d": "NARIÑO",
+      "m": "ILES",
+      "value": 63.02021919878582,
+      "year": 2023,
+      "cell": "AE748"
+    },
+    {
+      "code": "52354",
+      "d": "NARIÑO",
+      "m": "IMUÉS",
+      "value": 76.56934620462465,
+      "year": 2023,
+      "cell": "AE749"
+    },
+    {
+      "code": "52356",
+      "d": "NARIÑO",
+      "m": "IPIALES",
+      "value": 55.67213097104269,
+      "year": 2023,
+      "cell": "AE750"
+    },
+    {
+      "code": "52378",
+      "d": "NARIÑO",
+      "m": "LA CRUZ",
+      "value": 64.00476667031458,
+      "year": 2023,
+      "cell": "AE751"
+    },
+    {
+      "code": "52381",
+      "d": "NARIÑO",
+      "m": "LA FLORIDA",
+      "value": 48.24449801672567,
+      "year": 2023,
+      "cell": "AE752"
+    },
+    {
+      "code": "52385",
+      "d": "NARIÑO",
+      "m": "LA LLANADA",
+      "value": 35.163571629020225,
+      "year": 2023,
+      "cell": "AE753"
+    },
+    {
+      "code": "52390",
+      "d": "NARIÑO",
+      "m": "LA TOLA",
+      "value": 61.18407128245927,
+      "year": 2023,
+      "cell": "AE754"
+    },
+    {
+      "code": "52399",
+      "d": "NARIÑO",
+      "m": "LA UNIÓN ",
+      "value": 70.37186208078677,
+      "year": 2023,
+      "cell": "AE755"
+    },
+    {
+      "code": "52405",
+      "d": "NARIÑO",
+      "m": "LEIVA",
+      "value": 54.26651430532923,
+      "year": 2023,
+      "cell": "AE756"
+    },
+    {
+      "code": "52411",
+      "d": "NARIÑO",
+      "m": "LINARES",
+      "value": 64.93732308648585,
+      "year": 2023,
+      "cell": "AE757"
+    },
+    {
+      "code": "52418",
+      "d": "NARIÑO",
+      "m": "LOS ANDES (SOTOMAYOR)",
+      "value": 70.13124720122693,
+      "year": 2023,
+      "cell": "AE758"
+    },
+    {
+      "code": "52427",
+      "d": "NARIÑO",
+      "m": "MAGÜÍ (PAYÁN)",
+      "value": 61.73664692420239,
+      "year": 2023,
+      "cell": "AE759"
+    },
+    {
+      "code": "52435",
+      "d": "NARIÑO",
+      "m": "MALLAMA (PIEDRANCHA)",
+      "value": 46.13480090025402,
+      "year": 2023,
+      "cell": "AE760"
+    },
+    {
+      "code": "52473",
+      "d": "NARIÑO",
+      "m": "MOSQUERA ",
+      "value": 56.334068539381775,
+      "year": 2023,
+      "cell": "AE761"
+    },
+    {
+      "code": "52480",
+      "d": "NARIÑO",
+      "m": "NARIÑO ",
+      "value": 57.90749643523827,
+      "year": 2023,
+      "cell": "AE762"
+    },
+    {
+      "code": "52490",
+      "d": "NARIÑO",
+      "m": "OLAYA HERRERA (BOCAS DE SATINGA)",
+      "value": 66.41283141840128,
+      "year": 2023,
+      "cell": "AE763"
+    },
+    {
+      "code": "52506",
+      "d": "NARIÑO",
+      "m": "OSPINA",
+      "value": 68.7284884934408,
+      "year": 2023,
+      "cell": "AE764"
+    },
+    {
+      "code": "52520",
+      "d": "NARIÑO",
+      "m": "FRANCISCO PIZARRO (SALAHONDA)",
+      "value": 64.36859471203316,
+      "year": 2023,
+      "cell": "AE765"
+    },
+    {
+      "code": "52540",
+      "d": "NARIÑO",
+      "m": "POLICARPA",
+      "value": 63.18134517146534,
+      "year": 2023,
+      "cell": "AE766"
+    },
+    {
+      "code": "52560",
+      "d": "NARIÑO",
+      "m": "POTOSÍ",
+      "value": 57.54006353518926,
+      "year": 2023,
+      "cell": "AE767"
+    },
+    {
+      "code": "52565",
+      "d": "NARIÑO",
+      "m": "PROVIDENCIA ",
+      "value": 62.03133512681495,
+      "year": 2023,
+      "cell": "AE768"
+    },
+    {
+      "code": "52573",
+      "d": "NARIÑO",
+      "m": "PUERRES",
+      "value": 57.07867890302778,
+      "year": 2023,
+      "cell": "AE769"
+    },
+    {
+      "code": "52585",
+      "d": "NARIÑO",
+      "m": "PUPIALES",
+      "value": 56.30760004636466,
+      "year": 2023,
+      "cell": "AE770"
+    },
+    {
+      "code": "52612",
+      "d": "NARIÑO",
+      "m": "RICAURTE ",
+      "value": 59.23965165815314,
+      "year": 2023,
+      "cell": "AE771"
+    },
+    {
+      "code": "52621",
+      "d": "NARIÑO",
+      "m": "ROBERTO PAYÁN (SAN JOSÉ)",
+      "value": 68.74355677001682,
+      "year": 2023,
+      "cell": "AE772"
+    },
+    {
+      "code": "52678",
+      "d": "NARIÑO",
+      "m": "SAMANIEGO",
+      "value": 60.28051075145744,
+      "year": 2023,
+      "cell": "AE773"
+    },
+    {
+      "code": "52683",
+      "d": "NARIÑO",
+      "m": "SANDONÁ",
+      "value": 52.67747020137692,
+      "year": 2023,
+      "cell": "AE774"
+    },
+    {
+      "code": "52685",
+      "d": "NARIÑO",
+      "m": "SAN BERNARDO ",
+      "value": 62.77034979670793,
+      "year": 2023,
+      "cell": "AE775"
+    },
+    {
+      "code": "52687",
+      "d": "NARIÑO",
+      "m": "SAN LORENZO",
+      "value": 56.758114185442416,
+      "year": 2023,
+      "cell": "AE776"
+    },
+    {
+      "code": "52693",
+      "d": "NARIÑO",
+      "m": "SAN PABLO ",
+      "value": 64.38725077628388,
+      "year": 2023,
+      "cell": "AE777"
+    },
+    {
+      "code": "52694",
+      "d": "NARIÑO",
+      "m": "SAN PEDRO DE CARTAGO",
+      "value": 71.10194401305036,
+      "year": 2023,
+      "cell": "AE778"
+    },
+    {
+      "code": "52696",
+      "d": "NARIÑO",
+      "m": "SANTA BÁRBARA  (ISCUANDÉ)",
+      "value": 57.398274104836105,
+      "year": 2023,
+      "cell": "AE779"
+    },
+    {
+      "code": "52699",
+      "d": "NARIÑO",
+      "m": "SANTACRUZ  (GUACHAVÉS)",
+      "value": 56.69012886416108,
+      "year": 2023,
+      "cell": "AE780"
+    },
+    {
+      "code": "52720",
+      "d": "NARIÑO",
+      "m": "SAPUYES",
+      "value": 65.99240388329352,
+      "year": 2023,
+      "cell": "AE781"
+    },
+    {
+      "code": "52786",
+      "d": "NARIÑO",
+      "m": "TAMINANGO",
+      "value": 45.56666504305549,
+      "year": 2023,
+      "cell": "AE782"
+    },
+    {
+      "code": "52788",
+      "d": "NARIÑO",
+      "m": "TANGUA",
+      "value": 57.60141461615246,
+      "year": 2023,
+      "cell": "AE783"
+    },
+    {
+      "code": "52835",
+      "d": "NARIÑO",
+      "m": "TUMACO",
+      "value": 52.12063840225109,
+      "year": 2023,
+      "cell": "AE784"
+    },
+    {
+      "code": "52838",
+      "d": "NARIÑO",
+      "m": "TUQUERRES",
+      "value": 52.23209364138631,
+      "year": 2023,
+      "cell": "AE785"
+    },
+    {
+      "code": "52885",
+      "d": "NARIÑO",
+      "m": "YACUANQUER",
+      "value": 61.82622099370834,
+      "year": 2023,
+      "cell": "AE786"
+    },
+    {
+      "code": "54001",
+      "d": "NORTE DE SANTANDER",
+      "m": "SAN JOSÉ DE CUCUTA",
+      "value": 65.9633600389535,
+      "year": 2023,
+      "cell": "AE787"
+    },
+    {
+      "code": "54003",
+      "d": "NORTE DE SANTANDER",
+      "m": "ÁBREGO",
+      "value": 46.27124918071591,
+      "year": 2023,
+      "cell": "AE788"
+    },
+    {
+      "code": "54051",
+      "d": "NORTE DE SANTANDER",
+      "m": "ARBOLEDAS",
+      "value": 59.02375413712174,
+      "year": 2023,
+      "cell": "AE789"
+    },
+    {
+      "code": "54099",
+      "d": "NORTE DE SANTANDER",
+      "m": "BOCHALEMA",
+      "value": 60.990052172307834,
+      "year": 2023,
+      "cell": "AE790"
+    },
+    {
+      "code": "54109",
+      "d": "NORTE DE SANTANDER",
+      "m": "BUCARASICA",
+      "value": 56.394895322798405,
+      "year": 2023,
+      "cell": "AE791"
+    },
+    {
+      "code": "54125",
+      "d": "NORTE DE SANTANDER",
+      "m": "CÁCOTA",
+      "value": 48.04027028272338,
+      "year": 2023,
+      "cell": "AE792"
+    },
+    {
+      "code": "54128",
+      "d": "NORTE DE SANTANDER",
+      "m": "CÁCHIRA",
+      "value": 52.890884166442575,
+      "year": 2023,
+      "cell": "AE793"
+    },
+    {
+      "code": "54172",
+      "d": "NORTE DE SANTANDER",
+      "m": "CHINÁCOTA",
+      "value": 63.934938122387734,
+      "year": 2023,
+      "cell": "AE794"
+    },
+    {
+      "code": "54174",
+      "d": "NORTE DE SANTANDER",
+      "m": "CHITAGÁ",
+      "value": 60.44344945270465,
+      "year": 2023,
+      "cell": "AE795"
+    },
+    {
+      "code": "54206",
+      "d": "NORTE DE SANTANDER",
+      "m": "CONVENCIÓN",
+      "value": 46.886896120395626,
+      "year": 2023,
+      "cell": "AE796"
+    },
+    {
+      "code": "54223",
+      "d": "NORTE DE SANTANDER",
+      "m": "CUCUTILLA",
+      "value": 65.89660792256352,
+      "year": 2023,
+      "cell": "AE797"
+    },
+    {
+      "code": "54239",
+      "d": "NORTE DE SANTANDER",
+      "m": "DURANIA",
+      "value": 51.92967132007139,
+      "year": 2023,
+      "cell": "AE798"
+    },
+    {
+      "code": "54245",
+      "d": "NORTE DE SANTANDER",
+      "m": "EL CARMEN",
+      "value": 55.39143060440664,
+      "year": 2023,
+      "cell": "AE799"
+    },
+    {
+      "code": "54250",
+      "d": "NORTE DE SANTANDER",
+      "m": "EL TARRA",
+      "value": 67.1870674392355,
+      "year": 2023,
+      "cell": "AE800"
+    },
+    {
+      "code": "54261",
+      "d": "NORTE DE SANTANDER",
+      "m": "EL ZULIA",
+      "value": 58.45824099055281,
+      "year": 2023,
+      "cell": "AE801"
+    },
+    {
+      "code": "54313",
+      "d": "NORTE DE SANTANDER",
+      "m": "GRAMALOTE",
+      "value": 47.97818192673244,
+      "year": 2023,
+      "cell": "AE802"
+    },
+    {
+      "code": "54344",
+      "d": "NORTE DE SANTANDER",
+      "m": "HACARÍ",
+      "value": 53.00884940508333,
+      "year": 2023,
+      "cell": "AE803"
+    },
+    {
+      "code": "54347",
+      "d": "NORTE DE SANTANDER",
+      "m": "HERRÁN",
+      "value": 58.356866378205886,
+      "year": 2023,
+      "cell": "AE804"
+    },
+    {
+      "code": "54377",
+      "d": "NORTE DE SANTANDER",
+      "m": "LABATECA",
+      "value": 67.67601544895588,
+      "year": 2023,
+      "cell": "AE805"
+    },
+    {
+      "code": "54385",
+      "d": "NORTE DE SANTANDER",
+      "m": "LA ESPERANZA",
+      "value": 57.313466043219826,
+      "year": 2023,
+      "cell": "AE806"
+    },
+    {
+      "code": "54398",
+      "d": "NORTE DE SANTANDER",
+      "m": "LA PLAYA DE BELEN",
+      "value": 50.68198591915364,
+      "year": 2023,
+      "cell": "AE807"
+    },
+    {
+      "code": "54405",
+      "d": "NORTE DE SANTANDER",
+      "m": "LOS PATIOS",
+      "value": 61.36231385438615,
+      "year": 2023,
+      "cell": "AE808"
+    },
+    {
+      "code": "54418",
+      "d": "NORTE DE SANTANDER",
+      "m": "LOURDES",
+      "value": 47.75666338292553,
+      "year": 2023,
+      "cell": "AE809"
+    },
+    {
+      "code": "54480",
+      "d": "NORTE DE SANTANDER",
+      "m": "MUTISCUA",
+      "value": 53.23298259346289,
+      "year": 2023,
+      "cell": "AE810"
+    },
+    {
+      "code": "54498",
+      "d": "NORTE DE SANTANDER",
+      "m": "OCAÑA",
+      "value": 45.749781419426455,
+      "year": 2023,
+      "cell": "AE811"
+    },
+    {
+      "code": "54518",
+      "d": "NORTE DE SANTANDER",
+      "m": "PAMPLONA",
+      "value": 54.91749677056356,
+      "year": 2023,
+      "cell": "AE812"
+    },
+    {
+      "code": "54520",
+      "d": "NORTE DE SANTANDER",
+      "m": "PAMPLONITA",
+      "value": 63.32980873416178,
+      "year": 2023,
+      "cell": "AE813"
+    },
+    {
+      "code": "54553",
+      "d": "NORTE DE SANTANDER",
+      "m": "PUERTO SANTANDER",
+      "value": 62.293607089537645,
+      "year": 2023,
+      "cell": "AE814"
+    },
+    {
+      "code": "54599",
+      "d": "NORTE DE SANTANDER",
+      "m": "RAGONVALIA",
+      "value": 50.91021365172229,
+      "year": 2023,
+      "cell": "AE815"
+    },
+    {
+      "code": "54660",
+      "d": "NORTE DE SANTANDER",
+      "m": "SALAZAR DE LAS PALMAS",
+      "value": 54.00366043601498,
+      "year": 2023,
+      "cell": "AE816"
+    },
+    {
+      "code": "54670",
+      "d": "NORTE DE SANTANDER",
+      "m": "SAN CALIXTO",
+      "value": 62.74000040642063,
+      "year": 2023,
+      "cell": "AE817"
+    },
+    {
+      "code": "54673",
+      "d": "NORTE DE SANTANDER",
+      "m": "SAN CAYETANO ",
+      "value": 62.23330658382345,
+      "year": 2023,
+      "cell": "AE818"
+    },
+    {
+      "code": "54680",
+      "d": "NORTE DE SANTANDER",
+      "m": "SANTIAGO ",
+      "value": 54.17772666650574,
+      "year": 2023,
+      "cell": "AE819"
+    },
+    {
+      "code": "54720",
+      "d": "NORTE DE SANTANDER",
+      "m": "SARDINATA",
+      "value": 59.853475447779694,
+      "year": 2023,
+      "cell": "AE820"
+    },
+    {
+      "code": "54743",
+      "d": "NORTE DE SANTANDER",
+      "m": "SANTO DOMINGO DE SILOS",
+      "value": 53.50517201998967,
+      "year": 2023,
+      "cell": "AE821"
+    },
+    {
+      "code": "54800",
+      "d": "NORTE DE SANTANDER",
+      "m": "TEORAMA",
+      "value": 59.279642966726385,
+      "year": 2023,
+      "cell": "AE822"
+    },
+    {
+      "code": "54810",
+      "d": "NORTE DE SANTANDER",
+      "m": "TIBÚ",
+      "value": 67.18119242470331,
+      "year": 2023,
+      "cell": "AE823"
+    },
+    {
+      "code": "54820",
+      "d": "NORTE DE SANTANDER",
+      "m": "TOLEDO ",
+      "value": 67.10842332951651,
+      "year": 2023,
+      "cell": "AE824"
+    },
+    {
+      "code": "54871",
+      "d": "NORTE DE SANTANDER",
+      "m": "VILLACARO",
+      "value": 49.587450038551104,
+      "year": 2023,
+      "cell": "AE825"
+    },
+    {
+      "code": "54874",
+      "d": "NORTE DE SANTANDER",
+      "m": "VILLA DEL ROSARIO",
+      "value": 63.45534050387319,
+      "year": 2023,
+      "cell": "AE826"
+    },
+    {
+      "code": "63001",
+      "d": "QUINDIO",
+      "m": "ARMENIA",
+      "value": 72.67176100241653,
+      "year": 2023,
+      "cell": "AE827"
+    },
+    {
+      "code": "63111",
+      "d": "QUINDIO",
+      "m": "BUENAVISTA ",
+      "value": 50.52433190869712,
+      "year": 2023,
+      "cell": "AE828"
+    },
+    {
+      "code": "63130",
+      "d": "QUINDIO",
+      "m": "CALARCÁ",
+      "value": 12.596453985372122,
+      "year": 2023,
+      "cell": "AE829"
+    },
+    {
+      "code": "63190",
+      "d": "QUINDIO",
+      "m": "CIRCASIA",
+      "value": 69.52907766026928,
+      "year": 2023,
+      "cell": "AE830"
+    },
+    {
+      "code": "63212",
+      "d": "QUINDIO",
+      "m": "CÓRDOBA ",
+      "value": 46.32048374812223,
+      "year": 2023,
+      "cell": "AE831"
+    },
+    {
+      "code": "63272",
+      "d": "QUINDIO",
+      "m": "FILANDIA",
+      "value": 55.25576502962687,
+      "year": 2023,
+      "cell": "AE832"
+    },
+    {
+      "code": "63302",
+      "d": "QUINDIO",
+      "m": "GÉNOVA",
+      "value": 50.39182562508144,
+      "year": 2023,
+      "cell": "AE833"
+    },
+    {
+      "code": "63401",
+      "d": "QUINDIO",
+      "m": "LA TEBAIDA",
+      "value": 13.86420282938755,
+      "year": 2023,
+      "cell": "AE834"
+    },
+    {
+      "code": "63470",
+      "d": "QUINDIO",
+      "m": "MONTENEGRO",
+      "value": 53.61263913529699,
+      "year": 2023,
+      "cell": "AE835"
+    },
+    {
+      "code": "63548",
+      "d": "QUINDIO",
+      "m": "PIJAO",
+      "value": 53.532537661434624,
+      "year": 2023,
+      "cell": "AE836"
+    },
+    {
+      "code": "63594",
+      "d": "QUINDIO",
+      "m": "QUIMBAYA",
+      "value": 51.195118400677885,
+      "year": 2023,
+      "cell": "AE837"
+    },
+    {
+      "code": "63690",
+      "d": "QUINDIO",
+      "m": "SALENTO",
+      "value": 59.43670344624654,
+      "year": 2023,
+      "cell": "AE838"
+    },
+    {
+      "code": "66001",
+      "d": "RISARALDA",
+      "m": "PEREIRA",
+      "value": 75.23225403040647,
+      "year": 2023,
+      "cell": "AE839"
+    },
+    {
+      "code": "66045",
+      "d": "RISARALDA",
+      "m": "APÍA",
+      "value": 55.53739916211134,
+      "year": 2023,
+      "cell": "AE840"
+    },
+    {
+      "code": "66075",
+      "d": "RISARALDA",
+      "m": "BALBOA ",
+      "value": 63.40744407873899,
+      "year": 2023,
+      "cell": "AE841"
+    },
+    {
+      "code": "66088",
+      "d": "RISARALDA",
+      "m": "BELÉN DE UMBRÍA",
+      "value": 62.6675462391636,
+      "year": 2023,
+      "cell": "AE842"
+    },
+    {
+      "code": "66170",
+      "d": "RISARALDA",
+      "m": "DOSQUEBRADAS",
+      "value": 60.452727085604856,
+      "year": 2023,
+      "cell": "AE843"
+    },
+    {
+      "code": "66318",
+      "d": "RISARALDA",
+      "m": "GUÁTICA",
+      "value": 52.448390510132114,
+      "year": 2023,
+      "cell": "AE844"
+    },
+    {
+      "code": "66383",
+      "d": "RISARALDA",
+      "m": "LA CELIA",
+      "value": 58.19690426326915,
+      "year": 2023,
+      "cell": "AE845"
+    },
+    {
+      "code": "66400",
+      "d": "RISARALDA",
+      "m": "LA VIRGINIA",
+      "value": 67.31603700273507,
+      "year": 2023,
+      "cell": "AE846"
+    },
+    {
+      "code": "66440",
+      "d": "RISARALDA",
+      "m": "MARSELLA",
+      "value": 52.91237628323912,
+      "year": 2023,
+      "cell": "AE847"
+    },
+    {
+      "code": "66456",
+      "d": "RISARALDA",
+      "m": "MISTRATÓ",
+      "value": 53.933622363712104,
+      "year": 2023,
+      "cell": "AE848"
+    },
+    {
+      "code": "66572",
+      "d": "RISARALDA",
+      "m": "PUEBLO RICO ",
+      "value": 60.14118056200316,
+      "year": 2023,
+      "cell": "AE849"
+    },
+    {
+      "code": "66594",
+      "d": "RISARALDA",
+      "m": "QUINCHÍA",
+      "value": 55.66785951248446,
+      "year": 2023,
+      "cell": "AE850"
+    },
+    {
+      "code": "66682",
+      "d": "RISARALDA",
+      "m": "SANTA ROSA DE CABAL",
+      "value": 59.82630149954802,
+      "year": 2023,
+      "cell": "AE851"
+    },
+    {
+      "code": "66687",
+      "d": "RISARALDA",
+      "m": "SANTUARIO ",
+      "value": 63.16506010294292,
+      "year": 2023,
+      "cell": "AE852"
+    },
+    {
+      "code": "68001",
+      "d": "SANTANDER",
+      "m": "BUCARAMANGA",
+      "value": 76.14032274525688,
+      "year": 2023,
+      "cell": "AE853"
+    },
+    {
+      "code": "68013",
+      "d": "SANTANDER",
+      "m": "AGUADA ",
+      "value": 61.78004681317701,
+      "year": 2023,
+      "cell": "AE854"
+    },
+    {
+      "code": "68020",
+      "d": "SANTANDER",
+      "m": "ALBANIA ",
+      "value": 62.79899732348008,
+      "year": 2023,
+      "cell": "AE855"
+    },
+    {
+      "code": "68051",
+      "d": "SANTANDER",
+      "m": "ARATOCA",
+      "value": 64.77074952883726,
+      "year": 2023,
+      "cell": "AE856"
+    },
+    {
+      "code": "68077",
+      "d": "SANTANDER",
+      "m": "BARBOSA ",
+      "value": 60.92602558720204,
+      "year": 2023,
+      "cell": "AE857"
+    },
+    {
+      "code": "68079",
+      "d": "SANTANDER",
+      "m": "BARICHARA",
+      "value": 68.78502283497471,
+      "year": 2023,
+      "cell": "AE858"
+    },
+    {
+      "code": "68081",
+      "d": "SANTANDER",
+      "m": "BARRANCABERMEJA",
+      "value": 64.59392824092029,
+      "year": 2023,
+      "cell": "AE859"
+    },
+    {
+      "code": "68092",
+      "d": "SANTANDER",
+      "m": "BETULIA ",
+      "value": 63.361538257208245,
+      "year": 2023,
+      "cell": "AE860"
+    },
+    {
+      "code": "68101",
+      "d": "SANTANDER",
+      "m": "BOLÍVAR ",
+      "value": 60.34050124130659,
+      "year": 2023,
+      "cell": "AE861"
+    },
+    {
+      "code": "68121",
+      "d": "SANTANDER",
+      "m": "CABRERA ",
+      "value": 64.18148550150612,
+      "year": 2023,
+      "cell": "AE862"
+    },
+    {
+      "code": "68132",
+      "d": "SANTANDER",
+      "m": "CALIFORNIA",
+      "value": 48.84479509940945,
+      "year": 2023,
+      "cell": "AE863"
+    },
+    {
+      "code": "68147",
+      "d": "SANTANDER",
+      "m": "CAPITANEJO",
+      "value": 63.396194963758774,
+      "year": 2023,
+      "cell": "AE864"
+    },
+    {
+      "code": "68152",
+      "d": "SANTANDER",
+      "m": "CARCASÍ",
+      "value": 59.96841773709905,
+      "year": 2023,
+      "cell": "AE865"
+    },
+    {
+      "code": "68160",
+      "d": "SANTANDER",
+      "m": "CEPITÁ",
+      "value": 59.48517715195152,
+      "year": 2023,
+      "cell": "AE866"
+    },
+    {
+      "code": "68162",
+      "d": "SANTANDER",
+      "m": "CERRITO",
+      "value": 64.21851788563609,
+      "year": 2023,
+      "cell": "AE867"
+    },
+    {
+      "code": "68167",
+      "d": "SANTANDER",
+      "m": "CHARALÁ",
+      "value": 53.406441338322956,
+      "year": 2023,
+      "cell": "AE868"
+    },
+    {
+      "code": "68169",
+      "d": "SANTANDER",
+      "m": "CHARTA",
+      "value": 43.96691366025538,
+      "year": 2023,
+      "cell": "AE869"
+    },
+    {
+      "code": "68176",
+      "d": "SANTANDER",
+      "m": "CHIMA ",
+      "value": 47.48711010395898,
+      "year": 2023,
+      "cell": "AE870"
+    },
+    {
+      "code": "68179",
+      "d": "SANTANDER",
+      "m": "CHIPATÁ",
+      "value": 53.79739978259393,
+      "year": 2023,
+      "cell": "AE871"
+    },
+    {
+      "code": "68190",
+      "d": "SANTANDER",
+      "m": "CIMITARRA",
+      "value": 14.801287158351293,
+      "year": 2023,
+      "cell": "AE872"
+    },
+    {
+      "code": "68207",
+      "d": "SANTANDER",
+      "m": "CONCEPCIÓN ",
+      "value": 63.537857583008694,
+      "year": 2023,
+      "cell": "AE873"
+    },
+    {
+      "code": "68209",
+      "d": "SANTANDER",
+      "m": "CONFINES",
+      "value": 14.153185492793268,
+      "year": 2023,
+      "cell": "AE874"
+    },
+    {
+      "code": "68211",
+      "d": "SANTANDER",
+      "m": "CONTRATACIÓN",
+      "value": 52.73545524346184,
+      "year": 2023,
+      "cell": "AE875"
+    },
+    {
+      "code": "68217",
+      "d": "SANTANDER",
+      "m": "COROMORO",
+      "value": 59.638624315486936,
+      "year": 2023,
+      "cell": "AE876"
+    },
+    {
+      "code": "68229",
+      "d": "SANTANDER",
+      "m": "CURITÍ",
+      "value": 65.91904683010122,
+      "year": 2023,
+      "cell": "AE877"
+    },
+    {
+      "code": "68235",
+      "d": "SANTANDER",
+      "m": "EL CARMEN DE CHUCURI",
+      "value": 60.089206483128365,
+      "year": 2023,
+      "cell": "AE878"
+    },
+    {
+      "code": "68245",
+      "d": "SANTANDER",
+      "m": "EL GUACAMAYO",
+      "value": 63.64536542026186,
+      "year": 2023,
+      "cell": "AE879"
+    },
+    {
+      "code": "68250",
+      "d": "SANTANDER",
+      "m": "EL PEÑÓN ",
+      "value": 64.46002532430256,
+      "year": 2023,
+      "cell": "AE880"
+    },
+    {
+      "code": "68255",
+      "d": "SANTANDER",
+      "m": "EL PLAYÓN",
+      "value": 53.325528535104894,
+      "year": 2023,
+      "cell": "AE881"
+    },
+    {
+      "code": "68264",
+      "d": "SANTANDER",
+      "m": "ENCINO",
+      "value": 58.86691957363541,
+      "year": 2023,
+      "cell": "AE882"
+    },
+    {
+      "code": "68266",
+      "d": "SANTANDER",
+      "m": "ENCISO",
+      "value": 60.04548010915757,
+      "year": 2023,
+      "cell": "AE883"
+    },
+    {
+      "code": "68271",
+      "d": "SANTANDER",
+      "m": "FLORIÁN",
+      "value": 70.94253314025184,
+      "year": 2023,
+      "cell": "AE884"
+    },
+    {
+      "code": "68276",
+      "d": "SANTANDER",
+      "m": "FLORIDABLANCA",
+      "value": 63.040599454535,
+      "year": 2023,
+      "cell": "AE885"
+    },
+    {
+      "code": "68296",
+      "d": "SANTANDER",
+      "m": "GALÁN",
+      "value": 61.716770333719396,
+      "year": 2023,
+      "cell": "AE886"
+    },
+    {
+      "code": "68298",
+      "d": "SANTANDER",
+      "m": "GÁMBITA",
+      "value": 48.50425747330045,
+      "year": 2023,
+      "cell": "AE887"
+    },
+    {
+      "code": "68307",
+      "d": "SANTANDER",
+      "m": "GIRÓN",
+      "value": 59.42151270300269,
+      "year": 2023,
+      "cell": "AE888"
+    },
+    {
+      "code": "68318",
+      "d": "SANTANDER",
+      "m": "GUACA",
+      "value": 47.73550020123246,
+      "year": 2023,
+      "cell": "AE889"
+    },
+    {
+      "code": "68320",
+      "d": "SANTANDER",
+      "m": "GUADALUPE ",
+      "value": 63.323092238448275,
+      "year": 2023,
+      "cell": "AE890"
+    },
+    {
+      "code": "68322",
+      "d": "SANTANDER",
+      "m": "GUAPOTÁ",
+      "value": 60.878240568534125,
+      "year": 2023,
+      "cell": "AE891"
+    },
+    {
+      "code": "68324",
+      "d": "SANTANDER",
+      "m": "GUAVATÁ",
+      "value": 56.86023565600999,
+      "year": 2023,
+      "cell": "AE892"
+    },
+    {
+      "code": "68327",
+      "d": "SANTANDER",
+      "m": "GÜEPSA",
+      "value": 57.1739862346907,
+      "year": 2023,
+      "cell": "AE893"
+    },
+    {
+      "code": "68344",
+      "d": "SANTANDER",
+      "m": "HATO",
+      "value": 54.85247250544364,
+      "year": 2023,
+      "cell": "AE894"
+    },
+    {
+      "code": "68368",
+      "d": "SANTANDER",
+      "m": "JESÚS MARÍA",
+      "value": 60.11006640781066,
+      "year": 2023,
+      "cell": "AE895"
+    },
+    {
+      "code": "68370",
+      "d": "SANTANDER",
+      "m": "JORDÁN",
+      "value": 53.72625622704491,
+      "year": 2023,
+      "cell": "AE896"
+    },
+    {
+      "code": "68377",
+      "d": "SANTANDER",
+      "m": "LA BELLEZA",
+      "value": 62.6163671294366,
+      "year": 2023,
+      "cell": "AE897"
+    },
+    {
+      "code": "68385",
+      "d": "SANTANDER",
+      "m": "LANDÁZURI",
+      "value": 56.490336808998634,
+      "year": 2023,
+      "cell": "AE898"
+    },
+    {
+      "code": "68397",
+      "d": "SANTANDER",
+      "m": "LA PAZ ",
+      "value": 43.47117278053668,
+      "year": 2023,
+      "cell": "AE899"
+    },
+    {
+      "code": "68406",
+      "d": "SANTANDER",
+      "m": "LEBRIJA",
+      "value": 71.62167649719069,
+      "year": 2023,
+      "cell": "AE900"
+    },
+    {
+      "code": "68418",
+      "d": "SANTANDER",
+      "m": "LOS SANTOS",
+      "value": 65.02848140669383,
+      "year": 2023,
+      "cell": "AE901"
+    },
+    {
+      "code": "68425",
+      "d": "SANTANDER",
+      "m": "MACARAVITA",
+      "value": 44.86932826040448,
+      "year": 2023,
+      "cell": "AE902"
+    },
+    {
+      "code": "68432",
+      "d": "SANTANDER",
+      "m": "MÁLAGA",
+      "value": 61.311257349476705,
+      "year": 2023,
+      "cell": "AE903"
+    },
+    {
+      "code": "68444",
+      "d": "SANTANDER",
+      "m": "MATANZA",
+      "value": 50.47197048992743,
+      "year": 2023,
+      "cell": "AE904"
+    },
+    {
+      "code": "68464",
+      "d": "SANTANDER",
+      "m": "MOGOTES",
+      "value": 68.81627595151762,
+      "year": 2023,
+      "cell": "AE905"
+    },
+    {
+      "code": "68468",
+      "d": "SANTANDER",
+      "m": "MOLAGAVITA",
+      "value": 47.235021601561314,
+      "year": 2023,
+      "cell": "AE906"
+    },
+    {
+      "code": "68498",
+      "d": "SANTANDER",
+      "m": "OCAMONTE",
+      "value": 63.48101858881789,
+      "year": 2023,
+      "cell": "AE907"
+    },
+    {
+      "code": "68500",
+      "d": "SANTANDER",
+      "m": "OIBA",
+      "value": 75.08460360322198,
+      "year": 2023,
+      "cell": "AE908"
+    },
+    {
+      "code": "68502",
+      "d": "SANTANDER",
+      "m": "ONZAGA",
+      "value": 50.22319665026718,
+      "year": 2023,
+      "cell": "AE909"
+    },
+    {
+      "code": "68522",
+      "d": "SANTANDER",
+      "m": "PALMAR",
+      "value": 56.8175266518503,
+      "year": 2023,
+      "cell": "AE910"
+    },
+    {
+      "code": "68524",
+      "d": "SANTANDER",
+      "m": "PALMAS DEL SOCORRO",
+      "value": 51.81108909101488,
+      "year": 2023,
+      "cell": "AE911"
+    },
+    {
+      "code": "68533",
+      "d": "SANTANDER",
+      "m": "PÁRAMO",
+      "value": 53.801845303116544,
+      "year": 2023,
+      "cell": "AE912"
+    },
+    {
+      "code": "68547",
+      "d": "SANTANDER",
+      "m": "PIEDECUESTA",
+      "value": 64.3608824176937,
+      "year": 2023,
+      "cell": "AE913"
+    },
+    {
+      "code": "68549",
+      "d": "SANTANDER",
+      "m": "PINCHOTE",
+      "value": 66.79119394265317,
+      "year": 2023,
+      "cell": "AE914"
+    },
+    {
+      "code": "68572",
+      "d": "SANTANDER",
+      "m": "PUENTE NACIONAL",
+      "value": 74.28580127981355,
+      "year": 2023,
+      "cell": "AE915"
+    },
+    {
+      "code": "68573",
+      "d": "SANTANDER",
+      "m": "PUERTO PARRA",
+      "value": 63.39809068950291,
+      "year": 2023,
+      "cell": "AE916"
+    },
+    {
+      "code": "68575",
+      "d": "SANTANDER",
+      "m": "PUERTO WILCHES",
+      "value": 65.07332957376748,
+      "year": 2023,
+      "cell": "AE917"
+    },
+    {
+      "code": "68615",
+      "d": "SANTANDER",
+      "m": "RIONEGRO ",
+      "value": 61.58911970794277,
+      "year": 2023,
+      "cell": "AE918"
+    },
+    {
+      "code": "68655",
+      "d": "SANTANDER",
+      "m": "SABANA DE TORRES",
+      "value": 63.83345051563687,
+      "year": 2023,
+      "cell": "AE919"
+    },
+    {
+      "code": "68669",
+      "d": "SANTANDER",
+      "m": "SAN ANDRÉS ",
+      "value": 51.251645868565674,
+      "year": 2023,
+      "cell": "AE920"
+    },
+    {
+      "code": "68673",
+      "d": "SANTANDER",
+      "m": "SAN BENITO",
+      "value": 62.07294164716908,
+      "year": 2023,
+      "cell": "AE921"
+    },
+    {
+      "code": "68679",
+      "d": "SANTANDER",
+      "m": "SAN GIL",
+      "value": 68.15064843087272,
+      "year": 2023,
+      "cell": "AE922"
+    },
+    {
+      "code": "68682",
+      "d": "SANTANDER",
+      "m": "SAN JOAQUÍN",
+      "value": 51.500919006031765,
+      "year": 2023,
+      "cell": "AE923"
+    },
+    {
+      "code": "68684",
+      "d": "SANTANDER",
+      "m": "SAN JOSÉ DE MIRANDA",
+      "value": 52.7199879526566,
+      "year": 2023,
+      "cell": "AE924"
+    },
+    {
+      "code": "68686",
+      "d": "SANTANDER",
+      "m": "SAN MIGUEL ",
+      "value": 53.161505808047124,
+      "year": 2023,
+      "cell": "AE925"
+    },
+    {
+      "code": "68689",
+      "d": "SANTANDER",
+      "m": "SAN VICENTE DE CHUCURÍ",
+      "value": 58.615675345537994,
+      "year": 2023,
+      "cell": "AE926"
+    },
+    {
+      "code": "68705",
+      "d": "SANTANDER",
+      "m": "SANTA BÁRBARA ",
+      "value": 71.22210121576623,
+      "year": 2023,
+      "cell": "AE927"
+    },
+    {
+      "code": "68720",
+      "d": "SANTANDER",
+      "m": "SANTA HELENA DE OPÓN",
+      "value": 52.316259958600206,
+      "year": 2023,
+      "cell": "AE928"
+    },
+    {
+      "code": "68745",
+      "d": "SANTANDER",
+      "m": "SIMACOTA",
+      "value": 68.30921281086304,
+      "year": 2023,
+      "cell": "AE929"
+    },
+    {
+      "code": "68755",
+      "d": "SANTANDER",
+      "m": "SOCORRO",
+      "value": 59.66230275071332,
+      "year": 2023,
+      "cell": "AE930"
+    },
+    {
+      "code": "68770",
+      "d": "SANTANDER",
+      "m": "SUAITA",
+      "value": 56.62012038083105,
+      "year": 2023,
+      "cell": "AE931"
+    },
+    {
+      "code": "68773",
+      "d": "SANTANDER",
+      "m": "SUCRE ",
+      "value": 48.95995486463124,
+      "year": 2023,
+      "cell": "AE932"
+    },
+    {
+      "code": "68780",
+      "d": "SANTANDER",
+      "m": "SURATÁ",
+      "value": 50.48224240112801,
+      "year": 2023,
+      "cell": "AE933"
+    },
+    {
+      "code": "68820",
+      "d": "SANTANDER",
+      "m": "TONA",
+      "value": 63.11598178317054,
+      "year": 2023,
+      "cell": "AE934"
+    },
+    {
+      "code": "68855",
+      "d": "SANTANDER",
+      "m": "VALLE DE SAN JOSÉ",
+      "value": 63.59509788014738,
+      "year": 2023,
+      "cell": "AE935"
+    },
+    {
+      "code": "68861",
+      "d": "SANTANDER",
+      "m": "VÉLEZ",
+      "value": 60.679761188838754,
+      "year": 2023,
+      "cell": "AE936"
+    },
+    {
+      "code": "68867",
+      "d": "SANTANDER",
+      "m": "VETAS",
+      "value": 46.865619457414766,
+      "year": 2023,
+      "cell": "AE937"
+    },
+    {
+      "code": "68872",
+      "d": "SANTANDER",
+      "m": "VILLANUEVA ",
+      "value": 57.45244079435969,
+      "year": 2023,
+      "cell": "AE938"
+    },
+    {
+      "code": "68895",
+      "d": "SANTANDER",
+      "m": "ZAPATOCA",
+      "value": 51.93170010019113,
+      "year": 2023,
+      "cell": "AE939"
+    },
+    {
+      "code": "70001",
+      "d": "SUCRE",
+      "m": "SINCELEJO",
+      "value": 47.609172278552045,
+      "year": 2023,
+      "cell": "AE940"
+    },
+    {
+      "code": "70110",
+      "d": "SUCRE",
+      "m": "BUENAVISTA ",
+      "value": 55.39807733743423,
+      "year": 2023,
+      "cell": "AE941"
+    },
+    {
+      "code": "70124",
+      "d": "SUCRE",
+      "m": "CAIMITO",
+      "value": 47.7866495435122,
+      "year": 2023,
+      "cell": "AE942"
+    },
+    {
+      "code": "70204",
+      "d": "SUCRE",
+      "m": "COLOSÓ (RICAURTE)",
+      "value": 56.82276191277407,
+      "year": 2023,
+      "cell": "AE943"
+    },
+    {
+      "code": "70215",
+      "d": "SUCRE",
+      "m": "COROZAL",
+      "value": 60.342849744583916,
+      "year": 2023,
+      "cell": "AE944"
+    },
+    {
+      "code": "70221",
+      "d": "SUCRE",
+      "m": "COVEÑAS",
+      "value": 72.66185134885542,
+      "year": 2023,
+      "cell": "AE945"
+    },
+    {
+      "code": "70230",
+      "d": "SUCRE",
+      "m": "CHALÁN",
+      "value": 11.689919913904419,
+      "year": 2023,
+      "cell": "AE946"
+    },
+    {
+      "code": "70233",
+      "d": "SUCRE",
+      "m": "EL ROBLE",
+      "value": 51.74339079806794,
+      "year": 2023,
+      "cell": "AE947"
+    },
+    {
+      "code": "70235",
+      "d": "SUCRE",
+      "m": "GALERAS",
+      "value": 56.91983450018776,
+      "year": 2023,
+      "cell": "AE948"
+    },
+    {
+      "code": "70265",
+      "d": "SUCRE",
+      "m": "GUARANDA",
+      "value": 57.92070402883439,
+      "year": 2023,
+      "cell": "AE949"
+    },
+    {
+      "code": "70400",
+      "d": "SUCRE",
+      "m": "LA UNIÓN DE SUCRE",
+      "value": 44.60770724574324,
+      "year": 2023,
+      "cell": "AE950"
+    },
+    {
+      "code": "70418",
+      "d": "SUCRE",
+      "m": "LOS PALMITOS",
+      "value": 42.807858933876986,
+      "year": 2023,
+      "cell": "AE951"
+    },
+    {
+      "code": "70429",
+      "d": "SUCRE",
+      "m": "MAJAGUAL",
+      "value": 54.37115378329744,
+      "year": 2023,
+      "cell": "AE952"
+    },
+    {
+      "code": "70473",
+      "d": "SUCRE",
+      "m": "MORROA",
+      "value": 60.51026983457088,
+      "year": 2023,
+      "cell": "AE953"
+    },
+    {
+      "code": "70508",
+      "d": "SUCRE",
+      "m": "OVEJAS",
+      "value": 60.00683680891424,
+      "year": 2023,
+      "cell": "AE954"
+    },
+    {
+      "code": "70523",
+      "d": "SUCRE",
+      "m": "SAN ANTONIO DE PALMITO",
+      "value": 31.21924610233988,
+      "year": 2023,
+      "cell": "AE955"
+    },
+    {
+      "code": "70670",
+      "d": "SUCRE",
+      "m": "SAMPUÉS",
+      "value": 57.86542830125549,
+      "year": 2023,
+      "cell": "AE956"
+    },
+    {
+      "code": "70678",
+      "d": "SUCRE",
+      "m": "SAN BENITO ABAD",
+      "value": 52.73172483981065,
+      "year": 2023,
+      "cell": "AE957"
+    },
+    {
+      "code": "70702",
+      "d": "SUCRE",
+      "m": "SAN JUAN DE BETULIA",
+      "value": 50.93541473530877,
+      "year": 2023,
+      "cell": "AE958"
+    },
+    {
+      "code": "70708",
+      "d": "SUCRE",
+      "m": "SAN MARCOS",
+      "value": 60.7217291281343,
+      "year": 2023,
+      "cell": "AE959"
+    },
+    {
+      "code": "70713",
+      "d": "SUCRE",
+      "m": "SAN ONOFRE",
+      "value": 53.17045774974165,
+      "year": 2023,
+      "cell": "AE960"
+    },
+    {
+      "code": "70717",
+      "d": "SUCRE",
+      "m": "SAN PEDRO ",
+      "value": 57.323861384295256,
+      "year": 2023,
+      "cell": "AE961"
+    },
+    {
+      "code": "70742",
+      "d": "SUCRE",
+      "m": "SINCÉ",
+      "value": 56.01800381479176,
+      "year": 2023,
+      "cell": "AE962"
+    },
+    {
+      "code": "70771",
+      "d": "SUCRE",
+      "m": "SUCRE ",
+      "value": 44.21169356412835,
+      "year": 2023,
+      "cell": "AE963"
+    },
+    {
+      "code": "70820",
+      "d": "SUCRE",
+      "m": "SANTIAGO DE TOLÚ",
+      "value": 61.90491244985951,
+      "year": 2023,
+      "cell": "AE964"
+    },
+    {
+      "code": "70823",
+      "d": "SUCRE",
+      "m": "TOLUVIEJO",
+      "value": 62.63704581235636,
+      "year": 2023,
+      "cell": "AE965"
+    },
+    {
+      "code": "73001",
+      "d": "TOLIMA",
+      "m": "IBAGUE",
+      "value": 59.66103266941839,
+      "year": 2023,
+      "cell": "AE966"
+    },
+    {
+      "code": "73024",
+      "d": "TOLIMA",
+      "m": "ALPUJARRA",
+      "value": 12.9032166493445,
+      "year": 2023,
+      "cell": "AE967"
+    },
+    {
+      "code": "73026",
+      "d": "TOLIMA",
+      "m": "ALVARADO",
+      "value": 55.728480140235014,
+      "year": 2023,
+      "cell": "AE968"
+    },
+    {
+      "code": "73030",
+      "d": "TOLIMA",
+      "m": "AMBALEMA",
+      "value": 54.35936386292261,
+      "year": 2023,
+      "cell": "AE969"
+    },
+    {
+      "code": "73043",
+      "d": "TOLIMA",
+      "m": "ANZOÁTEGUI",
+      "value": 51.42120126066354,
+      "year": 2023,
+      "cell": "AE970"
+    },
+    {
+      "code": "73055",
+      "d": "TOLIMA",
+      "m": "ARMERO ",
+      "value": 51.951173752599814,
+      "year": 2023,
+      "cell": "AE971"
+    },
+    {
+      "code": "73067",
+      "d": "TOLIMA",
+      "m": "ATACO",
+      "value": 43.58111956424632,
+      "year": 2023,
+      "cell": "AE972"
+    },
+    {
+      "code": "73124",
+      "d": "TOLIMA",
+      "m": "CAJAMARCA",
+      "value": 41.65043030649043,
+      "year": 2023,
+      "cell": "AE973"
+    },
+    {
+      "code": "73148",
+      "d": "TOLIMA",
+      "m": "CARMEN DE APICALA",
+      "value": 71.9996043604608,
+      "year": 2023,
+      "cell": "AE974"
+    },
+    {
+      "code": "73152",
+      "d": "TOLIMA",
+      "m": "CASABIANCA",
+      "value": 42.05016410506789,
+      "year": 2023,
+      "cell": "AE975"
+    },
+    {
+      "code": "73168",
+      "d": "TOLIMA",
+      "m": "CHAPARRAL",
+      "value": 71.53892932969796,
+      "year": 2023,
+      "cell": "AE976"
+    },
+    {
+      "code": "73200",
+      "d": "TOLIMA",
+      "m": "COELLO",
+      "value": 66.37940627110882,
+      "year": 2023,
+      "cell": "AE977"
+    },
+    {
+      "code": "73217",
+      "d": "TOLIMA",
+      "m": "COYAIMA",
+      "value": 48.12266412982278,
+      "year": 2023,
+      "cell": "AE978"
+    },
+    {
+      "code": "73226",
+      "d": "TOLIMA",
+      "m": "CUNDAY",
+      "value": 40.028243458982274,
+      "year": 2023,
+      "cell": "AE979"
+    },
+    {
+      "code": "73236",
+      "d": "TOLIMA",
+      "m": "DOLORES",
+      "value": 48.62654597897582,
+      "year": 2023,
+      "cell": "AE980"
+    },
+    {
+      "code": "73268",
+      "d": "TOLIMA",
+      "m": "EL ESPINAL",
+      "value": 54.44696140455054,
+      "year": 2023,
+      "cell": "AE981"
+    },
+    {
+      "code": "73270",
+      "d": "TOLIMA",
+      "m": "FALAN",
+      "value": 54.367972480145724,
+      "year": 2023,
+      "cell": "AE982"
+    },
+    {
+      "code": "73275",
+      "d": "TOLIMA",
+      "m": "FLANDES",
+      "value": 62.449922161887606,
+      "year": 2023,
+      "cell": "AE983"
+    },
+    {
+      "code": "73283",
+      "d": "TOLIMA",
+      "m": "FRESNO",
+      "value": 56.14688410599633,
+      "year": 2023,
+      "cell": "AE984"
+    },
+    {
+      "code": "73319",
+      "d": "TOLIMA",
+      "m": "EL GUAMO ",
+      "value": 63.66194927910289,
+      "year": 2023,
+      "cell": "AE985"
+    },
+    {
+      "code": "73347",
+      "d": "TOLIMA",
+      "m": "HERVEO",
+      "value": 48.710960284458785,
+      "year": 2023,
+      "cell": "AE986"
+    },
+    {
+      "code": "73349",
+      "d": "TOLIMA",
+      "m": "HONDA",
+      "value": 51.65621862774444,
+      "year": 2023,
+      "cell": "AE987"
+    },
+    {
+      "code": "73352",
+      "d": "TOLIMA",
+      "m": "ICONONZO",
+      "value": 48.08752671896232,
+      "year": 2023,
+      "cell": "AE988"
+    },
+    {
+      "code": "73408",
+      "d": "TOLIMA",
+      "m": "LÉRIDA",
+      "value": 56.542319843669844,
+      "year": 2023,
+      "cell": "AE989"
+    },
+    {
+      "code": "73411",
+      "d": "TOLIMA",
+      "m": "LIBANO",
+      "value": 54.15938250931625,
+      "year": 2023,
+      "cell": "AE990"
+    },
+    {
+      "code": "73443",
+      "d": "TOLIMA",
+      "m": "SAN SEBASTIAN DE MARIQUITA",
+      "value": 63.38297524765323,
+      "year": 2023,
+      "cell": "AE991"
+    },
+    {
+      "code": "73449",
+      "d": "TOLIMA",
+      "m": "MELGAR",
+      "value": 66.30901269353053,
+      "year": 2023,
+      "cell": "AE992"
+    },
+    {
+      "code": "73461",
+      "d": "TOLIMA",
+      "m": "MURILLO",
+      "value": 64.04153016031583,
+      "year": 2023,
+      "cell": "AE993"
+    },
+    {
+      "code": "73483",
+      "d": "TOLIMA",
+      "m": "NATAGAIMA",
+      "value": 55.143685346454774,
+      "year": 2023,
+      "cell": "AE994"
+    },
+    {
+      "code": "73504",
+      "d": "TOLIMA",
+      "m": "ORTEGA",
+      "value": 43.60836667851359,
+      "year": 2023,
+      "cell": "AE995"
+    },
+    {
+      "code": "73520",
+      "d": "TOLIMA",
+      "m": "PALOCABILDO",
+      "value": 51.78677106070968,
+      "year": 2023,
+      "cell": "AE996"
+    },
+    {
+      "code": "73547",
+      "d": "TOLIMA",
+      "m": "PIEDRAS",
+      "value": 14.352278955035272,
+      "year": 2023,
+      "cell": "AE997"
+    },
+    {
+      "code": "73555",
+      "d": "TOLIMA",
+      "m": "PLANADAS",
+      "value": 52.941254820274466,
+      "year": 2023,
+      "cell": "AE998"
+    },
+    {
+      "code": "73563",
+      "d": "TOLIMA",
+      "m": "PRADO",
+      "value": 65.69964477625098,
+      "year": 2023,
+      "cell": "AE999"
+    },
+    {
+      "code": "73585",
+      "d": "TOLIMA",
+      "m": "PURIFICACIÓN",
+      "value": 70.26391408510443,
+      "year": 2023,
+      "cell": "AE1000"
+    },
+    {
+      "code": "73616",
+      "d": "TOLIMA",
+      "m": "RIOBLANCO",
+      "value": 65.34482023330995,
+      "year": 2023,
+      "cell": "AE1001"
+    },
+    {
+      "code": "73622",
+      "d": "TOLIMA",
+      "m": "RONCESVALLES",
+      "value": 56.2495283750382,
+      "year": 2023,
+      "cell": "AE1002"
+    },
+    {
+      "code": "73624",
+      "d": "TOLIMA",
+      "m": "ROVIRA",
+      "value": 55.91851778467991,
+      "year": 2023,
+      "cell": "AE1003"
+    },
+    {
+      "code": "73671",
+      "d": "TOLIMA",
+      "m": "SALDAÑA",
+      "value": 41.28098145277616,
+      "year": 2023,
+      "cell": "AE1004"
+    },
+    {
+      "code": "73675",
+      "d": "TOLIMA",
+      "m": "SAN ANTONIO",
+      "value": 51.873221821737545,
+      "year": 2023,
+      "cell": "AE1005"
+    },
+    {
+      "code": "73678",
+      "d": "TOLIMA",
+      "m": "SAN LUIS ",
+      "value": 57.72421692448832,
+      "year": 2023,
+      "cell": "AE1006"
+    },
+    {
+      "code": "73686",
+      "d": "TOLIMA",
+      "m": "SANTA ISABEL",
+      "value": 10.362871559642876,
+      "year": 2023,
+      "cell": "AE1007"
+    },
+    {
+      "code": "73770",
+      "d": "TOLIMA",
+      "m": "SUÁREZ ",
+      "value": 53.800163245589935,
+      "year": 2023,
+      "cell": "AE1008"
+    },
+    {
+      "code": "73854",
+      "d": "TOLIMA",
+      "m": "VALLE DE SAN JUAN",
+      "value": 60.564465853881266,
+      "year": 2023,
+      "cell": "AE1009"
+    },
+    {
+      "code": "73861",
+      "d": "TOLIMA",
+      "m": "VENADILLO",
+      "value": 62.17160544120513,
+      "year": 2023,
+      "cell": "AE1010"
+    },
+    {
+      "code": "73870",
+      "d": "TOLIMA",
+      "m": "VILLAHERMOSA",
+      "value": 41.22596972777187,
+      "year": 2023,
+      "cell": "AE1011"
+    },
+    {
+      "code": "73873",
+      "d": "TOLIMA",
+      "m": "VILLARRICA ",
+      "value": 36.30693387405502,
+      "year": 2023,
+      "cell": "AE1012"
+    },
+    {
+      "code": "76001",
+      "d": "VALLE DEL CAUCA",
+      "m": "SANTIAGO DE CALI",
+      "value": 69.60542878881175,
+      "year": 2023,
+      "cell": "AE1013"
+    },
+    {
+      "code": "76020",
+      "d": "VALLE DEL CAUCA",
+      "m": "ALCALÁ",
+      "value": 53.10641054435666,
+      "year": 2023,
+      "cell": "AE1014"
+    },
+    {
+      "code": "76036",
+      "d": "VALLE DEL CAUCA",
+      "m": "ANDALUCÍA",
+      "value": 59.397264617249505,
+      "year": 2023,
+      "cell": "AE1015"
+    },
+    {
+      "code": "76041",
+      "d": "VALLE DEL CAUCA",
+      "m": "ANSERMANUEVO",
+      "value": 55.39700030954473,
+      "year": 2023,
+      "cell": "AE1016"
+    },
+    {
+      "code": "76054",
+      "d": "VALLE DEL CAUCA",
+      "m": "ARGELIA ",
+      "value": 57.84096984827825,
+      "year": 2023,
+      "cell": "AE1017"
+    },
+    {
+      "code": "76100",
+      "d": "VALLE DEL CAUCA",
+      "m": "BOLÍVAR ",
+      "value": 52.998586307929266,
+      "year": 2023,
+      "cell": "AE1018"
+    },
+    {
+      "code": "76109",
+      "d": "VALLE DEL CAUCA",
+      "m": "BUENAVENTURA",
+      "value": 45.46376405492611,
+      "year": 2023,
+      "cell": "AE1019"
+    },
+    {
+      "code": "76111",
+      "d": "VALLE DEL CAUCA",
+      "m": "GUADALAJARA DE BUGA",
+      "value": 58.72843910703436,
+      "year": 2023,
+      "cell": "AE1020"
+    },
+    {
+      "code": "76113",
+      "d": "VALLE DEL CAUCA",
+      "m": "BUGALAGRANDE",
+      "value": 66.50725638596349,
+      "year": 2023,
+      "cell": "AE1021"
+    },
+    {
+      "code": "76122",
+      "d": "VALLE DEL CAUCA",
+      "m": "CAICEDONIA",
+      "value": 47.971330066980656,
+      "year": 2023,
+      "cell": "AE1022"
+    },
+    {
+      "code": "76126",
+      "d": "VALLE DEL CAUCA",
+      "m": "CALIMA DEL DARIEN",
+      "value": 48.63212769717042,
+      "year": 2023,
+      "cell": "AE1023"
+    },
+    {
+      "code": "76130",
+      "d": "VALLE DEL CAUCA",
+      "m": "CANDELARIA ",
+      "value": 71.58710739300179,
+      "year": 2023,
+      "cell": "AE1024"
+    },
+    {
+      "code": "76147",
+      "d": "VALLE DEL CAUCA",
+      "m": "CARTAGO",
+      "value": 64.49711220509138,
+      "year": 2023,
+      "cell": "AE1025"
+    },
+    {
+      "code": "76233",
+      "d": "VALLE DEL CAUCA",
+      "m": "DAGUA",
+      "value": 76.47778297124648,
+      "year": 2023,
+      "cell": "AE1026"
+    },
+    {
+      "code": "76243",
+      "d": "VALLE DEL CAUCA",
+      "m": "EL AGUILA",
+      "value": 42.567855586182304,
+      "year": 2023,
+      "cell": "AE1027"
+    },
+    {
+      "code": "76246",
+      "d": "VALLE DEL CAUCA",
+      "m": "EL CAIRO",
+      "value": 49.700514507035535,
+      "year": 2023,
+      "cell": "AE1028"
+    },
+    {
+      "code": "76248",
+      "d": "VALLE DEL CAUCA",
+      "m": "EL CERRITO",
+      "value": 74.13670315182284,
+      "year": 2023,
+      "cell": "AE1029"
+    },
+    {
+      "code": "76250",
+      "d": "VALLE DEL CAUCA",
+      "m": "EL DOVIO",
+      "value": 61.82120368658632,
+      "year": 2023,
+      "cell": "AE1030"
+    },
+    {
+      "code": "76275",
+      "d": "VALLE DEL CAUCA",
+      "m": "FLORIDA",
+      "value": 51.18863997555023,
+      "year": 2023,
+      "cell": "AE1031"
+    },
+    {
+      "code": "76306",
+      "d": "VALLE DEL CAUCA",
+      "m": "GINEBRA",
+      "value": 59.765483555479875,
+      "year": 2023,
+      "cell": "AE1032"
+    },
+    {
+      "code": "76318",
+      "d": "VALLE DEL CAUCA",
+      "m": "SAN JUAN BAUTISTA DE GUACARI",
+      "value": 59.6827863942858,
+      "year": 2023,
+      "cell": "AE1033"
+    },
+    {
+      "code": "76364",
+      "d": "VALLE DEL CAUCA",
+      "m": "JAMUNDÍ",
+      "value": 53.73929199124714,
+      "year": 2023,
+      "cell": "AE1034"
+    },
+    {
+      "code": "76377",
+      "d": "VALLE DEL CAUCA",
+      "m": "LA CUMBRE",
+      "value": 12.180237076747249,
+      "year": 2023,
+      "cell": "AE1035"
+    },
+    {
+      "code": "76400",
+      "d": "VALLE DEL CAUCA",
+      "m": "LA UNIÓN ",
+      "value": 73.50439691655231,
+      "year": 2023,
+      "cell": "AE1036"
+    },
+    {
+      "code": "76403",
+      "d": "VALLE DEL CAUCA",
+      "m": "LA VICTORIA ",
+      "value": 53.64146793397395,
+      "year": 2023,
+      "cell": "AE1037"
+    },
+    {
+      "code": "76497",
+      "d": "VALLE DEL CAUCA",
+      "m": "OBANDO",
+      "value": 61.13002640386823,
+      "year": 2023,
+      "cell": "AE1038"
+    },
+    {
+      "code": "76520",
+      "d": "VALLE DEL CAUCA",
+      "m": "PALMIRA",
+      "value": 52.580807541655275,
+      "year": 2023,
+      "cell": "AE1039"
+    },
+    {
+      "code": "76563",
+      "d": "VALLE DEL CAUCA",
+      "m": "PRADERA",
+      "value": 54.32048661231558,
+      "year": 2023,
+      "cell": "AE1040"
+    },
+    {
+      "code": "76606",
+      "d": "VALLE DEL CAUCA",
+      "m": "RESTREPO ",
+      "value": 52.51514450499201,
+      "year": 2023,
+      "cell": "AE1041"
+    },
+    {
+      "code": "76616",
+      "d": "VALLE DEL CAUCA",
+      "m": "RIOFRÍO",
+      "value": 60.90045967853339,
+      "year": 2023,
+      "cell": "AE1042"
+    },
+    {
+      "code": "76622",
+      "d": "VALLE DEL CAUCA",
+      "m": "ROLDANILLO",
+      "value": 63.73501488796179,
+      "year": 2023,
+      "cell": "AE1043"
+    },
+    {
+      "code": "76670",
+      "d": "VALLE DEL CAUCA",
+      "m": "SAN PEDRO ",
+      "value": 61.5885169161398,
+      "year": 2023,
+      "cell": "AE1044"
+    },
+    {
+      "code": "76736",
+      "d": "VALLE DEL CAUCA",
+      "m": "SEVILLA",
+      "value": 56.128674047872984,
+      "year": 2023,
+      "cell": "AE1045"
+    },
+    {
+      "code": "76823",
+      "d": "VALLE DEL CAUCA",
+      "m": "TORO",
+      "value": 53.91678165736569,
+      "year": 2023,
+      "cell": "AE1046"
+    },
+    {
+      "code": "76828",
+      "d": "VALLE DEL CAUCA",
+      "m": "TRUJILLO",
+      "value": 63.97945424254591,
+      "year": 2023,
+      "cell": "AE1047"
+    },
+    {
+      "code": "76834",
+      "d": "VALLE DEL CAUCA",
+      "m": "TULUÁ",
+      "value": 61.44588194509839,
+      "year": 2023,
+      "cell": "AE1048"
+    },
+    {
+      "code": "76845",
+      "d": "VALLE DEL CAUCA",
+      "m": "ULLOA",
+      "value": 55.2396136258191,
+      "year": 2023,
+      "cell": "AE1049"
+    },
+    {
+      "code": "76863",
+      "d": "VALLE DEL CAUCA",
+      "m": "VERSALLES",
+      "value": 56.76702190745247,
+      "year": 2023,
+      "cell": "AE1050"
+    },
+    {
+      "code": "76869",
+      "d": "VALLE DEL CAUCA",
+      "m": "VIJES",
+      "value": 56.08825877757448,
+      "year": 2023,
+      "cell": "AE1051"
+    },
+    {
+      "code": "76890",
+      "d": "VALLE DEL CAUCA",
+      "m": "YOTOCO",
+      "value": 69.09135474672219,
+      "year": 2023,
+      "cell": "AE1052"
+    },
+    {
+      "code": "76892",
+      "d": "VALLE DEL CAUCA",
+      "m": "YUMBO",
+      "value": 68.44690290630564,
+      "year": 2023,
+      "cell": "AE1053"
+    },
+    {
+      "code": "76895",
+      "d": "VALLE DEL CAUCA",
+      "m": "ZARZAL",
+      "value": 71.43767270467866,
+      "year": 2023,
+      "cell": "AE1054"
+    },
+    {
+      "code": "81001",
+      "d": "ARAUCA",
+      "m": "ARAUCA",
+      "value": 56.58912477560331,
+      "year": 2023,
+      "cell": "AE1055"
+    },
+    {
+      "code": "81065",
+      "d": "ARAUCA",
+      "m": "ARAUQUITA",
+      "value": 68.45095167480115,
+      "year": 2023,
+      "cell": "AE1056"
+    },
+    {
+      "code": "81220",
+      "d": "ARAUCA",
+      "m": "CRAVO NORTE",
+      "value": 63.40788300352437,
+      "year": 2023,
+      "cell": "AE1057"
+    },
+    {
+      "code": "81300",
+      "d": "ARAUCA",
+      "m": "FORTUL",
+      "value": 66.11228753517132,
+      "year": 2023,
+      "cell": "AE1058"
+    },
+    {
+      "code": "81591",
+      "d": "ARAUCA",
+      "m": "PUERTO RONDÓN",
+      "value": 48.6158803165737,
+      "year": 2023,
+      "cell": "AE1059"
+    },
+    {
+      "code": "81736",
+      "d": "ARAUCA",
+      "m": "SARAVENA",
+      "value": 67.03519881790137,
+      "year": 2023,
+      "cell": "AE1060"
+    },
+    {
+      "code": "81794",
+      "d": "ARAUCA",
+      "m": "TAME",
+      "value": 67.11761849584646,
+      "year": 2023,
+      "cell": "AE1061"
+    },
+    {
+      "code": "85001",
+      "d": "CASANARE",
+      "m": "YOPAL",
+      "value": 58.18588243854894,
+      "year": 2023,
+      "cell": "AE1062"
+    },
+    {
+      "code": "85010",
+      "d": "CASANARE",
+      "m": "AGUAZUL",
+      "value": 71.252815196853,
+      "year": 2023,
+      "cell": "AE1063"
+    },
+    {
+      "code": "85015",
+      "d": "CASANARE",
+      "m": "CHÁMEZA",
+      "value": 53.843933825949975,
+      "year": 2023,
+      "cell": "AE1064"
+    },
+    {
+      "code": "85125",
+      "d": "CASANARE",
+      "m": "HATO COROZAL",
+      "value": 57.72933500736495,
+      "year": 2023,
+      "cell": "AE1065"
+    },
+    {
+      "code": "85136",
+      "d": "CASANARE",
+      "m": "LA SALINA",
+      "value": 63.07332612932095,
+      "year": 2023,
+      "cell": "AE1066"
+    },
+    {
+      "code": "85139",
+      "d": "CASANARE",
+      "m": "MANÍ",
+      "value": 72.76044085641873,
+      "year": 2023,
+      "cell": "AE1067"
+    },
+    {
+      "code": "85162",
+      "d": "CASANARE",
+      "m": "MONTERREY",
+      "value": 65.51875518615276,
+      "year": 2023,
+      "cell": "AE1068"
+    },
+    {
+      "code": "85225",
+      "d": "CASANARE",
+      "m": "NUNCHÍA",
+      "value": 64.6951445194859,
+      "year": 2023,
+      "cell": "AE1069"
+    },
+    {
+      "code": "85230",
+      "d": "CASANARE",
+      "m": "OROCUÉ",
+      "value": 79.14550086846606,
+      "year": 2023,
+      "cell": "AE1070"
+    },
+    {
+      "code": "85250",
+      "d": "CASANARE",
+      "m": "PAZ DE ARIPORO",
+      "value": 54.0371179047472,
+      "year": 2023,
+      "cell": "AE1071"
+    },
+    {
+      "code": "85263",
+      "d": "CASANARE",
+      "m": "PORE",
+      "value": 75.72972964486186,
+      "year": 2023,
+      "cell": "AE1072"
+    },
+    {
+      "code": "85279",
+      "d": "CASANARE",
+      "m": "RECETOR",
+      "value": 66.53959525496614,
+      "year": 2023,
+      "cell": "AE1073"
+    },
+    {
+      "code": "85300",
+      "d": "CASANARE",
+      "m": "SABANALARGA ",
+      "value": 65.41112009320925,
+      "year": 2023,
+      "cell": "AE1074"
+    },
+    {
+      "code": "85315",
+      "d": "CASANARE",
+      "m": "SÁCAMA",
+      "value": 67.95755298482075,
+      "year": 2023,
+      "cell": "AE1075"
+    },
+    {
+      "code": "85325",
+      "d": "CASANARE",
+      "m": "SAN LUIS DE PALENQUE",
+      "value": 64.9471740293875,
+      "year": 2023,
+      "cell": "AE1076"
+    },
+    {
+      "code": "85400",
+      "d": "CASANARE",
+      "m": "TÁMARA",
+      "value": 57.030903536276426,
+      "year": 2023,
+      "cell": "AE1077"
+    },
+    {
+      "code": "85410",
+      "d": "CASANARE",
+      "m": "TAURAMENA",
+      "value": 58.95489636397631,
+      "year": 2023,
+      "cell": "AE1078"
+    },
+    {
+      "code": "85430",
+      "d": "CASANARE",
+      "m": "TRINIDAD",
+      "value": 65.06680814159394,
+      "year": 2023,
+      "cell": "AE1079"
+    },
+    {
+      "code": "85440",
+      "d": "CASANARE",
+      "m": "VILLANUEVA ",
+      "value": 56.648511878146714,
+      "year": 2023,
+      "cell": "AE1080"
+    },
+    {
+      "code": "86001",
+      "d": "PUTUMAYO",
+      "m": "SAN MIGUEL DE MOCOA",
+      "value": 55.82789660401242,
+      "year": 2023,
+      "cell": "AE1081"
+    },
+    {
+      "code": "86219",
+      "d": "PUTUMAYO",
+      "m": "COLÓN ",
+      "value": 64.99932461090356,
+      "year": 2023,
+      "cell": "AE1082"
+    },
+    {
+      "code": "86320",
+      "d": "PUTUMAYO",
+      "m": "ORITO",
+      "value": 57.11830386724012,
+      "year": 2023,
+      "cell": "AE1083"
+    },
+    {
+      "code": "86568",
+      "d": "PUTUMAYO",
+      "m": "PUERTO ASÍS",
+      "value": 60.501907360810534,
+      "year": 2023,
+      "cell": "AE1084"
+    },
+    {
+      "code": "86569",
+      "d": "PUTUMAYO",
+      "m": "PUERTO CAICEDO",
+      "value": 57.88212146996172,
+      "year": 2023,
+      "cell": "AE1085"
+    },
+    {
+      "code": "86571",
+      "d": "PUTUMAYO",
+      "m": "PUERTO GUZMÁN",
+      "value": 14.315809487601157,
+      "year": 2023,
+      "cell": "AE1086"
+    },
+    {
+      "code": "86573",
+      "d": "PUTUMAYO",
+      "m": "PUERTO LEGUÍZAMO",
+      "value": 56.4490323102195,
+      "year": 2023,
+      "cell": "AE1087"
+    },
+    {
+      "code": "86749",
+      "d": "PUTUMAYO",
+      "m": "SIBUNDOY",
+      "value": 52.16298534510352,
+      "year": 2023,
+      "cell": "AE1088"
+    },
+    {
+      "code": "86755",
+      "d": "PUTUMAYO",
+      "m": "SAN FRANCISCO ",
+      "value": 51.091151913418685,
+      "year": 2023,
+      "cell": "AE1089"
+    },
+    {
+      "code": "86757",
+      "d": "PUTUMAYO",
+      "m": "SAN MIGUEL ",
+      "value": 63.671317374275276,
+      "year": 2023,
+      "cell": "AE1090"
+    },
+    {
+      "code": "86760",
+      "d": "PUTUMAYO",
+      "m": "SANTIAGO ",
+      "value": 56.39622633567543,
+      "year": 2023,
+      "cell": "AE1091"
+    },
+    {
+      "code": "86865",
+      "d": "PUTUMAYO",
+      "m": "VALLE DEL GUAMUEZ (LA HORMIGA)",
+      "value": 70.2744341562294,
+      "year": 2023,
+      "cell": "AE1092"
+    },
+    {
+      "code": "86885",
+      "d": "PUTUMAYO",
+      "m": "VILLAGARZÓN (VILLA AMAZONICA)",
+      "value": 58.475721224539235,
+      "year": 2023,
+      "cell": "AE1093"
+    },
+    {
+      "code": "88564",
+      "d": "ARCHIPIÉLAGO DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA",
+      "m": "PROVIDENCIA",
+      "value": 25.13632215892062,
+      "year": 2023,
+      "cell": "AE1094"
+    },
+    {
+      "code": "91001",
+      "d": "AMAZONAS",
+      "m": "LETICIA",
+      "value": 60.20744099280265,
+      "year": 2023,
+      "cell": "AE1095"
+    },
+    {
+      "code": "91540",
+      "d": "AMAZONAS",
+      "m": "PUERTO NARIÑO",
+      "value": 46.99622686892596,
+      "year": 2023,
+      "cell": "AE1096"
+    },
+    {
+      "code": "94001",
+      "d": "GUAINÍA",
+      "m": "PUERTO INÍRIDA",
+      "value": 61.513702826537234,
+      "year": 2023,
+      "cell": "AE1097"
+    },
+    {
+      "code": "94343",
+      "d": "GUAINÍA",
+      "m": "BARRANCOMINAS",
+      "value": 47.3172402685061,
+      "year": 2023,
+      "cell": "AE1098"
+    },
+    {
+      "code": "95001",
+      "d": "GUAVIARE",
+      "m": "SAN JOSÉ DEL GUAVIARE",
+      "value": 59.9722476290696,
+      "year": 2023,
+      "cell": "AE1099"
+    },
+    {
+      "code": "95015",
+      "d": "GUAVIARE",
+      "m": "CALAMAR ",
+      "value": 53.01502854869237,
+      "year": 2023,
+      "cell": "AE1100"
+    },
+    {
+      "code": "95025",
+      "d": "GUAVIARE",
+      "m": "EL RETORNO",
+      "value": 54.23664871857247,
+      "year": 2023,
+      "cell": "AE1101"
+    },
+    {
+      "code": "95200",
+      "d": "GUAVIARE",
+      "m": "MIRAFLORES ",
+      "value": 46.229803745271475,
+      "year": 2023,
+      "cell": "AE1102"
+    },
+    {
+      "code": "97001",
+      "d": "VAUPÉS",
+      "m": "MITU",
+      "value": 56.309378961082295,
+      "year": 2023,
+      "cell": "AE1103"
+    },
+    {
+      "code": "97161",
+      "d": "VAUPÉS",
+      "m": "CARURU",
+      "value": 15.03987130238017,
+      "year": 2023,
+      "cell": "AE1104"
+    },
+    {
+      "code": "97666",
+      "d": "VAUPÉS",
+      "m": "TARAIRA",
+      "value": 53.1202907569064,
+      "year": 2023,
+      "cell": "AE1105"
+    },
+    {
+      "code": "99001",
+      "d": "VICHADA",
+      "m": "PUERTO CARREÑO",
+      "value": 51.44470416214654,
+      "year": 2023,
+      "cell": "AE1106"
+    },
+    {
+      "code": "99524",
+      "d": "VICHADA",
+      "m": "LA PRIMAVERA",
+      "value": 49.53922225250413,
+      "year": 2023,
+      "cell": "AE1107"
+    },
+    {
+      "code": "99624",
+      "d": "VICHADA",
+      "m": "SANTA ROSALÍA",
+      "value": 64.9665090318048,
+      "year": 2023,
+      "cell": "AE1108"
+    },
+    {
+      "code": "99773",
+      "d": "VICHADA",
+      "m": "CUMARIBO",
+      "value": 56.366147310167584,
+      "year": 2023,
+      "cell": "AE1109"
+    }
+  ]
+}

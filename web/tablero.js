@@ -243,9 +243,10 @@ function renderComparison(){
   $('comparison-note').textContent='Base: '+(state.scope==='decree'?'departamentos del decreto':'todos los departamentos')+(state.dept?' · '+state.dept:'')+' · captura '+state.date+'. '+c.n+' pares de '+c.total+' municipios.'+(search?' '+matched.length+' coincidencias resaltadas.':'');
   $('comparison-reference').textContent=c.referenceN+' municipios en la referencia; '+c.recoveryN+' con necesidad de recuperación temprana. Excluidos de la dispersión: '+exclusion+'. Se incluyen todos los pares disponibles de la versión seleccionada; no se rellenan faltantes.';
   $('comparison-kpis').innerHTML=tile('Pares comparables',c.n,'Municipios con ambos datos')+
-    tile('R²',precision(c.regression?.r2),'X: nuestro índice · Y: puntaje de necesidad')+
-    tile('Pearson r',precision(c.regression?.r),'Positivo: puntajes altos juntos')+
-    tile('Spearman ρ',precision(c.rho),'Asociación entre posiciones');
+    tile('Qué tan bien se ajustan los índices — R²',c.regression?new Intl.NumberFormat('es-CO',{style:'percent',maximumFractionDigits:2}).format(c.regression.r2):'—','Más cerca de 100 %: mejor ajuste lineal')+
+    tile('Cómo se relacionan los puntajes — Pearson r',precision(c.regression?.r),'De −1 a 1: positivo, suben juntos; negativo, van en sentido opuesto')+
+    tile('Qué tanto coincide el orden — Spearman ρ',precision(c.rho),'1: mismo orden · −1: orden inverso');
+  $('comparison-kpis').children[1].title='Porcentaje de la variación del puntaje de referencia recogido por el ajuste lineal con nuestro índice. No es un porcentaje de aciertos ni una validación de pronósticos.';
   function detail(r){
     comparisonGeo=r?.geo||'';
     $('comparison-detail').innerHTML=r?'<h3>'+esc(r.m)+', '+esc(r.d)+'</h3><p><b>'+names[mode]+': '+fmt(r.lower)+' /100</b><br>Posible por faltantes: '+fmt(r.upper)+' /100<br>Puesto nuestro: '+r.ownRank+'</p><p><b>Necesidad de recuperación temprana: '+precision(r.recovery)+'</b><br>Puesto en la referencia: '+r.recoveryRank+'</p><p>Cobertura: '+r.available+'/'+r.fieldCount+' campos · '+fmt(100*r.coverage)+'% del peso.</p><p class="formula">Par usado: X = '+precision(r.x)+'; Y = '+precision(r.y)+'</p><button type="button" class="secondary" data-geo="'+esc(r.geo)+'" data-source="'+T.RAPIDA+'">Abrir diagnóstico territorial</button>':'<p>Pasa el mouse, enfoca con Tab o toca un municipio para consultar sus valores y cobertura.</p>';
@@ -277,7 +278,7 @@ function renderComparison(){
   $('comparison-fit').textContent=c.regression?'Recta discontinua: Y = '+precision(c.regression.intercept)+(c.regression.slope<0?' − ':' + ')+precision(Math.abs(c.regression.slope))+' × X. R² = '+precision(c.regression.r2)+'.':c.reason;
   $('comparison-table').innerHTML=table(['Municipio','Nuestro índice documentado','Posible','Puesto nuestro','Necesidad de recuperación temprana','Puesto de necesidad','Cobertura'],pairs.slice().sort((a,b)=>b.x-a.x).map(r=>'<tr><td>'+geoButton({...r,lv:'municipal'},T.RAPIDA)+'</td><td class="num">'+precision(r.x)+'</td><td class="num">'+precision(r.upper)+'</td><td class="num">'+r.ownRank+'</td><td class="num">'+precision(r.recovery)+'</td><td class="num">'+r.recoveryRank+'</td><td>'+r.available+'/'+r.fieldCount+' · '+fmt(100*r.coverage)+'%</td></tr>'));
 }
-function refresh() {globalControls();diagnosticControls();renderPriorities();renderDiagnostic();renderMethod();MunicipalRadar.render(priorityModel,state);PerCapitaMunicipalRadar.render(priorityModel,state);RelativeMunicipalRadar.render(priorityModel,state);PrioridadPerCapita.render(state);PrioridadRelativa.render(state);renderRapida();showMeasure();}
+function refresh() {globalControls();diagnosticControls();renderPriorities();renderDiagnostic();renderMethod();MunicipalComparisons.render(priorityModel,state);PrioridadPerCapita.render(state);PrioridadRelativa.render(state);renderRapida();showMeasure();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>activate(b.dataset.tab)));
 document.querySelector('.tab-nav').addEventListener('keydown',event=>{
   if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;

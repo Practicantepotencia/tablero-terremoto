@@ -24,7 +24,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('nod
  assert.match(await page.locator('#priority-method').innerText(),/Impacto humano = \(z fallecidos \+ z desaparecidos\) \/ 2/);
  const snapshots=await page.evaluate(()=>{
   const state={scope:'decree',date:DATA.latest,dept:''},models=Priorizacion.models(DATA);
-  MunicipalRadar.render(models.absolute,state);PerCapitaMunicipalRadar.render(null,state);RelativeMunicipalRadar.render(null,state);
+  MunicipalComparisons.render(models.absolute,state);
   return ['absolute','percapita','sectorial'].map(mode=>{
    const r=models[mode].compute(state).all.find(r=>r.code==='66001'),h=r.sectors[0];
    return {mode,fields:r.fieldCount,shares:h.fields.map(f=>f.share),human:h.lower,expected:(h.fields[1].score+h.fields[2].score)/2,available:r.available,contribution:h.fields[0].contribution};
@@ -33,7 +33,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('nod
  for(const r of snapshots){assert.equal(r.fields,9);assert.deepEqual(r.shares,[0,.5,.5]);assert.equal(r.contribution,0);assert.ok(Math.abs(r.human-r.expected)<1e-8);}
  for(const prefix of ['radar','radar-percapita','radar-relative']){
   await page.evaluate(prefix=>{
-   const select=document.getElementById(prefix+'-select-0');select.value='municipal:66001';select.dispatchEvent(new Event('change'));
+   const select=document.getElementById('radar-select-0');select.value='municipal:66001';select.dispatchEvent(new Event('change'));
    document.querySelector('#'+prefix+'-chart [data-radar-m="0"][data-radar-axis="0"]').dispatchEvent(new Event('mouseenter'));
   },prefix);
   const text=await page.locator('#'+prefix+'-inspector').innerText();

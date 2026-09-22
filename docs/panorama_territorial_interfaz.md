@@ -25,7 +25,18 @@ El puntaje público es el límite inferior ya calculado por el modelo. Los lími
 - Una matriz coloca **cada indicador en una fila y los municipios en columnas**. Por ejemplo, los desaparecidos de Pereira, Cali y Atrato se leen en la misma fila. Los campos se emparejan por identificador, no por posición ni por la fuente elegida en la cascada.
 - La matriz incluye el puntaje de cada dimensión, los valores de sus indicadores y, en las variantes relativas, la unidad de la tasa y el conteo original. Las familias siguen visibles como información, sin intervenir en el cálculo. Un dato ausente nunca se muestra como cero.
 - Al pasar por un punto del radar se actualiza un resumen breve. El botón «Cómo se calcula» y los puntajes de dimensión abren una ventana modal con el desarrollo completo que antes ocupaba permanentemente el panel derecho. Se cierra con «Cerrar», Escape o un clic fuera, y devuelve el foco al control de origen.
-- Los selectores municipales, filtros, geometría del radar, líneas de faltantes y fórmulas se conservan. No se añaden clasificaciones de gravedad ni un segundo cálculo del índice.
+- Un único bloque «Municipios a comparar», antes de las tres gráficas, controla total, per cápita y relativo. Buscar, seleccionar, quitar o evitar duplicados actualiza los tres radares y sus matrices. Los filtros generales depuran la misma selección; un denominador ausente no sustituye el municipio en una de las vistas.
+- Cada radar conserva su punto inspeccionado y sus fórmulas. Geometría, líneas de faltantes y modelos de cálculo no cambian. No se añaden clasificaciones de gravedad ni un segundo cálculo del índice.
+
+## Lectura de los coeficientes
+
+Las tarjetas de comparación con PNUD presentan primero su interpretación y luego el método:
+
+- «Qué tan bien se ajustan los índices — R²»: el mismo coeficiente, presentado como porcentaje con hasta dos decimales. Es el ajuste lineal entre los puntajes observados, no un porcentaje de aciertos de pronóstico. La precisión completa permanece en el cálculo y en el detalle de la recta.
+- «Cómo se relacionan los puntajes — Pearson r»: conserva valor y signo; positivo indica que tienden a subir juntos, negativo que se mueven en sentido opuesto.
+- «Qué tanto coincide el orden — Spearman ρ»: conserva la correlación de rangos con tratamiento de empates. Los extremos corresponden al mismo orden o al inverso.
+
+No cambian los pares incluidos, el ajuste, las correlaciones ni los puntajes. Los coeficientes no definidos siguen mostrando «—», no cero.
 
 ## Definiciones de los nuevos resúmenes
 
@@ -58,4 +69,4 @@ Las pruebas de navegador requieren Playwright. Se puede indicar una instalación
 
 La prueba de conservación de datos se refiere al commit base indicado arriba; `BASELINE_REF` permite especificar otra referencia cuando se revise una actualización posterior. Los cinco módulos de cálculo se comparan byte a byte; `radar.js` contiene presentación y se permite modificar, mientras la prueba del radar contrasta las celdas de las tres variantes con los objetos calculados. Las pruebas de navegación existentes se adaptaron al selector y al buscador compartido. En la prueba histórica del radar se retiraron dos expectativas obsoletas: heridos dentro del impacto humano y ausencia de salud relativa. Se verifica la configuración ya vigente en `main`, sin cambiarla.
 
-No se ha actualizado `main` ni el sitio público. La copia de ramas entre repositorios queda pendiente por separado.
+La primera revisión de interfaz se publicó en `Practicantepotencia/tablero-terremoto/main` el 22 de septiembre de 2026. La copia de ramas a POTENCIA2026 y la comprobación de la conexión de Netlify quedan pendientes por separado.

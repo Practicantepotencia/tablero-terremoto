@@ -48,7 +48,8 @@ const payload=html=>{const a=html.indexOf('const DATA=')+11,b=html.indexOf(';</s
  await page.locator('#matrix-search').fill('ningun-municipio-xyz');assert.match(await page.locator('#relative-matrix').innerText(),/Sin municipios/);
  await page.locator('#matrix-search').fill('');await page.selectOption('#dept','');
  await page.locator('#tab-radar').click();
- for(const prefix of ['radar','radar-percapita','radar-relative']){await page.selectOption('#'+prefix+'-select-0','municipal:66001');assert.equal(await page.locator('#'+prefix+'-chart svg').count(),1);}
+ await page.selectOption('#radar-select-0','municipal:66001');
+ for(const prefix of ['radar','radar-percapita','radar-relative'])assert.equal(await page.locator('#'+prefix+'-chart svg').count(),1);
  for(const tab of ['rapida','diagnostico','metodo']){await page.locator('#tab-'+tab).click();assert.equal(await page.locator('#'+tab).isVisible(),true);}
  await page.locator('#tab-prioridades').click();await page.selectOption('#affectation-mode','sectorial');await page.locator('#matrix-search').fill('Pereira');
  if(await page.locator('#relative-close').isVisible())await page.locator('#relative-close').click();await page.locator('#profile-title').scrollIntoViewIfNeeded();

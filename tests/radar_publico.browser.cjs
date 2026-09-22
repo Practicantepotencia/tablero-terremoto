@@ -8,12 +8,17 @@ const {pathToFileURL}=require('node:url'),{chromium}=require('playwright');
   page.on('pageerror',e=>errors.push(e.message));await page.route(/^https?:/,route=>route.abort());
   await page.goto(pathToFileURL(path.resolve('index.html')).href);
   await page.locator('#tab-radar').click();
+  assert.equal(await page.locator('#radar-pickers select').count(),3);
+  assert.equal(await page.locator('#radar input[type="search"]').count(),3);
+  assert.equal(await page.locator('#radar-percapita-pickers, #radar-relative-pickers').count(),0);
+  assert.ok(await page.locator('#radar-pickers').evaluate(el=>Boolean(el.compareDocumentPosition(document.querySelector('.radar-card'))&Node.DOCUMENT_POSITION_FOLLOWING)));
   fs.mkdirSync('tmp/panorama-qa',{recursive:true});
   const snapshots=[];
   for(const [prefix,mode]of [['radar','absolute'],['radar-percapita','percapita'],['radar-relative','sectorial']]){
-   await page.selectOption('#'+prefix+'-select-0','municipal:66001');
-   await page.selectOption('#'+prefix+'-select-1','municipal:76001');
-   await page.selectOption('#'+prefix+'-select-2','municipal:27050');
+   await page.selectOption('#radar-select-0','municipal:66001');
+   await page.selectOption('#radar-select-1','municipal:76001');
+   await page.selectOption('#radar-select-2','municipal:27050');
+   for(const id of ['radar','radar-percapita','radar-relative'])assert.deepEqual(await page.locator('#'+id+'-sectors .radar-column-name').allTextContents(),['Pereira','Santiago de Cali','Atrato']);
    const matrix=page.locator('#'+prefix+'-sectors'),legend=page.locator('#'+prefix+'-legend'),dialog=page.locator('#'+prefix+'-method-dialog');
    assert.equal(await matrix.locator('thead th').count(),4);
    assert.deepEqual(await matrix.locator('.radar-column-name').allTextContents(),['Pereira','Santiago de Cali','Atrato']);
@@ -53,24 +58,36 @@ const {pathToFileURL}=require('node:url'),{chromium}=require('playwright');
    await dialog.locator('[data-radar-close]').click();assert.equal(await dialog.isVisible(),false);
    assert.equal(await method.evaluate(el=>document.activeElement===el),true,'Cerrar devuelve foco al botón');
    if(mode==='absolute'){
-    await page.locator('#radar-reference').scrollIntoViewIfNeeded();await page.screenshot({path:'tmp/panorama-qa/radar-publico.png'});
+    await page.locator('#radar-controls-title').scrollIntoViewIfNeeded();await page.screenshot({path:'tmp/panorama-qa/radar-publico.png'});
     await matrix.screenshot({path:'tmp/panorama-qa/radar-matriz.png'});
    }
-   // Las selecciones independientes permanecen; quitar todas limpia gráfico y matriz.
-   for(let i=0;i<3;i++)await page.selectOption('#'+prefix+'-select-'+i,'');
-   assert.equal(await matrix.locator('table').count(),0);assert.equal(await dialog.isVisible(),false);
-   assert.match(await page.locator('#'+prefix+'-chart').innerText(),/Selecciona un municipio/);
-   await page.selectOption('#'+prefix+'-select-0','municipal:66001');
+   // Quitar todas limpia las tres comparaciones, sin rellenar la selección.
+   for(let i=0;i<3;i++)await page.selectOption('#radar-select-'+i,'');
+   for(const id of ['radar','radar-percapita','radar-relative']){
+    assert.equal(await page.locator('#'+id+'-sectors table').count(),0);
+    assert.match(await page.locator('#'+id+'-chart').innerText(),/Selecciona un municipio/);
+   }
+   assert.equal(await dialog.isVisible(),false);
+   await page.selectOption('#radar-select-0','municipal:66001');
    await page.locator('#'+prefix+'-chart [data-radar-m="0"][data-radar-axis="1"]').first().hover();
    assert.match(await page.locator('#'+prefix+'-selection').innerText(),/Vivienda/);
    assert.equal(await dialog.isVisible(),false,'Hover no abre metodología');
   }
+  // Duplicados, teclado, cambios de fecha y filtros mantienen un único estado.
+  await page.selectOption('#radar-select-2','municipal:66001');
+  assert.equal(await page.locator('#radar-select-0').inputValue(),'');
+  await page.locator('#radar-search-0').fill('quibdo');await page.locator('#radar-search-0').press('ArrowDown');await page.keyboard.press('Enter');
+  for(const id of ['radar','radar-percapita','radar-relative'])assert.deepEqual(await page.locator('#'+id+'-sectors .radar-column-name').allTextContents(),['Quibdó','Pereira']);
+  const dates=await page.locator('#date option').evaluateAll(xs=>xs.map(x=>x.value)),latest=await page.locator('#date').inputValue();
+  if(dates.length>1){await page.selectOption('#date',dates.find(d=>d!==latest));await page.selectOption('#date',latest);}
+  const names=await page.locator('#radar-sectors .radar-column-name').allTextContents();
+  for(const id of ['radar-percapita','radar-relative'])assert.deepEqual(await page.locator('#'+id+'-sectors .radar-column-name').allTextContents(),names);
   await page.selectOption('#scope','all');await page.selectOption('#dept','Risaralda');
   for(const prefix of ['radar','radar-percapita','radar-relative']){
    assert.equal(await page.locator('#'+prefix+'-sectors .radar-column-name').innerText(),'Pereira');
   }
   await page.setViewportSize({width:390,height:844});
-  await page.locator('#radar-reference').scrollIntoViewIfNeeded();
+  await page.locator('#radar-controls-title').scrollIntoViewIfNeeded();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.screenshot({path:'tmp/panorama-qa/radar-mobile.png'});
   await page.locator('#radar-selection [data-radar-method]').click();

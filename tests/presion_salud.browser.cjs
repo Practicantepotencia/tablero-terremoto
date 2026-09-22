@@ -25,14 +25,14 @@ for(const selector of ['#matrix','#percapita-matrix','#relative-matrix']){
  assert.match(await human.innerText(),/Personas desaparecidas/);
 }
 // Exercise the same radar objects, independently of tab visibility.
-await page.evaluate(()=>RelativeMunicipalRadar.render(null,{scope:'decree',date:DATA.latest,dept:''}));
+await page.evaluate(()=>MunicipalComparisons.render(Priorizacion.models(DATA).absolute,{scope:'decree',date:DATA.latest,dept:''}));
 await page.evaluate(()=>{
- const s=document.getElementById('radar-relative-select-0');s.value='municipal:66001';s.dispatchEvent(new Event('change'));
+ const s=document.getElementById('radar-select-0');s.value='municipal:66001';s.dispatchEvent(new Event('change'));
  document.querySelector('#radar-relative-chart [data-radar-m="0"][data-radar-axis="2"]')?.dispatchEvent(new Event('mouseenter'));
 });
 assert.match(await page.locator('#radar-relative-inspector').innerText(),/Heridos frente a/);
 const selects=page.locator('[id$="radar-select-0"], [id*="radar"][id$="select-0"]');
-assert.ok(await selects.count()>=3);
+assert.equal(await selects.count(),1);
 require('node:fs').mkdirSync('tmp/panorama-qa',{recursive:true});
 await page.screenshot({path:'tmp/panorama-qa/presion.png',fullPage:false});
 const check=await page.evaluate(()=>{
@@ -50,7 +50,7 @@ for(const selector of ['#matrix','#percapita-matrix','#relative-matrix']){
 }
 const education=await page.evaluate(()=>{
  const state={scope:'decree',date:DATA.latest,dept:''},models=Priorizacion.models(DATA);
- MunicipalRadar.render(models.absolute,state);PerCapitaMunicipalRadar.render(null,state);RelativeMunicipalRadar.render(null,state);
+ MunicipalComparisons.render(models.absolute,state);
  return ['absolute','percapita','sectorial'].map(mode=>{
   const r=models[mode].compute(state).all.find(r=>r.code==='66001'),s=r.sectors.find(s=>s.id==='educacion');
   return {mode,sectors:r.sectors.length,rate:s.fields[0].rate,score:s.fields[0].score,raw:s.fields[0].row.v,coverage:s.coverage};
@@ -65,7 +65,7 @@ const educationCell=page.locator('#relative-matrix tbody tr').first().locator('t
 assert.doesNotMatch(await educationCell.innerText(),/Sin datos relativos/);
 assert.match(await educationCell.innerText(),/165 \/ 314 sedes educativas/);
 await page.evaluate(()=>{
- const s=document.getElementById('radar-relative-select-0');s.value='municipal:66001';s.dispatchEvent(new Event('change'));
+ const s=document.getElementById('radar-select-0');s.value='municipal:66001';s.dispatchEvent(new Event('change'));
  const point=document.querySelector('#radar-relative-chart [data-radar-m="0"][data-radar-axis="3"]');
  if(!point)throw new Error('Falta el punto educativo relativo');point.dispatchEvent(new Event('mouseenter'));
 });
@@ -77,7 +77,7 @@ assert.match(await page.locator('#relative-detail').innerText(),/Tope fijo: 1/);
 assert.match(await page.locator('#relative-detail').innerText(),/Educación: z = 100 × min/);
 assert.match(await educationCell.innerText(),/52,55/);
 await page.evaluate(()=>{
- const s=document.getElementById('radar-relative-select-0');s.value='municipal:76020';s.dispatchEvent(new Event('change'));
+ const s=document.getElementById('radar-select-0');s.value='municipal:76020';s.dispatchEvent(new Event('change'));
  document.querySelector('#radar-relative-chart [data-radar-m="0"][data-radar-axis="3"]').dispatchEvent(new Event('mouseenter'));
 });
 const capped=await page.locator('#radar-relative-inspector').innerText();
@@ -89,7 +89,7 @@ assert.match(await page.locator('#relative-matrix tbody tr').first().locator('td
 assert.match(await page.locator('#priority-method').innerText(),/Vivienda = \(2 × z destruidas \+ 1 × z averiadas\) \/ 3/);
 for(const prefix of ['radar','radar-percapita','radar-relative']){
  await page.evaluate(prefix=>{
-  const select=document.getElementById(prefix+'-select-0');select.value='municipal:66001';select.dispatchEvent(new Event('change'));
+  const select=document.getElementById('radar-select-0');select.value='municipal:66001';select.dispatchEvent(new Event('change'));
   document.querySelector('#'+prefix+'-chart [data-radar-m="0"][data-radar-axis="1"]').dispatchEvent(new Event('mouseenter'));
  },prefix);
  const inspector=await page.locator('#'+prefix+'-inspector').innerText();

@@ -9,7 +9,7 @@
   const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const fmt=x=>x==null?'Sin dato':new Intl.NumberFormat('es-CO',{maximumFractionDigits:4}).format(x);
   const label=r=>`${r.m}, ${r.d}`;
-  let selected=[], current=[], active=null, initialized=false, referenceDetails='';
+  let current=[], active=null, referenceDetails='';
   const point=(i,v)=>[330+190*v/100*Math.cos(-Math.PI/2+i*2*Math.PI/Priorizacion.SECTORS.length),270+190*v/100*Math.sin(-Math.PI/2+i*2*Math.PI/Priorizacion.SECTORS.length)];
   const polygon=values=>values.map((v,i)=>point(i,v).join(',')).join(' ');
   function relativeField(f,r){
@@ -28,28 +28,10 @@
     get('radar-sectors').querySelectorAll('[data-radar-m]').forEach(el=>el.setAttribute('aria-pressed',String(Number(el.dataset.radarM)===index&&Number(el.dataset.radarAxis)===axis)));
     get('radar-inspector').innerHTML=`<h3 style="color:${colors[index]}">${esc(label(r))}</h3><h4>${esc(s.name)}: ${relative&&!s.coverage?'Sin datos relativos':fmt(s.lower)+'–'+fmt(s.upper)+' / 100'}</h4>${relative?(percapita?'<p>Por 10.000 habitantes.</p>':'<p>Base propia de cada indicador.</p>'):''}${s.fields.map(f=>relative?relativeField(f,r):`<div class="radar-input"><strong>${esc(f.label)}</strong><div class="small muted">${esc(f.source)} · ${esc(f.unit)} · N = ${f.n}</div>${f.row?`<div>Valor = ${fmt(f.row.v)}; máximo = ${fmt(f.anchor)}</div><div class="formula">z = ${f.row.v===0?'0 (cero explícito)':`100 × ${fmt(f.row.v)} / ${fmt(f.anchor)}`} = ${fmt(f.score)}<br>Peso interno = ${fmt(f.share)}<br>Aporte al sector = ${fmt(f.score)} × ${fmt(f.share)} = ${fmt(f.score*f.share)}</div>`:`<p><strong>Sin dato, no cero.</strong> Máximo de referencia = ${fmt(f.anchor)}. Peso interno = ${fmt(f.share)}. Aporte desconocido al sector: 0–${fmt(100*f.share)}.</p>`}</div>`).join('')}<p class="formula">Sector inferior = ${s.fields.filter(f=>f.share>0).map(f=>f.score==null?'0 [límite, no dato]':fmt(f.score*f.share)).join(' + ')} = ${fmt(s.lower)}<br>Sector superior = ${fmt(s.lower)} + ${fmt(s.upper-s.lower)} por faltantes = ${fmt(s.upper)}</p><h4>Cómo entra al índice global</h4><p>D = (${r.sectors.map(x=>fmt(x.lower)).join(' + ')}) / ${r.sectors.length} = ${fmt(r.damageLower)} · documentado.</p><p>IPM censal DANE 2018 = ${r.vulnerability==null?'Sin dato: intervalo 0–100':fmt(r.vulnerability)+'%'}.</p><p class="formula">P = D × (1 + 0,25 × IPM/100) / 1,25<br>P inferior = ${fmt(r.damageLower)} × ${fmt(loFactor)} = ${fmt(r.lower)}<br>P superior = ${fmt(r.damageUpper)} × ${fmt(hiFactor)} = ${fmt(r.upper)}</p><p>Aporte de este sector a P: ${fmt(s.lower/r.sectors.length*loFactor)}–${fmt(s.upper/r.sectors.length*hiFactor)} puntos · peso 1/${r.sectors.length}.</p>`;
   }
-  function render(model,state){
+  function render(model,state,selected){
     if(relative){relativeModel=relativeModel||Priorizacion.models(DATA)[mode];model=relativeModel;}
-    const host=get('radar-pickers');if(!host)return;
+    const host=get('radar-chart');if(!host)return;
     const p=model.compute(state), places=p.all.filter(r=>!state.dept||r.d===state.dept).slice().sort((a,b)=>label(a).localeCompare(label(b),'es'));
-    if(!initialized){selected=p.items.slice(0,2).map(r=>r.geo);initialized=true;}
-    selected=[0,1,2].map(i=>places.some(r=>r.geo===selected[i])?selected[i]:'');
-    host.innerHTML=[0,1,2].map(i=>`<div><label for="radar-search-${i}">Municipio ${i+1}</label><input type="search" id="radar-search-${i}" placeholder="Escribe y elige un resultado" aria-label="Buscar municipio ${i+1}" aria-controls="radar-results-${i}"><div id="radar-results-${i}" class="radar-results" hidden></div><p id="radar-count-${i}" class="small muted" role="status"></p><select id="radar-select-${i}" aria-label="Municipio ${i+1}"><option value="">Sin seleccionar</option>${places.map(r=>`<option value="${esc(r.geo)}" ${selected[i]===r.geo?'selected':''}>${esc(label(r))}</option>`).join('')}</select></div>`).join('').replaceAll('"radar-','"'+prefix+'-').replaceAll(`class="${prefix}-results"`,'class="radar-results"');
-    [0,1,2].forEach(i=>{
-      const select=get(`radar-select-${i}`);
-      const input=get(`radar-search-${i}`),results=get(`radar-results-${i}`),count=get(`radar-count-${i}`);
-      const choose=geo=>{selected[i]=geo;selected=selected.map((g,j)=>j!==i&&g===geo?'':g);render(model,state);get(`radar-select-${i}`).focus();};
-      const fold=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-      input.oninput=()=>{
-        const q=fold(input.value);results.hidden=!q;
-        const matches=q?places.filter(r=>fold(label(r)).includes(q)):[];
-        count.textContent=q?`${matches.length} coincidencias en el ámbito y departamento seleccionados. Elige un resultado.`:'';
-        results.innerHTML=matches.map(r=>`<button type="button" data-radar-choice="${esc(r.geo)}">${esc(label(r))}</button>`).join('')||(q?'<p>Sin coincidencias. Revisa los filtros de universo y departamento.</p>':'');
-        results.querySelectorAll('button').forEach(b=>b.onclick=()=>choose(b.dataset.radarChoice));
-      };
-      input.onkeydown=e=>{if(e.key==='ArrowDown'||e.key==='Enter'){const first=results.querySelector('button');if(first){e.preventDefault();first.focus();}}if(e.key==='Escape'){results.hidden=true;}};
-      select.onchange=()=>choose(select.value);
-    });
     current=selected.map(g=>places.find(r=>r.geo===g)).filter(Boolean);
     referenceDetails=`Modelo ${Priorizacion.VERSION}${relative?(percapita?' · Per cápita · población DANE ':' · Denominadores sectoriales · año de la captura ')+String(state.date).slice(0,4):''} · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos reportados'}, ${p.referenceN} municipios.`;
     get('radar-reference').textContent=`Referencia: ${p.referenceN} municipios · Fecha de reporte: ${state.date}`;
@@ -98,6 +80,32 @@
   root.MunicipalRadar=createRadar('radar');
   root.RelativeMunicipalRadar=createRadar('radar-relative','sectorial');
   root.PerCapitaMunicipalRadar=createRadar('radar-percapita','percapita');
+  // One selection owns the three views; missing sector data never changes it.
+  let selected=[],initialized=false;
+  function renderComparisons(model,state){
+    const get=id=>document.getElementById(id),host=get('radar-pickers');if(!host)return;
+    const esc=Presentacion.esc,label=r=>`${r.m}, ${r.d}`;
+    const p=model.compute(state),places=p.all.filter(r=>!state.dept||r.d===state.dept).slice().sort((a,b)=>label(a).localeCompare(label(b),'es'));
+    if(!initialized){selected=p.items.filter(r=>places.some(place=>place.geo===r.geo)).slice(0,2).map(r=>r.geo);initialized=true;}
+    selected=[0,1,2].map(i=>places.some(r=>r.geo===selected[i])?selected[i]:'');
+    host.innerHTML=[0,1,2].map(i=>`<div><label for="radar-search-${i}">Municipio ${i+1}</label><input type="search" id="radar-search-${i}" placeholder="Escribe y elige un resultado" aria-label="Buscar municipio ${i+1}" aria-controls="radar-results-${i}"><div id="radar-results-${i}" class="radar-results" hidden></div><p id="radar-count-${i}" class="small muted" role="status"></p><select id="radar-select-${i}" aria-label="Municipio ${i+1}"><option value="">Sin seleccionar</option>${places.map(r=>`<option value="${esc(r.geo)}" ${selected[i]===r.geo?'selected':''}>${esc(label(r))}</option>`).join('')}</select></div>`).join('');
+    [0,1,2].forEach(i=>{
+      const select=get(`radar-select-${i}`),input=get(`radar-search-${i}`),results=get(`radar-results-${i}`),count=get(`radar-count-${i}`);
+      const choose=geo=>{selected[i]=geo;selected=selected.map((g,j)=>j!==i&&g===geo?'':g);renderComparisons(model,state);get(`radar-select-${i}`).focus();};
+      const fold=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+      input.oninput=()=>{
+        const q=fold(input.value);results.hidden=!q;
+        const matches=q?places.filter(r=>fold(label(r)).includes(q)):[];
+        count.textContent=q?`${matches.length} coincidencias. Elige un resultado.`:'';
+        results.innerHTML=matches.map(r=>`<button type="button" data-radar-choice="${esc(r.geo)}">${esc(label(r))}</button>`).join('')||(q?'<p>Sin coincidencias. Revisa los filtros de universo y departamento.</p>':'');
+        results.querySelectorAll('button').forEach(b=>b.onclick=()=>choose(b.dataset.radarChoice));
+      };
+      input.onkeydown=e=>{if(e.key==='ArrowDown'||e.key==='Enter'){const first=results.querySelector('button');if(first){e.preventDefault();first.focus();}}if(e.key==='Escape')results.hidden=true;};
+      select.onchange=()=>choose(select.value);
+    });
+    [root.MunicipalRadar,root.PerCapitaMunicipalRadar,root.RelativeMunicipalRadar].forEach(radar=>radar.render(model,state,selected));
+  }
+  root.MunicipalComparisons={render:renderComparisons};
 })(globalThis);
 
 

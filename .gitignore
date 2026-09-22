@@ -7,3 +7,6 @@ actualizar_log.txt
 
 __pycache__/
 *.pyc
+
+# Capturas e informes locales de verificación visual.
+/tmp/panorama-qa/

@@ -1,55 +1,60 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Necesidades de recuperación temprana, diagnóstico sectorial y cobertura de la evidencia territorial en Colombia.">
-<title>Prioridades de recuperación · Colombia</title><style>__STYLE__</style></head>
+<title>Panorama territorial · Colombia</title><style>__STYLE__</style></head>
 <body><main class="wrap">
 <div class="statusbar"><span class="pill">Análisis territorial</span><span id="capture-label"></span><span id="build-label" class="muted"></span></div>
-<header class="hero"><div class="kicker">Respuesta al terremoto · Colombia</div><h1>Dónde intervenir y qué necesita cada municipio</h1><p class="subtitle">Prioridades y necesidades por municipio.</p></header>
+<header class="hero"><div class="kicker">Respuesta al terremoto · Colombia</div><h1>Panorama territorial</h1><p class="subtitle">Afectaciones y necesidades de recuperación por municipio.</p></header>
 <nav class="tab-nav" role="tablist" aria-label="Vistas del tablero">
-<button type="button" id="tab-prioridades" class="tab-btn active" role="tab" aria-selected="true" aria-controls="prioridades" data-tab="prioridades">Prioridades</button>
+<button type="button" id="tab-prioridades" class="tab-btn active" role="tab" aria-selected="true" aria-controls="prioridades" data-tab="prioridades">Índice</button>
 <button type="button" id="tab-radar" class="tab-btn" role="tab" aria-selected="false" aria-controls="radar" data-tab="radar">Comparar municipios</button>
 <button type="button" id="tab-rapida" class="tab-btn" role="tab" aria-selected="false" aria-controls="rapida" data-tab="rapida">Necesidad de recuperación temprana</button>
 <button type="button" id="tab-diagnostico" class="tab-btn" role="tab" aria-selected="false" aria-controls="diagnostico" data-tab="diagnostico">Diagnóstico territorial</button>
 <button type="button" id="tab-metodo" class="tab-btn" role="tab" aria-selected="false" aria-controls="metodo" data-tab="metodo">Fuentes y método</button>
 </nav>
 <div class="filters global">
-<label>Universo territorial<select id="scope"><option value="decree">Departamentos del Decreto 1171</option><option value="all">Todos los departamentos del inventario</option></select></label>
+<label>Universo territorial<select id="scope"><option value="decree">Departamentos del Decreto 1171</option><option value="all">Todos los departamentos reportados</option></select></label>
 <label>Departamento<select id="dept"></select></label>
-<label>Captura del inventario<select id="date"></select></label>
+<label title="Fecha de incorporación al tablero; no necesariamente fecha del hecho ni del reporte original.">Fecha de reporte<select id="date"></select></label>
 </div>
 <p id="scope-note" class="note"></p>
 <section id="prioridades" class="tab-panel" role="tabpanel" aria-labelledby="tab-prioridades">
 <div id="priority-kpis" class="tiles" aria-live="polite"></div>
-<div class="card matrix-card"><div class="section-head"><h2 id="matrix-title">Qué necesita cada municipio</h2></div>
-<div class="filters matrix-controls"><label>Buscar municipio<input id="matrix-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="matrix"></label></div>
+<details class="summary-definitions"><summary>Cómo se cuentan estos datos</summary><div id="summary-definitions"></div></details>
+<div class="card profile-card">
+<div class="section-head"><h2 id="profile-title">Perfil de afectaciones por municipio</h2></div>
+<p class="profile-intro">Compara la magnitud de las afectaciones documentadas en cada sector e identifica dónde se concentran las principales brechas.</p>
+<div class="filters profile-controls"><label>Buscar municipio<input id="matrix-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="matrix percapita-matrix relative-matrix"></label><label>Medida de afectación<select id="affectation-mode" aria-controls="absolute-card percapita-card relative-card"><option value="absolute">Afectación total</option><option value="percapita">Afectación per cápita</option><option value="sectorial">Afectación relativa</option></select></label></div>
+<p class="scale-key">Puntajes de 0 a 100: un valor más alto indica mayor afectación en el índice, no un porcentaje de pérdidas. <button type="button" class="link" id="show-method">Cómo se calcula</button></p>
+<div class="matrix-card" id="absolute-card"><h3 id="matrix-title" class="sr-only">Afectación total</h3>
 <p id="priority-note" class="note"></p><details class="matrix-explanation"><summary>Fuentes y significado de los colores</summary><p id="matrix-caption" class="muted small"></p><p id="matrix-note" class="note"></p><p id="matrix-warning" class="note"></p></details><p id="matrix-count" class="note small" aria-live="polite"></p><div id="matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="matrix-title"></div></div>
 <section class="card" id="priority-detail" hidden aria-live="polite" aria-label="Descomposición de la prioridad municipal"></section>
-<div class="card matrix-card" id="percapita-card"><div class="section-head"><h2 id="percapita-title">Qué necesita cada municipio · per cápita</h2><span class="muted small">Todos los conteos por 10.000 habitantes</span></div>
-<div class="filters matrix-controls"><label>Buscar municipio<input id="percapita-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="percapita-matrix"></label></div>
-<p class="note">Tasas por 10.000 habitantes.</p>
-<p id="percapita-note" class="note"></p><details class="matrix-explanation"><summary>Fórmula y cómo interpretar las tasas</summary><p id="percapita-formula" class="formula"></p></details>
+<div class="matrix-card" id="percapita-card" hidden><h3 id="percapita-title" class="sr-only">Afectación per cápita</h3>
+<input id="percapita-search" type="hidden">
+<p id="percapita-note" class="note"></p><details class="matrix-explanation"><summary>Fuentes y cálculo</summary><p id="percapita-formula" class="formula"></p></details>
 <p id="percapita-count" class="note small" aria-live="polite"></p><div id="percapita-matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="percapita-title"></div><section id="percapita-detail" class="relative-detail" hidden aria-live="polite" aria-label="Cálculo per cápita municipal"></section></div>
-<div class="card matrix-card" id="relative-card"><div class="section-head"><h2 id="relative-title">Qué necesita cada municipio · relativo</h2><span class="muted small">Denominador propio por indicador</span></div>
-<div class="filters matrix-controls"><label>Buscar municipio<input id="relative-search" type="search" placeholder="Cali, Lorica, Quibdó…" aria-controls="relative-matrix"></label></div>
-<p id="relative-note" class="note"></p><details class="matrix-explanation"><summary>Fórmula y cómo interpretar las tasas</summary><p id="relative-formula" class="formula"></p></details>
+<div class="matrix-card" id="relative-card" hidden><h3 id="relative-title" class="sr-only">Afectación relativa</h3>
+<input id="relative-search" type="hidden">
+<p id="relative-note" class="note"></p><details class="matrix-explanation"><summary>Fuentes y cálculo</summary><p id="relative-formula" class="formula"></p></details>
 <p id="relative-count" class="note small" aria-live="polite"></p><div id="relative-matrix" class="table-scroll" tabindex="0" role="region" aria-labelledby="relative-title"></div><section id="relative-detail" class="relative-detail" hidden aria-live="polite" aria-label="Cálculo relativo municipal"></section></div>
-<div class="card"><p>Puntaje 0–100. Documentado: evidencia disponible; posible: límite por faltantes.</p><button type="button" class="secondary" id="show-method">Ver método y fórmulas</button></div>
+</div>
 </section>
 <section id="radar" class="tab-panel" role="tabpanel" aria-labelledby="tab-radar" hidden>
-<div class="card"><h2>Comparar necesidades sectoriales · absoluto</h2><p class="note">Puntaje 0–100. Línea continua: documentado; discontinua: posible.</p>
+<div class="card radar-card"><h2>Comparar afectaciones · total</h2>
 <div id="radar-pickers" class="filters"></div><p id="radar-reference" class="note"></p>
-
-<div class="radar-layout"><div><div id="radar-chart"></div><div id="radar-legend"></div></div><section id="radar-inspector" class="radar-inspector" aria-label="Cálculo del punto seleccionado"></section></div>
-<p class="note">Selecciona un punto o sector para ver su fórmula.</p><div id="radar-sectors" class="radar-sectors"></div></div>
-<div class="card"><h2>Comparar necesidades sectoriales · per cápita</h2><p class="note">Puntaje per cápita. Línea continua: documentado; discontinua: posible.</p>
+<div class="radar-layout"><div class="radar-plot"><div id="radar-chart"></div><p class="radar-line-key"><span>Continua: puntaje documentado</span><span>Discontinua: límite por información faltante</span></p></div><div class="radar-sidebar"><div id="radar-legend"></div><section id="radar-selection" class="radar-selection" aria-label="Punto seleccionado" aria-live="polite"></section></div></div>
+<p class="radar-table-hint">Compara cada indicador en la misma fila. Pulsa un puntaje de dimensión para consultar su cálculo.</p><div id="radar-sectors" class="radar-comparison table-scroll" tabindex="0" role="region" aria-label="Comparación de dimensiones e indicadores, afectación total"></div>
+<dialog id="radar-method-dialog" class="radar-method-dialog" aria-labelledby="radar-method-title"><header class="radar-dialog-head"><h2 id="radar-method-title">Cómo se calcula · afectación total</h2><button type="button" class="secondary" data-radar-close autofocus>Cerrar</button></header><section id="radar-inspector" class="radar-inspector" aria-label="Cálculo del punto seleccionado"></section></dialog></div>
+<div class="card radar-card"><h2>Comparar afectaciones · per cápita</h2>
 <div id="radar-percapita-pickers" class="filters"></div><p id="radar-percapita-reference" class="note"></p>
-<div class="radar-layout"><div><div id="radar-percapita-chart"></div><div id="radar-percapita-legend"></div></div><section id="radar-percapita-inspector" class="radar-inspector" aria-label="Cálculo per cápita del punto seleccionado"></section></div>
-<p class="note">Selecciona un punto o sector para ver su fórmula.</p><div id="radar-percapita-sectors" class="radar-sectors"></div></div>
-<div class="card"><h2>Comparar necesidades sectoriales · relativo</h2><p class="note">Salud relativa a capacidad registrada.</p>
+<div class="radar-layout"><div class="radar-plot"><div id="radar-percapita-chart"></div><p class="radar-line-key"><span>Continua: puntaje documentado</span><span>Discontinua: límite por información faltante</span></p></div><div class="radar-sidebar"><div id="radar-percapita-legend"></div><section id="radar-percapita-selection" class="radar-selection" aria-label="Punto per cápita seleccionado" aria-live="polite"></section></div></div>
+<p class="radar-table-hint">Compara cada indicador en la misma fila. Pulsa un puntaje de dimensión para consultar su cálculo.</p><div id="radar-percapita-sectors" class="radar-comparison table-scroll" tabindex="0" role="region" aria-label="Comparación de dimensiones e indicadores, afectación per cápita"></div>
+<dialog id="radar-percapita-method-dialog" class="radar-method-dialog" aria-labelledby="radar-percapita-method-title"><header class="radar-dialog-head"><h2 id="radar-percapita-method-title">Cómo se calcula · afectación per cápita</h2><button type="button" class="secondary" data-radar-close autofocus>Cerrar</button></header><section id="radar-percapita-inspector" class="radar-inspector" aria-label="Cálculo per cápita del punto seleccionado"></section></dialog></div>
+<div class="card radar-card"><h2>Comparar afectaciones · relativa</h2>
 <div id="radar-relative-pickers" class="filters"></div><p id="radar-relative-reference" class="note"></p>
-
-<div class="radar-layout"><div><div id="radar-relative-chart"></div><div id="radar-relative-legend"></div></div><section id="radar-relative-inspector" class="radar-inspector" aria-label="Cálculo relativo con denominador propio del punto seleccionado"></section></div>
-<p class="note">Selecciona un punto o sector para ver su fórmula.</p><div id="radar-relative-sectors" class="radar-sectors"></div></div>
+<div class="radar-layout"><div class="radar-plot"><div id="radar-relative-chart"></div><p class="radar-line-key"><span>Continua: puntaje documentado</span><span>Discontinua: límite por información faltante</span></p></div><div class="radar-sidebar"><div id="radar-relative-legend"></div><section id="radar-relative-selection" class="radar-selection" aria-label="Punto relativo seleccionado" aria-live="polite"></section></div></div>
+<p class="radar-table-hint">Compara cada indicador en la misma fila. Pulsa un puntaje de dimensión para consultar su cálculo.</p><div id="radar-relative-sectors" class="radar-comparison table-scroll" tabindex="0" role="region" aria-label="Comparación de dimensiones e indicadores, afectación relativa"></div>
+<dialog id="radar-relative-method-dialog" class="radar-method-dialog" aria-labelledby="radar-relative-method-title"><header class="radar-dialog-head"><h2 id="radar-relative-method-title">Cómo se calcula · afectación relativa</h2><button type="button" class="secondary" data-radar-close autofocus>Cerrar</button></header><section id="radar-relative-inspector" class="radar-inspector" aria-label="Cálculo relativo con denominador propio del punto seleccionado"></section></dialog></div>
 </section>
 <section id="rapida" class="tab-panel" role="tabpanel" aria-labelledby="tab-rapida" hidden>
 <p class="note">Puntaje original de PNUD/UNGRD.</p>
@@ -96,7 +101,7 @@
 </section>
 <footer><span id="footer-capture"></span><span>Sin dato no significa cero. <a href="docs/notas_metodologicas.docx" download>Guía metodológica</a></span></footer>
 <noscript><p>Activa JavaScript para filtrar y consultar el tablero. Los datos originales están en <a href="indicadores_largo_no_calculo.csv">el inventario CSV</a>.</p></noscript>
-</main><script>__MODEL__</script><script>__HEALTH_PRESSURE__
+</main><script>__PRESENTATION__</script><script>__MODEL__</script><script>__HEALTH_PRESSURE__
 __DENOMINATORS__</script><script>__PRIORITY_MODEL__</script><script>const DATA=__DATA__;</script><script>__RADAR__</script><script>__RELATIVE__</script><script>__COMPARISON__</script><script>__APP__</script></body></html>
 
 

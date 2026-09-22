@@ -1,14 +1,15 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),{chromium}=require('playwright');
 (async()=>{
- const browser=await chromium.launch({headless:true}),errors=[],html=fs.readFileSync('index.html','utf8');
+ const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})}),errors=[],html=fs.readFileSync('index.html','utf8');
  const baseline=html.replace(/"families_informational_only"\s*:\s*true/,'"families_informational_only":false');
  assert.notEqual(baseline,html);
  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'familias-ui-')),previous=path.join(dir,'antes.html');fs.writeFileSync(previous,baseline);
- async function open(file){const p=await browser.newPage({viewport:{width:1440,height:1000}});p.on('pageerror',e=>errors.push(e.message));await p.goto('file://'+path.resolve(file),{waitUntil:'load'});await p.waitForSelector('#relative-matrix table');return p;}
+ async function open(file){const p=await browser.newPage({viewport:{width:1440,height:1000}});p.on('pageerror',e=>errors.push(e.message));await p.goto('file://'+path.resolve(file),{waitUntil:'load'});await p.waitForSelector('#relative-matrix table',{state:'attached'});return p;}
  async function familyCards(p){
   const out=[];
   for(const prefix of ['','percapita-','relative-']){
-   const search=prefix?prefix+'search':'matrix-search',matrix=prefix?prefix+'matrix':'matrix';
+   const search='matrix-search',matrix=prefix?prefix+'matrix':'matrix';
+   await p.selectOption('#affectation-mode',prefix==='percapita-'?'percapita':prefix==='relative-'?'sectorial':'absolute');
    await p.locator('#'+search).fill('Pereira');
    assert.equal(await p.locator('#'+matrix+' tbody tr').count(),1);
    const tile=p.locator('#'+matrix+' tbody tr').first().locator('td').nth(1).locator('.heat-item').first();

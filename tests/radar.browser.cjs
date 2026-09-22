@@ -61,18 +61,27 @@ const path=require('node:path');
   const inspector=await page.locator('#radar-relative-inspector').innerText();
   assert.match(inspector,/487[.,]820/);
   assert.match(inspector,/Tasa =/);
-  assert.match(inspector,/5[.,]3093/);
+  // La versión actual excluye heridos de impacto humano; verificar sus tasas
+  // activas, no la constante de heridos de una captura histórica.
+  const humanRates=await page.evaluate(()=>Priorizacion.models(DATA).sectorial.compute(state).all.find(r=>r.code==='66001').sectors[0].fields.filter(f=>f.share>0&&f.rate!=null).map(f=>new Intl.NumberFormat('es-CO',{maximumFractionDigits:4}).format(f.rate)));
+  for(const rate of humanRates)assert.ok(inspector.includes('= '+rate+' /10.000'));
+  assert.doesNotMatch(inspector,/Personas heridas/);
   assert.match(inspector,/Sin dato relativo/);
   assert.equal(await page.locator('#radar-legend').innerText(),absoluteLegend);
   const before=await page.locator('#radar-inspector').innerText();
+  // Los puntos de municipios con puntajes similares pueden superponerse.
+  // Seleccionar solo Pereira permite comprobar el hover sin otro punto encima.
+  await page.selectOption('#radar-relative-select-1','');
+  await page.selectOption('#radar-relative-select-2','');
   await page.locator('#radar-relative-chart [data-radar-m="0"][data-radar-axis="1"]').first().hover();
   assert.match(await page.locator('#radar-relative-inspector').innerText(),/Vivienda/);
   assert.match(await page.locator('#radar-relative-inspector').innerText(),/Total de viviendas/);
-  assert.equal(await page.locator('#radar-relative-chart [data-radar-axis="2"]').count(),0);
+  assert.ok(await page.locator('#radar-relative-chart [data-radar-axis="2"]').count()>0);
   await page.locator('#radar-relative-sectors [data-radar-m="0"][data-radar-axis="2"]').click();
-  assert.match(await page.locator('#radar-relative-inspector').innerText(),/Sin datos relativos/);
+  assert.match(await page.locator('#radar-relative-inspector').innerText(),/Heridos frente a camas/);
   assert.match(await page.locator('#radar-relative-inspector').innerText(),/REPS/);
   assert.equal(await page.locator('#radar-inspector').innerText(),before);
+  await page.keyboard.press('Escape');
   await page.setViewportSize({width:390,height:844});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   assert.deepEqual(errors,[]);

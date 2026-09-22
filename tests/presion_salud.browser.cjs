@@ -1,8 +1,9 @@
 const assert=require('node:assert/strict'),{chromium}=require('playwright'),path=require('node:path');
 (async()=>{
-const browser=await chromium.launch({headless:true}),page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})}),page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
 page.on('pageerror',e=>errors.push(e.message));
 await page.goto('file://'+path.resolve('index.html'),{waitUntil:'load'});
+await page.selectOption('#affectation-mode','sectorial');
 await page.waitForSelector('#relative-matrix table');
 const res=await page.evaluate(()=>{
  const state={scope:'decree',date:DATA.latest,dept:''},result=Priorizacion.models(DATA).sectorial.compute(state);
@@ -11,7 +12,7 @@ const res=await page.evaluate(()=>{
 });
 const expectedFields=await page.evaluate(()=>DATA.healthPressure?.human_impact_policy?.families_informational_only?9:10);
 assert.equal(res.fields,expectedFields);assert.deepEqual(res.human,['3is_familias','3is_fallecidos','3is_desaparecidos']);assert.ok(res.ratio>=0);assert.ok(Math.abs(res.ratio-res.raw/res.base)<1e-8);
-await page.locator('#relative-search').fill('Pereira');await page.waitForTimeout(100);
+await page.locator('#matrix-search').fill('Pereira');
 assert.equal(await page.locator('#relative-matrix tbody tr').count(),1);
 assert.match(await page.locator('#relative-matrix').innerText(),/Heridos frente a/);
 await page.locator('#relative-matrix [data-relative-geo]').click();
@@ -32,7 +33,8 @@ await page.evaluate(()=>{
 assert.match(await page.locator('#radar-relative-inspector').innerText(),/Heridos frente a/);
 const selects=page.locator('[id$="radar-select-0"], [id*="radar"][id$="select-0"]');
 assert.ok(await selects.count()>=3);
-await page.screenshot({path:'experimentos/presion_salud/interfaz.png',fullPage:false});
+require('node:fs').mkdirSync('tmp/panorama-qa',{recursive:true});
+await page.screenshot({path:'tmp/panorama-qa/presion.png',fullPage:false});
 const check=await page.evaluate(()=>{
  const state={scope:'decree',date:DATA.latest,dept:''};
  return ['absolute','percapita','sectorial'].map(mode=>{
@@ -61,7 +63,7 @@ for(const prefix of ['radar','radar-percapita','radar-relative']){
 }
 const educationCell=page.locator('#relative-matrix tbody tr').first().locator('td').nth(4);
 assert.doesNotMatch(await educationCell.innerText(),/Sin datos relativos/);
-assert.match(await educationCell.innerText(),/Original:/);
+assert.match(await educationCell.innerText(),/165 \/ 314 sedes educativas/);
 await page.evaluate(()=>{
  const s=document.getElementById('radar-relative-select-0');s.value='municipal:66001';s.dispatchEvent(new Event('change'));
  const point=document.querySelector('#radar-relative-chart [data-radar-m="0"][data-radar-axis="3"]');
@@ -81,7 +83,7 @@ await page.evaluate(()=>{
 const capped=await page.locator('#radar-relative-inspector').innerText();
 assert.match(capped,/Conteo original: 25/);assert.match(capped,/17 Sedes/);assert.match(capped,/100 × min\(1,4706, 1\) = 100/);
 assert.doesNotMatch(capped,/Máxima tasa comparable/);
-await page.locator('#relative-search').fill('Alcalá');
+await page.locator('#matrix-search').fill('Alcalá');
 assert.match(await page.locator('#relative-matrix tbody tr').first().locator('td').nth(4).innerText(),/100 \/100/);
 
 assert.match(await page.locator('#priority-method').innerText(),/Vivienda = \(2 × z destruidas \+ 1 × z averiadas\) \/ 3/);
@@ -101,7 +103,7 @@ const housing=await page.evaluate(()=>{
  });
 });
 for(const h of housing){assert.deepEqual(h.shares,[2/3,1/3]);assert.ok(Math.abs(h.score-h.expected)<1e-8);}
-await page.locator('#relative-search').fill('Pereira');
+await page.locator('#matrix-search').fill('Pereira');
 assert.match(await page.locator('#relative-matrix tbody tr').first().locator('td').nth(2).innerText(),/29,35/);
 await page.locator('#relative-matrix [data-relative-geo]').click();
 assert.match(await page.locator('#relative-detail').innerText(),/66,6667%/);

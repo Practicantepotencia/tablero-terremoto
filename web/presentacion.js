@@ -34,8 +34,12 @@
     const gravity=rows.filter(r=>r.f==='Naboo/UNGRD'&&r.id==='gravedad_oficial');
     const affected=new Set(rows.filter(r=>r.v>0&&ids.has(r.id)&&['PNUD','3iS-Sheets'].includes(r.f)).map(r=>r.geo));
     gravity.filter(r=>r.v>0).forEach(r=>affected.add(r.geo));
+    // Escala humana: población expuesta de la evaluación RAPIDA (PNUD/UNGRD), que
+    // recorta por la huella de sacudida, y no la población municipal completa. Un
+    // cero es valor observado, no faltante: el municipio quedó fuera de la huella.
+    const exposure=new Map(rows.filter(r=>r.id==='undp_rapida_pop_exp'&&Number.isFinite(r.v)).map(r=>[r.geo,r.v]));
     function population(geos){
-      const observed=[...geos].map(geo=>places.get(geo)?.population?.population).filter(n=>Number.isFinite(n)&&n>0);
+      const observed=[...geos].map(geo=>exposure.get(geo)).filter(n=>Number.isFinite(n));
       return {value:observed.length?observed.reduce((a,b)=>a+b,0):null,known:observed.length,total:geos.size};
     }
     const ranked=selected.items.filter(r=>r.coverage>0).slice().sort((a,b)=>b.lower-a.lower);

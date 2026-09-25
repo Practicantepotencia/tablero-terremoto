@@ -176,6 +176,18 @@ solo se vinculan a los que ya aparecen en el inventario.
 Se corrigen equivalencias explícitas entre Cali/Santiago de Cali, Anserma
 Nuevo/Ansermanuevo, Calima (Darién)/Calima y tres nombres de Chocó. Siempre
 se exige el departamento correspondiente y un código existente en la referencia.
+
+Desde la captura del 25 de septiembre se homologan también los 15 nombres que
+quedaban sin código (50 filas): Calima-El Darién (76126), Pto Nare(La Magdalena)
+(05585), Sotará y Sotará - Paispamba (19760), Nuevo Belén de Bajirá (27493),
+Carolina del Príncipe (05150), El Peñol (05541), Piendamó (19548), El Pital
+(41548), Cúcuta (54001), Armero Guayabal (73055), Bogotá D.C. (11001),
+Cartagena (13001), Cuaspud (52224) y Tumaco (52835). Sin ellas, nueve municipios
+del decreto se contaban dos veces (509 identidades para 500 municipios) y la
+gravedad crítica de Calima no llegaba al municipio puntuado. Nuevo Belén de
+Bajirá se creó después del censo 2018: su código se valida contra la población
+DANE 2026 y no tiene IPM censal. Un test exige cero municipios sin código en el
+inventario vigente.
 Los códigos incompatibles o ambiguos se excluyen y registran como incidencia.
 No hay emparejamiento aproximado por semejanza de texto.
 

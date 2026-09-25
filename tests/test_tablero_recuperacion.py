@@ -69,6 +69,23 @@ class PreparationTests(unittest.TestCase):
         self.assertEqual({r['geo'] for r in result['rows']}, {'municipal:76001'})
         self.assertEqual(next(r['v'] for r in result['rows'] if r['id']=='3is_colapsos'),515)
 
+    def test_aliases_point_to_dane_codes_in_the_same_department(self):
+        population = json.loads((tablero.ROOT / 'data/poblacion_relativa.json').read_text(encoding='utf-8'))
+        reference = {r['code']: r for r in population['rows']}
+        for (department, name), code in tablero.GEO_ALIASES.items():
+            with self.subTest(municipio=name):
+                self.assertIn(code, reference)
+                self.assertEqual(tablero.normalized(reference[code]['d']).replace(',', ''), department)
+
+    def test_post_census_municipality_joins_by_population_code(self):
+        result = tablero.prepare_payload([sample(municipio='Nuevo Belén de Bajirá', divipola='', fuente='PNUD')])
+        self.assertEqual({r['geo'] for r in result['rows']}, {'municipal:27493'})
+
+    def test_current_inventory_has_no_municipality_without_code(self):
+        result = tablero.prepare_payload(tablero.read_rows(tablero.ROOT / tablero.CURRENT))
+        orphans = sorted({r['geo'] for r in result['rows'] if r['lv'] == 'municipal' and not r['code']})
+        self.assertEqual(orphans, [])
+
     def test_baseline_only_territories_do_not_expand_damage_universe(self):
         result=tablero.prepare_payload([sample()])
         self.assertEqual(len({r['geo'] for r in result['rows']}),1)

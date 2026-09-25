@@ -21,15 +21,31 @@ RECOVERY = "undp_rapida_recovery_needs"
 IPM = "undp_rapida_mpi"
 RAPIDA = "UNDP-RAPIDA"
 BASELINE = ROOT / 'data/linea_base_priorizacion.json'
-# Equivalencias explícitas por departamento. El código debe existir en DANE.
+# Equivalencias explícitas por departamento. El código debe existir en DANE
+# (IPM censal 2018 o población DANE 2026; Nuevo Belén de Bajirá es posterior al censo).
 GEO_ALIASES = {
     ('valle del cauca', 'santiago de cali'): '76001',
     ('valle del cauca', 'cali'): '76001',
     ('valle del cauca', 'anserma nuevo'): '76041',
     ('valle del cauca', 'calima (darien)'): '76126',
+    ('valle del cauca', 'calima-el darien'): '76126',
     ('choco', 'canton de san pablo'): '27135',
     ('choco', 'carmen de atrato'): '27245',
     ('choco', 'litoral de san juan'): '27250',
+    ('choco', 'nuevo belen de bajira'): '27493',
+    ('antioquia', 'carolina del principe'): '05150',
+    ('antioquia', 'el penol'): '05541',
+    ('antioquia', 'pto nare(la magdalena)'): '05585',
+    ('bogota d.c.', 'bogota d.c.'): '11001',
+    ('bolivar', 'cartagena'): '13001',
+    ('cauca', 'piendamo'): '19548',
+    ('cauca', 'sotara'): '19760',
+    ('cauca', 'sotara - paispamba'): '19760',
+    ('huila', 'el pital'): '41548',
+    ('narino', 'cuaspud'): '52224',
+    ('narino', 'tumaco'): '52835',
+    ('norte de santander', 'cucuta'): '54001',
+    ('tolima', 'armero guayabal'): '73055',
 }
 SOURCES = {
     RAPIDA: {"label": "UNDP · RAPIDA", "kind": "Evaluación y modelación", "url": "https://geosmart.undp.org/arcgis/apps/storymaps/stories/9d0ef01099a64edda2caecbd34135d7e", "note": "Se conservan los valores publicados por PNUD/UNGRD; la cobertura depende del indicador y del ámbito seleccionado. El StoryMap documenta la estructura de pesos de la necesidad de recuperación temprana (50% impactos, 30% vulnerabilidad socioeconómica, 20% vulnerabilidad física) pero no su normalización interna, tratamiento de faltantes ni la combinación exacta de subindicadores -- no alcanza para reproducir el puntaje publicado. Su campo de IPM se describe como proyección de PNUD a 2025 sobre datos DANE, sin metodología de proyección publicada ni confirmación de que corresponda al campo descargado -- no sustituye la línea base DANE censal 2018 de nuestro modelo sin antes validar ambas cosas. Detalle: docs/investigacion_undp_geosmart.md. El puntaje original se consulta sin añadirle IPM."},
@@ -70,7 +86,7 @@ def prepare_payload(current, history=()):
     pressure_path = ROOT / 'data/presion_salud.json'
     pressure = json.loads(pressure_path.read_text(encoding='utf-8')) if pressure_path.exists() else None
     reference_names = defaultdict(set)
-    reference_codes = {r['code']: r for r in baseline['rows']}
+    reference_codes = {r['code'] for r in baseline['rows']} | {r['code'] for r in population.get('rows', [])}
     for r in baseline['rows']:
         reference_names[(normalized(r['d']), normalized(r['m']))].add(r['code'])
     # A current capture replaces the WHOLE capture of that date, including

@@ -162,12 +162,15 @@ las necesidades. Debe ampliarse cuando existan variables compatibles y relevante
 
 ## Identidad y origen de la línea base
 
-Se reutiliza únicamente el IPM total y la referencia geográfica del DANE ya
-incorporados en `fuentes-nuevas`, commit
-`85fe4adcf00f0749f1a9449f18da6d50a7a17b65`. El archivo generado
-`data/linea_base_priorizacion.json` conserva periodo, código, hoja/celda, URL,
-hash del paquete de origen y metadatos del Excel original. El extractor es
-`preparar_linea_base_priorizacion.py`.
+Se usa únicamente el IPM total del anexo municipal DANE del CNPV 2018
+(hoja `4_IPM Mpio dominios`, columna C). El Excel original está en
+`data/originales/dane_ipm_2018.xlsx` (SHA-256 `a3ac3a60…6f`), el mismo que se
+incorporó en `fuentes-nuevas`, commit `85fe4adcf00f0749f1a9449f18da6d50a7a17b65`.
+`preparar_linea_base_priorizacion.py` lo extrae directamente, sin depender de otra
+rama; con `--download` vuelve a bajarlo de DANE y se detiene si el hash cambió.
+El archivo generado `data/linea_base_priorizacion.json` conserva periodo, código,
+hoja/celda, URL y hash del Excel. Un test exige que la extracción reproduzca
+exactamente las 1.122 filas guardadas.
 
 No se añadieron cientos de indicadores de línea base al frente del tablero.
 Los 1.122 territorios censales tampoco se insertan como municipios afectados:

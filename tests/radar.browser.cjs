@@ -74,7 +74,7 @@ const path=require('node:path');
   const before=await page.locator('#radar-inspector').innerText();
   await page.locator('#radar-relative-chart [data-radar-m="0"][data-radar-axis="1"]').first().hover();
   assert.match(await page.locator('#radar-relative-inspector').innerText(),/Vivienda/);
-  assert.match(await page.locator('#radar-relative-inspector').innerText(),/Total de viviendas/);
+  assert.match(await page.locator('#radar-relative-inspector').innerText(),/Hogares DANE del mismo año/);
   assert.ok(await page.locator('#radar-relative-chart [data-radar-axis="2"]').count()>0);
   await page.locator('#radar-relative-sectors [data-radar-m="0"][data-radar-axis="2"]').click();
   assert.match(await page.locator('#radar-relative-inspector').innerText(),/Heridos frente a camas/);

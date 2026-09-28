@@ -104,7 +104,7 @@ const housing=await page.evaluate(()=>{
 });
 for(const h of housing){assert.deepEqual(h.shares,[2/3,1/3]);assert.ok(Math.abs(h.score-h.expected)<1e-8);}
 await page.locator('#matrix-search').fill('Pereira');
-assert.match(await page.locator('#relative-matrix tbody tr').first().locator('td').nth(2).innerText(),/29,35/);
+assert.match(await page.locator('#relative-matrix tbody tr').first().locator('td').nth(2).innerText(),/27,33/);
 await page.locator('#relative-matrix [data-relative-geo]').click();
 assert.match(await page.locator('#relative-detail').innerText(),/66,6667%/);
 assert.match(await page.locator('#relative-detail').innerText(),/33,3333%/);

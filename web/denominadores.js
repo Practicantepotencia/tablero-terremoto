@@ -4,7 +4,8 @@
   const H = typeof module !== 'undefined' && module.exports ? require('./presion_salud.js') : root.PresionSalud;
   const spec=(kind,label,multiplier,unit,enabled,reason='')=>({kind,label,multiplier,unit,enabled,reason});
   const people=()=>spec('poblacion','Población municipal DANE del mismo año',10000,'/10.000 habitantes',true);
-  const homes=()=>spec('viviendas','Total de viviendas DANE, ocupadas y desocupadas',100,'% de la base de viviendas',true);
+  // Hogares aproximan las viviendas habitadas: el total de viviendas incluye casas vacías o de temporada.
+  const homes=()=>spec('hogares','Hogares DANE del mismo año (aproximan las viviendas habitadas)',100,'% de los hogares',true);
   const health=()=>spec('sedes_ips','Sedes físicas de salud preevento, homologadas al reporte',100,'% de sedes',false,
     'REPS es un inventario candidato. Falta homologar los puntos/centros reportados con sus sedes y comprobar cobertura. Atrato reporta 9 afectados frente a 3 sedes IPS REPS.');
   const education=()=>spec('sedes_educativas','Sedes educativas preevento del mismo universo',100,'% de sedes',false,
@@ -75,7 +76,7 @@
       if(rs.length!==1)return {...base,reason:rs.length?'Denominador duplicado o ambiguo':'Sin base municipal para el año de la captura'};
       const d=rs[0],source=sources[d.source];
       if(d.status!=='verified'||!Number.isFinite(d.value)||d.value<=0||d.area!=='Total'||!source?.url||!source.sha256||
-        d.unit!==(rule.kind==='poblacion'?'Habitantes':'Viviendas'))return {...base,reason:'Denominador sin validación, unidad o procedencia compatible'};
+        d.unit!==({poblacion:'Habitantes',hogares:'Hogares'}[rule.kind]||'Viviendas'))return {...base,reason:'Denominador sin validación, unidad o procedencia compatible'};
       if(!/^\d{4}-\d{2}-\d{2}$/.test(d.reference_date||'')||!/^\d{4}-\d{2}-\d{2}$/.test(source.published||'')||
         !payload.event_date||d.reference_date>payload.event_date||source.published>payload.event_date||d.reference_date>date)
         return {...base,reason:'Base sin fecha preevento verificable para esta captura'};

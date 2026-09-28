@@ -11,7 +11,7 @@ Versión del documento 10 de septiembre de 2026. Las cifras de cobertura, refere
 
 Absoluto usa los conteos publicados. Per cápita divide todos los conteos entre población municipal y los expresa por 10.000 habitantes. Relativo usa una base compatible propia del indicador; si esa base no está verificada, no calcula la tasa.
 
-En relativo están habilitados siete campos: fallecidos, desaparecidos y heridos de 3iS por población DANE 2026; viviendas destruidas y averiadas de 3iS y PNUD por el total municipal de viviendas DANE 2026. Estas últimas se expresan por 100 viviendas e incluyen viviendas ocupadas y desocupadas. Tener una regla habilitada no garantiza datos para cada municipio.
+En relativo están habilitados siete campos: fallecidos, desaparecidos y heridos de 3iS por población DANE 2026; viviendas destruidas y averiadas de 3iS y PNUD por los hogares DANE 2026, que aproximan las viviendas habitadas. Estas últimas se expresan por 100 hogares. Tener una regla habilitada no garantiza datos para cada municipio.
 
 Los otros diez campos quedan sin tasa: familias afectadas, puntos y centros de salud, puntos y centros educativos, colapsos de edificios, acueductos, vías y puntos y centros comunitarios. Faltan equivalencias de definición o inventarios comparables. No se sustituye un denominador sectorial ausente por población.
 
@@ -78,7 +78,7 @@ Orden por límite documentado de la prioridad relativa. Pulsa una dimensión: ma
 
 Cada variable: tasa = valor × factor / denominador propio; puntaje = 100 × tasa / máxima tasa comparable. Se conservan los 17 campos, los seis sectores (1/6 cada uno) y el ajuste IPM. Referencia: departamentos del decreto, captura 2026-09-10. Buscar, ordenar o filtrar departamento no cambia esa referencia. No se sustituye un denominador ausente por población. Bases verificadas el 2026-09-10.
 
-Personas: reportes por 10.000 habitantes. Viviendas: porcentaje respecto al total proyectado de viviendas, ocupadas y desocupadas. La proporción de viviendas y el puntaje normalizado son distintos. Familias, salud, educación, infraestructura y comunidad quedan sin valor relativo mientras no se verifique un denominador compatible. Ver lista de los 17 campos, fuentes y motivos de exclusión.
+Personas: reportes por 10.000 habitantes. Viviendas: porcentaje respecto a los hogares DANE 2026, que aproximan las viviendas habitadas. La proporción de viviendas y el puntaje normalizado son distintos. Familias, salud, educación, infraestructura y comunidad quedan sin valor relativo mientras no se verifique un denominador compatible. Ver lista de los 17 campos, fuentes y motivos de exclusión.
 
 Se conserva el ajuste por IPM censal 2018. Población proyectada es una referencia previa: no mide desplazamientos tras el sismo. Los reportes siguen teniendo las limitaciones de cobertura y clasificación del índice absoluto.
 

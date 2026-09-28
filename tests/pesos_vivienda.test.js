@@ -7,7 +7,7 @@ function fixture(){
  latest:date,dates:[date],baseline:{rows:[]},population:{rows:codes.map(code=>({code,population:1000,year:2026}))},
  healthPressure:{enabled:false,source_cascade:{enabled:true},housing_weight_policy:{enabled:true,destroyed:2,damaged:1}},
  denominators:{event_date:'2026-08-10',sources:{official:{url:'https://www.dane.gov.co/',published:'2025-12-24',sha256:'a'.repeat(64)}},
- rows:codes.map(code=>({code,kind:'viviendas',value:100,year:2026,unit:'Viviendas',source:'official',reference_date:'2026-06-30',area:'Total',status:'verified'}))}};
+ rows:codes.map(code=>({code,kind:'hogares',value:100,year:2026,unit:'Hogares',source:'official',reference_date:'2026-06-30',area:'Total',status:'verified'}))}};
 }
 const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-9,a+' != '+b);
 test('destruidas tienen doble peso en los tres modelos; el sector sigue pesando 1/5',()=>{

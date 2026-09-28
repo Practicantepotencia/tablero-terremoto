@@ -1,7 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),P=require('../web/priorizacion.js'),D=require('../web/denominadores.js');
 const date='2026-09-09',state={scope:'all',date};
 const row=(code,v,extra={})=>({geo:'municipal:'+code,code,lv:'municipal',m:code,d:'D',f:'3iS-Sheets',id:'3is_fallecidos',v,u:'Número',dim:'Impacto humano',i:'Fallecidos',date,...extra});
-const denominator=(code,value,kind='poblacion',extra={})=>({code,value,kind,year:2026,unit:kind==='poblacion'?'Habitantes':'Viviendas',source:'official',reference_date:'2026-06-30',area:'Total',status:'verified',...extra});
+const denominator=(code,value,kind='poblacion',extra={})=>({code,value,kind,year:2026,unit:{poblacion:'Habitantes',hogares:'Hogares'}[kind]||'Viviendas',source:'official',reference_date:'2026-06-30',area:'Total',status:'verified',...extra});
 const data=(rows,bases)=>({rows,dates:[date],latest:date,baseline:{rows:[]},population:{rows:[]},sources:{},
  denominators:{event_date:'2026-08-10',sources:{official:{url:'https://www.dane.gov.co/',published:'2025-12-24',sha256:'test-fixture'}},rows:bases}});
 const rel=d=>P.create(d,undefined,{relative:true}).compute(state);
@@ -14,12 +14,17 @@ test('relativizar antes de normalizar puede invertir el orden absoluto',()=>{
  assert.equal(f.rate,10);assert.equal(f.anchor,200);assert.equal(f.score,5);
  assert.equal(fatalities(r.items[0]).score,100);
 });
-test('vivienda usa viviendas, aunque la población dé otro orden',()=>{
+test('vivienda usa hogares, aunque la población dé otro orden',()=>{
  const d=data([row('05001',100,{id:'3is_vivdestruidas'}),row('05002',200,{id:'3is_vivdestruidas'})],
- [denominator('05001',1000,'viviendas'),denominator('05002',10000,'viviendas'),denominator('05001',1000000),denominator('05002',1000)]);
+ [denominator('05001',1000,'hogares'),denominator('05002',10000,'hogares'),denominator('05001',1000000),denominator('05002',1000)]);
  const result=rel(d);assert.equal(result.items[0].code,'05001');
  const f=result.items[0].sectors[1].fields[0];
- assert.equal(f.rate,10);assert.equal(f.score,100);assert.equal(f.denominator.kind,'viviendas');
+ assert.equal(f.rate,10);assert.equal(f.score,100);assert.equal(f.denominator.kind,'hogares');
+});
+test('el total de viviendas (ocupadas y desocupadas) ya no es base de vivienda',()=>{
+ const d=data([row('05001',100,{id:'pnud_vd',f:'PNUD'})],[denominator('05001',1000,'viviendas')]);
+ const f=rel(d).all[0].sectors[1].fields[0];
+ assert.equal(f.rate,null);assert.equal(f.denominator,null);
 });
 test('ausente, cero, negativo, otro año, duplicado o sin procedencia no crea tasa ni siquiera con numerador cero',()=>{
  const variants=[[],[denominator('05001',0)],[denominator('05001',-1)],[denominator('05001',100,'poblacion',{year:2025})],
@@ -43,7 +48,7 @@ test('ni población ni bases candidatas sustituyen inventarios sin homologar',()
  assert.equal(f.rate,null);assert.match(f.reason,/familias/);
 });
 test('numerador que supera universo se rechaza en vez de truncarse',()=>{
- const d=data([row('05001',101,{id:'pnud_vd',f:'PNUD'})],[denominator('05001',100,'viviendas')]);
+ const d=data([row('05001',101,{id:'pnud_vd',f:'PNUD'})],[denominator('05001',100,'hogares')]);
  const r=rel(d).missing[0],f=r.sectors[1].fields[2];
  assert.equal(f.rate,null);assert.equal(f.score,null);assert.match(f.reason,/supera/);
 });

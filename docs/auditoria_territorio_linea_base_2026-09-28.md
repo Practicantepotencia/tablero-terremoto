@@ -19,7 +19,7 @@ datos del repositorio.
 | T7 | Daño fuera de los 12 departamentos: 60 municipios, 0,25 % del costo estimado | Baja | Sin acción |
 | B1 | La capacidad hospitalaria (camas REPS 2022) solo se reconstruye desde otra rama (`salud-relativa-hospitalizacion`) | Media | Corregido: el extracto está en esta rama, con hash y test |
 | B2 | Población, viviendas y hogares 2026 no guardan el Excel original; reproducirlos exige que DANE siga sirviendo el mismo archivo | Media | Abierto |
-| B3 | El denominador de vivienda incluye viviendas desocupadas (Ricaurte: 0,59 personas por vivienda) | Baja-Media | Abierto |
+| B3 | El denominador de vivienda incluye viviendas desocupadas (Ricaurte: 0,59 personas por vivienda) | Baja-Media | Corregido: la base de vivienda es hogares DANE 2026 |
 | B4 | En el índice relativo, salud solo se puede medir en 81 municipios (los que tienen heridos) | Media | Abierto |
 | B5 | Educación relativa: 4 municipios con más centros afectados (PNUD) que sedes registradas (SIMAT 2022) | Baja | Documentado por el modelo (tope 1) |
 | B6 | IPM DANE 2018 frente a IPM RAPIDA: r = 0,95; en Chocó difieren mucho, pero el top 20 no cambia con ninguno | Informativo | Sin acción |

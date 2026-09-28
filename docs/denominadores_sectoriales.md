@@ -57,10 +57,10 @@ registros con DIVIPOLA y año exactos, valor positivo y procedencia verificable.
 | Impacto humano | Fallecidos (`3is_fallecidos`) | Población municipal DANE 2026 | Por 10.000 habitantes. |
 | Impacto humano | Desaparecidos (`3is_desaparecidos`) | Población municipal DANE 2026 | Por 10.000 habitantes, si el numerador existe. |
 | Impacto humano | Heridos (`3is_heridos`) | Población municipal DANE 2026 | Por 10.000 habitantes. |
-| Vivienda | Destruidas 3iS (`3is_vivdestruidas`) | Total de viviendas DANE 2026, ocupadas y desocupadas | Por 100 viviendas de la base proyectada. |
-| Vivienda | Averiadas 3iS (`3is_vivaveriadas`) | Total de viviendas DANE 2026, ocupadas y desocupadas | Por 100 viviendas de la base proyectada. |
-| Vivienda | Destruidas PNUD (`pnud_vd`) | Total de viviendas DANE 2026, ocupadas y desocupadas | Por 100 viviendas de la base proyectada. |
-| Vivienda | Averiadas PNUD (`pnud_va`) | Total de viviendas DANE 2026, ocupadas y desocupadas | Por 100 viviendas de la base proyectada. |
+| Vivienda | Destruidas 3iS (`3is_vivdestruidas`) | Hogares DANE 2026 (aproximan las viviendas habitadas) | Por 100 hogares. |
+| Vivienda | Averiadas 3iS (`3is_vivaveriadas`) | Hogares DANE 2026 (aproximan las viviendas habitadas) | Por 100 hogares. |
+| Vivienda | Destruidas PNUD (`pnud_vd`) | Hogares DANE 2026 (aproximan las viviendas habitadas) | Por 100 hogares. |
+| Vivienda | Averiadas PNUD (`pnud_va`) | Hogares DANE 2026 (aproximan las viviendas habitadas) | Por 100 hogares. |
 | Salud | Puntos 3iS (`3is_salud`) | Sedes físicas de salud preevento, homologadas al reporte | Sin tasa. REPS descargado y auditado, aún incompatible con los agregados de daño. |
 | Salud | Centros PNUD (`pnud_csalud`) | Sedes físicas de salud preevento, homologadas al reporte | Sin tasa, por la misma falta de conciliación. |
 | Educación | Puntos 3iS (`3is_educativos`) | Total de sedes educativas del mismo universo, antes del evento | Sin tasa: falta cruce por sede y definición del alcance educativo. |
@@ -86,6 +86,16 @@ matrícula total no es un denominador de proporción de edificios.
    cabecera/resto. El concepto DANE es vivienda censal, que puede ocupar parte de
    un edificio. Es una proyección oficial, no un conteo del parque tras el sismo.
    Los hogares se conservan como base candidata para familias, sin asignar tasa.
+
+   **Cambio del 28/09/2026:** la base de vivienda pasó del total de viviendas a
+   los **hogares** DANE 2026 (anexo *Proyecciones Hogares mpio*, mismo año y
+   referencia). El total incluye viviendas vacías o de temporada, que diluyen el
+   porcentaje en municipios turísticos (Ricaurte: 0,59 personas por vivienda). Los
+   hogares aproximan las viviendas habitadas, que es la base que usa el Decreto
+   1171. El numerador sigue contando viviendas; un hogar no es exactamente una
+   vivienda, pero ninguna cifra de viviendas afectadas supera los hogares del
+   municipio. Efecto en el índice relativo: top 20 igual; El Cairo pasa del
+   puesto 32 al 25.
 2. [DANE, población municipal 2018–2042](https://www.dane.gov.co/files/censo2018/proyecciones-de-poblacion/Municipal/PPED-AreaMun-2018-2042_VP.xlsx).
    Se verificó de nuevo el hash del archivo que generó la base existente. Total
    municipal de 2026, publicado antes del evento. Las tasas de personas expresan

@@ -8,7 +8,7 @@ function fixture(rows){
  return {rows,latest:date,dates:[date],baseline:{rows:[]},population:{rows:codes.map((code,i)=>({code,year:2026,population:1000*(i+1)}))},
  healthPressure:{enabled:false,source_cascade:{enabled:true}},
  denominators:{event_date:'2026-08-10',sources:{official:{url:'https://www.dane.gov.co/',published:'2025-12-24',sha256:'a'.repeat(64)}},
- rows:codes.map((code,i)=>({code,kind:'viviendas',value:100*(i+1),year:2026,unit:'Viviendas',source:'official',reference_date:'2026-06-30',area:'Total',status:'verified'})),
+ rows:codes.map((code,i)=>({code,kind:'hogares',value:100*(i+1),year:2026,unit:'Hogares',source:'official',reference_date:'2026-06-30',area:'Total',status:'verified'})),
  registry_proxies:{enabled:true,catalog:{sedes_educativas:{year:2022,unit:'Sedes educativas',source:'men',reference_date:'2022-12-31',label:'MEN'}},
  sources:{men:{url:'https://portalsineb.mineducacion.gov.co/',sha256:'b'.repeat(64)}},rows:codes.map(code=>({code,kind:'sedes_educativas',value:10,year:2022,unit:'Sedes educativas',source:'men',reference_date:'2022-12-31',area:'Total',status:'observed_registry_proxy'}))}}};
 }

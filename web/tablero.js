@@ -13,7 +13,7 @@ const tile = (label, value, sub) => `<div class="tile"><div class="tile-label">$
 const geoButton = (r, source = r.f) => `<button type="button" class="link" data-geo="${esc(r.geo)}" data-source="${esc(source)}">${esc(r.m || r.d)}</button>${r.m?`<div class="muted small">${esc(r.d)}</div>`:''}`;
 function attribution(r) {
   if(r.f !== 'FundacionExe') return '';
-  return `<div class="small">${model.decree(state.date).has(r.d)?'Atribución al sismo no verificada':'No atribuida al sismo'}</div>`;
+  return `<div class="small">${model.inScope(r,{scope:'decree',date:state.date})?'Atribución al sismo no verificada':'No atribuida al sismo'}</div>`;
 }
 function setOptions(id, choices, selected, emptyLabel) {
   const options = emptyLabel ? [{value:'',label:emptyLabel},...choices] : choices;
@@ -310,7 +310,7 @@ $('download').addEventListener('click',()=>{
   // Quote every cell and neutralize spreadsheet formula injection in labels.
   const quote=v=>'"'+String(typeof v==='string'&&/^[=+@\-\t\r]/.test(v)?"'"+v:v??'').replaceAll('"','""')+'"';
   const header=['puesto','divipola','departamento','municipio','nivel','fuente','indicador_id','indicador','valor','unidad','captura_inventario','fecha_fuente','atribucion'];
-  const lines=[header,...rows.map(r=>[r.rank,r.code,r.d,r.m,r.lv,r.f,r.id,r.i,r.v,r.u,r.date,'no acreditada',r.f==='FundacionExe'?(model.decree(state.date).has(r.d)?'no verificada':'no atribuida al sismo'):'consultar fuente'])];
+  const lines=[header,...rows.map(r=>[r.rank,r.code,r.d,r.m,r.lv,r.f,r.id,r.i,r.v,r.u,r.date,'no acreditada',r.f==='FundacionExe'?(model.inScope(r,{scope:'decree',date:state.date})?'no verificada':'no atribuida al sismo'):'consultar fuente'])];
   const blob=new Blob(['\ufeff'+lines.map(row=>row.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='seleccion-territorial.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });

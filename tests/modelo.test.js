@@ -72,6 +72,15 @@ test('sector never fills a missing source or mixes units and captures',()=>{
   const m=model(rows), chosen={...state,metric:T.cohort(rows[0])};
   assert.deepEqual(m.sector(chosen).items.map(r=>r.geo),['a']);
 });
+test('decree scope follows the DANE department code, not the department name of each row',()=>{
+  const flag=(d,code,v)=>row('dep:'+code,v,{lv:'departamental',d,code,f:'Decreto1171',id:'en_decreto_1171'});
+  const m=model([flag('Cundinamarca','25',1),flag('Bogotá D.C.','11',0),
+    row('bogota',.9,{d:'Cundinamarca',code:'11001'}),row('funza',.5,{d:'Cundinamarca',code:'25286'}),row('sin-codigo',.4,{d:'Cundinamarca'})]);
+  const geos=m.visible({...state,scope:'decree'}).filter(r=>r.lv==='municipal').map(r=>r.geo).sort();
+  assert.deepEqual(geos,['funza','sin-codigo']);
+  assert.equal(m.inScope(row('x',1,{d:'Cundinamarca',code:'11001'}),{scope:'decree',date}),false);
+});
+
 test('decree narrows geography while indicator selection remains unchanged, even without observations',()=>{
   const r=row('a',100,{d:'Córdoba',f:'FundacionExe',id:'sedes'});
   const m=model([r,row('norm',1,{lv:'departamental',f:'Decreto1171',id:'en_decreto_1171'})]);

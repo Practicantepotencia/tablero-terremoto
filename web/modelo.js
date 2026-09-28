@@ -29,10 +29,18 @@
     function decree(date) {
       return new Set(rows.filter(r => r.date === date && r.id === 'en_decreto_1171' && r.f === 'Decreto1171' && r.v === 1).map(r => r.d));
     }
-    function inScope(r, state) { return state.scope !== 'decree' || decree(state.date).has(r.d); }
+    // El ámbito se decide por el código DANE del departamento, no por el nombre que trae cada
+    // fila: RAPIDA publica Bogotá (11001) como «Cundinamarca». Sin código se usa el nombre.
+    const depCode = r => { const c = String(r.code || '').slice(0, 2); return /^\d{2}$/.test(c) ? c : ''; };
+    function decreeScope(date) {
+      const flags = rows.filter(r => r.date === date && r.id === 'en_decreto_1171' && r.f === 'Decreto1171' && r.v === 1);
+      const codes = new Set(flags.map(depCode).filter(Boolean)), names = new Set(flags.map(r => r.d));
+      return r => { const c = depCode(r); return c ? codes.has(c) : names.has(r.d); };
+    }
+    function inScope(r, state) { return state.scope !== 'decree' || decreeScope(state.date)(r); }
     function visible(state, date = state.date, ignoreDept = false) {
-      const deps = decree(state.date); // Same geographic boundary for historical comparisons.
-      return rows.filter(r => r.date === date && (state.scope !== 'decree' || deps.has(r.d)) && (ignoreDept || !state.dept || r.d === state.dept));
+      const inDecree = decreeScope(state.date); // Same geographic boundary for historical comparisons.
+      return rows.filter(r => r.date === date && (state.scope !== 'decree' || inDecree(r)) && (ignoreDept || !state.dept || r.d === state.dept));
     }
     function strict(base, id, source = RAPIDA) {
       const found = base.filter(r => r.lv === 'municipal' && r.f === source && r.id === id);

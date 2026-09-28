@@ -53,8 +53,8 @@ test('faltantes conservan su peso y no se convierten en ceros observados',()=>{
  assert.equal(r.sectors[2].coverage,0);assert.equal(r.sectors[2].lower,0);assert.equal(r.sectors[2].upper,100);
 });
 test('ámbito recalcula; búsqueda y departamento conservan referencia',()=>{
- const d=data([row('05001',100),row('05002',20,{d:'Fuera'}),row('05',1,{lv:'departamental',f:'Decreto1171',id:'en_decreto_1171',u:'Sí/No (1-0)'})],
- [denominator('05001',100000),denominator('05002',1000)]);
+ const d=data([row('05001',100),row('08002',20,{d:'Fuera'}),row('05',1,{lv:'departamental',f:'Decreto1171',id:'en_decreto_1171',u:'Sí/No (1-0)'})],
+ [denominator('05001',100000),denominator('08002',1000)]);
  const model=P.create(d,undefined,{relative:true});
  const a=model.selection(state).items.find(r=>r.code==='05001');
  const b=model.selection({...state,dept:'D',matrixSearch:'05001'}).items[0];assert.equal(a.lower,b.lower);assert.equal(a.rank,b.rank);

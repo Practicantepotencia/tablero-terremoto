@@ -11,7 +11,7 @@ datos del repositorio.
 | # | Hallazgo | Severidad | Estado |
 |---|---|---|---|
 | T1 | `main` sigue con 15 identidades municipales sin código (509 en vez de 500, 5 críticos en vez de 6) | Alta | Corregido en la rama; falta fusionar |
-| T2 | Bogotá entra al universo del decreto porque RAPIDA la etiqueta como Cundinamarca; el filtro usa el nombre del departamento de cada fila, no el código | Media | Abierto |
+| T2 | Bogotá entra al universo del decreto porque RAPIDA la etiqueta como Cundinamarca; el filtro usa el nombre del departamento de cada fila, no el código | Media | Corregido: el filtro usa el código DANE (universo 499) |
 | T3 | El universo con puntaje es, en la práctica, la lista de PNUD: los 470 municipios con puntaje son exactamente los que tienen filas PNUD | Media (de comunicación) | Abierto |
 | T4 | 47 municipios de los 12 departamentos no aparecen en ninguna fuente; no son ceros, son invisibles | Media (de comunicación) | Abierto |
 | T5 | El Cairo contradice el decreto (80 % de viviendas destruidas según el decreto; 2,4 % en los datos) | Media (de verificación) | Abierto |

@@ -59,7 +59,7 @@ La explicación del escenario se añade en un único lugar, sobre la tercera int
 ## Reproducibilidad
 
 data/presion_salud.json contiene filas municipales, procedencia, IDs de registros que se suman y commit fuente.
-scripts/reconstruir_capacidad_presion.py vuelve a descargar el extracto congelado y compara cada suma.
+scripts/reconstruir_capacidad_presion.py lee el extracto congelado (data/salud_capacidad_reps_2022.json, traído a esta rama desde salud-relativa-hospitalizacion, commit d9124b4), verifica su SHA-256 y compara cada suma; tests/test_capacidad_presion.py lo ejecuta.
 No se utilizan municipal_rows de estimaciones ML: se parte únicamente de records observados.
 web/presion_salud.js valida identidad, fecha, unidad y unicidad antes de dividir.
 scripts/auditar_presion_salud.cjs verifica ambos universos, fórmulas, coberturas y aislamiento frente al modelo base.

@@ -17,7 +17,7 @@ datos del repositorio.
 | T5 | El Cairo contradice el decreto (80 % de viviendas destruidas según el decreto; 2,4 % en los datos) | Media (de verificación) | Abierto |
 | T6 | Los faltantes de 3iS se tratan como desconocidos incluso donde el total departamental confirma que son cero | Media | Abierto |
 | T7 | Daño fuera de los 12 departamentos: 60 municipios, 0,25 % del costo estimado | Baja | Sin acción |
-| B1 | La capacidad hospitalaria (camas REPS 2022) solo se reconstruye desde otra rama (`salud-relativa-hospitalizacion`) | Media | Abierto |
+| B1 | La capacidad hospitalaria (camas REPS 2022) solo se reconstruye desde otra rama (`salud-relativa-hospitalizacion`) | Media | Corregido: el extracto está en esta rama, con hash y test |
 | B2 | Población, viviendas y hogares 2026 no guardan el Excel original; reproducirlos exige que DANE siga sirviendo el mismo archivo | Media | Abierto |
 | B3 | El denominador de vivienda incluye viviendas desocupadas (Ricaurte: 0,59 personas por vivienda) | Baja-Media | Abierto |
 | B4 | En el índice relativo, salud solo se puede medir en 81 municipios (los que tienen heridos) | Media | Abierto |

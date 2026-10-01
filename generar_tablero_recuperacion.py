@@ -41,6 +41,7 @@ SOURCES = {
     "Naboo/UNGRD": {"label": "Listado municipal · gravedad", "kind": "Clasificación del listado", "url": "data/municipios_afectados_terremoto_colombia_ago2026.csv", "note": "El valor 0 significa sin clasificación oficial en el listado, no sin daño. Las categorías no son cantidades sumables."},
     "Camaras": {"label": "Cámaras · empresarios", "kind": "Reporte empresarial", "url": "data/camaras_comercio_empresarios_afectados_ago2026.csv", "note": "Cobertura departamental parcial. Empresarios reportados no equivalen a pérdida de producción ni a empleo perdido."},
     "Decreto1171": {"label": "Ámbito del Decreto 1171", "kind": "Marco territorial", "url": "data/decreto_1171_11ago2026.pdf", "note": "Filtro por departamentos nombrados en el inventario. No es una delimitación municipal del daño ni una prueba de atribución causal."},
+    "MEN": {"label": "MEN · sedes oficiales reportadas", "kind": "Reporte de sedes y matrícula", "url": "docs/integracion_educativa.md", "note": "Archivo 21/09/2026. Fecha inferida del nombre; inspección y matrícula sin fecha propia acreditada. Condición crítica y prestación del servicio son campos distintos."},
 }
 
 
@@ -72,6 +73,10 @@ def prepare_payload(current, history=()):
     pressure = json.loads(pressure_path.read_text(encoding='utf-8')) if pressure_path.exists() else None
     cepal_path = ROOT / 'data/evaluacion_cepal.json'
     cepal_registry = json.loads(cepal_path.read_text(encoding='utf-8')) if cepal_path.exists() else {'records': []}
+    education_path = ROOT / 'data/educacion_men.json'
+    education = json.loads(education_path.read_text(encoding='utf-8')) if education_path.exists() else None
+    context_path = ROOT / 'data/fuentes_educacion_contexto.json'
+    education_context = json.loads(context_path.read_text(encoding='utf-8')) if context_path.exists() else None
     reference_names = defaultdict(set)
     reference_codes = {r['code']: r for r in baseline['rows']}
     for r in baseline['rows']:
@@ -179,6 +184,7 @@ def prepare_payload(current, history=()):
             del r['original_dimension']
     return {"rows": rows, "dates": dates, "latest": latest, "sources": SOURCES, "baseline": baseline, "population": population, "denominators": denominators, "healthPressure": pressure,
             "cepal": cepal_payload,
+            "education": education, "educationContext": education_context,
             "issues": [{"label": k, "n": v} for k, v in sorted(issues.items()) if v],
             "generated": datetime.now(timezone.utc).isoformat(timespec="seconds")}
 
@@ -186,7 +192,7 @@ def prepare_payload(current, history=()):
 def build_html(current, history=()):
     payload = prepare_payload(current, history)
     template = (ROOT / "web" / "tablero.html").read_text(encoding="utf-8")
-    for marker, filename in (("__STYLE__", "tablero.css"), ("__PRESENTATION__", "presentacion.js"), ("__MODEL__", "modelo.js"), ("__HEALTH_PRESSURE__", "presion_salud.js"), ("__DENOMINATORS__", "denominadores.js"), ("__PRIORITY_MODEL__", "priorizacion.js"), ("__RADAR__", "radar.js"), ("__RELATIVE__", "relativo.js"), ("__COMPARISON__", "comparacion.js"), ("__APP__", "tablero.js")):
+    for marker, filename in (("__STYLE__", "tablero.css"), ("__PRESENTATION__", "presentacion.js"), ("__EDUCATION__", "educacion.js"), ("__MODEL__", "modelo.js"), ("__HEALTH_PRESSURE__", "presion_salud.js"), ("__DENOMINATORS__", "denominadores.js"), ("__PRIORITY_MODEL__", "priorizacion.js"), ("__RADAR__", "radar.js"), ("__RELATIVE__", "relativo.js"), ("__COMPARISON__", "comparacion.js"), ("__APP__", "tablero.js")):
         template = template.replace(marker, (ROOT / "web" / filename).read_text(encoding="utf-8"))
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
     return template.replace("__DATA__", data.replace("<", "\\u003c"))

@@ -29,7 +29,7 @@ function globalControls() {
   $('build-label').textContent = `Generado: ${DATA.generated.slice(0,10)}`;
   $('scope-note').textContent = state.scope==='decree'
     ? `${model.decree(state.date).size} departamentos del decreto`
-    : 'Todos los departamentos reportados';
+    : state.scope==='five'?'Cinco departamentos · 126 municipios':'Todos los departamentos reportados';
   $('footer-capture').textContent = `Captura ${state.date}`;
 }
 function diagnosticControls() {
@@ -76,6 +76,7 @@ function scatter(items,qr,qi) {
 function historyBlock(key,geo='') {
   if(!key)return '<p class="empty">Sin indicador seleccionado.</p>';
   const result=model.history(state,key,geo);
+  if(result.reason==='single_delivery')return '<p class="empty">MEN: una entrega del 21 de septiembre; sin serie de evolución acreditada.</p>';
   if(!result.ready)return `<p class="empty">${result.points.length<2?'Solo hay una captura disponible. Se requieren al menos dos.':'No existe un panel de territorios presente en todas las capturas.'}</p>`;
   const [, , , ,unit]=JSON.parse(key), pts=result.points;
   const lo=Math.min(...pts.map(p=>p.v)),hi=Math.max(...pts.map(p=>p.v)),pad=(hi-lo)*.1||1;
@@ -157,17 +158,18 @@ function renderPriorityDetail(geo,scroll=true){
   $('priority-detail').innerHTML=`<div class="section-head"><h2>${esc(T.label(r))}</h2><button class="secondary" type="button" id="close-priority-detail">Cerrar ficha</button></div><p class="note">${esc(r.code?`DIVIPOLA ${r.code}`:r.geo)} · captura ${esc(state.date)}. Fecha efectiva de cada fuente pendiente de acreditar.</p><div class="tiles">${tile('Prioridad documentada',r.coverage?fmt(r.lower):'—',`Intervalo ${fmt(r.lower)}–${fmt(r.upper)}`)}${tile('Puesto al variar pesos',r.rankMin==null?'—':`${r.rankMin}–${r.rankMax}`,`${p.scenarios} escenarios; no probabilidad`)}${tile('Puesto posible por faltantes',r.bestRank==null?'—':`${r.bestRank}–${r.worstRank}`,'Entre municipios con algún componente')}${tile('IPM censal 2018',r.vulnerability==null?'—':`${fmt(r.vulnerability)}%`,'DANE · vulnerabilidad previa')}</div><p class="formula">P = D × (1 + 0,25 × IPM/100) / 1,25<br>Límite inferior: ${fmt(r.damageLower)} × ${fmt(factorLo)} = ${fmt(r.lower)} puntos.</p><p>D = promedio de los cinco sectores. Sectores: ${r.sectors.map(s=>`${esc(s.name)} ${fmt(s.lower)}–${fmt(s.upper)}`).join('; ')}. ${r.vulnerability==null?'El IPM faltante también amplía el intervalo.':''}</p><div class="table-scroll">${table(['Sector','Variable y fuente','Valor','Referencia positiva / total','Máximo observado','Intensidad 0–100','Aporte mínimo al puntaje'],fields.map(f=>`<tr><td>${esc(f.s)}</td><td>${esc(f.label)}<div class="small muted">${esc(f.source)}</div>${Presentacion.sourceComparison(f)?`<div class="small">Fuentes difieren: ${esc(Presentacion.sourceComparison(f))}. Se usa ${esc(f.source)}.</div>`:""}</td><td class="num">${f.row?fmt(f.row.v):'Sin dato'}</td><td class="num">${f.positive} / ${f.n}</td><td class="num">${fmt(f.anchor)}</td><td class="num">${fmt(f.score)}</td><td class="num">${f.share===0?'0':f.score==null?'Desconocido':fmt(f.contribution*factorLo)}</td></tr>`))}</div><p class="note">Necesidad de recuperación temprana original: ${fmt(r.recovery,'Índice')} (puesto ${r.recoveryRank??'—'}). No interviene en este cálculo. ${r.baseline?`Línea base: <a href="${esc(r.baseline.download)}" target="_blank" rel="noopener">DANE 2018</a>, ${esc(r.baseline.locator)}.`:''}</p><button class="secondary" type="button" data-geo="${esc(r.geo)}" data-source="${esc(state.matrixSource==='integrated'?'3iS-Sheets':state.matrixSource)}">Consultar todos los indicadores de la fuente</button>`;
   $('close-priority-detail').onclick=()=>{state.priorityGeo='';$('priority-detail').hidden=true;};
   $('priority-detail').insertAdjacentHTML('beforeend','<details><summary>Daños, pérdidas y costos adicionales</summary>'+cepalAccounts(r.code)+'</details>');
+  $('priority-detail').insertAdjacentHTML('beforeend',educationDetail(r.code));
   if(scroll)$('priority-detail').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function renderPriorityMethod(){
   const p=priorityModel.compute(state);
-  $('priority-method').innerHTML=`<h2>Fórmula del modelo sectorial ${Priorizacion.VERSION}</h2><p class="formula">z = 100 × valor / máximo observado del indicador<br>${DATA.healthPressure?.education_relative_policy?.normalization==='fixed_inventory_cap_1'?'Educación relativa: z = 100 × min(centros afectados / sedes registradas, 1)<br>':''}Sector = suma de z × peso interno<br>${DATA.healthPressure?.human_impact_policy?.families_informational_only?'Impacto humano = (z fallecidos + z desaparecidos) / 2. Familias: solo consulta.<br>':''}${DATA.healthPressure?.housing_weight_policy?.enabled?'Vivienda = ('+DATA.healthPressure.housing_weight_policy.destroyed+' × z destruidas + '+DATA.healthPressure.housing_weight_policy.damaged+' × z averiadas) / '+(DATA.healthPressure.housing_weight_policy.destroyed+DATA.healthPressure.housing_weight_policy.damaged)+'<br>':''}${DATA.healthPressure?.source_cascade?.enabled?'Fuente por variable: PNUD; si falta, 3iS. El cero es válido.<br>':''}D = (Impacto humano + Vivienda + Salud + Educación + Infraestructura) / 5<br>P = D × (1 + 0,25 × IPM censal / 100) / 1,25</p><details><summary>Variables y pesos</summary><div class="table-scroll">${table(['Sector (peso 1/5)','Variable','Fuente','Peso dentro del sector','Con dato / positivos','Máximo observado'],p.definitions.flatMap(s=>s.fields.map(f=>{const c=p.calibrations.find(c=>c.id===f.id);return `<tr><td>${esc(s.name)}</td><td>${esc(f.label)}</td><td>${esc(f.candidates?'PNUD → 3iS-Sheets':f.source)}</td><td class="num">${fmt(f.share*100)}%</td><td class="num">${c.n} / ${c.positive}</td><td class="num">${fmt(c.anchor)}${c.positive<10?'<div class="small">Referencia positiva pequeña</div>':''}${!c.coherent?'<div class="small">Definiciones incompatibles: excluido</div>':''}</td></tr>`;})))}</div></details>`;
+  $('priority-method').innerHTML=`<h2>Fórmula del modelo sectorial ${p.modelVersion}</h2><p class="formula">z = 100 × valor / máximo observado del indicador<br>${DATA.healthPressure?.education_relative_policy?.normalization==='fixed_inventory_cap_1'?'Educación relativa: z = 100 × min(centros afectados / sedes registradas, 1)<br>':''}Sector = suma de z × peso interno<br>${p.educationActive?'Educación = 0,5 × z centros afectados + 0,5 × z matrícula en sedes críticas (desde 2026-09-21)<br>':''}${DATA.healthPressure?.human_impact_policy?.families_informational_only?'Impacto humano = (z fallecidos + z desaparecidos) / 2. Familias: solo consulta.<br>':''}${DATA.healthPressure?.housing_weight_policy?.enabled?'Vivienda = ('+DATA.healthPressure.housing_weight_policy.destroyed+' × z destruidas + '+DATA.healthPressure.housing_weight_policy.damaged+' × z averiadas) / '+(DATA.healthPressure.housing_weight_policy.destroyed+DATA.healthPressure.housing_weight_policy.damaged)+'<br>':''}${DATA.healthPressure?.source_cascade?.enabled?'Fuente por variable: PNUD; si falta, 3iS. El cero es válido.<br>':''}D = (Impacto humano + Vivienda + Salud + Educación + Infraestructura) / 5<br>P = D × (1 + 0,25 × IPM censal / 100) / 1,25</p><details><summary>Variables y pesos</summary><div class="table-scroll">${table(['Sector (peso 1/5)','Variable','Fuente','Peso dentro del sector','Con dato / positivos','Máximo observado'],p.definitions.flatMap(s=>s.fields.map(f=>{const c=p.calibrations.find(c=>c.id===f.id);return `<tr><td>${esc(s.name)}</td><td>${esc(f.label)}</td><td>${esc(f.candidates?'PNUD → 3iS-Sheets':f.source)}</td><td class="num">${fmt(f.share*100)}%</td><td class="num">${c.n} / ${c.positive}</td><td class="num">${fmt(c.anchor)}${c.positive<10?'<div class="small">Referencia positiva pequeña</div>':''}${!c.coherent?'<div class="small">Definiciones incompatibles: excluido</div>':''}</td></tr>`;})))}</div></details>`;
 }
 function cepalSelection(code=''){
   const geos=new Set(model.visible(state).map(r=>r.code));
   const records=(DATA.cepal?.records||[]).filter(r=>geos.has(r.code)&&(!code||r.code===code)&&r.observed_at<=state.date);
   const mode=$('affectation-mode').value,configuration=priorityModels[mode].compute(state);
-  return {reference:DATA.cepal?.reference,index:{...DATA.cepal?.index,version:Priorizacion.VERSION,mode,
+  return {reference:DATA.cepal?.reference,index:{...DATA.cepal?.index,version:configuration.modelVersion,effectiveFrom:configuration.effectiveFrom,mode,
     scope:state.scope,povertyAdjustment:0.25,sectors:configuration.definitions,
     calibration:configuration.calibrations},capture:state.date,
     status:records.length?'partial_documented':'not_evaluated',records,
@@ -185,6 +187,36 @@ function renderCepal(){
   $('cepal-status').innerHTML=cepalAccounts()+`<p class="note">${monetary.length} estimaciones monetarias publicadas en la selección, pendientes de acreditar su valoración y solapamientos. No se suman entre fuentes ni a los conteos.</p><p class="small">Daños: activos afectados a precios de reposición equivalente previos al evento. Pérdidas: flujos sin desastre menos flujos con desastre, por periodo. Costos adicionales: gasto incremental efectuado. El índice, sus pesos e IPM son decisiones propias.</p>`;
   if(DATA.cepal?.issues?.length)$('cepal-status').insertAdjacentHTML('beforeend','<p>'+DATA.cepal.issues.length+' registros excluidos; consultar incidencias en la descarga.</p>');
 }
+
+function educationSelection(){
+  const e=Educacion.create(DATA),deps=model.decree(state.date),roster=new Map(e.roster.map(r=>[r.code,r]));
+  const inScope=r=>(!state.dept||r.d===state.dept)&&(state.scope==='five'?roster.has(r.code):state.scope!=='decree'||deps.has(r.d));
+  const reference=e.roster.filter(inScope),rows=e.active(state.date)?[...e.municipalities.values()].filter(inScope):[];
+  const codes=new Set(rows.map(r=>r.code));
+  const configuration=priorityModel.compute(state);
+  const context=(DATA.educationContext?.sources||[]).map(s=>({...s,municipalities:s.municipalities.filter(r=>inScope({...roster.get(r.code),code:r.code}))}));
+  return {capture:state.date,scope:state.scope,department:state.dept,modelVersion:configuration.modelVersion,effectiveFrom:configuration.effectiveFrom,
+    men:{available:e.active(state.date),version:e.payload.version,source:e.payload.source,reportDate:e.payload.report_date,reportDateBasis:e.payload.report_date_basis,observedAt:null,municipalities:rows},
+    territorialReference:{label:'126 municipios de Caldas, Chocó, Quindío, Risaralda y Valle del Cauca; presencia territorial, no completitud del daño',municipalities:reference,reported:reference.filter(r=>codes.has(r.code)).length,missing:reference.filter(r=>!codes.has(r.code))},
+    context:{note:'Fuentes sin fecha de observación acreditada; contexto fuera del índice y de su historia.',sources:context}};
+}
+function educationDetail(code){
+  const e=Educacion.create(DATA);if(!e.active(state.date))return '';
+  const r=e.municipalities.get(code);
+  if(!r)return '<details><summary>Educación · MEN</summary><p>Sin reporte MEN para este municipio; no equivale a cero.</p></details>';
+  return '<details><summary>Educación · MEN</summary><p>'+fmt(r.critical_sites)+' sedes críticas · '+fmt(r.critical_enrollment)+' matrículas. De esas sedes, '+fmt(r.critical_service_yes_sites)+' reportan prestar servicio. Condición crítica no equivale a clases suspendidas.</p>'+table(['Servicio reportado','Sedes','Matrícula'],['yes','no','unknown'].map((k,i)=>'<tr><td>'+['Sí presta','No presta','Por confirmar'][i]+'</td><td>'+fmt(r['service_'+k+'_sites'])+'</td><td>'+fmt(r['service_'+k+'_enrollment'])+'</td></tr>'))+'<p class="small">Archivo del 2026-09-21 según su nombre. Inspección y fecha de matrícula no acreditadas; no mide horas lectivas perdidas.</p></details>';
+}
+function renderEducation(){
+  const x=educationSelection(),rows=x.men.municipalities,ref=x.territorialReference;
+  const sum=k=>rows.every(r=>Number.isFinite(r[k]))?rows.reduce((n,r)=>n+r[k],0):null;
+  const contextRows=x.context.sources.map(s=>{const rs=s.municipalities,n=k=>rs.reduce((a,r)=>a+(r[k]||0),0);return '<tr><td title="'+esc(s.note)+'">'+esc(s.label)+'</td><td>'+fmt(n('units'))+' '+esc(s.unit)+'</td><td>'+fmt(n('records'))+'</td><td>'+rs.length+'</td></tr>';});
+  $('education-coverage').innerHTML=(x.men.available?'<p>MEN: '+rows.length+' municipios · '+fmt(sum('reported_sites'))+' sedes · '+fmt(sum('enrollment'))+' matrículas. Críticas: '+fmt(sum('critical_sites'))+' sedes y '+fmt(sum('critical_enrollment'))+' matrículas.</p><p>Presencia en el ámbito de cinco departamentos: '+ref.reported+'/'+ref.municipalities.length+' municipios. No acredita cobertura del total de sedes o personas afectadas.</p>'+table(['Servicio reportado','Sedes','Matrícula'],['yes','no','unknown'].map((k,i)=>'<tr><td>'+['Sí presta','No presta','Por confirmar'][i]+'</td><td>'+fmt(sum('service_'+k+'_sites'))+'</td><td>'+fmt(sum('service_'+k+'_enrollment'))+'</td></tr>'))+(ref.missing.length?'<p class="small">Sin reporte MEN: '+ref.missing.map(r=>esc(r.m)+', '+esc(r.d)).join('; ')+'.</p>':''):'<p>MEN aún no participa en esta captura. Se incorpora desde 2026-09-21.</p>')+'<p class="small">Matrícula en sedes críticas no equivale a estudiantes sin clases. Fecha del archivo inferida del nombre; inspección no acreditada.</p><details><summary>Otras bases · contexto sin fecha acreditada</summary>'+table(['Fuente','Unidades identificadas','Registros','Municipios'],contextRows)+'<p class="small">Universos distintos o solapados; no se suman entre sí ni al índice. Ver criterios y cruces en la documentación.</p></details>';
+}
+$('download-education').addEventListener('click',()=>{
+  const url=URL.createObjectURL(new Blob([JSON.stringify(educationSelection(),null,2)],{type:'application/json'}));
+  const a=document.createElement('a');a.href=url;a.download='educacion-'+state.scope+'-'+state.date+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+
 function distribution(pool) {
   if(!pool.length)return '<p class="empty">No hay distribución para estos filtros.</p>';
   const vals=pool.map(r=>r.v),min=Math.min(...vals),max=Math.max(...vals),n=min===max?1:8;
@@ -201,7 +233,7 @@ function renderDiagnostic() {
     sourceWarning.textContent=`${s.pool.length} de ${s.total} territorios con dato · ${s.total-s.pool.length} sin dato`;
   }else{
     sourceWarning.className='note';
-    sourceWarning.textContent=state.source==='FundacionExe'?'Atribución al sismo no verificada.':'';
+    sourceWarning.textContent=state.source==='FundacionExe'?'Atribución al sismo no verificada.':state.source==='MEN'?'Archivo MEN: 2026-09-21 (nombre); fecha de inspección no acreditada.':'';
   }
   const concept=meta&&DATA.cepal?.catalog?.[meta.f+'|'+meta.id];
   if(concept?.kind==='monetary_estimate')sourceWarning.textContent=concept.note;
@@ -230,7 +262,8 @@ function renderProfile() {
 function renderMethod() {
   renderPriorityMethod();
   renderCepal();
-  const base=model.visible(state),sources=sorted(base.map(r=>r.f));
+  renderEducation();
+  const base=model.visible(state).filter(r=>!r.territory_only),sources=sorted(base.map(r=>r.f));
   $('coverage-table').innerHTML=table(['Fuente','Municipios','Departamentos','Indicadores','Origen y límites'],sources.map(f=>{const r=base.filter(x=>x.f===f),info=DATA.sources[f];return `<tr><td><a href="${esc(info?.url||'#')}" target="_blank" rel="noopener">${esc(info?.label||f)}</a></td><td class="num">${new Set(r.filter(x=>x.lv==='municipal').map(x=>x.geo)).size}</td><td class="num">${new Set(r.map(x=>x.d)).size}</td><td class="num">${new Set(r.map(x=>x.id)).size}</td><td>${esc(info?.kind||'Fuente registrada')}</td></tr>`; }));
   const missingCodes=new Set(base.filter(r=>r.lv==='municipal'&&!r.code).map(r=>r.geo)).size;
   $('checks').innerHTML=table(['Control','Resultado'],[
@@ -241,7 +274,7 @@ function renderMethod() {
     '<tr><td>Probabilidad o nivel de confianza estadístico</td><td>No estimado; se muestra cobertura observada</td></tr>'
   ]);
   const metas=[...new Map(base.map(r=>[T.cohort(r),r])).values()];
-  $('dictionary').innerHTML=table(['Indicador','Dimensión','Fuente','Nivel','Unidad','Concepto'],metas.map(r=>`<tr><td>${esc(r.i)}<div class="small muted">${esc(r.id)}</div></td><td>${esc(r.dim)}</td><td>${esc(r.f)}</td><td>${esc(r.lv)}</td><td>${esc(r.u)}</td><td>${esc(DATA.cepal?.catalog?.[r.f+'|'+r.id]?.label||'Sin clasificar')}</td></tr>`));
+  $('dictionary').innerHTML=table(['Indicador','Dimensión','Fuente','Nivel','Unidad','Concepto'],metas.map(r=>`<tr><td>${esc(r.i)}<div class="small muted">${esc(r.id)}</div></td><td>${esc(r.dim)}</td><td>${esc(r.f)}</td><td>${esc(r.lv)}</td><td>${esc(r.u)}</td><td>${esc(DATA.cepal?.catalog?.[r.f+'|'+r.id]?.label||(r.f==='MEN'?'Condición y servicio reportados':'Sin clasificar'))}</td></tr>`));
 }
 
 function renderRapida(){
@@ -266,7 +299,7 @@ function renderComparison(){
   const precision=n=>n==null?'—':new Intl.NumberFormat('es-CO',{maximumFractionDigits:4}).format(n);
   const search=$('comparison-search').value,matched=pairs.filter(r=>T.searchMatch({...r,lv:'municipal'},search));
   const exclusion=c.excluded.index+' sin índice documentado; '+c.excluded.rapida+' sin necesidad de recuperación temprana comparable (categorías excluyentes)';
-  $('comparison-note').textContent='Base: '+(state.scope==='decree'?'departamentos del decreto':'todos los departamentos')+(state.dept?' · '+state.dept:'')+' · captura '+state.date+'. '+c.n+' pares de '+c.total+' municipios.'+(search?' '+matched.length+' coincidencias resaltadas.':'');
+  $('comparison-note').textContent='Base: '+(state.scope==='decree'?'departamentos del decreto':state.scope==='five'?'cinco departamentos':'todos los departamentos')+(state.dept?' · '+state.dept:'')+' · captura '+state.date+'. '+c.n+' pares de '+c.total+' municipios.'+(search?' '+matched.length+' coincidencias resaltadas.':'');
   $('comparison-reference').textContent=c.referenceN+' municipios en la referencia; '+c.recoveryN+' con necesidad de recuperación temprana. Excluidos de la dispersión: '+exclusion+'. Se incluyen todos los pares disponibles de la versión seleccionada; no se rellenan faltantes.';
   $('comparison-kpis').innerHTML=tile('Pares comparables',c.n,'Municipios con ambos datos')+
     tile('Qué tan bien se ajustan los índices — R²',c.regression?new Intl.NumberFormat('es-CO',{style:'percent',maximumFractionDigits:2}).format(c.regression.r2):'—','Más cerca de 100 %: mejor ajuste lineal')+
@@ -335,8 +368,8 @@ $('download').addEventListener('click',()=>{
   const rows=model.sector({...state,search:$('sector-search').value}).items;
   // Quote every cell and neutralize spreadsheet formula injection in labels.
   const quote=v=>'"'+String(typeof v==='string'&&/^[=+@\-\t\r]/.test(v)?"'"+v:v??'').replaceAll('"','""')+'"';
-  const header=['puesto','divipola','departamento','municipio','nivel','fuente','indicador_id','indicador','valor','unidad','captura_inventario','fecha_fuente','atribucion','version_fuente','dimension_original','concepto','estado_cepal'];
-  const lines=[header,...rows.map(r=>[r.rank,r.code,r.d,r.m,r.lv,r.f,r.id,r.i,r.v,r.u,r.date,r.observed_at||'no acreditada',r.f==='FundacionExe'?(model.decree(state.date).has(r.d)?'no verificada':'no atribuida al sismo'):'consultar fuente',r.source_version||'no acreditada',r.original_dimension||DATA.cepal?.catalog?.[r.f+'|'+r.id]?.original_dimension||r.dim,DATA.cepal?.catalog?.[r.f+'|'+r.id]?.label,DATA.cepal?.catalog?.[r.f+'|'+r.id]?.status])];
+  const header=['puesto','divipola','departamento','municipio','nivel','fuente','indicador_id','indicador','valor','unidad','captura_inventario','fecha_fuente','atribucion','version_fuente','dimension_original','concepto','estado_cepal','fecha_archivo_fuente','vigencia_modelo','version_modelo'];
+  const lines=[header,...rows.map(r=>[r.rank,r.code,r.d,r.m,r.lv,r.f,r.id,r.i,r.v,r.u,r.date,r.observed_at||'no acreditada',r.attribution||(r.f==='FundacionExe'?(model.decree(state.date).has(r.d)?'no verificada':'no atribuida al sismo'):'consultar fuente'),r.source_version||'no acreditada',r.original_dimension||DATA.cepal?.catalog?.[r.f+'|'+r.id]?.original_dimension||r.dim,DATA.cepal?.catalog?.[r.f+'|'+r.id]?.label,DATA.cepal?.catalog?.[r.f+'|'+r.id]?.status,r.source_date||'no acreditada',priorityModel.compute(state).effectiveFrom,priorityModel.compute(state).modelVersion])];
   const blob=new Blob(['\ufeff'+lines.map(row=>row.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='seleccion-territorial.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });

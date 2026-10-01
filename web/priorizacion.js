@@ -4,6 +4,7 @@
   const T = typeof module !== 'undefined' && module.exports ? require('./modelo.js') : root.Territorial;
   const D = typeof module !== 'undefined' && module.exports ? require('./denominadores.js') : root.Denominadores;
   const H = typeof module !== 'undefined' && module.exports ? require('./presion_salud.js') : root.PresionSalud;
+  const E = typeof module !== 'undefined' && module.exports ? require('./educacion.js') : root.Educacion;
   const field = (id, source, label, share) => ({id, source, label, share, unit:'Número'});
   const reported = (id, label, share=1) => field('3is_'+id, '3iS-Sheets', label, share);
   const estimated = (id, label, share=1) => field('pnud_'+id, 'PNUD', label, share);
@@ -91,13 +92,13 @@
     const relative=mode!=='absolute';
     const denominators=mode==='sectorial'?D.create(data):null;
     const pressure=H.create(data);
+    const education=E.create(data);
     const sourceCascade=data.healthPressure?.source_cascade?.enabled===true;
     const familiesInformational=data.healthPressure?.human_impact_policy?.families_informational_only===true;
     const definitions=housingWeights(sourceCascade?cascadedSectors():SECTORS,data.healthPressure?.housing_weight_policy).map(s=>
       familiesInformational&&s.id==='impacto_humano'
         ?{...s,fields:s.fields.map(f=>({...f,share:f.id==='3is_familias'?0:.5}))}:s);
-    const sectorDefs=mode==='sectorial'&&pressure.enabled?definitions.map(s=>s.id==='salud'?{...s,fields:[pressure.field]}:s):definitions;
-    const fieldCount=sectorDefs.reduce((n,s)=>n+s.fields.filter(f=>f.share>0).length,0);
+    const legacySectorDefs=mode==='sectorial'&&pressure.enabled?definitions.map(s=>s.id==='salud'?{...s,fields:[pressure.field]}:s):definitions;
     const fixedEducation=mode==='sectorial'&&data.healthPressure?.education_relative_policy?.normalization==='fixed_inventory_cap_1';
     const scale=(f,values)=>{
       const observedMax=values.length?Math.max(...values):null;
@@ -110,6 +111,10 @@
       // Solo ámbito y captura definen referencias; buscar/filtrar departamento no renormaliza.
       const key=JSON.stringify([state.scope,state.date]);
       if(cache.has(key))return cache.get(key);
+      const educationActive=education.active(state.date);
+      const sectorDefs=educationActive?legacySectorDefs.map(s=>s.id==='educacion'
+        ?{...s,fields:[...s.fields.map(f=>({...f,share:f.share*.5})),{...E.field}]}:s):legacySectorDefs;
+      const fieldCount=sectorDefs.reduce((n,s)=>n+s.fields.filter(f=>f.share>0).length,0);
       const base=territorial.visible({...state,dept:''}).filter(r=>r.lv==='municipal');
       const places=[...new Map(base.map(r=>[r.geo,r])).values()];
       const baselines=new Map((data.baseline?.rows||[]).map(r=>[r.code,r]));
@@ -122,7 +127,7 @@
         if(rs.length===1&&Number.isFinite(rs[0].population)&&rs[0].population>0)populations.set(code,rs[0]);
       });
       const relativeMeasure=(r,id,code)=>{
-        if(mode==='sectorial'){
+        if(mode==='sectorial'&&id!==E.ID){
           const result=denominators.measure(r,id,code,state.date);
           if(data.healthPressure?.disabled_relative_indicators?.includes(id))
             return {...result,rate:null,calculationDisabled:true,reason:'Cálculo relativo de centros educativos deshabilitado en esta rama.'};
@@ -199,7 +204,7 @@
       }
       const top=new Set(ranked.filter(r=>r.rank<=20).map(r=>r.geo));
       const rapidaTop=recovery.filter(r=>recoveryRank.get(r.geo).rank<=20);
-      const result={definitions:sectorDefs,items:ranked,missing:items.filter(r=>r.coverage<=EPS).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')),
+      const result={definitions:sectorDefs,educationActive,modelVersion:educationActive?'1.2-RS+MEN-20260921':'1.2-RS',effectiveFrom:educationActive?data.education.effective_from:null,items:ranked,missing:items.filter(r=>r.coverage<=EPS).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')),
         all:items,calibrations:[...calibrations.values()].map(({rows,values,disagreements,...r})=>({...r,disagreements:disagreements?.size||0})),scenarios,
         overlap:rapidaTop.filter(r=>top.has(r.geo)).length,rapidaTopN:rapidaTop.length,referenceN:places.length};
       cache.set(key,result);return result;
@@ -208,7 +213,7 @@
       const result=compute(state);
       const order=state.priorityOrder||'integrated';
       let items=[...result.items,...result.missing];
-      const sectorIndex=sectorDefs.findIndex(s=>s.id===state.priorityDimension);
+      const sectorIndex=result.definitions.findIndex(s=>s.id===state.priorityDimension);
       if(sectorIndex>=0&&order!=='rapida'){
         const value=order==='uncertainty'?'upper':'lower';
         const known=items.filter(r=>r.sectors[sectorIndex].coverage>EPS).sort((a,b)=>b.sectors[sectorIndex][value]-a.sectors[sectorIndex][value]||T.label(a).localeCompare(T.label(b),'es'));

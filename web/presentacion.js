@@ -1,6 +1,7 @@
 /* Presentación pública. No transforma datos ni interviene en el modelo del índice. */
 (function(root){
   'use strict';
+  const E=typeof module!=='undefined'&&module.exports?require('./educacion.js'):root.Educacion;
   const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const number=(n,digits=2)=>Number.isFinite(n)?new Intl.NumberFormat('es-CO',{maximumFractionDigits:digits}).format(n):'—';
   const source=s=>String(s||'').replaceAll('3iS-Sheets','3iS');
@@ -17,7 +18,7 @@
     const value=has?number(relative?f.rate:f.row.v,relative?4:2):'—';
     const unit=relative?f.relativeUnit:(f.row?.u==='Número'?'':f.row?.u);
     const explanation=f.share===0?'Solo consulta; no suma al índice.':has?'Puntaje de la variable: '+number(f.score)+'/100.':'Sin dato; no equivale a cero.';
-    const title=[f.label,explanation,relative&&f.row?'Valor original: '+number(f.row.v):'',relative&&f.denominator?'Base: '+number(f.denominator.value)+' '+f.denominator.unit+' · '+f.denominator.reference_date:'',f.reason||'',f.proxyNote||'',sourceComparison(f)?'Fuentes difieren: '+sourceComparison(f)+'. Se conserva la precedencia PNUD; no se suman':''].filter(Boolean).join('. ');
+    const title=[f.label,explanation,f.row?.source_date?'Archivo '+f.row.source_date+' (nombre); inspección no acreditada':'',relative&&f.row?'Valor original: '+number(f.row.v):'',relative&&f.denominator?'Base: '+number(f.denominator.value)+' '+f.denominator.unit+' · '+f.denominator.reference_date:'',f.reason||'',f.proxyNote||'',sourceComparison(f)?'Fuentes difieren: '+sourceComparison(f)+'. Se conserva la precedencia PNUD; no se suman':''].filter(Boolean).join('. ');
     const base=relative&&has&&f.denominator?'<small class="rate-base">'+number(f.row.v)+' / '+number(f.denominator.value)+' '+esc(f.denominator.unit.toLowerCase())+'</small>':relative&&f.row?'<small class="rate-base">Reportado: '+number(f.row.v)+'</small>':'';
     return '<span class="heat-item '+(has?'':'missing')+'" title="'+esc(title)+'" style="--intensity:'+ (f.score==null?0:Math.min(100,Math.max(0,f.score)))+'"><span class="field-name">'+esc(f.label.replace(/ · (3iS|PNUD)$/,''))+'</span><span class="field-value"><b>'+value+'</b>'+ (has&&unit?' <small>'+esc(unit)+'</small>':has?'':relative&&f.row?' <small>sin dato relativo</small>':' <small>sin dato</small>')+'</span>'+base+(f.exceedsRegistry?'<small class="rate-base">Supera el registro de referencia</small>':f.pressureProxy?'<small class="rate-base">Capacidad histórica; no ocupación</small>':'')+'</span>';
   }
@@ -36,6 +37,8 @@
     const rows=data.rows.filter(r=>r.date===state.date&&r.lv==='municipal'&&places.has(r.geo));
     const gravity=rows.filter(r=>r.f==='Naboo/UNGRD'&&r.id==='gravedad_oficial');
     const affected=new Set(rows.filter(r=>r.v>0&&ids.has(r.id)&&['PNUD','3iS-Sheets'].includes(r.f)).map(r=>r.geo));
+    const education=E.create(data);
+    if(education.active(state.date))for(const r of education.municipalities.values())if(r.affected_sites>0&&places.has('municipal:'+r.code))affected.add('municipal:'+r.code);
     gravity.filter(r=>r.v>0).forEach(r=>affected.add(r.geo));
     function population(geos){
       const observed=[...geos].map(geo=>places.get(geo)?.population?.population).filter(n=>Number.isFinite(n)&&n>0);

@@ -1,9 +1,13 @@
 # Priorización municipal y evaluación CEPAL
 
-Esta rama aplica el capítulo II del **Manual para la Evaluación de Desastres**,
+Este documento registra la etapa `cepal-capitulo-2-priorizacion-municipal`
+en `5770524`. La etapa hija y su modelo educativo vigente se describen en
+[integracion_educativa.md](integracion_educativa.md).
+
+La etapa original aplica el capítulo II del **Manual para la Evaluación de Desastres**,
 CEPAL, LC/L.3691, febrero de 2014, pp. impresas 33–43 (PDF 34–44).
 Referencia examinada: `S2013806_es.pdf`, adjunto del usuario.
-La implementación se detiene en este capítulo.
+La implementación de esa etapa se detuvo en este capítulo.
 
 ## Decisión principal
 

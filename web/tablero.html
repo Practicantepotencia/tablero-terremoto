@@ -13,7 +13,7 @@
 <button type="button" id="tab-metodo" class="tab-btn" role="tab" aria-selected="false" aria-controls="metodo" data-tab="metodo">Fuentes y método</button>
 </nav>
 <div class="filters global">
-<label>Universo territorial<select id="scope"><option value="decree">Departamentos del Decreto 1171</option><option value="all">Todos los departamentos reportados</option></select></label>
+<label>Universo territorial<select id="scope"><option value="decree">Departamentos del Decreto 1171</option><option value="all">Todos los departamentos reportados</option><option value="five">Cinco departamentos · 126 municipios</option></select></label>
 <label>Departamento<select id="dept"></select></label>
 <label title="Fecha de incorporación al tablero; no necesariamente fecha del hecho ni del reporte original.">Captura del inventario<select id="date"></select></label>
 </div>
@@ -96,6 +96,7 @@
 <div id="priority-method" class="card"></div>
 <details class="card" id="cepal-method"><summary>Evaluación económica · CEPAL, capítulo II</summary><div id="cepal-status"></div><p><a href="docs/cepal_capitulo_2.md">Criterios y datos necesarios</a> · <button type="button" class="link" id="download-cepal">Descargar evaluación JSON</button></p></details>
 <div class="card"><h2>Guía metodológica</h2><p><a href="docs/cepal_capitulo_2.md">Metodología vigente y alcance CEPAL</a> · <a href="docs/notas_metodologicas.md" target="_blank" rel="noopener">Notas históricas</a></p></div>
+<details class="card" id="education-evidence"><summary>Educación: cobertura y servicio reportado</summary><div id="education-coverage"></div><button type="button" class="link" id="download-education">Descargar agregados MEN</button><p><a href="docs/integracion_educativa.md">Fuentes, vigencia y criterios educativos</a></p></details>
 <div class="card"><h2>Cobertura de las fuentes</h2><div id="coverage-table" class="table-scroll"></div></div>
 <details class="card"><summary>Controles de integridad</summary><div id="checks"></div></details>
 <details class="card"><summary>Diccionario de la selección</summary><div id="dictionary" class="table-scroll"></div></details>
@@ -103,7 +104,7 @@
 </section>
 <footer><span id="footer-capture"></span><span>Sin dato no significa cero. <a href="docs/cepal_capitulo_2.md">Guía metodológica</a></span></footer>
 <noscript><p>Activa JavaScript para filtrar y consultar el tablero. Los datos originales están en <a href="indicadores_largo_no_calculo.csv">el inventario CSV</a>.</p></noscript>
-</main><script>__PRESENTATION__</script><script>__MODEL__</script><script>__HEALTH_PRESSURE__
+</main><script>__EDUCATION__</script><script>__PRESENTATION__</script><script>__MODEL__</script><script>__HEALTH_PRESSURE__
 __DENOMINATORS__</script><script>__PRIORITY_MODEL__</script><script>const DATA=__DATA__;</script><script>__RADAR__</script><script>__RELATIVE__</script><script>__COMPARISON__</script><script>__APP__</script></body></html>
 
 

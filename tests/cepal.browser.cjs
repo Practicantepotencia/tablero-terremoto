@@ -14,10 +14,12 @@ const values=data=>data.rows.map(r=>[r.geo,r.f,r.id,r.v,r.u,r.date]);
 assert.deepEqual(values(after),values(before),'Conservar el inventario original');
 const numeric=r=>({code:r.code,lower:r.lower,upper:r.upper,rank:r.rank,available:r.available,coverage:r.coverage,best:r.bestRank,worst:r.worstRank,rankMin:r.rankMin,rankMax:r.rankMax,
  sectors:r.sectors.map(s=>({id:s.id,lo:s.lower,hi:s.upper,fields:s.fields.map(f=>({id:f.id,score:f.score,share:f.share,anchor:f.anchor,source:f.source,rate:f.rate}))}))});
+// Verify the chapter-II change independently of the explicit later educational model.
+const legacy={...after,education:null};
 let comparisons=0;
 for(const date of after.dates)for(const scope of ['all','decree'])for(const mode of ['absolute','percapita','sectorial']){
  const state={date,scope,dept:''};
- assert.deepEqual(P.models(after)[mode].compute(state).items.map(numeric),originalPriority.models(before)[mode].compute(state).items.map(numeric));comparisons++;
+ assert.deepEqual(P.models(legacy)[mode].compute(state).items.map(numeric),originalPriority.models(before)[mode].compute(state).items.map(numeric));comparisons++;
 }
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
@@ -61,7 +63,7 @@ for(const date of after.dates)for(const scope of ['all','decree'])for(const mode
   await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.scrollTo(0,0));
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   await page.screenshot({path:path.join(out,'mobile.png')});assert.deepEqual(errors,[]);
-  const report={base:'c66aa361fb713fdaf741e0c0ceedf9c5798bb6bb',numericComparisons:comparisons,inventoryRows:after.rows.length,indexUnchanged:true,errors,temporal,exports:true,mobileOverflow:false};
+  const report={base:'c66aa361fb713fdaf741e0c0ceedf9c5798bb6bb',numericComparisons:comparisons,inventoryRows:after.rows.length,legacyIndexUnchanged:true,errors,temporal,exports:true,mobileOverflow:false};
   fs.writeFileSync(path.join(out,'results.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});

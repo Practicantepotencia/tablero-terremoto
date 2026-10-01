@@ -33,7 +33,7 @@
     const host=get('radar-chart');if(!host)return;
     const p=model.compute(state), places=p.all.filter(r=>!state.dept||r.d===state.dept).slice().sort((a,b)=>label(a).localeCompare(label(b),'es'));
     current=selected.map(g=>places.find(r=>r.geo===g)).filter(Boolean);
-    referenceDetails=`Modelo ${Priorizacion.VERSION}${relative?(percapita?' · Per cápita · población DANE ':' · Denominadores sectoriales · año de la captura ')+String(state.date).slice(0,4):''} · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':'todos los departamentos reportados'}, ${p.referenceN} municipios.`;
+    referenceDetails=`Modelo ${p.modelVersion}${relative?(percapita?' · Per cápita · población DANE ':' · Denominadores sectoriales · año de la captura ')+String(state.date).slice(0,4):''} · Captura ${state.date} · Referencia: ${state.scope==='decree'?'departamentos del decreto':state.scope==='five'?'cinco departamentos':'todos los departamentos reportados'}, ${p.referenceN} municipios.`;
     get('radar-reference').textContent=`Referencia: ${p.referenceN} municipios · Fecha de reporte: ${state.date}`;
     get('radar-reference').title=referenceDetails;
     const dialog=get('radar-method-dialog');

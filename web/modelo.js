@@ -1,6 +1,7 @@
 /* Pure calculations shared by the standalone dashboard and Node tests. */
 (function (root) {
   'use strict';
+  const E=typeof module!=='undefined'&&module.exports?require('./educacion.js'):root.Educacion;
   const RECOVERY = 'undp_rapida_recovery_needs', IPM = 'undp_rapida_mpi', RAPIDA = 'UNDP-RAPIDA';
   const sectors = [
     ['Vivienda', ['undp_rapida_bdg_homes_dest', 'undp_rapida_bdg_homes_dmg']],
@@ -24,15 +25,23 @@
   const searchMatch = (r, search = '') => label(r).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
     .includes(search.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase());
   function create(data) {
-    const rows = data.rows;
+    const education=E.create(data);
+    const rows = data.rows.concat(education.observations(data.dates||[]));
+    const roster=new Set(education.roster.map(r=>r.code));
     const catalog = [...new Map(rows.map(r => [cohort(r), {key: cohort(r), f: r.f, lv: r.lv, dim: r.dim, id: r.id, u: r.u, i: r.i}])).values()];
     function decree(date) {
       return new Set(rows.filter(r => r.date === date && r.id === 'en_decreto_1171' && r.f === 'Decreto1171' && r.v === 1).map(r => r.d));
     }
-    function inScope(r, state) { return state.scope !== 'decree' || decree(state.date).has(r.d); }
+    function inScope(r, state) { return state.scope===E.SCOPE?roster.has(r.code):state.scope !== 'decree' || decree(state.date).has(r.d); }
     function visible(state, date = state.date, ignoreDept = false) {
       const deps = decree(state.date); // Same geographic boundary for historical comparisons.
-      return rows.filter(r => r.date === date && (state.scope !== 'decree' || deps.has(r.d)) && (ignoreDept || !state.dept || r.d === state.dept));
+      const selected=rows.filter(r => r.date === date && (state.scope===E.SCOPE?roster.has(r.code):state.scope !== 'decree' || deps.has(r.d)) && (ignoreDept || !state.dept || r.d === state.dept));
+      if(state.scope===E.SCOPE){
+        const present=new Set(selected.map(r=>r.code));
+        for(const r of education.roster)if(!present.has(r.code)&&(ignoreDept||!state.dept||r.d===state.dept))
+          selected.push({...r,geo:'municipal:'+r.code,lv:'municipal',f:'Ámbito educativo',id:'education_scope',i:'Municipio del ámbito',dim:'Cobertura',u:'Referencia territorial',v:null,date,territory_only:true,join:'DIVIPOLA'});
+      }
+      return selected;
     }
     function strict(base, id, source = RAPIDA) {
       const found = base.filter(r => r.lv === 'municipal' && r.f === source && r.id === id);
@@ -82,6 +91,7 @@
         .sort((a, b) => a.dim.localeCompare(b.dim, 'es') || a.i.localeCompare(b.i, 'es'));
     }
     function history(state, key, geo = '') {
+      if(JSON.parse(key)[0]===E.SOURCE)return {points:[],n:0,ready:false,delta:null,reason:'single_delivery'};
       const dates = data.dates.filter(d => d <= state.date);
       const groups = dates.map(d => visible(state, d).filter(r => cohort(r) === key && (!geo || r.geo === geo)));
       // Include empty captures: a source outage invalidates the balanced panel.

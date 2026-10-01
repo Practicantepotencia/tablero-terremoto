@@ -1,0 +1,35 @@
+{
+  "parent": "577052461c1a82232defeb92c120dc1ffd09fbb2",
+  "preCutComparisons": 84,
+  "originalRows": 372566,
+  "territorialUniverse": 126,
+  "menMunicipalities": 121,
+  "missingMen": 5,
+  "exports": true,
+  "errors": [],
+  "mobileOverflow": false,
+  "pythonTests": 56,
+  "javascriptTests": 111,
+  "htmlBytes": 104420907,
+  "rawWorkbooksCommitted": false,
+  "chapter": "IV Educación, páginas impresas 59–65",
+  "branch": "cepal-integracion-educativa",
+  "chapter2Regression": {
+    "base": "c66aa361fb713fdaf741e0c0ceedf9c5798bb6bb",
+    "numericComparisons": 132,
+    "inventoryRows": 372566,
+    "legacyIndexUnchanged": true,
+    "errors": [],
+    "temporal": {
+      "early": 0,
+      "latest": 1
+    },
+    "exports": true,
+    "mobileOverflow": false
+  },
+  "visualReview": [
+    "desktop education detail",
+    "source coverage disclosure",
+    "mobile 390px"
+  ]
+}

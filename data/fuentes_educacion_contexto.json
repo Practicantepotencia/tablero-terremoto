@@ -1,0 +1,835 @@
+{
+  "version": 1,
+  "reference_commit": "25c13842159a57d8fbeffb8a5ac8b51d96e14a6b",
+  "purpose": "Contexto por unidad propia; no alimenta el índice ni estima cobertura exhaustiva.",
+  "sources": [
+    {
+      "file": "icbf_base_afectaciones_aliados.xlsx",
+      "sheet": "PRIMERA INFANCIA",
+      "label": "ICBF · primera infancia",
+      "unit": "UDS",
+      "source_date": null,
+      "sha256": "c3eed6d7bdcb665333ca4666fce18d654e5359e3aeb795ab4641545638971a88",
+      "note": "UDS y beneficiarios reportados, no sedes MEN. Beneficiarios desconocidos no se completan. Otras hojas administrativas, SRD y nutrición no se suman a este universo.",
+      "municipalities": [
+        {
+          "code": "17001",
+          "records": 2,
+          "units": 2,
+          "beneficiaries_reported": 255,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 2,
+          "severe_units": 0
+        },
+        {
+          "code": "17013",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 16,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 1,
+          "severe_units": 0
+        },
+        {
+          "code": "17088",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 56,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 1,
+          "severe_units": 0
+        },
+        {
+          "code": "17174",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 97,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 1,
+          "severe_units": 0
+        },
+        {
+          "code": "17380",
+          "records": 6,
+          "units": 6,
+          "beneficiaries_reported": 650,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 6,
+          "severe_units": 0
+        },
+        {
+          "code": "17524",
+          "records": 2,
+          "units": 2,
+          "beneficiaries_reported": 100,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 2,
+          "severe_units": 0
+        },
+        {
+          "code": "17665",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 48,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 1,
+          "severe_units": 0
+        },
+        {
+          "code": "27001",
+          "records": 180,
+          "units": 180,
+          "beneficiaries_reported": 870,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 174,
+          "missing_damage": 174,
+          "severe_units": 4
+        },
+        {
+          "code": "27361",
+          "records": 4,
+          "units": 4,
+          "beneficiaries_reported": 383,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 2,
+          "severe_units": 0
+        },
+        {
+          "code": "27491",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 169,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "27580",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 73,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 1,
+          "severe_units": 0
+        },
+        {
+          "code": "63001",
+          "records": 34,
+          "units": 34,
+          "beneficiaries_reported": 2563,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 34,
+          "severe_units": 0
+        },
+        {
+          "code": "63130",
+          "records": 13,
+          "units": 13,
+          "beneficiaries_reported": 966,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 13,
+          "severe_units": 0
+        },
+        {
+          "code": "63190",
+          "records": 7,
+          "units": 7,
+          "beneficiaries_reported": 236,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 7,
+          "severe_units": 0
+        },
+        {
+          "code": "63212",
+          "records": 2,
+          "units": 2,
+          "beneficiaries_reported": 124,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 2,
+          "severe_units": 0
+        },
+        {
+          "code": "63272",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 55,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 1,
+          "severe_units": 0
+        },
+        {
+          "code": "63302",
+          "records": 3,
+          "units": 3,
+          "beneficiaries_reported": 161,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 3,
+          "severe_units": 0
+        },
+        {
+          "code": "63401",
+          "records": 21,
+          "units": 21,
+          "beneficiaries_reported": 275,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 21,
+          "severe_units": 0
+        },
+        {
+          "code": "63470",
+          "records": 16,
+          "units": 16,
+          "beneficiaries_reported": 456,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 16,
+          "severe_units": 0
+        },
+        {
+          "code": "63548",
+          "records": 3,
+          "units": 3,
+          "beneficiaries_reported": 130,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 3,
+          "severe_units": 0
+        },
+        {
+          "code": "63594",
+          "records": 13,
+          "units": 13,
+          "beneficiaries_reported": 448,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 13,
+          "severe_units": 0
+        },
+        {
+          "code": "66001",
+          "records": 22,
+          "units": 22,
+          "beneficiaries_reported": 468,
+          "text_integer_beneficiaries": 1,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        },
+        {
+          "code": "66045",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 11,
+          "text_integer_beneficiaries": 1,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        },
+        {
+          "code": "66088",
+          "records": 3,
+          "units": 3,
+          "beneficiaries_reported": 64,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "66170",
+          "records": 15,
+          "units": 15,
+          "beneficiaries_reported": 344,
+          "text_integer_beneficiaries": 4,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 12
+        },
+        {
+          "code": "66318",
+          "records": 14,
+          "units": 14,
+          "beneficiaries_reported": 254,
+          "text_integer_beneficiaries": 11,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "66400",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 10,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "66440",
+          "records": 7,
+          "units": 7,
+          "beneficiaries_reported": 95,
+          "text_integer_beneficiaries": 5,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "66572",
+          "records": 10,
+          "units": 10,
+          "beneficiaries_reported": 90,
+          "text_integer_beneficiaries": 9,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "66594",
+          "records": 4,
+          "units": 4,
+          "beneficiaries_reported": 56,
+          "text_integer_beneficiaries": 3,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 3
+        },
+        {
+          "code": "66682",
+          "records": 1,
+          "units": 1,
+          "beneficiaries_reported": 1,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76001",
+          "records": 779,
+          "units": 779,
+          "beneficiaries_reported": 21136,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 4
+        },
+        {
+          "code": "76020",
+          "records": 9,
+          "units": 9,
+          "beneficiaries_reported": 403,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76036",
+          "records": 17,
+          "units": 17,
+          "beneficiaries_reported": 310,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76041",
+          "records": 25,
+          "units": 25,
+          "beneficiaries_reported": 396,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 2
+        },
+        {
+          "code": "76054",
+          "records": 11,
+          "units": 11,
+          "beneficiaries_reported": 167,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76100",
+          "records": 26,
+          "units": 26,
+          "beneficiaries_reported": 484,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76109",
+          "records": 949,
+          "units": 949,
+          "beneficiaries_reported": 13877,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 14
+        },
+        {
+          "code": "76111",
+          "records": 57,
+          "units": 57,
+          "beneficiaries_reported": 1946,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 4
+        },
+        {
+          "code": "76113",
+          "records": 20,
+          "units": 20,
+          "beneficiaries_reported": 505,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76122",
+          "records": 38,
+          "units": 38,
+          "beneficiaries_reported": 587,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76126",
+          "records": 24,
+          "units": 24,
+          "beneficiaries_reported": 449,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 13
+        },
+        {
+          "code": "76130",
+          "records": 80,
+          "units": 80,
+          "beneficiaries_reported": 2165,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76147",
+          "records": 53,
+          "units": 53,
+          "beneficiaries_reported": 2178,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76233",
+          "records": 40,
+          "units": 40,
+          "beneficiaries_reported": 938,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76243",
+          "records": 13,
+          "units": 13,
+          "beneficiaries_reported": 202,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 2
+        },
+        {
+          "code": "76246",
+          "records": 7,
+          "units": 7,
+          "beneficiaries_reported": 101,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76248",
+          "records": 18,
+          "units": 18,
+          "beneficiaries_reported": 921,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76250",
+          "records": 28,
+          "units": 28,
+          "beneficiaries_reported": 485,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76275",
+          "records": 66,
+          "units": 66,
+          "beneficiaries_reported": 1327,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76306",
+          "records": 11,
+          "units": 11,
+          "beneficiaries_reported": 498,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76318",
+          "records": 49,
+          "units": 49,
+          "beneficiaries_reported": 969,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 3
+        },
+        {
+          "code": "76364",
+          "records": 31,
+          "units": 31,
+          "beneficiaries_reported": 1566,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76377",
+          "records": 21,
+          "units": 21,
+          "beneficiaries_reported": 300,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        },
+        {
+          "code": "76400",
+          "records": 29,
+          "units": 29,
+          "beneficiaries_reported": 580,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        },
+        {
+          "code": "76403",
+          "records": 16,
+          "units": 16,
+          "beneficiaries_reported": 346,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76497",
+          "records": 13,
+          "units": 13,
+          "beneficiaries_reported": 316,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76520",
+          "records": 79,
+          "units": 79,
+          "beneficiaries_reported": 3943,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76563",
+          "records": 42,
+          "units": 42,
+          "beneficiaries_reported": 1587,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76606",
+          "records": 28,
+          "units": 28,
+          "beneficiaries_reported": 492,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        },
+        {
+          "code": "76616",
+          "records": 14,
+          "units": 14,
+          "beneficiaries_reported": 447,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76622",
+          "records": 43,
+          "units": 43,
+          "beneficiaries_reported": 744,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76670",
+          "records": 20,
+          "units": 20,
+          "beneficiaries_reported": 492,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76736",
+          "records": 44,
+          "units": 44,
+          "beneficiaries_reported": 835,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76823",
+          "records": 26,
+          "units": 26,
+          "beneficiaries_reported": 353,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76828",
+          "records": 21,
+          "units": 21,
+          "beneficiaries_reported": 627,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76834",
+          "records": 115,
+          "units": 115,
+          "beneficiaries_reported": 3143,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        },
+        {
+          "code": "76845",
+          "records": 7,
+          "units": 7,
+          "beneficiaries_reported": 118,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76863",
+          "records": 8,
+          "units": 8,
+          "beneficiaries_reported": 187,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76869",
+          "records": 18,
+          "units": 18,
+          "beneficiaries_reported": 271,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        },
+        {
+          "code": "76890",
+          "records": 10,
+          "units": 10,
+          "beneficiaries_reported": 367,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        },
+        {
+          "code": "76892",
+          "records": 105,
+          "units": 105,
+          "beneficiaries_reported": 2405,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 0
+        },
+        {
+          "code": "76895",
+          "records": 47,
+          "units": 47,
+          "beneficiaries_reported": 989,
+          "text_integer_beneficiaries": 0,
+          "missing_beneficiaries": 0,
+          "missing_damage": 0,
+          "severe_units": 1
+        }
+      ],
+      "unresolved_records": 0,
+      "records": 3448
+    },
+    {
+      "file": "sedes_afectadas_filtradas_pei_dqdas.xlsx",
+      "sheet": "sedes_afectadas_Pei y Dqdas",
+      "label": "Pereira y Dosquebradas · afectadas",
+      "unit": "Sedes",
+      "source_date": null,
+      "sha256": "83e89ab20ad35c311b58520ba7f65366e083954c380d3995073f80e0cbca90f5",
+      "note": "Sedes ya incluidas en MEN. Sus categorías y matrículas pueden discrepar; no se añaden ni sustituyen automáticamente. La hoja de proyecto es otro listado.",
+      "municipalities": [
+        {
+          "code": "66001",
+          "records": 165,
+          "units": 165,
+          "men_matches": 165,
+          "enrollment_reported": 58052,
+          "men_enrollment_same_sites": 56313,
+          "damage_disagreements": 80,
+          "enrollment_disagreements": 141
+        },
+        {
+          "code": "66170",
+          "records": 7,
+          "units": 7,
+          "men_matches": 7,
+          "enrollment_reported": 9272,
+          "men_enrollment_same_sites": 5973,
+          "damage_disagreements": 4,
+          "enrollment_disagreements": 7
+        }
+      ],
+      "project_records": 35,
+      "project_unique_codes": 20
+    },
+    {
+      "file": "pereira_fuente_unica_v2_dane.xlsx",
+      "sheet": "Matriz_maestra",
+      "label": "Pereira · fuente única",
+      "unit": "Instituciones",
+      "source_date": null,
+      "sha256": "516d7d34a067d89acc1d02ec4c281ae61384752e80fadf83b953028f68d22f55",
+      "note": "El DANE identifica instituciones, no sedes. La matrícula institucional repetida no se suma por fila; requiere concordancia institución-sede para cruzar MEN.",
+      "municipalities": [
+        {
+          "code": "66001",
+          "records": 102,
+          "units": 63,
+          "missing_code": 1
+        }
+      ]
+    },
+    {
+      "file": "fundacion_plan_sedes.xlsx",
+      "sheet": "Hoja1",
+      "label": "Fundación PLAN",
+      "unit": "Sedes",
+      "source_date": null,
+      "sha256": "123dfcd1b6359df94f7d0bc27790b18310e9e6341464535ee3bf69e4219e6497",
+      "note": "Intervenciones reportadas en sedes ya presentes en MEN. No acreditan ejecución, cobertura efectiva ni beneficiarios atendidos.",
+      "municipalities": [
+        {
+          "code": "27205",
+          "records": 4,
+          "units": 3,
+          "men_matches": 3
+        },
+        {
+          "code": "27810",
+          "records": 4,
+          "units": 3,
+          "men_matches": 3
+        },
+        {
+          "code": "66170",
+          "records": 4,
+          "units": 3,
+          "men_matches": 3
+        },
+        {
+          "code": "76109",
+          "records": 4,
+          "units": 3,
+          "men_matches": 3
+        }
+      ]
+    }
+  ]
+}

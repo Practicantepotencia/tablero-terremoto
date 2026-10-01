@@ -13,6 +13,7 @@ import json
 import math
 from pathlib import Path
 import unicodedata
+import cepal
 
 ROOT = Path(__file__).resolve().parent
 CURRENT = "indicadores_largo_no_calculo.csv"
@@ -69,6 +70,8 @@ def prepare_payload(current, history=()):
         denominators['registry_proxies'] = json.loads(proxy_path.read_text(encoding='utf-8'))
     pressure_path = ROOT / 'data/presion_salud.json'
     pressure = json.loads(pressure_path.read_text(encoding='utf-8')) if pressure_path.exists() else None
+    cepal_path = ROOT / 'data/evaluacion_cepal.json'
+    cepal_registry = json.loads(cepal_path.read_text(encoding='utf-8')) if cepal_path.exists() else {'records': []}
     reference_names = defaultdict(set)
     reference_codes = {r['code']: r for r in baseline['rows']}
     for r in baseline['rows']:
@@ -108,6 +111,10 @@ def prepare_payload(current, history=()):
             issues["IPM fuera de 0–100"] += 1
             continue
         code = r.get("divipola", "").strip()
+        observed_at = r.get('fecha_observacion') or None
+        if observed_at and not cepal.iso(observed_at):
+            issues['Fecha efectiva inválida: no acreditada'] += 1
+            observed_at = None
         expected = 5 if r["nivel"] == "municipal" else 2
         code = code if code.isdigit() and len(code) == expected else ""
         original_code = code
@@ -121,10 +128,16 @@ def prepare_payload(current, history=()):
                 invalid_names.add(name_key)
                 continue
             code = code or resolved
+        # Keep the source label for audit; monetary replacement estimates are not
+        # lost flows merely because the original export called them "Pérdidas".
+        monetary = r['unidad'] == 'COP' and r['indicador_id'] in cepal.DAMAGE_INDICATORS
         clean.append({"lv": r["nivel"], "d": r["departamento"].strip(), "m": r.get("municipio", "").strip(),
-                      "dim": r["dimension"], "id": r["indicador_id"], "i": r["indicador"],
+                      "dim": 'Estimaciones monetarias' if monetary and r['dimension'] == 'Pérdidas económicas' else r["dimension"], "id": r["indicador_id"], "i": r["indicador"],
+                      "original_dimension": r['dimension'],
                       "u": r["unidad"], "f": r["fuente"], "v": value,
                       "date": r["fecha_corte"], "code": code,
+                      **({'observed_at': observed_at} if observed_at else {}),
+                      **({'source_version': r['version_fuente']} if r.get('version_fuente') else {}),
                       "identity_note": 'Equivalencia municipal explícita' if r['nivel']=='municipal' and name_key in GEO_ALIASES else 'Referencia DANE' if code and not original_code else ''})
     # Only unambiguous codes are shared between spelling-normalized names.
     codes = defaultdict(set)
@@ -149,7 +162,7 @@ def prepare_payload(current, history=()):
         grouped[(r["geo"], r["f"], r["id"], r["date"])].append(r)
     rows = []
     for group in grouped.values():
-        variants = {(r["v"], r["u"], r["dim"], r["i"]) for r in group}
+        variants = {(r["v"], r["u"], r["dim"], r["i"], r.get('observed_at'), r.get('source_version')) for r in group}
         if len(variants) > 1:
             issues["Observaciones conflictivas excluidas"] += len(group)
             continue
@@ -158,7 +171,14 @@ def prepare_payload(current, history=()):
     rows.sort(key=lambda r: (r["date"], r["f"], r["id"], r["geo"]))
     dates = sorted(capture_dates)
     latest = max((d for d in current_dates if d in dates), default=dates[-1] if dates else "")
+    cepal_payload = cepal.prepare(rows, cepal_registry)
+    # Source dimensions belong to the indicator catalog. Avoid repeating absent
+    # metadata on every historical row in this already large offline HTML.
+    for r in rows:
+        if r['original_dimension'] == cepal_payload['catalog'][r['f']+'|'+r['id']]['original_dimension']:
+            del r['original_dimension']
     return {"rows": rows, "dates": dates, "latest": latest, "sources": SOURCES, "baseline": baseline, "population": population, "denominators": denominators, "healthPressure": pressure,
+            "cepal": cepal_payload,
             "issues": [{"label": k, "n": v} for k, v in sorted(issues.items()) if v],
             "generated": datetime.now(timezone.utc).isoformat(timespec="seconds")}
 

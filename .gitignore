@@ -10,3 +10,4 @@ __pycache__/
 
 # Capturas e informes locales de verificación visual.
 /tmp/panorama-qa/
+/tmp/cepal-qa/

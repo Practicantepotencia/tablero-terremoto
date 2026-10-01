@@ -1,126 +1,81 @@
-# Tablero territorial de recuperación temprana
+# Tablero de priorización municipal
 
-[Ver el tablero público](https://practicantepotencia.github.io/tablero-terremoto/).
+Rama `cepal-capitulo-2-priorizacion-municipal`, creada desde `main`
+`c66aa361fb713fdaf741e0c0ceedf9c5798bb6bb`. Esta rama no despliega producción.
+[Tablero publicado en main](https://practicantepotencia.github.io/tablero-terremoto/).
 
-Main publica la interfaz unificada aprobada. Se conservan los datos e historiales
-existentes y la actualización automática. [Publicación y mantenimiento](docs/publicacion_main.md).
+## Uso
 
-## Tablero principal en main
+Abrir `index.html`. Es autocontenido y funciona sin conexión. La vista principal
+ordena municipios mediante un índice propio de afectaciones documentadas.
+Un selector alterna medidas absolutas, por 10.000 habitantes y relativas por
+indicador. La búsqueda se comparte; solo hay una matriz visible. Los encabezados
+alternan orden descendente, ascendente y global. Las fichas explican el cálculo.
 
-Abre **index.html**. La matriz «Qué necesita cada municipio» es la vista
-principal: búsqueda de municipios, puntaje sectorial y rango por faltantes.
-Cada encabezado alterna orden descendente, ascendente y orden global normal.
-Inmediatamente debajo aparece una segunda matriz por cada 10.000 habitantes,
-con población municipal DANE 2026, conteos originales y cálculo verificable.
-La tercera matriz usa bases propias verificadas por indicador y conserva los vacíos
-sin homologación. Las tres tienen búsqueda y orden independientes.
-En «Comparar municipios» aparecen los tres radares en el mismo orden.
+Cinco pestañas: Índice, Comparar municipios, Necesidad de recuperación temprana
+(RAPIDA), Diagnóstico territorial y Fuentes y método. RAPIDA se conserva como
+comparación externa y nunca entra en la fórmula propia.
 
-«Necesidad de recuperación temprana», antes de «Diagnóstico territorial» y «Fuentes y método»,
-conserva el ranking original y Necesidad de recuperación temprana e IPM. Incluye la nueva dispersión
-entre nuestro índice (selector absoluto / per cápita / relativo) y el puntaje original de
-necesidad de recuperación temprana, con Pearson, Spearman, R² y cobertura.
-Solo hay dos controles locales: versión del índice y resaltar municipio. Los pares
-se seleccionan mediante los filtros territoriales generales.
-[Guía y método de la integración](docs/tablero_unificado.md).
+## Modelo vigente
 
-El modelo combina 17 campos en seis sectores con peso igual y aplica un ajuste
-por IPM censal DANE 2018. Usa pesos fijos, separa canales y muestra la sensibilidad
-del orden. RAPIDA se conserva como comparación y no entra en la fórmula. La ficha
-de cada municipio muestra los valores originales y sus aportes.
+- Cinco sectores con peso 1/5: Impacto humano, Vivienda, Salud, Educación e
+  Infraestructura y acceso. Nueve campos puntúan; diez se muestran.
+- Impacto humano promedia fallecidos y desaparecidos. Familias solo informativa.
+- Vivienda pondera destruidas 2/3 y averiadas 1/3.
+- PNUD tiene precedencia; 3iS completa ausencias. Cero explícito es válido.
+  Diferencias entre fuentes se conservan en la ficha y no se suman.
+- `P = D × (1 + 0,25 × IPM/100) / 1,25`, con IPM DANE censal 2018.
+- Faltantes mantienen pesos e intervalos; no se convierten en cero observado.
+  El orden usa el límite inferior y puede favorecer municipios mejor documentados.
+- Buscar o filtrar departamento no renormaliza. Cambiar ámbito o captura sí.
+- Salud relativa es heridos/camas REPS 2022, una carga potencial frente a capacidad
+  histórica. Educación relativa es un cociente frente al registro SIMAT 2022,
+  con tope del índice en 1; no acredita porcentaje de sedes dañadas.
 
-El orden por límite inferior es conservador y puede favorecer a municipios mejor
-documentados. El intervalo muestra esa limitación. No es un ranking validado en
-terreno ni una medición de ayudas pendientes. Método y resultados de la captura:
-[modelo_priorizacion.md](docs/modelo_priorizacion.md).
+Los pesos y el ajuste son elecciones del producto. El índice no es una fórmula
+CEPAL, una valoración monetaria, un presupuesto ni una medida de ayudas pendientes.
+La comparación con RAPIDA no lo valida en terreno.
+
+## Adaptación al capítulo II de CEPAL
+
+[Metodología vigente, controles y límites](docs/cepal_capitulo_2.md).
+
+Se distinguen afectación física, daños monetarios, pérdidas de flujos y costos
+adicionales. Las estimaciones publicadas en COP permanecen consultables pero
+pendientes de acreditar valoración, línea base y solapamientos. No se suman entre
+fuentes ni con conteos. Las tres cuentas CEPAL aparecen no evaluadas mientras
+falten datos admisibles. La fecha del selector es una captura, no el corte de las
+fuentes. El CSV conserva fecha efectiva y versión cuando existen.
+
+`cepal.py` valida la cuenta independiente de `data/evaluacion_cepal.json`.
+Exige evidencia de causalidad, acervo y precios previos para daños, escenarios
+mensuales para pérdidas y gastos incrementales efectuados para costos adicionales.
+Se excluyen conflictos y solapamientos; no se calcula impacto macroeconómico.
+
+La rama `educacion-matricula-critica` se inspeccionó como referencia, sin fusionarla
+ni incorporar sus libros originales. Sus datos MEN no modifican retrospectivamente
+los pesos de esta rama. Matrícula crítica no significa alumnos sin clase.
+
+## Generación y comprobación
 
 ```sh
-git fetch origin
-git switch main
-git pull --ff-only origin main
+python scripts/validar_cepal.py
 python generar_tablero_recuperacion.py
-```
-
-La generación local no requiere descargar nuevas fuentes. La línea base reutiliza
-el archivo DANE ya verificado en `fuentes-nuevas`, con su procedencia conservada.
-El cruce municipal corrige Cali/Santiago de Cali y vincula sus 515 colapsos a
-infraestructura. No altera los valores originales de los CSV.
-
-Para comprobar el modelo: `node --test tests/modelo.test.js tests/priorizacion.test.js`.
-GitHub Actions verifica y genera el HTML al cambiar el código en esta rama.
-
-## Arquitectura heredada y consultas por fuente
-
-Esta rama integra el EDA y el tablero del índice en **un solo `index.html`**,
-con cinco pestañas: Prioridades, Comparar municipios, Necesidad de recuperación
-temprana, Diagnóstico territorial y Fuentes y método.
-Conserva el lenguaje visual del tablero original: fondo gris, tarjetas blancas,
-acento azul, tablas y fichas desplegables.
-
-## Consultar y generar
-
-Abre `index.html` directamente en un navegador. Es autocontenido y funciona
-sin conexión. `eda_indicadores.html` redirige al mismo tablero.
-
-Para regenerar desde el inventario local, sin descargar ni modificar datos:
-
-```sh
-python generar_tablero_recuperacion.py
-```
-
-Para descargar las fuentes, actualizar la captura y generar el tablero:
-
-```sh
-python actualizar_indice_terremoto.py --out index.html
-```
-
-El comando anterior ya no publica los compuestos Naboo o ajustado. Mantiene
-los cargadores originales y su exportación a formato largo; los campos con
-fuente `Calculo` quedan excluidos del nuevo tablero. El historial anterior
-del índice y los CSV ajustados se conservan como archivos históricos.
-
-La entrada anterior `python generar_eda_indicadores.py --out eda_indicadores.html`
-también genera el tablero unificado y su redirección, para no romper comandos
-locales existentes.
-
-## Lectura
-
-- **Prioridades:** matriz de necesidades por municipio, orden del modelo
-  sectorial, contraste con RAPIDA e intervalos por datos faltantes.
-- **Diagnóstico territorial:** rankings, distribución y ficha por una sola
-  fuente, indicador, definición, unidad, nivel y captura. Permite descargar
-  la selección. Un indicador sin observaciones sigue seleccionado y muestra
-  el vacío, incluso al cambiar el filtro del decreto.
-- **Fuentes y método:** cobertura, vínculos de origen, diccionario,
-  incidencias de integridad y limitaciones metodológicas.
-
-La fecha del inventario es una **captura**, no el corte efectivo de las
-observaciones. Falta acreditar la versión y fecha de cada fuente. No se
-presentan tasas sin denominadores verificados ni probabilidades de confianza.
-
-## Desarrollo
-
-`generar_tablero_recuperacion.py` valida y prepara los registros. `web/modelo.js`
-contiene consultas por fuente y `web/priorizacion.js` el nuevo modelo;
-`web/tablero.js` controla filtros y vistas;
-`web/tablero.html` y `web/tablero.css` conservan la presentación. El generador
-inserta los recursos y datos en un único HTML.
-
-```sh
 python -m unittest discover -s tests -v
-node --test tests/modelo.test.js
-node --check web/tablero.js
+node --test tests/*.test.js
+node tests/cepal.browser.cjs
 ```
 
-Para reproducir el tablero histórico de forma explícita:
+La generación usa los CSV locales y no descarga fuentes ni modifica historiales.
+La prueba de navegador requiere Playwright y Chromium; admite `CHROME_PATH`.
+Comprueba valores y puntajes contra main, filtros, exportaciones y vista móvil.
 
-```sh
-python actualizar_indice_terremoto.py --legado --out dashboard_impacto_terremoto.html
-```
+El actualizador original se conserva: `python actualizar_indice_terremoto.py --out index.html`.
+No se modifican los flujos de publicación o horarios de producción.
 
-El modo legado también actualiza sus CSV históricos; no es el flujo operativo.
-GitHub Actions ejecuta el flujo unificado en esta rama. Los horarios de GitHub
-solo se ejecutan en la rama predeterminada; una rama de trabajo se actualiza
-mediante `push` o `workflow_dispatch`. No se cambia la configuración de Pages.
-
-Metodología y criterios de transición: [docs/metodologia_recuperacion.md](docs/metodologia_recuperacion.md).
+`generar_tablero_recuperacion.py` prepara datos y HTML; `web/priorizacion.js`
+calcula el índice; `web/modelo.js` organiza consultas; `web/tablero.js` controla
+vistas y exportaciones. La documentación de versiones anteriores está en
+[modelo_priorizacion.md](docs/modelo_priorizacion.md) y
+[notas_metodologicas.md](docs/notas_metodologicas.md); no sustituye la configuración
+vigente descrita arriba.

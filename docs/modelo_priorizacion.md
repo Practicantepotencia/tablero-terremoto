@@ -1,3 +1,5 @@
+> Documento histórico. Para la configuración actual y su alcance consultar [CEPAL, capítulo II](cepal_capitulo_2.md). Las versiones de seis sectores y 17 campos descritas abajo no están vigentes.
+
 > Impacto humano vigente: [familias visibles, sin peso](familias_solo_consulta.md). Se promedian únicamente fallecidos y desaparecidos (1/2 cada uno). Hay nueve campos puntuables y diez mostrados en las tres versiones.
 
 > Actualización vigente: [Vivienda con doble peso para destruidas](pesos_vivienda.md): 2/3 destruidas y 1/3 averiadas, en las tres versiones. El sector conserva peso global 1/5. Educación relativa mantiene su tope fijo.

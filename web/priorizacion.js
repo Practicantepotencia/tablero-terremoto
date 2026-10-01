@@ -54,7 +54,12 @@
     for(const source of channels)for(const [geo,row]of source.rows){
       if(!rows.has(geo)){rows.set(geo,row);sourceCounts[source.source]++;}
     }
-    return {rows,sourceCounts,channels:channels.map(({rows,...c})=>c),coherent:channels.some(c=>c.coherent)};
+    const disagreements=new Map();
+    for(const geo of rows.keys()){
+      const observations=channels.map(c=>c.rows.get(geo)).filter(Boolean);
+      if(new Set(observations.map(r=>r.v)).size>1)disagreements.set(geo,observations.map(r=>({source:r.f,value:r.v,capture:r.date,observedAt:r.observed_at||null})));
+    }
+    return {rows,sourceCounts,disagreements,channels:channels.map(({rows,...c})=>c),coherent:channels.some(c=>c.coherent)};
   }
   const FIELD_COUNT = SECTORS.reduce((n,s)=>n+s.fields.length,0);
   const clamp = (v,lo,hi) => Math.min(hi,Math.max(lo,v));
@@ -159,7 +164,7 @@
           const fields=sector.fields.map(f=>{
             const c=calibrations.get(f.id),r=c.rows.get(place.geo),value=measure(r),score=normalize(value,c.anchor);
             return {...f,...(f.candidates?{source:r?.f||'PNUD → 3iS-Sheets',selectedIndicator:r?.id??null,cascadeFallback:r?.f==='3iS-Sheets'}:{}),row:r||null,score,rate:relative?value:null,...(relative?relativeMeasure(r,r?.id||f.id,place.code):{}),anchor:c.anchor,n:c.n,positive:c.positive,...(c.normalization?{normalization:c.normalization,observedMax:c.observedMax}:{}),
-              percentile:value!=null?T.percentile(c.values,value):null,contribution:f.share===0?0:score==null?null:score*f.share/sectorDefs.length};
+              sourceDisagreement:c.disagreements?.get(place.geo)||[],percentile:value!=null?T.percentile(c.values,value):null,contribution:f.share===0?0:score==null?null:score*f.share/sectorDefs.length};
           });
           const lower=fields.reduce((s,f)=>s+(f.score??0)*f.share,0);
           const unknown=fields.filter(f=>f.score==null).reduce((s,f)=>s+100*f.share,0);
@@ -195,7 +200,7 @@
       const top=new Set(ranked.filter(r=>r.rank<=20).map(r=>r.geo));
       const rapidaTop=recovery.filter(r=>recoveryRank.get(r.geo).rank<=20);
       const result={definitions:sectorDefs,items:ranked,missing:items.filter(r=>r.coverage<=EPS).sort((a,b)=>T.label(a).localeCompare(T.label(b),'es')),
-        all:items,calibrations:[...calibrations.values()].map(({rows,values,...r})=>r),scenarios,
+        all:items,calibrations:[...calibrations.values()].map(({rows,values,disagreements,...r})=>({...r,disagreements:disagreements?.size||0})),scenarios,
         overlap:rapidaTop.filter(r=>top.has(r.geo)).length,rapidaTopN:rapidaTop.length,referenceN:places.length};
       cache.set(key,result);return result;
     }

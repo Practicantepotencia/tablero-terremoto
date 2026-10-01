@@ -1,0 +1,18 @@
+{
+  "base": "c66aa361fb713fdaf741e0c0ceedf9c5798bb6bb",
+  "numericComparisons": 132,
+  "inventoryRows": 372566,
+  "indexUnchanged": true,
+  "errors": [],
+  "temporal": {
+    "early": 0,
+    "latest": 1
+  },
+  "exports": true,
+  "mobileOverflow": false,
+  "python_tests": 50,
+  "javascript_tests": 104,
+  "chapter": "II",
+  "raw_workbooks_added": false,
+  "production_deployed": false
+}

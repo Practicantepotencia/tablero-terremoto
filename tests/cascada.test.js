@@ -17,6 +17,8 @@ test('PNUD gana incluido cero; 3iS completa solo ausencia y nunca suma o promedi
  assert.equal(result.rows.get('municipal:27050').v,0);assert.equal(result.rows.get('municipal:27050').f,'PNUD');
  assert.equal(result.rows.get('municipal:27660').v,20);assert.equal(result.rows.size,2);
  assert.deepEqual(result.sourceCounts,{PNUD:1,'3iS-Sheets':1});
+ assert.deepEqual(result.disagreements.get('municipal:27050').map(r=>[r.source,r.value]),[['PNUD',0],['3iS-Sheets',100]]);
+ assert.equal(result.disagreements.has('municipal:27660'),false);
 });
 test('valores no válidos o conflictivos no se publican; duplicado idéntico cuenta una vez',()=>{
  for(const bad of [null,NaN,Infinity,-1,'0']){
@@ -71,5 +73,7 @@ test('no recupera PNUD de otra captura ni permite a 3iS cambiar un puntaje con P
  const after=structuredClone(before);after.rows[1].v=1e9;
  const a=P.models(before).absolute.compute(state),b=P.models(after).absolute.compute(state);
  assert.deepEqual(a.calibrations,b.calibrations);
- for(const r of a.all){const t=b.all.find(x=>x.geo===r.geo);assert.equal(r.lower,t.lower);assert.deepEqual(r.sectors,t.sectors);}
+ const scoredSectors=r=>r.sectors.map(s=>({...s,fields:s.fields.map(({sourceDisagreement,...f})=>f)}));
+ for(const r of a.all){const t=b.all.find(x=>x.geo===r.geo);assert.equal(r.lower,t.lower);assert.deepEqual(scoredSectors(r),scoredSectors(t));}
+ assert.equal(b.all[0].sectors[1].fields[0].sourceDisagreement[1].value,1e9,'El respaldo no puntúa pero su discrepancia permanece consultable');
 });

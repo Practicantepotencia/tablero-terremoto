@@ -4,19 +4,22 @@
   const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const number=(n,digits=2)=>Number.isFinite(n)?new Intl.NumberFormat('es-CO',{maximumFractionDigits:digits}).format(n):'—';
   const source=s=>String(s||'').replaceAll('3iS-Sheets','3iS');
+  const sourceComparison=f=>(f.sourceDisagreement||[]).map(r=>source(r.source)+': '+number(r.value)).join('; ');
   function municipality(r,attribute){
     return '<td class="municipal-cell"><button class="link municipality-name" type="button" '+attribute+'="'+esc(r.geo)+'">'+esc(r.m)+'</button><div class="muted small">'+esc(r.d)+'</div>'+
       '<div class="score-label">Puntaje de afectación</div><div class="priority-number">'+(r.coverage>0?number(r.lower):'—')+'<small> /100</small></div>'+
-      '<div class="rank-label">Puesto global: '+(r.rank??'—')+'</div><div class="small muted">'+r.available+' de '+r.fieldCount+' indicadores con información</div></td>';
+      '<div class="rank-label" title="Orden por el límite inferior del índice propio; puede favorecer municipios mejor documentados.">Puesto global: '+(r.rank??'-')+'</div>'+
+      (r.coverage>0&&Number.isFinite(r.upper)&&r.upper-r.lower>1e-8?'<div class="small muted" title="Rango por datos faltantes; no es intervalo de confianza.">Rango: '+number(r.lower)+'–'+number(r.upper)+'</div>':'')+
+      '<div class="small muted">'+r.available+' de '+r.fieldCount+' indicadores con información</div></td>';
   }
   function field(f,relative){
     const has=relative?f.rate!=null:!!f.row;
     const value=has?number(relative?f.rate:f.row.v,relative?4:2):'—';
     const unit=relative?f.relativeUnit:(f.row?.u==='Número'?'':f.row?.u);
     const explanation=f.share===0?'Solo consulta; no suma al índice.':has?'Puntaje de la variable: '+number(f.score)+'/100.':'Sin dato; no equivale a cero.';
-    const title=[f.label,explanation,relative&&f.row?'Valor original: '+number(f.row.v):'',relative&&f.denominator?'Base: '+number(f.denominator.value)+' '+f.denominator.unit+' · '+f.denominator.reference_date:'',f.reason||''].filter(Boolean).join('. ');
+    const title=[f.label,explanation,relative&&f.row?'Valor original: '+number(f.row.v):'',relative&&f.denominator?'Base: '+number(f.denominator.value)+' '+f.denominator.unit+' · '+f.denominator.reference_date:'',f.reason||'',f.proxyNote||'',sourceComparison(f)?'Fuentes difieren: '+sourceComparison(f)+'. Se conserva la precedencia PNUD; no se suman':''].filter(Boolean).join('. ');
     const base=relative&&has&&f.denominator?'<small class="rate-base">'+number(f.row.v)+' / '+number(f.denominator.value)+' '+esc(f.denominator.unit.toLowerCase())+'</small>':relative&&f.row?'<small class="rate-base">Reportado: '+number(f.row.v)+'</small>':'';
-    return '<span class="heat-item '+(has?'':'missing')+'" title="'+esc(title)+'" style="--intensity:'+ (f.score==null?0:Math.min(100,Math.max(0,f.score)))+'"><span class="field-name">'+esc(f.label.replace(/ · (3iS|PNUD)$/,''))+'</span><span class="field-value"><b>'+value+'</b>'+ (has&&unit?' <small>'+esc(unit)+'</small>':has?'':relative&&f.row?' <small>sin dato relativo</small>':' <small>sin dato</small>')+'</span>'+base+'</span>';
+    return '<span class="heat-item '+(has?'':'missing')+'" title="'+esc(title)+'" style="--intensity:'+ (f.score==null?0:Math.min(100,Math.max(0,f.score)))+'"><span class="field-name">'+esc(f.label.replace(/ · (3iS|PNUD)$/,''))+'</span><span class="field-value"><b>'+value+'</b>'+ (has&&unit?' <small>'+esc(unit)+'</small>':has?'':relative&&f.row?' <small>sin dato relativo</small>':' <small>sin dato</small>')+'</span>'+base+(f.exceedsRegistry?'<small class="rate-base">Supera el registro de referencia</small>':f.pressureProxy?'<small class="rate-base">Capacidad histórica; no ocupación</small>':'')+'</span>';
   }
   function sector(s,relative,selected=false){
     const sources=[...new Set(s.fields.filter(f=>f.row).map(f=>source(f.source)))];
@@ -81,6 +84,6 @@
     return '<div class="radar-selection-heading"><div><span class="small muted">Punto seleccionado</span><h3>'+esc(s.name)+'</h3><p style="color:'+color+'">'+esc(r.m)+', '+esc(r.d)+'</p></div><strong>'+(s.coverage>0?number(s.lower,1)+' <small>/100</small>':'Sin dato')+'</strong></div>'+
       '<button type="button" class="secondary" data-radar-method>Cómo se calcula</button>';
   }
-  const api={municipality,sector,summary,number,esc,radarLegend,radarMatrix,radarSelection};
+  const api={municipality,sector,summary,number,esc,radarLegend,radarMatrix,radarSelection,sourceComparison};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.Presentacion=api;
 })(globalThis);
